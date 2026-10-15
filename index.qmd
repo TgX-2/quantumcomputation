@@ -1,0 +1,25 @@
+---
+title: "quantum"
+---
+Bản dịch kém chất lượng của Quantum Computation and Quantum Information, 10th Anniversary Edition, by Michael A. Nielson and Issac L. Chuang.
+
+Đọc bản chính tại đây: [file](/file/quantum-computation-and-quantum-information-nielsen-chuang.pdf)
+
+# Part 1 Fundamental concepts
+
+## I Introduction concepts
+* 1.1. Global perspectives
+    * 1.1.1. History of quantum computation and quantum information
+    * 1.1.2. Future directions
+
+* 1.2. Quantum bits
+    * 1.2.1. Multiple qubits
+
+* 1.3. Quantum computation
+    * 1.3.1. Single qubit gates
+    * 1.3.2. Multiple qhbit gates
+    * 1.3.3. Mesurements in bases other than the computational basis
+    * 1.3.4. Quantum circuits
+    * 1.3.5. Qubit copying circuit
+    * 1.3.6. Example: Bell states
+    * 1.3.7. Example: quantum teleportation

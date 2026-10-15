@@ -1,0 +1,14 @@
+---
+title: "Lời tựa"
+chapter: "Introduction"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục fbài viết"
+    toc-location: right
+    css: ../styles.css
+---
+
+# Lời tựa

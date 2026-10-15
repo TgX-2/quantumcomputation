@@ -1,0 +1,69 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "quantum",
+    "section": "",
+    "text": "Bản dịch kém chất lượng của Quantum Computation and Quantum Information, 10th Anniversary Edition, by Michael A. Nielson and Issac L. Chuang.\nĐọc bản chính tại đây: file",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "note/preface.html",
+    "href": "note/preface.html",
+    "title": "Preface",
+    "section": "",
+    "text": "hello sdf sdf",
+    "crumbs": [
+      "Preface",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#i-introduction-concepts",
+    "href": "index.html#i-introduction-concepts",
+    "title": "quantum",
+    "section": "I Introduction concepts",
+    "text": "I Introduction concepts\n\n1.1. Global perspectives\n\n1.1.1. History of quantum computation and quantum information\n1.1.2. Future directions\n\n1.2. Quantum bits\n\n1.2.1. Multiple qubits\n\n1.3. Quantum computation\n\n1.3.1. Single qubit gates\n1.3.2. Multiple qhbit gates\n1.3.3. Mesurements in bases other than the computational basis\n1.3.4. Quantum circuits\n1.3.5. Qubit copying circuit\n1.3.6. Example: Bell states\n1.3.7. Example: quantum teleportation",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "note/intro/afterword.html",
+    "href": "note/intro/afterword.html",
+    "title": "Lời bạt",
+    "section": "",
+    "text": "Note\n\n\n\nTại sao tôi lại dịch lời bạt của tác giả làm gì?\ndont know, 4fun &lt;(“)\n\n\nMột đống thứ đã xảy ra trong ngành quantum information trong 10 năm kể từ lúc phiên bản thứ nhất của cuốn sách này được xuất bản, và lời bạt này cũng không thể nào tổng kết lại được thậm chí là một phần nhỏ của nó. Nhưng một số sự phát triển bùng lổ đáng để bình luận, và có thể nó khơi dậy sự tò mò của bạn.\nBut a few especially striking developments merit comment, and may perhaps whet your appetite for more.\nCó lẽ sự tiến bộ ấn tượng nhất xảy ra ở lĩnh vực experimental implementation thực hiện thử nghiệm. Mặc dù chúng ta vẫn cần phải mất vài năm nữa để có thể xây dựng máy tính lượng tử ở quy mô lớn, nhưng đã có nhiều tiến bộ đáng kể. Superconducting Circuit Mạch siêu dẫn đã được sử dụng để cài đặt một số two-qubit quantum algorithm, và three-qubit systems gần như trong tầm tay (nearly within reach).\nQubits dựa trên spin của hạt nhân và các photons đơn lẻ đã được sử dụng để chứng minh proof-of-principle bằng chứng nguyên lý hoạt động của dạng đơn giản nhất của quantum error correction và quantum simulation.\nNhưng mà sự tiến bộ lớn nhất đó chính là với trapped ion systems hệ thống ion bị giữ lại, cái thứ mà đã được sử dụng để cài đặt rất nhiều two- and three-qubit algorithms và algorithmic building blocks, bao gồm quantum search algorithm thuật toán tìm lượng tử và quantum Fourier transform biến đổi Fourier lượng tử. Trapped ions cũng được sử dụng để chứng minh các nguyên lý cơ bản của giao tiếp lượng tử, bao gồm sửa lỗi lượng tử và dịch chuyển lượng tử.\nLĩnh vực tiến bộ thứ hai là sự hiểu biết được nguồn lực vật lý nào cần để tính toán lượng tử. Có lẽ sự đột phá thú vị nhất ở đây là việc khám phá ra rằng quantum computation có thể được thực hiện chỉ thông qua các phép đo.\nNhiều năm qua"
+  },
+  {
+    "objectID": "note/intro/preface.html",
+    "href": "note/intro/preface.html",
+    "title": "Lời tựa",
+    "section": "",
+    "text": "Lời tựa",
+    "crumbs": [
+      "Introduction",
+      "Lời tựa"
+    ]
+  },
+  {
+    "objectID": "note/intro/notation.html",
+    "href": "note/intro/notation.html",
+    "title": "Danh pháp và ký hiệu",
+    "section": "",
+    "text": "Nomenclature and notation\nKý hiệu và danh pháp.\nCó một vài danh pháp và ký hiệu có hai hoặc nhiều nghĩa trong sử dụng thông thường trong quantum computation và quantum information. Để tránh nhầm lẫn phát sinh",
+    "crumbs": [
+      "Introduction",
+      "Danh pháp và ký hiệu"
+    ]
+  }
+]

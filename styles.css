@@ -1,0 +1,29 @@
+
+
+/* ---------- Dark Theme ---------- */
+
+html[data-bs-theme="dark"] .lesson-info{
+    color:#aaa;
+}
+
+html[data-bs-theme="dark"] .lesson-navbar{
+    border:2px solid #666;
+    background:#222;
+}
+
+html[data-bs-theme="dark"] .lesson-navbar a{
+    color:#1D9D77;
+}
+
+html[data-bs-theme="dark"] .tab{
+    color:#1D9D77;
+}
+
+html[data-bs-theme="dark"] .tab:hover{
+    background:#333;
+}
+
+html[data-bs-theme="dark"] .tab.active{
+    background:#1D9D77;
+    color:#111;
+}

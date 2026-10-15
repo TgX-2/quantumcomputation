@@ -1,0 +1,18 @@
+---
+title: "Danh pháp và ký hiệu"
+chapter: "Introduction"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+    css: ../styles.css
+---
+
+# Nomenclature and notation
+
+Ký hiệu và danh pháp.
+
+Có một vài danh pháp và ký hiệu có hai hoặc nhiều nghĩa trong sử dụng thông thường trong quantum computation và quantum information. Để tránh nhầm lẫn phát sinh

@@ -1,0 +1,36 @@
+---
+title: "Lời bạt"
+chapter: "Introduction"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+    css: ../styles.css
+---
+
+:::{.callout-note}
+Tại sao tôi lại dịch lời bạt của tác giả làm gì? 
+
+dont know, 4fun <(")
+:::
+
+Một đống thứ đã xảy ra trong ngành quantum information trong 10 năm kể từ lúc phiên bản thứ nhất của cuốn sách này được xuất bản, và lời bạt này cũng không thể nào tổng kết lại được thậm chí là một phần nhỏ của nó. Nhưng một số sự phát triển bùng lổ đáng để bình luận, và có thể nó khơi dậy sự tò mò của bạn.
+
+*But a few especially striking developments merit comment, and may perhaps whet your appetite for more.*
+
+
+
+Có lẽ sự tiến bộ ấn tượng nhất xảy ra ở lĩnh vực *experimental implementation* thực hiện thử nghiệm. Mặc dù chúng ta vẫn cần phải mất vài năm nữa để có thể xây dựng máy tính lượng tử ở quy mô lớn, nhưng đã có nhiều tiến bộ đáng kể. *Superconducting Circuit* Mạch siêu dẫn đã được sử dụng để cài đặt một số *two-qubit quantum algorithm*, và *three-qubit systems* gần như trong tầm tay (*nearly within reach*). 
+
+*Qubits* dựa trên spin của hạt nhân và các photons đơn lẻ đã được sử dụng để chứng minh *proof-of-principle* bằng chứng nguyên lý hoạt động của dạng đơn giản nhất của *quantum error correction* và *quantum simulation*.
+
+Nhưng mà sự tiến bộ lớn nhất đó chính là với *trapped ion systems* hệ thống ion bị giữ lại, cái thứ mà đã được sử dụng để cài đặt rất nhiều *two- and three-qubit algorithms* và *algorithmic building blocks*, bao gồm *quantum search algorithm* thuật toán tìm lượng tử và *quantum Fourier transform* biến đổi Fourier lượng tử. *Trapped ions* cũng được sử dụng để chứng minh các nguyên lý cơ bản của giao tiếp lượng tử, bao gồm sửa lỗi lượng tử và dịch chuyển lượng tử.
+
+
+
+Lĩnh vực tiến bộ thứ hai là sự hiểu biết được nguồn lực vật lý nào cần để tính toán lượng tử. Có lẽ sự đột phá thú vị nhất ở đây là việc khám phá ra rằng quantum computation có thể được thực hiện chỉ thông qua các phép đo.
+
+Nhiều năm qua

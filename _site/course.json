@@ -1,0 +1,28 @@
+{
+  "Linear Algebra": [
+    {
+      "title": "index",
+      "path": "linear-algebra/index"
+    },
+    {
+      "title": "vector",
+      "path": "linear-algebra/vector"
+    },
+    {
+      "title": "linearcombspanbasis",
+      "path": "linear-algebra/linearcombspanbasis"
+    },
+    {
+      "title": "lineartransformation",
+      "path": "linear-algebra/lineartransformation"
+    },
+    {
+      "title": "determinant",
+      "path": "linear-algebra/determinant"
+    },
+    {
+      "title": "matrix",
+      "path": "linear-algebra/matrix"
+    }
+  ]
+}
