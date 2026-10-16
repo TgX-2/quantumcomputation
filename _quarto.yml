@@ -4,6 +4,7 @@ project:
 website:
   title: "TgX.2"
   site-url: https://tgx-2.github.io/note
+  favicon: img/favicon.ico
 
   sidebar:
     collapse-level: 1
@@ -12,12 +13,16 @@ website:
       - href: index.qmd
         text: Home
 
-      - section : "Introduction"
+      - section : "Misc."
         contents:
+          - note/intro/afterword.qmd
           - note/intro/preface.qmd
           - note/intro/notation.qmd
-          - note/intro/afterword.qmd
 
+      - section : "Introduction and overview"
+        contents:
+          - note/introandoverview/1.qmd
+          
 
 format:
   html:
