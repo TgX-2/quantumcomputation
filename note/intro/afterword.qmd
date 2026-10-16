@@ -11,6 +11,7 @@ format:
     css: ../styles.css
 ---
 
+# Lời bạt
 
 Một đống thứ đã xảy ra trong ngành quantum information trong 10 năm kể từ lúc phiên bản thứ nhất của cuốn sách này được xuất bản, và lời bạt này cũng không thể nào tổng kết lại được thậm chí là một phần nhỏ của nó. Nhưng một số sự phát triển bùng lổ đáng để bình luận, và có thể nó khơi dậy sự tò mò của bạn.
 

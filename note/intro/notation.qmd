@@ -11,8 +11,20 @@ format:
     css: ../styles.css
 ---
 
-# Nomenclature and notation
+# Danh pháp và ký hiệu
 
-Ký hiệu và danh pháp.
+Có một số danh pháp và ký hiệu có hai hoặc nhiều nghĩa được sử dụng phổ biến trong lĩnh cực QCQI. Để tránh sự xảy ra sự nhầm lẫn, phần này sẽ thu thập nhiều danh xưng và ký hiệu thường gặp hơn cả trong số đó, cùng với các quy ước sẽ được tuân thủ xuyên suốt cuốn sách này.
 
-Có một vài danh pháp và ký hiệu có hai hoặc nhiều nghĩa trong sử dụng thông thường trong quantum computation và quantum information. Để tránh nhầm lẫn phát sinh
+## Đại số tuyến tính và Cơ học lượng tử
+
+
+
+## Lý thuyết thông tin và xác suất
+
+## Miscellancea
+
+## Các cổng lượng tử và ký hiệu mạch thường dùng
+
+![](../../img/1.png)
+
+![](../../img/2.png)
