@@ -16,6 +16,7 @@ website:
         contents:
           - note/intro/preface.qmd
           - note/intro/notation.qmd
+          - note/intro/afterword.qmd
 
 
 format:
