@@ -115,5 +115,16 @@ Ví dụ, các phiến đất sét chữ hình nêm cho thấy rằng vào thờ
 
 ---
 
-Hình thức hiện đại của khoa học máy tính đã được nhà toán học vĩ đại Alan Turing công bố trong một bài báo đáng chú ý năm 1936.
+Biểu hiện hiện đại của khoa học máy tính đã được công bố bởi nhà toán học vĩ đại Alan Turing trong một bài báo nổi bật vào năm 1936. Turing đã phát triển chi tiết một khái niệm trừu tượng về cái mà ngày nay chúng ta gọi là một máy tính có thể lập trình được — một mô hình tính toán mà giờ đây được gọi là máy Turing để tôn vinh ông. Turing đã chỉ ra rằng tồn tại một Máy Turing Vạn năng (Universal Turing Machine) có thể được sử dụng để mô phỏng bất kỳ máy Turing nào khác.
 
+Hơn nữa, ông khẳng định rằng Máy Turing Vạn năng nắm bắt đầy đủ ý nghĩa của việc thực hiện một tác vụ bằng phương pháp thuật toán. Nghĩa là, nếu một thuật toán có thể được thực hiện trên bất kỳ phần cứng nào (chẳng hạn như một máy tính cá nhân hiện đại), thì sẽ có một thuật toán tương đương dành cho Máy Turing Vạn năng thực hiện chính xác cùng một tác vụ như thuật toán đang chạy trên máy tính cá nhân đó.
+
+Khẳng định này — được gọi là [***Church-Turing thesis***](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis) Giả thuyết Church–Turing để vinh danh Turing cùng một nhà tiên phong khác của khoa học máy tính là Alonzo Church — khẳng định sự tương đương giữa khái niệm vật lý về tập hợp các thuật toán có thể thực hiện trên một thiết bị vật lý với khái niệm toán học nghiêm ngặt về Máy Turing Vạn năng. Sự công nhận rộng rãi dành cho giả thuyết này đã đặt nền móng cho sự phát triển của một lý thuyết phong phú trong khoa học máy tính.
+
+---
+
+Không lâu sau bài báo của Turing, những chiếc máy tính đầu tiên được chế tạo từ các linh kiện điện tử đã ra đời. John von Neumann đã phát triển một mô hình lý thuyết đơn giản về cách kết hợp tất cả các thành phần cần thiết theo một cách thực tế để một máy tính có đầy đủ khả năng tương đương với một Máy Turing Vạn năng.
+
+Tuy nhiên, sự phát triển của phần cứng thực sự bứt phá vào năm 1947, khi John Bardeen, Walter Brattain và William Shockley phát triển ra transistor. Kể từ đó, phần cứng máy tính đã gia tăng sức mạnh với tốc độ kinh ngạc, đến mức sự tăng trưởng này đã được Gordon Moore cụ thể hóa vào năm 1965 thành cái mà ngày nay được biết đến là Định luật Moore — định luật phát biểu rằng sức mạnh của máy tính sẽ tăng gấp đôi với chi phí không đổi sau khoảng mỗi hai năm.
+
+# Hướng đi trong tương lai
