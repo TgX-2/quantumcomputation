@@ -43,7 +43,7 @@ Quantum mechanics đã trở thành một phần không thể thiếu của khoa
 
 ## Lịch sử của Quantum Mechanic
 
-Quantum mechanics là gì?
+**Quantum mechanics là gì?**
 
 Quantum mechanics là một khuôn khổ toán học hay là một chuỗi quy tắc để định hình lý thuyết vật lý.
 
@@ -81,7 +81,7 @@ Lấy ví dụ, phương pháp đã được phát triển là nhốt một nguy
 
 ---
 
-Tại sao chúng tại lại cần nỗ lực đến vậy để đạt được ***complete control over single quantum systems*** việc kiểm soát hoàn toàn các hệ lượng tử đơn lẻ?
+**Tại sao chúng tại lại cần nỗ lực đến vậy để đạt được complete control over single quantum systems - việc kiểm soát hoàn toàn các hệ lượng tử đơn lẻ?**
 
 Tạm gác lại các lý do về công nghệ, và chỉ tập trung vào khoa học thuần túy, câu trả lời chính là việc các nhà nghiên cứu phải hoàn thành việc này bằng linh cảm. Thường thì những phát hiện sâu sắc nhất trong khoa học xuất hiện khi chúng ta phát triển một phương pháp để khám phá một lĩnh vực mới của tự nhiên.
 
@@ -107,7 +107,7 @@ Các nguyên mẫu thử nghiệm cho việc thực hiện ***quantum cryptograp
 
 ---
 
-## Lịch sử của Computer science
+## Lịch sử của Computer Science
 
 Và chúng ta sẽ chuyển từ quantum mechanics sang một thành tựu trí tuệ vĩ đại khác của thế kỷ 20, computer science. Nguồn gốc của khoa học máy tính đã bị chìm vào lãng quên suốt chiều dài lịch sử.
 
@@ -140,7 +140,7 @@ Hóa ra, mặc dù một máy tính thông thường có thể được sử d�
 
 ---
 
-Thế nào là một mô phỏng "hiệu quả" và mô phỏng "không hiệu quả" cho một máy tính lượng tử?
+**Thế nào là một mô phỏng "hiệu quả" và mô phỏng "không hiệu quả" cho một máy tính lượng tử?**
 
 Nhiều khái niệm then chốt để trả lời câu hỏi này đã được phát minh từ rất lâu trước khi khái niệm máy tính lượng tử ra đời. Đặc biệt, ý tưởng về thuật toán hiệu quả và không hiệu quả đã được làm rõ một cách chính xác về mặt toán học, nhờ lĩnh vực lý thuyết độ phức tạp thuật toán. Nói một cách đại khái, một thuật toán hiệu quả là một thuật toán chạy trong thời gian đa thức. Ngược lại, một thuật toán không hiệu quả là một thuật toán chạy trong thời gian siêu đa thức (ví dụ như là hàm mũ).
 
@@ -217,6 +217,83 @@ Từ đó, một máy tính vạn năng thei Deutsch, chính là một chiếc m
 Và liệu nó có phải thật sự là mạnh nhất hay chưa? Không ai biết được cho tới hiện nay.
 
 :::
+
+---
+
+Những gì mà mô hình máy tính lượng tử của Deutsch đã mang lại chính là một thách thức đối với strong Church-Turing thesis. Deutsch đã đặt câu hỏi liệu một máy tính lượng tử có thể giải quyết một cách hiệu quả các bài toán tính toán vốn không có lời giải hiệu quả trên máy tính cổ điển, kể cả trên một máy Turing xác suất, hay không? Sau đó, ông đã xây dựng một ví dụ đơn giản gợi mở rằng, trên thực tế, máy tính 
+lượng tử thực sự có thể sở hữu sức mạnh tính toán vượt xa sức mạnh của các máy tính cổ điển.
+
+---
+
+Bước đi đầu tiên nổi bật này của Deutsch đã được tiếp tục cải tiến trong thập kỷ sau đó bởi nhiều nhà nghiên cứu, mà đỉnh cao là chứng minh năm 1994 của Peter Shor cho thấy hai bài toán vô cùng quan trọng, bài toán phân tích thừa số nguyên tố và bài toán 'logarit rời rạc', đều có thể giải quết một cách hiệu quả trên một máy tính lượng tử.
+
+Khám phá này đã thu hút sự quan tâm rộng rãi bởi vì hai bài toán trên từng và vẫn đang được tin tưởng phổ biến là không có lời giải hiệu quả cho trên máy tính cổ điển. Các kết quả của Shor là một minh chứng mạnh mẽ cho thấy máy tính lượng tử có sức mạnh vượt trội so với máy Turing, kể cả máy Turing xác suất.
+
+Thêm một bằng chững nữa cho sức mạnh của máy tính lượng tử xuất hiện vào năm 1995, khi Lov Grover chỉ ra rằng một bài toán quan trọng khác, bài toán thực hiện tìm kiếm trong một không gian tìm kiếm không có cấu trúc, cũng có thể được tăng tốc trên một máy tính lượng tử. Mặc dù thuật toán của Grover không mang lại sự tăng tốc ngoạn mục như các thuật toán của Shor, nhưng khả năng ứng dụng rộng rãi của các phương pháp luận dựa trên tìm kiếm đã kich thích sự quan tâm đáng kể dành cho thuật toán của Grover.
+
+---
+
+Vào khoảng thời gian các thuật toán của Shor và Grover được phát kiến, nhiều nhà nghiên cứu cũng đang phát triển một ý tưởng mà Richard Feynman từng đề xuất vào năm 1982. Feynman đã chỉ ra rằng dường như có những khó khăn cốt lõi trong việc mô phỏng các hệ cơ học lượng tử trên máy tính cổ điển, và ông gợi ý rằng việc xây dựng các máy tính dựa trên các nguyên lý của cơ học lượng tử sẽ cho phép chúng ta vượt qua những khó khăn đó. Vào những năm 1990, một số nhóm nghiên cứu đã bắt đầu cụ thể hóa ý tưởng này, chứng minh rằng hoàn toàn có thể sử dụng máy tính lượng tử để mô phỏng một cách hiệu quả các hệ thống vốn không có cách mô phỏng hiệu quả nào trên máy tính cổ điển. Rất có thể một trong những ứng dụng quan trọng nhất của máy tính lượng tử trong tương lai sẽ là thực hiện các mô phỏng cho các hệ cơ học lượng tử quá phức tạp đối với máy tính cổ điển, một bài toán mang những hàm ý khoa học và công nghệ vô cùng sâu sắc.
+
+---
+
+**Máy tính lượng tử có thể giải quyết những bài toán nào khác nhanh hơn máy tính cổ điển?**
+
+Câu trả lời ngắn gọn là chúng ta chưa biết. Việc đưa ra các thuật toán lượng tử hay dường như rất khó. Một người bi quan có thể nghĩ rằng đó là vì chẳng có việc gì mà máy tính lượng tử giỏi hơn ngoài những ứng dụng đã được phát hiện!
+
+Chúng tôi có một góc nhìn khác. Thiết kế thuật toán cho máy tính lượng tử rất khó vì các nhà thiết kế phải đối mặt với hai vấn đề hóc búa mà việc xây dựng thuật toán cho máy tính cổ điển không hề gặp phải.
+
+Thứ nhất, trực giác con người chúng ta bắt nguồn từ thế giới cổ điển. Nếu chúng ta dùng trực giác đó làm trợ giúp để xây dựng thuật toán, thì những ý tưởng thuật toán mà chúng ta nghĩ ra sẽ chỉ là các ý tưởng cổ điển. Để thiết kế ra các thuật toán lượng tử hay, người ta buộc phải ‘tắt’ đi trực giác cổ điển của mình trong ít nhất một phần của quá trình thiết kế, đồng thời phải tận dụng các hiệu ứng thuần túy lượng tử để đạt được mục đích thuật toán mong muốn.
+
+Thứ hai, để thực sự thú vị, việc thiết kế một thuật toán mang tính cơ học lượng tử thôi là chưa đủ. Thuật toán đó phải vượt trội hơn bất kỳ thuật toán cổ điển hiện có nào! Do đó, hoàn toàn có khả năng người ta tìm ra một thuật toán tận dụng các khía cạnh thuần túy lượng tử của cơ học lượng tử, nhưng nó lại không thu hút được sự quan tâm rộng rãi vì các thuật toán cổ điển có đặc tính hiệu năng tương đương đã tồn tại sẵn.
+
+Sự kết hợp của hai vấn đề này khiến việc kiến tạo các thuật toán lượng tử mới trở thành một thử thách lớn lao cho tương lai.
+
+---
+
+Thậm chí một cách rộng lớn hơn, chúng ta có thể đặt câu hỏi liệu có bất kỳ sự tổng quát hóa nào mà chúng ta có thể đưa ra về sức mạnh của máy tính lượng tử so với máy tính cổ điển hay không. 
+
+**Điều gì làm cho máy tính lượng tử mạnh hơn máy tính cổ điển, giả định rằng điều này thực sự đúng?**
+
+**Lớp bài toán nào có thể được giải quyết một cách hiệu quả trên một máy tính lượng tử, và lớp đó so sánh như thế nào với lớp bài toán có thể giải quyết hiệu quả trên một máy tính cổ điển?**
+
+Một trong những điều thú vị nhất về tính toán lượng tử và thông tin lượng tử là chúng ta biết rất ít về câu trả lời cho những câu hỏi này! Đó là một thách thức lớn cho tương lai để hiểu rõ hơn những câu hỏi này.
+
+## Lịch sử của Information Theory
+
+Sau khi đã tiến đến ranh giới cốt lõi của tính toán lượng tử, chúng ta hãy chuyển sang lịch sử của một luồng tư tưởng khác cũng đóng góp vào tính toán lượng tử và thông tin lượng tử: ***Information theory*** Lý thuyết thông tin.
+
+Cùng thời điểm khoa học máy tính bùng nổ vào những năm 1940, một cuộc cách mạng khác cũng đang diễn ra trong sự hiểu biết của chúng ta về truyền thông. Vào năm 1948, Claude Shannon đã xuất bản một cặp bài báo kiệt xuất, đặt nền móng cho lý thuyết hiện đại về information và communication.
+
+---
+
+Có lẽ bước đi then chốt được Shannon thực hiện chính là việc *mathematically define the concept of information*. 
+
+Trong nhiều ngành khoa học toán học, người ta có sự linh hoạt khá lớn khi lựa chọn các định nghĩa nền tảng. Bạn hãy thử suy nghĩ một cách ngây thơ trong vài phút về câu hỏi sau: bạn sẽ làm thế nào để định nghĩa bằng toán học cho khái niệm ***"information source"*** (nguồn thông tin)? 
+
+Đã có nhiều câu trả lời khác nhau cho bài toán này được sử dụng rộng rãi; tuy nhiên, định nghĩa mà Shannon nghĩ ra dường như mang lại nhiều thành quả vượt trội nhất xét về khía cạnh mở rộng tri thức, dẫn đến vô số kết quả sâu sắc và một lý thuyết với cấu trúc phong phú phản ánh chính xác nhiều (dù không phải tất cả) các bài toán truyền thông trong thế giới thực.
+
+---
+
+Shannon quan tâm đến hai câu hỏi then chốt liên quan đến việc truyền tải thông tin qua một kênh truyền thông. 
+
+Thứ nhất, cần những tài nguyên nào để gửi thông tin qua một kênh truyền thông? Ví dụ, các công ty điện thoại cần biết họ có thể truyền tải bao nhiêu thông tin một cách đáng tin cậy qua một cáp điện thoại cho trước. 
+
+Thứ hai, liệu thông tin có thể được truyền đi theo cách sao cho nó được bảo vệ khỏi noise trên kênh truyền thông hay không?
+
+---
+
+Shannon đã trả lời hai câu hỏi này bằng cách chứng minh hai định lý nền tảng của lý thuyết thông tin. 
+
+Định lý thứ nhất, ***Shannon's noiseless channel coding theorem*** định lý mã hóa kênh không nhiễu của Shannon, định lượng các tài nguyên vật lý cần thiết để lưu trữ đầu ra từ một nguồn thông tin. 
+
+Định lý thứ hai, ***Shannon's noisy channel coding theorem*** định lý mã hóa kênh có nhiễn của Shannon, định lượng lượng thông tin tối đa có thể truyền tải một cách đáng tin cậy qua một kênh truyền thông có nhiễu.
+
+Để đạt được việc truyền tải đáng tin cậy khi có sự hiện diện của nhiễu, Shannon đã chỉ ra rằng các ***error-correcting codes*** mã sửa lỗi có thể được sử dụng để bảo vệ thông tin đang được gửi đi. Định lý mã hóa kênh có nhiễu của Shannon đưa ra một giới hạn trên cho mức độ bảo vệ mà các mã sửa lỗi mang lại. Thật không may, định lý của Shannon không chỉ ra một cách tường minh một tập hợp các mã sửa lỗi có tính thực tiễn để đạt tới giới hạn đó.
+
+Từ thời điểm các bài báo của Shannon xuất hiện cho đến nay, các nhà nghiên cứu đã xây dựng ngày càng nhiều lớp mã sửa lỗi tốt hơn trong nỗ lực tiến gần hơn đến giới hạn do định lý Shannon thiết lập. Hiện nay đã tồn tại một lý thuyết tinh vi về các mã sửa lỗi, mang đến cho người dùng vô số lựa chọn trong hành trình thiết kế một mã sửa lỗi tốt. Các mã như vậy được sử dụng ở rất nhiều nơi, chẳng hạn như trong các đầu đọc đĩa đĩa CD, modem máy tính, và các hệ thống thông tin liên lạc qua vệ tinh.
+
+
 
 
 # Hướng đi trong tương lai
