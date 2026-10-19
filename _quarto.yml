@@ -22,6 +22,7 @@ website:
       - section : "Introduction and overview"
         contents:
           - note/introandoverview/1.qmd
+          - note/introandoverview/2.qmd
           
 
 format:

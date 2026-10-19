@@ -357,7 +357,7 @@ Ngay cả khi bạn đảo ngược chiều của một trong các kênh (cho m�
 
 Trong thế giới lượng tử, nếu bạn có hai kênh lượng tử dung lượng bằng 0 chạy song song ( như hình bên trái), dung lượng kết hợp vẫn bằng 0.
 
-Tuy nhiên, nếu bạn đảo ngược chiều của một trong các kênh (như mô tả ở nửa bên phải của hình: một kênh hướng từ trái sang phải, kênh còn lại hướng từ phải sang trái), điều kỳ diệu xảy ra: dung lượng truyền thông tin có thể trở thành lớn hơn 0!. Và đây được gọi là *** superactivation of quantum capacity***.
+Tuy nhiên, nếu bạn đảo ngược chiều của một trong các kênh (như mô tả ở nửa bên phải của hình: một kênh hướng từ trái sang phải, kênh còn lại hướng từ phải sang trái), điều kỳ diệu xảy ra: dung lượng truyền thông tin có thể trở thành lớn hơn 0!. Và đây được gọi là ***superactivation of quantum capacity***.
 
 Việc đảo chiều dòng chảy thông tin lượng tử tạo ra một sự tương tác phi tuyến tính hoặc ***entanglement assistance*** hiện tượng vướng víu chéo đặc biệt, giúp hai kênh vốn dĩ không có ích gì cả, nhưng khi kết hợp lại theo cách này lại có thể phối hợp để truyền được thông tin.
 
