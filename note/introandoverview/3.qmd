@@ -1,0 +1,148 @@
+---
+title: "Quantum computation"
+chapter: "Introduction and Overview"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+    css: ../styles.css
+---
+
+Sự thay đổi xảy ra đối với một trạng thái lượng tử có thể được mô tả bằng ngôn ngữ của quantum computation. Tương tự như cách một máy tính cổ điển được xây dựng từ một mạch điện chứa các dây dẫn và cổng logic, một máy tính lượng tử được xây dựng từ một mạch lượng tử chứa các dây dẫn và các cổng lượng tử sơ cấp để mang đi và thao tác với thông tin lượng tử. 
+
+Trong phần này, chúng ta sẽ mô tả một số cổng lượng tử đơn giản, và trình bày một số mạch ví dụ minh họa ứng dụng của chúng, bao gồm cả một mạch có khả năng dịch chuyển tức thời qubit!
+
+# 1. Single qubit gates
+
+**Có thể định nghĩa một cổng NOT lượng tử tương tự cho các qubit được không?**
+
+Hãy tưởng tượng rằng chúng ta có một quá trình đưa trạng thái $\vert 0\rangle$ thành trạng thái $\vert 1\rangle$, và ngược lại. Một quá trình như vậy rõ ràng sẽ là một ứng cử viên sáng giá cho một chất tương tự lượng tử của cổng NOT. Tuy nhiên, việc chỉ định hành động của cổng trên các trạng thái $\vert 0\rangle$ và $\vert 1\rangle$ không cho chúng ta biết điều gì xảy ra với các trạng thái chồng chập của các trạng thái $\vert 0\rangle$ và $\vert 1\rangle$, nếu không có thêm kiến thức về các tính chất của cổng lượng tử. 
+
+Trên thực tế, cổng NOT lượng tử hoạt động một cách tuyến tính (linearly), nghĩa là nó biến đổi trạng thái   
+
+$$
+\alpha\vert 0\rangle + \beta\vert 1\rangle \tag {1.8}
+$$
+
+thành trạng thái tương ứng trong đó vai trò của $\vert 0\rangle$ và $\vert 1\rangle$ được hoán đổi cho nhau,
+
+$$
+\alpha\vert 1\rangle + \beta\vert 0\rangle. \tag {1.9}
+$$
+
+Tại sao cổng NOT lượng tử lại hoạt động theo kiểu tuyến tính chứ không phải theo một cách phi tuyến tính nào đó là một câu hỏi rất thú vị, và câu trả lời không hề hiển nhiên chút nào. Hóa ra hành vi tuyến tính này là một tính chất chung của cơ học lượng tử, và được thúc đẩy rất tốt bởi thực nghiệm; hơn nữa, hành vi phi tuyến tính có thể dẫn đến các nghịch lý rõ rệt như du hành thời gian, truyền thông tin nhanh hơn ánh sáng, và vi phạm các định luật nhiệt động lực học thứ hai. Chúng ta sẽ khám phá điểm này sâu hơn ở các chương sau, nhưng hiện tại chúng ta sẽ tạm coi nó là một điều được thừa nhận.
+
+---
+
+Có một cách thuận tiện để biểu diễn cổng $\text{NOT}$ lượng tử dưới dạng ma trận, cách này xuất phát trực tiếp từ tính tuyến tính của các cổng lượng tử. Giả sử chúng ta định nghĩa một ma trận $X$ để đại diện cho cổng $\text{NOT}$ lượng tử như sau:
+
+$$
+X \equiv \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}  \tag {1.10}
+$$
+
+(Ký hiệu $X$ cho cổng $\text{NOT}$ lượng tử được sử dụng vì lý do lịch sử.) Nếu trạng thái lượng tử $\alpha\vert 0\rangle + \beta\vert 1\rangle$ được viết dưới dạng ký hiệu véc-tơ là
+
+$$
+\begin{bmatrix} \alpha \\ \beta \end{bmatrix}  \tag {1.11}
+$$
+
+với phần tử ở trên tương ứng với biên độ của $\vert 0\rangle$ và phần tử ở dưới là biên độ của $\vert 1\rangle$, thì đầu ra tương ứng từ cổng $\text{NOT}$ lượng tử là
+
+$$
+X \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \beta \\ \alpha \end{bmatrix}  \tag {1.12}
+$$
+
+Lưu ý rằng tác động của cổng $\text{NOT}$ là lấy trạng thái $\vert 0\rangle$ và thay thế nó bằng trạng thái tương ứng với cột đầu tiên của ma trận $X$. Tương tự, trạng thái $\vert 1\rangle$ được thay thế bằng trạng thái tương ứng với cột thứ hai của ma trận $X$.
+
+---
+
+Các cổng lượng tử trên một qubit đơn có thể được mô tả bằng các ma trận hai nhân hai. 
+
+**Có ràng buộc nào đối với các ma trận có thể được sử dụng làm cổng lượng tử không?**
+
+Hóa ra là có. Hãy nhớ lại rằng điều kiện chuẩn hóa yêu cầu $\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1$ đối với một trạng thái lượng tử $\alpha\vert 0\rangle + \beta\vert 1\rangle$. Điều này cũng phải đúng đối với trạng thái lượng tử $\vert\psi'\rangle = \alpha'\vert 0\rangle + \beta'\vert 1\rangle$ sau khi cổng đã tác động. Hóa ra điều kiện thích hợp cho ma trận đại diện cho cổng là ma trận $U$ mô tả cổng một qubit phải là đơn nhất (unitary), nghĩa là $U^\dagger U = I$, trong đó $U^\dagger$ là số phức liên hợp chuyển vị (adjoint) của $U$ (được thu được bằng cách chuyển vị và sau đó lấy số phức liên hợp của $U$), và $I$ là ma trận đơn vị hai nhân hai. Ví dụ, đối với cổng $\text{NOT}$, rất dễ dàng để kiểm tra rằng $X^\dagger X = I$. 
+
+---
+
+Thật đáng kinh ngạc, ràng buộc tính đơn nhất này là ràng buộc duy nhất đối với các cổng lượng tử. Bất kỳ ma trận đơn nhất nào cũng quy định một cổng lượng tử hợp lệ. Ý nghĩa thú vị là, trái ngược với trường hợp cổ điển — nơi chỉ tồn tại một cổng một bit không tầm thường duy nhất là cổng $\text{NOT}$ — có rất nhiều cổng một qubit không tầm thường. Hai cổng quan trọng mà chúng ta sẽ sử dụng sau này là cổng $Z$:
+
+$$
+Z \equiv \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \tag {1.13}
+$$
+
+giữ nguyên $\vert 0\rangle$, và lật dấu của $\vert 1\rangle$ thành $-\vert 1\rangle$, và cổng Hadamard:
+
+$$
+H \equiv \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \tag {1.14}
+$$
+
+Cổng này đôi khi được mô tả giống như một cổng "căn bậc hai của NOT", ở chỗ nó biến $\vert 0\rangle$ thành $(\vert 0\rangle + \vert 1\rangle)/\sqrt{2}$ (cột đầu tiên của $H$), nằm "ở giữa" $\vert 0\rangle$ và $\vert 1\rangle$, và biến $\vert 1\rangle$ thành $(\vert 0\rangle - \vert 1\rangle)/\sqrt{2}$ (cột thứ hai của $H$), cũng nằm "ở giữa" $\vert 0\rangle$ và $\vert 1\rangle$. Tuy nhiên, lưu ý rằng $H^2$ không phải là một cổng $\text{NOT}$, vì đại số đơn giản cho thấy rằng $H^2 = I$, và do đó việc áp dụng $H$ hai lần vào một trạng thái sẽ không làm thay đổi gì cả.   
+
+---
+
+Cổng Hadamard là một trong những cổng lượng tử hữu ích nhất, và rất đáng để thử hình dung hoạt động của nó thông qua bức tranh quả cầu Bloch. Trong bức tranh này, hóa ra các cổng một qubit tương ứng với các phép quay và phản xạ của quả cầu. Phép toán Hadamard chỉ đơn giản là một phép quay của quả cầu quanh trục $y$ một góc $90^\circ$, theo sau là một phép quay quanh trục $x$ một góc $180^\circ$, như minh họa trong Hình 1.4. Một số cổng một qubit quan trọng được thể hiện trong Hình 1.5, và được đối chiếu với trường hợp cổ điển.
+
+![](../../img/1.4.png)
+
+
+![](../../img/1.5.png)
+
+
+Có vô số ma trận đơn nhất hai nhân hai, và do đó có vô số cổng một qubit. Tuy nhiên, hóa ra các tính chất của tập hợp đầy đủ có thể được hiểu từ các tính chất của một tập hợp nhỏ hơn nhiều. Ví dụ, như được giải thích ở Hộp 1.1, một cổng đơn nhất một qubit tùy ý có thể được phân rã thành tích của các phép quay 
+
+$$
+\begin{bmatrix}
+\cos \frac \gamma 2 & -\sin\frac \gamma 2 \\
+\sin \frac \gamma 2 & \cos \frac \gamma 2 
+\end{bmatrix}
+\tag {1.15}
+$$
+
+và một cổng mà sau này chúng ta sẽ hiểu là phép quay quanh trục $\hat z$ 
+
+$$
+\begin{bmatrix}
+e^{-i\beta /2} & 0 \\ 
+0 & e^{i\beta/2}
+\end{bmatrix}
+\tag {1.16}
+$$
+
+cùng với một sự dịch pha (toàn cục) - một hệ số nhân hằng số có dạng $e^{i\alpha}$. Các cổng này có thể được chia nhỏ hơn nữa - chúng ta không cần phải thực hiện các cổng này cho các giá trị $\alpha$, $\beta$ và $\gamma$ tùy ý, mà có thể xây dựng các xấp xỉ tốt tùy ý cho các cổng đó chỉ bằng cách sử dụng một số giá trị cố định đặc biệt của $\alpha$, $\beta$ và $\gamma$. 
+
+Bằng cách này, có thể xây dựng một cổng một qubit tùy ý bằng cách sử dụng một tập hợp hữu hạn các cổng lượng tử. Tổng quát hơn, một phép tính toán lượng tử tùy ý trên bất kỳ số lượng qubit nào có thể được tạo ra bởi một tập hợp hữu hạn các cổng được gọi là phổ biến cho tính toán lượng tử. Để có được một tập hợp phổ biến như vậy, trước tiên chúng ta cần giới thiệu một số cổng lượng tử liên quan đến nhiều qubit. 
+
+:::{.callout-note}
+# Hộp 1.1. Phân rã các phép toán một qubit
+
+Ở mục 4.2 bắt đầu từ trang 174 trong sách, chúng ta chứng minh rằng một ma trận đơn nhất $2 \times 2$ tùy ý có thể được phân rã thành
+
+$$
+U = 
+
+e^{i\alpha} 
+\begin{bmatrix} 
+e^{-i\beta/2} & 0 \\ 
+0 & e^{i\beta/2} 
+\end{bmatrix} 
+
+\begin{bmatrix} 
+\cos\frac{\gamma}{2} & -\sin\frac{\gamma}{2} \\ 
+\sin\frac{\gamma}{2} & \cos\frac{\gamma}{2} 
+\end{bmatrix},
+
+
+\begin{bmatrix} 
+e^{-i\delta/2} & 0 \\ 
+0 & e^{i\delta/2} 
+\end{bmatrix} 
+
+
+\tag{1.17}
+$$
+
+trong đó $\alpha$, $\beta$, $\gamma$ và $\delta$ là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.
+:::

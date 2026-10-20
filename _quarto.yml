@@ -23,6 +23,7 @@ website:
         contents:
           - note/introandoverview/1.qmd
           - note/introandoverview/2.qmd
+          - note/introandoverview/3.qmd
           
 
 format:
