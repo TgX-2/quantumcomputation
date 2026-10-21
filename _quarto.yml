@@ -28,9 +28,11 @@ website:
 
 format:
   html:
-    theme:
-      light: cosmo
-      dark: darkly
+    theme: cosmo
+    grid:
+      body-width: 1000px
+      margin-width: 160px
+      gutter-width: 1em
     toc: true
     html-math-method: katex
     css: styles.css

@@ -8,7 +8,6 @@ format:
     toc-depth: 3
     toc-title: "Mục lục fbài viết"
     toc-location: right
-    css: ../styles.css
 ---
 
 # Lời tựa

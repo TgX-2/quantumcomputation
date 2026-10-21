@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quantum – TgX.2</title>
+<title>Điện toán lượng tử – TgX.2</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -40,14 +40,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -80,169 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -267,9 +101,6 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">TgX.2</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -335,6 +166,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Quantum bits</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -347,7 +184,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-fundamental-concepts" id="toc-part-1-fundamental-concepts" class="nav-link active" data-scroll-target="#part-1-fundamental-concepts">Part 1 Fundamental concepts</a>
+  <li><a href="#lộ-trình-đọc" id="toc-lộ-trình-đọc" class="nav-link active" data-scroll-target="#lộ-trình-đọc">Lộ trình đọc</a></li>
+  <li><a href="#part-1-fundamental-concepts" id="toc-part-1-fundamental-concepts" class="nav-link" data-scroll-target="#part-1-fundamental-concepts">Part 1 Fundamental concepts</a>
   <ul class="collapse">
   <li><a href="#i-introduction-concepts" id="toc-i-introduction-concepts" class="nav-link" data-scroll-target="#i-introduction-concepts">I Introduction concepts</a></li>
   </ul></li>
@@ -357,10 +195,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">quantum</h1>
+<h1 class="title">Điện toán lượng tử</h1>
 </div>
 
 
@@ -377,14 +214,53 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Bản dịch kém chất lượng của Quantum Computation and Quantum Information, 10th Anniversary Edition, by Michael A. Nielson and Issac L. Chuang.</p>
-<p>Đọc bản chính tại đây: <a href=".\file/quantum-computation-and-quantum-information-nielsen-chuang.pdf">file</a></p>
+<div class="home-hero">
+<div class="hero-eyebrow">
+<p>Quantum computation &amp; information</p>
+</div>
+<section id="khám-phá-thế-giới-lượng-tử" class="level1">
+<h1>Khám phá thế giới lượng tử</h1>
+<div class="hero-description">
+<p>Ghi chú và bản dịch tiếng Việt về điện toán lượng tử, thông tin lượng tử cùng những ý tưởng nền tảng phía sau chúng.</p>
+</div>
+<div class="hero-actions">
+<p><a href="./note/introandoverview/1.html" class="hero-button primary">Bắt đầu đọc →</a> <a href="file/quantum-computation-and-quantum-information-nielsen-chuang.pdf" class="hero-button">Đọc sách bản gốc</a></p>
+</div>
+</section>
+</div>
+<div class="home-intro">
+<p>Một hành trình từ những khái niệm cơ bản đến các ứng dụng của cơ học lượng tử trong tính toán và xử lý thông tin.</p>
+</div>
+<section id="lộ-trình-đọc" class="level2 home-section-title">
+<h2 class="home-section-title anchored" data-anchor-id="lộ-trình-đọc">Lộ trình đọc</h2>
+<div class="home-grid">
+<section id="mở-đầu-và-tổng-quan" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="mở-đầu-và-tổng-quan"><a href="./note/introandoverview/1.html">Mở đầu và tổng quan</a></h3>
+<p>Làm quen với lịch sử, động lực và những ý tưởng cốt lõi của lĩnh vực.</p>
+</section>
+<section id="các-chương-tiếp-theo" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="các-chương-tiếp-theo"><a href="./note/introandoverview/2.html">Các chương tiếp theo</a></h3>
+<p>Tiếp tục hành trình qua những chủ đề nền tảng của điện toán lượng tử.</p>
+</section>
+<section id="khám-phá-thêm" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="khám-phá-thêm"><a href="./note/introandoverview/3.html">Khám phá thêm</a></h3>
+<p>Đọc phần tiếp theo trong chuỗi bài giới thiệu và tổng quan.</p>
+</section>
+<section id="ký-hiệu-và-tài-liệu" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="ký-hiệu-và-tài-liệu"><a href="./note/intro/notation.html">Ký hiệu và tài liệu</a></h3>
+<p>Tra cứu ký hiệu và các ghi chú hữu ích khi đọc.</p>
+</section>
+</div>
+<div class="home-note">
+<p>Đây là bản dịch và ghi chú đang được hoàn thiện. Bạn có thể đối chiếu với sách gốc để có thêm ngữ cảnh.</p>
+</div>
+</section>
 <section id="part-1-fundamental-concepts" class="level1">
 <h1>Part 1 Fundamental concepts</h1>
 <section id="i-introduction-concepts" class="level2">
 <h2 class="anchored" data-anchor-id="i-introduction-concepts">I Introduction concepts</h2>
 <ul>
-<li>1.1. Global perspectives
+<li><a href="./note/introandoverview/1.html">1.1. Global perspectives</a>
 <ul>
 <li>1.1.1. History of quantum computation and quantum information</li>
 <li>1.1.2. Future directions</li>
@@ -396,8 +272,8 @@ ul.task-list li input[type="checkbox"] {
 <li>1.3. Quantum computation
 <ul>
 <li>1.3.1. Single qubit gates</li>
-<li>1.3.2. Multiple qhbit gates</li>
-<li>1.3.3. Mesurements in bases other than the computational basis</li>
+<li>1.3.2. Multiple qubit gates</li>
+<li>1.3.3. Measurements in bases other than the computational basis</li>
 <li>1.3.4. Quantum circuits</li>
 <li>1.3.5. Qubit copying circuit</li>
 <li>1.3.6. Example: Bell states</li>
@@ -412,19 +288,6 @@ ul.task-list li input[type="checkbox"] {
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

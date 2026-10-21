@@ -41,14 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-e8964db687007ca8dd88d9d9ce58e3ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,172 +118,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -312,9 +145,6 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">TgX.2</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -399,12 +229,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#single-qubit-gates" id="toc-single-qubit-gates" class="nav-link active" data-scroll-target="#single-qubit-gates">1. Single qubit gates</a></li>
+  <li><a href="#multiple-qubit-gates" id="toc-multiple-qubit-gates" class="nav-link" data-scroll-target="#multiple-qubit-gates">2. Multiple qubit gates</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introandoverview/1.html">Introduction and overview</a></li><li class="breadcrumb-item"><a href="../../note/introandoverview/3.html">Quantum computation</a></li></ol></nav>
 <div class="quarto-title">
@@ -507,25 +337,33 @@ e^{-i\beta /2} &amp; 0 \\
 </div>
 <div class="callout-body-container callout-body">
 <p>Ở mục 4.2 bắt đầu từ trang 174 trong sách, chúng ta chứng minh rằng một ma trận đơn nhất <span class="math inline">2 \times 2</span> tùy ý có thể được phân rã thành</p>
-<p>$$ U =</p>
-e^{i}
-<span class="math display">\begin{bmatrix}
-e^{-i\beta/2} &amp; 0 \\
-0 &amp; e^{i\beta/2}
-\end{bmatrix}</span>
-<span class="math display">\begin{bmatrix}
-\cos\frac{\gamma}{2} &amp; -\sin\frac{\gamma}{2} \\
-\sin\frac{\gamma}{2} &amp; \cos\frac{\gamma}{2}
-\end{bmatrix}</span>
-<p>,</p>
-<span class="math display">\begin{bmatrix}
-e^{-i\delta/2} &amp; 0 \\
-0 &amp; e^{i\delta/2}
-\end{bmatrix}</span>
-<p>$$</p>
+<p><span class="math display">
+U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \end{bmatrix} \begin{bmatrix} \cos\frac{\gamma}{2} &amp; -\sin\frac{\gamma}{2} \\ \sin\frac{\gamma}{2} &amp; \cos\frac{\gamma}{2} \end{bmatrix},\begin{bmatrix} e^{-i\delta/2} &amp; 0 \\ 0 &amp; e^{i\delta/2} \end{bmatrix}
+\tag{1.17}
+</span></p>
 <p>trong đó <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span> và <span class="math inline">\delta</span> là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.</p>
 </div>
 </div>
+</section>
+<section id="multiple-qubit-gates" class="level1">
+<h1>2. Multiple qubit gates</h1>
+<p>Bây giờ chúng ta hãy tổng quát hóa từ một qubit sang nhiều qubit.</p>
+<p><img src="../../img/1.6.png" class="img-fluid"></p>
+<p>Hình 1.6 hiển thị năm cổng cổ điển đa bit đáng chú ý, các cổng <span class="math inline">\text{AND}</span>, <span class="math inline">\text{OR}</span>, <span class="math inline">\text{XOR}</span> (exclusive-OR), <span class="math inline">\text{NAND}</span> và <span class="math inline">\text{NOR}</span>. Một kết quả lý thuyết quan trọng là bất kỳ hàm số nào trên các bit đều có thể được tính toán chỉ từ sự kết hợp của các cổng <span class="math inline">\text{NAND}</span>, do đó cổng này được gọi là một cổng vạn năng. Ngược lại, cổng <span class="math inline">\text{XOR}</span> đứng một mình hoặc thậm chí đi cùng với cổng <span class="math inline">\text{NOT}</span> thì không vạn năng Một cách để nhận ra điều này là lưu ý rằng việc áp dụng cổng <span class="math inline">\text{XOR}</span> không làm thay đổi tính chẵn lẻ tổng thể của các bit. Kết quả là, bất kỳ mạch nào chỉ bao gồm các cổng <span class="math inline">\text{NOT}</span> và <span class="math inline">\text{XOR}</span> sẽ cho ra các đầu ra có cùng tính chẵn lẻ nếu hai đầu vào <span class="math inline">x</span> và <span class="math inline">y</span> có cùng tính chẵn lẻ, từ đó giới hạn lớp các hàm có thể được tính toán, và do đó loại bỏ tính phổ biến.</p>
+<hr>
+<p>Cổng logic lượng tử đa qubit nguyên mẫu là cổng <span class="math inline">\text{controlled-NOT}</span> hay cổng <span class="math inline">\text{CNOT}</span>. Cổng này có hai qubit đầu vào, được gọi lần lượt là <strong><em>control qubit</em></strong> qubit điều khiển và <strong><em>target qubit</em></strong> qubit mục tiêu. Sơ đồ mạch cho cổng <span class="math inline">\text{CNOT}</span> được thể hiện ở góc trên bên phải của Hình 1.6; dòng trên đại diện cho qubit điều khiển, trong khi dòng dưới đại diện cho qubit mục tiêu. Hoạt động của cổng có thể được mô tả như sau:</p>
+<ul>
+<li><p>Nếu qubit điều khiển được đặt ở <span class="math inline">0</span>, thì qubit mục tiêu được giữ nguyên.</p></li>
+<li><p>Nếu qubit điều khiển được đặt ở <span class="math inline">1</span>, thì qubit mục tiêu bị lật.</p></li>
+</ul>
+<p>Theo các phương trình:</p>
+<p><span class="math display">
+\vert 00\rangle \to \vert 00\rangle; \quad \vert 01\rangle \to \vert 01\rangle; \quad \vert 10\rangle \to \vert 11\rangle; \quad \vert 11\rangle \to \vert 10\rangle \tag {1.18}
+</span></p>
+<p>Một cách khác để mô tả cổng <span class="math inline">\text{CNOT}</span> là sự tổng quát hóa của cổng <span class="math inline">\text{XOR}</span> cổ điển, vì hành động của cổng có thể được tóm tắt là <span class="math inline">\vert A, B\rangle \to \vert A, B \oplus A\rangle</span>, trong đó <span class="math inline">\oplus</span> là phép cộng modulo hai, đây chính xác là những gì cổng <span class="math inline">\text{XOR}</span> thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép <span class="math inline">\text{XOR}</span> với nhau và kết quả được lưu trữ trong qubit mục tiêu.</p>
+<hr>
+<p>Lại một cách khác để mô tả hành động của cổng <span class="math inline">\text{CNOT}</span> là đưa ra biểu diễn ma trận, như được hiển thị ở góc dưới bên phải của Hình 1.6. Bạn có thể dễ dàng xác minh rằng cột đầu tiên của <span class="math inline">U_{CN}</span> mô tả sự biến đổi xảy ra đối với <span class="math inline">\vert 00\rangle</span>, và tương tự đối với các trạng thái cơ sở tính toán khác, <span class="math inline">\vert 01\rangle</span>, <span class="math inline">\vert 10\rangle</span> và <span class="math inline">\vert 11\rangle</span>. Đối với trường hợp một qubit, yêu cầu bảo toàn xác suất được thể hiện qua thực tế rằng <span class="math inline">U_{CN}</span> là <strong><em>unitary matrix</em></strong> một ma trận đơn nhất, nghĩa là <span class="math inline">U_{CN}^\dagger U_{CN} = I</span>.</p>
+<hr>
 
 
 </section>
@@ -533,19 +371,6 @@ e^{-i\delta/2} &amp; 0 \\
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

@@ -8,7 +8,6 @@ format:
     toc-depth: 3
     toc-title: "Mục lục bài viết"
     toc-location: right
-    css: ../styles.css
 ---
 
 Bit là khái niệm nền tảng của classical computation và classical information. 
@@ -176,6 +175,5 @@ Tổng quát hơn, chúng ta có thể xem xét một hệ thống gồm $n$ qub
 Đối với $n = 500$, con số này lớn hơn số nguyên tử ước tính trong Vũ trụ! Cố gắng lưu trữ tất cả các số phức này sẽ là điều bất khả thi trên bất kỳ máy tính cổ điển nào có thể tưởng tượng được. Không gian Hilbert quả thực là một nơi rất rộng lớn. Tuy nhiên, về nguyên tắc, Tự nhiên thao tác với lượng dữ liệu khổng lồ như vậy, ngay cả đối với các hệ thống chỉ chứa vài trăm nguyên tử. Cứ như thể Tự nhiên đang giữ $2^{500}$ mảnh giấy nháp ẩn ở bên cạnh, nơi cô ấy thực hiện các phép tính của mình khi hệ thống tiến hóa. Sức mạnh tính toán tiềm năng to lớn này là thứ mà chúng ta rất muốn tận dụng. 
 
 **Nhưng làm thế nào chúng ta có thể coi cơ học lượng tử như một phép tính toán?**
-
 
 

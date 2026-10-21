@@ -8,7 +8,6 @@ format:
     toc-depth: 3
     toc-title: "Mục lục bài viết"
     toc-location: right
-    css: ../styles.css
 ---
 
 Sự thay đổi xảy ra đối với một trạng thái lượng tử có thể được mô tả bằng ngôn ngữ của quantum computation. Tương tự như cách một máy tính cổ điển được xây dựng từ một mạch điện chứa các dây dẫn và cổng logic, một máy tính lượng tử được xây dựng từ một mạch lượng tử chứa các dây dẫn và các cổng lượng tử sơ cấp để mang đi và thao tác với thông tin lượng tử. 
@@ -121,28 +120,88 @@ Bằng cách này, có thể xây dựng một cổng một qubit tùy ý bằng
 Ở mục 4.2 bắt đầu từ trang 174 trong sách, chúng ta chứng minh rằng một ma trận đơn nhất $2 \times 2$ tùy ý có thể được phân rã thành
 
 $$
-U = 
-
-e^{i\alpha} 
-\begin{bmatrix} 
-e^{-i\beta/2} & 0 \\ 
-0 & e^{i\beta/2} 
-\end{bmatrix} 
-
-\begin{bmatrix} 
-\cos\frac{\gamma}{2} & -\sin\frac{\gamma}{2} \\ 
-\sin\frac{\gamma}{2} & \cos\frac{\gamma}{2} 
-\end{bmatrix},
-
-
-\begin{bmatrix} 
-e^{-i\delta/2} & 0 \\ 
-0 & e^{i\delta/2} 
-\end{bmatrix} 
-
-
+U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} & 0 \\ 0 & e^{i\beta/2} \end{bmatrix} \begin{bmatrix} \cos\frac{\gamma}{2} & -\sin\frac{\gamma}{2} \\ \sin\frac{\gamma}{2} & \cos\frac{\gamma}{2} \end{bmatrix},\begin{bmatrix} e^{-i\delta/2} & 0 \\ 0 & e^{i\delta/2} \end{bmatrix} 
 \tag{1.17}
 $$
 
 trong đó $\alpha$, $\beta$, $\gamma$ và $\delta$ là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.
 :::
+
+# 2. Multiple qubit gates
+
+Bây giờ chúng ta hãy tổng quát hóa từ một qubit sang nhiều qubit. 
+
+![](../../img/1.6.png)
+
+Hình 1.6 hiển thị năm cổng cổ điển đa bit đáng chú ý, các cổng $\text{AND}$, $\text{OR}$, $\text{XOR}$ (exclusive-OR), $\text{NAND}$ và $\text{NOR}$. Một kết quả lý thuyết quan trọng là bất kỳ hàm số nào trên các bit đều có thể được tính toán chỉ từ sự kết hợp của các cổng $\text{NAND}$, do đó cổng này được gọi là một cổng vạn năng. Ngược lại, cổng $\text{XOR}$ đứng một mình hoặc thậm chí đi cùng với cổng $\text{NOT}$ thì không vạn năng Một cách để nhận ra điều này là lưu ý rằng việc áp dụng cổng $\text{XOR}$ không làm thay đổi tính chẵn lẻ tổng thể của các bit. Kết quả là, bất kỳ mạch nào chỉ bao gồm các cổng $\text{NOT}$ và $\text{XOR}$ sẽ cho ra các đầu ra có cùng tính chẵn lẻ nếu hai đầu vào $x$ và $y$ có cùng tính chẵn lẻ, từ đó giới hạn lớp các hàm có thể được tính toán, và do đó loại bỏ tính phổ biến.
+
+---
+
+Cổng logic lượng tử đa qubit nguyên mẫu là cổng $\text{controlled-NOT}$ hay cổng $\text{CNOT}$. Cổng này có hai qubit đầu vào, được gọi lần lượt là ***control qubit*** qubit điều khiển và ***target qubit*** qubit mục tiêu. Sơ đồ mạch cho cổng $\text{CNOT}$ được thể hiện ở góc trên bên phải của Hình 1.6; dòng trên đại diện cho qubit điều khiển, trong khi dòng dưới đại diện cho qubit mục tiêu. Hoạt động của cổng có thể được mô tả như sau: 
+
+* Nếu qubit điều khiển được đặt ở $0$, thì qubit mục tiêu được giữ nguyên. 
+
+* Nếu qubit điều khiển được đặt ở $1$, thì qubit mục tiêu bị lật. 
+
+Theo các phương trình:
+
+$$
+\vert 00\rangle \to \vert 00\rangle; \quad \vert 01\rangle \to \vert 01\rangle; \quad \vert 10\rangle \to \vert 11\rangle; \quad \vert 11\rangle \to \vert 10\rangle \tag {1.18}
+$$
+
+Một cách khác để mô tả cổng $\text{CNOT}$ là sự tổng quát hóa của cổng $\text{XOR}$ cổ điển, vì hành động của cổng có thể được tóm tắt là $\vert A, B\rangle \to \vert A, B \oplus A\rangle$, trong đó $\oplus$ là phép cộng modulo hai, đây chính xác là những gì cổng $\text{XOR}$ thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép $\text{XOR}$ với nhau và kết quả được lưu trữ trong qubit mục tiêu.
+
+---
+
+Lại một cách khác để mô tả hành động của cổng $\text{CNOT}$ là đưa ra biểu diễn ma trận, như được hiển thị ở góc dưới bên phải của Hình 1.6. Bạn có thể dễ dàng xác minh rằng cột đầu tiên của $U_{CN}$ mô tả sự biến đổi xảy ra đối với $\vert 00\rangle$, và tương tự đối với các trạng thái cơ sở tính toán khác, $\vert 01\rangle$, $\vert 10\rangle$ và $\vert 11\rangle$. Đối với trường hợp một qubit, yêu cầu bảo toàn xác suất được thể hiện qua thực tế rằng $U_{CN}$ là ***unitary matrix***  một ma trận đơn nhất, nghĩa là $U_{CN}^\dagger U_{CN} = I$.  
+
+---
+
+Chúng ta đã nhận thấy rằng cổng $\text{CNOT}$ có thể được coi là một dạng cổng $\text{XOR}$ tổng quát. 
+
+Các cổng cổ điển khác như cổng $\text{NAND}$ hoặc cổng $\text{XOR}$ thông thường có thể được hiểu là các cổng đơn nhất theo một nghĩa tương tự như cách cổng $\text{NOT}$ lượng tử đại diện cho cổng $\text{NOT}$ cổ điển không? 
+
+Hóa ra điều này là không thể. Lý do là vì các cổng $\text{XOR}$ và $\text{NAND}$ về cơ bản là ***irreversible or non-invertible*** không thuận nghịch hoặc không khả nghịch. Ví dụ, cho trước đầu ra $A \oplus B$ từ một cổng $\text{XOR}$, không thể xác định được đầu vào $A$ và $B$ ban đầu là gì; có sự mất mát thông tin không thể khôi phục đi kèm với hành động không khả nghịch của cổng $\text{XOR}$. 
+
+Mặt khác, các cổng lượng tử đơn nhất thì luôn khả nghịch, vì nghịch đảo của một ma trận đơn nhất cũng là một ma trận đơn nhất, và do đó một cổng lượng tử luôn có thể được đảo ngược bởi một cổng lượng tử khác. Hiểu cách thực hiện logic cổ điển theo nghĩa khả nghịch hoặc đảo ngược này sẽ là một bước quan trọng trong việc hiểu cách khai thác sức mạnh của cơ học lượng tử cho tính toán. Chúng ta sẽ giải thích ý tưởng cơ bản về cách thực hiện tính toán khả nghịch (reversible computation) ở Mục 1.4.1.
+
+:::{.callout-note}
+# Giải thích thêm cho dễ hiểu
+
+**Trong máy tính cổ điển**
+
+Ví dụ lấy cổng xor, ta có hai bit đầu vào là A và B, thì kết quả cuối cùng chỉ là một bit kết quả (0 hoặc 1).
+
+Vì vậy, chúng ta không biết chính xác đầu vào A và B là gì khi chỉ biết mỗi bit kết quả. Từ đó, thông tin về việc A và B bằng bao nhiêu đã bị trộn lẫn và vướng vào nhau, gọi là mất thông tin. Vì vậy các cổng ở máy tính cổ điển là không khả nghịch, tức là từ một cổng kết quả không thể suy ra được các cổng đầu vào ban đầu.
+
+**Trong máy tính lượng tử**
+
+Ta có cổng CNOT, nhận vào 2 qubit là $\vert A, B \rangle$, và biến đổi chúng thành:
+
+$$
+\vert A, B\rangle \rightarrow \vert A, A \oplus B\rangle
+$$
+
+nhìn vào kết quả, ta thấy $\vert A \rangle$ vẫn còn được giữ nguyên. Chỉ có qubit thứ hai mới bị biến thành kết quả của $A \oplus B$.
+
+Vì vậy chúng ta có thể khôi phục 2 qubit đầu vào.
+
+**Tại sao**
+
+Bởi vì các ma trận trong lượng tử (hay là cổng logic của nó nhưng ở dạng ma trận) đều phải là ma trận đơn nhất.
+
+Tức là việc ta áp dụng hai lần một cổng nào đó, sẽ cho ra kết quả như ban đầu.
+
+:::
+
+
+---
+
+Tất nhiên, có rất nhiều cổng lượng tử thú vị khác ngoài cổng $\text{controlled-NOT}$. Tuy nhiên, theo một nghĩa nào đó, cổng $\text{controlled-NOT}$ và các cổng một qubit là các nguyên mẫu cho tất cả các cổng khác vì kết quả tính phổ biến đáng chú ý sau đây: 
+
+**Bất kỳ cổng logic đa qubit nào cũng có thể được cấu thành từ cổng $\text{CNOT}$ và các cổng một qubit.**
+
+Chứng minh được đưa ra ở Mục 4.5, và đây là đối trọng lượng tử của tính phổ biến của cổng $\text{NAND}$.
+
+
+
