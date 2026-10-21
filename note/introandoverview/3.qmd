@@ -203,5 +203,161 @@ Tất nhiên, có rất nhiều cổng lượng tử thú vị khác ngoài cổ
 
 Chứng minh được đưa ra ở Mục 4.5, và đây là đối trọng lượng tử của tính phổ biến của cổng $\text{NAND}$.
 
+# 3. Measurements in bases other than the computational basis
+
+Chúng ta đã mô tả các phép đo lượng tử của một qubit đơn ở trạng thái $\alpha\vert 0\rangle + \beta\vert 1\rangle$ mang lại kết quả $0$ hoặc $1$ và để lại qubit ở trạng thái tương ứng $\vert 0\rangle$ hoặc $\vert 1\rangle$, với các xác suất tương ứng là $\vert{}\alpha\vert{}^2$ và $\vert{}\beta\vert{}^2$. Trên thực tế, cơ học lượng tử cho phép sự linh hoạt hơn đôi chút trong lớp các phép đo có thể được thực hiện, mặc dù hoàn toàn không đủ để khôi phục $\alpha$ và $\beta$ từ một phép đo duy nhất!
+
+Lưu ý rằng các trạng thái $\vert 0\rangle$ và $\vert 1\rangle$ chỉ đại diện cho một trong nhiều lựa chọn khả dĩ về các trạng thái cơ sở cho một qubit. Một lựa chọn khả dĩ khác là tập hợp $\vert+\rangle \equiv (\vert 0\rangle + \vert 1\rangle)/\sqrt{2}$ và $\vert-\rangle \equiv (\vert 0\rangle - \vert 1\rangle)/\sqrt{2}$. Một trạng thái tùy ý $\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle$ có thể được biểu diễn lại theo các trạng thái $\vert+\rangle$ và $\vert-\rangle$:
+
+$$
+\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle = \alpha\frac{\vert+\rangle + \vert-\rangle}{\sqrt{2}} + \beta\frac{\vert+\rangle - \vert-\rangle}{\sqrt{2}} = \frac{\alpha + \beta}{\sqrt{2}}\vert+\rangle + \frac{\alpha - \beta}{\sqrt{2}}\vert-\rangle. 
+\tag {1.19}
+$$
+
+Hóa ra là có thể coi các trạng thái $\vert+\rangle$ và $\vert-\rangle$ giống như thể chúng là các trạng thái cơ sở tính toán, và đo đạc đối với cơ sở mới này. Đương nhiên, việc đo đạc đối với cơ sở $\vert+\rangle, \vert-\rangle$ mang lại kết quả ‘$+$’ với xác suất $\vert{}\alpha + \beta\vert{}^2/2$ và kết quả ‘$-$' với xác suất $\vert{}\alpha - \beta\vert{}^2/2$, với các trạng thái sau phép đo tương ứng là $\vert+\rangle$ và $\vert-\rangle$, tương ứng.
+
+Tổng quát hơn, cho trước bất kỳ trạng thái cơ sở nào $\vert a\rangle$ và $\vert b\rangle$ cho một qubit, có thể biểu diễn một trạng thái tùy ý dưới dạng một tổ hợp tuyến tính $\alpha\vert a\rangle + \beta\vert b\rangle$ của các trạng thái đó. Hơn nữa, miễn là các trạng thái là ***orthonormal*** trực chuẩn, có thể thực hiện một phép đo đối với cơ sở $\vert a\rangle, \vert b\rangle$, cho ra kết quả $a$ với xác suất $\vert{}\alpha\vert{}^2$ và $b$ với xác suất $\vert{}\beta\vert{}^2$. 
+
+Ràng buộc trực chuẩn là cần thiết để $\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1$ như chúng ta mong đợi đối với các xác suất. Theo cách tương tự, về nguyên tắc, có thể đo một hệ lượng tử gồm nhiều qubit đối với một cơ sở trực chuẩn tùy ý. Tuy nhiên, chỉ vì có thể làm được về nguyên tắc không có nghĩa là phép đo đó có thể được thực hiện một cách dễ dàng, và chúng ta sẽ quay lại vấn đề làm thế nào để thực hiện hiệu quả một phép đo theo một cơ sở tùy ý ở phần sau.
+
+Có nhiều lý do để sử dụng hình thức mở rộng này cho các phép đo lượng tử, nhưng cuối cùng lý do tốt nhất là thế này: hình thức này cho phép chúng ta mô tả các kết quả thực nghiệm quan sát được, như chúng ta sẽ thấy trong thảo luận của mình về thí nghiệm Stern–Gerlach ở Mục 1.5.1. Một hình thức thậm chí còn tinh vi và thuận tiện hơn (nhưng về cơ bản là tương đương) để mô tả các phép đo lượng tử được mô tả trong chương tiếp theo, Mục 2.2.3.
+
+# 4. Quantum circuits
+
+Chúng ta đã gặp một vài mạch lượng tử đơn giản. Hãy cùng xem xét chi tiết hơn một chút về các thành phần của một mạch lượng tử. 
+
+Một mạch lượng tử đơn giản chứa ba cổng lượng tử được thể hiện trong Hình 1.7. Mạch được đọc từ trái sang phải. Mỗi đường trong mạch đại diện cho một ***wire*** dây dẫn trong mạch lượng tử. Dây dẫn này không nhất thiết phải tương ứng với một sợi dây vật lý; thay vào đó, nó có thể tương ứng với sự trôi qua của thời gian, hoặc có thể là một hạt vật lý như một photon — một hạt ánh sáng — di chuyển từ vị trí này sang vị trí khác trong không gian. Quy ước chung là giả định rằng trạng thái đầu vào của mạch là một trạng thái cơ sở tính toán, thường là trạng thái bao gồm toàn các $\vert 0\rangle$. Quy tắc này bị phá vỡ thường xuyên trong các tài liệu về tính toán lượng tử và thông tin lượng tử, nhưng việc thông báo trước cho người đọc khi điều này xảy ra được coi là lịch sự.  
+
+Mạch trong Hình 1.7 thực hiện một tác vụ đơn giản nhưng hữu ích — nó hoán đổi trạng thái của hai qubit. Để thấy rằng mạch này thực hiện thao tác hoán đổi (swap), hãy lưu ý rằng chuỗi các cổng có trình tự tác động sau đây lên trạng thái cơ sở tính toán $\vert a, b\rangle$:   
+
+$$
+\vert a, b\rangle \longrightarrow \vert a, a \oplus b\rangle
+$$
+
+$$
+\longrightarrow \vert a \oplus (a \oplus b), a \oplus b\rangle = \vert b, a \oplus b\rangle
+$$
+
+$$
+\longrightarrow \vert b, (a \oplus b) \oplus b\rangle = \vert b, a\rangle \tag {1.20}
+$$
+
+trong đó tất cả các phép cộng đều được thực hiện theo modulo 2. Do đó, hiệu ứng của mạch là hoán đổi trạng thái của hai qubit.
+
+![](../../img/1.7.png)
+
+---
+
+Có một số tính năng được phép trong mạch cổ điển nhưng thường không xuất hiện trong mạch lượng tử. 
+
+Thứ nhất, chúng ta không cho phép ***'loops'*** "vòng lặp", nghĩa là thông tin phản hồi từ một phần này của mạch lượng tử sang phần khác; chúng ta gọi mạch là ***acyclic*** không có chu trình. 
+
+Thứ hai, các mạch cổ điển cho phép các đường dây được "nối" lại với nhau, một thao tác được gọi là $\text{FANIN}$, với dây đơn kết quả chứa phép toán $\text{OR}$ theo từng bit của các đầu vào. Rõ ràng thao tác này không khả nghịch và do đó không đơn nhất, vì vậy chúng ta không cho phép $\text{FANIN}$ trong các mạch lượng tử của mình. 
+
+Thứ ba, thao tác nghịch đảo của nó, $\text{FANOUT}$, trong đó một vài bản sao của một bit được tạo ra cũng không được phép trong các mạch lượng tử. Trên thực tế, hóa ra quantum mechanic cấm việc sao chép một qubit, khiến thao tác $\text{FANOUT}$ trở thành bất khả thi! Chúng ta sẽ thấy một ví dụ về điều này trong phần tiếp theo khi chúng ta cố gắng thiết kế một mạch để sao chép một qubit.
+
+---
+
+Khi tiến hành, chúng ta sẽ giới thiệu các cổng lượng tử mới khi cần thiết. Thật tiện lợi khi giới thiệu một quy ước khác về các mạch lượng tử tại thời điểm này. Quy ước này được minh họa trong Hình 1.8. Giả sử $U$ là bất kỳ ma trận đơn nhất nào tác động lên một số $n$ qubit nào đó, do đó $U$ có thể được coi là một cổng lượng tử trên các qubit đó. Khi đó chúng ta có thể định nghĩa một cổng $\text{controlled-}U$ vốn là sự mở rộng tự nhiên của cổng $\text{controlled-NOT}$. Cổng này có một qubit điều khiển đơn lẻ, được chỉ định bởi đường có chấm đen, và $n$ qubit mục tiêu, được chỉ định bởi hộp $U$. Nếu qubit điều khiển được đặt ở $0$ thì không có gì xảy ra với các qubit mục tiêu. Nếu qubit điều khiển được đặt ở $1$ thì cổng $U$ được áp dụng lên các qubit mục tiêu. Ví dụ điển hình của cổng $\text{controlled-}U$ là cổng $\text{controlled-NOT}$, đó là cổng $\text{controlled-}U$ với $U = X$, như được minh họa trong Hình 1.9. 
+
+![](../../img/1.9.png)
+
+Một thao tác quan trọng khác là phép đo, mà chúng ta biểu diễn bằng ký hiệu "đồng hồ đo", như được hiển thị trong Hình 1.10. Như đã mô tả trước đó, thao tác này chuyển đổi một trạng thái qubit đơn $\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle$ thành một bit cổ điển xác suất M (được phân biệt với qubit bằng cách vẽ nó như một dây dẫn hai đường), có giá trị là 0 với xác suất $\vert \alpha \vert ^2$, hoặc 1 với xác suất $\vert \beta \vert ^2$.
+
+![](../../img/1.10.png)
+
+Chúng ta sẽ thấy các mạch lượng tử hữu ích như những mô hình cho tất cả các quá trình lượng tử, bao gồm nhưng không giới hạn ở computation, communication, và thậm chí là quantum noise. Một vài ví dụ đơn giản minh họa điều này dưới đây.
+
+# 5. Quantum copying circuit?
+
+Cổng $\text{CNOT}$ rất hữu ích trong việc minh họa một thuộc tính nền tảng đặc biệt của thông tin lượng tử. Hãy xem xét nhiệm vụ sao chép một bit cổ điển. Điều này có thể được thực hiện bằng cách sử dụng một cổng $\text{CNOT}$ cổ điển, nhận vào bit cần sao chép (ở một trạng thái ẩn $x$ nào đó) và một bit "nháp" (scratchpad bit) được khởi tạo bằng 0, như được minh họa trong Hình 1.11. Đầu ra là hai bit, cả hai đều ở cùng trạng thái $x$.
+
+Giả sử chúng ta cố gắng sao chép một qubit ở trạng thái ẩn $\vert\psi\rangle = a\vert 0\rangle + b\vert 1\rangle$ theo cách tương tự bằng cách sử dụng một cổng $\text{CNOT}$. Trạng thái đầu vào của hai qubit có thể được viết là
+
+$$
+\big[a\vert 0\rangle + b\vert 1\rangle\big]\vert 0\rangle = a\vert 00\rangle + b\vert 10\rangle \tag {1.21}
+$$
+
+Chức năng của cổng $\text{CNOT}$ là phủ định qubit thứ hai khi qubit thứ nhất là 1, và do đó đầu ra đơn giản là $a\vert 00\rangle + b\vert 11\rangle$. Chúng ta đã sao chép thành công $\vert\psi\rangle$ chưa? Tức là, chúng ta đã tạo ra trạng thái $\vert\psi\rangle\vert\psi\rangle$ chưa? 
+
+Trong trường hợp $\vert\psi\rangle = \vert 0\rangle$ hoặc $\vert\psi\rangle = \vert 1\rangle$ thì đó thực sự là những gì mạch này làm; có thể sử dụng các mạch lượng tử để sao chép thông tin cổ điển được mã hóa dưới dạng $\vert 0\rangle$ hoặc $\vert 1\rangle$. Tuy nhiên, đối với một trạng thái tổng quát $\vert\psi\rangle$, chúng ta thấy rằng:
+
+$$
+\vert\psi\rangle\vert\psi\rangle = a^2\vert 00\rangle + ab\vert 01\rangle + ab\vert 10\rangle + b^2\vert 11\rangle \tag {1.22}
+$$
+
+So sánh với $a\vert 00\rangle + b\vert 11\rangle$, chúng ta thấy rằng trừ khi $ab = 0$, mạch "sao chép" ở trên không sao chép đầu vào trạng thái lượng tử. Trên thực tế, hóa ra việc tạo ra một bản sao của một trạng thái lượng tử ẩn là bất khả thi. Tính chất này, rằng các qubit không thể bị sao chép, được gọi là ***no-cloning theorem*** định lý cấm sao chép, và đây là một trong những khác biệt chính giữa thông tin lượng tử và thông tin cổ điển. Định lý cấm sao chép được thảo luận chi tiết hơn ở Hộp 12.1 trang 532; chứng minh rất đơn giản và chúng tôi khuyến khích bạn đọc trước phần chứng minh đó ngay bây giờ.
+
+---
+
+Có một cách nhìn khác về sự thất bại của mạch trong Hình 1.11, dựa trên trực giác rằng một qubit theo cách nào đó chứa thông tin "bị ẩn" không thể tiếp cận trực tiếp thông qua phép đo. 
+
+Hãy xem xét điều gì xảy ra khi chúng ta đo một trong các qubit của trạng thái $a\vert 00\rangle + b\vert 11\rangle$. Như đã mô tả trước đây, chúng ta thu được kết quả là $0$ hoặc $1$ với các xác suất tương ứng là $\vert{}a\vert{}^2$ và $\vert{}b\vert{}^2$. Tuy nhiên, một khi một qubit được đo, trạng thái của qubit kia được xác định hoàn toàn và không thể thu được thêm thông tin nào về $a$ và $b$. Theo nghĩa này, thông tin ẩn bổ sung được mang trong qubit ban đầu $\vert\psi\rangle$ đã bị mất trong phép đo đầu tiên và không thể lấy lại được. Tuy nhiên, nếu qubit đã được sao chép, thì trạng thái của qubit kia vẫn phải chứa một phần thông tin ẩn đó. Do đó, một bản sao chắc chắn không thể được tạo ra.
+
+:::{.callout-note}
+# Giải thích thêm một số thứ
+
+Ta cho rằng CNOT hoạt động rất tốt ở cổ điển, vì thế nó phải hoạt động tốt ở lượng tử.
+
+Nhưng việc lấy hệ thứ nhất là $\vert\psi\rangle = \alpha\vert 0 \rangle + \beta \vert 1 \rangle$ và hệ thứ hai là $\vert 0 \rangle$ CNOT với nhau, thì sẽ cho ra một hệ bị vướng víu $\alpha \vert 00 \rangle + \beta \vert 1 \rangle$.
+
+Có thể thấy thì nếu ta đo lại phần thứ nhất, thì phần thứ hai bị sụp đổ theo. 
+
+Vì vậy, theo lý thuyết, một trạng thái nhân bản hoàn hảo $\vert \psi \rangle \vert \psi \rangle$ kết quả phải là (1.22). Mỗi qubit đều giữ trọn vẹn thông tin $\vert \psi \rangle$ ban đầu mà không bị ràng buộc số phận lại với nhau.
+
+:::
+
+# 6. Example: Bell states
+
+Hãy cùng xem xét một mạch phức tạp hơn một chút, được thể hiện trong Hình 1.12, có một cổng Hadamart theo sau bởi một cộng CNOT, và biến đổi bốn trạng thái tính toán cơ sở theo bảng được cho. 
+
+Lấy một ví dụ cụ thể, cổng Hadamart nhận đầu vào $\vert 00 \rangle$ thành $(\vert 0 \rangle + \vert 1 \rangle) \vert 0 \rangle / \sqrt 2$, sau đó cổng CNOT cho ra trạng thái đầu ra $(\vert 00 \rangle + \vert 11 \rangle) / \sqrt 2$. Lưu ý cách hoạt động này: đầu tiên, phép biến đổi Hadamart đặt qubit phía trên vào trạng thái chồng chập; điều này sau đó đóng vai trò là một đầu vào điều khiển cho cổng CNOT, và qubit mục tiêu chỉ bị lật khi điều khiển bằng 1. Các trạng thái đầu ra:
+
+$$
+\vert\beta_{00}\rangle = \frac{\vert 00\rangle + \vert 11\rangle}{\sqrt{2}}; \tag {1.23}
+$$
+
+$$
+\vert\beta_{01}\rangle = \frac{\vert 01\rangle + \vert 10\rangle}{\sqrt{2}}; \tag {1.24}
+$$
+
+$$
+\vert\beta_{10}\rangle = \frac{\vert 00\rangle - \vert 11\rangle}{\sqrt{2}}; \text{ và} \tag {1.25}
+$$
+
+$$
+\vert\beta_{11}\rangle = \frac{\vert 01\rangle - \vert 10\rangle}{\sqrt{2}} \tag {1.26}
+$$
+
+được gọi là ***Bell states*** trạng thái Bell, hoặc đôi khi là ***EPR states*** trạng thái EPR, theo tên của một số người - Bell, và Eistein, Podolsky, và Rosen - những người đầu tiên chỉ ra các tính chất kỳ lạ của các trạng thái như thế này.
+
+Ký hiệu ghi nhớ $\vert\beta_{00}\rangle, \vert\beta_{01}\rangle, \vert\beta_{10}\rangle, \vert\beta_{11}\rangle$ có thể được hiểu thông qua các phương trình   
+
+$$
+\vert\beta_{xy}\rangle \equiv \frac{\vert 0, y\rangle + (-1)^x\vert 1, \bar{y}\rangle}{\sqrt{2}}, \tag {1.27}
+$$
+
+trong đó $\bar{y}$ là phần bù (phủ định) của $y$
+
+![](../../img/1.12.png)
+
+:::{.callout}
+# Thử một ví dụ 
+
+Ta có đầu vào sẽ là $\vert 01 \rangle$ tức là $x = \vert 0 \rangle$ và $y = \vert 1 \rangle$.
+
+Khi x đi qua cổng Hadamart, từ $\vert 0 \rangle$ sẽ biến thành trạng thái chồng chập $\vert + \rangle$.
+
+Lấy tích tensor:
+
+$$
+\vert + \rangle \tensor \vert 1 \rangle \\ 
+\Rightarrow 
+
+\frac {\vert 0 \rangle + \vert 1 \rangle}{\sqrt 2} \tensor \vert 1 \rangle
+$$
+
+bằng chính $\vert \beta_{01} \rangle$
 
 
+:::
