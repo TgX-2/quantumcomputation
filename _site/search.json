@@ -79,29 +79,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Điện toán lượng tử",
+    "title": "Khám phá thế giới lượng tử",
     "section": "",
-    "text": "Quantum computation & information\n\n\n\n\nGhi chú và bản dịch tiếng Việt về điện toán lượng tử, thông tin lượng tử cùng những ý tưởng nền tảng phía sau chúng.\n\n\nBắt đầu đọc → Đọc sách bản gốc",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#lộ-trình-đọc",
-    "href": "index.html#lộ-trình-đọc",
-    "title": "Điện toán lượng tử",
-    "section": "Lộ trình đọc",
-    "text": "Lộ trình đọc\n\n\nMở đầu và tổng quan\nLàm quen với lịch sử, động lực và những ý tưởng cốt lõi của lĩnh vực.\n\n\nCác chương tiếp theo\nTiếp tục hành trình qua những chủ đề nền tảng của điện toán lượng tử.\n\n\nKhám phá thêm\nĐọc phần tiếp theo trong chuỗi bài giới thiệu và tổng quan.\n\n\nKý hiệu và tài liệu\nTra cứu ký hiệu và các ghi chú hữu ích khi đọc.\n\n\n\nĐây là bản dịch và ghi chú đang được hoàn thiện. Bạn có thể đối chiếu với sách gốc để có thêm ngữ cảnh.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#i-introduction-concepts",
-    "href": "index.html#i-introduction-concepts",
-    "title": "Điện toán lượng tử",
-    "section": "I Introduction concepts",
-    "text": "I Introduction concepts\n\n1.1. Global perspectives\n\n1.1.1. History of quantum computation and quantum information\n1.1.2. Future directions\n\n1.2. Quantum bits\n\n1.2.1. Multiple qubits\n\n1.3. Quantum computation\n\n1.3.1. Single qubit gates\n1.3.2. Multiple qubit gates\n1.3.3. Measurements in bases other than the computational basis\n1.3.4. Quantum circuits\n1.3.5. Qubit copying circuit\n1.3.6. Example: Bell states\n1.3.7. Example: quantum teleportation",
+    "text": "Quantum computation & information\n\n\nKhám phá thế giới lượng tử\n\nGhi chú và bản dịch tiếng Việt về điện toán lượng tử, thông tin lượng tử cùng những ý tưởng nền tảng phía sau chúng.\n\n\nBắt đầu đọc → Đọc sách bản gốc",
     "crumbs": [
       "Home"
     ]

@@ -1,5 +1,5 @@
 ---
-title: "Điện toán lượng tử"
+# title: "Điện toán lượng tử"
 ---
 
 ::: {.home-hero}
@@ -20,7 +20,7 @@ Ghi chú và bản dịch tiếng Việt về điện toán lượng tử, thôn
 :::
 
 :::
-
+<!-- 
 ::: {.home-intro}
 Một hành trình từ những khái niệm cơ bản đến các ứng dụng của cơ học lượng tử trong tính toán và xử lý thông tin.
 :::
@@ -72,4 +72,4 @@ Tra cứu ký hiệu và các ghi chú hữu ích khi đọc.
     * 1.3.4. Quantum circuits
     * 1.3.5. Qubit copying circuit
     * 1.3.6. Example: Bell states
-    * 1.3.7. Example: quantum teleportation
+    * 1.3.7. Example: quantum teleportation -->
