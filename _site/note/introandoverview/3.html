@@ -234,6 +234,7 @@ window.Quarto = {
   <li><a href="#quantum-circuits" id="toc-quantum-circuits" class="nav-link" data-scroll-target="#quantum-circuits">4. Quantum circuits</a></li>
   <li><a href="#quantum-copying-circuit" id="toc-quantum-copying-circuit" class="nav-link" data-scroll-target="#quantum-copying-circuit">5. Quantum copying circuit?</a></li>
   <li><a href="#example-bell-states" id="toc-example-bell-states" class="nav-link" data-scroll-target="#example-bell-states">6. Example: Bell states</a></li>
+  <li><a href="#example-quantum-teleportation" id="toc-example-quantum-teleportation" class="nav-link" data-scroll-target="#example-quantum-teleportation">7. Example: quantum teleportation</a></li>
   </ul>
 </nav>
     </div>
@@ -362,7 +363,7 @@ U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \e
 </ul>
 <p>Theo các phương trình:</p>
 <p><span class="math display">
-\vert 00\rangle \to \vert 00\rangle; \quad \vert 01\rangle \to \vert 01\rangle; \quad \vert 10\rangle \to \vert 11\rangle; \quad \vert 11\rangle \to \vert 10\rangle \tag {1.18}
+\vert 00\rangle \to \vert 00\rangle; \tag {vert}01\rangle \to \vert 01\rangle; \tag {vert}10\rangle \to \vert 11\rangle; \tag {vert}11\rangle \to \vert 10\rangle \tag {1.18}
 </span></p>
 <p>Một cách khác để mô tả cổng <span class="math inline">\text{CNOT}</span> là sự tổng quát hóa của cổng <span class="math inline">\text{XOR}</span> cổ điển, vì hành động của cổng có thể được tóm tắt là <span class="math inline">\vert A, B\rangle \to \vert A, B \oplus A\rangle</span>, trong đó <span class="math inline">\oplus</span> là phép cộng modulo hai, đây chính xác là những gì cổng <span class="math inline">\text{XOR}</span> thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép <span class="math inline">\text{XOR}</span> với nhau và kết quả được lưu trữ trong qubit mục tiêu.</p>
 <hr>
@@ -509,14 +510,80 @@ U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \e
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ta có đầu vào sẽ là <span class="math inline">\vert 01 \rangle</span> tức là <span class="math inline">x = \vert 0 \rangle</span> và <span class="math inline">y = \vert 1 \rangle</span>.</p>
-<p>Khi x đi qua cổng Hadamart, từ <span class="math inline">\vert 0 \rangle</span> sẽ biến thành trạng thái chồng chập <span class="math inline">\vert + \rangle</span>.</p>
-<p>Lấy tích tensor:</p>
-<p>$$ + \ </p>
-<p> $$</p>
-<p>bằng chính <span class="math inline">\vert \beta_{01} \rangle</span></p>
+<p>Trạng thái ban đầu là <span class="math inline">\vert 0 \rangle</span> và <span class="math inline">\vert 1 \rangle</span>, <span class="math inline">\vert \psi\rangle = \vert 0 \rangle \otimes \vert 1\rangle = \vert 01 \rangle</span>.</p>
+<p>Ban đầu, hệ thứ nhất đi qua cổng Hadamart, vì từ <span class="math inline">\vert 01\rangle</span> sẽ biến thành:</p>
+<p><span class="math display">
+\vert + \rangle \otimes \vert 1\rangle = \frac {\vert 01\rangle + \vert 11\rangle} {\sqrt 2}
+</span></p>
+<p>Tiếp theo, hệ đi qua cổng CNOT, <span class="math inline">\vert +\rangle</span> sẽ là control, còn <span class="math inline">\vert 1\rangle</span> sẽ là target, vì vậy, hệ sẽ biến thành:</p>
+<p><span class="math display">
+\frac {\vert 01 \rangle + \vert 10 \rangle} {\sqrt 2} = \vert \beta_{01} \rangle
+</span></p>
 </div>
 </div>
+</section>
+<section id="example-quantum-teleportation" class="level1">
+<h1>7. Example: quantum teleportation</h1>
+<p>Bây giờ chúng ta sẽ áp dụng các kỹ thuật từ vài trang vừa rồi để hiểu một thứ gì đó phi tầm thường, đầy kinh ngạc và vô cùng thú vị — quantum teleportation!</p>
+<p>Quantum teleportation là một kỹ thuật để di chuyển các quantum state đi xung quanh, ngay cả khi vắng bóng một kênh truyền thông lượng tử nối liền người gửi quantum state với người nhận.</p>
+<p>Dưới đây là cách thức hoạt động của quantum teleportation. Alice và Bob đã gặp nhau từ lâu nhưng hiện tại sống rất xa nhau. Khi còn ở bên nhau, họ đã tạo ra một cặp EPR, mỗi người cầm một qubit của cặp EPR đó khi họ chia tay. Nhiều năm sau, Bob đang ở ẩn, và nhiệm vụ của Alice, nếu cô ấy chấp nhận, là chuyển một qubit <span class="math inline">\vert{}\psi\rangle</span> đến cho Bob. Cô ấy không hề biết trạng thái của qubit này, và hơn thế nữa, cô ấy chỉ có thể gửi thông tin cổ điển cho Bob. Liệu Alice có nên nhận nhiệm vụ này?</p>
+<p>Về mặt trực giác, mọi thứ có vẻ khá tồi tệ đối với Alice. Cô ấy không biết trạng thái <span class="math inline">\vert{}\psi\rangle</span> của qubit mà cô ấy cần gửi cho Bob, và các định luật của cơ học lượng tử ngăn cấm cô ấy xác định trạng thái đó khi trong tay cô ấy chỉ sở hữu một bản sao duy nhất của <span class="math inline">\vert{}\psi\rangle</span>. Tệ hơn nữa, ngay cả khi cô ấy biết trạng thái <span class="math inline">\vert{}\psi\rangle</span>, việc mô tả nó một cách chính xác sẽ tốn một lượng thông tin cổ điển vô hạn vì <span class="math inline">\vert{}\psi\rangle</span> nhận các giá trị trong một không gian liên tục. Vì vậy, ngay cả khi cô ấy biết <span class="math inline">\vert{}\psi\rangle</span>, Alice sẽ mất cả đời để mô tả trạng thái đó cho Bob. Mọi chuyện có vẻ không mấy khả quan cho Alice. May mắn thay cho Alice, quantum teleportation là một cách thức tận dụng cặp EPR vướng víu nhằm gửi <span class="math inline">\vert{}\psi\rangle</span> đến cho Bob, chỉ với một chi phí phụ rất nhỏ về classical communication.</p>
+<p><img src="../../img/1.13.png" class="img-fluid"></p>
+<p>Tóm tắt lại, các bước của giải pháp như sau: Alice cho tương tác qubit <span class="math inline">\vert{}\psi\rangle</span> với nửa cặp EPR của cô ấy, và sau đó đo hai qubit mà cô ấy đang sở hữu, thu được một trong bốn kết quả cổ điển có thể xảy ra: <span class="math inline">00, 01, 10,</span> và <span class="math inline">11</span>. Cô ấy gửi thông tin này cho Bob. Tùy thuộc vào thông điệp cổ điển của Alice, Bob thực hiện một trong bốn phép toán trên nửa cặp EPR của anh ấy. Thật đáng kinh ngạc, bằng cách làm điều này, anh ấy có thể khôi phục lại chính xác trạng thái ban đầu <span class="math inline">\vert{}\psi\rangle</span>!</p>
+<p>Mạch lượng tử được hiển thị trong Hình 1.13 cung cấp một mô tả chính xác hơn về quantum teleportation. Trạng thái cần được dịch chuyển tức thời là <span class="math inline">\vert{}\psi\rangle = \alpha\vert{}0\rangle + \beta\vert{}1\rangle</span>, trong đó <span class="math inline">\alpha</span> và <span class="math inline">\beta</span> là các biên độ ẩn chưa biết. Trạng thái đầu vào đi vào mạch <span class="math inline">\vert{}\psi_0\rangle</span> là:</p>
+<p><span class="math display">
+\vert{}\psi_0\rangle = \vert{}\psi\rangle\vert{}\beta_{00}\rangle \tag {1.28}
+</span></p>
+<p><span class="math display">
+= \frac{1}{\sqrt{2}} \big[\alpha\vert 0\rangle(\vert 00\rangle + \vert 11\rangle) + \beta\vert 1\rangle(\vert 00\rangle + \vert 11\rangle)\big], \tag {1.29}
+</span></p>
+<p>trong đó chúng ta sử dụng quy ước rằng hai qubit đầu tiên (ở bên trái) thuộc về Alice, và qubit thứ ba thuộc về Bob. Như chúng ta đã giải thích trước đó, qubit thứ hai của Alice và qubit của Bob khởi đầu ở trạng thái EPR. Alice gửi các qubit của cô ấy qua một cổng <span class="math inline">\text{CNOT}</span>, thu được:</p>
+<p><span class="math display">
+\vert\psi_1\rangle = \frac{1}{\sqrt{2}} \big[\alpha\vert 0\rangle(\vert 00\rangle + \vert 11\rangle) + \beta\vert 1\rangle(\vert 10\rangle + \vert 01\rangle)\big].
+\tag {1.30}
+</span></p>
+<p>Sau đó cô ấy gửi qubit đầu tiên qua một cổng Hadamard, thu được:</p>
+<p><span class="math display">
+\vert\psi_2\rangle = \frac{1}{2} \big[\alpha(\vert 0\rangle + \vert 1\rangle)(\vert 00\rangle + \vert 11\rangle) + \beta(\vert 0\rangle - \vert 1\rangle)(\vert 10\rangle + \vert 01\rangle)\big].
+\tag {1.31}
+</span></p>
+<p>Trạng thái này có thể được viết lại theo cách sau, đơn giản bằng cách nhóm các số hạng lại:</p>
+<p><span class="math display">
+\vert\psi_2\rangle = \frac{1}{2} \big[\vert 00\rangle (\alpha\vert 0\rangle + \beta\vert 1\rangle) + \vert 01\rangle (\alpha\vert 1\rangle + \beta\vert 0\rangle)\\ + \vert 10\rangle (\alpha\vert 0\rangle - \beta\vert 1\rangle) + \vert 11\rangle (\alpha\vert 1\rangle - \beta\vert 0\rangle)\big].
+\tag {1.32}
+</span></p>
+<p>Biểu thức này tự nhiên phân rã thành bốn số hạng. Số hạng đầu tiên có các qubit của Alice ở trạng thái <span class="math inline">\vert 00\rangle</span>, và qubit của Bob ở trạng thái <span class="math inline">\alpha\vert 0\rangle + \beta\vert 1\rangle</span> — chính là trạng thái ban đầu <span class="math inline">\vert\psi\rangle</span>. Nếu Alice thực hiện phép đo và thu được kết quả <span class="math inline">00</span> thì hệ thống của Bob sẽ ở trạng thái <span class="math inline">\vert\psi\rangle</span>. Tương tự, từ biểu thức trước đó, chúng ta có thể đọc ra trạng thái sau phép đo của Bob, dựa trên kết quả đo của Alice:</p>
+<p><span class="math display">
+00 \longmapsto \vert\psi_3(00)\rangle \equiv \big[\alpha\vert 0\rangle + \beta\vert 1\rangle\big] \tag {1.33}
+</span></p>
+<p><span class="math display">
+01 \longmapsto \vert\psi_3(01)\rangle \equiv \big[\alpha\vert 1\rangle + \beta\vert 0\rangle\big] \tag {1.34}
+</span></p>
+<p><span class="math display">
+10 \longmapsto \vert\psi_3(10)\rangle \equiv \big[\alpha\vert 0\rangle - \beta\vert 1\rangle\big] \tag {1.35}
+</span></p>
+<p><span class="math display">
+11 \longmapsto \vert\psi_3(11)\rangle \equiv \big[\alpha\vert 1\rangle - \beta\vert 0\rangle\big]. \tag {1.36}
+</span></p>
+<p>Tùy thuộc vào kết quả đo của Alice, qubit của Bob sẽ kết thúc ở một trong bốn trạng thái khả dĩ. Tất nhiên, để biết nó đang ở trạng thái nào, Bob phải được thông báo về kết quả đo của Alice, chúng ta sẽ chỉ ra sau rằng chính thực tế này ngăn cản việc dịch chuyển tức thời được sử dụng để truyền thông tin nhanh hơn tốc độ ánh sáng.</p>
+<p>Một khi Bob đã biết kết quả đo, Bob có thể “sửa chữa” lại trạng thái của mình, khôi phục lại <span class="math inline">\vert{}\psi\rangle</span>, bằng cách áp dụng cổng lượng tử phù hợp. Ví dụ</p>
+<ul>
+<li><p>Nếu trong trường hợp kết quả đo là <span class="math inline">00</span>, Bob không cần làm gì cả.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">01</span> thì Bob có thể sửa trạng thái bằng cách áp dụng cổng <span class="math inline">X</span>.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">10</span> thì Bob có thể sửa trạng thái bằng cách áp dụng cổng <span class="math inline">Z</span>.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">11</span> thì Bob có thể sửa trạng thái bằng cách áp dụng đầu tiên cổng <span class="math inline">X</span> và sau đó là cổng <span class="math inline">Z</span>.</p></li>
+</ul>
+<p>Tóm lại, Bob cần áp dụng phép biến đổi <span class="math inline">Z^{M_1} X^{M_2}</span> (lưu ý thời gian đi từ trái sang phải trong sơ đồ mạch, nhưng trong tích ma trận thì các số hạng ở bên phải xảy ra trước) lên qubit của anh ấy, và anh ấy sẽ khôi phục lại trạng thái <span class="math inline">\vert{}\psi\rangle</span>.</p>
+<hr>
+<p>Có rất nhiều đặc điểm thú vị về dịch chuyển tức thời, một số trong số đó chúng ta sẽ quay lại bàn sau trong sách. Hiện tại, chúng ta hài lòng với việc bình luận về một vài khía cạnh.</p>
+<p><strong>Thứ nhất, dịch chuyển tức thời không cho phép truyền các trạng thái lượng tử nhanh hơn ánh sáng sao?</strong></p>
+<p>Điều này có vẻ khá kỳ lạ, bởi vì lý thuyết tương đối ngụ ý rằng việc truyền thông tin nhanh hơn ánh sáng có thể được dùng để gửi thông tin ngược về quá khứ. May mắn thay, dịch chuyển tức thời lượng tử không cho phép truyền thông tin nhanh hơn ánh sáng, bởi vì để hoàn thành việc dịch chuyển tức thời, Alice bắt buộc phải truyền kết quả đo của cô ấy cho Bob qua một kênh truyền thông cổ điển. Chúng ta sẽ chỉ ra ở Phần 2.4.3 rằng nếu không có truyền thông cổ điển này, dịch chuyển tức thời không hề truyền được bất kỳ thông tin nào. Kênh cổ điển bị giới hạn bởi tốc độ ánh sáng, do đó suy ra rằng dịch chuyển tức thời lượng tử không thể thực hiện nhanh hơn tốc độ ánh sáng, giải quyết nghịch lý biểu kiến này.</p>
+<p>Một câu đố <strong>thứ hai về dịch chuyển tức thời là dường như nó tạo ra một bản sao của trạng thái lượng tử đang được dịch chuyển</strong>, vi phạm rõ ràng định lý cấm sao chép được thảo luận ở Phần 1.3.5. Sự vi phạm này chỉ là ảo tưởng vì sau quá trình dịch chuyển tức thời, chỉ còn lại qubit mục tiêu ở trạng thái <span class="math inline">\vert{}\psi\rangle</span>, và qubit dữ liệu ban đầu kết thúc ở một trong các trạng thái cơ sở tính toán <span class="math inline">\vert{}0\rangle</span> hoặc <span class="math inline">\vert{}1\rangle</span>, tùy thuộc vào kết quả đo trên qubit đầu tiên.</p>
+<hr>
+<p><strong>Chúng ta có thể học được gì từ dịch chuyển tức thời lượng tử?</strong></p>
+<p>Khá nhiều thứ! Nó không chỉ là một thủ thuật gọn gàng mà người ta có thể làm với các trạng thái lượng tử.</p>
+<p>Dịch chuyển tức thời lượng tử nhấn mạnh tính có thể thay thế của các tài nguyên khác nhau trong cơ học lượng tử, cho thấy rằng một cặp EPR được chia sẻ cùng với hai bit truyền thông cổ điển là một tài nguyên ít nhất tương đương với một qubit truyền thông. Tính toán lượng tử và thông tin lượng tử đã hé lộ rất nhiều phương pháp hoán đổi tài nguyên, nhiều phương pháp được xây dựng dựa trên dịch chuyển tức thời lượng tử.</p>
+<p>Cụ thể, trong Chương 10, chúng tôi giải thích cách dịch chuyển tức thời có thể được sử dụng để xây dựng các cổng lượng tử có khả năng chống lại các tác động của nhiễu, và trong Chương 12, chúng tôi chỉ ra rằng dịch chuyển tức thời gắn kết mật thiết với các tính chất của mã sửa lỗi lượng tử. Mặc dù có những kết nối này với các chủ đề khác, nhưng công bằng mà nói chúng ta chỉ mới bắt đầu hiểu tại sao dịch chuyển tức thời lại khả thi trong cơ học lượng tử; trong các chương sau, chúng ta nỗ lực giải thích một số hiểu biết sâu sắc giúp việc hiểu đó trở nên khả thi.</p>
 
 
 </section>
