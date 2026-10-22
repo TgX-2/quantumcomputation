@@ -1,0 +1,70 @@
+---
+title: "Quantum algorithms"
+chapter: "Introduction and Overview"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+* **Lớp lượng tử nào có thể được thực hiện bằng cách sử dụng các mạch lượng tử?**
+
+* **Lớp lượng tử đó so sánh như thế nào với các phép tính có thể được thực hiện bằng các mạch logic cổ điển?**
+
+* **Liệu chúng ta có thể tìm ra một tác vụ mà máy tính lượng tử có thể thực hiện tốt hơn máy tính cổ điển?**
+
+Trong phần này, chúng ta sẽ nghiên cứu những câu hỏi này, giải thích cách thực hiện các phép tính cổ điển trên máy tính lượng tử, đưa ra một số ví dụ về các bài toán mà máy tính lượng tử mang lại ưu thế so với máy tính cổ điển, và tóm tắt các thuật toán lượng tử đã biết.
+
+:::{.callout-warning}
+# tl;dr
+
+Có thể giải quyết bài toán nào? Chúng rộng lớn hơn ra sao so với máy tính cổ điển?
+
+Những bài toán cụ thể nào giúp quantum computer đánh bại hoàn toàn classical computer? (không chỉ tính riêng time complexity)
+
+Đã có những thuật toán nào?
+:::
+
+# 1. Classical computations on a quantum computer
+
+**Chúng ta có thể mô phỏng một mạch logic cổ điển bằng một mạch lượng tử không?**
+
+Không có gì ngạc nhiên khi câu trả lời cho câu hỏi này là có. Sẽ rất ngạc nhiên nếu không phải như vậy, vì các nhà vật lý tin rằng mọi khía cạnh của thế giới xung quanh chúng ta, bao gồm cả các mạch logic cổ điển, cuối cùng đều có thể được giải thích bằng cơ học lượng tử. Như đã chỉ ra trước đó, lý do các mạch lượng tử không thể được dùng để mô phỏng trực tiếp các mạch cổ điển là vì các cổng logic lượng tử đơn nhất vốn dĩ có tính thuận nghịch, trong khi nhiều cổng logic cổ điển như cổng $\text{NAND}$ lại vốn dĩ không có tính thuận nghịch.
+
+Bất kỳ mạch cổ điển nào cũng có thể được thay thế bằng một mạch tương đương chỉ chứa các phần tử thuận nghịch, bằng cách sử dụng một cổng thuận nghịch được gọi là ***Toffoli gate*** cổng Toffoli. Cổng Toffoli có ba bit đầu vào và ba bit đầu ra, như được minh họa trong Hình 1.14. 
+
+Hai trong số các bit là control bits không bị ảnh hưởng bởi hoạt động của cổng Toffoli. Bit thứ ba là target bit bị lật nếu cả hai bit điều khiển đều được đặt bằng 1, và ngược lại thì được giữ nguyên. Lưu ý rằng việc áp dụng cổng Toffoli hai lần lên một tập hợp các bit sẽ cho hiệu ứng $(a, b, c) \rightarrow (a, b, c \oplus ab) \rightarrow (a, b, c)$, và do đó cổng Toffoli là một cổng thuận nghịch, vì nghịch đảo của nó chính là chính nó.
+
+![](../../img/1.14.png)
+
+---
+
+Cổng Toffoli có thể được dùng để mô phỏng các cổng $\text{NAND}$, như được minh họa trong Hình 1.15, và cũng có thể được dùng để thực hiện thao tác $\text{FANOUT}$, như được minh họa trong Hình 1.16. Với hai phép toán này, việc mô phỏng tất cả các phần tử khác trong một mạch cổ điển trở nên khả thi, và do đó một mạch cổ điển tùy ý có thể được mô phỏng bằng một mạch thuận nghịch tương đương.
+
+![](../../img/1.15.png)
+
+![](../../img/1.16.png)
+
+---
+
+Cổng Toffoli đã được mô tả như một cổng cổ điển, nhưng nó cũng có thể được triển khai như một cổng logic lượng tử. Theo định nghĩa, việc triển khai logic lượng tử của cổng Toffoli chỉ đơn giản là hoán vị các trạng thái cơ sở tính toán theo cùng cách thức như cổng Toffoli cổ điển. 
+
+
+Ví dụ, cổng Toffoli lượng tử tác động lên trạng thái $\vert 110\rangle$ sẽ lật qubit thứ ba vì hai qubit đầu tiên đều được đặt bằng 1, dẫn đến kết quả là trạng thái $\vert 111\rangle$. Việc viết ra phép biến đổi này dưới dạng ma trận $U$ kích thước $8 \times 8$ và kiểm tra tường minh rằng $U$ là một ma trận đơn nhất là việc tẻ nhạt nhưng không khó, và do đó cổng Toffoli là một cổng lượng tử hợp lệ. Cổng Toffoli lượng tử có thể được dùng để mô phỏng các cổng logic cổ điển không thuận nghịch, đúng như cổng Toffoli cổ điển đã làm, và đảm bảo rằng máy tính lượng tử có khả năng thực hiện bất kỳ phép tính nào mà một máy tính cổ điển (tất định) có thể làm.  
+
+Sẽ ra sao nếu máy tính cổ điển là không tất định, nghĩa là có khả năng tạo ra các bit ngẫu nhiên được sử dụng trong tính toán? Không có gì ngạc nhiên khi máy tính lượng tử có thể dễ dàng mô phỏng điều này. Để thực hiện việc mô phỏng như vậy, hóa ra chỉ cần tạo ra các lần tung đồng xu công bằng ngẫu nhiên, việc này có thể thực hiện bằng cách chuẩn bị một qubit ở trạng thái $\vert{}0\rangle$, cho nó đi qua cổng Hadamard để tạo ra $(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$, và sau đó đo trạng thái. Kết quả thu được sẽ là $\vert{}0\rangle$ hoặc $\vert{}1\rangle$ với xác suất 50/50. Điều này cung cấp cho máy tính lượng tử khả năng mô phỏng hiệu quả một máy tính cổ điển không tất định.
+
+---
+
+Tất nhiên, nếu khả năng mô phỏng các máy tính cổ điển là tính năng duy nhất của máy tính lượng tử thì sẽ có rất ít ý nghĩa trong việc nhọc công khai thác các hiệu ứng lượng tử! Ưu thế của tính toán lượng tử là nhiều hàm mạnh mẽ hơn đáng kể có thể được tính toán bằng cách sử dụng các qubit và cổng lượng tử. Trong một vài phần tiếp theo, chúng tôi giải thích cách thực hiện điều này, với đỉnh cao là thuật toán Deutsch–Jozsa, ví dụ đầu tiên của chúng tôi về một thuật toán lượng tử có khả năng giải quyết một bài toán nhanh hơn bất kỳ thuật toán cổ điển nào.
+
+# 2. Quantum parallelism
+
+# 3. Deutsch’s algorithm
+
+# 4. The Deutsch–Jozsa algorithm 
+
+# 5. Quantum algorithms summarized
