@@ -380,8 +380,38 @@ $$
 
 :::
 
+---
+
+**Algorithm: Deutsch-Jozsa**
+
+**Đầu vào:** Một hộp đen $U_f$ thực hiện phép biến đổi $\vert{}x\rangle\vert{}y\rangle \to \vert{}x\rangle\vert{}y \oplus f(x)\rangle$, với $x \in \{0, \dots, 2^n - 1\}$ và $f(x) \in \{0, 1\}$. Người ta hứa hẹn rằng $f(x)$ hoặc là hàm hằng với mọi giá trị của $x$, hoặc là hàm cân bằng — tức là bằng $1$ cho đúng một nửa số $x$ khả dĩ và bằng $0$ cho nửa còn lại
+
+**Đầu ra:** Trả về $0$ khi và chỉ khi $f$ là hàm hằng.   
+
+**Thời gian chạy:** Chỉ đúng một lần đánh giá $U_f$ và luôn luôn thành công.
+
+**Quy trình:**
+
+(1) Khởi tạo trạng thái: Chuẩn bị trạng thái ban đầu $\vert{}\psi_0\rangle = \vert{}0\rangle^{\otimes n}\vert{}1\rangle$.   
+
+(2) Tạo chồng chập: Áp dụng các cổng Hadamard để tạo trạng thái chồng chập đều $\frac{1}{\sqrt{2^n}} \sum_{x=0}^{2^n-1} \vert{}x\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]$.   
+
+(3) Tính toán hàm số: Áp dụng hộp đen $U_f$ để đưa giá trị hàm số vào pha: $\sum_x (-1)^{f(x)}\vert{}x\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]$.   
+
+(4) Giao thoa lượng tử: Thực hiện phép biến đổi Hadamard trên thanh ghi truy vấn để tạo sự giao thoa.   
+
+(5) Đo đạc: Tiến hành đo đạc để thu được đầu ra cuối cùng $z$.
+
+**Những điểm lưu ý quan trọng**
+
+Mặc dù thuật toán này chứng minh máy tính lượng tử có thể giải quyết bài toán của Deutsch chỉ với 1 lần đánh giá so với yêu cầu $2^n/2 + 1$ lần ở máy tính cổ điển tất định, tác giả lưu ý ba điểm hạn chế:   
+
+Thứ nhất: Bài toán Deutsch không phải là một bài toán có tính ứng dụng thực tế cao hay quá quan trọng trong đời sống.   
+
+Thứ hai: Việc so sánh giữa cổ điển và lượng tử trong trường hợp này giống như "so sánh táo với cam" vì phương thức đánh giá hàm số ở hai bên hoàn toàn khác nhau.   
+
+Thứ ba: Nếu Alice sử dụng một máy tính ngẫu nhiên/xác suất cổ điển (probabilistic classical computer) và chỉ cần chọn ngẫu nhiên một vài giá trị $x$ để hỏi Bob, cô ấy có thể xác định với xác suất cao liệu $f$ là hằng hay cân bằng mà không cần phải dùng đến máy tính lượng tử.   
+
+Tuy nhiên, thuật toán Deutsch–Jozsa vẫn đặt nền móng quan trọng cho các thuật toán lượng tử mạnh mẽ hơn về sau.
 
 
-
-
-# 5. Quantum algorithms summarized

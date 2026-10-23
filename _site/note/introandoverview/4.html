@@ -222,6 +222,12 @@ window.Quarto = {
  <span class="menu-text">Quantum algorithms</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -238,7 +244,6 @@ window.Quarto = {
   <li><a href="#quantum-parallelism" id="toc-quantum-parallelism" class="nav-link" data-scroll-target="#quantum-parallelism">2. Quantum parallelism</a></li>
   <li><a href="#deutschs-algorithm" id="toc-deutschs-algorithm" class="nav-link" data-scroll-target="#deutschs-algorithm">3. Deutsch’s algorithm</a></li>
   <li><a href="#the-deutschjozsa-algorithm" id="toc-the-deutschjozsa-algorithm" class="nav-link" data-scroll-target="#the-deutschjozsa-algorithm">4. The Deutsch–Jozsa algorithm</a></li>
-  <li><a href="#quantum-algorithms-summarized" id="toc-quantum-algorithms-summarized" class="nav-link" data-scroll-target="#quantum-algorithms-summarized">5. Quantum algorithms summarized</a></li>
   </ul>
 </nav>
     </div>
@@ -559,9 +564,25 @@ H^{\otimes n}\vert{}x\rangle = \frac{\sum_z (-1)^{x \cdot z}\vert{}z\rangle}{\sq
 </span></p>
 </div>
 </div>
-</section>
-<section id="quantum-algorithms-summarized" class="level1">
-<h1>5. Quantum algorithms summarized</h1>
+<hr>
+<p><strong>Algorithm: Deutsch-Jozsa</strong></p>
+<p><strong>Đầu vào:</strong> Một hộp đen <span class="math inline">U_f</span> thực hiện phép biến đổi <span class="math inline">\vert{}x\rangle\vert{}y\rangle \to \vert{}x\rangle\vert{}y \oplus f(x)\rangle</span>, với <span class="math inline">x \in \{0, \dots, 2^n - 1\}</span> và <span class="math inline">f(x) \in \{0, 1\}</span>. Người ta hứa hẹn rằng <span class="math inline">f(x)</span> hoặc là hàm hằng với mọi giá trị của <span class="math inline">x</span>, hoặc là hàm cân bằng — tức là bằng <span class="math inline">1</span> cho đúng một nửa số <span class="math inline">x</span> khả dĩ và bằng <span class="math inline">0</span> cho nửa còn lại</p>
+<p><strong>Đầu ra:</strong> Trả về <span class="math inline">0</span> khi và chỉ khi <span class="math inline">f</span> là hàm hằng.</p>
+<p><strong>Thời gian chạy:</strong> Chỉ đúng một lần đánh giá <span class="math inline">U_f</span> và luôn luôn thành công.</p>
+<p><strong>Quy trình:</strong></p>
+<ol type="1">
+<li><p>Khởi tạo trạng thái: Chuẩn bị trạng thái ban đầu <span class="math inline">\vert{}\psi_0\rangle = \vert{}0\rangle^{\otimes n}\vert{}1\rangle</span>.</p></li>
+<li><p>Tạo chồng chập: Áp dụng các cổng Hadamard để tạo trạng thái chồng chập đều <span class="math inline">\frac{1}{\sqrt{2^n}} \sum_{x=0}^{2^n-1} \vert{}x\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]</span>.</p></li>
+<li><p>Tính toán hàm số: Áp dụng hộp đen <span class="math inline">U_f</span> để đưa giá trị hàm số vào pha: <span class="math inline">\sum_x (-1)^{f(x)}\vert{}x\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]</span>.</p></li>
+<li><p>Giao thoa lượng tử: Thực hiện phép biến đổi Hadamard trên thanh ghi truy vấn để tạo sự giao thoa.</p></li>
+<li><p>Đo đạc: Tiến hành đo đạc để thu được đầu ra cuối cùng <span class="math inline">z</span>.</p></li>
+</ol>
+<p><strong>Những điểm lưu ý quan trọng</strong></p>
+<p>Mặc dù thuật toán này chứng minh máy tính lượng tử có thể giải quyết bài toán của Deutsch chỉ với 1 lần đánh giá so với yêu cầu <span class="math inline">2^n/2 + 1</span> lần ở máy tính cổ điển tất định, tác giả lưu ý ba điểm hạn chế:</p>
+<p>Thứ nhất: Bài toán Deutsch không phải là một bài toán có tính ứng dụng thực tế cao hay quá quan trọng trong đời sống.</p>
+<p>Thứ hai: Việc so sánh giữa cổ điển và lượng tử trong trường hợp này giống như “so sánh táo với cam” vì phương thức đánh giá hàm số ở hai bên hoàn toàn khác nhau.</p>
+<p>Thứ ba: Nếu Alice sử dụng một máy tính ngẫu nhiên/xác suất cổ điển (probabilistic classical computer) và chỉ cần chọn ngẫu nhiên một vài giá trị <span class="math inline">x</span> để hỏi Bob, cô ấy có thể xác định với xác suất cao liệu <span class="math inline">f</span> là hằng hay cân bằng mà không cần phải dùng đến máy tính lượng tử.</p>
+<p>Tuy nhiên, thuật toán Deutsch–Jozsa vẫn đặt nền móng quan trọng cho các thuật toán lượng tử mạnh mẽ hơn về sau.</p>
 
 
 </section>
