@@ -305,15 +305,136 @@ window.Quarto = {
 <hr>
 <p>Cổng Toffoli đã được mô tả như một cổng cổ điển, nhưng nó cũng có thể được triển khai như một cổng logic lượng tử. Theo định nghĩa, việc triển khai logic lượng tử của cổng Toffoli chỉ đơn giản là hoán vị các trạng thái cơ sở tính toán theo cùng cách thức như cổng Toffoli cổ điển.</p>
 <p>Ví dụ, cổng Toffoli lượng tử tác động lên trạng thái <span class="math inline">\vert 110\rangle</span> sẽ lật qubit thứ ba vì hai qubit đầu tiên đều được đặt bằng 1, dẫn đến kết quả là trạng thái <span class="math inline">\vert 111\rangle</span>. Việc viết ra phép biến đổi này dưới dạng ma trận <span class="math inline">U</span> kích thước <span class="math inline">8 \times 8</span> và kiểm tra tường minh rằng <span class="math inline">U</span> là một ma trận đơn nhất là việc tẻ nhạt nhưng không khó, và do đó cổng Toffoli là một cổng lượng tử hợp lệ. Cổng Toffoli lượng tử có thể được dùng để mô phỏng các cổng logic cổ điển không thuận nghịch, đúng như cổng Toffoli cổ điển đã làm, và đảm bảo rằng máy tính lượng tử có khả năng thực hiện bất kỳ phép tính nào mà một máy tính cổ điển (tất định) có thể làm.</p>
-<p>Sẽ ra sao nếu máy tính cổ điển là không tất định, nghĩa là có khả năng tạo ra các bit ngẫu nhiên được sử dụng trong tính toán? Không có gì ngạc nhiên khi máy tính lượng tử có thể dễ dàng mô phỏng điều này. Để thực hiện việc mô phỏng như vậy, hóa ra chỉ cần tạo ra các lần tung đồng xu công bằng ngẫu nhiên, việc này có thể thực hiện bằng cách chuẩn bị một qubit ở trạng thái <span class="math inline">\vert{}0\rangle</span>, cho nó đi qua cổng Hadamard để tạo ra <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, và sau đó đo trạng thái. Kết quả thu được sẽ là <span class="math inline">\vert{}0\rangle</span> hoặc <span class="math inline">\vert{}1\rangle</span> với xác suất 50/50. Điều này cung cấp cho máy tính lượng tử khả năng mô phỏng hiệu quả một máy tính cổ điển không tất định.</p>
+<hr>
+<p><strong>Sẽ ra sao nếu máy tính cổ điển là không tất định, nghĩa là có khả năng tạo ra các bit ngẫu nhiên được sử dụng trong tính toán?</strong></p>
+<p>Không có gì ngạc nhiên khi máy tính lượng tử có thể dễ dàng mô phỏng điều này. Để thực hiện việc mô phỏng như vậy, hóa ra chỉ cần tạo ra các lần tung đồng xu công bằng ngẫu nhiên, việc này có thể thực hiện bằng cách chuẩn bị một qubit ở trạng thái <span class="math inline">\vert{}0\rangle</span>, cho nó đi qua cổng Hadamard để tạo ra <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, và sau đó đo trạng thái. Kết quả thu được sẽ là <span class="math inline">\vert{}0\rangle</span> hoặc <span class="math inline">\vert{}1\rangle</span> với xác suất 50/50. Điều này cung cấp cho máy tính lượng tử khả năng mô phỏng hiệu quả một máy tính cổ điển không tất định.</p>
 <hr>
 <p>Tất nhiên, nếu khả năng mô phỏng các máy tính cổ điển là tính năng duy nhất của máy tính lượng tử thì sẽ có rất ít ý nghĩa trong việc nhọc công khai thác các hiệu ứng lượng tử! Ưu thế của tính toán lượng tử là nhiều hàm mạnh mẽ hơn đáng kể có thể được tính toán bằng cách sử dụng các qubit và cổng lượng tử. Trong một vài phần tiếp theo, chúng tôi giải thích cách thực hiện điều này, với đỉnh cao là thuật toán Deutsch–Jozsa, ví dụ đầu tiên của chúng tôi về một thuật toán lượng tử có khả năng giải quyết một bài toán nhanh hơn bất kỳ thuật toán cổ điển nào.</p>
 </section>
 <section id="quantum-parallelism" class="level1">
 <h1>2. Quantum parallelism</h1>
+<p><strong><em>Quantum parallelism</em></strong> Song song lượng tử là một tính năng nền tảng của nhiều thuật toán lượng tử. Một cách trực quan, và có nguy cơ bị đơn giản hóa quá mức, song song lượng tử cho phép máy tính lượng tử tính toán một hàm <span class="math inline">f(x)</span> cho nhiều giá trị <span class="math inline">x</span> khác nhau cùng một lúc. Trong phần này, chúng tôi giải thích cách song song lượng tử hoạt động, cùng với một số giới hạn của nó.</p>
+<hr>
+<p>Giả sử <span class="math inline">f(x) : \{0, 1\} \to \{0, 1\}</span> là một hàm số với miền xác định và tập giá trị là một bit. Một cách thuận tiện để tính toán hàm này trên máy tính lượng tử là xét một máy tính lượng tử gồm hai qubit bắt đầu ở trạng thái <span class="math inline">\vert{}x, y\rangle</span>. Với một chuỗi cổng logic thích hợp, ta có thể biến đổi trạng thái này thành <span class="math inline">\vert{}x, y \oplus f(x)\rangle</span>, trong đó <span class="math inline">\oplus</span> biểu thị phép cộng theo modulo 2; thanh ghi thứ nhất được gọi là thanh ghi data, và thanh ghi thứ hai được gọi là thanh ghi target. Phép biến đổi được định nghĩa bởi ánh xạ <span class="math inline">\vert{}x, y\rangle \to \vert{}x, y \oplus f(x)\rangle</span> được đặt tên là <span class="math inline">U_f</span>, và lưu ý rằng có thể dễ dàng chứng minh đây là một phép biến đổi đơn nhất. Nếu <span class="math inline">y = 0</span>, thì trạng thái cuối cùng của qubit thứ hai chính là giá trị <span class="math inline">f(x)</span>.</p>
+<p>(Ở Phần 3.2.5, chúng tôi chỉ ra rằng với một mạch cổ điển cho trước dùng để tính <span class="math inline">f</span>, sẽ tồn tại một mạch lượng tử có hiệu năng tương đương để tính phép biến đổi <span class="math inline">U_f</span> trên máy tính lượng tử. Đối với mục đích hiện tại của chúng ta, nó có thể được xem như một hộp đen).</p>
+<hr>
+<p><img src="../../img/1.17.png" class="img-fluid"></p>
+<p>Hãy xét mạch được hiển thị trong Hình 1.17, áp dụng <span class="math inline">U_f</span> cho một đầu vào không nằm trong cơ sở tính toán. Thay vào đó, thanh ghi dữ liệu được chuẩn bị ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, có thể được tạo ra bằng cổng Hadamard tác động lên <span class="math inline">\vert{}0\rangle</span>. Sau đó, chúng ta áp dụng <span class="math inline">U_f</span>, dẫn đến trạng thái:</p>
+<p><span class="math display">
+\frac{\vert{}0, f(0)\rangle + \vert{}1, f(1)\rangle}{\sqrt{2}} \tag {1.37}
+</span></p>
+<p>Đây là một trạng thái đáng kinh ngạc! Các số hạng khác nhau chứa thông tin về cả <span class="math inline">f(0)</span> và <span class="math inline">f(1)</span>; gần như thể chúng ta đã tính toán <span class="math inline">f(x)</span> cho hai giá trị của <span class="math inline">x</span> cùng một lúc, một tính năng được gọi là “song song lượng tử”. Không giống như song song cổ điển — nơi nhiều mạch, mỗi mạch được xây dựng để tính toán <span class="math inline">f(x)</span>, được thực thi đồng thời — ở đây chỉ có một mạch <span class="math inline">f(x)</span> đơn lẻ được sử dụng để đánh giá hàm số cho nhiều giá trị của <span class="math inline">x</span> cùng lúc, bằng cách khai thác khả năng của máy tính lượng tử khi ở trong trạng thái chồng chập của các trạng thái khác nhau.</p>
+<hr>
+<p><img src="../../img/1.18.png" class="img-fluid"></p>
+<p>Quy trình này có thể dễ dàng tổng quát hóa cho các hàm trên một số lượng bit tùy ý, bằng cách sử dụng một phép toán chung được gọi là <strong><em>Hadamard transform</em></strong> phép biến đổi Hadamard, hoặc đôi khi là phép biến đổi Walsh–Hadamard. Phép toán này chỉ đơn giản là <span class="math inline">n</span> cổng Hadamard tác động song song trên <span class="math inline">n</span> qubit. Ví dụ, được thể hiện trong Hình 1.18 là trường hợp <span class="math inline">n = 2</span> với các qubit ban đầu được chuẩn bị ở trạng thái <span class="math inline">\vert{}0\rangle</span>, cho ra kết quả</p>
+<p><span class="math display">
+\left(\frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}}\right)\left(\frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}}\right)
+= \frac{\vert{}00\rangle + \vert{}01\rangle + \vert{}10\rangle + \vert{}11\rangle}{2} \tag {1.38}
+</span></p>
+<p>như là đầu ra. Chúng ta viết <span class="math inline">H^{\otimes 2}</span> để ký hiệu tác động song song của hai cổng Hadamard, và đọc ký hiệu ‘<span class="math inline">\otimes</span>’ là ‘tensor’. Tổng quát hơn, kết quả của việc thực hiện phép biến đổi Hadamard trên <span class="math inline">n</span> qubit ban đầu ở trạng thái toàn <span class="math inline">\vert{}0\rangle</span> là</p>
+<p><span class="math display">
+\frac{1}{\sqrt{2^n}} \sum_x \vert{}x\rangle, \tag {1.39}
+</span></p>
+<p>trong đó tổng lấy trên tất cả các giá trị khả dĩ của <span class="math inline">x</span>, và chúng ta viết <span class="math inline">H^{\otimes n}</span> để ký hiệu tác động này. Nghĩa là, phép biến đổi Hadamard tạo ra một trạng thái chồng chập đều của tất cả các trạng thái cơ sở tính toán. Hơn nữa, nó thực hiện điều này một cách cực kỳ hiệu quả, tạo ra trạng thái chồng chập của <span class="math inline">2^n</span> trạng thái chỉ bằng cách sử dụng đúng <span class="math inline">n</span> cổng.</p>
+<p>Việc đánh giá song song lượng tử của một hàm số với đầu vào <span class="math inline">x</span> gồm <span class="math inline">n</span> bit và đầu ra 1 bit, <span class="math inline">f(x)</span>, do đó có thể được thực hiện theo cách sau. Chuẩn bị trạng thái gồm <span class="math inline">n + 1</span> qubit là <span class="math inline">\vert{}0\rangle^{\otimes n}\vert{}0\rangle</span>, sau đó áp dụng phép biến đổi Hadamard cho <span class="math inline">n</span> qubit đầu tiên, tiếp theo là mạch lượng tử thực thi <span class="math inline">U_f</span>. Thao tác này tạo ra trạng thái</p>
+<p>Việc đánh giá song song lượng tử của một hàm số với đầu vào <span class="math inline">x</span> gồm <span class="math inline">n</span> bit và đầu ra 1 bit, <span class="math inline">f(x)</span>, do đó có thể được thực hiện theo cách sau. Chuẩn bị trạng thái gồm <span class="math inline">n + 1</span> qubit là <span class="math inline">\vert{}0\rangle^{\otimes n}\vert{}0\rangle</span>, sau đó áp dụng phép biến đổi Hadamard cho <span class="math inline">n</span> qubit đầu tiên, tiếp theo là mạch lượng tử thực thi <span class="math inline">U_f</span>. Thao tác này tạo ra trạng thái <span class="math display">
+\frac{1}{\sqrt{2^n}} \sum_x \vert{}x\rangle\vert{}f(x)\rangle \tag{1.40}
+</span></p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Nói thêm một chút
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Việc giới thiệu hadamart transform của tác giả có lẽ là ý đồ với tiền đề giới thiệu việc có thể tính không chỉ 2 giá trị f(x), mà có thể nâng lên tới n (n thỏa thích).</p>
+<p>Tuy là chúng có thể tính được nhiều f() cùng một lúc, nhưng nó chỉ trong thế giới lượng tử. Bởi vì khi chúng ta đo chúng thì tất cả đều đã bị sụp đổ, chỉ còn tồn tại 1 kết quả trả về duy nhất trong cổ điển.</p>
+<p>Nhưng việc tính toán 2 cái cùng 1 lúc, rồi khéo léo lồng ghép các cổng logic vào, có thể giúp xác định tính chất của một hàm nào đó, chỉ trong một phép đo! Cụ thẻ là thuật toán Deutsch sẽ giới thiệu ngay sau đây. Chỉ cần 1 lần đo duy nhất là có thể biết được <span class="math inline">f(0) = f(1)</span> hay <span class="math inline">f(0) \neq f(1)</span> trong khi thực tế tốn 2 lần để đo.</p>
+</div>
+</div>
 </section>
 <section id="deutschs-algorithm" class="level1">
 <h1>3. Deutsch’s algorithm</h1>
+<p>Một sửa đổi nhỏ đối với mạch trong Hình 1.17 minh họa cách các mạch lượng tử có thể vượt trội hơn các mạch cổ điển bằng cách thực hiện thuật toán Deutsch (chúng ta thực sự trình bày một phiên bản đơn giản hóa và cải tiến của thuật toán gốc; xem phần ‘Lịch sử và đọc thêm’ ở cuối chương). Thuật toán Deutsch kết hợp song song lượng tử với một tính chất của cơ học lượng tử được gọi là giao thoa (interference). Như trước đây, hãy sử dụng cổng Hadamard để chuẩn bị qubit thứ nhất ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, nhưng bây giờ hãy chuẩn bị qubit thứ hai <span class="math inline">y</span> ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, sử dụng một cổng Hadamard tác động lên trạng thái <span class="math inline">\vert{}1\rangle</span>. Hãy theo dõi các trạng thái để xem điều gì xảy ra trong mạch này, được thể hiện trong Hình 1.19.</p>
+<p><img src="../../img/1.19.png" class="img-fluid"></p>
+<p>Trạng thái đầu vào</p>
+<p><span class="math display">
+\vert{}\psi_0\rangle = \vert{}01\rangle \tag {1.41}
+</span></p>
+<p>được đưa qua hai cổng Hadamard để cho ra</p>
+<p><span class="math display">
+\vert{}\psi_1\rangle =
+\left[ \frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}} \right]
+\left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right].
+\tag {1.42}
+</span></p>
+<p>Chỉ cần suy nghĩ một chút sẽ thấy rằng nếu chúng ta áp dụng <span class="math inline">U_f</span> lên trạng thái <span class="math inline">\vert{}x\rangle(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, ta sẽ thu được trạng thái <span class="math inline">(-1)^{f(x)}\vert{}x\rangle(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>.</p>
+<p>Do đó, việc áp dụng <span class="math inline">U_f</span> lên <span class="math inline">\vert{}\psi_1\rangle</span> để lại cho chúng ta một trong hai khả năng:</p>
+<p><span class="math display">
+\vert{}\psi_2\rangle = \begin{cases}
+\pm \left[ \frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}} \right] \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right] &amp; \text{nếu } f(0) = f(1) \\
+\pm \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right] \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right] &amp; \text{nếu } f(0) \neq f(1).
+\end{cases}
+\tag {1.43}
+</span></p>
+<p>Cổng Hadamard cuối cùng trên qubit đầu tiên do đó cho chúng ta</p>
+<p><span class="math display">
+\vert{}\psi_3\rangle = \begin{cases}
+\pm \vert{}0\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right] &amp; \text{nếu } f(0) = f(1) \\
+\pm \vert{}1\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right] &amp; \text{nếu } f(0) \neq f(1).
+\end{cases}
+\tag {1.44}
+</span></p>
+<p>Nhận ra rằng <span class="math inline">f(0) \oplus f(1)</span> bằng <span class="math inline">0</span> nếu <span class="math inline">f(0) = f(1)</span> và bằng <span class="math inline">1</span> trong trường hợp ngược lại, chúng ta có thể viết lại kết quả này một cách ngắn gọn là</p>
+<p><span class="math display">
+\vert{}\psi_3\rangle = \pm \vert{}f(0) \oplus f(1)\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right], \tag {1.45}</span></p>
+<p>vì vậy bằng cách đo qubit đầu tiên, chúng ta có thể xác định được <span class="math inline">f(0) \oplus f(1)</span>. Điều này thực sự rất thú vị: mạch lượng tử đã mang lại cho chúng ta khả năng xác định một thuộc tính toàn cục của <span class="math inline">f(x)</span>, cụ thể là <span class="math inline">f(0) \oplus f(1)</span>, chỉ bằng một lần duy nhất đánh giá <span class="math inline">f(x)</span>! Điều này nhanh hơn so với thiết bị cổ điển, vốn sẽ đòi hỏi ít nhất hai lần đánh giá.</p>
+<hr>
+<p>Ví dụ này làm nổi bật sự khác biệt giữa song song lượng tử và các thuật toán ngẫu nhiên cổ điển.</p>
+<p>Một cách ngây thơ, người ta có thể nghĩ rằng trạng thái <span class="math inline">\vert{}0\rangle\vert{}f(0)\rangle + \vert{}1\rangle\vert{}f(1)\rangle</span> tương đối giống với một máy tính cổ điển xác suất đánh giá <span class="math inline">f(0)</span> với xác suất một nửa, hoặc <span class="math inline">f(1)</span> với xác suất một nửa. Sự khác biệt là ở một máy tính cổ điển, hai lựa chọn thay thế này loại trừ lẫn nhau vĩnh viễn; trong một máy tính lượng tử thì có thể để hai lựa chọn thay thế giao thoa với nhau nhằm mang lại một số thuộc tính toàn cục của hàm số <span class="math inline">f</span>, bằng cách sử dụng một thứ gì đó như cổng Hadamard để kết hợp lại các lựa chọn thay thế khác nhau, như đã được thực hiện trong thuật toán Deutsch.</p>
+<p><strong>Bản chất của việc thiết kế nhiều thuật toán lượng tử là việc lựa chọn khéo léo hàm số và phép biến đổi cuối cùng cho phép xác định hiệu quả thông tin toàn cục hữu ích về hàm số — thông tin mà không thể đạt được nhanh chóng trên một máy tính cổ điển.</strong></p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Thuật toán Deutsch đưa ra để giải quyết vấn đề rằng, liệu hàm <span class="math inline">f : \{0, 1\} \to \{0, 1\}</span> là hàm hằng số hay cân bằng? Tức là việc kiểm tra f(0) và f(1) bằng nhau hay không.</p>
+<p>Trong khi thế giới cổ điển tốn tới 2 lần đo để biết được, thì thuật toán của ông này chỉ cần 1 lần đo là đã biết.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Phase kick back
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Là một kỹ thuật trong tính toán lượng tử. Khi mà pha của target qubit được đẩy ngược lại và làm thay đổi pha của control qubit.</p>
+<p>Thông thường, trong một cổng điều khiển như CNOT, control qubit sẽ quyết định có làm thay đổi trạng thái của target qubit hay không. Tuy nhiên, khi target qubit nằm trong một trạng thái chồng chập đặc biệt (trạng thái riêng của cổng tác động), trạng thái của nó không đổi, nhưng pha hệ số của nó lại tác động ngược lên control qubit.</p>
+<p>Cơ chế.</p>
+<p>Giả sử ta có một cổng điều khiển U tác động lên target qubit ở trạng thái <span class="math inline">\vert \psi\rangle</span>, sao cho <span class="math inline">U\vert \psi \rangle = -\vert \psi \rangle</span> (tức là tạo ra một pha -1).</p>
+<p>Khi control qubit ở trạng thái chồng chập <span class="math inline">\vert + \rangle</span>, mạch sẽ diễn biến như sau:</p>
+<ul>
+<li><p>Nếu là <span class="math inline">\vert 0 \rangle</span>, thì cổng U không kích hoạt, trạng thái sau khi tác động là <span class="math inline">\vert 0 \rangle \vert \psi \rangle</span>.</p></li>
+<li><p>Nếu là <span class="math inline">\vert 1 \rangle</span>, thì cổng U kích hoạt, biến <span class="math inline">\vert \psi \rangle</span> thành <span class="math inline">-\vert \psi \rangle</span>, trạng thái sau cùng là <span class="math inline">-\vert 1 \rangle \vert \psi \rangle</span>.</p></li>
+</ul>
+<p>Kết hợp lại, trạng thái của toàn hệ thống sau cổng điều khiển U là:</p>
+<p><span class="math display">
+\frac {\vert 0 \rangle \vert \psi \rangle - \vert 1 \rangle \vert \psi \rangle} {\sqrt 2} =
+\left( \frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right) \vert \psi \rangle
+</span></p>
+<p>có thể thấy, từ ban đầu với 2 qubit lần lượt là, <span class="math inline">\vert + \rangle</span> và <span class="math inline">\vert \psi \rangle</span>, cuối cùng chúng ta đã được là <span class="math inline">\vert - \rangle</span> và <span class="math inline">\vert \psi \rangle</span>.</p>
+<p>target qubit không bị biến đổi, nhưng pha của control qubit đã bị thay đổi.</p>
+</div>
+</div>
 </section>
 <section id="the-deutschjozsa-algorithm" class="level1">
 <h1>4. The Deutsch–Jozsa algorithm</h1>
