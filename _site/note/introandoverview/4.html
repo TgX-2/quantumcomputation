@@ -352,13 +352,14 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <p>Việc giới thiệu hadamart transform của tác giả có lẽ là ý đồ với tiền đề giới thiệu việc có thể tính không chỉ 2 giá trị f(x), mà có thể nâng lên tới n (n thỏa thích).</p>
 <p>Tuy là chúng có thể tính được nhiều f() cùng một lúc, nhưng nó chỉ trong thế giới lượng tử. Bởi vì khi chúng ta đo chúng thì tất cả đều đã bị sụp đổ, chỉ còn tồn tại 1 kết quả trả về duy nhất trong cổ điển.</p>
-<p>Nhưng việc tính toán 2 cái cùng 1 lúc, rồi khéo léo lồng ghép các cổng logic vào, có thể giúp xác định tính chất của một hàm nào đó, chỉ trong một phép đo! Cụ thẻ là thuật toán Deutsch sẽ giới thiệu ngay sau đây. Chỉ cần 1 lần đo duy nhất là có thể biết được <span class="math inline">f(0) = f(1)</span> hay <span class="math inline">f(0) \neq f(1)</span> trong khi thực tế tốn 2 lần để đo.</p>
+<p>Nhưng việc tính toán 2 cái cùng 1 lúc, rồi khéo léo lồng ghép các cổng logic vào, có thể giúp xác định tính chất của một hàm nào đó, chỉ trong một phép đo! Cụ thể là thuật toán Deutsch sẽ giới thiệu ngay sau đây. Chỉ cần 1 lần đo duy nhất là có thể biết được <span class="math inline">f(0) = f(1)</span> hay <span class="math inline">f(0) \neq f(1)</span> trong khi thực tế tốn 2 lần để đo.</p>
 </div>
 </div>
 </section>
 <section id="deutschs-algorithm" class="level1">
 <h1>3. Deutsch’s algorithm</h1>
-<p>Một sửa đổi nhỏ đối với mạch trong Hình 1.17 minh họa cách các mạch lượng tử có thể vượt trội hơn các mạch cổ điển bằng cách thực hiện thuật toán Deutsch (chúng ta thực sự trình bày một phiên bản đơn giản hóa và cải tiến của thuật toán gốc; xem phần ‘Lịch sử và đọc thêm’ ở cuối chương). Thuật toán Deutsch kết hợp song song lượng tử với một tính chất của cơ học lượng tử được gọi là giao thoa (interference). Như trước đây, hãy sử dụng cổng Hadamard để chuẩn bị qubit thứ nhất ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, nhưng bây giờ hãy chuẩn bị qubit thứ hai <span class="math inline">y</span> ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, sử dụng một cổng Hadamard tác động lên trạng thái <span class="math inline">\vert{}1\rangle</span>. Hãy theo dõi các trạng thái để xem điều gì xảy ra trong mạch này, được thể hiện trong Hình 1.19.</p>
+<p>Một sửa đổi nhỏ đối với mạch trong Hình 1.17 minh họa cách các mạch lượng tử có thể vượt trội hơn các mạch cổ điển bằng cách thực hiện thuật toán Deutsch (chúng ta thực sự trình bày một phiên bản đơn giản hóa và cải tiến của thuật toán gốc; xem phần ‘Lịch sử và đọc thêm’ ở cuối chương).</p>
+<p>Thuật toán Deutsch kết hợp song song lượng tử với một tính chất của cơ học lượng tử được gọi là <strong><em>interference</em></strong> giao thoa. Như trước đây, hãy sử dụng cổng Hadamard để chuẩn bị qubit thứ nhất ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, nhưng bây giờ hãy chuẩn bị qubit thứ hai <span class="math inline">y</span> ở trạng thái chồng chập <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, sử dụng một cổng Hadamard tác động lên trạng thái <span class="math inline">\vert{}1\rangle</span>. Hãy theo dõi các trạng thái để xem điều gì xảy ra trong mạch này, được thể hiện trong Hình 1.19.</p>
 <p><img src="../../img/1.19.png" class="img-fluid"></p>
 <p>Trạng thái đầu vào</p>
 <p><span class="math display">
@@ -390,7 +391,8 @@ window.Quarto = {
 </span></p>
 <p>Nhận ra rằng <span class="math inline">f(0) \oplus f(1)</span> bằng <span class="math inline">0</span> nếu <span class="math inline">f(0) = f(1)</span> và bằng <span class="math inline">1</span> trong trường hợp ngược lại, chúng ta có thể viết lại kết quả này một cách ngắn gọn là</p>
 <p><span class="math display">
-\vert{}\psi_3\rangle = \pm \vert{}f(0) \oplus f(1)\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right], \tag {1.45}</span></p>
+\vert{}\psi_3\rangle = \pm \vert{}f(0) \oplus f(1)\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right], \tag {1.45}
+</span></p>
 <p>vì vậy bằng cách đo qubit đầu tiên, chúng ta có thể xác định được <span class="math inline">f(0) \oplus f(1)</span>. Điều này thực sự rất thú vị: mạch lượng tử đã mang lại cho chúng ta khả năng xác định một thuộc tính toàn cục của <span class="math inline">f(x)</span>, cụ thể là <span class="math inline">f(0) \oplus f(1)</span>, chỉ bằng một lần duy nhất đánh giá <span class="math inline">f(x)</span>! Điều này nhanh hơn so với thiết bị cổ điển, vốn sẽ đòi hỏi ít nhất hai lần đánh giá.</p>
 <hr>
 <p>Ví dụ này làm nổi bật sự khác biệt giữa song song lượng tử và các thuật toán ngẫu nhiên cổ điển.</p>
@@ -438,6 +440,125 @@ window.Quarto = {
 </section>
 <section id="the-deutschjozsa-algorithm" class="level1">
 <h1>4. The Deutsch–Jozsa algorithm</h1>
+<p>Thuật toán Deutsch là một trường hợp đơn giản của một thuật toán lượng tử tổng quát hơn, mà chúng ta sẽ gọi là thuật toán Deutsch–Jozsa. Ứng dụng này, được gọi là Bài toán Deutsch, có thể được mô tả như một trò chơi sau đây.</p>
+<p>Alice, ở Amsterdam, chọn một số <span class="math inline">x</span> từ <span class="math inline">0</span> đến <span class="math inline">2^n - 1</span>, và gửi nó trong một lá thư cho Bob, ở Boston. Bob tính toán một hàm số <span class="math inline">f(x)</span> nào đó và trả lời bằng kết quả, vốn có giá trị là <span class="math inline">0</span> hoặc <span class="math inline">1</span>. Ở đây, Bob đã hứa sẽ sử dụng một hàm <span class="math inline">f</span> thuộc một trong hai loại:</p>
+<ol type="i">
+<li><p>Hoặc <span class="math inline">f(x)</span> là hàm <em>constant</em> hằng, nghĩa là cho cùng một giá trị (<span class="math inline">0</span> hoặc <span class="math inline">1</span>) cho mọi giá trị của <span class="math inline">x</span>.</p></li>
+<li><p>Hoặc <span class="math inline">f(x)</span> là hàm <em>balanced</em> cân bằng, nghĩa là bằng <span class="math inline">1</span> cho đúng một nửa số giá trị <span class="math inline">x</span> có thể có, và bằng <span class="math inline">0</span> cho một nửa còn lại.</p></li>
+</ol>
+<p>Mục tiêu của Alice là xác định chắc chắn xem Bob đã chọn một hàm hằng hay một hàm cân bằng, với số lần trao đổi thư với Bob là ít nhất có thể. Cô ấy có thể thành công nhanh đến mức nào?</p>
+<ul>
+<li><p><strong>Trong trường hợp cổ điển:</strong> Alice chỉ có thể gửi cho Bob một giá trị của <span class="math inline">x</span> trong mỗi lá thư. Trong trường hợp xấu nhất, Alice sẽ cần phải truy vấn Bob ít nhất <span class="math inline">2^n/2 + 1</span> lần. Lý do là cô ấy có thể nhận được <span class="math inline">2^n/2</span> kết quả số <span class="math inline">0</span> liên tiếp trước khi cuối cùng nhận được một kết quả <span class="math inline">1</span>, lúc đó mới cho cô ấy biết rằng hàm của Bob là hàm cân bằng. Do đó, thuật toán cổ điển tất định tốt nhất mà cô có thể sử dụng đòi hỏi <span class="math inline">2^n/2 + 1</span> lần truy vấn. Lưu ý rằng trong mỗi lá thư, Alice gửi cho Bob <span class="math inline">n</span> bit thông tin. Hơn nữa, trong ví dụ này, khoảng cách địa lý được sử dụng để nâng cao chi phí tính toán <span class="math inline">f(x)</span> một cách nhân tạo, nhưng điều này không bắt buộc trong bài toán tổng quát, nơi bản thân <span class="math inline">f(x)</span> có thể vốn dĩ rất khó để tính toán.</p></li>
+<li><p><strong>Trong trường hợp lượng tử:</strong> Nếu Bob và Alice có thể trao đổi các qubit thay vì chỉ các bit cổ điển, và nếu Bob đồng ý tính toán <span class="math inline">f(x)</span> bằng một phép biến đổi đơn nhất <span class="math inline">U_f</span>, thì Alice có thể đạt được mục tiêu của mình chỉ trong đúng 1 lần thư từ với Bob bằng cách sử dụng thuật toán sau.</p></li>
+</ul>
+<p>Tương tự như thuật toán Deutsch, Alice có một thanh ghi <span class="math inline">n</span> qubit để lưu trữ truy vấn của mình, và một thanh ghi 1 qubit đơn lẻ mà cô sẽ đưa cho Bob để lưu trữ câu trả lời. Cô bắt đầu bằng cách chuẩn bị cả thanh ghi truy vấn và thanh ghi câu trả lời ở trạng thái chồng chập. Bob sẽ đánh giá <span class="math inline">f(x)</span> bằng cách sử dụng song song lượng tử và để lại kết quả trong thanh ghi câu trả lời. Sau đó, Alice tạo giao thoa cho các trạng thái trong sự chồng chập bằng cách sử dụng phép biến đổi Hadamard trên thanh ghi truy vấn, và kết thúc bằng cách thực hiện một phép đo thích hợp để xác định xem <span class="math inline">f</span> là hàm hằng hay hàm cân bằng.</p>
+<hr>
+<p><img src="../../img/1.20.png" class="img-fluid"></p>
+<p>Các bước cụ thể của thuật toán đã được mô tả ở hình 1.20. Chúng ta hãy theo dõi trạng thái thông qua của mạch này. Trạng thái đầu vào là</p>
+<p><span class="math display">
+\vert \psi_0 \rangle = \vert 0 \rangle^ {\otimes n} \vert 1 \rangle \tag {1.46}
+</span></p>
+<p>nó khá là tương tự với phương trình 1.41, nhưng ở đây, thanh ghi truy vấn được mô tả bởi n qubit, tất cả đều được ở trạng thái <span class="math inline">\vert 0 \rangle</span>. Và sau khi biến đổi Hadamard ở trên thanh ghi và cổng Hadamard qua thanh ghi kết quả chúng ta có:</p>
+<p><span class="math display">
+\vert \psi_1 \rangle  
+= \sum_{x \in \{0, 1 \}^n} {\frac {\vert x \rangle} {\sqrt{2^n}} \left[\frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]}
+\tag {1.47}
+</span></p>
+<p>Và thanh ghi truy vấn bây giờ đã superposition với mọi giá trị, và thanh ghi kết quả ở trạng thái chồng chập với trọng số đều của 0 và 1. Và tiếp theo, hàm f được tính (bởi Bob) theo công thức <span class="math inline">U_f = \vert x, y \rangle \to \vert x , y \oplus f(x) \rangle</span>, cho:</p>
+<p><span class="math display">
+\vert \psi_2\rangle =
+\sum_{x}{
+\frac {(-1)^{f(x)} \vert x \rangle} {\sqrt {2^n}}
+\left[ \frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]
+}
+\tag {1.48}
+</span></p>
+<p>Alice hiện có một tập hợp các qubit trong đó kết quả đánh giá hàm số của Bob được lưu trữ trong biên độ của trạng thái chồng chập qubit. Bây giờ cô ấy tạo giao thoa giữa các số hạng trong trạng thái chồng chập bằng cách sử dụng phép biến đổi Hadamard trên thanh ghi truy vấn. Để xác định kết quả của phép biến đổi Hadamard, sẽ rất hữu ích nếu đầu tiên ta tính toán tác động của phép biến đổi Hadamard lên một trạng thái <span class="math inline">\vert{}x\rangle</span>. Bằng cách kiểm tra riêng biệt các trường hợp <span class="math inline">x = 0</span> và <span class="math inline">x = 1</span>, chúng ta thấy rằng đối với một qubit đơn lẻ, <span class="math inline">H\vert{}x\rangle = \sum_z (-1)^{xz}\vert{}z\rangle / \sqrt{2}</span>. Do đó</p>
+<p><span class="math display">
+H^{\otimes n}\vert{}x_1, \dots, x_n\rangle = \frac{\sum_{z_1, \dots, z_n} (-1)^{x_1 z_1 + \dots + x_n z_n}\vert{}z_1, \dots, z_n\rangle}{\sqrt{2^n}} \tag {1.49}
+</span></p>
+<p>Điều này có thể được tóm tắt một cách ngắn gọn hơn trong phương trình rất hữu ích sau</p>
+<p><span class="math display">
+H^{\otimes n}\vert{}x\rangle = \frac{\sum_z (-1)^{x \cdot z}\vert{}z\rangle}{\sqrt{2^n}}, \tag {1.50}
+</span></p>
+<p>trong đó <span class="math inline">x \cdot z</span> là tích vô hướng theo bit của <span class="math inline">x</span> và <span class="math inline">z</span>, lấy modulo 2. Sử dụng phương trình này và (1.48), giờ đây chúng ta có thể đánh giá <span class="math inline">\vert{}\psi_3\rangle</span>,</p>
+<p><span class="math display">
+\vert{}\psi_3\rangle = \sum_z \sum_x \frac{(-1)^{x \cdot z + f(x)}\vert{}z\rangle}{2^n} \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]. \tag {1.51}
+</span></p>
+<p>Alice bây giờ quan sát thanh ghi truy vấn. Lưu ý rằng biên độ cho trạng thái <span class="math inline">\vert{}0\rangle^{\otimes n}</span> là <span class="math inline">\sum_x (-1)^{f(x)}/2^n</span>. Hãy cùng xem xét hai trường hợp có thể xảy ra — <span class="math inline">f</span> là hàm hằng và <span class="math inline">f</span> là hàm cân bằng — để nhận biết điều gì sẽ xảy ra. Trong trường hợp <span class="math inline">f</span> là hàm hằng, biên độ cho <span class="math inline">\vert{}0\rangle^{\otimes n}</span> là <span class="math inline">+1</span> hoặc <span class="math inline">-1</span>, tùy thuộc vào giá trị hằng số mà <span class="math inline">f(x)</span> nhận. Vì <span class="math inline">\vert{}\psi_3\rangle</span> có độ dài đơn vị, suy ra tất cả các biên độ khác phải bằng <span class="math inline">0</span>, và một phép quan sát sẽ cho ra toàn số <span class="math inline">0</span> cho tất cả các qubit trong thanh ghi truy vấn. Nếu <span class="math inline">f</span> là hàm cân bằng, thì các đóng góp dương và âm cho biên độ của <span class="math inline">\vert{}0\rangle^{\otimes n}</span> sẽ triệt tiêu lẫn nhau, để lại biên độ bằng <span class="math inline">0</span>, và phép đo bắt buộc phải cho ra một kết quả khác <span class="math inline">0</span> trên ít nhất một qubit trong thanh ghi truy vấn. Tóm lại, nếu Alice đo được toàn số <span class="math inline">0</span> thì hàm số là hàm hằng; ngược lại, hàm số là hàm cân bằng. Thuật toán Deutsch–Jozsa được tóm tắt dưới đây.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ông tác giả viết sách này cho trình độ cao học nên hiểu thế đ nào được
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giờ chúng ta hãy phân tích tại sao có được phương trình <span class="math inline">\vert \psi_3 \rangle</span> cuối cùng.</p>
+<p>Ban đầu, ta có n <span class="math inline">\vert 0 \rangle</span> và 1 <span class="math inline">\vert 1 \rangle</span>.</p>
+<p><span class="math display">
+\vert \psi_0 \rangle = \vert 0 \rangle ^ {\otimes n} \otimes \vert 1\rangle
+</span></p>
+<p><strong>Tính ket psi 1:</strong></p>
+<p>Ta có thanh ghi truy vấn đi qua Hadamard transform, và thanh ghi kết quả đi qua cổng Hadamard, từ đó ta có:</p>
+<p><span class="math display">
+\vert \psi_1 \rangle = \text{H}^{\otimes n} \vert 0 \rangle ^{\otimes n}\otimes \text{H} \vert 1 \rangle =
+\sum_{x \in \{0, 1\}^n} \frac {\vert x \rangle} {\sqrt {2^n}} \vert - \rangle
+</span></p>
+<p><strong>Tính ket psi 2:</strong></p>
+<p>Ta có <span class="math inline">\vert x \rangle = \vert (x_1, x_2, ..., x_n) \rangle</span> và <span class="math inline">\vert y \rangle = \vert - \rangle</span>, khi đi qua <span class="math inline">U_f : \vert x, y \rangle = \vert x, y \otimes f(x) \rangle</span>, ta có ket psi 2 bằng:</p>
+<p><span class="math display">
+\vert \psi_2\rangle =
+\sum_{x}{
+\frac {(-1)^{f(x)} \vert x \rangle} {\sqrt {2^n}}
+\left[ \frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]
+}
+</span></p>
+<p><strong>Tính ket psi 3:</strong></p>
+<p>Sau đó thanh ghi truy vấn đi qua chuyển đổi Hadamard.</p>
+<p>x cũng chỉ nằm trong <span class="math inline">\in \{0, 1\}</span>, vì vậy khi đi qua cổng Hadamard, giá trị khả dĩ là:</p>
+<p><span class="math display">
+\text H \vert x \rangle =
+\frac {\vert 0 \rangle + (-1)^x \vert 1 \rangle}
+{\sqrt 2}
+</span></p>
+<p>Nhận thấy rằng, có thể biểu diễn nó như sau:</p>
+<p><span class="math display">
+\text H \vert x \rangle =
+\frac {(-1)^{0x} \vert 0 \rangle + (-1)^{1x} \vert 1 \rangle}
+{\sqrt 2} =
+\sum_{z \in \{0, 1\}} = \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2}
+</span></p>
+<p>Thử nhân hai x1 và x2 lại với nhau:</p>
+<p><span class="math display">
+\text{H} \vert x_1, x_2 \rangle =
+\frac 1 2 \left(
+  (-1)^{0x_1 + 0x_2} \vert 00 \rangle
++ (-1)^{0x_1 + 1x_2} \vert 01 \rangle \\
++ (-1)^{1x_1 + 0x_2} \vert 10 \rangle
++ (-1)^{1x_1 + 1x_2} \vert 11 \rangle
+\right)
+</span></p>
+<p>tổng quát hóa 2 biến lên:</p>
+<p><span class="math display">
+\text{H} \vert x_1 \rangle \otimes \text{H} \vert x_2 \rangle =
+\frac 1 2
+\sum_{z \in \{0, 1\}^2} (-1)^{z_1x_1 + z_2x_2} \vert z_1, z_2 \rangle
+</span></p>
+<p>Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa <span class="math inline">z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n</span> và <span class="math inline">z = (z_1, z_2, ..., z_n)</span>. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:</p>
+<p><span class="math display">
+\text{H}^{\otimes n} \vert x \rangle =
+\frac 1 {\sqrt {2^n}} \sum_{z\in \{0, 1\}^n} (-1)^{x\cdot z} \vert z \rangle
+</span></p>
+<p>Thay vào ket psi 2 ta được:</p>
+<p><span class="math display">
+\vert \psi_3 \rangle =
+\sum_x \sum_z \frac {(-1)^{x\cdot z + f(x)}} {2^n} \vert z \rangle \vert - \rangle
+</span></p>
+</div>
+</div>
 </section>
 <section id="quantum-algorithms-summarized" class="level1">
 <h1>5. Quantum algorithms summarized</h1>

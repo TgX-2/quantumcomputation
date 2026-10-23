@@ -120,13 +120,15 @@ Việc giới thiệu hadamart transform của tác giả có lẽ là ý đồ 
 
 Tuy là chúng có thể tính được nhiều f() cùng một lúc, nhưng nó chỉ trong thế giới lượng tử. Bởi vì khi chúng ta đo chúng thì tất cả đều đã bị sụp đổ, chỉ còn tồn tại 1 kết quả trả về duy nhất trong cổ điển.
 
-Nhưng việc tính toán 2 cái cùng 1 lúc, rồi khéo léo lồng ghép các cổng logic vào, có thể giúp xác định tính chất của một hàm nào đó, chỉ trong một phép đo! Cụ thẻ là thuật toán Deutsch sẽ giới thiệu ngay sau đây. Chỉ cần 1 lần đo duy nhất là có thể biết được $f(0) = f(1)$ hay $f(0) \neq f(1)$ trong khi thực tế tốn 2 lần để đo.
+Nhưng việc tính toán 2 cái cùng 1 lúc, rồi khéo léo lồng ghép các cổng logic vào, có thể giúp xác định tính chất của một hàm nào đó, chỉ trong một phép đo! Cụ thể là thuật toán Deutsch sẽ giới thiệu ngay sau đây. Chỉ cần 1 lần đo duy nhất là có thể biết được $f(0) = f(1)$ hay $f(0) \neq f(1)$ trong khi thực tế tốn 2 lần để đo.
 
 :::
 
 # 3. Deutsch’s algorithm
 
-Một sửa đổi nhỏ đối với mạch trong Hình 1.17 minh họa cách các mạch lượng tử có thể vượt trội hơn các mạch cổ điển bằng cách thực hiện thuật toán Deutsch (chúng ta thực sự trình bày một phiên bản đơn giản hóa và cải tiến của thuật toán gốc; xem phần 'Lịch sử và đọc thêm' ở cuối chương). Thuật toán Deutsch kết hợp song song lượng tử với một tính chất của cơ học lượng tử được gọi là giao thoa (interference). Như trước đây, hãy sử dụng cổng Hadamard để chuẩn bị qubit thứ nhất ở trạng thái chồng chập $(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$, nhưng bây giờ hãy chuẩn bị qubit thứ hai $y$ ở trạng thái chồng chập $(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}$, sử dụng một cổng Hadamard tác động lên trạng thái $\vert{}1\rangle$. Hãy theo dõi các trạng thái để xem điều gì xảy ra trong mạch này, được thể hiện trong Hình 1.19.   
+Một sửa đổi nhỏ đối với mạch trong Hình 1.17 minh họa cách các mạch lượng tử có thể vượt trội hơn các mạch cổ điển bằng cách thực hiện thuật toán Deutsch (chúng ta thực sự trình bày một phiên bản đơn giản hóa và cải tiến của thuật toán gốc; xem phần 'Lịch sử và đọc thêm' ở cuối chương). 
+
+Thuật toán Deutsch kết hợp song song lượng tử với một tính chất của cơ học lượng tử được gọi là ***interference*** giao thoa. Như trước đây, hãy sử dụng cổng Hadamard để chuẩn bị qubit thứ nhất ở trạng thái chồng chập $(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$, nhưng bây giờ hãy chuẩn bị qubit thứ hai $y$ ở trạng thái chồng chập $(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}$, sử dụng một cổng Hadamard tác động lên trạng thái $\vert{}1\rangle$. Hãy theo dõi các trạng thái để xem điều gì xảy ra trong mạch này, được thể hiện trong Hình 1.19.   
 
 ![](../../img/1.19.png)
 
@@ -170,7 +172,8 @@ $$
 Nhận ra rằng $f(0) \oplus f(1)$ bằng $0$ nếu $f(0) = f(1)$ và bằng $1$ trong trường hợp ngược lại, chúng ta có thể viết lại kết quả này một cách ngắn gọn là   
 
 $$
-\vert{}\psi_3\rangle = \pm \vert{}f(0) \oplus f(1)\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right], \tag {1.45}$$
+\vert{}\psi_3\rangle = \pm \vert{}f(0) \oplus f(1)\rangle \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right], \tag {1.45}
+$$
 
 vì vậy bằng cách đo qubit đầu tiên, chúng ta có thể xác định được $f(0) \oplus f(1)$. Điều này thực sự rất thú vị: mạch lượng tử đã mang lại cho chúng ta khả năng xác định một thuộc tính toàn cục của $f(x)$, cụ thể là $f(0) \oplus f(1)$, chỉ bằng một lần duy nhất đánh giá $f(x)$! Điều này nhanh hơn so với thiết bị cổ điển, vốn sẽ đòi hỏi ít nhất hai lần đánh giá.  
 
@@ -222,5 +225,163 @@ target qubit không bị biến đổi, nhưng pha của control qubit đã bị
 
 
 # 4. The Deutsch–Jozsa algorithm 
+
+Thuật toán Deutsch là một trường hợp đơn giản của một thuật toán lượng tử tổng quát hơn, mà chúng ta sẽ gọi là thuật toán Deutsch–Jozsa. Ứng dụng này, được gọi là Bài toán Deutsch, có thể được mô tả như một trò chơi sau đây.
+
+Alice, ở Amsterdam, chọn một số $x$ từ $0$ đến $2^n - 1$, và gửi nó trong một lá thư cho Bob, ở Boston. Bob tính toán một hàm số $f(x)$ nào đó và trả lời bằng kết quả, vốn có giá trị là $0$ hoặc $1$. Ở đây, Bob đã hứa sẽ sử dụng một hàm $f$ thuộc một trong hai loại: 
+
+(i) Hoặc $f(x)$ là hàm *constant* hằng, nghĩa là cho cùng một giá trị ($0$ hoặc $1$) cho mọi giá trị của $x$.   
+
+(ii) Hoặc $f(x)$ là hàm *balanced* cân bằng, nghĩa là bằng $1$ cho đúng một nửa số giá trị $x$ có thể có, và bằng $0$ cho một nửa còn lại. 
+
+Mục tiêu của Alice là xác định chắc chắn xem Bob đã chọn một hàm hằng hay một hàm cân bằng, với số lần trao đổi thư với Bob là ít nhất có thể. Cô ấy có thể thành công nhanh đến mức nào?
+
+* **Trong trường hợp cổ điển:** Alice chỉ có thể gửi cho Bob một giá trị của $x$ trong mỗi lá thư. Trong trường hợp xấu nhất, Alice sẽ cần phải truy vấn Bob ít nhất $2^n/2 + 1$ lần. Lý do là cô ấy có thể nhận được $2^n/2$ kết quả số $0$ liên tiếp trước khi cuối cùng nhận được một kết quả $1$, lúc đó mới cho cô ấy biết rằng hàm của Bob là hàm cân bằng. Do đó, thuật toán cổ điển tất định tốt nhất mà cô có thể sử dụng đòi hỏi $2^n/2 + 1$ lần truy vấn. Lưu ý rằng trong mỗi lá thư, Alice gửi cho Bob $n$ bit thông tin. Hơn nữa, trong ví dụ này, khoảng cách địa lý được sử dụng để nâng cao chi phí tính toán $f(x)$ một cách nhân tạo, nhưng điều này không bắt buộc trong bài toán tổng quát, nơi bản thân $f(x)$ có thể vốn dĩ rất khó để tính toán.   
+
+* **Trong trường hợp lượng tử:** Nếu Bob và Alice có thể trao đổi các qubit thay vì chỉ các bit cổ điển, và nếu Bob đồng ý tính toán $f(x)$ bằng một phép biến đổi đơn nhất $U_f$, thì Alice có thể đạt được mục tiêu của mình chỉ trong đúng 1 lần thư từ với Bob bằng cách sử dụng thuật toán sau.   
+
+Tương tự như thuật toán Deutsch, Alice có một thanh ghi $n$ qubit để lưu trữ truy vấn của mình, và một thanh ghi 1 qubit đơn lẻ mà cô sẽ đưa cho Bob để lưu trữ câu trả lời. Cô bắt đầu bằng cách chuẩn bị cả thanh ghi truy vấn và thanh ghi câu trả lời ở trạng thái chồng chập. Bob sẽ đánh giá $f(x)$ bằng cách sử dụng song song lượng tử và để lại kết quả trong thanh ghi câu trả lời. Sau đó, Alice tạo giao thoa cho các trạng thái trong sự chồng chập bằng cách sử dụng phép biến đổi Hadamard trên thanh ghi truy vấn, và kết thúc bằng cách thực hiện một phép đo thích hợp để xác định xem $f$ là hàm hằng hay hàm cân bằng.   
+
+---
+
+![](../../img/1.20.png)
+
+Các bước cụ thể của thuật toán đã được mô tả ở hình 1.20. Chúng ta hãy theo dõi trạng thái thông qua của mạch này. Trạng thái đầu vào là
+
+$$
+\vert \psi_0 \rangle = \vert 0 \rangle^ {\otimes n} \vert 1 \rangle \tag {1.46}
+$$
+
+nó khá là tương tự với phương trình 1.41, nhưng ở đây, thanh ghi truy vấn được mô tả bởi n qubit, tất cả đều được ở trạng thái $\vert 0 \rangle$. Và sau khi biến đổi Hadamard ở trên thanh ghi và cổng Hadamard qua thanh ghi kết quả chúng ta có:
+
+$$
+\vert \psi_1 \rangle  
+= \sum_{x \in \{0, 1 \}^n} {\frac {\vert x \rangle} {\sqrt{2^n}} \left[\frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]}
+\tag {1.47}
+$$
+
+Và thanh ghi truy vấn bây giờ đã superposition với mọi giá trị, và thanh ghi kết quả ở trạng thái chồng chập với trọng số đều của 0 và 1. Và tiếp theo, hàm f được tính (bởi Bob) theo công thức $U_f = \vert x, y \rangle \to \vert x , y \oplus f(x) \rangle$, cho:
+
+$$
+\vert \psi_2\rangle = 
+\sum_{x}{
+\frac {(-1)^{f(x)} \vert x \rangle} {\sqrt {2^n}}
+\left[ \frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]
+}
+\tag {1.48}
+$$
+
+Alice hiện có một tập hợp các qubit trong đó kết quả đánh giá hàm số của Bob được lưu trữ trong biên độ của trạng thái chồng chập qubit. Bây giờ cô ấy tạo giao thoa giữa các số hạng trong trạng thái chồng chập bằng cách sử dụng phép biến đổi Hadamard trên thanh ghi truy vấn. Để xác định kết quả của phép biến đổi Hadamard, sẽ rất hữu ích nếu đầu tiên ta tính toán tác động của phép biến đổi Hadamard lên một trạng thái $\vert{}x\rangle$. Bằng cách kiểm tra riêng biệt các trường hợp $x = 0$ và $x = 1$, chúng ta thấy rằng đối với một qubit đơn lẻ, $H\vert{}x\rangle = \sum_z (-1)^{xz}\vert{}z\rangle / \sqrt{2}$. Do đó   
+
+$$
+H^{\otimes n}\vert{}x_1, \dots, x_n\rangle = \frac{\sum_{z_1, \dots, z_n} (-1)^{x_1 z_1 + \dots + x_n z_n}\vert{}z_1, \dots, z_n\rangle}{\sqrt{2^n}} \tag {1.49}
+$$
+
+Điều này có thể được tóm tắt một cách ngắn gọn hơn trong phương trình rất hữu ích sau
+
+$$
+H^{\otimes n}\vert{}x\rangle = \frac{\sum_z (-1)^{x \cdot z}\vert{}z\rangle}{\sqrt{2^n}}, \tag {1.50}
+$$
+
+trong đó $x \cdot z$ là tích vô hướng theo bit của $x$ và $z$, lấy modulo 2. Sử dụng phương trình này và (1.48), giờ đây chúng ta có thể đánh giá $\vert{}\psi_3\rangle$,   
+
+$$
+\vert{}\psi_3\rangle = \sum_z \sum_x \frac{(-1)^{x \cdot z + f(x)}\vert{}z\rangle}{2^n} \left[ \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \right]. \tag {1.51}
+$$
+
+Alice bây giờ quan sát thanh ghi truy vấn. Lưu ý rằng biên độ cho trạng thái $\vert{}0\rangle^{\otimes n}$ là $\sum_x (-1)^{f(x)}/2^n$. Hãy cùng xem xét hai trường hợp có thể xảy ra — $f$ là hàm hằng và $f$ là hàm cân bằng — để nhận biết điều gì sẽ xảy ra. Trong trường hợp $f$ là hàm hằng, biên độ cho $\vert{}0\rangle^{\otimes n}$ là $+1$ hoặc $-1$, tùy thuộc vào giá trị hằng số mà $f(x)$ nhận. Vì $\vert{}\psi_3\rangle$ có độ dài đơn vị, suy ra tất cả các biên độ khác phải bằng $0$, và một phép quan sát sẽ cho ra toàn số $0$ cho tất cả các qubit trong thanh ghi truy vấn. Nếu $f$ là hàm cân bằng, thì các đóng góp dương và âm cho biên độ của $\vert{}0\rangle^{\otimes n}$ sẽ triệt tiêu lẫn nhau, để lại biên độ bằng $0$, và phép đo bắt buộc phải cho ra một kết quả khác $0$ trên ít nhất một qubit trong thanh ghi truy vấn. Tóm lại, nếu Alice đo được toàn số $0$ thì hàm số là hàm hằng; ngược lại, hàm số là hàm cân bằng. Thuật toán Deutsch–Jozsa được tóm tắt dưới đây.   
+
+:::{.callout}
+# Ông tác giả viết sách này cho trình độ cao học nên hiểu thế đ nào được
+
+Giờ chúng ta hãy phân tích tại sao có được phương trình $\vert \psi_3 \rangle$ cuối cùng.
+
+Ban đầu, ta có n $\vert 0 \rangle$ và 1 $\vert 1 \rangle$.
+
+$$
+\vert \psi_0 \rangle = \vert 0 \rangle ^ {\otimes n} \otimes \vert 1\rangle
+$$
+
+**Tính ket psi 1:**
+
+Ta có thanh ghi truy vấn đi qua Hadamard transform, và thanh ghi kết quả đi qua cổng Hadamard, từ đó ta có:
+
+$$
+\vert \psi_1 \rangle = \text{H}^{\otimes n} \vert 0 \rangle ^{\otimes n}\otimes \text{H} \vert 1 \rangle =
+\sum_{x \in \{0, 1\}^n} \frac {\vert x \rangle} {\sqrt {2^n}} \vert - \rangle
+$$
+
+**Tính ket psi 2:**
+
+Ta có $\vert x \rangle = \vert (x_1, x_2, ..., x_n) \rangle$ và $\vert y \rangle = \vert - \rangle$, khi đi qua $U_f : \vert x, y \rangle = \vert x, y \otimes f(x) \rangle$, ta có ket psi 2 bằng:
+
+$$
+\vert \psi_2\rangle = 
+\sum_{x}{
+\frac {(-1)^{f(x)} \vert x \rangle} {\sqrt {2^n}}
+\left[ \frac {\vert 0 \rangle - \vert 1 \rangle} {\sqrt 2} \right]
+}
+$$
+
+**Tính ket psi 3:**
+
+Sau đó thanh ghi truy vấn đi qua chuyển đổi Hadamard.
+
+x cũng chỉ nằm trong $\in \{0, 1\}$, vì vậy khi đi qua cổng Hadamard, giá trị khả dĩ là:
+
+$$
+\text H \vert x \rangle = 
+\frac {\vert 0 \rangle + (-1)^x \vert 1 \rangle}
+{\sqrt 2}
+$$
+
+Nhận thấy rằng, có thể biểu diễn nó như sau:
+
+$$
+\text H \vert x \rangle = 
+\frac {(-1)^{0x} \vert 0 \rangle + (-1)^{1x} \vert 1 \rangle}
+{\sqrt 2} = 
+\sum_{z \in \{0, 1\}} = \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2} 
+$$
+
+Thử nhân hai x1 và x2 lại với nhau:
+
+$$
+\text{H} \vert x_1, x_2 \rangle = 
+\frac 1 2 \left( 
+  (-1)^{0x_1 + 0x_2} \vert 00 \rangle
++ (-1)^{0x_1 + 1x_2} \vert 01 \rangle \\
++ (-1)^{1x_1 + 0x_2} \vert 10 \rangle 
++ (-1)^{1x_1 + 1x_2} \vert 11 \rangle 
+\right)
+$$
+
+tổng quát hóa 2 biến lên:
+
+$$
+\text{H} \vert x_1 \rangle \otimes \text{H} \vert x_2 \rangle = 
+\frac 1 2 
+\sum_{z \in \{0, 1\}^2} (-1)^{z_1x_1 + z_2x_2} \vert z_1, z_2 \rangle
+$$
+
+Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa $z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n$ và $z = (z_1, z_2, ..., z_n)$. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:
+
+$$
+\text{H}^{\otimes n} \vert x \rangle = 
+\frac 1 {\sqrt {2^n}} \sum_{z\in \{0, 1\}^n} (-1)^{x\cdot z} \vert z \rangle
+$$
+
+Thay vào ket psi 2 ta được:
+
+$$
+\vert \psi_3 \rangle = 
+\sum_x \sum_z \frac {(-1)^{x\cdot z + f(x)}} {2^n} \vert z \rangle \vert - \rangle
+$$
+
+:::
+
+
+
+
 
 # 5. Quantum algorithms summarized
