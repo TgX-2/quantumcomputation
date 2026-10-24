@@ -127,6 +127,36 @@ $$
 trong đó $\alpha$, $\beta$, $\gamma$ và $\delta$ là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.
 :::
 
+:::{.callout-warning}
+# Thử nghĩ xem
+
+Mọi người chỉ đề cập các kiểu vướng víu với nhau theo kiểu tuyến tính, hay chính xác hơn là tất cả qubit đều cùng cấp. Nhưng sẽ như thế nào tồn tại một qubit lồng? Một thứ tôi sẽ gọi là qubit loocj (loops)?
+
+Phát biểu như sau:
+
+Một qubit loocj sau khi đo sẽ nhảy tới hai qubit khác, tuỳ thuộc vào việc đo tiếp?
+
+Tôi hiện tại không biết rằng nó sẽ như thế nào, nhưng thử nghĩ xem, sẽ có hai hệ qubit hoàn toàn độc lập nhưng lại phụ thuộc vào nhau (hay là vướng víu).
+
+ví dụ:
+
+$$
+\vert \lambda \rangle = \gamma \vert A \rangle + \delta \vert B \rangle
+$$
+
+và $|\gamma| ^ 2 + |\delta|^2 = 1$. Khai triển $\vert \lambda\rangle$ (lúc đo) ra:
+
+$$
+\vert \lambda \rangle = \gamma (\alpha \vert 0 \rangle + \beta \vert 1 \rangle) + \delta (\alpha \vert 2 \rangle + \beta \vert 3 \rangle)
+$$
+
+chẳng hạn?
+
+
+
+:::
+
+
 # 2. Multiple qubit gates
 
 Bây giờ chúng ta hãy tổng quát hóa từ một qubit sang nhiều qubit. 
@@ -146,7 +176,10 @@ Cổng logic lượng tử đa qubit nguyên mẫu là cổng $\text{controlled-
 Theo các phương trình:
 
 $$
-\vert 00\rangle \to \vert 00\rangle; \tag {vert}01\rangle \to \vert 01\rangle; \tag {vert}10\rangle \to \vert 11\rangle; \tag {vert}11\rangle \to \vert 10\rangle \tag {1.18}
+\vert 00\rangle \to \vert 00\rangle; \\ 
+\vert01\rangle \to \vert 01\rangle; \\ 
+\vert10\rangle \to \vert 11\rangle; \\
+\vert11\rangle \to \vert 10\rangle \tag {1.18}
 $$
 
 Một cách khác để mô tả cổng $\text{CNOT}$ là sự tổng quát hóa của cổng $\text{XOR}$ cổ điển, vì hành động của cổng có thể được tóm tắt là $\vert A, B\rangle \to \vert A, B \oplus A\rangle$, trong đó $\oplus$ là phép cộng modulo hai, đây chính xác là những gì cổng $\text{XOR}$ thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép $\text{XOR}$ với nhau và kết quả được lưu trữ trong qubit mục tiêu.

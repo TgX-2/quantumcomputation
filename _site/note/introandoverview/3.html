@@ -222,6 +222,18 @@ window.Quarto = {
  <span class="menu-text">Quantum algorithms</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -355,6 +367,31 @@ U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \e
 <p>trong đó <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span> và <span class="math inline">\delta</span> là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Thử nghĩ xem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mọi người chỉ đề cập các kiểu vướng víu với nhau theo kiểu tuyến tính, hay chính xác hơn là tất cả qubit đều cùng cấp. Nhưng sẽ như thế nào tồn tại một qubit lồng? Một thứ tôi sẽ gọi là qubit loocj (loops)?</p>
+<p>Phát biểu như sau:</p>
+<p>Một qubit loocj sau khi đo sẽ nhảy tới hai qubit khác, tuỳ thuộc vào việc đo tiếp?</p>
+<p>Tôi hiện tại không biết rằng nó sẽ như thế nào, nhưng thử nghĩ xem, sẽ có hai hệ qubit hoàn toàn độc lập nhưng lại phụ thuộc vào nhau (hay là vướng víu).</p>
+<p>ví dụ:</p>
+<p><span class="math display">
+\vert \lambda \rangle = \gamma \vert A \rangle + \delta \vert B \rangle
+</span></p>
+<p>và <span class="math inline">|\gamma| ^ 2 + |\delta|^2 = 1</span>. Khai triển <span class="math inline">\vert \lambda\rangle</span> (lúc đo) ra:</p>
+<p><span class="math display">
+\vert \lambda \rangle = \gamma (\alpha \vert 0 \rangle + \beta \vert 1 \rangle) + \delta (\alpha \vert 2 \rangle + \beta \vert 3 \rangle)
+</span></p>
+<p>chẳng hạn?</p>
+</div>
+</div>
 </section>
 <section id="multiple-qubit-gates" class="level1">
 <h1>2. Multiple qubit gates</h1>
@@ -369,7 +406,10 @@ U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \e
 </ul>
 <p>Theo các phương trình:</p>
 <p><span class="math display">
-\vert 00\rangle \to \vert 00\rangle; \tag {vert}01\rangle \to \vert 01\rangle; \tag {vert}10\rangle \to \vert 11\rangle; \tag {vert}11\rangle \to \vert 10\rangle \tag {1.18}
+\vert 00\rangle \to \vert 00\rangle; \\
+\vert01\rangle \to \vert 01\rangle; \\
+\vert10\rangle \to \vert 11\rangle; \\
+\vert11\rangle \to \vert 10\rangle \tag {1.18}
 </span></p>
 <p>Một cách khác để mô tả cổng <span class="math inline">\text{CNOT}</span> là sự tổng quát hóa của cổng <span class="math inline">\text{XOR}</span> cổ điển, vì hành động của cổng có thể được tóm tắt là <span class="math inline">\vert A, B\rangle \to \vert A, B \oplus A\rangle</span>, trong đó <span class="math inline">\oplus</span> là phép cộng modulo hai, đây chính xác là những gì cổng <span class="math inline">\text{XOR}</span> thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép <span class="math inline">\text{XOR}</span> với nhau và kết quả được lưu trữ trong qubit mục tiêu.</p>
 <hr>

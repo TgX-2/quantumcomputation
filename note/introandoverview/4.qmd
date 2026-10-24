@@ -341,13 +341,13 @@ $$
 \text H \vert x \rangle = 
 \frac {(-1)^{0x} \vert 0 \rangle + (-1)^{1x} \vert 1 \rangle}
 {\sqrt 2} = 
-\sum_{z \in \{0, 1\}} = \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2} 
+\sum_{z \in \{0, 1\}} \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2} 
 $$
 
 Thử nhân hai x1 và x2 lại với nhau:
 
 $$
-\text{H} \vert x_1, x_2 \rangle = 
+\text{H}^{\otimes 2} \vert x_1, x_2 \rangle = 
 \frac 1 2 \left( 
   (-1)^{0x_1 + 0x_2} \vert 00 \rangle
 + (-1)^{0x_1 + 1x_2} \vert 01 \rangle \\
@@ -364,7 +364,7 @@ $$
 \sum_{z \in \{0, 1\}^2} (-1)^{z_1x_1 + z_2x_2} \vert z_1, z_2 \rangle
 $$
 
-Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa $z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n$ và $z = (z_1, z_2, ..., z_n)$. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:
+Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa thêm $z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n$ và $z = (z_1, z_2, ..., z_n)$. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:
 
 $$
 \text{H}^{\otimes n} \vert x \rangle = 

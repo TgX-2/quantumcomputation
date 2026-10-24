@@ -128,7 +128,13 @@ $$
 \mathbf{P} \overset{?}{\neq} \mathbf{NP}. \tag {1.55}
 $$
 
-Hầu hết các nhà nghiên cứu tin rằng NP chứa các bài toán không nằm trong P. Đặc biệt, có một lớp con quan trọng của các bài toán NP, gọi là các bài toán NP-hoàn hảo (NP-complete), có tầm quan trọng đặc biệt vì hai lý do.Thứ nhất, có hàng ngàn bài toán, trong đó nhiều bài toán cực kỳ quan trọng, đã được biết đến là NP-hoàn hảo.Thứ hai, bất kỳ bài toán NP-hoàn hảo cho trước nào, theo một nghĩa nào đó, đều "ít nhất là khó bằng" tất cả các bài toán khác trong NP. Chính xác hơn, một thuật toán để giải một bài toán NP-hoàn hảo cụ thể có thể được điều chỉnh để giải bất kỳ bài toán nào khác trong NP, với một chi phí bổ sung nhỏ (small overhead). Đặc biệt, nếu $\mathbf{P} \neq \mathbf{NP}$, thì suy ra không có bài toán NP-hoàn hảo nào có thể được giải quyết hiệu quả trên một máy tính cổ điển.
+---
+
+Hầu hết các nhà nghiên cứu tin rằng NP chứa các bài toán không nằm trong P. Đặc biệt, có một lớp con quan trọng của các bài toán NP, gọi là các bài toán NP-hoàn hảo (NP-complete), có tầm quan trọng đặc biệt vì hai lý do.
+
+* Thứ nhất, có hàng ngàn bài toán, trong đó nhiều bài toán cực kỳ quan trọng, đã được biết đến là NP-hoàn hảo.
+
+* Thứ hai, bất kỳ bài toán NP-hoàn hảo cho trước nào, theo một nghĩa nào đó, đều "ít nhất là khó bằng" tất cả các bài toán khác trong NP. Chính xác hơn, một thuật toán để giải một bài toán NP-hoàn hảo cụ thể có thể được điều chỉnh để giải bất kỳ bài toán nào khác trong NP, với một chi phí bổ sung nhỏ (small overhead). Đặc biệt, nếu $\mathbf{P} \neq \mathbf{NP}$, thì suy ra không có bài toán NP-hoàn hảo nào có thể được giải quyết hiệu quả trên một máy tính cổ điển.
 
 ---
 
@@ -140,7 +146,9 @@ P và NP chỉ là hai trong số rất nhiều lớp độ phức tạp đã đ
 
 ---
 
-Còn các lớp độ phức tạp lượng tử thì sao? Chúng ta có thể định nghĩa BQP là lớp của tất cả các bài toán tính toán có thể được giải hiệu quả trên một máy tính lượng tử, nơi một xác suất lỗi bị chặn được phép. (Nói một cách nghiêm ngặt, điều này làm cho BQP tương tự hơn với lớp độ phức tạp cổ điển BPP hơn là P, tuy nhiên chúng ta sẽ bỏ qua sự tinh tế này cho mục đích của thảo luận hiện tại, và coi nó như tương đương lượng tử của P). Vị trí chính xác của BQP so với P, NP và PSPACE hiện vẫn chưa được biết. Những gì đã biết là máy tính lượng tử có thể giải hiệu quả tất cả các bài toán trong P, nhưng không có bài toán nào nằm ngoài PSPACE mà chúng có thể giải hiệu quả. Do đó, BQP nằm đâu đó giữa P và PSPACE, như được minh họa trong Hình 1.21. Một hệ quả quan trọng là nếu chứng minh được rằng máy tính lượng tử mạnh hơn nghiêm ngặt so với máy tính cổ điển, thì suy ra P không bằng PSPACE. Việc chứng minh kết quả sau đã được nhiều nhà khoa học máy tính cố gắng mà không thành công, gợi ý rằng việc chứng minh máy tính lượng tử mạnh hơn máy tính cổ điển có thể là một điều không hề đơn giản, mặc dù có nhiều bằng chứng ủng hộ mệnh đề này.
+**Còn các lớp độ phức tạp lượng tử thì sao?**
+
+Chúng ta có thể định nghĩa BQP là lớp của tất cả các bài toán tính toán có thể được giải hiệu quả trên một máy tính lượng tử, nơi một xác suất lỗi bị chặn được phép. (Nói một cách nghiêm ngặt, điều này làm cho BQP tương tự hơn với lớp độ phức tạp cổ điển BPP hơn là P, tuy nhiên chúng ta sẽ bỏ qua sự tinh tế này cho mục đích của thảo luận hiện tại, và coi nó như tương đương lượng tử của P). Vị trí chính xác của BQP so với P, NP và PSPACE hiện vẫn chưa được biết. Những gì đã biết là máy tính lượng tử có thể giải hiệu quả tất cả các bài toán trong P, nhưng không có bài toán nào nằm ngoài PSPACE mà chúng có thể giải hiệu quả. Do đó, BQP nằm đâu đó giữa P và PSPACE, như được minh họa trong Hình 1.21. Một hệ quả quan trọng là nếu chứng minh được rằng máy tính lượng tử mạnh hơn nghiêm ngặt so với máy tính cổ điển, thì suy ra P không bằng PSPACE. Việc chứng minh kết quả sau đã được nhiều nhà khoa học máy tính cố gắng mà không thành công, gợi ý rằng việc chứng minh máy tính lượng tử mạnh hơn máy tính cổ điển có thể là một điều không hề đơn giản, mặc dù có nhiều bằng chứng ủng hộ mệnh đề này.
 
 ![](../../img/1.21.png)
 

@@ -228,6 +228,12 @@ window.Quarto = {
  <span class="menu-text">Quantum algorithms summarized</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -534,11 +540,11 @@ H^{\otimes n}\vert{}x\rangle = \frac{\sum_z (-1)^{x \cdot z}\vert{}z\rangle}{\sq
 \text H \vert x \rangle =
 \frac {(-1)^{0x} \vert 0 \rangle + (-1)^{1x} \vert 1 \rangle}
 {\sqrt 2} =
-\sum_{z \in \{0, 1\}} = \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2}
+\sum_{z \in \{0, 1\}} \frac {(-1)^{xz} \vert z \rangle} {\sqrt 2}
 </span></p>
 <p>Thử nhân hai x1 và x2 lại với nhau:</p>
 <p><span class="math display">
-\text{H} \vert x_1, x_2 \rangle =
+\text{H}^{\otimes 2} \vert x_1, x_2 \rangle =
 \frac 1 2 \left(
   (-1)^{0x_1 + 0x_2} \vert 00 \rangle
 + (-1)^{0x_1 + 1x_2} \vert 01 \rangle \\
@@ -552,7 +558,7 @@ H^{\otimes n}\vert{}x\rangle = \frac{\sum_z (-1)^{x \cdot z}\vert{}z\rangle}{\sq
 \frac 1 2
 \sum_{z \in \{0, 1\}^2} (-1)^{z_1x_1 + z_2x_2} \vert z_1, z_2 \rangle
 </span></p>
-<p>Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa <span class="math inline">z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n</span> và <span class="math inline">z = (z_1, z_2, ..., z_n)</span>. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:</p>
+<p>Và bây giờ chúng ta tổng quát hơn với n qubit, ta định nghĩa thêm <span class="math inline">z \cdot x = z_1x_1 + z_2x_2 + ... + z_nx_n</span> và <span class="math inline">z = (z_1, z_2, ..., z_n)</span>. Từ đó ta có cổng thức cổng quát cho Hadamard transform cho n qubit:</p>
 <p><span class="math display">
 \text{H}^{\otimes n} \vert x \rangle =
 \frac 1 {\sqrt {2^n}} \sum_{z\in \{0, 1\}^n} (-1)^{x\cdot z} \vert z \rangle
