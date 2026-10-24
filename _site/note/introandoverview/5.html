@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -193,13 +236,36 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#the-stern-gerlach-experiment" id="toc-the-stern-gerlach-experiment" class="nav-link active" data-scroll-target="#the-stern-gerlach-experiment">1. The Stern-Gerlach experiment</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -229,8 +295,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Tính toán lượng tử và thông tin lượng tử là một phát kiến lý thuyết tuyệt vời, nhưng các khái niệm trung tâm của nó, chẳng hạn như <strong><em>superposition</em></strong> sự chồng chập và <strong><em>entanglement</em></strong> sự vướng víu, lại đi ngược lại với trực giác mà chúng ta thu nhận được từ thế giới hàng ngày xung quanh mình.</p>
+<p>Chúng ta có bằng chứng nào cho thấy những ý tưởng này thực sự mô tả cách Tự nhiên vận hành? Việc hiện thực hóa các máy tính lượng tử quy mô lớn liệu có khả thi về mặt thực nghiệm hay không? Hay có thể có một nguyên lý vật lý nào đó ngăn cản một cách căn bản việc mở rộng quy mô của chúng?**</p>
+<p>Trong hai phần tiếp theo, chúng ta sẽ giải quyết những câu hỏi này. Chúng ta bắt đầu bằng việc điểm lại thí nghiệm “Stern–Gerlach” nổi tiếng, vốn cung cấp bằng chứng cho sự tồn tại của các qubit trong Tự nhiên. Sau đó, chúng ta sẽ mở rộng phạm vi, giải quyết bài toán rộng lớn hơn về cách xây dựng các hệ thống xử lý thông tin lượng tử thực tế.</p>
+<section id="the-stern-gerlach-experiment" class="level1">
+<h1>1. The Stern-Gerlach experiment</h1>
+<p>Qubit là nguyên tố nền tảng cho tính toán lượng tử và thông tin lượng tử. Làm thế nào chúng ta biết rằng các hệ thống có tính chất của qubit thực sự tồn tại trong Tự nhiên? Vào thời điểm viết sách, đã có một lượng lớn bằng chứng cho thấy điều này là đúng, nhưng trong những ngày đầu của cơ học lượng tử, cấu trúc qubit hoàn toàn không hề hiển nhiên, và các nhà khoa học đã phải vật lộn với những hiện tượng mà giờ đây chúng ta có thể hiểu dưới dạng các qubit, nghĩa là dưới dạng các hệ lượng tử hai mức năng lượng.</p>
+<hr>
+<p><img src="../../img/1.22.png" class="img-fluid"></p>
+<p>Một thí nghiệm ban đầu mang tính quyết định (và rất nổi tiếng) chỉ ra cấu trúc qubit được hình thành bởi Stern vào năm 1921 và thực hiện cùng với Gerlach vào năm 1922 tại Frankfurt. Trong thí nghiệm Stern–Gerlach ban đầu, các nguyên tử nóng được “bắn” từ một lò nung đi qua một từ trường khiến các nguyên tử bị lệch hướng, và sau đó vị trí của mỗi nguyên tử được ghi lại, như được minh họa ở Hình 1.22. Thí nghiệm ban đầu được thực hiện với các nguyên tử bạc, có cấu trúc phức tạp làm che khuất các hiệu ứng mà chúng ta đang thảo luận. Những gì chúng tôi mô tả dưới đây thực chất tuân theo một thí nghiệm năm 1927 được thực hiện bằng cách sử dụng các nguyên tử hydro. Hiệu ứng cơ bản tương tự được quan sát thấy, nhưng với các nguyên tử hydro thì cuộc thảo luận dễ theo dõi hơn. Tuy nhiên, hãy ghi nhớ rằng đặc ân này không có sẵn cho những người ở đầu những năm 1920, và họ phải cực kỳ khéo léo để nghĩ ra các giải thích cho các hiệu ứng phức tạp hơn mà họ quan sát được.</p>
+<p>Các nguyên tử hydro chứa một proton và một electron chuyển động quỹ đạo. Bạn có thể nghĩ electron này giống như một “dòng điện” nhỏ chạy quanh proton. Dòng điện này khiến nguyên tử có một từ trường; mỗi nguyên tử có cái mà các nhà vật lý gọi là <strong><em>magnetic dipole moment</em></strong> “mô-men lưỡng cực từ”. Kết quả là mỗi nguyên tử hành xử giống như một thanh nam châm nhỏ với một trục tương ứng với trục mà electron đang quay xung quanh. Việc ném các thanh nam châm nhỏ xuyên qua một từ trường sẽ khiến các nam châm bị lệch bởi từ trường, và chúng ta kỳ vọng sẽ thấy sự lệch tương tự của các nguyên tử trong thí nghiệm Stern–Gerlach.</p>
+<p>Nguyên tử bị lệch như thế nào phụ thuộc vào cả mô-men lưỡng cực từ của nguyên tử — trục mà electron đang quay xung quanh — và từ trường do thiết bị Stern–Gerlach tạo ra. Chúng ta sẽ không đi sâu vào các chi tiết, nhưng chỉ cần nói rằng bằng cách chế tạo thiết bị Stern–Gerlach một cách phù hợp, chúng ta có thể làm cho nguyên tử bị lệch một lượng phụ thuộc vào thành phần <span class="math inline">\hat{z}</span> của mô-men lưỡng cực từ của nguyên tử, trong đó <span class="math inline">\hat{z}</span> là một trục ngoài cố định nào đó.</p>
+<hr>
+<p>Hai bất ngờ lớn xuất hiện khi thí nghiệm này được thực hiện. Đầu tiên, vì các nguyên tử nóng thoát ra từ lò nung lẽ ra phải có các lưỡng cực được định hướng ngẫu nhiên theo mọi hướng, nên sẽ dẫn đến việc có một sự phân bố liên tục các nguyên tử được nhìn thấy ở mọi góc thoát ra từ thiết bị Stern–Gerlach. Thay vào đó, những gì được nhìn thấy là các nguyên tử xuất hiện từ một tập hợp các góc rời rạc. Các nhà vật lý đã có thể giải thích điều này bằng cách giả định rằng mô-men lưỡng cực từ của các nguyên tử đã được lượng tử hóa, nghĩa là chúng xuất hiện theo các bội số rời rạc của một lượng cơ bản nào đó.</p>
+<p>Quan sát về hiện tượng lượng tử hóa trong thí nghiệm Stern–Gerlach gây bất ngờ cho các nhà vật lý vào những năm 1920, nhưng không hoàn toàn kinh ngạc vì bằng chứng về các hiệu ứng lượng tử hóa ở các hệ thống khác đang trở nên phổ biến vào thời điểm đó. Điều thực sự đáng ngạc nhiên là số lượng các đỉnh được nhìn thấy trong thí nghiệm. Các nguyên tử hydro được sử dụng vốn dĩ phải có mô-men lưỡng cực từ bằng không. Về mặt cổ điển, điều này tự nó đã đáng ngạc nhiên, vì nó ứng với việc không có chuyển động quỹ đạo nào của electron, nhưng dựa trên những gì được biết về cơ học lượng tử vào thời điểm đó thì đây là một quan niệm có thể chấp nhận được. Vì do đó các nguyên tử hydro sẽ có mô-men từ bằng không, người ta kỳ vọng rằng chỉ có một chùm nguyên tử được nhìn thấy, và chùm này sẽ không bị lệch bởi từ trường. Thay vào đó, hai chùm đã được nhìn thấy: một chùm bị lệch lên trên bởi từ trường, và chùm kia bị lệch xuống dưới!</p>
+<p>Sự chia đôi khó hiểu này đã được giải thích sau rất nhiều nỗ lực bằng cách đặt giả thiết rằng electron trong nguyên tử hydro gắn liền với một đại lượng gọi là spin. Spin này hoàn toàn không liên quan đến chuyển động quay thông thường của electron quanh proton; nó là một đại lượng hoàn toàn mới được gắn liền với một electron. Nhà vật lý vĩ đại Heisenberg đã gọi ý tưởng này là “dũng cảm” vào thời điểm nó được đề xuất, và đây quả thực là một ý tưởng dũng cảm, vì nó giới thiệu một đại lượng vật lý thực sự mới vào Tự nhiên. Spin của electron được giả thiết là tạo ra một đóng góp thêm vào mô-men lưỡng cực từ của nguyên tử hydro, bổ sung cho đóng góp do chuyển động quay quỹ đạo của electron.</p>
+<hr>
+<p><strong>Mô tả thích hợp về spin của electron là gì?</strong></p>
+<p>Theo phỏng đoán ban đầu, chúng ta có thể giả thiết rằng spin được xác định bởi một bit đơn lẻ, ra lệnh cho nguyên tử hydro đi lên hoặc đi xuống. Các kết quả thực nghiệm bổ sung cung cấp thêm thông tin hữu ích để xác định xem phỏng đoán này có cần được tinh chỉnh hay thay thế hay không.</p>
+<p>Hãy biểu diễn thiết bị Stern–Gerlach ban đầu như được thể hiện ở Hình 1.22. Các đầu ra của nó là hai chùm nguyên tử, mà chúng ta sẽ gọi là <span class="math inline">\vert{}+Z\rangle</span> và <span class="math inline">\vert{}-Z\rangle</span>. (Chúng ta đang sử dụng ký hiệu gợi mở trông có vẻ mang tính cơ học lượng tử, nhưng tất nhiên bạn hoàn toàn tự do sử dụng bất kỳ ký hiệu nào bạn thích.) Bây giờ, giả sử chúng ta mắc nối tiếp hai thiết bị Stern–Gerlach lại với nhau, như được thể hiện ở Hình 1.23. Chúng ta sắp xếp sao cho thiết bị thứ hai bị nghiêng sang một bên, để từ trường làm lệch các nguyên tử theo trục <span class="math inline">\hat{x}</span>. Trong thí nghiệm tưởng tượng của chúng ta, chúng ta sẽ chặn đầu ra <span class="math inline">\vert{}-Z\rangle</span> từ thiết bị Stern–Gerlach đầu tiên, trong khi đầu ra <span class="math inline">\vert{}+Z\rangle</span> được gửi qua thiết bị thứ hai được định hướng dọc theo trục <span class="math inline">\hat{x}</span>. Một bộ dò được đặt ở đầu ra cuối cùng để đo sự phân bố của các nguyên tử dọc theo trục <span class="math inline">\hat{x}</span>.</p>
+<p><img src="../../img/1.23.png" class="img-fluid"></p>
+<p>Một lưỡng cực từ cổ điển hướng theo phương <span class="math inline">+\hat{z}</span> không có mô-men từ tổng hợp theo phương <span class="math inline">\hat{x}</span>, vì vậy chúng ta có thể kỳ vọng rằng đầu ra cuối cùng sẽ có một đỉnh trung tâm. Tuy nhiên, thực nghiệm quan sát thấy có tới hai đỉnh có cường độ bằng nhau! Vì vậy, có lẽ các nguyên tử này rất đặc biệt và có các mô-men từ xác định dọc theo từng trục một cách độc lập. Nghĩa là, có lẽ mỗi nguyên tử đi qua thiết bị thứ hai có thể được mô tả là đang ở một trạng thái mà chúng ta có thể viết là <span class="math inline">\vert{}+Z\rangle\vert{}+X\rangle</span> hoặc <span class="math inline">\vert{}+Z\rangle\vert{}-X\rangle</span>, nhằm biểu thị hai giá trị spin có thể được quan sát thấy.</p>
+<hr>
+<p><img src="../../img/1.24.png" class="img-fluid"></p>
+<p>Một thí nghiệm khác, được thể hiện ở Hình 1.24, có thể kiểm tra giả thuyết này bằng cách đưa một chùm tia từ đầu ra trước đó đi qua thiết bị Stern–Gerlach thứ hai định hướng theo phương <span class="math inline">\hat{z}</span>. Nếu các nguyên tử giữ nguyên định hướng <span class="math inline">\vert{}+Z\rangle</span> của chúng, thì đầu ra được kỳ vọng chỉ có một đỉnh tại đầu ra <span class="math inline">\vert{}+Z\rangle</span>. Tuy nhiên, một lần nữa, hai chùm tia lại được quan sát thấy ở đầu ra cuối cùng, với cường độ bằng nhau. Do đó, kết luận rút ra là trái ngược với kỳ vọng cổ điển: một trạng thái <span class="math inline">\vert{}+Z\rangle</span> thực chất bao gồm các phần bằng nhau của các trạng thái <span class="math inline">\vert{}+X\rangle</span> và <span class="math inline">\vert{}-X\rangle</span>, và một trạng thái <span class="math inline">\vert{}+X\rangle</span> bao gồm các phần bằng nhau của các trạng thái <span class="math inline">\vert{}+Z\rangle</span> và <span class="math inline">\vert{}-Z\rangle</span>. Các kết luận tương tự cũng có thể đạt được nếu thiết bị Stern–Gerlach được canh chỉnh dọc theo một trục khác, chẳng hạn như trục <span class="math inline">\hat{y}</span>.</p>
+<hr>
+<p>Mô hình qubit cung cấp một giải thích đơn giản cho hành vi được quan sát bằng thực nghiệm này. Hãy gọi <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> là các trạng thái của một qubit, và thiết lập các phép gán sau:</p>
+<p><span class="math display">
+\vert{}+Z\rangle \leftarrow \vert{}0\rangle \tag {1.56}
+</span> <span class="math display">
+\vert{}-Z\rangle \leftarrow \vert{}1\rangle \tag {1.57}
+</span></p>
+<p><span class="math display">
+\vert{}+X\rangle \leftarrow \frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}} \tag {1.58}
+</span></p>
+<p><span class="math display">
+\vert{}-X\rangle \leftarrow \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \tag {1.59}
+</span></p>
+<p>Khi đó, kết quả của thí nghiệm Stern–Gerlach mắc nối tiếp có thể được giải thích bằng cách giả định rằng thiết bị Stern–Gerlach theo phương <span class="math inline">\hat{z}</span> đo đạc spin (tức là qubit) theo cơ sở tính toán <span class="math inline">\vert{}0\rangle, \vert{}1\rangle</span>, và thiết bị Stern–Gerlach theo phương <span class="math inline">\hat{x}</span> đo đạc spin đối với cơ sở <span class="math inline">\frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}}, \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}}</span>.</p>
+<p>Ví dụ, trong thí nghiệm mắc nối tiếp <span class="math inline">\hat{z}-\hat{x}-\hat{z}</span>, nếu chúng ta giả định rằng các spin ở trạng thái <span class="math inline">\vert{}+Z\rangle = \vert{}0\rangle = \frac{\vert{}+X\rangle + \vert{}-X\rangle}{\sqrt{2}}</span> sau khi rời khỏi thiết bị Stern–Gerlach đầu tiên, thì xác suất để thu được <span class="math inline">\vert{}+X\rangle</span> ở thiết bị thứ hai là <span class="math inline">1/2</span>, và xác suất để thu được <span class="math inline">\vert{}-X\rangle</span> cũng là <span class="math inline">1/2</span>. Tương tự, xác suất để thu được <span class="math inline">\vert{}+Z\rangle</span> ở thiết bị thứ ba là <span class="math inline">1/2</span>. Do đó, mô hình qubit dự đoán hoàn toàn chính xác các kết quả từ loại thí nghiệm mắc nối tiếp này</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

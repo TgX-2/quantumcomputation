@@ -28,7 +28,9 @@ website:
           - note/introandoverview/4.5.qmd
           - note/introandoverview/5.qmd
 
-          
+      - section : "Ideas"
+        contents:
+          - note/questions.qmd
 
 format:
   html:

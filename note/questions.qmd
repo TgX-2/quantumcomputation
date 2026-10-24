@@ -1,0 +1,50 @@
+---
+title: "Câu hỏi trong anh"
+chapter: "Introduction and Overview"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Thao túng kết quả xác suất
+
+Nếu một qubit đang ở trạng thái chồng chất, ví dụ như: 
+
+$$
+\vert l \rangle = \frac 1 {\sqrt 2} \vert 0 \rangle + \frac 1 {\sqrt 2} \vert 0 \rangle
+$$
+
+Thì nó hoạt động tốt đến mức nào? Ý tôi là nếu không đo đạc, thì làm sao để biết nó ở trạng thái 50/50. 
+
+Nếu câu trả lời là không biết thì làm cách nào mà người ta biết được nó ở trạng thái 50/50?
+
+Nếu câu trả lời là có, chắc chắn, có cách để biết, cứ 100 lần trong 100 thế giới song song, nếu chúng ta đo thì thu được kết quả sau khi thống kê là 50 $\vert 0 \rangle$ và 50 $\vert 1 \rangle$ sao?
+
+Nó rõ ràng là khá vô lý! Lỡ đâu trong 60 thế giới đầu tiên, chúng ta đo được 40 trạng thái $\vert 0 \rangle$ và 20 trạng thái $\vert 1 \rangle$, rồi ngừng thì sao? Thì lúc đó chắc chắn $\alpha = \beta = \frac 1 {\sqrt 2}$ sẽ bị sai, và chúng ta đã thao túng nó sang một hệ số phức khác. 
+
+Và điều này dẫn đến điều gì? Dẫn đến kết luận ở #2
+
+# 2. Thao túng khi đo, kết quả ra trạng thái chồng chập
+
+Rõ ràng là điều này khá là vô lý trong thế giới cổ điển. 
+
+Nhưng nếu điều kết luận ở 1. là đúng, có thể thao túng kết quả xác suất, thì tức là $|\alpha|^2 + |\beta|^2 = 1$ không còn đúng nữa. Vậy thì quả cầu Blosch nó sẽ bị méo?
+
+Phần cực bắc và cực nam sẽ bị nhỏ lại? Nếu điều này đúng, thì có thể ép nó đến mức giới hạn, tức là giờ chỉ còn một đĩa phẳng nằm trong không gian 3d nữa thôi, và tất cả các phép đo đều dẫn đến trạng thái chồng chập?
+
+# 3. Tận dụng hết tất cả
+
+Liệu ngoài vướng víu với chồng chập lượng tử ra, còn tính chất nào của cơ học lượng tử có thể áp dụng vô máy tính lượng tử được hay không?
+
+Cái này phải học một khóa cấp tốc về quantum mechanics mới có thể trả lời được định hướng chứ giờ chỉ đưa ra một câu hỏi vu vơ vậy thôi.
+
+Nhưng thật ra thì đã có một đống ông giáo sư nghiên cứu bao nhiêu năm rồi, mà vẫn chỉ có những tính chất này là khả thi. Tại sao những tính chất còn lại (hay chưa biết) không khả thi, hãy chứng minh.
+
+# 4. Universal Stern-Gerlach-TgX Computer
+
+Thử tưởng tượng một máy tính không dùng bóng bán dẫn nữa, mà dùng các electron.
+
