@@ -1,0 +1,122 @@
+---
+title: "Quantum information"
+chapter: "Introduction and Overview"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+
+Thuật ngữ ***"quantum information"*** "thông tin lượng tử" được sử dụng theo hai cách khác nhau trong lĩnh vực tính toán lượng tử và thông tin lượng tử. 
+
+Cách sử dụng thứ nhất là một thuật ngữ bao trùm rộng rãi cho mọi dạng hoạt động có thể được hiểu là liên quan đến việc xử lý thông tin bằng cơ học lượng tử. Cách sử dụng này bao gồm các chủ đề như tính toán lượng tử, dịch chuyển tức thời lượng tử, định lý không sao chép, và hầu như tất cả các chủ đề khác trong cuốn sách này.   
+
+Cách sử dụng thứ hai của "thông tin lượng tử" mang tính chuyên ngành hơn nhiều: nó đề cập đến việc nghiên cứu các tác vụ xử lý thông tin lượng tử cơ bản. Nó thường không bao gồm, ví dụ, thiết kế thuật toán lượng tử, vì chi tiết của các thuật toán lượng tử cụ thể nằm ngoài phạm vi của từ "cơ bản". Để tránh nhầm lẫn, chúng ta sẽ sử dụng thuật ngữ ***"quantum information theory"*** "lý thuyết thông tin lượng tử" để chỉ lĩnh vực chuyên ngành hơn này, song song với thuật ngữ được sử dụng rộng rãi "lý thuyết thông tin (cổ điển)" để mô tả lĩnh vực cổ điển tương ứng. Tất nhiên, thuật ngữ "lý thuyết thông tin lượng tử" có điểm hạn chế riêng của nó — người ta có thể coi nó hàm ý rằng các cân nhắc lý thuyết là tất cả những gì quan trọng! Tất nhiên, thực tế không phải vậy, và việc chứng minh bằng thực nghiệm các quá trình cơ bản được nghiên cứu bởi lý thuyết thông tin lượng tử mang lại sự quan tâm rất lớn.
+
+---
+
+Mục đích của phần này là giới thiệu các ý tưởng cơ bản của lý thuyết thông tin lượng tử. Ngay cả khi giới hạn ở các tác vụ xử lý thông tin lượng tử cơ bản, lý thuyết thông tin lượng tử có thể trông giống như một khu vườn thú hỗn độn đối với người mới bắt đầu, với nhiều chủ đề dường như không liên quan lại nằm dưới nhãn "lý thuyết thông tin lượng tử". Một phần là vì môn học này vẫn đang trong quá trình phát triển, và vẫn chưa rõ cách tất cả các mảnh ghép khớp với nhau như thế nào. Tuy nhiên, chúng ta có thể xác định một vài mục tiêu cơ bản gắn kết các công trình nghiên cứu về lý thuyết thông tin lượng tử:   
+
+(i) **Xác định các lớp tài nguyên tĩnh cơ bản trong cơ học lượng tử.** Một ví dụ điển hình là qubit. Một ví dụ khác là bit; vật lý cổ điển xuất hiện như một trường hợp đặc biệt của vật lý lượng tử, vì vậy không có gì ngạc nhiên khi các tài nguyên tĩnh cơ bản xuất hiện trong lý thuyết thông tin cổ điển cũng có ý nghĩa rất lớn trong lý thuyết thông tin lượng tử. Một ví dụ nữa về lớp tài nguyên tĩnh cơ bản là trạng thái Bell được chia sẻ giữa hai bên ở xa nhau.   
+
+(ii) **Xác định các lớp quá trình động lực học cơ bản trong cơ học lượng tử.** Một ví dụ đơn giản là bộ nhớ, tức khả năng lưu trữ trạng thái lượng tử trong một khoảng thời gian. Các quá trình phức tạp hơn bao gồm việc truyền thông tin lượng tử giữa hai bên (Alice và Bob), sao chép (hoặc cố gắng sao chép) một trạng thái lượng tử, và quá trình bảo vệ việc xử lý thông tin lượng tử trước các tác động của nhiễu.   
+
+(iii) **Định lượng các sự đánh đổi tài nguyên phát sinh khi thực hiện các quá trình động lực học cơ bản.** Ví dụ, các tài nguyên tối thiểu cần thiết để truyền thông tin lượng tử một cách đáng tin cậy giữa hai bên bằng cách sử dụng một kênh truyền thông có nhiễu là gì?   
+
+Các mục tiêu tương tự cũng định nghĩa nên lý thuyết thông tin cổ điển. Tuy nhiên, lý thuyết thông tin lượng tử có phạm vi rộng hơn lý thuyết thông tin cổ điển, bởi vì nó bao gồm toàn bộ các yếu tố tĩnh và động của lý thuyết thông tin cổ điển, đồng thời mở rộng thêm các yếu tố tĩnh và động bổ sung đặc trưng của thế giới lượng tử.
+
+Phần còn lại của mục này mô tả một số ví dụ về các câu hỏi được nghiên cứu bởi lý thuyết thông tin lượng tử, trong từng trường hợp nhấn mạnh các yếu tố tĩnh và động cơ bản đang được xem xét, và sự đánh đổi tài nguyên đang được cân nhắc. Chúng ta bắt đầu với một ví dụ sẽ có vẻ quen thuộc đối với các nhà lý thuyết thông tin cổ điển: bài toán gửi thông tin cổ điển qua một kênh lượng tử. Sau đó, chúng ta bắt đầu rẽ nhánh và khám phá một số quá trình tĩnh và động mới hiện diện trong cơ học lượng tử, chẳng hạn như sửa lỗi lượng tử, bài toán phân biệt các trạng thái lượng tử, và phép biến đổi vướng víu. Chương này kết thúc bằng một số suy ngẫm về cách các công cụ của lý thuyết thông tin lượng tử có thể được áp dụng ở những nơi khác trong tính toán lượng tử và thông tin lượng tử.
+
+:::{.callout}
+
+# Cô đọng lại
+
+Nguyên liệu thô có sẵn $\to$ Thao tác vận hành $\to$ Bài toán cân đối chi phí
+
+**Xác định các lớp "tài nguyên tĩnh" cơ bản (Static Resources):**
+
+  * Các "nguyên liệu thô" hoặc công cụ có sẵn mà bạn đang nắm giữu trước khi bắt đầu thực hiện bất kỳ tính toán hay truyền công nào.
+
+  * Các ví dụ cụ thể:
+
+    - Classical bit: Trạng thái 0 và 1 quen thuộc. Vì vật lý cổ điển thực chất là một trường hợp đặc biệt của vật lý lượng tử, nên các tài nguyên của thông tin cổ điển cũng tự động nằm trong thế giới lượng tử.
+
+    - Quantum bit: Đơn vị thông tin cơ bản mang tính chồng chập.
+
+    - Trạng thái Bell: Cặp hạt vướng víu lượng tử được chia sẻ giữa hai người ở rất xa nhau, đóng vai trò như một tài nguyên đặc biệt mạnh mẽ (cái này là ví dụ cho communication).
+
+**Xác định các lớp "quá trình động lực học" cơ bản (Dynamical Processes):**
+
+  * Đây là những "thao tác, hành động hoặc dịch vụ" mà bạn vận hành lên các tài nguyen tĩnh nói trên theo thời gian.
+
+  * Các ví dụ cụ thể:
+
+      - Bộ nhớ: Khả năng cất giữ một trạng thái lượng tử trong một thời gian mà không để nó bị mất đi.
+
+      - Truyền thông tin: Đẩy trạng thái lượng tử đi qua lại giữa các nút trong mạng lưới.
+
+      - Sao chép và bảo vệ: Thử thực hiện việc nhân bản trạng thái (hoặc đối mặt với định lý không sao chép), đồng thời tìm cách bảo vệ thông tin lượng tử khỏi sự phá hoại của nhiễu môi trường.
+
+**Định lượng sự đánh đổi tài nguyên (Resources Tradeoffs):**
+
+  * Đây là bài toán kinh tế và tối ưu hóa kỹ thuật: "Muốn đạt được mục tiêu này thì cái giá phải trả tối thiểu là bao nhiêu?".
+
+  * Các ví dụ cụ thể:
+
+    - Để truyền thành công một thông tin lượng tử qua một kênh truyền thông đang bị nhiễu nặng, bạn cần tối thiểu bao nhiêu cặp vướng víu phụ trợ, hoặc cần bao nhiêu lớp mã hóa để sửa lỗi?
+
+:::
+
+---
+
+# 1. Quantum information theory: example problems
+
+## 1.1. Classical information through quantum channels
+
+Các kết quả nền tảng của lý thuyết thông tin cổ điển là ***noiseless channel coding theorem*** định lý mã hóa kênh không nhiễu của Shannon và ***noisy channel coding theorem*** định lý mã hóa kênh có nhiễu của Shannon. Định lý mã hóa kênh không nhiễu định lượng có bao nhiêu bit được yêu cầu để lưu trữ thông tin được phát ra bởi một nguồn thông tin, trong khi định lý mã hóa kênh có nhiễu định lượng có bao nhiêu thông tin có thể được truyền tải một cách đáng tin cậy qua một kênh truyền thông có nhiễu.   
+
+---
+
+**Chúng ta hiểu thế nào là information source - một nguồn thông tin?**
+
+Xác định khái niệm này là một bài toán nền tảng của lý thuyết thông tin cổ điển và lượng tử, một bài toán mà chúng ta sẽ xem xét lại vài lần. Hiện tại, hãy bắt đầu với một định nghĩa tạm thời: một nguồn thông tin cổ điển được mô tả bởi một tập hợp các xác suất $p_j, j = 1, 2, \dots, d$. Mỗi lần sử dụng nguồn sẽ dẫn đến việc "ký tự" $j$ được phát ra, được chọn ngẫu nhiên với xác suất $p_j$, độc lập cho mỗi lần sử dụng nguồn. Ví dụ, nếu nguồn là văn bản tiếng Anh, thì các số $j$ có thể tương ứng với các chữ cái trong bảng chữ cái và các dấu câu, với các xác suất $p_j$ cho biết tần suất tương đối mà các chữ cái khác nhau xuất hiện trong văn bản tiếng Anh thông thường. Mặc dù không hoàn toàn đúng là các chữ cái trong tiếng Anh xuất hiện một cách độc lập, nhưng đối với các mục đích của chúng ta, đó sẽ là một sự xấp xỉ đủ tốt.   
+
+---
+
+Văn bản tiếng Anh thông thường bao gồm một lượng đáng kể tính dư thừa, và có thể khai thác tính dư thừa đó để nén văn bản. 
+
+Ví dụ, chữ 'e' xuất hiện thường xuyên hơn rất nhiều trong văn bản tiếng Anh thông thường so với chữ 'z'. Do đó, một sơ đồ tốt để nén văn bản tiếng Anh sẽ biểu diễn chữ 'e' bằng ít bit thông tin hơn so với khi nó biểu diễn chữ 'z'. Định lý mã hóa kênh không nhiễu của Shannon định lượng chính xác mức độ hoạt động hiệu quả của một sơ đồ nén như vậy. Cụ thể hơn, định lý mã hóa kênh không nhiễu cho chúng ta biết rằng một nguồn cổ điển được mô tả bởi các xác suất $p_j$ có thể được nén sao cho trung bình mỗi lần sử dụng nguồn có thể được biểu diễn bằng $H(p_j)$ bit thông tin, trong đó $H(p_j) \equiv -\sum_j p_j \log(p_j)$ là một hàm của phân phối xác suất nguồn được gọi là entropy Shannon (Shannon entropy). Hơn nữa, định lý mã hóa kênh không nhiễu cho biết rằng việc cố gắng biểu diễn nguồn bằng ít bit hơn mức này sẽ dẫn đến xác suất lỗi cao khi thông tin được giải nén. (Định lý mã hóa kênh không nhiễu của Shannon được thảo luận chi tiết hơn nhiều trong Chương 12).   
+
+---
+
+Định lý mã hóa không nhiễu của Shannon cung cấp một ví dụ hay, nơi mà các mục tiêu của lý thuyết thông tin được liệt kê trước đó đều được thỏa mãn. Hai tài nguyên tĩnh được xác định (mục tiêu số 1): bit và nguồn thông tin. Một quá trình động hai giai đoạn được xác định (mục tiêu số 2): nén một nguồn thông tin, và sau đó giải nén để khôi phục nguồn thông tin. Cuối cùng, một tiêu chuẩn định lượng để xác định các tài nguyên tiêu thụ (mục tiêu số 3) bởi một sơ đồ nén dữ liệu tối ưu đã được tìm thấy.
+
+---
+
+Kết quả lớn thứ hai của Shannon, ***noisy channel coding theorem*** định lý mã hóa kênh có nhiễu, định lượng lượng thông tin có thể được truyền tải một cách đáng tin cậy qua một kênh có nhiễu. 
+
+Cụ thể, giả sử chúng ta muốn chuyển thông tin do một nguồn thông tin nào đó tạo ra đến một vị trí khác thông qua một kênh có nhiễu. Vị trí đó có thể ở một điểm khác trong không gian, hoặc ở một thời điểm khác – trường hợp sau chính là bài toán lưu trữ thông tin trong sự hiện diện của nhiễu. Ý tưởng trong cả hai trường hợp là mã hóa thông tin được tạo ra bằng cách sử dụng các mã sửa lỗi, sao cho bất kỳ nhiễu nào do kênh đưa vào đều có thể được sửa chữa ở đầu bên kia của kênh. Cách mà các mã sửa lỗi đạt được điều này là bằng cách đưa vào đủ tính dư thừa vào thông tin được gửi qua kênh sao cho ngay cả sau khi một phần thông tin bị hỏng, vẫn có thể khôi phục được thông điệp ban đầu. 
+
+Ví dụ, giả sử kênh có nhiễu dùng để truyền các bit đơn lẻ, và nhiễu trong kênh lớn đến mức để đạt được truyền dẫn đáng tin cậy, mỗi bit do nguồn tạo ra phải được mã hóa bằng cách sử dụng hai bit trước khi được gửi qua kênh. Chúng ta nói rằng một kênh như vậy có dung lượng là nửa bit, vì mỗi lần sử dụng kênh có thể được dùng để truyền tải một cách đáng tin cậy khoảng nửa bit thông tin. Định lý mã hóa kênh có nhiễu của Shannon cung cấp một quy trình tổng quát để tính toán dung lượng của một kênh có nhiễu tùy ý.   
+
+---
+
+Định lý mã hóa kênh có nhiễu của Shannon cũng đạt được ba mục tiêu của lý thuyết thông tin mà chúng ta đã nêu trước đó. Hai loại tài nguyên tĩnh liên quan (mục tiêu số 1): nguồn thông tin, và các bit được gửi qua kênh. Ba quá trình động lực học liên quan (mục tiêu số 2). Quá trình chính là nhiễu trong kênh. Để chống lại nhiễu này, chúng ta thực hiện các quá trình kép gồm mã hóa và giải mã trạng thái trong một mã sửa lỗi. Đối với một mô hình nhiễu cố định, định lý của Shannon cho chúng ta biết bao nhiêu tính dư thừa phải được đưa vào bởi một sơ đồ sửa lỗi tối ưu nếu muốn đạt được việc truyền thông tin đáng tin cậy (mục tiêu số 3).
+
+
+
+## 1.2. Quantum information through quantum channels
+
+
+## 1.3. Quantum distinguishability
+
+
+## 1.4. Creation and transformation of entanglement
+
+
+# 2. Quantum information in a wider context
+

@@ -27,6 +27,7 @@ website:
           - note/introandoverview/4.qmd
           - note/introandoverview/4.5.qmd
           - note/introandoverview/5.qmd
+          - note/introandoverview/6.qmd
 
       - section : "Ideas"
         contents:

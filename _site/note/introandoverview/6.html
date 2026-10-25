@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>Quantum information – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introandoverview/1.html">Introduction and overview</a></li><li class="breadcrumb-item"><a href="../../note/introandoverview/6.html">Quantum information</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#quantum-information-theory-example-problems" id="toc-quantum-information-theory-example-problems" class="nav-link active" data-scroll-target="#quantum-information-theory-example-problems">1. Quantum information theory: example problems</a>
+  <ul class="collapse">
+  <li><a href="#classical-information-through-quantum-channels" id="toc-classical-information-through-quantum-channels" class="nav-link" data-scroll-target="#classical-information-through-quantum-channels">1.1. Classical information through quantum channels</a></li>
+  <li><a href="#quantum-information-through-quantum-channels" id="toc-quantum-information-through-quantum-channels" class="nav-link" data-scroll-target="#quantum-information-through-quantum-channels">1.2. Quantum information through quantum channels</a></li>
+  <li><a href="#quantum-distinguishability" id="toc-quantum-distinguishability" class="nav-link" data-scroll-target="#quantum-distinguishability">1.3. Quantum distinguishability</a></li>
+  <li><a href="#creation-and-transformation-of-entanglement" id="toc-creation-and-transformation-of-entanglement" class="nav-link" data-scroll-target="#creation-and-transformation-of-entanglement">1.4. Creation and transformation of entanglement</a></li>
+  </ul></li>
+  <li><a href="#quantum-information-in-a-wider-context" id="toc-quantum-information-in-a-wider-context" class="nav-link" data-scroll-target="#quantum-information-in-a-wider-context">2. Quantum information in a wider context</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introandoverview/1.html">Introduction and overview</a></li><li class="breadcrumb-item"><a href="../../note/introandoverview/6.html">Quantum information</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Quantum information</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Thuật ngữ <strong><em>“quantum information”</em></strong> “thông tin lượng tử” được sử dụng theo hai cách khác nhau trong lĩnh vực tính toán lượng tử và thông tin lượng tử.</p>
+<p>Cách sử dụng thứ nhất là một thuật ngữ bao trùm rộng rãi cho mọi dạng hoạt động có thể được hiểu là liên quan đến việc xử lý thông tin bằng cơ học lượng tử. Cách sử dụng này bao gồm các chủ đề như tính toán lượng tử, dịch chuyển tức thời lượng tử, định lý không sao chép, và hầu như tất cả các chủ đề khác trong cuốn sách này.</p>
+<p>Cách sử dụng thứ hai của “thông tin lượng tử” mang tính chuyên ngành hơn nhiều: nó đề cập đến việc nghiên cứu các tác vụ xử lý thông tin lượng tử cơ bản. Nó thường không bao gồm, ví dụ, thiết kế thuật toán lượng tử, vì chi tiết của các thuật toán lượng tử cụ thể nằm ngoài phạm vi của từ “cơ bản”. Để tránh nhầm lẫn, chúng ta sẽ sử dụng thuật ngữ <strong><em>“quantum information theory”</em></strong> “lý thuyết thông tin lượng tử” để chỉ lĩnh vực chuyên ngành hơn này, song song với thuật ngữ được sử dụng rộng rãi “lý thuyết thông tin (cổ điển)” để mô tả lĩnh vực cổ điển tương ứng. Tất nhiên, thuật ngữ “lý thuyết thông tin lượng tử” có điểm hạn chế riêng của nó — người ta có thể coi nó hàm ý rằng các cân nhắc lý thuyết là tất cả những gì quan trọng! Tất nhiên, thực tế không phải vậy, và việc chứng minh bằng thực nghiệm các quá trình cơ bản được nghiên cứu bởi lý thuyết thông tin lượng tử mang lại sự quan tâm rất lớn.</p>
+<hr>
+<p>Mục đích của phần này là giới thiệu các ý tưởng cơ bản của lý thuyết thông tin lượng tử. Ngay cả khi giới hạn ở các tác vụ xử lý thông tin lượng tử cơ bản, lý thuyết thông tin lượng tử có thể trông giống như một khu vườn thú hỗn độn đối với người mới bắt đầu, với nhiều chủ đề dường như không liên quan lại nằm dưới nhãn “lý thuyết thông tin lượng tử”. Một phần là vì môn học này vẫn đang trong quá trình phát triển, và vẫn chưa rõ cách tất cả các mảnh ghép khớp với nhau như thế nào. Tuy nhiên, chúng ta có thể xác định một vài mục tiêu cơ bản gắn kết các công trình nghiên cứu về lý thuyết thông tin lượng tử:</p>
+<ol type="i">
+<li><p><strong>Xác định các lớp tài nguyên tĩnh cơ bản trong cơ học lượng tử.</strong> Một ví dụ điển hình là qubit. Một ví dụ khác là bit; vật lý cổ điển xuất hiện như một trường hợp đặc biệt của vật lý lượng tử, vì vậy không có gì ngạc nhiên khi các tài nguyên tĩnh cơ bản xuất hiện trong lý thuyết thông tin cổ điển cũng có ý nghĩa rất lớn trong lý thuyết thông tin lượng tử. Một ví dụ nữa về lớp tài nguyên tĩnh cơ bản là trạng thái Bell được chia sẻ giữa hai bên ở xa nhau.</p></li>
+<li><p><strong>Xác định các lớp quá trình động lực học cơ bản trong cơ học lượng tử.</strong> Một ví dụ đơn giản là bộ nhớ, tức khả năng lưu trữ trạng thái lượng tử trong một khoảng thời gian. Các quá trình phức tạp hơn bao gồm việc truyền thông tin lượng tử giữa hai bên (Alice và Bob), sao chép (hoặc cố gắng sao chép) một trạng thái lượng tử, và quá trình bảo vệ việc xử lý thông tin lượng tử trước các tác động của nhiễu.</p></li>
+<li><p><strong>Định lượng các sự đánh đổi tài nguyên phát sinh khi thực hiện các quá trình động lực học cơ bản.</strong> Ví dụ, các tài nguyên tối thiểu cần thiết để truyền thông tin lượng tử một cách đáng tin cậy giữa hai bên bằng cách sử dụng một kênh truyền thông có nhiễu là gì?</p></li>
+</ol>
+<p>Các mục tiêu tương tự cũng định nghĩa nên lý thuyết thông tin cổ điển. Tuy nhiên, lý thuyết thông tin lượng tử có phạm vi rộng hơn lý thuyết thông tin cổ điển, bởi vì nó bao gồm toàn bộ các yếu tố tĩnh và động của lý thuyết thông tin cổ điển, đồng thời mở rộng thêm các yếu tố tĩnh và động bổ sung đặc trưng của thế giới lượng tử.</p>
+<p>Phần còn lại của mục này mô tả một số ví dụ về các câu hỏi được nghiên cứu bởi lý thuyết thông tin lượng tử, trong từng trường hợp nhấn mạnh các yếu tố tĩnh và động cơ bản đang được xem xét, và sự đánh đổi tài nguyên đang được cân nhắc. Chúng ta bắt đầu với một ví dụ sẽ có vẻ quen thuộc đối với các nhà lý thuyết thông tin cổ điển: bài toán gửi thông tin cổ điển qua một kênh lượng tử. Sau đó, chúng ta bắt đầu rẽ nhánh và khám phá một số quá trình tĩnh và động mới hiện diện trong cơ học lượng tử, chẳng hạn như sửa lỗi lượng tử, bài toán phân biệt các trạng thái lượng tử, và phép biến đổi vướng víu. Chương này kết thúc bằng một số suy ngẫm về cách các công cụ của lý thuyết thông tin lượng tử có thể được áp dụng ở những nơi khác trong tính toán lượng tử và thông tin lượng tử.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Cô đọng lại
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nguyên liệu thô có sẵn <span class="math inline">\to</span> Thao tác vận hành <span class="math inline">\to</span> Bài toán cân đối chi phí</p>
+<p><strong>Xác định các lớp “tài nguyên tĩnh” cơ bản (Static Resources):</strong></p>
+<ul>
+<li><p>Các “nguyên liệu thô” hoặc công cụ có sẵn mà bạn đang nắm giữu trước khi bắt đầu thực hiện bất kỳ tính toán hay truyền công nào.</p></li>
+<li><p>Các ví dụ cụ thể:</p>
+<ul>
+<li><p>Classical bit: Trạng thái 0 và 1 quen thuộc. Vì vật lý cổ điển thực chất là một trường hợp đặc biệt của vật lý lượng tử, nên các tài nguyên của thông tin cổ điển cũng tự động nằm trong thế giới lượng tử.</p></li>
+<li><p>Quantum bit: Đơn vị thông tin cơ bản mang tính chồng chập.</p></li>
+<li><p>Trạng thái Bell: Cặp hạt vướng víu lượng tử được chia sẻ giữa hai người ở rất xa nhau, đóng vai trò như một tài nguyên đặc biệt mạnh mẽ (cái này là ví dụ cho communication).</p></li>
+</ul></li>
+</ul>
+<p><strong>Xác định các lớp “quá trình động lực học” cơ bản (Dynamical Processes):</strong></p>
+<ul>
+<li><p>Đây là những “thao tác, hành động hoặc dịch vụ” mà bạn vận hành lên các tài nguyen tĩnh nói trên theo thời gian.</p></li>
+<li><p>Các ví dụ cụ thể:</p>
+<ul>
+<li><p>Bộ nhớ: Khả năng cất giữ một trạng thái lượng tử trong một thời gian mà không để nó bị mất đi.</p></li>
+<li><p>Truyền thông tin: Đẩy trạng thái lượng tử đi qua lại giữa các nút trong mạng lưới.</p></li>
+<li><p>Sao chép và bảo vệ: Thử thực hiện việc nhân bản trạng thái (hoặc đối mặt với định lý không sao chép), đồng thời tìm cách bảo vệ thông tin lượng tử khỏi sự phá hoại của nhiễu môi trường.</p></li>
+</ul></li>
+</ul>
+<p><strong>Định lượng sự đánh đổi tài nguyên (Resources Tradeoffs):</strong></p>
+<ul>
+<li><p>Đây là bài toán kinh tế và tối ưu hóa kỹ thuật: “Muốn đạt được mục tiêu này thì cái giá phải trả tối thiểu là bao nhiêu?”.</p></li>
+<li><p>Các ví dụ cụ thể:</p>
+<ul>
+<li>Để truyền thành công một thông tin lượng tử qua một kênh truyền thông đang bị nhiễu nặng, bạn cần tối thiểu bao nhiêu cặp vướng víu phụ trợ, hoặc cần bao nhiêu lớp mã hóa để sửa lỗi?</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="quantum-information-theory-example-problems" class="level1">
+<h1>1. Quantum information theory: example problems</h1>
+<section id="classical-information-through-quantum-channels" class="level2">
+<h2 class="anchored" data-anchor-id="classical-information-through-quantum-channels">1.1. Classical information through quantum channels</h2>
+<p>Các kết quả nền tảng của lý thuyết thông tin cổ điển là <strong><em>noiseless channel coding theorem</em></strong> định lý mã hóa kênh không nhiễu của Shannon và <strong><em>noisy channel coding theorem</em></strong> định lý mã hóa kênh có nhiễu của Shannon. Định lý mã hóa kênh không nhiễu định lượng có bao nhiêu bit được yêu cầu để lưu trữ thông tin được phát ra bởi một nguồn thông tin, trong khi định lý mã hóa kênh có nhiễu định lượng có bao nhiêu thông tin có thể được truyền tải một cách đáng tin cậy qua một kênh truyền thông có nhiễu.</p>
+<hr>
+<p><strong>Chúng ta hiểu thế nào là information source - một nguồn thông tin?</strong></p>
+<p>Xác định khái niệm này là một bài toán nền tảng của lý thuyết thông tin cổ điển và lượng tử, một bài toán mà chúng ta sẽ xem xét lại vài lần. Hiện tại, hãy bắt đầu với một định nghĩa tạm thời: một nguồn thông tin cổ điển được mô tả bởi một tập hợp các xác suất <span class="math inline">p_j, j = 1, 2, \dots, d</span>. Mỗi lần sử dụng nguồn sẽ dẫn đến việc “ký tự” <span class="math inline">j</span> được phát ra, được chọn ngẫu nhiên với xác suất <span class="math inline">p_j</span>, độc lập cho mỗi lần sử dụng nguồn. Ví dụ, nếu nguồn là văn bản tiếng Anh, thì các số <span class="math inline">j</span> có thể tương ứng với các chữ cái trong bảng chữ cái và các dấu câu, với các xác suất <span class="math inline">p_j</span> cho biết tần suất tương đối mà các chữ cái khác nhau xuất hiện trong văn bản tiếng Anh thông thường. Mặc dù không hoàn toàn đúng là các chữ cái trong tiếng Anh xuất hiện một cách độc lập, nhưng đối với các mục đích của chúng ta, đó sẽ là một sự xấp xỉ đủ tốt.</p>
+<hr>
+<p>Văn bản tiếng Anh thông thường bao gồm một lượng đáng kể tính dư thừa, và có thể khai thác tính dư thừa đó để nén văn bản.</p>
+<p>Ví dụ, chữ ‘e’ xuất hiện thường xuyên hơn rất nhiều trong văn bản tiếng Anh thông thường so với chữ ‘z’. Do đó, một sơ đồ tốt để nén văn bản tiếng Anh sẽ biểu diễn chữ ‘e’ bằng ít bit thông tin hơn so với khi nó biểu diễn chữ ‘z’. Định lý mã hóa kênh không nhiễu của Shannon định lượng chính xác mức độ hoạt động hiệu quả của một sơ đồ nén như vậy. Cụ thể hơn, định lý mã hóa kênh không nhiễu cho chúng ta biết rằng một nguồn cổ điển được mô tả bởi các xác suất <span class="math inline">p_j</span> có thể được nén sao cho trung bình mỗi lần sử dụng nguồn có thể được biểu diễn bằng <span class="math inline">H(p_j)</span> bit thông tin, trong đó <span class="math inline">H(p_j) \equiv -\sum_j p_j \log(p_j)</span> là một hàm của phân phối xác suất nguồn được gọi là entropy Shannon (Shannon entropy). Hơn nữa, định lý mã hóa kênh không nhiễu cho biết rằng việc cố gắng biểu diễn nguồn bằng ít bit hơn mức này sẽ dẫn đến xác suất lỗi cao khi thông tin được giải nén. (Định lý mã hóa kênh không nhiễu của Shannon được thảo luận chi tiết hơn nhiều trong Chương 12).</p>
+<hr>
+<p>Định lý mã hóa không nhiễu của Shannon cung cấp một ví dụ hay, nơi mà các mục tiêu của lý thuyết thông tin được liệt kê trước đó đều được thỏa mãn. Hai tài nguyên tĩnh được xác định (mục tiêu số 1): bit và nguồn thông tin. Một quá trình động hai giai đoạn được xác định (mục tiêu số 2): nén một nguồn thông tin, và sau đó giải nén để khôi phục nguồn thông tin. Cuối cùng, một tiêu chuẩn định lượng để xác định các tài nguyên tiêu thụ (mục tiêu số 3) bởi một sơ đồ nén dữ liệu tối ưu đã được tìm thấy.</p>
+<hr>
+<p>Kết quả lớn thứ hai của Shannon, <strong><em>noisy channel coding theorem</em></strong> định lý mã hóa kênh có nhiễu, định lượng lượng thông tin có thể được truyền tải một cách đáng tin cậy qua một kênh có nhiễu.</p>
+<p>Cụ thể, giả sử chúng ta muốn chuyển thông tin do một nguồn thông tin nào đó tạo ra đến một vị trí khác thông qua một kênh có nhiễu. Vị trí đó có thể ở một điểm khác trong không gian, hoặc ở một thời điểm khác – trường hợp sau chính là bài toán lưu trữ thông tin trong sự hiện diện của nhiễu. Ý tưởng trong cả hai trường hợp là mã hóa thông tin được tạo ra bằng cách sử dụng các mã sửa lỗi, sao cho bất kỳ nhiễu nào do kênh đưa vào đều có thể được sửa chữa ở đầu bên kia của kênh. Cách mà các mã sửa lỗi đạt được điều này là bằng cách đưa vào đủ tính dư thừa vào thông tin được gửi qua kênh sao cho ngay cả sau khi một phần thông tin bị hỏng, vẫn có thể khôi phục được thông điệp ban đầu.</p>
+<p>Ví dụ, giả sử kênh có nhiễu dùng để truyền các bit đơn lẻ, và nhiễu trong kênh lớn đến mức để đạt được truyền dẫn đáng tin cậy, mỗi bit do nguồn tạo ra phải được mã hóa bằng cách sử dụng hai bit trước khi được gửi qua kênh. Chúng ta nói rằng một kênh như vậy có dung lượng là nửa bit, vì mỗi lần sử dụng kênh có thể được dùng để truyền tải một cách đáng tin cậy khoảng nửa bit thông tin. Định lý mã hóa kênh có nhiễu của Shannon cung cấp một quy trình tổng quát để tính toán dung lượng của một kênh có nhiễu tùy ý.</p>
+<hr>
+<p>Định lý mã hóa kênh có nhiễu của Shannon cũng đạt được ba mục tiêu của lý thuyết thông tin mà chúng ta đã nêu trước đó. Hai loại tài nguyên tĩnh liên quan (mục tiêu số 1): nguồn thông tin, và các bit được gửi qua kênh. Ba quá trình động lực học liên quan (mục tiêu số 2). Quá trình chính là nhiễu trong kênh. Để chống lại nhiễu này, chúng ta thực hiện các quá trình kép gồm mã hóa và giải mã trạng thái trong một mã sửa lỗi. Đối với một mô hình nhiễu cố định, định lý của Shannon cho chúng ta biết bao nhiêu tính dư thừa phải được đưa vào bởi một sơ đồ sửa lỗi tối ưu nếu muốn đạt được việc truyền thông tin đáng tin cậy (mục tiêu số 3).</p>
+</section>
+<section id="quantum-information-through-quantum-channels" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-information-through-quantum-channels">1.2. Quantum information through quantum channels</h2>
+</section>
+<section id="quantum-distinguishability" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-distinguishability">1.3. Quantum distinguishability</h2>
+</section>
+<section id="creation-and-transformation-of-entanglement" class="level2">
+<h2 class="anchored" data-anchor-id="creation-and-transformation-of-entanglement">1.4. Creation and transformation of entanglement</h2>
+</section>
+</section>
+<section id="quantum-information-in-a-wider-context" class="level1">
+<h1>2. Quantum information in a wider context</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
