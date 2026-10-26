@@ -166,6 +166,25 @@ code {
   font-size: 1.12rem;
 }
 
+.home-hero .hero-quote {
+  max-width: 62ch;
+  margin: 1.5rem 0;
+}
+
+.home-hero .hero-quote blockquote {
+  margin: 0;
+  padding: 0.15rem 0 0.15rem 1.1rem;
+  border-left-color: #8bd9c6;
+  background: transparent;
+  color: #f4fffc;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.7;
+}
+
+.home-hero .hero-quote blockquote p {
+  margin: 0;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -247,11 +266,21 @@ code {
 }
 
 .home-note {
+  margin-top: 2rem;
   padding: 1rem 1.15rem;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   background: var(--surface-muted);
   color: var(--muted);
+}
+
+.home-note h4 {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.home-note p:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 767px) {
