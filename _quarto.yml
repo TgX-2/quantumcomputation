@@ -19,6 +19,10 @@ website:
           - note/intro/preface.qmd
           - note/intro/notation.qmd
 
+      - section : "Ideas"
+        contents:
+          - note/questions.qmd
+
       - section : "Introduction and overview"
         contents:
           - note/introandoverview/1.qmd
@@ -29,9 +33,9 @@ website:
           - note/introandoverview/5.qmd
           - note/introandoverview/6.qmd
 
-      - section : "Ideas"
-        contents:
-          - note/questions.qmd
+      - section : "Introduction to Quantum Mechanics"
+        contents: 
+          - note/introductiontoquantummechanics/1.qmd
 
 format:
   html:

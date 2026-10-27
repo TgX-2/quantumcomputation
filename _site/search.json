@@ -246,5 +246,23 @@
       "Introduction and overview",
       "Quantum information"
     ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/index.html",
+    "href": "note/introductiontoquantummechanics/index.html",
+    "title": "Introduction to Quantum Mechanics",
+    "section": "",
+    "text": "‘I ain’t no physicist but I know what matters’ - Popeye the Sailor\n\n\n‘Quantum mechanics: Real Black Magic Calculus’ - Albert Einstein\n\nCơ học lượng tử là mô tả chính xác và đầy đủ nhất về thế giới mà chúng ta biết. Nó cũng là cơ sở để hiểu về tính toán lượng tử và thông tin lượng tử. Chương này cung cấp tất cả nền tảng kiến thức cần thiết về cơ học lượng tử để nắm vững tính toán và thông tin lượng tử. Không cần kiến thức trước về cơ học lượng tử.\nCơ học lượng tử rất dễ học, bất chấp tiếng tăm là một môn học khó. Tiếng tăm đó xuất phát từ độ khó của một số ứng dụng, chẳng hạn như hiểu cấu trúc của các phân tử phức tạp, những thứ không mang tính nền tảng để nắm bắt môn học; chúng ta sẽ không bàn về các ứng dụng như vậy. Điều kiện tiên quyết duy nhất để hiểu là có sự quen thuộc với đại số tuyến tính sơ cấp. Với nền tảng này, bạn có thể bắt đầu giải quyết các bài toán đơn giản trong vài giờ, ngay cả khi không có kiến thức trước về môn học.\nNhững độc giả đã quen thuộc với cơ học lượng tử có thể lướt qua chương này một cách nhanh chóng để làm quen với các quy ước ký hiệu (hầu hết là tiêu chuẩn) của chúng tôi và tự tin rằng mình đã quen thuộc với toàn bộ tài liệu. Độc giả ít hoặc không có kiến thức trước nên đọc kỹ chương này, dừng lại để thử làm các bài tập. Nếu bạn gặp khó khăn với một bài tập, hãy chuyển sang phần khác và quay lại thử sức sau.\nChương này bắt đầu với việc ôn tập một số nội dung từ đại số tuyến tính trong Mục 2.1. Mục này giả định sự quen thuộc với đại số tuyến tính sơ cấp, nhưng giới thiệu ký hiệu được các nhà vật lý sử dụng để mô tả cơ học lượng tử, khác với ký hiệu được sử dụng trong hầu hết các phần giới thiệu về đại số tuyến tính. Mục 2.2 mô tả các tiên đề cơ bản của cơ học lượng tử. Sau khi hoàn thành mục này, bạn sẽ hiểu được tất cả các nguyên lý cơ bản của cơ học lượng tử. Mục này chứa nhiều bài tập đơn giản được thiết kế để giúp củng cố sự nắm bắt của bạn đối với tài liệu này. Các mục còn lại của chương, và của cuốn sách này, làm rõ các tài liệu này mà không giới thiệu thêm các nguyên lý vật lý mới nào mang tính nền tảng. Mục 2.3 giải thích mã hóa siêu đặc (superdense coding), một ví dụ đáng ngạc nhiên và sáng tỏ về xử lý thông tin lượng tử kết hợp nhiều tiên đề của cơ học lượng tử trong một bối cảnh đơn giản. Các Mục 2.4 và 2.5 phát triển các công cụ toán học mạnh mẽ – density operator toán tử mật độ, purifications sự tinh chế, và Schmidt decomposition phân tích Schmidt – đặc biệt hữu ích trong việc nghiên cứu tính toán lượng tử và thông tin lượng tử. Hiểu các công cụ này cũng sẽ giúp bạn củng cố sự hiểu biết của mình về cơ học lượng tử sơ cấp. Cuối cùng, Mục 2.6 kiểm tra câu hỏi về việc cơ học lượng tử vượt ra ngoài sự hiểu biết “cổ điển” thông thường về cách thế giới vận hành như thế nào."
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/1.html",
+    "href": "note/introductiontoquantummechanics/1.html",
+    "title": "Linear algebra",
+    "section": "",
+    "text": "hi!",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "Linear algebra"
+    ]
   }
 ]
