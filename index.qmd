@@ -1,32 +1,67 @@
 ::: {.home-hero}
 
-::: {.hero-eyebrow}
-10周年記念版
-:::
+:::: {.hero-layout}
+::::: {.hero-copy}
+:::::: {.hero-eyebrow}
+QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版
+::::::
 
 # 量子計算と量子情報
 
-::: {.hero-quote}
+:::::: {.hero-description}
+量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。
+::::::
+
+<!-- :::::: {.hero-quote}
 > 量子計算は死にゆく分野であり、量子情報はまだ生まれていない分野である。これらは、生まれる前に死んでしまった学際領域を形作っている。
-:::
+:::::: -->
 
-::: {.hero-description}
-マイケル・A・ニールセン、アイザック・L・チャン著『量子計算と量子情報（Quantum Computation and Quantum Information）』10周年記念版の、質の低い翻訳。
-:::
+:::::: {.hero-attribution}
+マイケル・A・ニールセン、アイザック・L・チャン著
+::::::
 
-::: {.hero-actions}
+:::::: {.hero-actions}
 [原文を読む ↗](file/quantum-computation-and-quantum-information-nielsen-chuang.pdf){.hero-button .primary}
 [ウェブ版を見る ↗](https://tgx-2.github.io/quantumcomputation){.hero-button}
+::::::
+:::::
+
+::::: {.hero-portrait}
+![ただの一匹の猫。生きていると同時に、死んでいる。。](img/avt.png){.hero-avatar}
+:::::
+::::
+:::
+
+<section class="home-overview">
+
+## 読みたいところから
+
+::: {.home-intro}
+量子力学の基礎から量子情報の考え方まで。章やメモを選んで読み進められます。
+:::
+
+::: {.home-grid}
+
+::: {.home-card}
+### [本編を読む →](note/introandoverview/1.qmd)
+量子計算と量子情報の導入から読み始める。
+:::
+
+::: {.home-card}
+### [アイデアと問い →](note/questions.qmd)
+読みながら考えたい問いやアイデアをまとめています。
+:::
+
+::: {.home-card}
+### [まえがきを読む →](note/intro/preface.qmd)
+本文に入る前に、翻訳ノートの背景を読む。
 :::
 
 :::
+</section>
 
 ::: {.home-note}
 #### この文章について
 
-この記事は、特定の誰かに向けて書いたものではありません。また、学術論文でもありません。
-
-さらに、ここに書かれている内容は TgX.2 の見解や立場を反映するものではありません。
-
-内容はあくまで中立的な立場から記述しています。
+これは特定の誰かに向けた文章でも、学術論文でもありません。内容は中立的な立場から記述しており、TgX.2の見解や立場を反映するものではありません。
 :::

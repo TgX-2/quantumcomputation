@@ -48,3 +48,6 @@ Nhưng thật ra thì đã có một đống ông giáo sư nghiên cứu bao nh
 
 Thử tưởng tượng một máy tính không dùng bóng bán dẫn nữa, mà dùng các electron.
 
+# 5. Thuật toán Mô phỏng tôi
+
+Có cái nào dùng được cái này không. Mặc dù tôi biết rõ là nó sẽ không có. Vì thuật toán này dựa trên việc nên liều đến mức nào khi thời gian còn ít.

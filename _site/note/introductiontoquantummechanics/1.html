@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -238,8 +281,30 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#bases-and-linear-independence" id="toc-bases-and-linear-independence" class="nav-link active" data-scroll-target="#bases-and-linear-independence">1. Bases and linear independence</a></li>
+  <li><a href="#linear-operators-and-matrices" id="toc-linear-operators-and-matrices" class="nav-link" data-scroll-target="#linear-operators-and-matrices">2. Linear operators and matrices</a></li>
+  <li><a href="#the-pauli-matrices" id="toc-the-pauli-matrices" class="nav-link" data-scroll-target="#the-pauli-matrices">3. The Pauli matrices</a></li>
+  <li><a href="#inner-products" id="toc-inner-products" class="nav-link" data-scroll-target="#inner-products">4. Inner products</a>
+  <ul class="collapse">
+  <li><a href="#hilbert-space-yapping" id="toc-hilbert-space-yapping" class="nav-link" data-scroll-target="#hilbert-space-yapping">Hilbert space yapping</a></li>
+  <li><a href="#gram-schmidt-procedure" id="toc-gram-schmidt-procedure" class="nav-link" data-scroll-target="#gram-schmidt-procedure">Gram-Schmidt procedure</a></li>
+  <li><a href="#outer-product-representation" id="toc-outer-product-representation" class="nav-link" data-scroll-target="#outer-product-representation">Outer product representation</a></li>
+  <li><a href="#completeness-relation" id="toc-completeness-relation" class="nav-link" data-scroll-target="#completeness-relation">Completeness Relation</a></li>
+  <li><a href="#langle-opr-vert-cr-rangle" id="toc-langle-opr-vert-cr-rangle" class="nav-link" data-scroll-target="#langle-opr-vert-cr-rangle"><span class="math inline">\langle OPR \vert CR \rangle</span></a></li>
+  </ul></li>
+  <li><a href="#eigenvectors-and-eigenvalues" id="toc-eigenvectors-and-eigenvalues" class="nav-link" data-scroll-target="#eigenvectors-and-eigenvalues">5. Eigenvectors and eigenvalues</a></li>
+  <li><a href="#adjoints-and-hermitian-operators" id="toc-adjoints-and-hermitian-operators" class="nav-link" data-scroll-target="#adjoints-and-hermitian-operators">6. Adjoints and Hermitian operators</a></li>
+  <li><a href="#tensor-products" id="toc-tensor-products" class="nav-link" data-scroll-target="#tensor-products">7. Tensor products</a></li>
+  <li><a href="#operator-functions" id="toc-operator-functions" class="nav-link" data-scroll-target="#operator-functions">8. Operator functions</a></li>
+  <li><a href="#the-commutator-and-anti-commutator" id="toc-the-commutator-and-anti-commutator" class="nav-link" data-scroll-target="#the-commutator-and-anti-commutator">9. The commutator and anti-commutator</a></li>
+  <li><a href="#the-polar-and-singular-value-decompositions" id="toc-the-polar-and-singular-value-decompositions" class="nav-link" data-scroll-target="#the-polar-and-singular-value-decompositions">10. The polar and singular value decompositions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -269,9 +334,447 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>hi!</p>
+<blockquote class="blockquote">
+<p><em>‘This book is written as much to disturb and annoy as to instruct.’</em> – The first line of About Vectors, by Banesh Hoffmann.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘Life is complex – it has both real and imaginary parts.’</em> – Anonymous</p>
+</blockquote>
+<p>Đại số tuyến tính là ngành nghiên cứu về các không gian véc-tơ và các phép toán tuyến tính trên các không gian véc-tơ đó. Sự hiểu biết tốt về cơ học lượng tử dựa trên một nền tảng vững chắc về đại số tuyến tính sơ cấp. Trong mục này, chúng ta sẽ ôn tập một số khái niệm cơ bản từ đại số tuyến tính, đồng thời mô tả các ký hiệu chuẩn được sử dụng cho các khái niệm này trong việc nghiên cứu cơ học lượng tử. Các ký hiệu này được tóm tắt trong Hình 2.1 ở trang 62, với ký hiệu lượng tử ở cột bên trái và mô tả đại số tuyến tính ở cột bên phải. Bạn có thể xem lướt qua bảng đó và xem mình nhận ra bao nhiêu khái niệm ở cột bên phải.</p>
+<p>Theo quan điểm của chúng tôi (chắc chắn là “tôi” ở đây là tác giả sách rồi), trở ngại chính trong việc tiếp thu các tiên đề của cơ học lượng tử không phải là bản thân các tiên đề, mà là khối lượng lớn các khái niệm đại số tuyến tính cần thiết để hiểu chúng. Kết hợp với ký hiệu Dirac bất thường được các nhà vật lý áp dụng cho cơ học lượng tử, nó có thể trông có vẻ (một cách sai lầm) khá đáng sợ. Vì những lý do này, chúng tôi khuyên độc giả chưa quen thuộc với cơ học lượng tử nên đọc lướt qua phần tài liệu tiếp theo, dừng lại chủ yếu để tập trung hiểu các nguyên tắc cơ bản tuyệt đối của ký hiệu đang được sử dụng. Sau đó, hãy tiến hành nghiên cứu cẩn thận chủ đề chính của chương – các tiên đề của cơ học lượng tử – rồi quay lại nghiên cứu sâu hơn về các khái niệm và ký hiệu đại số tuyến tính cần thiết khi cần thiết.</p>
+<hr>
+<p>Các đối tượng cơ bản của đại số tuyến tính là <strong><em>vector spaces</em></strong> không gian véc-tơ. Không gian véc-tơ mà chúng ta quan tâm nhất là <span class="math inline">\mathbb{C}^n</span>, không gian của tất cả các bộ <span class="math inline">n</span> số phức, <span class="math inline">(z_1, \dots, z_n)</span>. Các phần tử của một không gian véc-tơ được gọi là véc-tơ (vectors), và đôi khi chúng ta sẽ sử dụng ký hiệu ma trận cột</p>
+<p><span class="math display">
+\begin{bmatrix} z_1 \\ \vdots \\ z_n \end{bmatrix} \tag {2.1}
+</span></p>
+<p>để chỉ một véc-tơ.</p>
+<p>Có một phép toán cộng được định nghĩa, nhận các cặp véc-tơ và chuyển thành các véc-tơ khác. Trong <span class="math inline">\mathbb{C}^n</span>, phép cộng véc-tơ được định nghĩa bởi</p>
+<p><span class="math display">
+\begin{bmatrix} z_1 \\ \vdots \\ z_n \end{bmatrix} + \begin{bmatrix} z'_1 \\ \vdots \\ z'_n \end{bmatrix} \equiv \begin{bmatrix} z_1 + z'_1 \\ \vdots \\ z_n + z'_n \end{bmatrix} \tag {2.2}
+</span></p>
+<p>trong đó các phép toán cộng ở vế phải chỉ là phép cộng số phức thông thường. Hơn nữa, trong một không gian véc-tơ còn có phép toán nhân với một vô hướng (multiplication by a scalar). Trong <span class="math inline">\mathbb{C}^n</span>, phép toán này được định nghĩa bởi</p>
+<p><span class="math display">
+z \begin{bmatrix} z_1 \\ \vdots \\ z_n \end{bmatrix} \equiv \begin{bmatrix} zz_1 \\ \vdots \\ zz_n \end{bmatrix} \tag {2.3}
+</span></p>
+<p>trong đó <span class="math inline">z</span> là một vô hướng, tức là một số phức, và các phép nhân ở vế phải là phép nhân số phức thông thường. Các nhà vật lý đôi khi gọi các số phức là c-numbers.</p>
+<hr>
+<p>Cơ học lượng tử là động lực chính của chúng ta để nghiên cứu đại số tuyến tính, vì vậy chúng ta sẽ sử dụng ký hiệu chuẩn của cơ học lượng tử cho các khái niệm đại số tuyến tính. Ký hiệu cơ học lượng tử chuẩn cho một véc-tơ trong không gian véc-tơ là:</p>
+<p><span class="math display">
+\vert{}\psi\rangle \quad (2.4)
+</span></p>
+<p><span class="math inline">\psi</span> là một nhãn cho véc-tơ (mọi nhãn đều hợp lệ, mặc dù chúng ta thích sử dụng các nhãn đơn giản như <span class="math inline">\psi</span> và <span class="math inline">\varphi</span>). Ký hiệu <span class="math inline">\vert{}\cdot\rangle</span> được sử dụng để chỉ ra rằng đối tượng là một véc-tơ. Toàn bộ đối tượng <span class="math inline">\vert{}\psi\rangle</span> đôi khi được gọi là một ket, mặc dù chúng ta sẽ không sử dụng thuật ngữ đó thường xuyên.</p>
+<p>Một không gian véc-tơ cũng chứa một véc-tơ không (zero vector) đặc biệt, mà chúng ta ký hiệu là <span class="math inline">0</span>. Nó thỏa mãn tính chất là đối với bất kỳ véc-tơ nào khác <span class="math inline">\vert{}v\rangle</span>, <span class="math inline">\vert{}v\rangle + 0 = \vert{}v\rangle</span>. Lưu ý rằng chúng ta không sử dụng ký hiệu ket cho véc-tơ không – đây là ngoại lệ duy nhất mà chúng ta sẽ thực hiện. Lý do tạo ra ngoại lệ này là vì theo quy ước, ký hiệu “hiển nhiên” cho véc-tơ không, <span class="math inline">\vert{}0\rangle</span>, được dùng để chỉ một ý nghĩa hoàn toàn khác. Phép toán nhân vô hướng sao cho <span class="math inline">z0 = 0</span> với mọi số phức <span class="math inline">z</span>. Để thuận tiện, chúng ta sử dụng ký hiệu <span class="math inline">(z_1, \dots, z_n)</span> để biểu thị một ma trận cột có các phần tử <span class="math inline">z_1, \dots, z_n</span>. Trong <span class="math inline">\mathbb{C}^n</span> phần tử không là <span class="math inline">(0, 0, \dots, 0)</span>. Một không gian con véc-tơ (vector subspace) của một không gian véc-tơ <span class="math inline">V</span> là một tập hợp con <span class="math inline">W</span> của <span class="math inline">V</span> sao cho <span class="math inline">W</span> cũng là một không gian véc-tơ, nghĩa là, <span class="math inline">W</span> phải đóng dưới phép nhân vô hướng và phép cộng.</p>
+<p><img src="../../img/2.1.png" class="img-fluid"></p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Biên phiên dịch
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><span class="math inline">z^*</span>: <strong><em>Complex conjugate</em></strong> Số phức liên hợp của số phức z. Ví dụ: <span class="math inline">(1 + i)^* = 1-i</span>.</p></li>
+<li><p><span class="math inline">\vert \psi \rangle</span>: Là một vector, hay còn được gọi là ket</p></li>
+<li><p><span class="math inline">\langle \psi \vert</span> : Là một vector đối ngẫu với <span class="math inline">\vert \psi \rangle</span>, còn được gọi là một bra.</p></li>
+<li><p><span class="math inline">\langle \varphi \vert \psi \rangle</span> : Là tích trong (inner products) giữa hai vector bra và ket. Tạo thành một braket hoàn chỉnh.</p></li>
+<li><p><span class="math inline">\vert \varphi \rangle \otimes \vert \psi \rangle</span> : Tích tensor của hai ket.</p></li>
+<li><p><span class="math inline">\vert \varphi \rangle \vert \psi \rangle</span> : Cách viết, ký hiệu ngắn gọn hơn của tích tensor.</p></li>
+<li><p><span class="math inline">A^*</span> : Một ma trận liên hợp phức của ma trận A.</p></li>
+<li><p><span class="math inline">A^T</span> : Ma trận chuyển vị của A.</p></li>
+<li><p><span class="math inline">A^\dagger</span> : Ma trận liên hợp Hermitian hoặc ma trận phụ hợp của ma trận A, được định nghĩa là <span class="math inline">A^\dagger = (A^T)^*</span>. Ví dụ:</p></li>
+</ul>
+<p><span class="math display">
+\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}^\dagger = \begin{bmatrix} a^* &amp; c^* \\ b^* &amp; d^* \end{bmatrix}
+</span></p>
+<ul>
+<li><span class="math inline">\langle \varphi \vert A \vert \psi \rangle</span> : Tích trong giữa vector <span class="math inline">\vert \varphi \rangle</span> và vector kết quả <span class="math inline">A\vert \psi \rangle</span>. Về mặt toán học, giá trị này hoàn toàn tương đương với tích trong giữa <span class="math inline">A^\dagger \vert \varphi \rangle</span> và <span class="math inline">\vert \psi \rangle</span></li>
+</ul>
+</div>
+</div>
+<section id="bases-and-linear-independence" class="level1">
+<h1>1. Bases and linear independence</h1>
+<p>Một tập sinh (spanning set) cho một không gian véc-tơ là một tập hợp các véc-tơ <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_n\rangle</span> sao cho bất kỳ véc-tơ <span class="math inline">\vert{}v\rangle</span> nào trong không gian véc-tơ đều có thể được viết dưới dạng tổ hợp tuyến tính <span class="math inline">\vert{}v\rangle = \sum_i a_i\vert{}v_i\rangle</span> của các véc-tơ trong tập hợp đó.</p>
+<p>Ví dụ, một tập sinh cho không gian véc-tơ <span class="math inline">\mathbb{C}^2</span> là tập hợp</p>
+<p><span class="math display">
+\vert{}v_1\rangle \equiv \begin{bmatrix} 1 \\ 0 \end{bmatrix}; \quad \vert{}v_2\rangle \equiv \begin{bmatrix} 0 \\ 1 \end{bmatrix} \tag {2.5}
+</span></p>
+<p>vì bất kỳ véc-tơ nào</p>
+<p><span class="math display">
+\vert{}v\rangle = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix} \tag {2.6}
+</span></p>
+<p>trong <span class="math inline">\mathbb{C}^2</span> đều có thể được viết dưới dạng tổ hợp tuyến tính <span class="math inline">\vert{}v\rangle = a_1\vert{}v_1\rangle + a_2\vert{}v_2\rangle</span> của các véc-tơ <span class="math inline">\vert{}v_1\rangle</span> và <span class="math inline">\vert{}v_2\rangle</span>. Chúng ta nói rằng các véc-tơ <span class="math inline">\vert{}v_1\rangle</span> và <span class="math inline">\vert{}v_2\rangle</span> sinh ra (span) không gian véc-tơ <span class="math inline">\mathbb{C}^2</span>.</p>
+<p>Nhìn chung, một không gian véc-tơ có thể có nhiều tập sinh khác nhau. Một tập sinh thứ hai cho không gian véc-tơ <span class="math inline">\mathbb{C}^2</span> là tập hợp</p>
+<p><span class="math display">
+\vert{}v_1\rangle \equiv \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}; \quad \vert{}v_2\rangle \equiv \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ -1 \end{bmatrix} \tag {2.7}
+</span></p>
+<p>vì một véc-tơ tùy ý <span class="math inline">\vert{}v\rangle = (a_1, a_2)</span> có thể được viết dưới dạng tổ hợp tuyến tính của <span class="math inline">\vert{}v_1\rangle</span> và <span class="math inline">\vert{}v_2\rangle</span>:</p>
+<p><span class="math display">
+\vert{}v\rangle = \frac{a_1 + a_2}{\sqrt{2}}\vert{}v_1\rangle + \frac{a_1 - a_2}{\sqrt{2}}\vert{}v_2\rangle \tag {2.8}
+</span></p>
+<p>Một tập hợp các véc-tơ khác không <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_n\rangle</span> được gọi là phụ thuộc tuyến tính nếu tồn tại một tập hợp các số phức <span class="math inline">a_1, \dots, a_n</span> với ít nhất một giá trị <span class="math inline">a_i \neq 0</span>, sao cho:</p>
+<p><span class="math display">
+a_1\vert{}v_1\rangle + a_2\vert{}v_2\rangle + \dots + a_n\vert{}v_n\rangle = 0 \tag {2.9}
+</span></p>
+<p>Một tập hợp các véc-tơ được gọi là độc lập tuyến tính nếu nó không phụ thuộc tuyến tính.</p>
+<p>Có thể chứng minh rằng bất kỳ hai tập hợp véc-tơ độc lập tuyến tính nào cùng sinh ra một không gian véc-tơ <span class="math inline">V</span> đều chứa cùng một số lượng phần tử. Chúng ta gọi một tập hợp như vậy là một cơ sở cho <span class="math inline">V</span>. Hơn nữa, một tập cơ sở như vậy luôn tồn tại. Số lượng phần tử trong cơ sở được định nghĩa là số chiều của <span class="math inline">V</span>.</p>
+<p>Trong cuốn sách này, chúng ta sẽ chỉ quan tâm đến các không gian véc-tơ hữu hạn chiều. Có nhiều câu hỏi thú vị và thường khó liên quan đến các không gian vô hạn chiều, nhưng chúng ta sẽ không cần phải bận tâm về những câu hỏi này.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.1: Chứng minh rằng <span class="math inline">(1, -1), (1, 2)</span> và <span class="math inline">(2, 1)</span> phụ thuộc tuyến tính.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tìm hệ số <span class="math inline">a_1, a_2, a_3</span> sao cho:</p>
+<p><span class="math display">
+a_1 (1, -1) + a_2 (1, 2) + a_3 (2, 1) = 0
+</span></p>
+<p><span class="math display">
+\begin{cases}
+a_1 + a_2 + 2a_3 = 0 \\
+-a_1 + 2a_2 + a_3 = 0
+\end{cases}
+</span></p>
+<p>Tập nghiệm là <span class="math inline">(-t, -t, t)</span>.</p>
+</div>
+</div>
+</section>
+<section id="linear-operators-and-matrices" class="level1">
+<h1>2. Linear operators and matrices</h1>
+<p>Một toán tử tuyến tính (linear operator) giữa các không gian véc-tơ <span class="math inline">V</span> và <span class="math inline">W</span> được định nghĩa là bất kỳ hàm số nào <span class="math inline">A: V \to W</span> có tính tuyến tính đối với các đầu vào của nó:</p>
+<p><span class="math display">
+A\left(\sum_i a_i\vert{}v_i\rangle\right) = \sum_i a_i A(\vert{}v_i\rangle) \quad (2.10)
+</span></p>
+<p>Thông thường chúng ta chỉ viết <span class="math inline">A\vert{}v\rangle</span> để ký hiệu cho <span class="math inline">A(\vert{}v\rangle)</span>. Khi chúng ta nói rằng một toán tử tuyến tính <span class="math inline">A</span> được định nghĩa trên một không gian véc-tơ <span class="math inline">V</span>, ý của chúng ta là <span class="math inline">A</span> là một toán tử tuyến tính đi từ <span class="math inline">V</span> đến <span class="math inline">V</span>. Một toán tử tuyến tính quan trọng trên bất kỳ không gian véc-tơ <span class="math inline">V</span> nào là toán tử đơn vị (identity operator), <span class="math inline">I_V</span>, được định nghĩa bởi phương trình <span class="math inline">I_V\vert{}v\rangle \equiv \vert{}v\rangle</span> với mọi véc-tơ <span class="math inline">\vert{}v\rangle</span>. Ở những nơi không gây nhầm lẫn, chúng ta lược bỏ chỉ số dưới <span class="math inline">V</span> và chỉ viết <span class="math inline">I</span> để ký hiệu toán tử đơn vị. Một toán tử tuyến tính quan trọng khác là toán tử không (zero operator), mà chúng ta ký hiệu là <span class="math inline">0</span>. Toán tử không ánh xạ mọi véc-tơ thành véc-tơ không, <span class="math inline">0\vert{}v\rangle \equiv 0</span>. Rõ ràng từ phương trình (2.10) rằng một khi tác động của toán tử tuyến tính <span class="math inline">A</span> lên một cơ sở được xác định, tác động của <span class="math inline">A</span> sẽ được xác định hoàn toàn trên mọi đầu vào.</p>
+<p>Giả sử <span class="math inline">V, W,</span> và <span class="math inline">X</span> là các không gian véc-tơ, và <span class="math inline">A: V \to W</span> cùng với <span class="math inline">B: W \to X</span> là các toán tử tuyến tính. Khi đó chúng ta sử dụng ký hiệu <span class="math inline">BA</span> để ký hiệu phép hợp thành (composition) của <span class="math inline">B</span> với <span class="math inline">A</span>, được định nghĩa bởi <span class="math inline">(BA)(\vert{}v\rangle) \equiv B(A(\vert{}v\rangle))</span>. Một lần nữa, chúng ta viết <span class="math inline">BA\vert{}v\rangle</span> như một dạng viết tắt cho <span class="math inline">(BA)(\vert{}v\rangle)</span>.</p>
+<p>Cách thuận tiện nhất để hiểu các toán tử tuyến tính là thông qua biểu diễn ma trận (matrix representations) của chúng. Trên thực tế, quan điểm về toán tử tuyến tính và quan điểm về ma trận hóa ra hoàn toàn tương đương. Tuy nhiên, quan điểm ma trận có thể quen thuộc hơn với bạn. Để thấy được mối liên hệ này, trước hết cần hiểu rằng một ma trận phức <span class="math inline">m \times n</span> với các phần tử <span class="math inline">A_{ij}</span> thực chất là một toán tử tuyến tính gửi các véc-tơ trong không gian véc-tơ <span class="math inline">\mathbb{C}^n</span> đến không gian véc-tơ <span class="math inline">\mathbb{C}^m</span>, dưới phép nhân ma trận của ma trận <span class="math inline">A</span> với một véc-tơ trong <span class="math inline">\mathbb{C}^n</span>. Chính xác hơn, khẳng định rằng ma trận <span class="math inline">A</span> là một toán tử tuyến tính có nghĩa là</p>
+<p><span class="math display">
+A\left(\sum_i a_i\vert{}v_i\rangle\right) = \sum_i a_i A\vert{}v_i\rangle \quad (2.11)
+</span></p>
+<p>đúng là một phương trình trong đó phép toán là phép nhân ma trận của <span class="math inline">A</span> với các véc-tơ cột. Rõ ràng, điều này là đúng!</p>
+<p>Chúng ta đã thấy rằng các ma trận có thể được coi là các toán tử tuyến tính. Liệu các toán tử tuyến tính có thể được biểu diễn dưới dạng ma trận không? Thực tế là có, như chúng ta sẽ giải thích ngay sau đây. Sự tương đương giữa hai quan điểm này biện minh cho việc chúng ta thay thế cho nhau các thuật ngữ từ lý thuyết ma trận và lý thuyết toán tử xuyên suốt cuốn sách. Giả sử <span class="math inline">A: V \to W</span> là một toán tử tuyến tính giữa các không gian véc-tơ <span class="math inline">V</span> và <span class="math inline">W</span>. Giả sử <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_m\rangle</span> là một cơ sở cho <span class="math inline">V</span> và <span class="math inline">\vert{}w_1\rangle, \dots, \vert{}w_n\rangle</span> là một cơ sở cho <span class="math inline">W</span>. Khi đó với mỗi <span class="math inline">j</span> trong khoảng <span class="math inline">1, \dots, m</span>, tồn tại các số phức <span class="math inline">A_{1j}</span> thông qua <span class="math inline">A_{nj}</span> sao cho</p>
+<p><span class="math display">
+A\vert{}v_j\rangle = \sum_t A_{tj}\vert{}w_t\rangle \quad (2.12)
+</span></p>
+<p>Ma trận có các phần tử là các giá trị <span class="math inline">A_{tj}</span> được gọi là tạo thành một biểu diễn ma trận của toán tử <span class="math inline">A</span>. Biểu diễn ma trận này của <span class="math inline">A</span> hoàn toàn tương đương với toán tử <span class="math inline">A</span>, và chúng ta sẽ sử dụng thay thế cho nhau giữa biểu diễn ma trận và quan điểm toán tử trừu tượng. Lưu ý rằng để thiết lập mối liên hệ giữa ma trận và toán tử tuyến tính, chúng ta phải chỉ định một tập hợp các trạng thái cơ sở đầu vào và đầu ra cho các không gian véc-tơ đầu vào và đầu ra của toán tử tuyến tính</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.2: (Biểu diễn ma trận: ví dụ)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">V</span> là một không gian véc-tơ với các véc-tơ cơ sở <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>, và <span class="math inline">A</span> là một toán tử tuyến tính từ <span class="math inline">V</span> đến <span class="math inline">V</span> sao cho <span class="math inline">A\vert{}0\rangle = \vert{}1\rangle</span> và <span class="math inline">A\vert{}1\rangle = \vert{}0\rangle</span>. Hãy đưa ra biểu diễn ma trận cho <span class="math inline">A</span>, đối với cơ sở đầu vào <span class="math inline">\vert{}0\rangle, \vert{}1\rangle</span> và cơ sở đầu ra <span class="math inline">\vert{}0\rangle, \vert{}1\rangle</span>. Tìm các cơ sở đầu vào và đầu ra sinh ra một biểu diễn ma trận khác của <span class="math inline">A</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.3: (Biểu diễn ma trận cho tích các toán tử)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">A</span> là một toán tử tuyến tính từ không gian véc-tơ <span class="math inline">V</span> đến không gian véc-tơ <span class="math inline">W</span>, và <span class="math inline">B</span> là một toán tử tuyến tính từ không gian véc-tơ <span class="math inline">W</span> đến không gian véc-tơ <span class="math inline">X</span>. Gọi <span class="math inline">\vert{}v_i\rangle, \vert{}w_j\rangle,</span> và <span class="math inline">\vert{}x_k\rangle</span> lần lượt là các cơ sở cho các không gian véc-tơ <span class="math inline">V, W,</span> và <span class="math inline">X</span>. Chứng minh rằng biểu diễn ma trận cho phép biến đổi tuyến tính <span class="math inline">BA</span> chính là tích ma trận của các biểu diễn ma trận cho <span class="math inline">B</span> và <span class="math inline">A</span>, đối với các cơ sở phù hợp.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.4: (Biểu diễn ma trận cho toán tử đơn vị)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng toán tử đơn vị trên một không gian véc-tơ <span class="math inline">V</span> có biểu diễn ma trận với các giá trị bằng 1 ở đường chéo chính và bằng 0 ở tất cả các vị trí khác, nếu biểu diễn ma trận đó được tính toán đối với cùng một bộ cơ sở đầu vào và đầu ra. Ma trận này được gọi là ma trận đơn vị (identity matrix).</p>
+</div>
+</div>
+</section>
+<section id="the-pauli-matrices" class="level1">
+<h1>3. The Pauli matrices</h1>
+<p>Bốn ma trận cực kỳ hữu ích mà chúng ta sẽ thường xuyên có dịp sử dụng là các ma trận Pauli.</p>
+<p>Đây là các ma trận kích thước <span class="math inline">2 \times 2</span>, được ký hiệu bằng nhiều cách khác nhau. Các ma trận này và các ký hiệu tương ứng được thể hiện trong Hình 2.2. Các ma trận Pauli rất hữu ích trong việc nghiên cứu tính toán lượng tử và thông tin lượng tử đến mức chúng ta được khuyến khích ghi nhớ chúng thông qua việc làm chi tiết các ví dụ và bài tập dựa trên chúng ở các mục tiếp theo.</p>
+<p><img src="../../img/2.2.png" class="img-fluid"></p>
+</section>
+<section id="inner-products" class="level1">
+<h1>4. Inner products</h1>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Trong quantum mechanics, trạng thái của môtj qubit hay hệ lượng tử nằm trong không gian n-chiều phức <span class="math inline">\mathbb C^n</span>, khá là trừu tượng, khá là phản trực giác.</p>
+<p>Vì vậy người ta sử dụng tích trong để trả lời 3 thứ:</p>
+<ol type="1">
+<li><p><strong>Norm</strong>: tính độ dài, trạng thái lượng tử này có chuẩn hóa hợp lệ không (tổng xác suất có bằng 100% hay không)?</p></li>
+<li><p><strong>Overlapping</strong>: Hai trạng thái lượng tử giống nhau đến mức nào?</p></li>
+<li><p><strong>Orthorgonality</strong>: Hai trạng thái có trực giao hay không? Hai trạng thái có hoàn toàn phân biệt được bằng phép đo hay không? (tức là tích trong bằng 0).</p></li>
+</ol>
+<hr>
+<p>Đầu vào sẽ là 2 vector bất kỳ, ví dụ như là ket psi hay ket varphi.</p>
+<p>Đầu ra cho duy nhất 1 số phức.</p>
+<hr>
+<p>Cú pháp:</p>
+<p>Tích trong ket v và ket w là: <span class="math inline">\langle v \vert w \rangle</span>.</p>
+</div>
+</div>
+<p>Một tích trong là một hàm số nhận đầu vào là hai vector <span class="math inline">\vert v \rangle</span> và <span class="math inline">\vert w \rangle</span> từ một không gian vector và cho đầu ra là một số phức. Hiện tại, sẽ thuận tiện khi viết tích trong của <span class="math inline">\vert v \rangle</span> và <span class="math inline">\vert w\rangle</span> dưới dạng <span class="math inline">(\vert v \rangle, \vert w\rangle)</span>. Đây không phải là ký hiệu cơ học lượng tử chuẩn; vì sự rõ ràng trong sư phạm, ký hiệu <span class="math inline">(\cdot, \cdot)</span> sẽ đôi khi hữu ích trong chương này.</p>
+<p>Ký hiệu cơ học lượng tử chuẩn cho tích trong <span class="math inline">(\vert{}v\rangle, \vert{}w\rangle)</span> là <span class="math inline">\langle v\vert{}w\rangle</span>, trong đó <span class="math inline">\vert{}v\rangle</span> và <span class="math inline">\vert{}w\rangle</span> là các véc-tơ trong không gian tích trong, và ký hiệu <span class="math inline">\langle v\vert{}</span> được sử dụng cho véc-tơ đối ngẫu (dual vector) với véc-tơ <span class="math inline">\vert{}v\rangle</span>; véc-tơ đối ngẫu là một toán tử tuyến tính từ không gian tích trong <span class="math inline">V</span> đến tập hợp các số phức <span class="math inline">\mathbb{C}</span>, được định nghĩa bởi <span class="math inline">\langle v\vert{}(\vert{}w\rangle) \equiv \langle v\vert{}w\rangle \equiv (\vert{}v\rangle, \vert{}w\rangle)</span>. Chúng ta sẽ sớm thấy rằng biểu diễn ma trận của các véc-tơ đối ngẫu chính là một véc-tơ hàng.</p>
+<p>Một hàm số <span class="math inline">(\cdot, \cdot)</span> từ <span class="math inline">V \times V</span> đến <span class="math inline">\mathbb{C}</span> là một tích trong nếu nó thỏa mãn các yêu cầu sau:</p>
+<ol type="1">
+<li><span class="math inline">(\cdot, \cdot)</span> có tính tuyến tính ở đối số thứ hai:</li>
+</ol>
+<p><span class="math display">
+(\vert{}v\rangle, \sum_i \lambda_i\vert{}w_i\rangle) = \sum_i \lambda_i (\vert{}v\rangle, \vert{}w_i\rangle) \tag {2.13}
+</span></p>
+<ol start="2" type="1">
+<li><p><span class="math inline">(\vert{}v\rangle, \vert{}w\rangle) = (\vert{}w\rangle, \vert{}v\rangle)^*</span>.</p></li>
+<li><p><span class="math inline">(\vert{}v\rangle, \vert{}v\rangle) \ge 0</span> với dấu bằng xảy ra khi và chỉ khi <span class="math inline">\vert{}v\rangle = 0</span>.</p></li>
+</ol>
+<p>Ví dụ, không gian <span class="math inline">\mathbb{C}^n</span> có một tích trong được định nghĩa bởi</p>
+<p><span class="math display">
+((y_1, \dots, y_n), (z_1, \dots, z_n)) \equiv \sum_i y_i^* z_i = \begin{bmatrix} y_1^* &amp; \dots &amp; y_n^* \end{bmatrix} \begin{bmatrix} z_1 \\ \vdots \\ z_n \end{bmatrix} \tag {2.14}
+</span></p>
+<p>Chúng ta gọi một không gian véc-tơ được trang bị một tích trong là một không gian tích trong (inner product space).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Xác minh rằng <span class="math inline">(\cdot, \cdot)</span> vừa được định nghĩa thực sự là một tích trong trên <span class="math inline">\mathbb{C}^n</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng bất kỳ tích trong <span class="math inline">(\cdot, \cdot)</span> nào cũng có tính tuyến tính liên hợp (conjugate-linear) ở đối số thứ nhất: <span class="math display">
+(\sum_i \lambda_i \vert{}w_i\rangle, \vert{}v\rangle) = \sum_i \lambda_i^* (\vert{}w_i\rangle, \vert{}v\rangle) \tag {2.15}
+</span></p>
+</div>
+</div>
+<hr>
+<section id="hilbert-space-yapping" class="level2">
+<h2 class="anchored" data-anchor-id="hilbert-space-yapping">Hilbert space yapping</h2>
+<p>Các cuộc thảo luận về cơ học lượng tử thường nhắc đến không gian Hilbert. Trong các không gian véc-tơ phức hữu hạn chiều xuất hiện trong tính toán và thông tin lượng tử, không gian Hilbert hoàn toàn đồng nhất với không gian tích trong. Kể từ bây giờ, chúng ta sử dụng hai thuật ngữ này thay thế cho nhau, ưu tiên dùng thuật ngữ không gian Hilbert. Đối với không gian vô hạn chiều, không gian Hilbert thỏa mãn các giới hạn kỹ thuật bổ sung vượt ra ngoài không gian tích trong, điều mà chúng ta không cần phải bận tâm.</p>
+<p>Các véc-tơ <span class="math inline">\vert{}w\rangle</span> và <span class="math inline">\vert{}v\rangle</span> được gọi là trực giao nếu tích trong của chúng bằng không. Ví dụ, <span class="math inline">\vert{}w\rangle \equiv (1, 0)</span> và <span class="math inline">\vert{}v\rangle \equiv (0, 1)</span> là trực giao đối với tích trong được định nghĩa bởi phương trình (2.14).</p>
+<p>Chúng ta định nghĩa chuẩn của một véc-tơ <span class="math inline">\vert{}v\rangle</span> bởi:</p>
+<p><span class="math display">
+\Vert{} \vert{}v\rangle \Vert{} \equiv \sqrt{\langle v\vert{}v\rangle} \quad (2.16)
+</span></p>
+<p>Một véc-tơ đơn vị là một véc-tơ <span class="math inline">\vert{}v\rangle</span> sao cho <span class="math inline">\Vert{} \vert{}v\rangle \Vert{} = 1</span>. Ta cũng nói rằng <span class="math inline">\vert{}v\rangle</span> được chuẩn hóa nếu <span class="math inline">\Vert{} \vert{}v\rangle \Vert{} = 1</span>. Thật tiện lợi khi nói đến việc chuẩn hóa một véc-tơ bằng cách chia nó cho chuẩn của chính nó; do đó <span class="math inline">\vert{}v\rangle / \Vert{} \vert{}v\rangle \Vert{}</span> là dạng chuẩn hóa của <span class="math inline">\vert{}v\rangle</span>, với mọi véc-tơ khác không <span class="math inline">\vert{}v\rangle</span>.</p>
+<p>Một tập hợp các véc-tơ <span class="math inline">\vert{}i\rangle</span> với chỉ số <span class="math inline">i</span> được gọi là trực chuẩn nếu mỗi véc-tơ là véc-tơ đơn vị, và các véc-tơ phân biệt trong tập hợp là trực giao với nhau, tức là <span class="math inline">\langle i\vert{}j \rangle = \delta_{ij}</span>, trong đó cả <span class="math inline">i</span> và <span class="math inline">j</span> đều được chọn từ tập chỉ số.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.7.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\vert w \rangle = (1, 1)</span> và <span class="math inline">\vert v \rangle = (1, -1)</span> là trực chuẩn. Và dạng chuẩn hóa của nó là gì?</p>
+<p>Tính:</p>
+<p><span class="math display">
+\langle w \vert = \vert w \rangle ^ \dagger = (w_1^\dagger \ w_2^\dagger)
+</span></p>
+<p><span class="math display">
+\langle w \vert v \rangle = \vert w \rangle^\dagger \vert v \rangle = 0
+</span></p>
+<p>vậy nó trực chuẩn.</p>
+<p>Tìm dạng chuẩn hóa: <span class="math display">
+\text{norm}(\vert w \rangle) = \frac{\vert w \rangle} {\Vert{} \vert{}w\rangle \Vert{}} = \frac 1 {\sqrt 2} (1, 1)
+</span></p>
+<p><span class="math display">
+\text{norm}(\vert v \rangle) = \frac{\vert v \rangle} {\Vert{} \vert{}v\rangle \Vert{}} = \frac 1 {\sqrt 2} (1, -1)
+</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="gram-schmidt-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="gram-schmidt-procedure">Gram-Schmidt procedure</h2>
+<p>Giả sử <span class="math inline">\vert{}w_1\rangle, \dots, \vert{}w_d\rangle</span> là một tập cơ sở cho một không gian véc-tơ <span class="math inline">V</span> có trang bị tích trong. Có một phương pháp hữu ích là thủ tục Gram-Schmidt, có thể được dùng để tạo ra một tập cơ sở trực chuẩn <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_d\rangle</span> cho không gian véc-tơ <span class="math inline">V</span>. Định nghĩa <span class="math inline">\vert{}v_1\rangle \equiv \vert{}w_1\rangle / \Vert{} \vert{}w_1\rangle \Vert{}</span>, và với <span class="math inline">1 \le k \le d-1</span>, định nghĩa <span class="math inline">\vert{}v_{k+1}\rangle</span> một cách quy nạp bởi:</p>
+<p><span class="math display">
+\vert{}v_{k+1}\rangle \equiv \frac{\vert{}w_{k+1}\rangle - \sum_{t=1}^k \langle v_t \vert{} w_{k+1} \rangle \vert{}v_t\rangle}{\Vert{} \vert{}w_{k+1}\rangle - \sum_{t=1}^k \langle v_t \vert{} w_{k+1} \rangle \vert{}v_t\rangle \Vert{}} \tag {2.17}
+</span></p>
+<p>Không khó để xác minh rằng các véc-tơ <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_d\rangle</span> tạo thành một tập trực chuẩn đồng thời cũng là một cơ sở cho <span class="math inline">V</span>. Do đó, bất kỳ không gian véc-tơ hữu hạn chiều nào có số chiều <span class="math inline">d</span> đều có một cơ sở trực chuẩn <span class="math inline">\vert{}v_1\rangle, \dots, \vert{}v_d\rangle</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng phương pháp Gram–Schmidt tạo ra một cơ sở trực chuẩn cho V.</p>
+</div>
+</div>
+<hr>
+<p>Kể từ bây giờ, khi nói đến biểu diễn ma trận của một toán tử tuyến tính, chúng ta có ý nói đến biểu diễn ma trận đối với các cơ sở đầu vào và đầu ra trực chuẩn.</p>
+<p>Chúng ta cũng sử dụng quy ước rằng nếu không gian đầu vào và đầu ra của một toán tử tuyến tính giống nhau, thì các cơ sở đầu vào và đầu ra cũng giống nhau, trừ khi có ghi chú khác.</p>
+<p>Với những quy ước này, tích trong trên một không gian Hilbert có thể được đưa ra một biểu diễn ma trận thuận tiện. Gọi <span class="math inline">\vert{}w\rangle = \sum_i w_i\vert{}i\rangle</span> và <span class="math inline">\vert{}v\rangle = \sum_j v_j\vert{}j\rangle</span> là biểu diễn của các véc-tơ <span class="math inline">\vert{}w\rangle</span> và <span class="math inline">\vert{}v\rangle</span> đối với một cơ sở trực chuẩn <span class="math inline">\vert{}i\rangle</span>. Khi đó, vì <span class="math inline">\langle i\vert{}j\rangle = \delta_{ij}</span>, ta có:</p>
+<p><span class="math display">
+\langle v\vert{}w\rangle = \left( \sum_i v_i\vert{}i\rangle, \sum_j w_j\vert{}j\rangle \right) = \sum_{ij} v_i^* w_j \delta_{ij} = \sum_i v_i^* w_i \tag{2.18}
+</span></p>
+<p><span class="math display">
+= \begin{bmatrix} v_1^* &amp; \dots &amp; v_n^* \end{bmatrix} \begin{bmatrix} w_1 \\ \vdots \\ w_n \end{bmatrix} \tag{2.19}
+</span></p>
+<p>Tức là, tích trong của hai véc-tơ bằng với tích trong véc-tơ giữa hai biểu diễn ma trận của các véc-tơ đó, miễn là các biểu diễn được viết đối với cùng một cơ sở trực chuẩn. Chúng ta cũng thấy rằng véc-tơ đối ngẫu <span class="math inline">\langle v\vert{}</span> có một diễn giải rất đẹp là véc-tơ hàng mà các thành phần của nó là số phức liên hợp của các thành phần tương ứng của biểu diễn véc-tơ cột của <span class="math inline">\vert{}v\rangle</span>.</p>
+<hr>
+</section>
+<section id="outer-product-representation" class="level2">
+<h2 class="anchored" data-anchor-id="outer-product-representation">Outer product representation</h2>
+<p>Tồn tại một cách hữu ích để biểu diễn các toán tử tuyến tính bằng cách sử dụng tích trong, được gọi là <strong><em>outer product representation</em></strong> biểu diễn tích ngoài.</p>
+<p>Giả sử <span class="math inline">\vert{}v\rangle</span> là một véc-tơ trong không gian tích trong <span class="math inline">V</span>, và <span class="math inline">\vert{}w\rangle</span> là một véc-tơ trong không gian tích trong <span class="math inline">W</span>. Định nghĩa <span class="math inline">\vert{}w\rangle\langle v\vert{}</span> là toán tử tuyến tính từ <span class="math inline">V</span> đến <span class="math inline">W</span> có tác động được định nghĩa bởi:</p>
+<p><span class="math display">
+(\vert{}w\rangle\langle v\vert{})(\vert{}v'\rangle) \equiv \vert{}w\rangle\langle v\vert{}v'\rangle = \langle v\vert{}v'\rangle \vert{}w\rangle \tag {2.20}
+</span></p>
+<p>Phương trình này khớp một cách tuyệt đẹp vào các quy ước ký hiệu của chúng ta, theo đó biểu thức <span class="math inline">\vert{}w\rangle\langle v\vert{}v'\rangle</span> có thể có một trong hai nghĩa: chúng ta sẽ dùng nó để chỉ kết quả khi toán tử <span class="math inline">\vert{}w\rangle\langle v\vert{}</span> tác động lên <span class="math inline">\vert{}v'\rangle</span>, và nó có một diễn giải sẵn có là kết quả của phép nhân véc-tơ <span class="math inline">\vert{}w\rangle</span> với số phức <span class="math inline">\langle v\vert{}v'\rangle</span>. Các định nghĩa của chúng ta được chọn sao cho hai ý nghĩa tiềm năng này trùng khớp với nhau. Quả thực, chúng ta định nghĩa ý nghĩa thứ nhất thông qua ý nghĩa thứ hai!</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Bản chất
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cho hai vector trạng thái <span class="math inline">\vert \alpha \rangle, \vert \beta \rangle</span>, tích ngoài của chúng được ký hiệu là:</p>
+<p><span class="math display">
+\hat P = \vert \alpha \rangle \langle \beta \vert
+</span></p>
+<p>Là một ma trận. khi áp dụng ma trận này lên một vector <span class="math inline">\vert \psi \rangle</span> bất kỳ, nó thành:</p>
+<p><span class="math display">
+\hat P \vert \psi \rangle = (\vert \alpha \rangle \langle \beta \vert) \vert \psi \rangle = \vert a \rangle (\langle \beta \vert \psi \rangle)
+</span></p>
+<p>vì kết quả của <span class="math inline">\langle \beta \vert \psi \rangle</span> là một số phức, vì vậy kết quả trả về là một vector mới nằm dọc theo hướng của <span class="math inline">\vert \alpha \rangle</span>, được tỉ lệ hóa bởi biên độ <span class="math inline">\langle \beta \vert \psi \rangle</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="completeness-relation" class="level2">
+<h2 class="anchored" data-anchor-id="completeness-relation">Completeness Relation</h2>
+<p>Chúng ta có thể lấy các tổ hợp tuyến tính của các toán tử tích ngoài <span class="math inline">\vert{}w\rangle\langle v\vert{}</span> một cách trực quan. Theo định nghĩa, <span class="math inline">\sum_i a_i\vert{}w_i\rangle\langle v_i\vert{}</span> là toán tử tuyến tính mà khi tác động lên <span class="math inline">\vert{}v'\rangle</span>, sẽ tạo ra <span class="math inline">\sum_i a_i\vert{}w_i\rangle\langle v_i\vert{}v'\rangle</span> làm đầu ra.</p>
+<p>Tính hữu ích của ký hiệu tích ngoài có thể nhận thấy từ một kết quả quan trọng được gọi là hệ thức đầy đủ (completeness relation) cho các véc-tơ trực chuẩn. Gọi <span class="math inline">\vert{}i\rangle</span> là bất kỳ cơ sở trực chuẩn nào cho không gian véc-tơ <span class="math inline">V</span>, sao cho một véc-tơ tùy ý <span class="math inline">\vert{}v\rangle</span> có thể được viết là <span class="math inline">\vert{}v\rangle = \sum_i v_i\vert{}i\rangle</span> với một tập hợp các số phức <span class="math inline">v_i</span>. Lưu ý rằng <span class="math inline">\langle i\vert{}v\rangle = v_i</span> và do đó</p>
+<p><span class="math display">
+\left( \sum_i \vert{}i\rangle\langle i\vert{} \right) \vert{}v\rangle = \sum_i \vert{}i\rangle\langle i\vert{}v\rangle = \sum_i v_i\vert{}i\rangle = \vert{}v\rangle \tag {2.21}
+</span></p>
+<p>Vì phương trình cuối cùng đúng với mọi véc-tơ <span class="math inline">\vert{}v\rangle</span>, suy ra rằng</p>
+<p><span class="math display">
+\sum_i \vert{}i\rangle\langle i\vert{} = I \tag {2.22}
+</span></p>
+<p>Phương trình này được gọi là <strong><em>completeness relation</em></strong> hệ thức đầy đủ.</p>
+<hr>
+</section>
+<section id="langle-opr-vert-cr-rangle" class="level2">
+<h2 class="anchored" data-anchor-id="langle-opr-vert-cr-rangle"><span class="math inline">\langle OPR \vert CR \rangle</span></h2>
+<p>Một ứng dụng của hệ thức đầy đủ là cung cấp một phương tiện để biểu diễn bất kỳ toán tử nào dưới ký hiệu tích ngoài. Giả sử <span class="math inline">A : V \to W</span> là một toán tử tuyến tính, <span class="math inline">\vert{}v_i\rangle</span> là một cơ sở trực chuẩn cho <span class="math inline">V</span>, và <span class="math inline">\vert{}w_j\rangle</span> là một cơ sở trực chuẩn cho <span class="math inline">W</span>. Sử dụng hệ thức đầy đủ hai lần, ta thu được</p>
+<p><span class="math display">
+A = I_W A I_V \tag {2.23}
+</span></p>
+<p><span class="math display">= \sum_{ij} \vert{}w_j\rangle \langle w_j\vert{}A\vert{}v_i\rangle \langle v_i\vert{} \tag {2.24}
+</span></p>
+<p><span class="math display">
+= \sum_{ij} \langle w_j\vert{}A\vert{}v_i\rangle \vert{}w_j\rangle\langle v_i\vert{} \tag {2.25}
+</span></p>
+<p>đó chính là biểu diễn tích ngoài cho <span class="math inline">A</span>. Chúng ta cũng thấy từ phương trình này rằng <span class="math inline">A</span> có phần tử ma trận <span class="math inline">\langle w_j\vert{}A\vert{}v_i\rangle</span> ở cột thứ <span class="math inline">i</span> và hàng thứ <span class="math inline">j</span>, đối với cơ sở đầu vào <span class="math inline">\vert{}v_i\rangle</span> và cơ sở đầu ra <span class="math inline">\vert{}w_j\rangle</span>.</p>
+<p>Một ứng dụng thứ hai minh họa tính hữu ích của hệ thức đầy đủ là bất đẳng thức Cauchy-Schwarz. Kết quả quan trọng này được thảo luận trong Hộp 2.1 ở trang này.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.9: (Các toán tử Pauli và tích ngoài)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Các ma trận Pauli (Hình 2.2 ở trang 65) có thể được coi là các toán tử đối với một cơ sở trực chuẩn <span class="math inline">\vert{}0\rangle, \vert{}1\rangle</span> cho một không gian Hilbert hai chiều. Hãy biểu diễn mỗi toán tử Pauli dưới ký hiệu tích ngoài.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.10:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\vert{}v_i\rangle</span> là một cơ sở trực chuẩn cho không gian tích trong <span class="math inline">V</span>. Biểu diễn ma trận cho toán tử <span class="math inline">\vert{}v_j\rangle\langle v_k\vert{}</span> đối với cơ sở <span class="math inline">\vert{}v_i\rangle</span> là gì?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The Cauchy-Schwarz inequality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bất đẳng thức Cauchy-Schwarz là một yếu tố quan trọng về không gian Hilbert.</p>
+<p>Nó khẳng định rằng với bất kỳ 2 vector <span class="math inline">\vert v\rangle</span> và <span class="math inline">\vert w\rangle</span> nào, <span class="math inline">\vert \langle v \vert w \rangle \vert ^2 \leq \langle v \vert v \rangle \langle w \vert w \rangle</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="eigenvectors-and-eigenvalues" class="level1">
+<h1>5. Eigenvectors and eigenvalues</h1>
+</section>
+<section id="adjoints-and-hermitian-operators" class="level1">
+<h1>6. Adjoints and Hermitian operators</h1>
+</section>
+<section id="tensor-products" class="level1">
+<h1>7. Tensor products</h1>
+</section>
+<section id="operator-functions" class="level1">
+<h1>8. Operator functions</h1>
+</section>
+<section id="the-commutator-and-anti-commutator" class="level1">
+<h1>9. The commutator and anti-commutator</h1>
+</section>
+<section id="the-polar-and-singular-value-decompositions" class="level1">
+<h1>10. The polar and singular value decompositions</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
