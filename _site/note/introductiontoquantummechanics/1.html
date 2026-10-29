@@ -297,8 +297,20 @@ window.Quarto = {
   <li><a href="#completeness-relation" id="toc-completeness-relation" class="nav-link" data-scroll-target="#completeness-relation">Completeness Relation</a></li>
   <li><a href="#langle-opr-vert-cr-rangle" id="toc-langle-opr-vert-cr-rangle" class="nav-link" data-scroll-target="#langle-opr-vert-cr-rangle"><span class="math inline">\langle OPR \vert CR \rangle</span></a></li>
   </ul></li>
-  <li><a href="#eigenvectors-and-eigenvalues" id="toc-eigenvectors-and-eigenvalues" class="nav-link" data-scroll-target="#eigenvectors-and-eigenvalues">5. Eigenvectors and eigenvalues</a></li>
-  <li><a href="#adjoints-and-hermitian-operators" id="toc-adjoints-and-hermitian-operators" class="nav-link" data-scroll-target="#adjoints-and-hermitian-operators">6. Adjoints and Hermitian operators</a></li>
+  <li><a href="#eigenvectors-and-eigenvalues" id="toc-eigenvectors-and-eigenvalues" class="nav-link" data-scroll-target="#eigenvectors-and-eigenvalues">5. Eigenvectors and eigenvalues</a>
+  <ul class="collapse">
+  <li><a href="#diagonal-representation" id="toc-diagonal-representation" class="nav-link" data-scroll-target="#diagonal-representation">Diagonal representation</a></li>
+  <li><a href="#degenerate" id="toc-degenerate" class="nav-link" data-scroll-target="#degenerate">Degenerate</a></li>
+  </ul></li>
+  <li><a href="#adjoints-and-hermitian-operators" id="toc-adjoints-and-hermitian-operators" class="nav-link" data-scroll-target="#adjoints-and-hermitian-operators">6. Adjoints and Hermitian operators</a>
+  <ul class="collapse">
+  <li><a href="#adjoint-hermitian-conjugate" id="toc-adjoint-hermitian-conjugate" class="nav-link" data-scroll-target="#adjoint-hermitian-conjugate">Adjoint (Hermitian conjugate)</a></li>
+  <li><a href="#hermitian-operator-self-adjoint-operator" id="toc-hermitian-operator-self-adjoint-operator" class="nav-link" data-scroll-target="#hermitian-operator-self-adjoint-operator">Hermitian operator (Self-adjoint operator)</a></li>
+  <li><a href="#projectors" id="toc-projectors" class="nav-link" data-scroll-target="#projectors">Projectors</a></li>
+  <li><a href="#normal" id="toc-normal" class="nav-link" data-scroll-target="#normal">Normal</a></li>
+  <li><a href="#unitary" id="toc-unitary" class="nav-link" data-scroll-target="#unitary">Unitary</a></li>
+  <li><a href="#positive-operators" id="toc-positive-operators" class="nav-link" data-scroll-target="#positive-operators">Positive operators</a></li>
+  </ul></li>
   <li><a href="#tensor-products" id="toc-tensor-products" class="nav-link" data-scroll-target="#tensor-products">7. Tensor products</a></li>
   <li><a href="#operator-functions" id="toc-operator-functions" class="nav-link" data-scroll-target="#operator-functions">8. Operator functions</a></li>
   <li><a href="#the-commutator-and-anti-commutator" id="toc-the-commutator-and-anti-commutator" class="nav-link" data-scroll-target="#the-commutator-and-anti-commutator">9. The commutator and anti-commutator</a></li>
@@ -757,9 +769,375 @@ A = I_W A I_V \tag {2.23}
 </section>
 <section id="eigenvectors-and-eigenvalues" class="level1">
 <h1>5. Eigenvectors and eigenvalues</h1>
+<p>Một <strong><em>eigenvector</em></strong> vector riêng của một toán tử tuyến tính A trên một không gian vector là một vector <span class="math inline">\vert v \rangle</span> sao cho <span class="math inline">\vert v\rangle \neq 0</span> và <span class="math inline">A\vert v \rangle = v\vert v \rangle</span>, trong đó v là một số phức được gọi là <strong><em>eigenvalue</em></strong> của A tương ứng với <span class="math inline">\vert v \rangle</span>.</p>
+<p>Cách tính eigenvalue và eigenvector, thông qua hàm đặc trưng:</p>
+<p><span class="math display">
+c(\lambda) \equiv \det \vert {A - \lambda I} \vert
+</span></p>
+<p>trong đó, det là hàm định thức cho ma trận. Có thể chứng minh rằng hàm đặc trưng chỉ phụ thuộc vào toán tử A chứ không phụ thuộc vào biểu diễn ma trận cụ thể được sử dụng cho A.</p>
+<p>Các nghiệm của phương trình đặc trưng <span class="math inline">c(\lambda) = 0</span> chính là các eigenvalue của toán tử A. Theo định lý cơ bản của đại số, mọi đa thức đều có ít nhất một nghiệm phức, vì vậy mọi toán tử A đều có ít nhất một eigenvalue và eigenvector tương ứng.</p>
+<p><strong><em>Eigenspace</em></strong> Không gian riêng tương ứng với eigenvalue là v, là tập hợp các vector có eigenvalue là v. Nó là một không gian con vector của không gian vector mà A tác động lên.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Phương trình <span class="math inline">A\vert v \rangle = v\vert v \rangle</span> có ý nghĩa vật lý vô cùng quan trọng.</p>
+<p>Khi một toán tử tuyến tính (phép đo) A tác động lên một trạng thái riêng eigenstates ket v, trạng thái đó không bị biến đổi hướng mà chỉ bị nhân với một hệ số scalar v.</p>
+<p>Trong cơ học lượng tử, eigenvalue v chính là kết quả đo được thực tế thu được từ phép đo A/</p>
+</div>
+</div>
+</div>
+<section id="diagonal-representation" class="level2">
+<h2 class="anchored" data-anchor-id="diagonal-representation">Diagonal representation</h2>
+<p>Một <strong><em>diagonal representation</em></strong> biểu diễn đường chéo cho một toán tử A trên không gian vector V là một biểu diễn</p>
+<p><span class="math display">
+A = \sum_i \lambda_i \vert i \rangle \langle i \vert
+</span></p>
+<p>, trong đó các vector <span class="math inline">\vert i \rangle</span> tạo thành một tập trực chuẩn các eigenvector của A, với các eigenvalue tương ứng <span class="math inline">\lambda_i</span>. Một toán tử được gọi là <strong><em>diagonalizable</em></strong> chéo hóa được nếu nó có một biểu diễn đường chéo. Trong mục tiếp theo, ta sẽ tìm một tập hợp các điều kiện cần và đủ đơn giản để một toán tử trên không gian Hilbert chéo hóa được.</p>
+<p>Như một ví dụ về biểu diễn đường chéo, lưu ý rằng ma trận Pauli-Z có thể viết được dưới dạng:</p>
+<p><span class="math display">
+Z = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; -1
+\end{bmatrix}
+= \vert 0 \rangle \langle 0 \vert - \vert 1 \rangle \langle 1 \vert \tag {2.29}
+</span></p>
+<p>trong đó biểu diễn ma trận là đối với các vector trực chuẩn lần lượt là <span class="math inline">\vert 0 \rangle</span> và <span class="math inline">\vert 1 \rangle</span>. Các biểu diễn đường chéo đôi khi còn được gọi là <strong><em>orthonormal decompositions</em></strong> phân tích trực chuẩn.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Có thể thấy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>biểu diễn chéo là một trường hợp đặc biệt của biểu diễn bằng tích ngoài, theo <strong><em>Spectral theorem</em></strong> định lý Phổ. Trường hợp đặc biệt khi và chỉ khi A là một toán tử Hermite.</p>
+<p>Và một toán tử không chéo hóa được là một toán tử không biểu diễn chéo hóa được.</p>
+</div>
+</div>
+</section>
+<section id="degenerate" class="level2">
+<h2 class="anchored" data-anchor-id="degenerate">Degenerate</h2>
+<p>Khi một eigenspace có số chiều lớn hơn 1, chúng ta nói rằng nó suy biến. Ví dụ, ma trận A được định nghĩa bởi:</p>
+<p><span class="math display">
+A \equiv \begin{bmatrix}
+2 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{bmatrix}
+\tag {2.30}
+</span></p>
+<p>có một eigenspace hai chiều tương ứng với eigenvalue 2. Các eigenvector <span class="math inline">(1, 0, 0)</span> và <span class="math inline">(0, 1, 0)</span> được gọi là suy biến vì chúng là các eigenvector độc lập tuyến tính của A có cùng eigenvalue.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ý nghĩa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Xảy ra khi có nhiều eigenvector độc lập tuyến tính cùng ứng với một eigenvalue.</p>
+<p>(Ví dụ hai trạng thái phân biệt, nhưng lại cho ra cùng một kết quả khi đo)</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.11: (Phân tích eigenvalue của các ma trận Pauli)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tìm các eigenvector, eigenvalue, và biểu diễn đường chéo của các ma trận Pauli X, Y, và Z.</p>
+<p><strong>Biểu diễn chéo hóa của Pauli-X:</strong></p>
+<p><span class="math display">
+X = \begin{bmatrix}
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+</span></p>
+<p>Tính eignevalue:</p>
+<p><span class="math display">
+\det(X - \lambda I) = 0 \\
+\left|\begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \right| = 0 \\
+\left|\begin{bmatrix} -\lambda &amp; 1 \\ 1 &amp; -\lambda \end{bmatrix} \right| = 0 \\
+\lambda^2 = 1
+</span></p>
+<p>Vậy <span class="math inline">\lambda = \pm 1</span>.</p>
+<p>Xét eigenvalue = 1, tìm eigenvector tương ứng:</p>
+<p><span class="math display">
+(X - \lambda I) \vert v \rangle = \theta \\ \left(\begin{bmatrix}0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} - \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \right) \begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} -1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}\begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} -a + b \\ a - b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+</span></p>
+<p>Hay a = b. Từ đó ta tìm được eigenvector là:</p>
+<p><span class="math display">
+\begin{bmatrix} a \\ a \end{bmatrix} = a \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+</span></p>
+<p>chuẩn hóa eigenvector, ta được:</p>
+<p><span class="math display">
+\text{norm}\left(a \begin{bmatrix} 1 \\ 1 \end{bmatrix}\right) = \frac a {\sqrt 2} \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+</span></p>
+<p>chúng ta có thể bỏ mọe thằng a đi cũng được, chỉ giữ lại mấy cái sau thôi, và có thể phân tích được vector cột 1 1 thành như sau:</p>
+<p><span class="math display">
+\frac {1} {\sqrt 2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \frac 1 {\sqrt 2} \left(\begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) = \frac 1 {\sqrt 2} (\vert 0 \rangle + \vert 1 \rangle) = \vert + \rangle
+</span></p>
+<p>vậy, eigenvector của pauli-x ứng với eigenvalue 1 là <span class="math inline">\vert + \rangle</span>.</p>
+<p>Tính tương tự với eigenvalue -1, ta tìm được eigenvalue <span class="math inline">\vert - \rangle</span>.</p>
+<p>Tổng hợp lại, ta có thể biểu diễn chéo hóa của pauli-x như sau:</p>
+<p><span class="math display">
+X = \vert + \rangle \langle + \vert - \vert - \rangle \langle-\vert
+</span></p>
+<p>Qua đó cũng có thể bình luận thêm là pauli-x là diagonalizable.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.12:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng ma trận</p>
+<p><span class="math display">
+\begin{bmatrix}
+1 &amp; 0 \\
+1 &amp; 1
+\end{bmatrix} \tag {2.31}
+</span></p>
+<p>không chéo hóa được.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="adjoints-and-hermitian-operators" class="level1">
 <h1>6. Adjoints and Hermitian operators</h1>
+<section id="adjoint-hermitian-conjugate" class="level2">
+<h2 class="anchored" data-anchor-id="adjoint-hermitian-conjugate">Adjoint (Hermitian conjugate)</h2>
+<p>Giả sử <span class="math inline">A</span> là một toán tử tuyến tính bất kỳ trên không gian Hilbert <span class="math inline">V</span>. Hóa ra tồn tại duy nhất một toán tử tuyến tính <span class="math inline">A^\dagger</span> trên <span class="math inline">V</span> sao cho với mọi véc-tơ <span class="math inline">\vert{}v\rangle, \vert{}w\rangle \in V</span>,</p>
+<p><span class="math display">
+(\vert{}v\rangle, A\vert{}w\rangle) = (A^\dagger\vert{}v\rangle, \vert{}w\rangle) \tag {2.32}
+</span></p>
+<p>Toán tử tuyến tính này được gọi là <strong><em>adjoint</em></strong> toán tử liên hợp hoặc <strong><em>Hermitian conjugate</em></strong> liên hợp Hermitian của toán tử <span class="math inline">A</span>. Từ định nghĩa, dễ dàng thấy rằng <span class="math inline">(AB)^\dagger = B^\dagger A^\dagger</span>. Theo quy ước, nếu <span class="math inline">\vert{}v\rangle</span> là một véc-tơ, thì chúng ta định nghĩa <span class="math inline">\vert{}v\rangle^\dagger \equiv \langle v\vert{}</span>. Với định nghĩa này, không khó để thấy rằng <span class="math inline">(A\vert{}v\rangle)^\dagger = \langle v\vert{}A^\dagger</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.13:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nếu <span class="math inline">\vert{}w\rangle</span> và <span class="math inline">\vert{}v\rangle</span> là hai véc-tơ bất kỳ, hãy chứng minh rằng <span class="math inline">(\vert{}w\rangle\langle v\vert{})^\dagger = \vert{}v\rangle\langle w\vert{}</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.14: (Tính phản tuyến tính của toán tử liên hợp)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng phép toán lấy liên hợp phụ hợp có tính phản tuyến tính (anti-linear):</p>
+<p><span class="math display">
+\left( \sum_i a_i A_i \right)^\dagger = \sum_i a_i^* A_i^\dagger \tag {2.33}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.15:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">(A^\dagger)^\dagger = A</span>.</p>
+</div>
+</div>
+</section>
+<section id="hermitian-operator-self-adjoint-operator" class="level2">
+<h2 class="anchored" data-anchor-id="hermitian-operator-self-adjoint-operator">Hermitian operator (Self-adjoint operator)</h2>
+<p>Trong biểu diễn ma trận của một toán tử <span class="math inline">A</span>, tác động của phép toán liên hợp Hermitian là biến ma trận của <span class="math inline">A</span> thành ma trận chuyển vị liên hợp phức, <span class="math inline">A^\dagger \equiv (A^*)^T</span>, trong đó dấu <span class="math inline">*</span> chỉ phép liên hợp phức, và <span class="math inline">T</span> chỉ phép chuyển vị. Ví dụ, chúng ta có:</p>
+<p><span class="math display">
+\begin{bmatrix} 1+3i &amp; 2i \\ 1+i &amp; 1-4i \end{bmatrix}^\dagger = \begin{bmatrix} 1-3i &amp; 1-i \\ -2i &amp; 1+4i \end{bmatrix} \tag {2.34}
+</span></p>
+<p>Một toán tử <span class="math inline">A</span> có liên hợp chính là <span class="math inline">A</span> được gọi là <strong><em>Hermitian operator</em></strong> một toán tử Hermitian hoặc <strong><em>self-adjoint operator</em></strong> tự liên hợp.</p>
+</section>
+<section id="projectors" class="level2">
+<h2 class="anchored" data-anchor-id="projectors">Projectors</h2>
+<p>Một lớp toán tử Hermitian quan trọng là các toán tử <strong><em>projectors</em></strong> chiếu. Giả sử <span class="math inline">W</span> là một không gian con véc-tơ <span class="math inline">k</span>-chiều của không gian véc-tơ <span class="math inline">d</span>-chiều <span class="math inline">V</span>. Sử dụng thủ tục Gram–Schmidt, ta có thể dựng một cơ sở trực chuẩn <span class="math inline">\vert{}1\rangle, \dots, \vert{}d\rangle</span> cho <span class="math inline">V</span> sao cho <span class="math inline">\vert{}1\rangle, \dots, \vert{}k\rangle</span> là một cơ sở trực chuẩn cho <span class="math inline">W</span>. Theo định nghĩa,</p>
+<p><span class="math display">
+P \equiv \sum_{i=1}^k \vert{}i\rangle\langle i\vert{} \tag {2.35}
+</span></p>
+<p>là toán tử chiếu lên không gian con <span class="math inline">W</span>. Dễ dàng kiểm tra rằng định nghĩa này không phụ thuộc vào cơ sở trực chuẩn <span class="math inline">\vert{}1\rangle, \dots, \vert{}k\rangle</span> được sử dụng cho <span class="math inline">W</span>. Từ định nghĩa, có thể chứng minh rằng <span class="math inline">\vert{}v\rangle\langle v\vert{}</span> là Hermitian với bất kỳ véc-tơ <span class="math inline">\vert{}v\rangle</span> nào, do đó <span class="math inline">P</span> là Hermitian, <span class="math inline">P^\dagger = P</span>. Chúng ta sẽ thường gọi “không gian véc-tơ <span class="math inline">P</span>” như một cách viết tắt cho không gian véc-tơ mà <span class="math inline">P</span> chiếu lên. Phần bù trực giao của <span class="math inline">P</span> là toán tử <span class="math inline">Q \equiv I - P</span>. Dễ thấy rằng <span class="math inline">Q</span> là một toán tử chiếu lên không gian véc-tơ sinh bởi <span class="math inline">\vert{}k+1\rangle, \dots, \vert{}d\rangle</span>, mà chúng ta cũng gọi là phần bù trực giao của <span class="math inline">P</span>, và có thể ký hiệu là <span class="math inline">Q</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.16:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng bất kỳ toán tử chiếu <span class="math inline">P</span> nào cũng thỏa mãn phương trình <span class="math inline">P^2 = P</span>.</p>
+</div>
+</div>
+</section>
+<section id="normal" class="level2">
+<h2 class="anchored" data-anchor-id="normal">Normal</h2>
+<p>Một toán tử <span class="math inline">A</span> được gọi là <strong><em>normal</em></strong> chuẩn tắc nếu <span class="math inline">AA^\dagger = A^\dagger A</span>. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là <strong><em>spectral decomposition</em></strong> phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 ở trang 72, mà bạn nên đọc kỹ.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.17:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng một ma trận chuẩn tắc là Hermitian khi và chỉ khi tất cả các giá trị riêng của nó đều là số thực.</p>
+</div>
+</div>
+</section>
+<section id="unitary" class="level2">
+<h2 class="anchored" data-anchor-id="unitary">Unitary</h2>
+<p>Một ma trận <span class="math inline">U</span> được gọi là <strong><em>unitary</em></strong> trực giao phức nếu <span class="math inline">U^\dagger U = I</span>. Tương tự, một toán tử <span class="math inline">U</span> được gọi là unitary nếu <span class="math inline">U^\dagger U = I</span>. Dễ dàng kiểm tra rằng một toán tử là unitary khi và chỉ khi mỗi biểu diễn ma trận của nó là unitary. Một toán tử unitary cũng thỏa mãn <span class="math inline">U U^\dagger = I</span>, và do đó <span class="math inline">U</span> là toán tử chuẩn tắc và có phân tích phổ. Về mặt hình học, các toán tử unitary có vai trò quan trọng vì chúng bảo toàn tích trong giữa các véc-tơ. Để thấy điều này, gọi <span class="math inline">\vert{}v\rangle</span> và <span class="math inline">\vert{}w\rangle</span> là hai véc-tơ bất kỳ. Khi đó tích trong của <span class="math inline">U\vert{}v\rangle</span> và <span class="math inline">U\vert{}w\rangle</span> bằng với tích trong của <span class="math inline">\vert{}v\rangle</span> và <span class="math inline">\vert{}w\rangle</span>:</p>
+<p><span class="math display">
+(U\vert{}v\rangle, U\vert{}w\rangle) = \langle v\vert{} U^\dagger U \vert{}w\rangle = \langle v\vert{} I \vert{}w\rangle = \langle v\vert{}w\rangle \tag {2.36}
+</span></p>
+<p>Kết quả này gợi ý biểu diễn tích ngoài đẹp đẽ sau đây của một toán tử unitary <span class="math inline">U</span> bất kỳ. Gọi <span class="math inline">\{\vert{}v_i\rangle\}</span> là một tập cơ sở trực chuẩn bất kỳ. Định nghĩa <span class="math inline">\vert{}w_i\rangle \equiv U\vert{}v_i\rangle</span>, khi đó <span class="math inline">\{\vert{}w_i\rangle\}</span> cũng là một tập cơ sở trực chuẩn, vì các toán tử unitary bảo toàn tích trong. Lưu ý rằng <span class="math inline">U = \sum_i \vert{}w_i\rangle\langle v_i\vert{}</span>. Ngược lại, nếu <span class="math inline">\{\vert{}v_i\rangle\}</span> và <span class="math inline">\{\vert{}w_i\rangle\}</span> là hai cơ sở trực chuẩn bất kỳ, thì dễ dàng kiểm tra rằng toán tử <span class="math inline">U</span> được định nghĩa bởi <span class="math inline">U \equiv \sum_i \vert{}w_i\rangle\langle v_i\vert{}</span> là một toán tử unitary.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.18:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng mọi giá trị riêng của một ma trận unitary đều có độ lớn bằng 1, nghĩa là có thể viết dưới dạng <span class="math inline">e^{i\theta}</span> với <span class="math inline">\theta</span> là một số thực.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.19: (Các ma trận Pauli: Hermitian và Unitary)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng các ma trận Pauli vừa là Hermitian vừa là Unitary.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.20: (Đổi cơ sở)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">A'</span> và <span class="math inline">A''</span> là các biểu diễn ma trận của một toán tử <span class="math inline">A</span> trên không gian véc-tơ <span class="math inline">V</span> đối với hai cơ sở trực chuẩn khác nhau, <span class="math inline">\{\vert{}v_i\rangle\}</span> và <span class="math inline">\{\vert{}w_i\rangle\}</span>. Khi đó các phần tử của <span class="math inline">A'</span> và <span class="math inline">A''</span> là <span class="math inline">A'_{ij} = \langle v_i\vert{}A\vert{}v_j\rangle</span> và <span class="math inline">A''_{ij} = \langle w_i\vert{}A\vert{}w_j\rangle</span>. Hãy mô tả mối quan hệ giữa <span class="math inline">A'</span> và <span class="math inline">A''</span>.</p>
+</div>
+</div>
+</section>
+<section id="positive-operators" class="level2">
+<h2 class="anchored" data-anchor-id="positive-operators">Positive operators</h2>
+<p>Một lớp con đặc biệt của toán tử Hermitian có vai trò cực kỳ quan trọng là các <strong><em>positive operators</em></strong> toán tử dương. Một toán tử <span class="math inline">A</span> được định nghĩa là toán tử dương nếu với mọi véc-tơ <span class="math inline">\vert{}v\rangle</span>, tích trong <span class="math inline">(\vert{}v\rangle, A\vert{}v\rangle)</span> là một số thực không âm. Nếu <span class="math inline">(\vert{}v\rangle, A\vert{}v\rangle) &gt; 0</span> với mọi <span class="math inline">\vert{}v\rangle \neq 0</span> thì ta nói <span class="math inline">A</span> là xác định dương (strictly positive / positive definite). Trong Bài tập 2.24, bạn sẽ chứng minh rằng một toán tử dương thì tự động là Hermitian, và do đó theo phân tích phổ, nó có biểu diễn đường chéo <span class="math inline">\sum_i \lambda_i \vert{}i\rangle\langle i\vert{}</span> với các giá trị riêng <span class="math inline">\lambda_i \ge 0</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.21:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lặp lại phép chứng minh phân tích phổ trong Hộp 2.2 cho trường hợp <span class="math inline">M</span> là Hermitian, đơn giản hóa phép chứng minh bất cứ khi nào có thể.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.22:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng hai véc-tơ riêng của một toán tử Hermitian ứng với các giá trị riêng khác nhau bắt buộc phải trực giao với nhau.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.23:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng các giá trị riêng của một toán tử chiếu <span class="math inline">P</span> đều bằng 0 hoặc 1.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.24: (Tính Hermitian của toán tử dương)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng một toán tử dương bắt buộc phải là Hermitian. (Gợi ý: Chứng minh rằng một toán tử <span class="math inline">A</span> bất kỳ có thể viết dưới dạng <span class="math inline">A = B + iC</span> trong đó <span class="math inline">B</span> và <span class="math inline">C</span> là các toán tử Hermitian).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.25:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng với bất kỳ toán tử <span class="math inline">A</span> nào, <span class="math inline">A^\dagger A</span> luôn là một toán tử dương.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="tensor-products" class="level1">
 <h1>7. Tensor products</h1>

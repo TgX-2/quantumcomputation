@@ -456,7 +456,316 @@ Nó khẳng định rằng với bất kỳ 2 vector $\vert v\rangle$ và $\vert
 
 # 5. Eigenvectors and eigenvalues
 
+Một ***eigenvector*** vector riêng của một toán tử tuyến tính A trên một không gian vector là một vector $\vert v \rangle$ sao cho $\vert v\rangle \neq 0$ và $A\vert v \rangle = v\vert v \rangle$, trong đó v là một số phức được gọi là ***eigenvalue*** của A tương ứng với $\vert v \rangle$.
+
+Cách tính eigenvalue và eigenvector, thông qua hàm đặc trưng:
+
+$$
+c(\lambda) \equiv \det \vert {A - \lambda I} \vert 
+$$
+
+trong đó, det là hàm định thức cho ma trận. Có thể chứng minh rằng hàm đặc trưng chỉ phụ thuộc vào toán tử A chứ không phụ thuộc vào biểu diễn ma trận cụ thể được sử dụng cho A.
+
+Các nghiệm của phương trình đặc trưng $c(\lambda) = 0$ chính là các eigenvalue của toán tử A. Theo định lý cơ bản của đại số, mọi đa thức đều có ít nhất một nghiệm phức, vì vậy mọi toán tử A đều có ít nhất một eigenvalue và eigenvector tương ứng.
+
+***Eigenspace*** Không gian riêng tương ứng với eigenvalue là v, là tập hợp các vector có eigenvalue là v. Nó là một không gian con vector của không gian vector mà A tác động lên.
+
+:::{.callout}
+Phương trình $A\vert v \rangle = v\vert v \rangle$ có ý nghĩa vật lý vô cùng quan trọng.
+
+Khi một toán tử tuyến tính (phép đo) A tác động lên một trạng thái riêng eigenstates ket v, trạng thái đó không bị biến đổi hướng mà chỉ bị nhân với một hệ số scalar v.
+
+Trong cơ học lượng tử, eigenvalue v chính là kết quả đo được thực tế thu được từ phép đo A/
+:::
+
+## Diagonal representation
+
+Một ***diagonal representation*** biểu diễn đường chéo cho một toán tử A trên không gian vector V là một biểu diễn
+
+$$
+A = \sum_i \lambda_i \vert i \rangle \langle i \vert 
+$$
+
+, trong đó các vector $\vert i \rangle$ tạo thành một tập trực chuẩn các eigenvector của A, với các eigenvalue tương ứng $\lambda_i$. Một toán tử được gọi là ***diagonalizable*** chéo hóa được nếu nó có một biểu diễn đường chéo. Trong mục tiếp theo, ta sẽ tìm một tập hợp các điều kiện cần và đủ đơn giản để một toán tử trên không gian Hilbert chéo hóa được. 
+
+Như một ví dụ về biểu diễn đường chéo, lưu ý rằng ma trận Pauli-Z có thể viết được dưới dạng:
+
+$$
+Z = \begin{bmatrix}
+1 & 0 \\ 
+0 & -1
+\end{bmatrix}
+= \vert 0 \rangle \langle 0 \vert - \vert 1 \rangle \langle 1 \vert \tag {2.29}
+$$
+
+trong đó biểu diễn ma trận là đối với các vector trực chuẩn lần lượt là $\vert 0 \rangle$ và $\vert 1 \rangle$. Các biểu diễn đường chéo đôi khi còn được gọi là ***orthonormal decompositions*** phân tích trực chuẩn.
+
+:::{.callout}
+# Có thể thấy
+
+biểu diễn chéo là một trường hợp đặc biệt của biểu diễn bằng tích ngoài, theo ***Spectral theorem*** định lý Phổ. Trường hợp đặc biệt khi và chỉ khi A là một toán tử Hermite.
+
+Và một toán tử không chéo hóa được là một toán tử không biểu diễn chéo hóa được.
+
+:::
+
+## Degenerate
+
+Khi một eigenspace có số chiều lớn hơn 1, chúng ta nói rằng nó suy biến. Ví dụ, ma trận A được định nghĩa bởi:
+
+$$
+A \equiv \begin{bmatrix}
+2 & 0 & 0 \\ 
+0 & 2 & 0 \\ 
+0 & 0 & 0
+\end{bmatrix}
+\tag {2.30}
+$$
+
+có một eigenspace hai chiều tương ứng với eigenvalue 2. Các eigenvector $(1, 0, 0)$ và $(0, 1, 0)$ được gọi là suy biến vì chúng là các eigenvector độc lập tuyến tính của A có cùng eigenvalue.
+
+:::{.callout}
+# Ý nghĩa
+
+Xảy ra khi có nhiều eigenvector độc lập tuyến tính cùng ứng với một eigenvalue.
+
+(Ví dụ hai trạng thái phân biệt, nhưng lại cho ra cùng một kết quả khi đo)
+
+
+:::
+
+
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.11: (Phân tích eigenvalue của các ma trận Pauli)
+
+Tìm các eigenvector, eigenvalue, và biểu diễn đường chéo của các ma trận Pauli X, Y, và Z.
+
+**Biểu diễn chéo hóa của Pauli-X:**
+
+$$
+X = \begin{bmatrix}
+0 & 1 \\ 
+1 & 0
+\end{bmatrix}
+$$
+
+Tính eignevalue:
+
+$$
+\det(X - \lambda I) = 0 \\ 
+\left|\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right| = 0 \\ 
+\left|\begin{bmatrix} -\lambda & 1 \\ 1 & -\lambda \end{bmatrix} \right| = 0 \\ 
+\lambda^2 = 1
+$$
+
+Vậy $\lambda = \pm 1$.
+
+Xét eigenvalue = 1, tìm eigenvector tương ứng:
+
+$$
+(X - \lambda I) \vert v \rangle = \theta \\ \left(\begin{bmatrix}0 & 1 \\ 1 & 0 \end{bmatrix} - \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right) \begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\ 
+\begin{bmatrix} -1 & 1 \\ 1 & -1 \end{bmatrix}\begin{bmatrix} a \\ b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} -a + b \\ a - b \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+$$
+
+Hay a = b. Từ đó ta tìm được eigenvector là:
+
+$$
+\begin{bmatrix} a \\ a \end{bmatrix} = a \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+$$
+
+chuẩn hóa eigenvector, ta được:
+
+$$
+\text{norm}\left(a \begin{bmatrix} 1 \\ 1 \end{bmatrix}\right) = \frac a {\sqrt 2} \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+$$
+
+chúng ta có thể bỏ mọe thằng a đi cũng được, chỉ giữ lại mấy cái sau thôi, và có thể phân tích được vector cột 1 1 thành như sau:
+
+$$
+\frac {1} {\sqrt 2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \frac 1 {\sqrt 2} \left(\begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) = \frac 1 {\sqrt 2} (\vert 0 \rangle + \vert 1 \rangle) = \vert + \rangle
+$$
+
+vậy, eigenvector của pauli-x ứng với eigenvalue 1 là $\vert + \rangle$.
+
+Tính tương tự với eigenvalue -1, ta tìm được eigenvalue $\vert - \rangle$.
+
+Tổng hợp lại, ta có thể biểu diễn chéo hóa của pauli-x như sau:
+
+$$
+X = \vert + \rangle \langle + \vert - \vert - \rangle \langle-\vert 
+$$
+
+Qua đó cũng có thể bình luận thêm là pauli-x là diagonalizable.
+
+:::
+
+
+:::{.callout-note}
+# Bài tập 2.12:
+
+Chứng minh rằng ma trận
+
+$$
+\begin{bmatrix}
+1 & 0 \\ 
+1 & 1 
+\end{bmatrix} \tag {2.31}
+$$
+
+không chéo hóa được.
+
+:::
+
+
 # 6. Adjoints and Hermitian operators
+
+## Adjoint (Hermitian conjugate)
+
+Giả sử $A$ là một toán tử tuyến tính bất kỳ trên không gian Hilbert $V$. Hóa ra tồn tại duy nhất một toán tử tuyến tính $A^\dagger$ trên $V$ sao cho với mọi véc-tơ $\vert{}v\rangle, \vert{}w\rangle \in V$,   
+
+$$
+(\vert{}v\rangle, A\vert{}w\rangle) = (A^\dagger\vert{}v\rangle, \vert{}w\rangle) \tag {2.32}
+$$   
+
+Toán tử tuyến tính này được gọi là ***adjoint*** toán tử liên hợp hoặc ***Hermitian conjugate*** liên hợp Hermitian của toán tử $A$. Từ định nghĩa, dễ dàng thấy rằng $(AB)^\dagger = B^\dagger A^\dagger$. Theo quy ước, nếu $\vert{}v\rangle$ là một véc-tơ, thì chúng ta định nghĩa $\vert{}v\rangle^\dagger \equiv \langle v\vert{}$. Với định nghĩa này, không khó để thấy rằng $(A\vert{}v\rangle)^\dagger = \langle v\vert{}A^\dagger$.
+
+
+:::{.callout-note}
+# Bài tập 2.13: 
+Nếu $\vert{}w\rangle$ và $\vert{}v\rangle$ là hai véc-tơ bất kỳ, hãy chứng minh rằng $(\vert{}w\rangle\langle v\vert{})^\dagger = \vert{}v\rangle\langle w\vert{}$.   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.14: (Tính phản tuyến tính của toán tử liên hợp) 
+
+Chứng minh rằng phép toán lấy liên hợp phụ hợp có tính phản tuyến tính (anti-linear):
+
+$$
+\left( \sum_i a_i A_i \right)^\dagger = \sum_i a_i^* A_i^\dagger \tag {2.33}
+$$   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.15: 
+Chứng minh rằng $(A^\dagger)^\dagger = A$.
+
+:::
+
+## Hermitian operator (Self-adjoint operator)
+
+Trong biểu diễn ma trận của một toán tử $A$, tác động của phép toán liên hợp Hermitian là biến ma trận của $A$ thành ma trận chuyển vị liên hợp phức, $A^\dagger \equiv (A^*)^T$, trong đó dấu $*$ chỉ phép liên hợp phức, và $T$ chỉ phép chuyển vị. Ví dụ, chúng ta có:   
+
+$$
+\begin{bmatrix} 1+3i & 2i \\ 1+i & 1-4i \end{bmatrix}^\dagger = \begin{bmatrix} 1-3i & 1-i \\ -2i & 1+4i \end{bmatrix} \tag {2.34}
+$$   
+
+Một toán tử $A$ có liên hợp chính là $A$ được gọi là ***Hermitian operator*** một toán tử Hermitian hoặc ***self-adjoint operator*** tự liên hợp. 
+
+## Projectors
+
+Một lớp toán tử Hermitian quan trọng là các toán tử ***projectors*** chiếu. Giả sử $W$ là một không gian con véc-tơ $k$-chiều của không gian véc-tơ $d$-chiều $V$. Sử dụng thủ tục Gram–Schmidt, ta có thể dựng một cơ sở trực chuẩn $\vert{}1\rangle, \dots, \vert{}d\rangle$ cho $V$ sao cho $\vert{}1\rangle, \dots, \vert{}k\rangle$ là một cơ sở trực chuẩn cho $W$. Theo định nghĩa,   
+
+$$
+P \equiv \sum_{i=1}^k \vert{}i\rangle\langle i\vert{} \tag {2.35}
+$$   
+
+là toán tử chiếu lên không gian con $W$. Dễ dàng kiểm tra rằng định nghĩa này không phụ thuộc vào cơ sở trực chuẩn $\vert{}1\rangle, \dots, \vert{}k\rangle$ được sử dụng cho $W$. Từ định nghĩa, có thể chứng minh rằng $\vert{}v\rangle\langle v\vert{}$ là Hermitian với bất kỳ véc-tơ $\vert{}v\rangle$ nào, do đó $P$ là Hermitian, $P^\dagger = P$. Chúng ta sẽ thường gọi "không gian véc-tơ $P$" như một cách viết tắt cho không gian véc-tơ mà $P$ chiếu lên. Phần bù trực giao của $P$ là toán tử $Q \equiv I - P$. Dễ thấy rằng $Q$ là một toán tử chiếu lên không gian véc-tơ sinh bởi $\vert{}k+1\rangle, \dots, \vert{}d\rangle$, mà chúng ta cũng gọi là phần bù trực giao của $P$, và có thể ký hiệu là $Q$.   
+
+:::{.callout-note}
+# Bài tập 2.16: 
+
+Chứng minh rằng bất kỳ toán tử chiếu $P$ nào cũng thỏa mãn phương trình $P^2 = P$.   
+
+:::
+
+## Normal
+
+Một toán tử $A$ được gọi là ***normal*** chuẩn tắc nếu $AA^\dagger = A^\dagger A$. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là ***spectral decomposition*** phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 ở trang 72, mà bạn nên đọc kỹ.   
+
+:::{.callout-note}
+# Bài tập 2.17: 
+
+Chứng minh rằng một ma trận chuẩn tắc là Hermitian khi và chỉ khi tất cả các giá trị riêng của nó đều là số thực.  
+
+:::
+
+## Unitary
+
+Một ma trận $U$ được gọi là ***unitary*** trực giao phức nếu $U^\dagger U = I$. Tương tự, một toán tử $U$ được gọi là unitary nếu $U^\dagger U = I$. Dễ dàng kiểm tra rằng một toán tử là unitary khi và chỉ khi mỗi biểu diễn ma trận của nó là unitary. Một toán tử unitary cũng thỏa mãn $U U^\dagger = I$, và do đó $U$ là toán tử chuẩn tắc và có phân tích phổ. Về mặt hình học, các toán tử unitary có vai trò quan trọng vì chúng bảo toàn tích trong giữa các véc-tơ. Để thấy điều này, gọi $\vert{}v\rangle$ và $\vert{}w\rangle$ là hai véc-tơ bất kỳ. Khi đó tích trong của $U\vert{}v\rangle$ và $U\vert{}w\rangle$ bằng với tích trong của $\vert{}v\rangle$ và $\vert{}w\rangle$:
+
+$$
+(U\vert{}v\rangle, U\vert{}w\rangle) = \langle v\vert{} U^\dagger U \vert{}w\rangle = \langle v\vert{} I \vert{}w\rangle = \langle v\vert{}w\rangle \tag {2.36}
+$$
+
+Kết quả này gợi ý biểu diễn tích ngoài đẹp đẽ sau đây của một toán tử unitary $U$ bất kỳ. Gọi $\{\vert{}v_i\rangle\}$ là một tập cơ sở trực chuẩn bất kỳ. Định nghĩa $\vert{}w_i\rangle \equiv U\vert{}v_i\rangle$, khi đó $\{\vert{}w_i\rangle\}$ cũng là một tập cơ sở trực chuẩn, vì các toán tử unitary bảo toàn tích trong. Lưu ý rằng $U = \sum_i \vert{}w_i\rangle\langle v_i\vert{}$. Ngược lại, nếu $\{\vert{}v_i\rangle\}$ và $\{\vert{}w_i\rangle\}$ là hai cơ sở trực chuẩn bất kỳ, thì dễ dàng kiểm tra rằng toán tử $U$ được định nghĩa bởi $U \equiv \sum_i \vert{}w_i\rangle\langle v_i\vert{}$ là một toán tử unitary.
+
+
+:::{.callout-note}
+# Bài tập 2.18: 
+Chứng minh rằng mọi giá trị riêng của một ma trận unitary đều có độ lớn bằng 1, nghĩa là có thể viết dưới dạng $e^{i\theta}$ với $\theta$ là một số thực.
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.19: (Các ma trận Pauli: Hermitian và Unitary) 
+
+Chứng minh rằng các ma trận Pauli vừa là Hermitian vừa là Unitary.
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.20: (Đổi cơ sở) 
+
+Giả sử $A'$ và $A''$ là các biểu diễn ma trận của một toán tử $A$ trên không gian véc-tơ $V$ đối với hai cơ sở trực chuẩn khác nhau, $\{\vert{}v_i\rangle\}$ và $\{\vert{}w_i\rangle\}$. Khi đó các phần tử của $A'$ và $A''$ là $A'_{ij} = \langle v_i\vert{}A\vert{}v_j\rangle$ và $A''_{ij} = \langle w_i\vert{}A\vert{}w_j\rangle$. Hãy mô tả mối quan hệ giữa $A'$ và $A''$.
+
+:::
+
+## Positive operators
+
+Một lớp con đặc biệt của toán tử Hermitian có vai trò cực kỳ quan trọng là các ***positive operators*** toán tử dương. Một toán tử $A$ được định nghĩa là toán tử dương nếu với mọi véc-tơ $\vert{}v\rangle$, tích trong $(\vert{}v\rangle, A\vert{}v\rangle)$ là một số thực không âm. Nếu $(\vert{}v\rangle, A\vert{}v\rangle) > 0$ với mọi $\vert{}v\rangle \neq 0$ thì ta nói $A$ là xác định dương (strictly positive / positive definite). Trong Bài tập 2.24, bạn sẽ chứng minh rằng một toán tử dương thì tự động là Hermitian, và do đó theo phân tích phổ, nó có biểu diễn đường chéo $\sum_i \lambda_i \vert{}i\rangle\langle i\vert{}$ với các giá trị riêng $\lambda_i \ge 0$.
+
+:::{.callout-note}
+# Bài tập 2.21: 
+
+Lặp lại phép chứng minh phân tích phổ trong Hộp 2.2 cho trường hợp $M$ là Hermitian, đơn giản hóa phép chứng minh bất cứ khi nào có thể.
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.22: 
+
+Chứng minh rằng hai véc-tơ riêng của một toán tử Hermitian ứng với các giá trị riêng khác nhau bắt buộc phải trực giao với nhau.
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.23: 
+
+Chứng minh rằng các giá trị riêng của một toán tử chiếu $P$ đều bằng 0 hoặc 1.
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.24: (Tính Hermitian của toán tử dương) 
+
+Chứng minh rằng một toán tử dương bắt buộc phải là Hermitian. (Gợi ý: Chứng minh rằng một toán tử $A$ bất kỳ có thể viết dưới dạng $A = B + iC$ trong đó $B$ và $C$ là các toán tử Hermitian).
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.25: 
+
+Chứng minh rằng với bất kỳ toán tử $A$ nào, $A^\dagger A$ luôn là một toán tử dương.
+
+:::
+
+
+
+
 
 # 7. Tensor products
 
