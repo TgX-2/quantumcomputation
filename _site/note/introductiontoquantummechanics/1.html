@@ -991,6 +991,54 @@ X = \vert + \rangle \langle + \vert - \vert - \rangle \langle-\vert
 P \equiv \sum_{i=1}^k \vert{}i\rangle\langle i\vert{} \tag {2.35}
 </span></p>
 <p>là toán tử chiếu lên không gian con <span class="math inline">W</span>. Dễ dàng kiểm tra rằng định nghĩa này không phụ thuộc vào cơ sở trực chuẩn <span class="math inline">\vert{}1\rangle, \dots, \vert{}k\rangle</span> được sử dụng cho <span class="math inline">W</span>. Từ định nghĩa, có thể chứng minh rằng <span class="math inline">\vert{}v\rangle\langle v\vert{}</span> là Hermitian với bất kỳ véc-tơ <span class="math inline">\vert{}v\rangle</span> nào, do đó <span class="math inline">P</span> là Hermitian, <span class="math inline">P^\dagger = P</span>. Chúng ta sẽ thường gọi “không gian véc-tơ <span class="math inline">P</span>” như một cách viết tắt cho không gian véc-tơ mà <span class="math inline">P</span> chiếu lên. Phần bù trực giao của <span class="math inline">P</span> là toán tử <span class="math inline">Q \equiv I - P</span>. Dễ thấy rằng <span class="math inline">Q</span> là một toán tử chiếu lên không gian véc-tơ sinh bởi <span class="math inline">\vert{}k+1\rangle, \dots, \vert{}d\rangle</span>, mà chúng ta cũng gọi là phần bù trực giao của <span class="math inline">P</span>, và có thể ký hiệu là <span class="math inline">Q</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Nói thêm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Định nghĩa:</strong></p>
+<p>Một toán tử tuyến tính P trên không gian Hilbert được gọi là projector nếu nó thỏa mãn hai tính chất:</p>
+<ol type="i">
+<li><p>Tính <strong><em>Idempotent</em></strong> đẳng cấu bình phương: <span class="math inline">P^2 = P</span>.</p></li>
+<li><p>Tính Hermitian: <span class="math inline">P^\dagger = P</span>.</p></li>
+</ol>
+<p><strong>Ví dụ minh họa:</strong></p>
+<p><em>Với 1 qubit, không gian Hilbert 2 chiều, chiếu lên một vector cơ sở</em>. Nó khác là giống việc tìm hình chiếu của một tia trong tọa độ đề các xuống một hệ trục tọa độ x hay y, có thể hiểu đơn giản là vậy.</p>
+<p>Ta muốn toán tử chiếu lên trạng thái <span class="math inline">\vert 0 \rangle \langle 0 \vert</span>:</p>
+<p><span class="math display">
+P_0 = \vert 0 \rangle \langle 0 \vert =
+\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\begin{bmatrix} 1 &amp; 0 \end{bmatrix} =
+\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
+</span></p>
+<p>Vậy là ta đã hoàn thành xong set up P. Thử chiếu trạng thái chồng chập:</p>
+<p><span class="math display">
+\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle= \begin{bmatrix} \alpha \\ \beta \end{bmatrix}
+</span></p>
+<p>tác dụng P lên ket psi:</p>
+<p><span class="math display">
+P_0\vert \psi \rangle = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha \\ 0 \end{bmatrix}
+</span></p>
+<p>Có thể thấy các thông tin về <span class="math inline">\vert 1 \rangle</span> đã biến mất, giờ chỉ còn biên độ <span class="math inline">\alpha</span> là còn.</p>
+<p><em>Với 2 qubit, không gian Hilbert 4 chiều, chiếu lên một trạng thái Bell đơn lẻ</em></p>
+<p>Giả sử chúng ta muốn xây dựng <span class="math inline">P_{\Phi^+}</span> dùng để kiểm tra xem hệ 2 qubit có đang ở trạng thái vướng víu <span class="math inline">\vert \Phi^+\rangle</span> hay không.</p>
+<p><span class="math display">
+P_{\Phi^+} = \frac{1}{2} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 1 \\  0 &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; 0 &amp; 0 \\  1 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}
+</span></p>
+<p>Và cũng có thể áp dụng lên không gian con nhiều chiều, bằng cách cộng các toán tử chiếu thành phần lại với nhau.</p>
+<p><strong>Ý nghĩa</strong>:</p>
+<p>Xác suất để đo được trạng thái <span class="math inline">\vert 0\rangle</span> khi hệ đang ở trạng thái <span class="math inline">\vert \psi \rangle</span> được tính thông qua giá trị kỳ vọng của toán tử chiếu <span class="math inline">P_0</span>:</p>
+<p><span class="math display">
+Prob(0) = \langle \psi \vert P_0 \vert \psi \rangle
+</span></p>
+<p>tức là ta sẽ kẹp thêm toán tử chiếu projector chỉ để kích hệ, tính xác suất xảy ra. Đó là tác dụng lớn nhất của nó tính đến hiện tại.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1007,7 +1055,43 @@ P \equiv \sum_{i=1}^k \vert{}i\rangle\langle i\vert{} \tag {2.35}
 </section>
 <section id="normal" class="level2">
 <h2 class="anchored" data-anchor-id="normal">Normal</h2>
-<p>Một toán tử <span class="math inline">A</span> được gọi là <strong><em>normal</em></strong> chuẩn tắc nếu <span class="math inline">AA^\dagger = A^\dagger A</span>. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là <strong><em>spectral decomposition</em></strong> phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 ở trang 72, mà bạn nên đọc kỹ.</p>
+<p>Một toán tử <span class="math inline">A</span> được gọi là <strong><em>normal</em></strong> chuẩn tắc nếu <span class="math inline">AA^\dagger = A^\dagger A</span>. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là <strong><em>spectral decomposition</em></strong> phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 sau đây:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 2.2. Phân tích phổ (The spectral decomposition)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Phân tích phổ (spectral decomposition) là một định lý biểu diễn cực kỳ hữu ích dành cho các toán tử chuẩn tắc (normal operators).</p>
+<p><strong>Định lý 2.1:</strong> (Phân tích phổ) Một toán tử chuẩn tắc M bất kỳ trên không gian véc-tơ V đều chéo hóa được đối với một cơ sở trực chuẩn nào đó của V. Ngược lại, bất kỳ toán tử nào chéo hóa được cũng là một toán tử chuẩn tắc.</p>
+<p><strong>Chứng minh:</strong> Chiều ngược lại là một bài tập đơn giản, do đó chúng ta chỉ chứng minh chiều thuận bằng phương pháp quy nạp theo số chiều <span class="math inline">d</span> của <span class="math inline">V</span>.</p>
+<p>Trường hợp <span class="math inline">d = 1</span>: Mệnh đề là hiển nhiên.</p>
+<p>Trước tiên, xét bước quy nạp: Gọi <span class="math inline">\lambda</span> là một giá trị riêng của <span class="math inline">M</span>, <span class="math inline">P</span> là toán tử chiếu lên không gian riêng ứng với <span class="math inline">\lambda</span>, và <span class="math inline">Q</span> là toán tử chiếu lên phần bù trực giao của nó. Khi đó: <span class="math display">
+M = (P + Q)M(P + Q) = PMP + QMP + PMQ + QMQ
+</span></p>
+<p>Rõ ràng <span class="math inline">PMP = \lambda P</span>. Hơn nữa, <span class="math inline">QMP = 0</span> vì <span class="math inline">M</span> biến không gian con <span class="math inline">P</span> thành chính nó.</p>
+<p>Chúng ta khẳng định rằng <span class="math inline">PMQ = 0</span>. Để thấy điều này, gọi <span class="math inline">\vert{}v\rangle</span> là một phần tử thuộc không gian con <span class="math inline">P</span>. Khi đó: <span class="math display">
+M M^\dagger \vert{}v\rangle = M^\dagger M \vert{}v\rangle = \lambda M^\dagger \vert{}v\rangle
+</span></p>
+<p>Do đó, <span class="math inline">M^\dagger \vert{}v\rangle</span> có giá trị riêng <span class="math inline">\lambda</span> và vì thế cũng là một phần tử thuộc không gian con <span class="math inline">P</span>. Suy ra <span class="math inline">QM^\dagger P = 0</span>. Lấy liên hợp Hermitian của phương trình này ta được <span class="math inline">PMQ = 0</span>.</p>
+<p>Do đó, <span class="math inline">M = PMP + QMQ</span>.</p>
+<p>Tiếp theo, chúng ta chứng minh rằng <span class="math inline">QMQ</span> là một toán tử chuẩn tắc. Để thấy điều này, lưu ý rằng <span class="math inline">QM = QM(P + Q) = QMQ</span>, và <span class="math inline">QM^\dagger = QM^\dagger(P + Q) = QM^\dagger Q</span>. Do đó, theo tính chuẩn tắc của <span class="math inline">M</span> và quan sát <span class="math inline">Q^2 = Q</span>, ta có: <span class="math display">
+\begin{aligned} &gt;   QMQ QM^\dagger Q &amp;= QM QM^\dagger Q \quad &amp;(2.37) \\ &gt;   &amp;= QM M^\dagger Q \quad &amp;(2.38) \\ &gt;   &amp;= QM^\dagger M Q \quad &amp;(2.39) \\ &gt;   &amp;= QM^\dagger QMQ \quad &amp;(2.40) \\ &gt;   &amp;= QM^\dagger Q QMQ \quad &amp;(2.41) &gt;   \end{aligned}
+</span></p>
+<p>do đó <span class="math inline">QMQ</span> là chuẩn tắc.</p>
+<p>Theo giả thiết quy nạp, <span class="math inline">QMQ</span> chéo hóa được đối với một cơ sở trực chuẩn nào đó của không gian con <span class="math inline">Q</span>, và <span class="math inline">PMP</span> vốn đã chéo hóa được đối với một cơ sở trực chuẩn của <span class="math inline">P</span>. Suy ra <span class="math inline">M = PMP + QMQ</span> chéo hóa được đối với một cơ sở trực chuẩn của toàn bộ không gian véc-tơ. <span class="math inline">\blacksquare</span></p>
+<p>Dưới dạng biểu diễn tích ngoài, điều này có nghĩa là <span class="math inline">M</span> có thể được viết dưới dạng:</p>
+<p><span class="math display">
+M = \sum_i \lambda_i \vert{}i\rangle\langle i\vert{}
+</span></p>
+<p>trong đó <span class="math inline">\lambda_i</span> là các giá trị riêng của <span class="math inline">M</span>, <span class="math inline">\{\vert{}i\rangle\}</span> là một cơ sở trực chuẩn cho <span class="math inline">V</span>, và mỗi <span class="math inline">\vert{}i\rangle</span> là một véc-tơ riêng của <span class="math inline">M</span> ứng với giá trị riêng <span class="math inline">\lambda_i</span>.</p>
+<p>Dưới dạng các toán tử chiếu, <span class="math inline">M = \sum_i \lambda_i P_i</span>, trong đó <span class="math inline">\lambda_i</span> lại là các giá trị riêng của <span class="math inline">M</span>, và <span class="math inline">P_i</span> là toán tử chiếu lên không gian riêng ứng với <span class="math inline">\lambda_i</span> của <span class="math inline">M</span>. Các toán tử chiếu này thỏa mãn hệ thức đầy đủ <span class="math inline">\sum_i P_i = I</span> và tính chất trực chuẩn <span class="math inline">P_i P_j = \delta_{ij} P_i</span>.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1141,15 +1225,551 @@ P \equiv \sum_{i=1}^k \vert{}i\rangle\langle i\vert{} \tag {2.35}
 </section>
 <section id="tensor-products" class="level1">
 <h1>7. Tensor products</h1>
+<p>Tích tensor là một cách kết hợp các không gian véc-tơ lại với nhau để tạo thành các không gian véc-tơ lớn hơn. Cách xây dựng này có vai trò then chốt để hiểu cơ học lượng tử của các hệ nhiều hạt. Phần thảo luận sau đây có một chút trừu tượng và có thể khó theo dõi nếu bạn chưa quen thuộc với tích tensor, vì vậy bạn cứ tự do bỏ qua phần này và xem lại sau khi đến phần thảo luận về tích tensor trong cơ học lượng tử.</p>
+<hr>
+<p>Giả sử <span class="math inline">V</span> và <span class="math inline">W</span> lần lượt là các không gian véc-tơ có số chiều <span class="math inline">m</span> và <span class="math inline">n</span>. Để thuận tiện, chúng ta cũng giả sử rằng <span class="math inline">V</span> và <span class="math inline">W</span> là các không gian Hilbert. Khi đó <span class="math inline">V \otimes W</span> (đọc là “<span class="math inline">V</span> tensor <span class="math inline">W</span>”) là một không gian véc-tơ có số chiều <span class="math inline">mn</span>. Các phần tử của <span class="math inline">V \otimes W</span> là tổ hợp tuyến tính của các ‘tích tensor’ <span class="math inline">\vert{}v\rangle \otimes \vert{}w\rangle</span> cấu thành từ các phần tử <span class="math inline">\vert{}v\rangle</span> của <span class="math inline">V</span> và <span class="math inline">\vert{}w\rangle</span> của <span class="math inline">W</span>. Đặc biệt, nếu <span class="math inline">\{\vert{}i\rangle\}</span> và <span class="math inline">\{\vert{}j\rangle\}</span> là các cơ sở trực chuẩn cho các không gian <span class="math inline">V</span> và <span class="math inline">W</span>, thì <span class="math inline">\{\vert{}i\rangle \otimes \vert{}j\rangle\}</span> là một cơ sở cho <span class="math inline">V \otimes W</span>. Chúng ta thường sử dụng các ký hiệu viết tắt <span class="math inline">\vert{}v\rangle\vert{}w\rangle</span>, <span class="math inline">\vert{}v, w\rangle</span> hoặc thậm chí <span class="math inline">\vert{}vw\rangle</span> cho tích tensor <span class="math inline">\vert{}v\rangle \otimes \vert{}w\rangle</span>.</p>
+<p>Ví dụ, nếu <span class="math inline">V</span> là không gian véc-tơ hai chiều với các véc-tơ cơ sở <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>, thì <span class="math inline">\vert{}0\rangle \otimes \vert{}0\rangle + \vert{}1\rangle \otimes \vert{}1\rangle</span> là một phần tử thuộc <span class="math inline">V \otimes W</span></p>
+<p>Theo định nghĩa, tích tensor thỏa mãn các tính chất cơ bản sau:</p>
+<ol type="1">
+<li>Với một số vô hướng <span class="math inline">z</span> bất kỳ và các phần tử <span class="math inline">\vert{}v\rangle</span> thuộc <span class="math inline">V</span> và <span class="math inline">\vert{}w\rangle</span> thuộc <span class="math inline">W</span>,</li>
+</ol>
+<p><span class="math display">
+z (\vert{}v\rangle \otimes \vert{}w\rangle) = (z\vert{}v\rangle) \otimes \vert{}w\rangle = \vert{}v\rangle \otimes (z\vert{}w\rangle) \tag {2.42}
+</span></p>
+<ol start="2" type="1">
+<li>Với <span class="math inline">\vert{}v_1\rangle</span> và <span class="math inline">\vert{}v_2\rangle</span> bất kỳ trong <span class="math inline">V</span> và <span class="math inline">\vert{}w\rangle</span> trong <span class="math inline">W</span>,</li>
+</ol>
+<p><span class="math display">
+(\vert{}v_1\rangle + \vert{}v_2\rangle) \otimes \vert{}w\rangle = \vert{}v_1\rangle \otimes \vert{}w\rangle + \vert{}v_2\rangle \otimes \vert{}w\rangle \tag {2.43}
+</span></p>
+<ol start="3" type="1">
+<li>Với <span class="math inline">\vert{}v\rangle</span> bất kỳ trong <span class="math inline">V</span> và <span class="math inline">\vert{}w_1\rangle, \vert{}w_2\rangle</span> trong <span class="math inline">W</span>,</li>
+</ol>
+<p><span class="math display">
+\vert{}v\rangle \otimes (\vert{}w_1\rangle + \vert{}w_2\rangle) = \vert{}v\rangle \otimes \vert{}w_1\rangle + \vert{}v\rangle \otimes \vert{}w_2\rangle \tag {2.44}
+</span></p>
+<p>Những loại toán tử tuyến tính nào tác động trên không gian <span class="math inline">V \otimes W</span>? Giả sử <span class="math inline">\vert{}v\rangle</span> và <span class="math inline">\vert{}w\rangle</span> là các véc-tơ trong <span class="math inline">V</span> và <span class="math inline">W</span>, còn <span class="math inline">A</span> và <span class="math inline">B</span> lần lượt là các toán tử tuyến tính trên <span class="math inline">V</span> và <span class="math inline">W</span>. Khi đó chúng ta có thể định nghĩa một toán tử tuyến tính <span class="math inline">A \otimes B</span> trên <span class="math inline">V \otimes W</span> bằng phương trình:</p>
+<p><span class="math display">
+(A \otimes B)(\vert{}v\rangle \otimes \vert{}w\rangle) \equiv A\vert{}v\rangle \otimes B\vert{}w\rangle \tag {2.45}
+</span></p>
+<p>Định nghĩa của <span class="math inline">A \otimes B</span> sau đó được mở rộng cho tất cả các phần tử của <span class="math inline">V \otimes W</span> theo cách tự nhiên để đảm bảo tính tuyến tính của <span class="math inline">A \otimes B</span>, nghĩa là:</p>
+<p><span class="math display">
+(A \otimes B) \left( \sum_i a_i \vert{}v_i\rangle \otimes \vert{}w_i\rangle \right) \equiv \sum_i a_i A\vert{}v_i\rangle \otimes B\vert{}w_i\rangle \tag {2.46}
+</span></p>
+<p>Có thể chứng minh rằng <span class="math inline">A \otimes B</span> được định nghĩa theo cách này là một toán tử tuyến tính xác định tốt trên <span class="math inline">V \otimes W</span>. Khái niệm tích tensor của hai toán tử này được mở rộng một cách rõ ràng cho trường hợp <span class="math inline">A: V \to V'</span> và <span class="math inline">B: W \to W'</span> ánh xạ giữa các không gian véc-tơ khác nhau. Quả thực, một toán tử tuyến tính <span class="math inline">C</span> bất kỳ ánh xạ <span class="math inline">V \otimes W</span> sang <span class="math inline">V' \otimes W'</span> có thể được biểu diễn dưới dạng tổ hợp tuyến tính của các tích tensor của các toán tử ánh xạ <span class="math inline">V</span> sang <span class="math inline">V'</span> và <span class="math inline">W</span> sang <span class="math inline">W'</span>:</p>
+<p><span class="math display">
+C = \sum_i c_i A_i \otimes B_i \tag {2.47}
+</span></p>
+<p>trong đó theo định nghĩa:</p>
+<p><span class="math display">
+\left( \sum_i c_i A_i \otimes B_i \right) \vert{}v\rangle \otimes \vert{}w\rangle \equiv \sum_i c_i A_i\vert{}v\rangle \otimes B_i\vert{}w\rangle \tag {2.48}
+</span></p>
+<p>Các tích trong trên các không gian <span class="math inline">V</span> và <span class="math inline">W</span> có thể được sử dụng để định nghĩa một tích trong tự nhiên trên <span class="math inline">V \otimes W</span>. Định nghĩa:</p>
+<p><span class="math display">
+\left( \sum_i a_i \vert{}v_i\rangle \otimes \vert{}w_i\rangle, \sum_j b_j \vert{}v_j'\rangle \otimes \vert{}w_j'\rangle \right) \equiv \sum_{ij} a_i^* b_j \langle v_i\vert{}v_j'\rangle \langle w_i\vert{}w_j'\rangle \tag {2.49}
+</span></p>
+<p>Có thể chứng minh rằng hàm được định nghĩa như vậy là một tích trong xác định tốt. Từ tích trong này, không gian tích trong <span class="math inline">V \otimes W</span> thừa hưởng các cấu trúc khác mà chúng ta đã quen thuộc, chẳng hạn như các khái niệm về toán tử liên hợp, tính unitary, tính chuẩn tắc và tính Hermitian.</p>
+<p>Tất cả những thảo luận này khá trừu tượng. Nó có thể trở nên cụ thể hơn nhiều bằng cách chuyển sang một biểu diễn ma trận thuận tiện được gọi là tích Kronecker (Kronecker product). Giả sử <span class="math inline">A</span> là một ma trận kích thước <span class="math inline">m \times n</span>, và <span class="math inline">B</span> là một ma trận kích thước <span class="math inline">p \times q</span>. Khi đó chúng ta có biểu diễn ma trận:</p>
+<p><span class="math display">
+A \otimes B \equiv \begin{bmatrix} A_{11}B &amp; A_{12}B &amp; \dots &amp; A_{1n}B \\ A_{21}B &amp; A_{22}B &amp; \dots &amp; A_{2n}B \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ A_{m1}B &amp; A_{m2}B &amp; \dots &amp; A_{mn}B \end{bmatrix} \tag {2.50}
+</span></p>
+<p>Trong biểu diễn này, các thuật ngữ như <span class="math inline">A_{11}B</span> biểu thị các ma trận con kích thước <span class="math inline">p \times q</span> mà các phần tử của nó tỉ lệ với <span class="math inline">B</span>, với hằng số tỉ lệ tổng thể là <span class="math inline">A_{11}</span>. Ví dụ, tích tensor của các véc-tơ <span class="math inline">(1, 2)</span> và <span class="math inline">(2, 3)</span> là véc-tơ:</p>
+<p><span class="math display">
+\begin{bmatrix} 1 \\ 2 \end{bmatrix} \otimes \begin{bmatrix} 2 \\ 3 \end{bmatrix} = \begin{bmatrix} 1 \times 2 \\ 1 \times 3 \\ 2 \times 2 \\ 2 \times 3 \end{bmatrix} = \begin{bmatrix} 2 \\ 3 \\ 4 \\ 6 \end{bmatrix} \tag {2.51}
+</span></p>
+<p>Tích tensor của các ma trận Pauli <span class="math inline">X</span> và <span class="math inline">Y</span> là:</p>
+<p><span class="math display">
+X \otimes Y = \begin{bmatrix} 0 \cdot Y &amp; 1 \cdot Y \\ 1 \cdot Y &amp; 0 \cdot Y \end{bmatrix} = \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; -i \\ 0 &amp; 0 &amp; i &amp; 0 \\ 0 &amp; -i &amp; 0 &amp; 0 \\ i &amp; 0 &amp; 0 &amp; 0 \end{bmatrix} \tag {2.52}
+</span></p>
+<p>Cuối cùng, chúng tôi đề cập đến ký hiệu hữu ích <span class="math inline">\vert{}\psi\rangle^{\otimes k}</span>, có nghĩa là <span class="math inline">\vert{}\psi\rangle</span> lấy tích tensor với chính nó <span class="math inline">k</span> lần. Ví dụ <span class="math inline">\vert{}\psi\rangle^{\otimes 2} = \vert{}\psi\rangle \otimes \vert{}\psi\rangle</span>. Một ký hiệu tương tự cũng được sử dụng cho các toán tử trên các không gian tích tensor.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.26:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cho <span class="math inline">\vert{}\psi\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>. Hãy viết rõ ràng <span class="math inline">\vert{}\psi\rangle^{\otimes 2}</span> và <span class="math inline">\vert{}\psi\rangle^{\otimes 3}</span>, cả dưới dạng tích tensor như <span class="math inline">\vert{}0\rangle\vert{}1\rangle</span>, và dưới dạng tích Kronecker.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.27:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tính biểu diễn ma trận của các tích tensor của các toán tử Pauli:</p>
+<ol type="a">
+<li><p><span class="math inline">X</span> và <span class="math inline">Z</span>;</p></li>
+<li><p><span class="math inline">I</span> và <span class="math inline">X</span>;</p></li>
+<li><p><span class="math inline">X</span> và <span class="math inline">I</span>.</p></li>
+</ol>
+<p>Tích tensor có tính giao hoán không?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.28:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng các phép toán chuyển vị, liên hợp phức, và liên hợp Hermitian phân phối qua tích tensor: <span class="math display">
+(A \otimes B)^* = A^* \otimes B^*; \quad (A \otimes B)^T = A^T \otimes B^T; \quad (A \otimes B)^\dagger = A^\dagger \otimes B^\dagger \tag {2.53}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.29:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tích tensor của hai toán tử unitary là một toán tử unitary.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.30:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tích tensor của hai toán tử Hermitian là một toán tử Hermitian.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.32:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tích tensor của hai toán tử chiếu là một toán tử chiếu.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.33:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Toán tử Hadamard trên một qubit có thể được viết dưới dạng:</p>
+<p><span class="math display">
+H = \frac{1}{\sqrt{2}} \Big[ (\vert{}0\rangle + \vert{}1\rangle)\langle 0\vert{} + (\vert{}0\rangle - \vert{}1\rangle)\langle 1\vert{} \Big] \tag {2.54}
+</span></p>
+<p>Hãy chứng minh một cách tường minh rằng phép biến đổi Hadamard trên <span class="math inline">n</span> qubit, <span class="math inline">H^{\otimes n}</span>, có thể được viết dưới dạng:</p>
+<p><span class="math display">
+H^{\otimes n} = \frac{1}{\sqrt{2^n}} \sum_{x,y} (-1)^{x \cdot y} \vert{}x\rangle\langle y\vert{} \tag{2.55}
+</span></p>
+<p>Hãy viết ra biểu diễn ma trận tường minh cho <span class="math inline">H^{\otimes 2}</span>.</p>
+</div>
+</div>
 </section>
 <section id="operator-functions" class="level1">
 <h1>8. Operator functions</h1>
+<p>Có rất nhiều hàm quan trọng có thể được định nghĩa cho các toán tử và ma trận. Nói một cách tổng quát, cho một hàm <span class="math inline">f</span> đi từ tập số phức sang số phức, ta có thể định nghĩa một hàm ma trận tương ứng trên các ma trận chuẩn tắc (hoặc một số lớp con như ma trận Hermitian) thông qua cấu trúc sau.</p>
+<p>Gọi <span class="math inline">A = \sum_a a \vert{}a\rangle\langle a\vert{}</span> là một phép phân tích phổ cho toán tử chuẩn tắc <span class="math inline">A</span>. Định nghĩa <span class="math inline">f(A) \equiv \sum_a f(a) \vert{}a\rangle\langle a\vert{}</span>. Một chút suy nghĩ cho thấy <span class="math inline">f(A)</span> được xác định một cách duy nhất. Thủ tục này có thể được sử dụng, ví dụ, để định nghĩa căn bậc hai của một toán tử dương, logarit của một toán tử xác định dương, hoặc hàm mũ của một toán tử chuẩn tắc. Như một ví dụ,</p>
+<p><span class="math display">
+\exp(\theta Z) = \begin{bmatrix} e^\theta &amp; 0 \\ 0 &amp; e^{-\theta} \end{bmatrix} \tag {2.56}
+</span></p>
+<p>vì <span class="math inline">Z</span> có các véc-tơ riêng là <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.34:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tìm căn bậc hai và logarit của ma trận</p>
+<p><span class="math display">
+\begin{bmatrix} 4 &amp; 3 \\ 3 &amp; 4 \end{bmatrix} \tag {2.57}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.35: (Hàm mũ của các ma trận Pauli)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cho <span class="math inline">\vec{v}</span> là một véc-tơ đơn vị thực ba chiều bất kỳ và <span class="math inline">\theta</span> là một số thực. Chứng minh rằng</p>
+<p><span class="math display">
+\exp(i\theta \vec{v}\cdot\vec{\sigma}) = \cos(\theta)I + i\sin(\theta)\vec{v}\cdot\vec{\sigma} \tag {2.58}
+</span></p>
+<p>trong đó <span class="math inline">\vec{v}\cdot\vec{\sigma} \equiv \sum_{i=1}^3 v_i \sigma_i</span>. Bài tập này được tổng quát hóa ở Bài toán 2.1 ở trang 117.</p>
+</div>
+</div>
+<hr>
+<p>Một hàm ma trận quan trọng khác là vết (trace) của một ma trận. Vết của <span class="math inline">A</span> được định nghĩa là tổng các phần tử trên đường chéo chính của nó:</p>
+<p><span class="math display">
+\text{tr}(A) \equiv \sum_i A_{ii} \tag {2.59}
+</span></p>
+<p>Dễ dàng thấy rằng vết có tính tuần hoàn, <span class="math inline">\text{tr}(AB) = \text{tr}(BA)</span>, và tính tuyến tính, <span class="math inline">\text{tr}(A + B) = \text{tr}(A) + \text{tr}(B)</span>, <span class="math inline">\text{tr}(zA) = z\text{tr}(A)</span>, trong đó <span class="math inline">A</span> và <span class="math inline">B</span> là các ma trận bất kỳ, còn <span class="math inline">z</span> là một số phức. Hơn nữa, từ tính tuần hoàn suy ra rằng vết của một ma trận là bất biến dưới phép biến đổi tương đương unitary <span class="math inline">A \to U A U^\dagger</span>, vì <span class="math inline">\text{tr}(U A U^\dagger) = \text{tr}(U^\dagger U A) = \text{tr}(A)</span>. Dựa trên kết quả này, việc định nghĩa vết của một toán tử <span class="math inline">A</span> bằng vết của bất kỳ biểu diễn ma trận nào của <span class="math inline">A</span> là hoàn toàn hợp lý. Tính bất biến của vết dưới các phép biến đổi tương đương unitary đảm bảo rằng vết của một toán tử được xác định tốt.</p>
+<p>Như một ví dụ về vết (trace), giả sử <span class="math inline">\vert{}\psi\rangle</span> là một véc-tơ đơn vị và <span class="math inline">A</span> là một toán tử bất kỳ. Để tính <span class="math inline">\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{})</span>, ta sử dụng phương pháp Gram–Schmidt để mở rộng <span class="math inline">\vert{}\psi\rangle</span> thành một cơ sở trực chuẩn <span class="math inline">\vert{}i\rangle</span> sao cho <span class="math inline">\vert{}\psi\rangle</span> là phần tử đầu tiên. Khi đó ta có:</p>
+<p><span class="math display">
+\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{}) = \sum_i \langle i\vert{}A\vert{}\psi\rangle\langle\psi\vert{}i\rangle \tag {2.60}
+</span></p>
+<p><span class="math display">
+= \langle\psi\vert{}A\vert{}\psi\rangle \tag {2.61}
+</span></p>
+<p>Kết quả này, <span class="math inline">\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{}) = \langle\psi\vert{}A\vert{}\psi\rangle</span>, cực kỳ hữu ích trong việc tính vết của một toán tử.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.36:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng các ma trận Pauli ngoại trừ <span class="math inline">I</span> đều có vết bằng 0.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.37: (Tính tuần hoàn của vết)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nếu <span class="math inline">A</span> và <span class="math inline">B</span> là hai toán tử tuyến tính, hãy chứng minh rằng: <span class="math display">
+\text{tr}(AB) = \text{tr}(BA) \tag {2.62}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.38: (Tính tuyến tính của vết)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nếu <span class="math inline">A</span> và <span class="math inline">B</span> là hai toán tử tuyến tính, hãy chứng minh rằng: <span class="math display">
+\text{tr}(A + B) = \text{tr}(A) + \text{tr}(B) \tag {2.63}
+</span></p>
+<p>và nếu <span class="math inline">z</span> là một số phức bất kỳ, hãy chứng minh rằng:</p>
+<p><span class="math display">
+\text{tr}(zA) = z\text{tr}(A) \tag {2.64}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.39: (Tích trong Hilbert–Schmidt trên các toán tử)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tập hợp <span class="math inline">L_V</span> các toán tử tuyến tính trên không gian Hilbert <span class="math inline">V</span> hiển nhiên là một không gian véc-tơ – tổng của hai toán tử tuyến tính là một toán tử tuyến tính, <span class="math inline">zA</span> là một toán tử tuyến tính nếu <span class="math inline">A</span> là toán tử tuyến tính và <span class="math inline">z</span> là số phức, đồng thời tồn tại phần tử không <span class="math inline">0</span>. Một kết quả bổ sung quan trọng là không gian véc-tơ <span class="math inline">L_V</span> có thể được trang bị một cấu trúc tích trong tự nhiên, biến nó thành một không gian Hilbert:</p>
+<ol type="1">
+<li>Chứng minh rằng hàm <span class="math inline">(\cdot, \cdot)</span> trên <span class="math inline">L_V \times L_V</span> được định nghĩa bởi: <span class="math display">
+(A, B) \equiv \text{tr}(A^\dagger B) \tag {2.65}
+</span></li>
+</ol>
+<p>là một hàm tích trong. Tích trong này được gọi là tích trong Hilbert–Schmidt hoặc tích trong vết.</p>
+<ol start="2" type="1">
+<li><p>Nếu <span class="math inline">V</span> có số chiều <span class="math inline">d</span>, hãy chứng minh rằng <span class="math inline">L_V</span> có số chiều <span class="math inline">d^2</span>.</p></li>
+<li><p>Tìm một cơ sở trực chuẩn gồm các ma trận Hermitian cho không gian Hilbert <span class="math inline">L_V</span></p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="the-commutator-and-anti-commutator" class="level1">
 <h1>9. The commutator and anti-commutator</h1>
+<p>Giao hoán tử giữa hai toán tử <span class="math inline">A</span> và <span class="math inline">B</span> được định nghĩa là:</p>
+<p><span class="math display">
+[A, B] \equiv AB - BA \quad (2.66)
+</span></p>
+<p>Nếu <span class="math inline">[A, B] = 0</span>, tức là <span class="math inline">AB = BA</span>, thì ta nói <span class="math inline">A</span> giao hoán với <span class="math inline">B</span>. Tương tự, phản giao hoán tử của hai toán tử <span class="math inline">A</span> và <span class="math inline">B</span> được định nghĩa bởi:</p>
+<p><span class="math display">
+\{A, B\} \equiv AB + BA \quad (2.67)
+</span></p>
+<p>ta nói <span class="math inline">A</span> phản giao hoán với <span class="math inline">B</span> nếu <span class="math inline">\{A, B\} = 0</span>. Hóa ra rất nhiều tính chất quan trọng của các cặp toán tử có thể được suy ra từ giao hoán tử và phản giao hoán tử của chúng. Có lẽ mối liên hệ hữu ích nhất là sự kết nối giữa giao hoán tử và tính chất có thể chéo hóa đồng thời (simultaneously diagonalize) các toán tử Hermitian <span class="math inline">A</span> và <span class="math inline">B</span>, nghĩa là viết <span class="math inline">A = \sum_i a_i \vert{}i\rangle\langle i\vert{}, B = \sum_i b_i \vert{}i\rangle\langle i\vert{}</span>, trong đó <span class="math inline">\vert{}i\rangle</span> là một tập cơ sở trực chuẩn chung cho cả <span class="math inline">A</span> và <span class="math inline">B</span>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Nói thêm một chút
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Trong đại số thông thường, phép nhân thường có tính giao hoán (AB = BA). Tuy nhiên, đối với tính toán lượng tử, thứ tự thực hiện rất quan trọng.</p>
+<p>Ý nghĩa vật lý (Hệ thức bất định Heisenberg): Nếu hai đại lượng vật lý (ví dụ như vị trí x và động lượng p) có giao hoán tử khác không <span class="math inline">([A, B] \neq 0)</span>, điều này có nghĩa là bạn không thể đồng thời đo chính xác tuyệt đối cả hai đại lượng này trên một hệ lượng tử.</p>
+</div>
+</div>
+<hr>
+<p><strong>Định lý 2.2: (Định lý chéo hóa đồng thời)</strong> Giả sử <span class="math inline">A</span> và <span class="math inline">B</span> là các toán tử Hermitian. Khi đó <span class="math inline">[A, B] = 0</span> khi và chỉ khi tồn tại một cơ sở trực chuẩn sao cho cả <span class="math inline">A</span> và <span class="math inline">B</span> đều là đường chéo đối với cơ sở đó. Chúng ta nói rằng <span class="math inline">A</span> và <span class="math inline">B</span> được chéo hóa đồng thời trong trường hợp này.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nếu hai đại lượng quan sát được (đại diện bởi toán tử Hermitian A và B) có thể đo lường đồng thời mà không làm ảnh hưởng lẫn nhau khi và chỉ khi chúng giao hoán với nhau <span class="math inline">([A, B] = 0)</span>.</p>
+<p>Khi <span class="math inline">[A, B] = 0</span>, chúng chia sẽ chung một bộ vector riêng, cho phép chúng ta biểu diễn chúng trên cùng một cơ sở trực chuẩn.</p>
+</div>
+</div>
+<p>Kết quả này liên kết giao hoán tử của hai toán tử (thường dễ tính toán) với tính chất chéo hóa đồng thời (vốn a priori khá khó xác định). Như một ví dụ, hãy xét:</p>
+<p><span class="math display">
+[X, Y] = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix} - \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} \quad (2.68)
+</span></p>
+<p><span class="math display">
+= 2i \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix} \quad (2.69)
+</span></p>
+<p><span class="math display">
+= 2iZ \quad (2.70)
+</span></p>
+<p>do đó <span class="math inline">X</span> và <span class="math inline">Y</span> không giao hoán. Như bạn đã chứng minh trong Bài tập 2.11, <span class="math inline">X</span> và <span class="math inline">Y</span> không có chung các véc-tơ riêng, đúng như chúng ta kỳ vọng từ định lý chéo hóa đồng thời.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Chứng minh định lý 2.2.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Chiều thuận:</strong> Nếu <span class="math inline">A</span> và <span class="math inline">B</span> chéo hóa trên cùng một cơ sở trực chuẩn, việc tính toán trực tiếp cho thấy <span class="math inline">[A, B] = 0</span>.</p>
+<p><strong>Chiều đảo:</strong> Dựa trên không gian riêng <span class="math inline">V_a</span> của <span class="math inline">A</span> ứng với giá trị riêng <span class="math inline">a</span>, ta định nghĩa toán tử <span class="math inline">B_a \equiv P_a B P_a</span> (với <span class="math inline">P_a</span> là toán tử chiếu lên <span class="math inline">V_a</span>). Vì <span class="math inline">B_a</span> là Hermitian trên <span class="math inline">V_a</span>, nó có một phân tích phổ trên <span class="math inline">V_a</span>. Bằng cách kết hợp các véc-tơ riêng của <span class="math inline">B_a</span> trên từng không gian riêng <span class="math inline">V_a</span>, ta thu được một tập cơ sở trực chuẩn chung giúp chéo hóa đồng thời cả <span class="math inline">A</span> và <span class="math inline">B</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.40: (Hệ thức giao hoán cho các ma trận Pauli)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kiểm tra các hệ thức giao hoán</p>
+<p><span class="math display">
+[X, Y] = 2iZ; \quad [Y, Z] = 2iX; \quad [Z, X] = 2iY. \tag{2.73}
+</span></p>
+<p>Có một cách viết thanh lịch cho điều này sử dụng <span class="math inline">\epsilon_{jkl}</span>, tensor phản đối xứng trên ba chỉ số, mà <span class="math inline">\epsilon_{jkl} = 0</span> ngoại trừ <span class="math inline">\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = 1</span>, và <span class="math inline">\epsilon_{321} = \epsilon_{213} = \epsilon_{132} = -1</span>:</p>
+<p><span class="math display">
+[\sigma_j, \sigma_k] = 2i \sum_{l=1}^3 \epsilon_{jkl} \sigma_l. \tag{2.74}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.41: (Hệ thức phản giao hoán cho các ma trận Pauli)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kiểm tra các hệ thức phản giao hoán<br>
+<span class="math display">
+\{\sigma_i, \sigma_j\} = 0 \tag{2.75}
+</span></p>
+<p>trong đó <span class="math inline">i \neq j</span> đều được chọn từ tập <span class="math inline">1, 2, 3</span>. Đồng thời kiểm tra rằng (<span class="math inline">i = 0, 1, 2, 3</span>)<br>
+<span class="math display">
+\sigma_i^2 = I. \tag{2.76}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.42:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kiểm tra rằng<br>
+<span class="math display">
+AB = \frac{[A, B] + \{A, B\}}{2}. \tag{2.77}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.43:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng với <span class="math inline">j, k = 1, 2, 3</span>,</p>
+<p><span class="math display">
+\sigma_j \sigma_k = \delta_{jk} I + i \sum_{l=1}^3 \epsilon_{jkl} \sigma_l. \tag{2.78}
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.44:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">[A, B] = 0</span>, <span class="math inline">\{A, B\} = 0</span>, và <span class="math inline">A</span> khả nghịch. Chứng minh rằng <span class="math inline">B</span> phải bằng <span class="math inline">0</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.45:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">[A, B]^\dagger = [B^\dagger, A^\dagger]</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.46:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">[A, B] = -[B, A]</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.47:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">A</span> và <span class="math inline">B</span> là Hermitian. Chứng minh rằng <span class="math inline">i[A, B]</span> là Hermitian.</p>
+</div>
+</div>
 </section>
 <section id="the-polar-and-singular-value-decompositions" class="level1">
 <h1>10. The polar and singular value decompositions</h1>
+<p>Phân rã cực và phân rã giá trị kỳ dị là những cách hữu ích để tách các toán tử tuyến tính thành các phần đơn giản hơn. Cụ thể, các phép phân rã này cho phép chúng ta tách các toán tử tuyến tính tổng quát thành tích của các toán tử đơn nhất và các toán tử dương. Mặc dù chúng ta không hiểu quá rõ về cấu trúc của các toán tử tuyến tính tổng quát, nhưng chúng ta hiểu khá chi tiết về các toán tử đơn nhất và các toán tử dương. Phân rã cực và phân rã giá trị kỳ dị cho phép chúng ta áp dụng sự hiểu biết này để hiểu rõ hơn về các toán tử tuyến tính tổng quát.</p>
+<hr>
+<p><strong>Định lý 2.3: (Polar decomposition - Phân rã cực)</strong></p>
+<p>Cho <span class="math inline">A</span> là một toán tử tuyến tính trên một không gian vectơ <span class="math inline">V</span>. Khi đó tồn tại các toán tử đơn nhất <span class="math inline">U</span> và các toán tử dương <span class="math inline">J</span> và <span class="math inline">K</span> sao cho</p>
+<p><span class="math display">
+A = UJ = KU, \tag{2.79}
+</span></p>
+<p>trong đó các toán tử dương duy nhất <span class="math inline">J</span> và <span class="math inline">K</span> thỏa mãn các phương trình này được định nghĩa bởi <span class="math inline">J \equiv \sqrt{A^\dagger A}</span> và <span class="math inline">K \equiv \sqrt{AA^\dagger}</span>. Hơn nữa, nếu <span class="math inline">A</span> khả nghịch thì <span class="math inline">U</span> là duy nhất.</p>
+<p>Chúng ta gọi biểu thức <span class="math inline">A = UJ</span> là phân rã cực trái của <span class="math inline">A</span>, và <span class="math inline">A = KU</span> là phân rã cực phải của <span class="math inline">A</span>. Thường thì chúng ta sẽ lược bỏ thuật ngữ ‘phải’ hoặc ‘trái’, và sử dụng thuật ngữ ‘phân rã cực’ cho cả hai biểu thức, với ngữ cảnh sẽ chỉ rõ ý nào được ám chỉ.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Chứng minh
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">J \equiv \sqrt{A^\dagger A}</span> là một toán tử dương, do đó nó có thể được biểu diễn bằng phân rã phổ, <span class="math inline">J = \sum_i \lambda_i \vert{}i\rangle\langle i\vert{}</span> (<span class="math inline">\lambda_i \ge 0</span>). Định nghĩa <span class="math inline">\vert{}\psi_i\rangle \equiv A\vert{}i\rangle</span>. Từ định nghĩa, ta thấy rằng <span class="math inline">\langle \psi_i \vert{} \psi_i \rangle = \lambda_i^2</span>. Hiện tại ta chỉ xét các chỉ số <span class="math inline">i</span> mà <span class="math inline">\lambda_i \neq 0</span>. Với các <span class="math inline">i</span> đó, định nghĩa <span class="math inline">\vert{}e_i\rangle \equiv \vert{}\psi_i\rangle / \lambda_i</span>, do đó các vectơ <span class="math inline">\vert{}e_i\rangle</span> được chuẩn hóa. Hơn nữa, chúng trực giao, bởi vì nếu <span class="math inline">i \neq j</span> thì <span class="math inline">\langle e_i \vert{} e_j \rangle = \langle i \vert{} A^\dagger A \vert{} j \rangle / \lambda_i \lambda_j = \langle i \vert{} J^2 \vert{} j \rangle / \lambda_i \lambda_j = 0</span>.</p>
+<p>Chúng ta đang xét các <span class="math inline">i</span> sao cho <span class="math inline">\lambda_i \neq 0</span>. Bây giờ sử dụng quá trình Gram-Schmidt để mở rộng tập trực chuẩn <span class="math inline">\vert{}e_i\rangle</span> sao cho nó tạo thành một cơ sở trực chuẩn, mà ta cũng ký hiệu là <span class="math inline">\vert{}e_i\rangle</span>. Định nghĩa một toán tử đơn nhất <span class="math inline">U \equiv \sum_i \vert{}e_i\rangle \langle i\vert{}</span>. Khi <span class="math inline">\lambda_i \neq 0</span>, ta có <span class="math inline">U J \vert{}i\rangle = \lambda_i \vert{}e_i\rangle = \vert{}\psi_i\rangle = A\vert{}i\rangle</span>. Khi <span class="math inline">\lambda_i = 0</span>, ta có <span class="math inline">U J \vert{}i\rangle = 0 = \vert{}\psi_i\rangle</span>. Chúng ta đã chứng minh rằng tác dụng của <span class="math inline">A</span> và <span class="math inline">UJ</span> trùng khớp trên cơ sở <span class="math inline">\vert{}i\rangle</span>, và do đó <span class="math inline">A = UJ</span>.</p>
+<p><span class="math inline">J</span> là duy nhất, vì nhân phương trình <span class="math inline">A = UJ</span> ở bên trái với phương trình liên hợp <span class="math inline">A^\dagger = J U^\dagger</span> cho ta <span class="math inline">J^2 = A^\dagger A</span>, từ đó ta thấy rằng <span class="math inline">J = \sqrt{A^\dagger A}</span> là duy nhất. Suy luận một chút ta thấy rằng nếu <span class="math inline">A</span> khả nghịch, thì <span class="math inline">J</span> cũng khả nghịch, do đó <span class="math inline">U</span> được xác định duy nhất bởi phương trình <span class="math inline">U = AJ^{-1}</span>. Chứng minh cho phân rã cực phải diễn ra tương tự, vì <span class="math inline">A = UJ = U J U^\dagger U = KU</span>, trong đó <span class="math inline">K \equiv U J U^\dagger</span> là một toán tử dương. Vì <span class="math inline">AA^\dagger = K U U^\dagger K = K^2</span> nên ta phải có <span class="math inline">K = \sqrt{AA^\dagger}</span>, như đã khẳng định.</p>
+</div>
+</div>
+<p>Phân rã giá trị kỳ dị kết hợp phân rã cực và định lý phổ.</p>
+<hr>
+<p><strong>Hệ quả 2.4: (Phân rã giá trị kỳ dị - Singular value decomposition)</strong></p>
+<p>Cho <span class="math inline">A</span> là một ma trận vuông. Khi đó tồn tại các ma trận đơn nhất <span class="math inline">U</span> và <span class="math inline">V</span>, và một ma trận đường chéo <span class="math inline">D</span> với các phần tử không âm sao cho</p>
+<p><span class="math display">
+A = U D V . \tag{2.80}
+</span></p>
+<p>Các phần tử trên đường chéo của <span class="math inline">D</span> được gọi là các giá trị kỳ dị của <span class="math inline">A</span>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Chứng minh
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Theo phân rã cực, <span class="math inline">A = SJ</span>, với <span class="math inline">S</span> là toán tử đơn nhất và <span class="math inline">J</span> là toán tử dương. Theo định lý phổ, <span class="math inline">J = T D T^\dagger</span>, với <span class="math inline">T</span> là toán tử đơn nhất và <span class="math inline">D</span> là ma trận đường chéo có các phần tử không âm. Đặt <span class="math inline">U \equiv S T</span> và <span class="math inline">V \equiv T^\dagger</span> là hoàn tất chứng minh. Bài tập 2.48: Phân rã cực của một ma trận dương <span class="math inline">P</span> là gì? Của một ma trận đơn nhất <span class="math inline">U</span>? Của một ma trận Hermitian <span class="math inline">H</span>? Bài tập 2.49: Biểu diễn phân rã cực của một ma trận chuẩn tắc (normal matrix) dưới dạng biểu diễn tích ngoài.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.50:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tìm phân rã cực trái và cực phải của ma trận<br>
+<span class="math display">
+\begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix}. \tag{2.81}
+</span></p>
+</div>
+</div>
 
 
 </section>

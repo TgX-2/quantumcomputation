@@ -675,6 +675,66 @@ $$
 
 là toán tử chiếu lên không gian con $W$. Dễ dàng kiểm tra rằng định nghĩa này không phụ thuộc vào cơ sở trực chuẩn $\vert{}1\rangle, \dots, \vert{}k\rangle$ được sử dụng cho $W$. Từ định nghĩa, có thể chứng minh rằng $\vert{}v\rangle\langle v\vert{}$ là Hermitian với bất kỳ véc-tơ $\vert{}v\rangle$ nào, do đó $P$ là Hermitian, $P^\dagger = P$. Chúng ta sẽ thường gọi "không gian véc-tơ $P$" như một cách viết tắt cho không gian véc-tơ mà $P$ chiếu lên. Phần bù trực giao của $P$ là toán tử $Q \equiv I - P$. Dễ thấy rằng $Q$ là một toán tử chiếu lên không gian véc-tơ sinh bởi $\vert{}k+1\rangle, \dots, \vert{}d\rangle$, mà chúng ta cũng gọi là phần bù trực giao của $P$, và có thể ký hiệu là $Q$.   
 
+:::{.callout}
+# Nói thêm
+
+**Định nghĩa:**
+
+Một toán tử tuyến tính P trên không gian Hilbert được gọi là projector nếu nó thỏa mãn hai tính chất:
+
+(i) Tính ***Idempotent*** đẳng cấu bình phương: $P^2 = P$.
+
+(ii) Tính Hermitian: $P^\dagger = P$.
+
+**Ví dụ minh họa:**
+
+*Với 1 qubit, không gian Hilbert 2 chiều, chiếu lên một vector cơ sở*. Nó khác là giống việc tìm hình chiếu của một tia trong tọa độ đề các xuống một hệ trục tọa độ x hay y, có thể hiểu đơn giản là vậy.
+
+Ta muốn toán tử chiếu lên trạng thái $\vert 0 \rangle \langle 0 \vert$:
+
+$$
+P_0 = \vert 0 \rangle \langle 0 \vert = 
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} 
+\begin{bmatrix} 1 & 0 \end{bmatrix} = 
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
+$$
+
+Vậy là ta đã hoàn thành xong set up P. Thử chiếu trạng thái chồng chập:
+
+$$
+\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle= \begin{bmatrix} \alpha \\ \beta \end{bmatrix}
+$$
+
+tác dụng P lên ket psi:
+
+$$
+P_0\vert \psi \rangle = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \alpha \\ 0 \end{bmatrix}
+$$
+
+Có thể thấy các thông tin về $\vert 1 \rangle$ đã biến mất, giờ chỉ còn biên độ $\alpha$ là còn.
+
+*Với 2 qubit, không gian Hilbert 4 chiều, chiếu lên một trạng thái Bell đơn lẻ*
+
+Giả sử chúng ta muốn xây dựng $P_{\Phi^+}$ dùng để kiểm tra xem hệ 2 qubit có đang ở trạng thái vướng víu $\vert \Phi^+\rangle$ hay không.
+
+$$
+P_{\Phi^+} = \frac{1}{2} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix} \begin{pmatrix} 1 & 0 & 0 & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & 0 & 0 & 1 \\  0 & 0 & 0 & 0 \\  0 & 0 & 0 & 0 \\  1 & 0 & 0 & 1 \end{pmatrix}
+$$
+
+Và cũng có thể áp dụng lên không gian con nhiều chiều, bằng cách cộng các toán tử chiếu thành phần lại với nhau.
+
+**Ý nghĩa**:
+
+Xác suất để đo được trạng thái $\vert 0\rangle$ khi hệ đang ở trạng thái $\vert \psi \rangle$ được tính thông qua giá trị kỳ vọng của toán tử chiếu $P_0$:
+
+$$
+Prob(0) = \langle \psi \vert P_0 \vert \psi \rangle
+$$
+
+tức là ta sẽ kẹp thêm toán tử chiếu projector chỉ để kích hệ, tính xác suất xảy ra. Đó là tác dụng lớn nhất của nó tính đến hiện tại.
+
+:::
+
 :::{.callout-note}
 # Bài tập 2.16: 
 
@@ -684,7 +744,56 @@ Chứng minh rằng bất kỳ toán tử chiếu $P$ nào cũng thỏa mãn ph�
 
 ## Normal
 
-Một toán tử $A$ được gọi là ***normal*** chuẩn tắc nếu $AA^\dagger = A^\dagger A$. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là ***spectral decomposition*** phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 ở trang 72, mà bạn nên đọc kỹ.   
+Một toán tử $A$ được gọi là ***normal*** chuẩn tắc nếu $AA^\dagger = A^\dagger A$. Rõ ràng, một toán tử Hermitian thì cũng là chuẩn tắc. Tồn tại một định lý biểu diễn đáng chú ý cho các toán tử chuẩn tắc được gọi là ***spectral decomposition*** phân tích phổ, khẳng định rằng một toán tử là chuẩn tắc khi và chỉ khi nó chéo hóa được. Kết quả này được chứng minh trong Hộp 2.2 sau đây:
+
+:::{.callout-important}
+# Hộp 2.2. Phân tích phổ (The spectral decomposition)
+
+Phân tích phổ (spectral decomposition) là một định lý biểu diễn cực kỳ hữu ích dành cho các toán tử chuẩn tắc (normal operators).   
+
+**Định lý 2.1:** (Phân tích phổ) Một toán tử chuẩn tắc M bất kỳ trên không gian véc-tơ V đều chéo hóa được đối với một cơ sở trực chuẩn nào đó của V. Ngược lại, bất kỳ toán tử nào chéo hóa được cũng là một toán tử chuẩn tắc.
+
+**Chứng minh:** Chiều ngược lại là một bài tập đơn giản, do đó chúng ta chỉ chứng minh chiều thuận bằng phương pháp quy nạp theo số chiều $d$ của $V$.   
+
+Trường hợp $d = 1$: Mệnh đề là hiển nhiên.   
+
+Trước tiên, xét bước quy nạp:
+Gọi $\lambda$ là một giá trị riêng của $M$, $P$ là toán tử chiếu lên không gian riêng ứng với $\lambda$, và $Q$ là toán tử chiếu lên phần bù trực giao của nó. Khi đó:
+$$
+M = (P + Q)M(P + Q) = PMP + QMP + PMQ + QMQ
+$$
+
+
+Rõ ràng $PMP = \lambda P$. Hơn nữa, $QMP = 0$ vì $M$ biến không gian con $P$ thành chính nó.   
+
+Chúng ta khẳng định rằng $PMQ = 0$. Để thấy điều này, gọi $\vert{}v\rangle$ là một phần tử thuộc không gian con $P$. Khi đó:
+$$
+M M^\dagger \vert{}v\rangle = M^\dagger M \vert{}v\rangle = \lambda M^\dagger \vert{}v\rangle
+$$
+
+Do đó, $M^\dagger \vert{}v\rangle$ có giá trị riêng $\lambda$ và vì thế cũng là một phần tử thuộc không gian con $P$. Suy ra $QM^\dagger P = 0$. Lấy liên hợp Hermitian của phương trình này ta được $PMQ = 0$.   
+
+Do đó, $M = PMP + QMQ$.   
+
+Tiếp theo, chúng ta chứng minh rằng $QMQ$ là một toán tử chuẩn tắc. Để thấy điều này, lưu ý rằng $QM = QM(P + Q) = QMQ$, và $QM^\dagger = QM^\dagger(P + Q) = QM^\dagger Q$. Do đó, theo tính chuẩn tắc của $M$ và quan sát $Q^2 = Q$, ta có:
+$$
+\begin{aligned} >   QMQ QM^\dagger Q &= QM QM^\dagger Q \quad &(2.37) \\ >   &= QM M^\dagger Q \quad &(2.38) \\ >   &= QM^\dagger M Q \quad &(2.39) \\ >   &= QM^\dagger QMQ \quad &(2.40) \\ >   &= QM^\dagger Q QMQ \quad &(2.41) >   \end{aligned}
+$$
+
+do đó $QMQ$ là chuẩn tắc.   
+
+Theo giả thiết quy nạp, $QMQ$ chéo hóa được đối với một cơ sở trực chuẩn nào đó của không gian con $Q$, và $PMP$ vốn đã chéo hóa được đối với một cơ sở trực chuẩn của $P$. Suy ra $M = PMP + QMQ$ chéo hóa được đối với một cơ sở trực chuẩn của toàn bộ không gian véc-tơ. $\blacksquare$   
+
+Dưới dạng biểu diễn tích ngoài, điều này có nghĩa là $M$ có thể được viết dưới dạng:
+
+$$
+M = \sum_i \lambda_i \vert{}i\rangle\langle i\vert{}
+$$
+
+trong đó $\lambda_i$ là các giá trị riêng của $M$, $\{\vert{}i\rangle\}$ là một cơ sở trực chuẩn cho $V$, và mỗi $\vert{}i\rangle$ là một véc-tơ riêng của $M$ ứng với giá trị riêng $\lambda_i$.   
+
+Dưới dạng các toán tử chiếu, $M = \sum_i \lambda_i P_i$, trong đó $\lambda_i$ lại là các giá trị riêng của $M$, và $P_i$ là toán tử chiếu lên không gian riêng ứng với $\lambda_i$ của $M$. Các toán tử chiếu này thỏa mãn hệ thức đầy đủ $\sum_i P_i = I$ và tính chất trực chuẩn $P_i P_j = \delta_{ij} P_i$.
+:::
 
 :::{.callout-note}
 # Bài tập 2.17: 
@@ -763,15 +872,444 @@ Chứng minh rằng với bất kỳ toán tử $A$ nào, $A^\dagger A$ luôn l�
 
 :::
 
-
-
-
-
 # 7. Tensor products
+
+Tích tensor là một cách kết hợp các không gian véc-tơ lại với nhau để tạo thành các không gian véc-tơ lớn hơn. Cách xây dựng này có vai trò then chốt để hiểu cơ học lượng tử của các hệ nhiều hạt. Phần thảo luận sau đây có một chút trừu tượng và có thể khó theo dõi nếu bạn chưa quen thuộc với tích tensor, vì vậy bạn cứ tự do bỏ qua phần này và xem lại sau khi đến phần thảo luận về tích tensor trong cơ học lượng tử.   
+
+---
+
+Giả sử $V$ và $W$ lần lượt là các không gian véc-tơ có số chiều $m$ và $n$. Để thuận tiện, chúng ta cũng giả sử rằng $V$ và $W$ là các không gian Hilbert. Khi đó $V \otimes W$ (đọc là "$V$ tensor $W$") là một không gian véc-tơ có số chiều $mn$. Các phần tử của $V \otimes W$ là tổ hợp tuyến tính của các 'tích tensor' $\vert{}v\rangle \otimes \vert{}w\rangle$ cấu thành từ các phần tử $\vert{}v\rangle$ của $V$ và $\vert{}w\rangle$ của $W$. Đặc biệt, nếu $\{\vert{}i\rangle\}$ và $\{\vert{}j\rangle\}$ là các cơ sở trực chuẩn cho các không gian $V$ và $W$, thì $\{\vert{}i\rangle \otimes \vert{}j\rangle\}$ là một cơ sở cho $V \otimes W$. Chúng ta thường sử dụng các ký hiệu viết tắt $\vert{}v\rangle\vert{}w\rangle$, $\vert{}v, w\rangle$ hoặc thậm chí $\vert{}vw\rangle$ cho tích tensor $\vert{}v\rangle \otimes \vert{}w\rangle$.   
+
+Ví dụ, nếu $V$ là không gian véc-tơ hai chiều với các véc-tơ cơ sở $\vert{}0\rangle$ và $\vert{}1\rangle$, thì $\vert{}0\rangle \otimes \vert{}0\rangle + \vert{}1\rangle \otimes \vert{}1\rangle$ là một phần tử thuộc $V \otimes W$
+
+Theo định nghĩa, tích tensor thỏa mãn các tính chất cơ bản sau:
+
+(1) Với một số vô hướng $z$ bất kỳ và các phần tử $\vert{}v\rangle$ thuộc $V$ và $\vert{}w\rangle$ thuộc $W$,
+
+$$
+z (\vert{}v\rangle \otimes \vert{}w\rangle) = (z\vert{}v\rangle) \otimes \vert{}w\rangle = \vert{}v\rangle \otimes (z\vert{}w\rangle) \tag {2.42}
+$$
+
+(2) Với $\vert{}v_1\rangle$ và $\vert{}v_2\rangle$ bất kỳ trong $V$ và $\vert{}w\rangle$ trong $W$,
+
+$$
+(\vert{}v_1\rangle + \vert{}v_2\rangle) \otimes \vert{}w\rangle = \vert{}v_1\rangle \otimes \vert{}w\rangle + \vert{}v_2\rangle \otimes \vert{}w\rangle \tag {2.43}
+$$
+
+(3) Với $\vert{}v\rangle$ bất kỳ trong $V$ và $\vert{}w_1\rangle, \vert{}w_2\rangle$ trong $W$,
+
+$$
+\vert{}v\rangle \otimes (\vert{}w_1\rangle + \vert{}w_2\rangle) = \vert{}v\rangle \otimes \vert{}w_1\rangle + \vert{}v\rangle \otimes \vert{}w_2\rangle \tag {2.44}
+$$
+
+Những loại toán tử tuyến tính nào tác động trên không gian $V \otimes W$? Giả sử $\vert{}v\rangle$ và $\vert{}w\rangle$ là các véc-tơ trong $V$ và $W$, còn $A$ và $B$ lần lượt là các toán tử tuyến tính trên $V$ và $W$. Khi đó chúng ta có thể định nghĩa một toán tử tuyến tính $A \otimes B$ trên $V \otimes W$ bằng phương trình:   
+
+$$
+(A \otimes B)(\vert{}v\rangle \otimes \vert{}w\rangle) \equiv A\vert{}v\rangle \otimes B\vert{}w\rangle \tag {2.45}
+$$
+
+Định nghĩa của $A \otimes B$ sau đó được mở rộng cho tất cả các phần tử của $V \otimes W$ theo cách tự nhiên để đảm bảo tính tuyến tính của $A \otimes B$, nghĩa là:   
+
+$$
+(A \otimes B) \left( \sum_i a_i \vert{}v_i\rangle \otimes \vert{}w_i\rangle \right) \equiv \sum_i a_i A\vert{}v_i\rangle \otimes B\vert{}w_i\rangle \tag {2.46}
+$$
+
+Có thể chứng minh rằng $A \otimes B$ được định nghĩa theo cách này là một toán tử tuyến tính xác định tốt trên $V \otimes W$. Khái niệm tích tensor của hai toán tử này được mở rộng một cách rõ ràng cho trường hợp $A: V \to V'$ và $B: W \to W'$ ánh xạ giữa các không gian véc-tơ khác nhau. Quả thực, một toán tử tuyến tính $C$ bất kỳ ánh xạ $V \otimes W$ sang $V' \otimes W'$ có thể được biểu diễn dưới dạng tổ hợp tuyến tính của các tích tensor của các toán tử ánh xạ $V$ sang $V'$ và $W$ sang $W'$:   
+
+$$
+C = \sum_i c_i A_i \otimes B_i \tag {2.47}
+$$
+
+trong đó theo định nghĩa:   
+
+$$
+\left( \sum_i c_i A_i \otimes B_i \right) \vert{}v\rangle \otimes \vert{}w\rangle \equiv \sum_i c_i A_i\vert{}v\rangle \otimes B_i\vert{}w\rangle \tag {2.48}
+$$
+
+Các tích trong trên các không gian $V$ và $W$ có thể được sử dụng để định nghĩa một tích trong tự nhiên trên $V \otimes W$. Định nghĩa:   
+
+$$
+\left( \sum_i a_i \vert{}v_i\rangle \otimes \vert{}w_i\rangle, \sum_j b_j \vert{}v_j'\rangle \otimes \vert{}w_j'\rangle \right) \equiv \sum_{ij} a_i^* b_j \langle v_i\vert{}v_j'\rangle \langle w_i\vert{}w_j'\rangle \tag {2.49}
+$$
+
+Có thể chứng minh rằng hàm được định nghĩa như vậy là một tích trong xác định tốt. Từ tích trong này, không gian tích trong $V \otimes W$ thừa hưởng các cấu trúc khác mà chúng ta đã quen thuộc, chẳng hạn như các khái niệm về toán tử liên hợp, tính unitary, tính chuẩn tắc và tính Hermitian.
+
+Tất cả những thảo luận này khá trừu tượng. Nó có thể trở nên cụ thể hơn nhiều bằng cách chuyển sang một biểu diễn ma trận thuận tiện được gọi là tích Kronecker (Kronecker product). Giả sử $A$ là một ma trận kích thước $m \times n$, và $B$ là một ma trận kích thước $p \times q$. Khi đó chúng ta có biểu diễn ma trận:   
+
+$$
+A \otimes B \equiv \begin{bmatrix} A_{11}B & A_{12}B & \dots & A_{1n}B \\ A_{21}B & A_{22}B & \dots & A_{2n}B \\ \vdots & \vdots & \vdots & \vdots \\ A_{m1}B & A_{m2}B & \dots & A_{mn}B \end{bmatrix} \tag {2.50}
+$$   
+
+Trong biểu diễn này, các thuật ngữ như $A_{11}B$ biểu thị các ma trận con kích thước $p \times q$ mà các phần tử của nó tỉ lệ với $B$, với hằng số tỉ lệ tổng thể là $A_{11}$. Ví dụ, tích tensor của các véc-tơ $(1, 2)$ và $(2, 3)$ là véc-tơ:   
+
+$$
+\begin{bmatrix} 1 \\ 2 \end{bmatrix} \otimes \begin{bmatrix} 2 \\ 3 \end{bmatrix} = \begin{bmatrix} 1 \times 2 \\ 1 \times 3 \\ 2 \times 2 \\ 2 \times 3 \end{bmatrix} = \begin{bmatrix} 2 \\ 3 \\ 4 \\ 6 \end{bmatrix} \tag {2.51}
+$$   
+
+Tích tensor của các ma trận Pauli $X$ và $Y$ là:   
+
+$$
+X \otimes Y = \begin{bmatrix} 0 \cdot Y & 1 \cdot Y \\ 1 \cdot Y & 0 \cdot Y \end{bmatrix} = \begin{bmatrix} 0 & 0 & 0 & -i \\ 0 & 0 & i & 0 \\ 0 & -i & 0 & 0 \\ i & 0 & 0 & 0 \end{bmatrix} \tag {2.52}
+$$   
+
+Cuối cùng, chúng tôi đề cập đến ký hiệu hữu ích $\vert{}\psi\rangle^{\otimes k}$, có nghĩa là $\vert{}\psi\rangle$ lấy tích tensor với chính nó $k$ lần. Ví dụ $\vert{}\psi\rangle^{\otimes 2} = \vert{}\psi\rangle \otimes \vert{}\psi\rangle$. Một ký hiệu tương tự cũng được sử dụng cho các toán tử trên các không gian tích tensor. 
+
+   
+
+:::{.callout-note}
+# Bài tập 2.26: 
+
+Cho $\vert{}\psi\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$. Hãy viết rõ ràng $\vert{}\psi\rangle^{\otimes 2}$ và $\vert{}\psi\rangle^{\otimes 3}$, cả dưới dạng tích tensor như $\vert{}0\rangle\vert{}1\rangle$, và dưới dạng tích Kronecker.
+:::
+
+:::{.callout-note}
+# Bài tập 2.27: 
+Tính biểu diễn ma trận của các tích tensor của các toán tử Pauli:
+
+(a) $X$ và $Z$; 
+
+(b) $I$ và $X$; 
+
+(c) $X$ và $I$. 
+
+Tích tensor có tính giao hoán không? 
+:::
+
+
+:::{.callout-note}
+# Bài tập 2.28: 
+
+Chứng minh rằng các phép toán chuyển vị, liên hợp phức, và liên hợp Hermitian phân phối qua tích tensor:
+$$
+(A \otimes B)^* = A^* \otimes B^*; \quad (A \otimes B)^T = A^T \otimes B^T; \quad (A \otimes B)^\dagger = A^\dagger \otimes B^\dagger \tag {2.53}
+$$    
+:::
+
+:::{.callout-note}
+# Bài tập 2.29: 
+Chứng minh rằng tích tensor của hai toán tử unitary là một toán tử unitary.  
+:::
+
+:::{.callout-note}
+# Bài tập 2.30: 
+Chứng minh rằng tích tensor của hai toán tử Hermitian là một toán tử Hermitian.  
+:::
+
+:::{.callout-note}
+# Bài tập 2.32: 
+Chứng minh rằng tích tensor của hai toán tử chiếu là một toán tử chiếu.  
+:::
+
+:::{.callout-note}
+# Bài tập 2.33: 
+Toán tử Hadamard trên một qubit có thể được viết dưới dạng:
+
+$$
+H = \frac{1}{\sqrt{2}} \Big[ (\vert{}0\rangle + \vert{}1\rangle)\langle 0\vert{} + (\vert{}0\rangle - \vert{}1\rangle)\langle 1\vert{} \Big] \tag {2.54}
+$$   
+
+Hãy chứng minh một cách tường minh rằng phép biến đổi Hadamard trên $n$ qubit, $H^{\otimes n}$, có thể được viết dưới dạng:
+
+$$
+H^{\otimes n} = \frac{1}{\sqrt{2^n}} \sum_{x,y} (-1)^{x \cdot y} \vert{}x\rangle\langle y\vert{} \tag{2.55}
+$$   
+
+Hãy viết ra biểu diễn ma trận tường minh cho $H^{\otimes 2}$.
+:::
 
 # 8. Operator functions
 
+Có rất nhiều hàm quan trọng có thể được định nghĩa cho các toán tử và ma trận. Nói một cách tổng quát, cho một hàm $f$ đi từ tập số phức sang số phức, ta có thể định nghĩa một hàm ma trận tương ứng trên các ma trận chuẩn tắc (hoặc một số lớp con như ma trận Hermitian) thông qua cấu trúc sau.   
+
+Gọi $A = \sum_a a \vert{}a\rangle\langle a\vert{}$ là một phép phân tích phổ cho toán tử chuẩn tắc $A$. Định nghĩa $f(A) \equiv \sum_a f(a) \vert{}a\rangle\langle a\vert{}$. Một chút suy nghĩ cho thấy $f(A)$ được xác định một cách duy nhất. Thủ tục này có thể được sử dụng, ví dụ, để định nghĩa căn bậc hai của một toán tử dương, logarit của một toán tử xác định dương, hoặc hàm mũ của một toán tử chuẩn tắc. Như một ví dụ,   
+
+$$
+\exp(\theta Z) = \begin{bmatrix} e^\theta & 0 \\ 0 & e^{-\theta} \end{bmatrix} \tag {2.56}
+$$
+
+vì $Z$ có các véc-tơ riêng là $\vert{}0\rangle$ và $\vert{}1\rangle$. 
+
+:::{.callout-note}
+# Bài tập 2.34: 
+
+Tìm căn bậc hai và logarit của ma trận   
+
+$$
+\begin{bmatrix} 4 & 3 \\ 3 & 4 \end{bmatrix} \tag {2.57}
+$$
+:::
+
+:::{.callout-note}
+# Bài tập 2.35: (Hàm mũ của các ma trận Pauli) 
+
+Cho $\vec{v}$ là một véc-tơ đơn vị thực ba chiều bất kỳ và $\theta$ là một số thực. Chứng minh rằng   
+
+$$
+\exp(i\theta \vec{v}\cdot\vec{\sigma}) = \cos(\theta)I + i\sin(\theta)\vec{v}\cdot\vec{\sigma} \tag {2.58}
+$$
+
+trong đó $\vec{v}\cdot\vec{\sigma} \equiv \sum_{i=1}^3 v_i \sigma_i$. Bài tập này được tổng quát hóa ở Bài toán 2.1 ở trang 117.
+
+:::
+
+---
+
+Một hàm ma trận quan trọng khác là vết (trace) của một ma trận. Vết của $A$ được định nghĩa là tổng các phần tử trên đường chéo chính của nó:   
+
+$$
+\text{tr}(A) \equiv \sum_i A_{ii} \tag {2.59}
+$$
+
+Dễ dàng thấy rằng vết có tính tuần hoàn, $\text{tr}(AB) = \text{tr}(BA)$, và tính tuyến tính, $\text{tr}(A + B) = \text{tr}(A) + \text{tr}(B)$, $\text{tr}(zA) = z\text{tr}(A)$, trong đó $A$ và $B$ là các ma trận bất kỳ, còn $z$ là một số phức. Hơn nữa, từ tính tuần hoàn suy ra rằng vết của một ma trận là bất biến dưới phép biến đổi tương đương unitary $A \to U A U^\dagger$, vì $\text{tr}(U A U^\dagger) = \text{tr}(U^\dagger U A) = \text{tr}(A)$. Dựa trên kết quả này, việc định nghĩa vết của một toán tử $A$ bằng vết của bất kỳ biểu diễn ma trận nào của $A$ là hoàn toàn hợp lý. Tính bất biến của vết dưới các phép biến đổi tương đương unitary đảm bảo rằng vết của một toán tử được xác định tốt.
+
+Như một ví dụ về vết (trace), giả sử $\vert{}\psi\rangle$ là một véc-tơ đơn vị và $A$ là một toán tử bất kỳ. Để tính $\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{})$, ta sử dụng phương pháp Gram–Schmidt để mở rộng $\vert{}\psi\rangle$ thành một cơ sở trực chuẩn $\vert{}i\rangle$ sao cho $\vert{}\psi\rangle$ là phần tử đầu tiên. Khi đó ta có:   
+
+$$
+\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{}) = \sum_i \langle i\vert{}A\vert{}\psi\rangle\langle\psi\vert{}i\rangle \tag {2.60}
+$$   
+
+$$
+= \langle\psi\vert{}A\vert{}\psi\rangle \tag {2.61}
+$$   
+
+Kết quả này, $\text{tr}(A\vert{}\psi\rangle\langle\psi\vert{}) = \langle\psi\vert{}A\vert{}\psi\rangle$, cực kỳ hữu ích trong việc tính vết của một toán tử.   
+
+:::{.callout-note}
+# Bài tập 2.36: 
+
+Chứng minh rằng các ma trận Pauli ngoại trừ $I$ đều có vết bằng 0.   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.37: (Tính tuần hoàn của vết) 
+
+Nếu $A$ và $B$ là hai toán tử tuyến tính, hãy chứng minh rằng:
+$$
+\text{tr}(AB) = \text{tr}(BA) \tag {2.62}
+$$   
+
+:::
+
+   
+:::{.callout-note}
+# Bài tập 2.38: (Tính tuyến tính của vết) 
+Nếu $A$ và $B$ là hai toán tử tuyến tính, hãy chứng minh rằng:
+$$
+\text{tr}(A + B) = \text{tr}(A) + \text{tr}(B) \tag {2.63}
+$$
+
+và nếu $z$ là một số phức bất kỳ, hãy chứng minh rằng:
+
+$$
+\text{tr}(zA) = z\text{tr}(A) \tag {2.64}
+$$   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.39: (Tích trong Hilbert–Schmidt trên các toán tử) 
+Tập hợp $L_V$ các toán tử tuyến tính trên không gian Hilbert $V$ hiển nhiên là một không gian véc-tơ – tổng của hai toán tử tuyến tính là một toán tử tuyến tính, $zA$ là một toán tử tuyến tính nếu $A$ là toán tử tuyến tính và $z$ là số phức, đồng thời tồn tại phần tử không $0$. Một kết quả bổ sung quan trọng là không gian véc-tơ $L_V$ có thể được trang bị một cấu trúc tích trong tự nhiên, biến nó thành một không gian Hilbert:   
+
+(1) Chứng minh rằng hàm $(\cdot, \cdot)$ trên $L_V \times L_V$ được định nghĩa bởi:
+$$
+(A, B) \equiv \text{tr}(A^\dagger B) \tag {2.65}
+$$
+
+là một hàm tích trong. Tích trong này được gọi là tích trong Hilbert–Schmidt hoặc tích trong vết.   
+
+(2) Nếu $V$ có số chiều $d$, hãy chứng minh rằng $L_V$ có số chiều $d^2$.   
+
+(3) Tìm một cơ sở trực chuẩn gồm các ma trận Hermitian cho không gian Hilbert $L_V$
+
+:::
+
 # 9. The commutator and anti-commutator
+
+Giao hoán tử giữa hai toán tử $A$ và $B$ được định nghĩa là:   
+
+$$
+[A, B] \equiv AB - BA \quad (2.66)
+$$   
+
+Nếu $[A, B] = 0$, tức là $AB = BA$, thì ta nói $A$ giao hoán với $B$. Tương tự, phản giao hoán tử của hai toán tử $A$ và $B$ được định nghĩa bởi:   
+
+$$
+\{A, B\} \equiv AB + BA \quad (2.67)
+$$   
+
+ta nói $A$ phản giao hoán với $B$ nếu $\{A, B\} = 0$. Hóa ra rất nhiều tính chất quan trọng của các cặp toán tử có thể được suy ra từ giao hoán tử và phản giao hoán tử của chúng. Có lẽ mối liên hệ hữu ích nhất là sự kết nối giữa giao hoán tử và tính chất có thể chéo hóa đồng thời (simultaneously diagonalize) các toán tử Hermitian $A$ và $B$, nghĩa là viết $A = \sum_i a_i \vert{}i\rangle\langle i\vert{}, B = \sum_i b_i \vert{}i\rangle\langle i\vert{}$, trong đó $\vert{}i\rangle$ là một tập cơ sở trực chuẩn chung cho cả $A$ và $B$.   
+
+:::{.callout}
+# Nói thêm một chút
+
+Trong đại số thông thường, phép nhân thường có tính giao hoán (AB = BA). Tuy nhiên, đối với tính toán lượng tử, thứ tự thực hiện rất quan trọng.
+
+Ý nghĩa vật lý (Hệ thức bất định Heisenberg): Nếu hai đại lượng vật lý (ví dụ như vị trí x và động lượng p) có giao hoán tử khác không $([A, B] \neq 0)$, điều này có nghĩa là bạn không thể đồng thời đo chính xác tuyệt đối cả hai đại lượng này trên một hệ lượng tử.
+:::
+
+---
+
+**Định lý 2.2: (Định lý chéo hóa đồng thời)** Giả sử $A$ và $B$ là các toán tử Hermitian. Khi đó $[A, B] = 0$ khi và chỉ khi tồn tại một cơ sở trực chuẩn sao cho cả $A$ và $B$ đều là đường chéo đối với cơ sở đó. Chúng ta nói rằng $A$ và $B$ được chéo hóa đồng thời trong trường hợp này.   
+
+:::{.callout}
+# tl;dr
+
+Nếu hai đại lượng quan sát được (đại diện bởi toán tử Hermitian A và B) có thể đo lường đồng thời mà không làm ảnh hưởng lẫn nhau khi và chỉ khi chúng giao hoán với nhau $([A, B] = 0)$.
+
+Khi $[A, B] = 0$, chúng chia sẽ chung một bộ vector riêng, cho phép chúng ta biểu diễn chúng trên cùng một cơ sở trực chuẩn.
+:::
+
+Kết quả này liên kết giao hoán tử của hai toán tử (thường dễ tính toán) với tính chất chéo hóa đồng thời (vốn a priori khá khó xác định). Như một ví dụ, hãy xét:   
+
+$$
+[X, Y] = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} - \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \quad (2.68)
+$$   
+
+$$
+= 2i \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \quad (2.69)
+$$   
+
+$$
+= 2iZ \quad (2.70)
+$$   
+
+do đó $X$ và $Y$ không giao hoán. Như bạn đã chứng minh trong Bài tập 2.11, $X$ và $Y$ không có chung các véc-tơ riêng, đúng như chúng ta kỳ vọng từ định lý chéo hóa đồng thời. 
+
+:::{.callout-important}
+# Chứng minh định lý 2.2.
+
+**Chiều thuận:** Nếu $A$ và $B$ chéo hóa trên cùng một cơ sở trực chuẩn, việc tính toán trực tiếp cho thấy $[A, B] = 0$.   
+
+**Chiều đảo:** Dựa trên không gian riêng $V_a$ của $A$ ứng với giá trị riêng $a$, ta định nghĩa toán tử $B_a \equiv P_a B P_a$ (với $P_a$ là toán tử chiếu lên $V_a$). Vì $B_a$ là Hermitian trên $V_a$, nó có một phân tích phổ trên $V_a$. Bằng cách kết hợp các véc-tơ riêng của $B_a$ trên từng không gian riêng $V_a$, ta thu được một tập cơ sở trực chuẩn chung giúp chéo hóa đồng thời cả $A$ và $B$
+:::
+
+
+:::{.callout-note}
+# Bài tập 2.40: (Hệ thức giao hoán cho các ma trận Pauli) 
+
+Kiểm tra các hệ thức giao hoán   
+
+$$
+[X, Y] = 2iZ; \quad [Y, Z] = 2iX; \quad [Z, X] = 2iY. \tag{2.73}
+$$   
+
+Có một cách viết thanh lịch cho điều này sử dụng $\epsilon_{jkl}$, tensor phản đối xứng trên ba chỉ số, mà $\epsilon_{jkl} = 0$ ngoại trừ $\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = 1$, và $\epsilon_{321} = \epsilon_{213} = \epsilon_{132} = -1$:   
+
+$$
+[\sigma_j, \sigma_k] = 2i \sum_{l=1}^3 \epsilon_{jkl} \sigma_l. \tag{2.74}
+$$   
+:::
+
+:::{.callout-note}
+# Bài tập 2.41: (Hệ thức phản giao hoán cho các ma trận Pauli) 
+
+Kiểm tra các hệ thức phản giao hoán   
+$$
+\{\sigma_i, \sigma_j\} = 0 \tag{2.75}
+$$
+
+trong đó $i \neq j$ đều được chọn từ tập $1, 2, 3$. Đồng thời kiểm tra rằng ($i = 0, 1, 2, 3$)   
+$$
+\sigma_i^2 = I. \tag{2.76}
+$$   
+:::
+
+:::{.callout-note}
+# Bài tập 2.42: 
+
+Kiểm tra rằng   
+$$
+AB = \frac{[A, B] + \{A, B\}}{2}. \tag{2.77}
+$$   
+:::
+
+:::{.callout-note}
+# Bài tập 2.43: 
+
+Chứng minh rằng với $j, k = 1, 2, 3$,   
+
+$$
+\sigma_j \sigma_k = \delta_{jk} I + i \sum_{l=1}^3 \epsilon_{jkl} \sigma_l. \tag{2.78}
+$$   
+:::
+
+:::{.callout-note}
+# Bài tập 2.44: 
+Giả sử $[A, B] = 0$, $\{A, B\} = 0$, và $A$ khả nghịch. Chứng minh rằng $B$ phải bằng $0$.  
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.45: 
+Chứng minh rằng $[A, B]^\dagger = [B^\dagger, A^\dagger]$.   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.46: 
+Chứng minh rằng $[A, B] = -[B, A]$.    
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.47: 
+Giả sử $A$ và $B$ là Hermitian. Chứng minh rằng $i[A, B]$ là Hermitian.   
+
+:::
+
 
 # 10. The polar and singular value decompositions
 
+Phân rã cực và phân rã giá trị kỳ dị là những cách hữu ích để tách các toán tử tuyến tính thành các phần đơn giản hơn. Cụ thể, các phép phân rã này cho phép chúng ta tách các toán tử tuyến tính tổng quát thành tích của các toán tử đơn nhất và các toán tử dương. Mặc dù chúng ta không hiểu quá rõ về cấu trúc của các toán tử tuyến tính tổng quát, nhưng chúng ta hiểu khá chi tiết về các toán tử đơn nhất và các toán tử dương. Phân rã cực và phân rã giá trị kỳ dị cho phép chúng ta áp dụng sự hiểu biết này để hiểu rõ hơn về các toán tử tuyến tính tổng quát.   
+
+---
+
+**Định lý 2.3: (Polar decomposition - Phân rã cực)** 
+
+Cho $A$ là một toán tử tuyến tính trên một không gian vectơ $V$. Khi đó tồn tại các toán tử đơn nhất $U$ và các toán tử dương $J$ và $K$ sao cho   
+
+$$
+A = UJ = KU, \tag{2.79}
+$$   
+
+trong đó các toán tử dương duy nhất $J$ và $K$ thỏa mãn các phương trình này được định nghĩa bởi $J \equiv \sqrt{A^\dagger A}$ và $K \equiv \sqrt{AA^\dagger}$. Hơn nữa, nếu $A$ khả nghịch thì $U$ là duy nhất.   
+
+Chúng ta gọi biểu thức $A = UJ$ là phân rã cực trái của $A$, và $A = KU$ là phân rã cực phải của $A$. Thường thì chúng ta sẽ lược bỏ thuật ngữ 'phải' hoặc 'trái', và sử dụng thuật ngữ 'phân rã cực' cho cả hai biểu thức, với ngữ cảnh sẽ chỉ rõ ý nào được ám chỉ. 
+
+:::{.callout-important}
+# Chứng minh
+$J \equiv \sqrt{A^\dagger A}$ là một toán tử dương, do đó nó có thể được biểu diễn bằng phân rã phổ, $J = \sum_i \lambda_i \vert{}i\rangle\langle i\vert{}$ ($\lambda_i \ge 0$). Định nghĩa $\vert{}\psi_i\rangle \equiv A\vert{}i\rangle$. Từ định nghĩa, ta thấy rằng $\langle \psi_i \vert{} \psi_i \rangle = \lambda_i^2$. Hiện tại ta chỉ xét các chỉ số $i$ mà $\lambda_i \neq 0$. Với các $i$ đó, định nghĩa $\vert{}e_i\rangle \equiv \vert{}\psi_i\rangle / \lambda_i$, do đó các vectơ $\vert{}e_i\rangle$ được chuẩn hóa. Hơn nữa, chúng trực giao, bởi vì nếu $i \neq j$ thì $\langle e_i \vert{} e_j \rangle = \langle i \vert{} A^\dagger A \vert{} j \rangle / \lambda_i \lambda_j = \langle i \vert{} J^2 \vert{} j \rangle / \lambda_i \lambda_j = 0$.   
+
+Chúng ta đang xét các $i$ sao cho $\lambda_i \neq 0$. Bây giờ sử dụng quá trình Gram-Schmidt để mở rộng tập trực chuẩn $\vert{}e_i\rangle$ sao cho nó tạo thành một cơ sở trực chuẩn, mà ta cũng ký hiệu là $\vert{}e_i\rangle$. Định nghĩa một toán tử đơn nhất $U \equiv \sum_i \vert{}e_i\rangle \langle i\vert{}$. Khi $\lambda_i \neq 0$, ta có $U J \vert{}i\rangle = \lambda_i \vert{}e_i\rangle = \vert{}\psi_i\rangle = A\vert{}i\rangle$. Khi $\lambda_i = 0$, ta có $U J \vert{}i\rangle = 0 = \vert{}\psi_i\rangle$. Chúng ta đã chứng minh rằng tác dụng của $A$ và $UJ$ trùng khớp trên cơ sở $\vert{}i\rangle$, và do đó $A = UJ$.   
+
+$J$ là duy nhất, vì nhân phương trình $A = UJ$ ở bên trái với phương trình liên hợp $A^\dagger = J U^\dagger$ cho ta $J^2 = A^\dagger A$, từ đó ta thấy rằng $J = \sqrt{A^\dagger A}$ là duy nhất. Suy luận một chút ta thấy rằng nếu $A$ khả nghịch, thì $J$ cũng khả nghịch, do đó $U$ được xác định duy nhất bởi phương trình $U = AJ^{-1}$. Chứng minh cho phân rã cực phải diễn ra tương tự, vì $A = UJ = U J U^\dagger U = KU$, trong đó $K \equiv U J U^\dagger$ là một toán tử dương. Vì $AA^\dagger = K U U^\dagger K = K^2$ nên ta phải có $K = \sqrt{AA^\dagger}$, như đã khẳng định.
+:::
+
+Phân rã giá trị kỳ dị kết hợp phân rã cực và định lý phổ.
+
+---
+
+**Hệ quả 2.4: (Phân rã giá trị kỳ dị - Singular value decomposition)**
+
+Cho $A$ là một ma trận vuông. Khi đó tồn tại các ma trận đơn nhất $U$ và $V$, và một ma trận đường chéo $D$ với các phần tử không âm sao cho   
+
+$$
+A = U D V . \tag{2.80}
+$$
+
+Các phần tử trên đường chéo của $D$ được gọi là các giá trị kỳ dị của $A$.   
+
+:::{.callout-important}
+# Chứng minh
+Theo phân rã cực, $A = SJ$, với $S$ là toán tử đơn nhất và $J$ là toán tử dương. Theo định lý phổ, $J = T D T^\dagger$, với $T$ là toán tử đơn nhất và $D$ là ma trận đường chéo có các phần tử không âm. Đặt $U \equiv S T$ và $V \equiv T^\dagger$ là hoàn tất chứng minh.   Bài tập 2.48: Phân rã cực của một ma trận dương $P$ là gì? Của một ma trận đơn nhất $U$? Của một ma trận Hermitian $H$?   Bài tập 2.49: Biểu diễn phân rã cực của một ma trận chuẩn tắc (normal matrix) dưới dạng biểu diễn tích ngoài.   
+:::
+
+:::{.callout-note}
+# Bài tập 2.50: 
+
+Tìm phân rã cực trái và cực phải của ma trận   
+$$
+\begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}. \tag{2.81}
+$$
+:::
