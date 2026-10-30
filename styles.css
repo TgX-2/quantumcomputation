@@ -112,6 +112,24 @@ blockquote {
   color: var(--muted);
 }
 
+.postulates {
+  margin: 2rem 0;
+  padding: 1.35rem 1.5rem 1rem;
+  border: 1px solid #ddc69b;
+  border-left: 5px solid var(--accent-strong);
+  border-radius: 0.9rem;
+  background: #fffaf1;
+  box-shadow: 0 8px 24px rgb(72 38 32 / 10%);
+}
+
+.postulates > :first-child {
+  margin-top: 0;
+}
+
+.postulates > :last-child {
+  margin-bottom: 0;
+}
+
 pre,
 code {
   border-color: var(--border);

@@ -36,6 +36,7 @@ website:
       - section : "Introduction to Quantum Mechanics"
         contents: 
           - note/introductiontoquantummechanics/1.qmd
+          - note/introductiontoquantummechanics/2.qmd
 
 format:
   html:

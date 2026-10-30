@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>The postulates of Quantum Mechanics – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontoquantummechanics/1.html">Introduction to Quantum Mechanics</a></li><li class="breadcrumb-item"><a href="../../note/introductiontoquantummechanics/2.html">The postulates of Quantum Mechanics</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#state-space" id="toc-state-space" class="nav-link active" data-scroll-target="#state-space">1. State space</a></li>
+  <li><a href="#tiên-đề-1" id="toc-tiên-đề-1" class="nav-link" data-scroll-target="#tiên-đề-1">Tiên đề 1</a></li>
+  <li><a href="#evolution" id="toc-evolution" class="nav-link" data-scroll-target="#evolution">2. Evolution</a></li>
+  <li><a href="#tiên-đề-2" id="toc-tiên-đề-2" class="nav-link" data-scroll-target="#tiên-đề-2">Tiên đề 2</a></li>
+  <li><a href="#tiên-đề-2-1" id="toc-tiên-đề-2-1" class="nav-link" data-scroll-target="#tiên-đề-2-1">Tiên đề 2’</a></li>
+  <li><a href="#quantum-measurement" id="toc-quantum-measurement" class="nav-link" data-scroll-target="#quantum-measurement">3. Quantum measurement</a></li>
+  <li><a href="#tiên-đề-3" id="toc-tiên-đề-3" class="nav-link" data-scroll-target="#tiên-đề-3">Tiên đề 3</a></li>
+  <li><a href="#distinguishing-quantum-states" id="toc-distinguishing-quantum-states" class="nav-link" data-scroll-target="#distinguishing-quantum-states">4. Distinguishing quantum states</a></li>
+  <li><a href="#projective-measurements" id="toc-projective-measurements" class="nav-link" data-scroll-target="#projective-measurements">5. Projective measurements</a></li>
+  <li><a href="#povm-measurements" id="toc-povm-measurements" class="nav-link" data-scroll-target="#povm-measurements">6. POVM measurements</a></li>
+  <li><a href="#phase" id="toc-phase" class="nav-link" data-scroll-target="#phase">7. Phase</a></li>
+  <li><a href="#composite-systems" id="toc-composite-systems" class="nav-link" data-scroll-target="#composite-systems">8. Composite systems</a></li>
+  <li><a href="#quantum-mechanics-a-global-view" id="toc-quantum-mechanics-a-global-view" class="nav-link" data-scroll-target="#quantum-mechanics-a-global-view">9. Quantum mechanics: a global view</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontoquantummechanics/1.html">Introduction to Quantum Mechanics</a></li><li class="breadcrumb-item"><a href="../../note/introductiontoquantummechanics/2.html">The postulates of Quantum Mechanics</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">The postulates of Quantum Mechanics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><em>‘All understanding begins with our not accepting the world as it appears.’</em> - Alan Kay</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘The most incomprehensible thing about the world is that it is comprehensible.’</em> - Albert Einstein</p>
+</blockquote>
+<p>Cơ học lượng tử là một khung toán học cho sự phát triển của các lý thuyết vật lý. Bản thân cơ học lượng tử không nói cho bạn biết một hệ vật lý phải tuân theo những định luật nào, nhưng nó cung cấp một khuôn khổ toán học và khái niệm cho việc phát triển các định luật như vậy. Trong một vài mục tiếp theo, chúng tôi đưa ra mô tả đầy đủ về các tiên đề cơ bản của cơ học lượng tử. Các tiên đề này cung cấp một mối kết nối giữa thế giới vật lý và hình thức luận toán học của cơ học lượng tử.</p>
+<p>Các tiên đề của cơ học lượng tử được rút ra sau một quá trình dài thử nghiệm và (phần lớn là) sai sót, bao gồm một lượng đáng kể sự đoán chừng và dò dẫm của những người sáng lập nên lý thuyết. Đừng ngạc nhiên nếu động cơ cho các tiên đề không phải lúc nào cũng rõ ràng; ngay cả đối với các chuyên gia, các tiên đề cơ bản của cơ học lượng tử vẫn trông rất đáng kinh ngạc. Điều bạn nên kỳ vọng đạt được trong một vài mục tiếp theo là nắm vững cách vận dụng tốt các tiên đề này – cách áp dụng chúng, và khi nào áp dụng.</p>
+<section id="state-space" class="level1">
+<h1>1. State space</h1>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Postulate 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Có thể nói rằng</p>
+<blockquote class="blockquote">
+<p>(Hệ vật lý cô lập) + (Không gian Hilbert) = (Không gian trạng thái của hệ)</p>
+</blockquote>
+<p>Hệ thống được mô tả hoàn toàn bởi <strong><em>state vector</em></strong> của hệ vật lý cô lập (và state vector phải là vector đơn vị).</p>
+<hr>
+<section id="hệ-vật-lý-cô-lập---isolated-physical-system" class="level2">
+<h2 class="anchored" data-anchor-id="hệ-vật-lý-cô-lập---isolated-physical-system">Hệ vật lý cô lập - <strong><em>Isolated physical system</em></strong></h2>
+<ul>
+<li><p>Là một hệ hoàn toàn không tương tác, không bị ảnh hưởng hay thất thoát thông tin / năng lượng ra môi trường bên ngoài.</p></li>
+<li><p>Tại sao lại phải là hệ “cô lập”? Vì nếu hệ mở thì nó sẽ mất tính thuần khiết lượng tử - xảy ra hiện tượng decoherence. Lúc đó không thể chỉ dùng mỗi vector state để mô tả toàn bộ không gian được.</p></li>
+</ul>
+<hr>
+</section>
+<section id="không-gian-trạng-thái-hilbert-space---state-space" class="level2">
+<h2 class="anchored" data-anchor-id="không-gian-trạng-thái-hilbert-space---state-space">Không gian trạng thái (Hilbert space) - <strong><em>State space</em></strong></h2>
+<ul>
+<li>Mọi trạng thái có thể xảy ra đều được chứa trong một không gian, mà ở đây của chúng ta là không gian Hilbert.</li>
+</ul>
+<hr>
+</section>
+<section id="hệ-thống-được-mô-tả-hoàn-toàn-bởi-vector-state-vert-psi-rangle" class="level2">
+<h2 class="anchored" data-anchor-id="hệ-thống-được-mô-tả-hoàn-toàn-bởi-vector-state-vert-psi-rangle">Hệ thống được mô tả hoàn toàn bởi vector state <span class="math inline">\vert \psi \rangle</span></h2>
+<ul>
+<li><p>Trong vật lý cổ điển, muốn mô tả một quả bóng, thì chúng ta cần thiết phải biết bị trí <span class="math inline">(x, y, z)</span> và động lượng <span class="math inline">(v_x, v_y, v_z)</span> của nó. Nhưng trong quantum mechanics, <strong>toàn bộ thông tin</strong> về hệ thống (vị trí, động lượng, spin, …) đều được gói gọn trong một vector duy nhất gọi là vector trạng thái ket psi.</p></li>
+<li><p>Nếu bạn biết ket psi, thì bạn biết tất cả những gì bản chất tự nhiên cho phép bạn biết về hệ đó tại thời điểm đó.</p></li>
+</ul>
+<hr>
+</section>
+</div>
+</div>
+<p>Tiên đề đầu tiên của cơ học lượng tử thiết lập đấu trường mà trong đó cơ học lượng tử diễn ra. Đấu trường đó chính là người bạn quen thuộc của chúng ta từ đại số tuyến tính: không gian Hilbert.</p>
+</section>
+<section id="tiên-đề-1" class="level1 postulates">
+<h1>Tiên đề 1</h1>
+<p>Kết hợp với bất kỳ hệ vật lý cô lập nào là một không gian vectơ phức có tích vô hướng (tức là một không gian Hilbert) được gọi là không gian trạng thái của hệ. Hệ thống được mô tả hoàn toàn bởi vector trạng thái của nó, vốn là một vector đơn vị trong không gian trạng thái của hệ.</p>
+</section>
+<hr>
+<p>Cơ học lượng tử không cho chúng ta biết rằng, đối với một hệ vật lý cho trước, không gian trạng thái của hệ đó là gì, cũng như không cho biết vector trạng thái của hệ là gì. Việc tìm ra điều đó cho một hệ thống cụ thể là một bài toán khó mà các nhà vật lý đã phát triển nhiều quy tắc phức tạp và tuyệt đẹp để giải quyết. Chẳng hạn, có lý thuyết tuyệt vời về điện động lực học lượng tử (thường được gọi là QED), mô tả cách các nguyên tử và ánh sáng tương tác. Một khía cạnh của QED là nó cho chúng ta biết nên sử dụng không gian trạng thái nào để đưa ra các mô tả lượng tử về nguyên tử và ánh sáng. Chúng ta sẽ không bận tâm quá nhiều đến sự phức tạp của các lý thuyết như QED (ngoại trừ việc chúng áp dụng vào các hiện thực vật lý trong Chương 7), vì chúng ta chủ yếu quan tâm đến khung tổng quát do cơ học lượng tử cung cấp. Đối với mục đích của chúng ta, sẽ là đủ nếu đưa ra một số giả định rất đơn giản (và hợp lý) về không gian trạng thái của các hệ mà chúng ta quan tâm, và bám sát các giả định đó.</p>
+<hr>
+<blockquote class="blockquote">
+<p>Qubit là đơn giản nhất, không phải là duy nhất.</p>
+</blockquote>
+<p>Hệ thống cơ học lượng tử đơn giản nhất, và là hệ thống mà chúng ta sẽ quan tâm nhiều nhất, chính là qubit. Một qubit có không gian trạng thái hai chiều. Giả sử <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> tạo thành một cơ sở trực chuẩn cho không gian trạng thái đó. Khi đó, một vector trạng thái tùy ý trong không gian trạng thái có thể được viết là</p>
+<p><span class="math display">
+\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle, \tag{2.82}
+</span></p>
+<p>trong đó <span class="math inline">a</span> và <span class="math inline">b</span> là các số phức. Do đó, điều kiện để <span class="math inline">\vert{}\psi\rangle</span> là một vector đơn vị, <span class="math inline">\langle\psi\vert{}\psi\rangle = 1</span>, tương đương với <span class="math inline">\vert{}a\vert{}^2 + \vert{}b\vert{}^2 = 1</span>. Điều kiện <span class="math inline">\langle\psi\vert{}\psi\rangle = 1</span> thường được gọi là <strong><em>normalization condition</em></strong> điều kiện chuẩn hóa cho các vector trạng thái.</p>
+<hr>
+<p>Chúng ta sẽ coi qubit là hệ thống cơ học lượng tử cơ bản của mình. Sau này, trong Chương 7, chúng ta sẽ thấy rằng có những hệ vật lý thực tế có thể được mô tả dưới dạng các qubit. Tuy nhiên, hiện tại, việc suy nghĩ về các qubit theo thuật ngữ trừu tượng, không cần quy chiếu đến một hiện thực cụ thể nào là đã đủ. Các thảo luận của chúng ta về qubit sẽ luôn được quy chiếu về một số tập hợp vector cơ sở trực chuẩn nào đó, <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>, được coi là đã cố định từ trước. Về mặt trực giác, các trạng thái <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> tương tự như hai giá trị <span class="math inline">0</span> và <span class="math inline">1</span> mà một bit cổ điển có thể nhận. Điểm khác biệt giữa một qubit và một bit là sự chồng chập (superpositions) của hai trạng thái này, có dạng <span class="math inline">a\vert{}0\rangle + b\vert{}1\rangle</span>, cũng có thể tồn tại, trong đó không thể nói chắc chắn rằng qubit đang ở trạng thái <span class="math inline">\vert{}0\rangle</span> hay chắc chắn ở trạng thái <span class="math inline">\vert{}1\rangle</span>.</p>
+<p>Chúng ta kết thúc với một số thuật ngữ hữu ích thường được dùng liên quan đến việc mô tả các trạng thái lượng tử. Chúng ta nói rằng bất kỳ tổ hợp tuyến tính nào <span class="math inline">\sum_i \alpha_i \vert{}\psi_i\rangle</span> là một sự chồng chập của các trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> với biên độ (amplitude) <span class="math inline">\alpha_i</span> đối với trạng thái <span class="math inline">\vert{}\psi_i\rangle</span>. Do đó, ví dụ, trạng thái</p>
+<p><span class="math display">
+\frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \tag{2.83}
+</span></p>
+<p>là sự chồng chập của các trạng thái <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> với biên độ <span class="math inline">1/\sqrt{2}</span> cho trạng thái <span class="math inline">\vert{}0\rangle</span>, và biên độ <span class="math inline">-1/\sqrt{2}</span> cho trạng thái <span class="math inline">\vert{}1\rangle</span>.</p>
+<section id="evolution" class="level1">
+<h1>2. Evolution</h1>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Có thể nói rằng</p>
+<blockquote class="blockquote">
+<p>(Hệ tại thời điểm <span class="math inline">t_2</span>) = U (Hệ tại thời điểm <span class="math inline">t_1</span>)</p>
+</blockquote>
+<p>Nếu tiên đề thứ nhất cho ta không gian, thì tiên đề thứ hai cho ta biết cách di chuyển giữa hai trạng thái của hệ.</p>
+<p>(Tiên đề 1 quy định không gian bàn cờ 8x8, còn tiên đề thứ hai quy định cách quân cờ di chuyển).</p>
+<hr>
+<section id="một-hệ-lượng-tử-đóng---closed-quantum-system" class="level2">
+<h2 class="anchored" data-anchor-id="một-hệ-lượng-tử-đóng---closed-quantum-system">Một hệ lượng tử đóng - <em>Closed quantum system</em></h2>
+<p>Là một hệ thống vật lý lượng tử hoàn toàn cô lập, không trao đổi thông tin, năng lượng hay vật chất với môi trường bên ngoài.</p>
+<hr>
+</section>
+<section id="phép-biến-đổi-đơn-nhất---u" class="level2">
+<h2 class="anchored" data-anchor-id="phép-biến-đổi-đơn-nhất---u">Phép biến đổi đơn nhất - <span class="math inline">U</span></h2>
+<p>Việc dùng toán tử đơn nhất U <span class="math inline">(U^\dagger U = I)</span> đảm bảo hai yếu tố cốt lõi:</p>
+<ol type="i">
+<li><p>Bảo toàn xác suất: Vì U là đơn nhất vậy nên nó giữ nguyên độ dài của vector state (luôn bằng 1), nghĩa là tổng xác suất của mọi kết quả đo luôn bằng 100%.</p></li>
+<li><p>Tính thuận nghịch: Mọi quá trình tiến hóa lượng tử đều có thể đảo ngược thời gian (theo nghĩa toán học) (nếu biết trạng thái sau và toán tử U, ta luôn có thể quay lại được trạng thái ban đầu bằng toán tử nghịch đảo <span class="math inline">U^\dagger</span>).</p></li>
+</ol>
+</section>
+</div>
+</div>
+<p><strong>Trạng thái <span class="math inline">\vert{}\psi\rangle</span> của một hệ cơ học lượng tử thay đổi theo thời gian như thế nào?</strong></p>
+<p>Tiên đề sau đây đưa ra quy tắc mô tả sự thay đổi trạng thái đó.</p>
+</section>
+<section id="tiên-đề-2" class="level1 postulates">
+<h1>Tiên đề 2</h1>
+<p>Sự tiến hóa của <strong><em>closed quantum system</em></strong> một hệ lượng tử cô lập được mô tả bằng <strong><em>unitary transformation</em></strong> một phép biến đổi đơn nhất. Nghĩa là, trạng thái <span class="math inline">\vert{}\psi\rangle</span> của hệ tại thời điểm <span class="math inline">t_1</span> có liên quan đến trạng thái <span class="math inline">\vert{}\psi'\rangle</span> của hệ tại thời điểm <span class="math inline">t_2</span> thông qua một toán tử đơn nhất <span class="math inline">U</span> chỉ phụ thuộc vào các thời điểm <span class="math inline">t_1</span> và <span class="math inline">t_2</span>,</p>
+<p><span class="math display">
+\vert{}\psi'\rangle = U\vert{}\psi\rangle. \tag{2.84}
+</span></p>
+</section>
+<p>Giống như cơ học lượng tử không cho chúng ta biết không gian trạng thái hoặc trạng thái lượng tử của một hệ lượng tử cụ thể là gì, nó cũng không cho biết toán tử đơn nhất <span class="math inline">U</span> nào mô tả động lực học lượng tử trong thế giới thực. Cơ học lượng tử chỉ đảm bảo với chúng ta rằng sự tiến hóa của bất kỳ hệ lượng tử cô lập nào cũng có thể được mô tả theo cách đó. Một câu hỏi hiển nhiên được đặt ra là: những toán tử đơn nhất nào là tự nhiên để xem xét? Trong trường hợp các qubit đơn lẻ, hóa ra bất kỳ toán tử đơn nhất nào cũng có thể được hiện thực hóa trong các hệ thống thực tế.</p>
+<p>Hãy xem xét một vài ví dụ về các toán tử đơn nhất trên một qubit đơn lẻ rất quan trọng trong tính toán lượng tử và thông tin lượng tử. Chúng ta đã thấy một số ví dụ về các toán tử đơn nhất như vậy – các ma trận Pauli, được định nghĩa trong Mục 2.1.3, và các cổng lượng tử được mô tả trong Chương 1. Như đã lưu ý trong Mục 1.3.1, ma trận <span class="math inline">X</span> thường được gọi là cổng NOT lượng tử, tương tự như cổng NOT cổ điển. Các ma trận Pauli <span class="math inline">X</span> và <span class="math inline">Z</span> đôi khi cũng được gọi là các ma trận lật bit (bit flip) và lật pha (phase flip): ma trận <span class="math inline">X</span> biến đổi <span class="math inline">\vert{}0\rangle</span> thành <span class="math inline">\vert{}1\rangle</span>, và <span class="math inline">\vert{}1\rangle</span> thành <span class="math inline">\vert{}0\rangle</span>, từ đó có tên là lật bit; còn ma trận <span class="math inline">Z</span> giữ nguyên <span class="math inline">\vert{}0\rangle</span>, và biến đổi <span class="math inline">\vert{}1\rangle</span> thành <span class="math inline">-\vert{}1\rangle</span>, với thừa số bổ sung <span class="math inline">-1</span> được gọi là hệ số pha (phase factor), do đó biện minh cho thuật ngữ lật pha. Chúng ta sẽ không sử dụng thuật ngữ lật pha cho <span class="math inline">Z</span> rất thường xuyên, vì nó rất dễ bị nhầm lẫn với cổng pha sẽ được định nghĩa trong Chương 4. (Mục 2.2.7 chứa nhiều thảo luận hơn về các cách sử dụng khác nhau của thuật ngữ ‘pha’.)</p>
+<hr>
+<p>Một toán tử đơn nhất thú vị khác là cổng Hadamard, mà chúng ta ký hiệu là <span class="math inline">H</span>. Cổng này có tác dụng <span class="math inline">H\vert{}0\rangle \equiv (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, <span class="math inline">H\vert{}1\rangle \equiv (\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, và biểu diễn ma trận tương ứng là</p>
+<p><span class="math display">
+H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}. \tag{2.85}
+</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.51:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kiểm tra rằng cổng Hadamard <span class="math inline">H</span> là đơn nhất (unitary).</p>
+<p>Ta có:</p>
+<p><span class="math display">
+H = \frac 1 {\sqrt 2} \begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{bmatrix}
+\Rightarrow
+H^\dagger = \frac 1 {\sqrt 2} \begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{bmatrix}
+</span></p>
+<p><span class="math display">
+H^\dagger H = \frac 1 2 \begin{bmatrix}
+2 &amp; 0 \\
+0 &amp; 2
+\end{bmatrix}
+=\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.52:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kiểm tra rằng <span class="math inline">H^2 = I</span>.</p>
+<p><span class="math display">
+H^2 = \frac 1 2 \begin{bmatrix}
+2 &amp; 0 \\
+0 &amp; 2
+\end{bmatrix}
+=\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I
+</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.53:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Các trị riêng (eigenvalues) và vectơ riêng (eigenvectors) của <span class="math inline">H</span> là gì?</p>
+<p>Ta có:</p>
+<p><span class="math display">
+\det (A - \lambda I) = 0
+</span></p>
+<p><span class="math display">
+\det \left(\frac 1 {\sqrt 2} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix} - \lambda \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} \right) = 0
+</span></p>
+<p><span class="math display">
+\det \left(\begin{bmatrix} \frac 1 {\sqrt 2} - \lambda &amp; \frac 1 {\sqrt 2} \\ \frac 1 {\sqrt 2} &amp; \frac {-1} {\sqrt 2} - \lambda \end{bmatrix} \right) = 0
+</span></p>
+<p><span class="math display">
+\lambda^2 = 1 \Rightarrow \lambda = \pm 1
+</span></p>
+<p>Với các vector riêng tương ứng với giá trị riêng <span class="math inline">\lambda = 1</span> là:</p>
+<p><span class="math display">
+(A - 1I)v = 0
+</span></p>
+<p><span class="math display">
+\begin{bmatrix}
+\frac 1 {\sqrt 2} - 1 &amp; \frac 1 {\sqrt 2} \\
+\frac 1 {\sqrt 2} &amp;  - \frac 1 {\sqrt 2} - 1
+\end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+</span></p>
+<p><span class="math display">
+\begin{cases}
+\left(\frac 1 {\sqrt 2} - 1 \right) + \frac 1 {\sqrt 2} v_2  = 0\\
+\frac 1 {\sqrt 2} v_1 - \left(\frac 1 {\sqrt 2} + 1 \right) v_2 = 0
+\end{cases}
+</span></p>
+<p>Hay ta có thể suy ra <span class="math inline">\frac 1 {\sqrt 2} v_1 = \left(\frac 1 {\sqrt 2} + 1 \right) v_2</span>, chuyển vế:</p>
+<p><span class="math display">
+a = \sqrt 2 \left(\frac 1 {\sqrt 2} + 1 \right) b \Rightarrow a = (1 + \sqrt 2) b
+</span></p>
+<p>Các eigenvector tương ứng với eigenvalue lambda = 1 là:</p>
+<p><span class="math display">
+v = b \begin{bmatrix}
+1 + \sqrt 2 \\
+1
+\end{bmatrix}
+</span></p>
+<p>Chuẩn hóa nó, ta được:</p>
+<p><span class="math display">
+\text{norm}(v) = \frac 1 {4 + 2\sqrt 2} \begin{bmatrix} 1 + \sqrt 2 \\ 1 \end{bmatrix}
+</span></p>
+<p>Làm quá khổ rồi, vậy nên với lambda = -1 tự tính, nhé ;)</p>
+<p><span class="math display">
+w = \frac 1 {4 - 2\sqrt 2} \begin{bmatrix} \sqrt 2 - 1 \\ 1 \end{bmatrix}
+</span></p>
+</div>
+</div>
+<hr>
+<p>Tiên đề 2 yêu cầu hệ thống được mô tả phải là hệ cô lập.</p>
+<p>Tức là nó không tương tác dưới bất kỳ hình thức nào với các hệ thống khác. Trong thực tế, tất nhiên, tất cả các hệ thống (trừ toàn bộ Vũ trụ) ít nhiều đều tương tác với các hệ thống khác. Mặc dù vậy, có những hệ thống thú vị có thể được mô tả với độ xấp xỉ tốt là hệ cô lập, và được mô tả bởi sự tiến hóa đơn nhất với độ xấp xỉ tốt. Hơn nữa, ít nhất về mặt nguyên lý, mọi hệ thống mở đều có thể được mô tả như một phần của một hệ thống cô lập lớn hơn (Vũ trụ) đang trải qua sự tiến hóa đơn nhất. Sau này, chúng ta sẽ giới thiệu thêm các công cụ cho phép chúng ta mô tả các hệ thống không cô lập, nhưng hiện tại chúng ta sẽ tiếp tục với việc mô tả sự tiến hóa của các hệ thống cô lập.</p>
+<hr>
+<p>Tiên đề 2 mô tả cách các trạng thái lượng tử của một hệ lượng tử cô lập tại hai thời điểm khác nhau liên hệ với nhau. Một phiên bản tinh tế hơn của tiên đề này có thể được đưa ra để mô tả sự tiến hóa của một hệ lượng tử trong thời gian liên tục (continuous time). Từ tiên đề tinh tế hơn này, chúng ta sẽ thu lại được Tiên đề 2. Trước khi phát biểu tiên đề đã được sửa đổi, cần chỉ ra hai điều.</p>
+<p>Thứ nhất, một lưu ý về ký hiệu: Toán tử <span class="math inline">H</span> xuất hiện trong thảo luận sau đây không giống với toán tử Hadamard mà chúng ta vừa giới thiệu.</p>
+<p>Thứ hai, tiên đề sau đây sử dụng các công cụ của phương trình vi phân. Những độc giả ít nền tảng về phương trình vi phân có thể yên tâm rằng chúng sẽ không cần thiết cho phần lớn cuốn sách, ngoại trừ một phần của Chương 7 về các hiện thực vật lý của xử lý thông tin lượng tử.</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Cách suy ra từ tiền đề 2 ra tiền đề 2’ - Phương trình Schrödinger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ta có:</p>
+<p><span class="math display">
+\vert \psi (t) \rangle = U(t, t_0) \vert \psi (t_0) \rangle (1)
+</span></p>
+<p>Vì U là toán tử đơn nhất, nó bảo toàn xác suất toàn phần (tổng xác suất luôn bằng 1). Để đảm bảo tính chất này liên tục theo thời gian, toán tử U phải được sinh ra bởi một toán tử Hermit (tự liên hợp). Toán tử hermit đó chính là toán tử Hamilton <span class="math inline">\hat H</span>.</p>
+<p><span class="math display">
+U(t, t_0) = \exp \left(- \frac i \hbar \hat H(t -t_0)\right) (2)
+</span></p>
+<p>Từ (2) thay vào phương trình (1), lấy đạo hàm theo thời gian, suy ra:</p>
+<p><span class="math display">
+\frac \partial {\partial t} \vert \psi(t) \rangle = \left(-\frac i \hbar \hat H \right) \exp\left(-\frac i \hbar \hat H(t - t_0)\right) \vert \psi(t_0) \rangle
+</span></p>
+<p><span class="math display">
+\frac \partial {\partial t} \vert \psi(t) \rangle = \left(-\frac i \hbar \hat H \right) \vert \psi(t) \rangle
+</span></p>
+<p>Nhân cả hai vế với <span class="math inline">i\hbar</span>, ta có phương trình Schrödinger:</p>
+<p><span class="math display">
+i \hbar \frac {\partial} {\partial t} \vert \psi(t) \rangle = \hat H \vert \psi(t) \rangle
+</span></p>
+</div>
+</div>
+<section id="tiên-đề-2-1" class="level1 postulates">
+<h1>Tiên đề 2’</h1>
+<p>Sự tiến hóa theo thời gian của trạng thái của một hệ lượng tử cô lập được mô tả bởi phương trình Schrödinger,</p>
+<p><span class="math display">
+i\hbar \frac{d\vert{}\psi\rangle}{dt} = H\vert{}\psi\rangle. \tag{2.86}
+</span></p>
+<p>Trong phương trình này, <span class="math inline">\hbar</span> là một hằng số vật lý được gọi là hằng số Planck (Planck’s constant) mà giá trị của nó phải được xác định bằng thực nghiệm. Giá trị chính xác không quan trọng đối với chúng ta. Trong thực tế, thường người ta hấp thụ thừa số <span class="math inline">\hbar</span> vào <span class="math inline">H</span>, qua đó đặt hiệu dụng <span class="math inline">\hbar = 1</span>. <span class="math inline">H</span> là một toán tử Hermitian cố định được gọi là Hamiltonian của hệ cô lập.</p>
+</section>
+<hr>
+<p>Nếu chúng ta biết Hamiltonian của một hệ, thì (cùng với hiểu biết về <span class="math inline">\hbar</span>) chúng ta hiểu hoàn toàn động lực học của nó, ít nhất là về mặt nguyên lý. Nhìn chung, việc tìm ra Hamiltonian cần thiết để mô tả một hệ vật lý cụ thể là một bài toán rất khó – phần lớn vật lý thế kỷ 20 đã quan tâm đến bài toán này – đòi hỏi sự đóng góp đáng kể từ thực nghiệm để có thể trả lời. Từ quan điểm của chúng ta, đây là một bài toán chi tiết cần được giải quyết bởi các lý thuyết vật lý được xây dựng trong khuôn khổ của cơ học lượng tử – chúng ta cần Hamiltonian nào để mô tả các nguyên tử trong một cấu hình như thế này hay thế khác – và không phải là một câu hỏi cần được giải quyết bởi chính lý thuyết cơ học lượng tử. Phần lớn thời gian trong thảo luận của chúng ta về tính toán lượng tử và thông tin lượng tử, chúng ta sẽ không cần bàn về các Hamiltonian, và khi chúng ta làm vậy, chúng ta thường chỉ đặt giả thiết rằng một ma trận nào đó là Hamiltonian như một điểm khởi đầu, và tiếp tục từ đó, mà không cố gắng biện minh cho việc sử dụng Hamiltonian đó.</p>
+<hr>
+<p>Vì Hamiltonian là một toán tử Hermitian nên nó có phân rã phổ</p>
+<p><span class="math display">
+H = \sum_E E \vert{}E\rangle\langle E\vert{}, \tag{2.87}
+</span></p>
+<p>với các trị riêng <span class="math inline">E</span> và các vectơ riêng chuẩn hóa tương ứng <span class="math inline">\vert{}E\rangle</span>. Các trạng thái <span class="math inline">\vert{}E\rangle</span> theo quy ước được gọi là các trạng thái riêng năng lượng (energy eigenstates), hoặc đôi khi là trạng thái dừng (stationary states), và <span class="math inline">E</span> là năng lượng của trạng thái <span class="math inline">\vert{}E\rangle</span>. Năng lượng thấp nhất được gọi là năng lượng trạng thái cơ bản (ground state energy) cho hệ, và trạng thái riêng năng lượng tương ứng (hoặc không gian riêng) được gọi là trạng thái cơ bản (ground state). Lý do các trạng thái <span class="math inline">\vert{}E\rangle</span> đôi khi được gọi là trạng thái dừng là vì thay đổi duy nhất của chúng theo thời gian là nhận thêm một thừa số số học tổng thể,</p>
+<p><span class="math display">
+\vert{}E\rangle \to \exp\left(\frac{-iEt}{\hbar}\right)\vert{}E\rangle. \tag{2.88}
+</span></p>
+<p>Như một ví dụ, giả sử một qubit đơn lẻ có Hamiltonian</p>
+<p><span class="math display">
+H = \hbar \omega X. \tag{2.89}
+</span></p>
+<p>Trong phương trình này, <span class="math inline">\omega</span> là một tham số mà trong thực tế cần phải được xác định bằng thực nghiệm. Chúng ta sẽ không quá bận tâm về tham số này ở đây – ý điểm là để mang lại cho bạn cảm nhận về loại Hamiltonian đôi khi được viết ra trong việc nghiên cứu tính toán lượng tử và thông tin lượng tử. Các trạng thái riêng năng lượng của Hamiltonian này hiển nhiên giống với các vectơ riêng của <span class="math inline">X</span>, cụ thể là <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span> và <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, với các năng lượng tương ứng là <span class="math inline">\hbar\omega</span> và <span class="math inline">-\hbar\omega</span>. Do đó, trạng thái cơ bản là <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>, và năng lượng trạng thái cơ bản là <span class="math inline">-\hbar\omega</span>.</p>
+<hr>
+<p><strong>Mối liên hệ giữa bức tranh động lực học theo Hamiltonian (Tiên đề 2’) và bức tranh toán tử đơn nhất (Tiên đề 2) là gì?</strong></p>
+<p>Câu trả lời được cung cấp bằng cách viết ra nghiệm của phương trình Schrödinger, mà có thể dễ dàng kiểm tra là:</p>
+<p><span class="math display">
+\vert{}\psi(t_2)\rangle = \exp\left[\frac{-iH(t_2 - t_1)}{\hbar}\right] \vert{}\psi(t_1)\rangle = U(t_1, t_2)\vert{}\psi(t_1)\rangle, \tag{2.90}
+</span></p>
+<p>trong đó chúng ta định nghĩa</p>
+<p><span class="math display">
+U(t_1, t_2) \equiv \exp\left[\frac{-iH(t_2 - t_1)}{\hbar}\right]. \tag{2.91}
+</span></p>
+<p>Bạn sẽ chứng minh trong các bài tập rằng toán tử này là đơn nhất, và hơn nữa, bất kỳ toán tử đơn nhất <span class="math inline">U</span> nào cũng có thể được hiện thực hóa dưới dạng <span class="math inline">U = \exp(iK)</span> đối với một toán tử Hermitian <span class="math inline">K</span> nào đó. Do đó, có một sự tương ứng một-một giữa mô tả động lực học theo thời gian rời rạc sử dụng các toán tử đơn nhất, và mô tả theo thời gian liên tục sử dụng các Hamiltonian. Trong phần lớn cuốn sách, chúng ta sử dụng công thức đơn nhất của động lực học lượng tử.</p>
+<hr>
+<p>Trong tính toán lượng tử và thông tin lượng tử, chúng ta thường nói về việc áp dụng một toán tử đơn nhất lên một hệ lượng tử cụ thể. Ví dụ, trong bối cảnh các mạch lượng tử, chúng ta có thể nói về việc áp dụng cổng đơn nhất <span class="math inline">X</span> lên một qubit đơn lẻ. Điều này có mâu thuẫn với những gì chúng ta đã nói trước đó về việc các toán tử đơn nhất mô tả sự tiến hóa của một hệ lượng tử cô lập không? Xét cho cùng, nếu chúng ta đang “áp dụng” một toán tử đơn nhất, điều đó ngụ ý rằng có một “chúng ta” ở bên ngoài đang tương tác với hệ lượng tử, và hệ thống đó không còn cô lập nữa.</p>
+<p>Một ví dụ về điều này xảy ra khi một tia laser được chiếu tập trung vào một nguyên tử. Sau rất nhiều suy nghĩ và công sức, có thể viết ra một Hamiltonian mô tả toàn bộ hệ thống nguyên tử - laser. Điều thú vị là khi chúng ta viết Hamiltonian cho hệ nguyên tử - laser và chỉ xét các tác động lên riêng nguyên tử, hành vi của vector trạng thái của nguyên tử hóa ra được mô tả gần như (nhưng không hoàn toàn tuyệt đối) bởi một Hamiltonian khác, gọi là Hamiltonian nguyên tử (atomic Hamiltonian). Hamiltonian nguyên tử chứa các số hạng liên quan đến cường độ laser và các tham số khác của laser, mà chúng ta có thể thay đổi theo ý muốn. Cứ như thể sự tiến hóa của nguyên tử đang được mô tả bởi một Hamiltonian mà chúng ta có thể thay đổi theo ý muốn, mặc dù nguyên tử không phải là một hệ cô lập.</p>
+<p>Tổng quát hơn, đối với nhiều hệ thống như thế này, hóa ra có thể viết ra một Hamiltonian biến đổi theo thời gian cho một hệ lượng tử, trong đó Hamiltonian của hệ không phải là một hằng số mà thay đổi theo một số tham số nằm dưới sự kiểm soát của nhà thực nghiệm, và có thể bị thay đổi trong suốt quá trình thí nghiệm. Do đó, hệ thống không phải là hệ cô lập, nhưng nó vẫn tiến hóa theo phương trình Schrödinger với một Hamiltonian biến đổi theo thời gian, với một độ xấp xỉ tốt.</p>
+<p>Kết quả là, để bắt đầu, chúng ta thường sẽ mô tả sự tiến hóa của các hệ lượng tử – ngay cả những hệ không cô lập – bằng cách sử dụng các toán tử đơn nhất. Ngoại trừ điểm chính đối lập với điều này là phép đo lượng tử sẽ được mô tả ở mục tiếp theo. Sau này, chúng ta sẽ khảo sát chi tiết hơn các độ lệch có thể có so với sự tiến hóa đơn nhất do tương tác với các hệ thống khác, đồng thời hiểu chính xác hơn về động lực học của các hệ lượng tử thực tế.</p>
+<section id="quantum-measurement" class="level1">
+<h1>3. Quantum measurement</h1>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ở tiên đề 1 và tiên đề 2, hệ thống được coi là cô lập hoàn toàn và chuyển động mượt mà theo các toán tử đơn nhất.</p>
+<p>Nhưng trong thực tế, để thu được kết quả, nhà khoa học phải dùng thiết bị đo đạc tác động vào hệ thống. Hành động “quan sát/đo đạc” này phá vỡ tính cô lập, khiến hệ thống rẽ sang một nhánh hoàn toàn khác: <strong><em>state collapse</em></strong> - sự sụp đổi trạng thái. Tiên đề 3 sinh ra để quản lý khoảng khắc đó.</p>
+<hr>
+<section id="toán-tử-đo-m_m" class="level2">
+<h2 class="anchored" data-anchor-id="toán-tử-đo-m_m">Toán tử đo <span class="math inline">M_m</span></h2>
+<p>Mỗi kết quả đo có thể xảy ra (m) ứng với một toán tử đo riêng biệt <span class="math inline">M_m</span>.</p>
+</section>
+<section id="công-thức-tính-xác-suất-pm" class="level2">
+<h2 class="anchored" data-anchor-id="công-thức-tính-xác-suất-pm">(2.92) - Công thức tính xác suất <span class="math inline">P(m)</span></h2>
+<p>Xác suất để thu được kết m khi đo trạng thái ket psi chính là kỳ vọng của toán tử <span class="math inline">M^\daggerM</span> trên trạng thái đó:</p>
+<p><span class="math display">
+p(m) = \langle \psi \vert M_m^\dagger M_m \vert \psi \rangle
+</span></p>
+</section>
+<section id="sự-thay-đổi-trạng-thái-sau-đo-left-frac-m_m-vert-psi-rangle-textnorm-right" class="level2">
+<h2 class="anchored" data-anchor-id="sự-thay-đổi-trạng-thái-sau-đo-left-frac-m_m-vert-psi-rangle-textnorm-right">(2.93) - Sự thay đổi trạng thái sau đo <span class="math inline">\left( \frac {M_m \vert \psi \rangle} {\text{norm}} \right)</span></h2>
+<p>Ngay sau khi đo và nhận kết quả m, trạng thái của hệ không còn là ketpsi ban đầu nữa mà bị bóp thành trạng thái mới <span class="math inline">M_m \vert \psi \rangle</span> (phải chuẩn hóa lại để đảm bảo xác suất = 1).</p>
+</section>
+<section id="phương-trình-đầy-đủ" class="level2">
+<h2 class="anchored" data-anchor-id="phương-trình-đầy-đủ">(2.94) (2.95) - Phương trình đầy đủ</h2>
+<p>Đảm bảo rằng tổng xác suất của tất cả kết quả đo luôn bằng đúng 100% (2.95).</p>
+</section>
+</div>
+</div>
+<p>Chúng ta đã giả định rằng các hệ lượng tử cô lập tiến hóa tuân theo sự tiến hóa đơn nhất (unitary evolution). Sự tiến hóa của các hệ không tương tác với phần còn lại của thế giới thì rất tuyệt, nhưng chắc chắn cũng phải có những lúc nhà thực nghiệm và thiết bị thí nghiệm của họ — nói cách khác là một hệ vật lý bên ngoài — quan sát hệ thống để tìm hiểu xem điều gì đang diễn ra bên trong hệ thống. Sự tương tác này khiến hệ thống không còn cô lập nữa, và do đó không nhất thiết tuân theo sự tiến hóa đơn nhất. Để giải thích điều gì xảy ra khi việc này được thực hiện, chúng ta giới thiệu Tiên đề 3, cung cấp một phương tiện để mô tả các hiệu ứng của phép đo lên các hệ lượng tử.</p>
+</section>
+<section id="tiên-đề-3" class="level1 postulates">
+<h1>Tiên đề 3</h1>
+<p>Các phép đo lượng tử được mô tả bởi một tập hợp <span class="math inline">\{M_m\}</span> các toán tử đo (measurement operators). Đây là các toán tử tác dụng lên không gian trạng thái của hệ đang được đo. Chỉ số <span class="math inline">m</span> đề cập đến các kết quả đo có thể xảy ra trong thí nghiệm. Nếu trạng thái của hệ lượng tử là <span class="math inline">\vert{}\psi\rangle</span> ngay trước phép đo, thì xác suất để kết quả <span class="math inline">m</span> xảy ra được cho bởi</p>
+<p><span class="math display">
+p(m) = \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle, \tag{2.92}
+</span></p>
+<p>và trạng thái của hệ thống sau phép đo là</p>
+<p><span class="math display">
+\frac{M_m \vert{}\psi\rangle}{\sqrt{\langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle}}. \tag{2.93}
+</span></p>
+<p>Các toán tử đo thỏa mãn phương trình đầy đủ (completeness equation),</p>
+<p><span class="math display">
+\sum_m M_m^\dagger M_m = I. \tag{2.94}
+</span></p>
+<p>Phương trình đầy đủ biểu thị thực tế rằng tổng các xác suất bằng một:</p>
+<p><span class="math display">
+1 = \sum_m p(m) = \sum_m \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle. \tag{2.95}
+</span></p>
+<p>Phương trình này được thỏa mãn với mọi <span class="math inline">\vert{}\psi\rangle</span> tương đương với phương trình đầy đủ.</p>
+</section>
+<p>Tuy nhiên, phương trình đầy đủ dễ kiểm tra trực tiếp hơn nhiều, đó là lý do tại sao nó xuất hiện trong phát biểu của tiên đề.</p>
+<hr>
+<p>Một ví dụ đơn giản nhưng quan trọng về phép đo là phép đo một qubit trong cơ sở tính toán. Đây là phép đo trên một qubit đơn lẻ với hai kết quả được định nghĩa bởi hai toán tử đo <span class="math inline">M_0 = \vert{}0\rangle\langle0\vert{}, M_1 = \vert{}1\rangle\langle1\vert{}</span>. Quan sát thấy rằng mỗi toán tử đo là Hermitian, và <span class="math inline">M_0^2 = M_0, M_1^2 = M_1</span>. Do đó hệ thức đầy đủ được thỏa mãn, <span class="math inline">I = M_0^\dagger M_0 + M_1^\dagger M_1 = M_0 + M_1</span>. Giả sử trạng thái đang được đo là <span class="math inline">\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle</span>. Khi đó xác suất thu được kết quả đo 0 là</p>
+<p><span class="math display">
+p(0) = \langle\psi\vert{}M_0^\dagger M_0\vert{}\psi\rangle = \langle\psi\vert{}M_0\vert{}\psi\rangle = \vert{}a\vert{}^2. \tag{2.96}
+</span></p>
+<p>Tương tự, xác suất thu được kết quả đo 1 là <span class="math inline">p(1) = \vert{}b\vert{}^2</span>. Trạng thái sau phép đo trong hai trường hợp do đó là</p>
+<p><span class="math display">
+\frac{M_0\vert{}\psi\rangle}{\vert{}a\vert{}} = \frac{a}{\vert{}a\vert{}}\vert{}0\rangle \tag{2.97}
+</span></p>
+<p><span class="math display">
+\frac{M_1\vert{}\psi\rangle}{\vert{}b\vert{}} = \frac{b}{\vert{}b\vert{}}\vert{}1\rangle. \tag{2.98}
+</span></p>
+<p>Chúng ta sẽ thấy trong Mục 2.2.7 rằng các hệ số nhân như <span class="math inline">a/\vert{}a\vert{}</span>, vốn có độ lớn bằng một, có thể được bỏ qua một cách hiệu quả, do đó hai trạng thái sau phép đo thực chất là <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>, giống như đã được mô tả ở Chương 1.</p>
+<hr>
+<p>Trạng thái của Tiên đề 3 như một tiên đề cơ bản thu hút sự tò mò của nhiều người. Các thiết bị đo lường bản thân chúng là các hệ cơ học lượng tử, do đó hệ lượng tử đang được đo và thiết bị đo cùng nhau là một phần của một hệ cơ học lượng tử cô lập lớn hơn. (Có thể cần phải bao gồm các hệ lượng tử khác ngoài hệ đang được đo và thiết bị đo để có được một hệ hoàn toàn cô lập, nhưng vấn đề là điều này có thể làm được.) Theo Tiên đề 2, sự tiến hóa của hệ cô lập lớn hơn này có thể được mô tả bằng một sự tiến hóa đơn nhất. Liệu có thể dẫn xuất Tiên đề 3 như một hệ quả của bức tranh này không? Mặc dù đã có rất nhiều nghiên cứu theo hướng này, vẫn còn sự bất đồng giữa các nhà vật lý về việc liệu điều này có khả thi hay không. Tuy nhiên, chúng ta sẽ theo đuổi một cách tiếp cận rất thực dụng rằng trong thực tế, rõ ràng khi nào nên áp dụng Tiên đề 2 và khi nào nên áp dụng Tiên đề 3, và không cần phải lo lắng về việc dẫn xuất tiên đề này từ tiên đề kia.</p>
+<p>Trong vài mục tiếp theo, chúng ta sẽ áp dụng Tiên đề 3 cho một số kịch bản đo lường cơ bản nhưng quan trọng. Mục 2.2.4 khảo sát bài toán phân biệt một tập hợp các trạng thái lượng tử. Mục 2.2.5 giải thích một trường hợp đặc biệt của Tiên đề 3, gọi là các phép đo xạ ảnh (projective hoặc von Neumann measurements). Mục 2.2.6 giải thích một trường hợp đặc biệt khác của Tiên đề 3, được gọi là các phép đo POVM. Nhiều tài liệu nhập môn về cơ học lượng tử chỉ thảo luận về các phép đo xạ ảnh, mà bỏ qua phần thảo luận đầy đủ về Tiên đề 3 hoặc các phần tử POVM. Vì lý do này, chúng tôi đã đưa ra Hộp 2.5 ở trang 91, trong đó bình luận về mối quan hệ giữa các lớp phép đo khác nhau mà chúng ta mô tả.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Cãi nhau
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Thiết bị đo đạc trong phòng thí nghiệm cũng làm từ vật chất và phải tuân theo cơ học lượng tử. Nếu gộp chung hệ thống cần đo + thiết bị đo + môi trường thành một “Hệ cô lập lớn”, thì theo tiên đề 2, mọi thứ phải tiến hóa mượt mà bằng toán tử đơn nhất U, chứ không hề có hiện tượng “sụp đổ trạng thái”.</p>
+<p><strong>Quan điểm thực dụng:</strong> Các nhà vật lý vẫn tranh cãi xem liệu có thể dùng tiên đề 2 để suy ra tiên đề 3 hay không.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.57: (Các phép đo nối tiếp là các phép đo đơn lẻ)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\{L_l\}</span> và <span class="math inline">\{M_m\}</span> là hai tập hợp các toán tử đo. Chứng minh rằng một phép đo được định nghĩa bởi các toán tử đo <span class="math inline">\{L_l\}</span> tiếp theo sau bởi một phép đo được định nghĩa bởi các toán tử đo <span class="math inline">\{M_m\}</span> tương đương về mặt vật lý với một phép đo đơn lẻ được định nghĩa bởi các toán tử đo <span class="math inline">\{N_{lm}\}</span> với biểu diễn <span class="math inline">N_{lm} \equiv M_m L_l</span>.</p>
+</div>
+</div>
+<section id="distinguishing-quantum-states" class="level1">
+<h1>4. Distinguishing quantum states</h1>
+</section>
+<section id="projective-measurements" class="level1">
+<h1>5. Projective measurements</h1>
+</section>
+<section id="povm-measurements" class="level1">
+<h1>6. POVM measurements</h1>
+</section>
+<section id="phase" class="level1">
+<h1>7. Phase</h1>
+</section>
+<section id="composite-systems" class="level1">
+<h1>8. Composite systems</h1>
+</section>
+<section id="quantum-mechanics-a-global-view" class="level1">
+<h1>9. Quantum mechanics: a global view</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
