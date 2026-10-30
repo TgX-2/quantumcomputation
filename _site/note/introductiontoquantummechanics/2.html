@@ -301,6 +301,8 @@ window.Quarto = {
   <li><a href="#tiên-đề-3" id="toc-tiên-đề-3" class="nav-link" data-scroll-target="#tiên-đề-3">Tiên đề 3</a></li>
   <li><a href="#distinguishing-quantum-states" id="toc-distinguishing-quantum-states" class="nav-link" data-scroll-target="#distinguishing-quantum-states">4. Distinguishing quantum states</a></li>
   <li><a href="#projective-measurements" id="toc-projective-measurements" class="nav-link" data-scroll-target="#projective-measurements">5. Projective measurements</a></li>
+  <li><a href="#phép-đo-xạ-ảnh" id="toc-phép-đo-xạ-ảnh" class="nav-link" data-scroll-target="#phép-đo-xạ-ảnh">Phép đo xạ ảnh</a></li>
+  <li><a href="#nguyên-lý-bất-định-heisenberg" id="toc-nguyên-lý-bất-định-heisenberg" class="nav-link" data-scroll-target="#nguyên-lý-bất-định-heisenberg">Nguyên lý bất định Heisenberg</a></li>
   <li><a href="#povm-measurements" id="toc-povm-measurements" class="nav-link" data-scroll-target="#povm-measurements">6. POVM measurements</a></li>
   <li><a href="#phase" id="toc-phase" class="nav-link" data-scroll-target="#phase">7. Phase</a></li>
   <li><a href="#composite-systems" id="toc-composite-systems" class="nav-link" data-scroll-target="#composite-systems">8. Composite systems</a></li>
@@ -675,7 +677,7 @@ U(t_1, t_2) \equiv \exp\left[\frac{-iH(t_2 - t_1)}{\hbar}\right]. \tag{2.91}
 </section>
 <section id="công-thức-tính-xác-suất-pm" class="level2">
 <h2 class="anchored" data-anchor-id="công-thức-tính-xác-suất-pm">(2.92) - Công thức tính xác suất <span class="math inline">P(m)</span></h2>
-<p>Xác suất để thu được kết m khi đo trạng thái ket psi chính là kỳ vọng của toán tử <span class="math inline">M^\daggerM</span> trên trạng thái đó:</p>
+<p>Xác suất để thu được kết m khi đo trạng thái ket psi chính là kỳ vọng của toán tử <span class="math inline">M^\dagger M</span> trên trạng thái đó:</p>
 <p><span class="math display">
 p(m) = \langle \psi \vert M_m^\dagger M_m \vert \psi \rangle
 </span></p>
@@ -758,9 +760,193 @@ p(0) = \langle\psi\vert{}M_0^\dagger M_0\vert{}\psi\rangle = \langle\psi\vert{}M
 </div>
 <section id="distinguishing-quantum-states" class="level1">
 <h1>4. Distinguishing quantum states</h1>
+<p>Một ứng dụng quan trọng của Tiên đề 3 là bài toán phân biệt các trạng thái lượng tử. Trong thế giới cổ điển, các trạng thái khác nhau của một vật thể thường có thể phân biệt được, ít nhất là về mặt nguyên lý. Ví dụ, chúng ta luôn có thể xác định xem một đồng xu ngửa hay sấp, ít nhất là trong giới hạn lý tưởng. Trong cơ học lượng tử, tình hình phức tạp hơn. Ở Mục 1.6, chúng ta đã đưa ra một lý lẽ hợp lý rằng các trạng thái lượng tử không trực giao thì không thể phân biệt được. Với Tiên đề 3 làm nền tảng vững chắc, giờ đây chúng ta có thể đưa ra một minh chứng thuyết phục hơn rất nhiều cho thực tế này.</p>
+<hr>
+<p>Khả năng phân biệt, giống như nhiều ý tưởng trong tính toán lượng tử và thông tin lượng tử, được hiểu rõ nhất bằng phép ẩn dụ về một trò chơi liên quan đến hai bên, Alice và Bob. Alice chọn một trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> (<span class="math inline">1 \le i \le n</span>) từ một tập hợp các trạng thái cố định được biết bởi cả hai bên. Cô ấy đưa trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> cho Bob, người có nhiệm vụ xác định chỉ số <span class="math inline">i</span> của trạng thái mà Alice đã đưa cho anh ta.</p>
+<p>Giả sử các trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> là trực chuẩn. Khi đó Bob có thể thực hiện một phép đo lượng tử để phân biệt các trạng thái này, sử dụng thủ tục sau. Định nghĩa các toán tử đo <span class="math inline">M_i \equiv \vert{}\psi_i\rangle\langle\psi_i\vert{}</span>, mỗi cái cho một chỉ số <span class="math inline">i</span> có thể có, và một toán tử đo bổ sung <span class="math inline">M_0</span> được định nghĩa là căn bậc hai dương của toán tử dương <span class="math inline">I - \sum_{i \neq 0} \vert{}\psi_i\rangle\langle\psi_i\vert{}</span>. Các toán tử này thỏa mãn hệ thức đầy đủ, và nếu trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> được chuẩn bị thì <span class="math inline">p(i) = \langle\psi_i\vert{}M_i\vert{}\psi_i\rangle = 1</span>, do đó kết quả <span class="math inline">i</span> xảy ra một cách chắc chắn. Do đó, có thể phân biệt đáng tin cậy các trạng thái trực chuẩn <span class="math inline">\vert{}\psi_i\rangle</span>.</p>
+<p>Ngược lại, nếu các trạng thái <span class="math inline">\vert{}\psi_i\rangle</span> không trực giao thì chúng ta có thể chứng minh rằng không có phép đo lượng tử nào có khả năng phân biệt các trạng thái đó. Ý tưởng là Bob sẽ thực hiện một phép đo được mô tả bởi các toán tử đo <span class="math inline">M_j</span>, với kết quả <span class="math inline">j</span>. Tùy thuộc vào kết quả của phép đo, Bob cố gắng đoán xem chỉ số <span class="math inline">i</span> là gì bằng cách sử dụng một quy tắc nào đó, <span class="math inline">i = f(j)</span>, trong đó <span class="math inline">f(\cdot)</span> biểu diễn quy tắc anh ta dùng để đoán. Chìa khóa cho việc tại sao Bob không thể phân biệt các trạng thái không trực giao <span class="math inline">\vert{}\psi_1\rangle</span> và <span class="math inline">\vert{}\psi_2\rangle</span> là quan sát cho thấy <span class="math inline">\vert{}\psi_2\rangle</span> có thể được phân rã thành một thành phần (khác không) song song với <span class="math inline">\vert{}\psi_1\rangle</span>, và một thành phần trực giao với <span class="math inline">\vert{}\psi_1\rangle</span>. Giả sử <span class="math inline">j</span> là một kết quả đo sao cho <span class="math inline">f(j) = 1</span>, nghĩa là Bob đoán rằng trạng thái là <span class="math inline">\vert{}\psi_1\rangle</span> khi anh ta quan sát thấy <span class="math inline">j</span>. Nhưng vì thành phần của <span class="math inline">\vert{}\psi_2\rangle</span> song song với <span class="math inline">\vert{}\psi_1\rangle</span>, nên có một xác suất khác không nhận được kết quả <span class="math inline">j</span> khi <span class="math inline">\vert{}\psi_2\rangle</span> được chuẩn bị, vì vậy đôi khi Bob sẽ mắc lỗi trong việc nhận diện trạng thái nào đã được chuẩn bị. Một lập luận chặt chẽ hơn rằng các trạng thái không trực giao không thể phân biệt được được đưa ra trong Hộp 2.3, nhưng điều này đã nắm bắt được ý tưởng cốt lõi.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 2.3: Chứng minh rằng các trạng thái không trực giao không thể được phân biệt một cách đáng tin cậy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Một chứng minh bằng phản chứng cho thấy không có phép đo nào phân biệt được các trạng thái không trực giao <span class="math inline">\vert{}\psi_1\rangle</span> và <span class="math inline">\vert{}\psi_2\rangle</span> là có thể xảy ra. Giả sử một phép đo như vậy là có thể. Nếu trạng thái <span class="math inline">\vert{}\psi_1\rangle</span> (<span class="math inline">\vert{}\psi_2\rangle</span>) được chuẩn bị thì xác suất đo được <span class="math inline">j</span> sao cho <span class="math inline">f(j) = 1</span> (<span class="math inline">f(j) = 2</span>) phải bằng 1. Định nghĩa <span class="math inline">E_i \equiv \sum_{j: f(j)=i} M_j^\dagger M_j</span>, những quan sát này có thể được viết thành:</p>
+<p><span class="math display">
+\langle\psi_1\vert{}E_1\vert{}\psi_1\rangle = 1; \quad \langle\psi_2\vert{}E_2\vert{}\psi_2\rangle = 1. \tag{2.99}
+</span></p>
+<p>Vì <span class="math inline">\sum_i E_i = I</span> nên suy ra rằng <span class="math inline">\sum_i \langle\psi_1\vert{}E_i\vert{}\psi_1\rangle = 1</span>, và vì <span class="math inline">\langle\psi_1\vert{}E_1\vert{}\psi_1\rangle = 1</span> nên ta buộc phải có <span class="math inline">\langle\psi_1\vert{}E_2\vert{}\psi_1\rangle = 0</span>, và do đó <span class="math inline">\sqrt{E_2}\vert{}\psi_1\rangle = 0</span>. Giả sử ta phân rã <span class="math inline">\vert{}\psi_2\rangle = \alpha\vert{}\psi_1\rangle + \beta\vert{}\varphi\rangle</span>, trong đó <span class="math inline">\vert{}\varphi\rangle</span> trực giao với <span class="math inline">\vert{}\psi_1\rangle</span>, <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span>, và <span class="math inline">\vert{}\beta\vert{} &lt; 1</span> vì <span class="math inline">\vert{}\psi_1\rangle</span> và <span class="math inline">\vert{}\psi_2\rangle</span> không trực giao. Khi đó <span class="math inline">\sqrt{E_2}\vert{}\psi_2\rangle = \beta\sqrt{E_2}\vert{}\varphi\rangle</span>, điều này ngụ ý mâu thuẫn với (2.99), vì</p>
+<p><span class="math display">
+\langle\psi_2\vert{}E_2\vert{}\psi_2\rangle = \vert{}\beta\vert{}^2 \langle\varphi\vert{}E_2\vert{}\varphi\rangle \le \vert{}\beta\vert{}^2 &lt; 1, \tag{2.100}
+</span></p>
+<p>trong đó bất đẳng thức áp chót suy từ quan sát rằng</p>
+<p><span class="math display">
+\langle\varphi\vert{}E_2\vert{}\varphi\rangle \le \sum_i \langle\varphi\vert{}E_i\vert{}\varphi\rangle = \langle\varphi\vert{}\varphi\rangle = 1. \tag{2.101}
+</span></p>
+</div>
+</div>
 </section>
 <section id="projective-measurements" class="level1">
 <h1>5. Projective measurements</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Nhận định chủ quan
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Thay vì dùng tập <span class="math inline">{M_m}</span> vô tội vạ như trong tiên đề 3. Chúng ta sẽ thông minh hơn là dùng các toán tử chiếu (projectors). Như đã đề cập trong chương giới thiệu linear algebra.</p>
+<p>Một số tính chất của toán tử chiếu:</p>
+<p><span class="math display">
+P_m^\dagger = P_m \qquad P_m^2 = P_m
+</span></p>
+<p>(và rõ ràng tính chất đầu tiên phù hợp với tiên đề 2, khi U là một toán tử Hermite)</p>
+</div>
+</div>
+<p>Trong mục này, chúng ta giải thích một trường hợp đặc biệt quan trọng của tiên đề đo tổng quát, Tiên đề 3. Lớp phép đo đặc biệt này được gọi là các phép đo xạ ảnh (projective measurements). Đối với nhiều ứng dụng của tính toán lượng tử và thông tin lượng tử, chúng ta sẽ chủ yếu quan tâm đến các phép đo xạ ảnh. Thật vậy, các phép đo xạ ảnh thực ra hóa ra tương đương với tiên đề đo tổng quát, khi chúng được bổ sung khả năng thực hiện các phép biến đổi đơn nhất (unitary transformations), như được mô tả trong Tiên đề 2. Chúng ta sẽ giải thích chi tiết sự tương đương này trong Mục 2.2.8, vì phát biểu của tiên đề đo đối với các phép đo xạ ảnh thoạt nhìn có vẻ khá khác biệt so với tiên đề tổng quát, Tiên đề 3.</p>
+</section>
+<section id="phép-đo-xạ-ảnh" class="level1 postulates">
+<h1>Phép đo xạ ảnh</h1>
+<p>Projective measurements được mô tả bởi một đại lượng quan sát được (observable), <span class="math inline">M</span>, một toán tử Hermitian trên không gian trạng thái của hệ đang được quan sát. Đại lượng quan sát được có phân rã phổ (spectral decomposition), <span class="math display">
+M = \sum_m m P_m, \tag{2.102}
+</span></p>
+<p>trong đó <span class="math inline">P_m</span> là toán tử chiếu (projector) lên không gian riêng của <span class="math inline">M</span> với trị riêng <span class="math inline">m</span>. Các kết quả có thể có của phép đo tương ứng với các trị riêng <span class="math inline">m</span> của đại lượng quan sát được. Khi đo trạng thái <span class="math inline">\vert{}\psi\rangle</span>, xác suất thu được kết quả <span class="math inline">m</span> được cho bởi</p>
+<p><span class="math display">
+p(m) = \langle\psi\vert{}P_m\vert{}\psi\rangle, \tag{2.103}
+</span></p>
+<p>Giả sử rằng kết quả <span class="math inline">m</span> đã xảy ra, trạng thái của hệ lượng tử ngay sau phép đo là</p>
+<p><span class="math display">
+\frac{P_m\vert{}\psi\rangle}{\sqrt{p(m)}}. \tag{2.104}
+</span></p>
+</section>
+<p>Các phép đo xạ ảnh có thể được hiểu là một trường hợp đặc biệt của Tiên đề 3. Giả sử các toán tử đo trong Tiên đề 3, ngoài việc thỏa mãn hệ thức đầy đủ <span class="math inline">\sum_m M_m^\dagger M_m = I</span>, còn thỏa mãn các điều kiện rằng <span class="math inline">M_m</span> là các toán tử chiếu trực giao, nghĩa là <span class="math inline">M_m</span> là Hermitian, và <span class="math inline">M_m M_{m'} = \delta_{m, m'} M_m</span>. Với các hạn chế bổ sung này, Tiên đề 3 rút gọn thành một phép đo xạ ảnh như vừa được định nghĩa.</p>
+<hr>
+<p>Các phép đo xạ ảnh có nhiều tính chất tuyệt vời. Cụ thể, việc tính giá trị trung bình cho các phép đo xạ ảnh rất dễ dàng. Theo định nghĩa, giá trị trung bình (xem Phụ lục 1 để biết các định nghĩa sơ cấp và kết quả trong lý thuyết xác suất) của phép đo là</p>
+<p><span class="math display">
+\text{E}(M) = \sum_m m p(m) \tag{2.110}
+</span></p>
+<p><span class="math display">
+= \sum_m m \langle\psi\vert{}P_m\vert{}\psi\rangle \tag{2.111}
+</span></p>
+<p><span class="math display">
+= \langle\psi\vert{}\left(\sum_m m P_m\right)\vert{}\psi\rangle \tag{2.112}
+</span></p>
+<p><span class="math display">
+= \langle\psi\vert{}M\vert{}\psi\rangle. \tag{2.113}
+</span></p>
+<p>Đây là một công thức hữu ích, giúp đơn giản hóa nhiều phép tính. Giá trị trung bình của đại lượng quan sát được <span class="math inline">M</span> thường được viết là <span class="math inline">\langle M \rangle \equiv \langle\psi\vert{}M\vert{}\psi\rangle</span>. Từ công thức tính giá trị trung bình này suy ra công thức cho độ lệch chuẩn liên quan đến các phép quan sát <span class="math inline">M</span>,</p>
+<p><span class="math display">
+[\Delta(M)]^2 = \langle(M - \langle M \rangle)^2\rangle \tag{2.114}
+</span></p>
+<p><span class="math display">
+= \langle M^2 \rangle - \langle M \rangle^2. \tag{2.115}
+</span></p>
+<p>Độ lệch chuẩn là một thước đo độ phân tán điển hình của các giá trị được quan sát khi đo <span class="math inline">M</span>. Cụ thể, nếu chúng ta thực hiện một số lượng lớn các thí nghiệm trong đó trạng thái <span class="math inline">\vert{}\psi\rangle</span> được chuẩn bị và đại lượng quan sát được <span class="math inline">M</span> được đo, thì độ lệch chuẩn <span class="math inline">\Delta(M)</span> của các giá trị quan sát được được xác định bởi công thức <span class="math inline">\Delta(M) = \sqrt{\langle M^2 \rangle - \langle M \rangle^2}</span>. Công thức hóa về phép đo và độ lệch chuẩn theo các đại lượng quan sát được dẫn đến một cách thanh lịch các kết quả như nguyên lý bất định Heisenberg (xem Hộp 2.4).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.58:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta chuẩn bị một hệ lượng tử ở một trạng thái riêng <span class="math inline">\vert{}\psi\rangle</span> của một đại lượng quan sát được <span class="math inline">M</span> nào đó, với trị riêng tương ứng là <span class="math inline">m</span>. Giá trị trung bình quan sát được của <span class="math inline">M</span> và độ lệch chuẩn là gì?</p>
+</div>
+</div>
+<hr>
+<p>Hai thuật ngữ được sử dụng rộng rãi cho các phép đo rất đáng được nhấn mạnh. Thay vì đưa ra một đại lượng quan sát được (observable) để mô tả một phép đo xạ ảnh, người ta thường chỉ liệt kê một tập hợp đầy đủ các toán tử chiếu trực giao <span class="math inline">P_m</span> thỏa mãn các hệ thức <span class="math inline">\sum_m P_m = I</span> và <span class="math inline">P_m P_{m'} = \delta_{m,m'} P_m</span>. Đại lượng quan sát được tương ứng ẩn trong cách dùng này là <span class="math inline">M = \sum_m m P_m</span>. Một cụm từ khác cũng được sử dụng rộng rãi, “đo trong cơ sở <span class="math inline">\vert{}m\rangle</span>” (measure in a basis <span class="math inline">\vert{}m\rangle</span>), trong đó <span class="math inline">\vert{}m\rangle</span> tạo thành một cơ sở trực chuẩn, đơn giản có nghĩa là thực hiện phép đo xạ ảnh với các toán tử chiếu <span class="math inline">P_m = \vert{}m\rangle\langle m\vert{}</span>.</p>
+<p>Hãy xem xét một ví dụ về các phép đo xạ ảnh trên các qubit đơn lẻ. Đầu tiên là phép đo đại lượng quan sát được <span class="math inline">Z</span>. Phép đo này có các trị riêng <span class="math inline">+1</span> và <span class="math inline">-1</span> với các vectơ riêng tương ứng là <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span>. Do đó, ví dụ, phép đo <span class="math inline">Z</span> trên trạng thái <span class="math inline">\vert{}\psi\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span> cho kết quả <span class="math inline">+1</span> với xác suất <span class="math inline">\langle\psi\vert{}0\rangle\langle0\vert{}\psi\rangle = 1/2</span>, và tương tự kết quả <span class="math inline">-1</span> với xác suất <span class="math inline">1/2</span>. Tổng quát hơn, giả sử <span class="math inline">\vec{v}</span> là bất kỳ vectơ đơn vị thực ba chiều nào. Khi đó chúng ta có thể định nghĩa một đại lượng quan sát được:</p>
+<p><span class="math display">
+\vec{v} \cdot \vec{\sigma} \equiv v_1 \sigma_1 + v_2 \sigma_2 + v_3 \sigma_3. \tag{2.116}
+</span></p>
+<p>Phép đo đại lượng quan sát này đôi khi được gọi là “phép đo spin dọc theo trục <span class="math inline">\vec{v}</span>”, vì những lý do lịch sử. Hai bài tập sau đây khuyến khích bạn tự giải quyết một số tính chất sơ cấp nhưng quan trọng của một phép đo như vậy.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.59:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta có qubit ở trạng thái <span class="math inline">\vert{}0\rangle</span>, và chúng ta đo đại lượng quan sát được <span class="math inline">X</span>. Giá trị trung bình của <span class="math inline">X</span> là gì? Độ lệch chuẩn của <span class="math inline">X</span> là gì?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.60:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\vec{v} \cdot \vec{\sigma}</span> có các trị riêng <span class="math inline">\pm 1</span>, và các toán tử chiếu lên các không gian riêng tương ứng được cho bởi <span class="math inline">P_\pm = (I \pm \vec{v} \cdot \vec{\sigma})/2</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.61:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tính xác suất thu được kết quả <span class="math inline">+1</span> đối với phép đo <span class="math inline">\vec{v} \cdot \vec{\sigma}</span>, biết rằng trạng thái trước phép đo là <span class="math inline">\vert{}0\rangle</span>. Trạng thái của hệ thống sau phép đo nếu thu được kết quả <span class="math inline">+1</span> là gì?</p>
+</div>
+</div>
+<section id="nguyên-lý-bất-định-heisenberg" class="level2">
+<h2 class="anchored" data-anchor-id="nguyên-lý-bất-định-heisenberg">Nguyên lý bất định Heisenberg</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 2.4: Nguyên lý bất định Heisenberg
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Có lẽ kết quả nổi tiếng nhất của cơ học lượng tử là nguyên lý bất định Heisenberg.</p>
+<p>Giả sử <span class="math inline">A</span> và <span class="math inline">B</span> là hai toán tử Hermitian, và <span class="math inline">\vert{}\psi\rangle</span> là một trạng thái lượng tử. Giả sử <span class="math inline">\langle\psi\vert{}AB\vert{}\psi\rangle = x + iy</span>, trong đó <span class="math inline">x</span> và <span class="math inline">y</span> là các số thực. Chú ý rằng <span class="math inline">\langle\psi\vert{}[A, B]\vert{}\psi\rangle = 2iy</span> và <span class="math inline">\langle\psi\vert{}\{A, B\}\vert{}\psi\rangle = 2x</span>. Điều này ngụ ý rằng</p>
+<p><span class="math display">
+\vert{}\langle\psi\vert{}[A, B]\vert{}\psi\rangle\vert{}^2 + \vert{}\langle\psi\vert{}\{A, B\}\vert{}\psi\rangle\vert{}^2 = 4 \vert{}\langle\psi\vert{}AB\vert{}\psi\rangle\vert{}^2. \tag{2.105}
+</span></p>
+<p>Theo bất đẳng thức Cauchy–Schwarz</p>
+<p><span class="math display">
+\vert{}\langle\psi\vert{}AB\vert{}\psi\rangle\vert{}^2 \le \langle\psi\vert{}A^2\vert{}\psi\rangle \langle\psi\vert{}B^2\vert{}\psi\rangle, \tag{2.106}
+</span></p>
+<p>khi kết hợp với Phương trình (2.105) và bỏ đi một số hạng không âm sẽ cho</p>
+<p><span class="math display">
+\vert{}\langle\psi\vert{}[A, B]\vert{}\psi\rangle\vert{}^2 \le 4 \langle\psi\vert{}A^2\vert{}\psi\rangle \langle\psi\vert{}B^2\vert{}\psi\rangle. \tag{2.107}
+</span></p>
+<p>Giả sử <span class="math inline">C</span> và <span class="math inline">D</span> là hai đại lượng quan sát được. Thay <span class="math inline">A = C - \langle C \rangle</span> và <span class="math inline">B = D - \langle D \rangle</span> vào phương trình cuối cùng, chúng ta thu được nguyên lý bất định Heisenberg như nó thường được phát biểu:</p>
+<p><span class="math display">
+\Delta(C)\Delta(D) \ge \frac{\vert{}\langle\psi\vert{}[C, D]\vert{}\psi\rangle\vert{}}{2}. \tag{2.108}
+</span></p>
+<hr>
+<p>Bạn nên cảnh giác với một hiểu lầm phổ biến về nguyên lý bất định, rằng việc đo một đại lượng quan sát được <span class="math inline">C</span> đến một ‘độ chính xác’ <span class="math inline">\Delta(C)</span> nào đó sẽ làm cho giá trị của <span class="math inline">D</span> bị ‘nhiễu loạn’ một lượng <span class="math inline">\Delta(D)</span> theo cách sao cho một loại bất đẳng thức nào đó tương tự như (2.108) được thỏa mãn. Mặc dù đúng là các phép đo trong cơ học lượng tử gây ra sự nhiễu loạn cho hệ thống đang được đo, nhưng đây nhấn mạnh không phải là nội dung của nguyên lý bất định.</p>
+<hr>
+<p>Cách giải thích đúng đắn của nguyên lý bất định là nếu chúng ta chuẩn bị một số lượng lớn các hệ lượng tử ở các trạng thái giống hệt nhau, <span class="math inline">\vert{}\psi\rangle</span>, rồi sau đó thực hiện các phép đo <span class="math inline">C</span> trên một số hệ thống đó, và đo <span class="math inline">D</span> trên các hệ thống khác, thì độ lệch chuẩn <span class="math inline">\Delta(C)</span> của các kết quả <span class="math inline">C</span> nhân với độ lệch chuẩn <span class="math inline">\Delta(D)</span> của các kết quả cho <span class="math inline">D</span> sẽ thỏa mãn bất đẳng thức (2.108). Như một ví dụ về nguyên lý bất định, hãy xét các đại lượng quan sát được <span class="math inline">X</span> và <span class="math inline">Y</span> khi được đo cho trạng thái lượng tử <span class="math inline">\vert{}0\rangle</span>. Trong Phương trình (2.70), chúng ta đã chỉ ra rằng <span class="math inline">[X, Y] = 2iZ</span>, vì vậy nguyên lý bất định nói với chúng ta rằng</p>
+<p><span class="math display">
+\Delta(X)\Delta(Y) \ge \langle0\vert{}Z\vert{}0\rangle = 1. \tag{2.109}
+</span></p>
+<p>Một hệ quả sơ cấp của điều này là <span class="math inline">\Delta(X)</span> và <span class="math inline">\Delta(Y)</span> đều phải lớn hơn <span class="math inline">0</span> một cách nghiêm ngặt, như có thể được kiểm chứng bằng phép tính trực tiếp.</p>
+</div>
+</div>
 </section>
 <section id="povm-measurements" class="level1">
 <h1>6. POVM measurements</h1>

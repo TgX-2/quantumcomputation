@@ -24,7 +24,7 @@ body {
 
 #quarto-content main.content {
   width: 100%;
-  max-width: 100ch;
+  max-width: none;
   padding: 2rem clamp(1.25rem, 4vw, 3rem);
   border: 1px solid var(--border);
   border-radius: 1.25rem;

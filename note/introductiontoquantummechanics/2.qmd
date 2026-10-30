@@ -401,7 +401,7 @@ Mỗi kết quả đo có thể xảy ra (m) ứng với một toán tử đo ri
 
 ## (2.92) - Công thức tính xác suất $P(m)$
 
-Xác suất để thu được kết m khi đo trạng thái ket psi chính là kỳ vọng của toán tử $M^\daggerM$ trên trạng thái đó:
+Xác suất để thu được kết m khi đo trạng thái ket psi chính là kỳ vọng của toán tử $M^\dagger M$ trên trạng thái đó:
 
 $$
 p(m) = \langle \psi \vert M_m^\dagger M_m \vert \psi \rangle
@@ -494,9 +494,194 @@ Giả sử $\{L_l\}$ và $\{M_m\}$ là hai tập hợp các toán tử đo. Ch�
 
 # 4. Distinguishing quantum states
 
+Một ứng dụng quan trọng của Tiên đề 3 là bài toán phân biệt các trạng thái lượng tử. Trong thế giới cổ điển, các trạng thái khác nhau của một vật thể thường có thể phân biệt được, ít nhất là về mặt nguyên lý. Ví dụ, chúng ta luôn có thể xác định xem một đồng xu ngửa hay sấp, ít nhất là trong giới hạn lý tưởng. Trong cơ học lượng tử, tình hình phức tạp hơn. Ở Mục 1.6, chúng ta đã đưa ra một lý lẽ hợp lý rằng các trạng thái lượng tử không trực giao thì không thể phân biệt được. Với Tiên đề 3 làm nền tảng vững chắc, giờ đây chúng ta có thể đưa ra một minh chứng thuyết phục hơn rất nhiều cho thực tế này.   
+
+---
+
+Khả năng phân biệt, giống như nhiều ý tưởng trong tính toán lượng tử và thông tin lượng tử, được hiểu rõ nhất bằng phép ẩn dụ về một trò chơi liên quan đến hai bên, Alice và Bob. Alice chọn một trạng thái $\vert{}\psi_i\rangle$ ($1 \le i \le n$) từ một tập hợp các trạng thái cố định được biết bởi cả hai bên. Cô ấy đưa trạng thái $\vert{}\psi_i\rangle$ cho Bob, người có nhiệm vụ xác định chỉ số $i$ của trạng thái mà Alice đã đưa cho anh ta.
+
+Giả sử các trạng thái $\vert{}\psi_i\rangle$ là trực chuẩn. Khi đó Bob có thể thực hiện một phép đo lượng tử để phân biệt các trạng thái này, sử dụng thủ tục sau. Định nghĩa các toán tử đo $M_i \equiv \vert{}\psi_i\rangle\langle\psi_i\vert{}$, mỗi cái cho một chỉ số $i$ có thể có, và một toán tử đo bổ sung $M_0$ được định nghĩa là căn bậc hai dương của toán tử dương $I - \sum_{i \neq 0} \vert{}\psi_i\rangle\langle\psi_i\vert{}$. Các toán tử này thỏa mãn hệ thức đầy đủ, và nếu trạng thái $\vert{}\psi_i\rangle$ được chuẩn bị thì $p(i) = \langle\psi_i\vert{}M_i\vert{}\psi_i\rangle = 1$, do đó kết quả $i$ xảy ra một cách chắc chắn. Do đó, có thể phân biệt đáng tin cậy các trạng thái trực chuẩn $\vert{}\psi_i\rangle$.   
+
+Ngược lại, nếu các trạng thái $\vert{}\psi_i\rangle$ không trực giao thì chúng ta có thể chứng minh rằng không có phép đo lượng tử nào có khả năng phân biệt các trạng thái đó. Ý tưởng là Bob sẽ thực hiện một phép đo được mô tả bởi các toán tử đo $M_j$, với kết quả $j$. Tùy thuộc vào kết quả của phép đo, Bob cố gắng đoán xem chỉ số $i$ là gì bằng cách sử dụng một quy tắc nào đó, $i = f(j)$, trong đó $f(\cdot)$ biểu diễn quy tắc anh ta dùng để đoán. Chìa khóa cho việc tại sao Bob không thể phân biệt các trạng thái không trực giao $\vert{}\psi_1\rangle$ và $\vert{}\psi_2\rangle$ là quan sát cho thấy $\vert{}\psi_2\rangle$ có thể được phân rã thành một thành phần (khác không) song song với $\vert{}\psi_1\rangle$, và một thành phần trực giao với $\vert{}\psi_1\rangle$. Giả sử $j$ là một kết quả đo sao cho $f(j) = 1$, nghĩa là Bob đoán rằng trạng thái là $\vert{}\psi_1\rangle$ khi anh ta quan sát thấy $j$. Nhưng vì thành phần của $\vert{}\psi_2\rangle$ song song với $\vert{}\psi_1\rangle$, nên có một xác suất khác không nhận được kết quả $j$ khi $\vert{}\psi_2\rangle$ được chuẩn bị, vì vậy đôi khi Bob sẽ mắc lỗi trong việc nhận diện trạng thái nào đã được chuẩn bị. Một lập luận chặt chẽ hơn rằng các trạng thái không trực giao không thể phân biệt được được đưa ra trong Hộp 2.3, nhưng điều này đã nắm bắt được ý tưởng cốt lõi.
+
+:::{.callout-important}
+# Hộp 2.3: Chứng minh rằng các trạng thái không trực giao không thể được phân biệt một cách đáng tin cậy
+
+Một chứng minh bằng phản chứng cho thấy không có phép đo nào phân biệt được các trạng thái không trực giao $\vert{}\psi_1\rangle$ và $\vert{}\psi_2\rangle$ là có thể xảy ra. Giả sử một phép đo như vậy là có thể. Nếu trạng thái $\vert{}\psi_1\rangle$ ($\vert{}\psi_2\rangle$) được chuẩn bị thì xác suất đo được $j$ sao cho $f(j) = 1$ ($f(j) = 2$) phải bằng 1. Định nghĩa $E_i \equiv \sum_{j: f(j)=i} M_j^\dagger M_j$, những quan sát này có thể được viết thành:
+
+$$
+\langle\psi_1\vert{}E_1\vert{}\psi_1\rangle = 1; \quad \langle\psi_2\vert{}E_2\vert{}\psi_2\rangle = 1. \tag{2.99}
+$$
+
+Vì $\sum_i E_i = I$ nên suy ra rằng $\sum_i \langle\psi_1\vert{}E_i\vert{}\psi_1\rangle = 1$, và vì $\langle\psi_1\vert{}E_1\vert{}\psi_1\rangle = 1$ nên ta buộc phải có $\langle\psi_1\vert{}E_2\vert{}\psi_1\rangle = 0$, và do đó $\sqrt{E_2}\vert{}\psi_1\rangle = 0$. Giả sử ta phân rã $\vert{}\psi_2\rangle = \alpha\vert{}\psi_1\rangle + \beta\vert{}\varphi\rangle$, trong đó $\vert{}\varphi\rangle$ trực giao với $\vert{}\psi_1\rangle$, $\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1$, và $\vert{}\beta\vert{} < 1$ vì $\vert{}\psi_1\rangle$ và $\vert{}\psi_2\rangle$ không trực giao. Khi đó $\sqrt{E_2}\vert{}\psi_2\rangle = \beta\sqrt{E_2}\vert{}\varphi\rangle$, điều này ngụ ý mâu thuẫn với (2.99), vì   
+
+$$
+\langle\psi_2\vert{}E_2\vert{}\psi_2\rangle = \vert{}\beta\vert{}^2 \langle\varphi\vert{}E_2\vert{}\varphi\rangle \le \vert{}\beta\vert{}^2 < 1, \tag{2.100}
+$$
+
+trong đó bất đẳng thức áp chót suy từ quan sát rằng  
+
+$$
+\langle\varphi\vert{}E_2\vert{}\varphi\rangle \le \sum_i \langle\varphi\vert{}E_i\vert{}\varphi\rangle = \langle\varphi\vert{}\varphi\rangle = 1. \tag{2.101}
+$$
+:::
 
 # 5. Projective measurements
 
+:::{.callout-note}
+# Nhận định chủ quan
+
+Thay vì dùng tập ${M_m}$ vô tội vạ như trong tiên đề 3. Chúng ta sẽ thông minh hơn là dùng các toán tử chiếu (projectors). Như đã đề cập trong chương giới thiệu linear algebra.
+
+Một số tính chất của toán tử chiếu:
+
+$$
+P_m^\dagger = P_m \qquad P_m^2 = P_m
+$$
+
+(và rõ ràng tính chất đầu tiên phù hợp với tiên đề 2, khi U là một toán tử Hermite)
+
+
+:::
+
+Trong mục này, chúng ta giải thích một trường hợp đặc biệt quan trọng của tiên đề đo tổng quát, Tiên đề 3. Lớp phép đo đặc biệt này được gọi là các phép đo xạ ảnh (projective measurements). Đối với nhiều ứng dụng của tính toán lượng tử và thông tin lượng tử, chúng ta sẽ chủ yếu quan tâm đến các phép đo xạ ảnh. Thật vậy, các phép đo xạ ảnh thực ra hóa ra tương đương với tiên đề đo tổng quát, khi chúng được bổ sung khả năng thực hiện các phép biến đổi đơn nhất (unitary transformations), như được mô tả trong Tiên đề 2. Chúng ta sẽ giải thích chi tiết sự tương đương này trong Mục 2.2.8, vì phát biểu của tiên đề đo đối với các phép đo xạ ảnh thoạt nhìn có vẻ khá khác biệt so với tiên đề tổng quát, Tiên đề 3.
+
+:::{.postulates}
+# Phép đo xạ ảnh
+
+Projective measurements được mô tả bởi một đại lượng quan sát được (observable), $M$, một toán tử Hermitian trên không gian trạng thái của hệ đang được quan sát. Đại lượng quan sát được có phân rã phổ (spectral decomposition),
+$$
+M = \sum_m m P_m, \tag{2.102}
+$$
+
+trong đó $P_m$ là toán tử chiếu (projector) lên không gian riêng của $M$ với trị riêng $m$. Các kết quả có thể có của phép đo tương ứng với các trị riêng $m$ của đại lượng quan sát được. Khi đo trạng thái $\vert{}\psi\rangle$, xác suất thu được kết quả $m$ được cho bởi   
+
+$$
+p(m) = \langle\psi\vert{}P_m\vert{}\psi\rangle, \tag{2.103}
+$$
+   
+Giả sử rằng kết quả $m$ đã xảy ra, trạng thái của hệ lượng tử ngay sau phép đo là   
+
+$$
+\frac{P_m\vert{}\psi\rangle}{\sqrt{p(m)}}. \tag{2.104}
+$$
+:::
+
+Các phép đo xạ ảnh có thể được hiểu là một trường hợp đặc biệt của Tiên đề 3. Giả sử các toán tử đo trong Tiên đề 3, ngoài việc thỏa mãn hệ thức đầy đủ $\sum_m M_m^\dagger M_m = I$, còn thỏa mãn các điều kiện rằng $M_m$ là các toán tử chiếu trực giao, nghĩa là $M_m$ là Hermitian, và $M_m M_{m'} = \delta_{m, m'} M_m$. Với các hạn chế bổ sung này, Tiên đề 3 rút gọn thành một phép đo xạ ảnh như vừa được định nghĩa. 
+
+---
+
+Các phép đo xạ ảnh có nhiều tính chất tuyệt vời. Cụ thể, việc tính giá trị trung bình cho các phép đo xạ ảnh rất dễ dàng. Theo định nghĩa, giá trị trung bình (xem Phụ lục 1 để biết các định nghĩa sơ cấp và kết quả trong lý thuyết xác suất) của phép đo là   
+
+$$
+\text{E}(M) = \sum_m m p(m) \tag{2.110}
+$$   
+
+$$
+= \sum_m m \langle\psi\vert{}P_m\vert{}\psi\rangle \tag{2.111}
+$$
+    
+$$
+= \langle\psi\vert{}\left(\sum_m m P_m\right)\vert{}\psi\rangle \tag{2.112}
+$$   
+
+$$
+= \langle\psi\vert{}M\vert{}\psi\rangle. \tag{2.113}
+$$   
+
+Đây là một công thức hữu ích, giúp đơn giản hóa nhiều phép tính. Giá trị trung bình của đại lượng quan sát được $M$ thường được viết là $\langle M \rangle \equiv \langle\psi\vert{}M\vert{}\psi\rangle$. Từ công thức tính giá trị trung bình này suy ra công thức cho độ lệch chuẩn liên quan đến các phép quan sát $M$,   
+
+$$
+[\Delta(M)]^2 = \langle(M - \langle M \rangle)^2\rangle \tag{2.114}
+$$   
+
+$$
+= \langle M^2 \rangle - \langle M \rangle^2. \tag{2.115}
+$$   
+
+Độ lệch chuẩn là một thước đo độ phân tán điển hình của các giá trị được quan sát khi đo $M$. Cụ thể, nếu chúng ta thực hiện một số lượng lớn các thí nghiệm trong đó trạng thái $\vert{}\psi\rangle$ được chuẩn bị và đại lượng quan sát được $M$ được đo, thì độ lệch chuẩn $\Delta(M)$ của các giá trị quan sát được được xác định bởi công thức $\Delta(M) = \sqrt{\langle M^2 \rangle - \langle M \rangle^2}$. Công thức hóa về phép đo và độ lệch chuẩn theo các đại lượng quan sát được dẫn đến một cách thanh lịch các kết quả như nguyên lý bất định Heisenberg (xem Hộp 2.4).   
+
+:::{.callout-note}
+# Bài tập 2.58: 
+Giả sử chúng ta chuẩn bị một hệ lượng tử ở một trạng thái riêng $\vert{}\psi\rangle$ của một đại lượng quan sát được $M$ nào đó, với trị riêng tương ứng là $m$. Giá trị trung bình quan sát được của $M$ và độ lệch chuẩn là gì? 
+:::
+
+---
+
+Hai thuật ngữ được sử dụng rộng rãi cho các phép đo rất đáng được nhấn mạnh. Thay vì đưa ra một đại lượng quan sát được (observable) để mô tả một phép đo xạ ảnh, người ta thường chỉ liệt kê một tập hợp đầy đủ các toán tử chiếu trực giao $P_m$ thỏa mãn các hệ thức $\sum_m P_m = I$ và $P_m P_{m'} = \delta_{m,m'} P_m$. Đại lượng quan sát được tương ứng ẩn trong cách dùng này là $M = \sum_m m P_m$. Một cụm từ khác cũng được sử dụng rộng rãi, "đo trong cơ sở $\vert{}m\rangle$" (measure in a basis $\vert{}m\rangle$), trong đó $\vert{}m\rangle$ tạo thành một cơ sở trực chuẩn, đơn giản có nghĩa là thực hiện phép đo xạ ảnh với các toán tử chiếu $P_m = \vert{}m\rangle\langle m\vert{}$.   
+
+Hãy xem xét một ví dụ về các phép đo xạ ảnh trên các qubit đơn lẻ. Đầu tiên là phép đo đại lượng quan sát được $Z$. Phép đo này có các trị riêng $+1$ và $-1$ với các vectơ riêng tương ứng là $\vert{}0\rangle$ và $\vert{}1\rangle$. Do đó, ví dụ, phép đo $Z$ trên trạng thái $\vert{}\psi\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$ cho kết quả $+1$ với xác suất $\langle\psi\vert{}0\rangle\langle0\vert{}\psi\rangle = 1/2$, và tương tự kết quả $-1$ với xác suất $1/2$. Tổng quát hơn, giả sử $\vec{v}$ là bất kỳ vectơ đơn vị thực ba chiều nào. Khi đó chúng ta có thể định nghĩa một đại lượng quan sát được:
+   
+$$
+\vec{v} \cdot \vec{\sigma} \equiv v_1 \sigma_1 + v_2 \sigma_2 + v_3 \sigma_3. \tag{2.116}
+$$   
+
+Phép đo đại lượng quan sát này đôi khi được gọi là "phép đo spin dọc theo trục $\vec{v}$", vì những lý do lịch sử. Hai bài tập sau đây khuyến khích bạn tự giải quyết một số tính chất sơ cấp nhưng quan trọng của một phép đo như vậy.   
+
+:::{.callout-note}
+# Bài tập 2.59: 
+Giả sử chúng ta có qubit ở trạng thái $\vert{}0\rangle$, và chúng ta đo đại lượng quan sát được $X$. Giá trị trung bình của $X$ là gì? Độ lệch chuẩn của $X$ là gì?   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.60: 
+Chứng minh rằng $\vec{v} \cdot \vec{\sigma}$ có các trị riêng $\pm 1$, và các toán tử chiếu lên các không gian riêng tương ứng được cho bởi $P_\pm = (I \pm \vec{v} \cdot \vec{\sigma})/2$.   
+
+:::
+
+:::{.callout-note}
+# Bài tập 2.61: 
+Tính xác suất thu được kết quả $+1$ đối với phép đo $\vec{v} \cdot \vec{\sigma}$, biết rằng trạng thái trước phép đo là $\vert{}0\rangle$. Trạng thái của hệ thống sau phép đo nếu thu được kết quả $+1$ là gì?
+
+:::
+
+
+## Nguyên lý bất định Heisenberg
+:::{.callout-important}
+# Hộp 2.4: Nguyên lý bất định Heisenberg
+
+Có lẽ kết quả nổi tiếng nhất của cơ học lượng tử là nguyên lý bất định Heisenberg. 
+
+Giả sử $A$ và $B$ là hai toán tử Hermitian, và $\vert{}\psi\rangle$ là một trạng thái lượng tử. Giả sử $\langle\psi\vert{}AB\vert{}\psi\rangle = x + iy$, trong đó $x$ và $y$ là các số thực. Chú ý rằng $\langle\psi\vert{}[A, B]\vert{}\psi\rangle = 2iy$ và $\langle\psi\vert{}\{A, B\}\vert{}\psi\rangle = 2x$. Điều này ngụ ý rằng   
+
+$$
+\vert{}\langle\psi\vert{}[A, B]\vert{}\psi\rangle\vert{}^2 + \vert{}\langle\psi\vert{}\{A, B\}\vert{}\psi\rangle\vert{}^2 = 4 \vert{}\langle\psi\vert{}AB\vert{}\psi\rangle\vert{}^2. \tag{2.105}
+$$   
+
+Theo bất đẳng thức Cauchy–Schwarz   
+
+$$
+\vert{}\langle\psi\vert{}AB\vert{}\psi\rangle\vert{}^2 \le \langle\psi\vert{}A^2\vert{}\psi\rangle \langle\psi\vert{}B^2\vert{}\psi\rangle, \tag{2.106}
+$$   
+
+khi kết hợp với Phương trình (2.105) và bỏ đi một số hạng không âm sẽ cho   
+
+$$
+\vert{}\langle\psi\vert{}[A, B]\vert{}\psi\rangle\vert{}^2 \le 4 \langle\psi\vert{}A^2\vert{}\psi\rangle \langle\psi\vert{}B^2\vert{}\psi\rangle. \tag{2.107}
+$$   
+
+Giả sử $C$ và $D$ là hai đại lượng quan sát được. Thay $A = C - \langle C \rangle$ và $B = D - \langle D \rangle$ vào phương trình cuối cùng, chúng ta thu được nguyên lý bất định Heisenberg như nó thường được phát biểu:
+
+$$
+\Delta(C)\Delta(D) \ge \frac{\vert{}\langle\psi\vert{}[C, D]\vert{}\psi\rangle\vert{}}{2}. \tag{2.108}
+$$   
+
+---
+
+Bạn nên cảnh giác với một hiểu lầm phổ biến về nguyên lý bất định, rằng việc đo một đại lượng quan sát được $C$ đến một 'độ chính xác' $\Delta(C)$ nào đó sẽ làm cho giá trị của $D$ bị 'nhiễu loạn' một lượng $\Delta(D)$ theo cách sao cho một loại bất đẳng thức nào đó tương tự như (2.108) được thỏa mãn. Mặc dù đúng là các phép đo trong cơ học lượng tử gây ra sự nhiễu loạn cho hệ thống đang được đo, nhưng đây nhấn mạnh không phải là nội dung của nguyên lý bất định.   
+
+---
+
+Cách giải thích đúng đắn của nguyên lý bất định là nếu chúng ta chuẩn bị một số lượng lớn các hệ lượng tử ở các trạng thái giống hệt nhau, $\vert{}\psi\rangle$, rồi sau đó thực hiện các phép đo $C$ trên một số hệ thống đó, và đo $D$ trên các hệ thống khác, thì độ lệch chuẩn $\Delta(C)$ của các kết quả $C$ nhân với độ lệch chuẩn $\Delta(D)$ của các kết quả cho $D$ sẽ thỏa mãn bất đẳng thức (2.108).   Như một ví dụ về nguyên lý bất định, hãy xét các đại lượng quan sát được $X$ và $Y$ khi được đo cho trạng thái lượng tử $\vert{}0\rangle$. Trong Phương trình (2.70), chúng ta đã chỉ ra rằng $[X, Y] = 2iZ$, vì vậy nguyên lý bất định nói với chúng ta rằng   
+
+$$
+\Delta(X)\Delta(Y) \ge \langle0\vert{}Z\vert{}0\rangle = 1. \tag{2.109}
+$$   
+
+
+Một hệ quả sơ cấp của điều này là $\Delta(X)$ và $\Delta(Y)$ đều phải lớn hơn $0$ một cách nghiêm ngặt, như có thể được kiểm chứng bằng phép tính trực tiếp.
+:::
 
 # 6. POVM measurements
 
