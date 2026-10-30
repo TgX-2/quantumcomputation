@@ -28,6 +28,14 @@ Nó rõ ràng là khá vô lý! Lỡ đâu trong 60 thế giới đầu tiên, c
 
 Và điều này dẫn đến điều gì? Dẫn đến kết luận ở #2
 
+---
+
+## Trả lời - (30/10/2026)
+
+Điều này là sai, không nằm trong không gian Hilbert, thích thì sang không gian khác.
+
+Tất cả đều phải theo một khung cố định của quantum mechanics, và ở đây thì hệ luôn phải đảm bảo = 1.
+
 # 2. Thao túng khi đo, kết quả ra trạng thái chồng chập
 
 Rõ ràng là điều này khá là vô lý trong thế giới cổ điển. 
@@ -35,6 +43,12 @@ Rõ ràng là điều này khá là vô lý trong thế giới cổ điển.
 Nhưng nếu điều kết luận ở 1. là đúng, có thể thao túng kết quả xác suất, thì tức là $|\alpha|^2 + |\beta|^2 = 1$ không còn đúng nữa. Vậy thì quả cầu Blosch nó sẽ bị méo?
 
 Phần cực bắc và cực nam sẽ bị nhỏ lại? Nếu điều này đúng, thì có thể ép nó đến mức giới hạn, tức là giờ chỉ còn một đĩa phẳng nằm trong không gian 3d nữa thôi, và tất cả các phép đo đều dẫn đến trạng thái chồng chập?
+
+---
+
+## Trả lời - (30/10/2026)
+
+Vì điều 1 sai rồi nên chắc chắn điều này sẽ không diễn ra.
 
 # 3. Tận dụng hết tất cả
 
@@ -51,3 +65,29 @@ Thử tưởng tượng một máy tính không dùng bóng bán dẫn nữa, m�
 # 5. Thuật toán Mô phỏng tôi
 
 Có cái nào dùng được cái này không. Mặc dù tôi biết rõ là nó sẽ không có. Vì thuật toán này dựa trên việc nên liều đến mức nào khi thời gian còn ít.
+
+# 6. (30/10/2026) - Vi Mô $\-$ Vĩ Mô
+
+Ở giới hạn nào thì hệ không hành xử như vi mô nữa, thử tưởng tượng xem, khi một hạt đơn lẻ thì nó hành xử rất phản trực giác. Nó chồng chập, vướng víu, ... . Nhưng khi ở hệ lớn, như là thế giới xung quanh chúng ta, mọi thứ đã bị sụp đổ.
+
+Vậy hệ lớn đến thế nào thì sẽ sụp đổ? 2 hạt, 3 hạt, ... n hạt?
+
+Hiện tại có 2 hướng lý thuyết giải quyết (nhưng hướng thứ 1 sắp chết):
+
+1. Mô hình GRW
+
+Khi một hệ thống đạt đến một khối lượng hoặc độ phức tạp nhất định, hàm sóng sẽ tự động sụp đổ một cách khác quan mà không cần con người hay môi trường tác động.
+
+2. Environmental Decoherence
+
+Tất cả là do môi trường.
+
+Nobel 2022
+
+# 7. (30/10/2026) - Phương trình Dirac nâng cấp
+
+Có thể thấy Phương trình Dirac đã nâng cấp rất nhiều từ phương trình của Pauli và Schrodinger, khi thêm spin và tương đối tín vào phương trình. Nhưng liệu nó đã end chưa?
+
+Do Phương trình Dirac là phương trình một hạt, nên sẽ thế nào nếu thêm số lượng hạt vào phương trình?
+
+Ý tưởng này sẽ dẫn đến QED và QFT, phải học thêm thôi.

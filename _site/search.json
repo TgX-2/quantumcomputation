@@ -4,7 +4,7 @@
     "href": "note/questions.html",
     "title": "Câu hỏi trong anh",
     "section": "",
-    "text": "1. Thao túng kết quả xác suất\nNếu một qubit đang ở trạng thái chồng chất, ví dụ như:\n\n\\vert l \\rangle = \\frac 1 {\\sqrt 2} \\vert 0 \\rangle + \\frac 1 {\\sqrt 2} \\vert 0 \\rangle\n\nThì nó hoạt động tốt đến mức nào? Ý tôi là nếu không đo đạc, thì làm sao để biết nó ở trạng thái 50/50.\nNếu câu trả lời là không biết thì làm cách nào mà người ta biết được nó ở trạng thái 50/50?\nNếu câu trả lời là có, chắc chắn, có cách để biết, cứ 100 lần trong 100 thế giới song song, nếu chúng ta đo thì thu được kết quả sau khi thống kê là 50 \\vert 0 \\rangle và 50 \\vert 1 \\rangle sao?\nNó rõ ràng là khá vô lý! Lỡ đâu trong 60 thế giới đầu tiên, chúng ta đo được 40 trạng thái \\vert 0 \\rangle và 20 trạng thái \\vert 1 \\rangle, rồi ngừng thì sao? Thì lúc đó chắc chắn \\alpha = \\beta = \\frac 1 {\\sqrt 2} sẽ bị sai, và chúng ta đã thao túng nó sang một hệ số phức khác.\nVà điều này dẫn đến điều gì? Dẫn đến kết luận ở #2\n\n\n2. Thao túng khi đo, kết quả ra trạng thái chồng chập\nRõ ràng là điều này khá là vô lý trong thế giới cổ điển.\nNhưng nếu điều kết luận ở 1. là đúng, có thể thao túng kết quả xác suất, thì tức là |\\alpha|^2 + |\\beta|^2 = 1 không còn đúng nữa. Vậy thì quả cầu Blosch nó sẽ bị méo?\nPhần cực bắc và cực nam sẽ bị nhỏ lại? Nếu điều này đúng, thì có thể ép nó đến mức giới hạn, tức là giờ chỉ còn một đĩa phẳng nằm trong không gian 3d nữa thôi, và tất cả các phép đo đều dẫn đến trạng thái chồng chập?\n\n\n3. Tận dụng hết tất cả\nLiệu ngoài vướng víu với chồng chập lượng tử ra, còn tính chất nào của cơ học lượng tử có thể áp dụng vô máy tính lượng tử được hay không?\nCái này phải học một khóa cấp tốc về quantum mechanics mới có thể trả lời được định hướng chứ giờ chỉ đưa ra một câu hỏi vu vơ vậy thôi.\nNhưng thật ra thì đã có một đống ông giáo sư nghiên cứu bao nhiêu năm rồi, mà vẫn chỉ có những tính chất này là khả thi. Tại sao những tính chất còn lại (hay chưa biết) không khả thi, hãy chứng minh.\n\n\n4. Universal Stern-Gerlach-TgX Computer\nThử tưởng tượng một máy tính không dùng bóng bán dẫn nữa, mà dùng các electron.\n\n\n5. Thuật toán Mô phỏng tôi\nCó cái nào dùng được cái này không. Mặc dù tôi biết rõ là nó sẽ không có. Vì thuật toán này dựa trên việc nên liều đến mức nào khi thời gian còn ít.",
+    "text": "Nếu một qubit đang ở trạng thái chồng chất, ví dụ như:\n\n\\vert l \\rangle = \\frac 1 {\\sqrt 2} \\vert 0 \\rangle + \\frac 1 {\\sqrt 2} \\vert 0 \\rangle\n\nThì nó hoạt động tốt đến mức nào? Ý tôi là nếu không đo đạc, thì làm sao để biết nó ở trạng thái 50/50.\nNếu câu trả lời là không biết thì làm cách nào mà người ta biết được nó ở trạng thái 50/50?\nNếu câu trả lời là có, chắc chắn, có cách để biết, cứ 100 lần trong 100 thế giới song song, nếu chúng ta đo thì thu được kết quả sau khi thống kê là 50 \\vert 0 \\rangle và 50 \\vert 1 \\rangle sao?\nNó rõ ràng là khá vô lý! Lỡ đâu trong 60 thế giới đầu tiên, chúng ta đo được 40 trạng thái \\vert 0 \\rangle và 20 trạng thái \\vert 1 \\rangle, rồi ngừng thì sao? Thì lúc đó chắc chắn \\alpha = \\beta = \\frac 1 {\\sqrt 2} sẽ bị sai, và chúng ta đã thao túng nó sang một hệ số phức khác.\nVà điều này dẫn đến điều gì? Dẫn đến kết luận ở #2\n\n\n\nĐiều này là sai, không nằm trong không gian Hilbert, thích thì sang không gian khác.\nTất cả đều phải theo một khung cố định của quantum mechanics, và ở đây thì hệ luôn phải đảm bảo = 1.",
     "crumbs": [
       "Ideas",
       "Câu hỏi trong anh"
@@ -555,6 +555,28 @@
     "crumbs": [
       "Introduction to Quantum Mechanics",
       "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/questions.html#trả-lời---30102026",
+    "href": "note/questions.html#trả-lời---30102026",
+    "title": "Câu hỏi trong anh",
+    "section": "",
+    "text": "Điều này là sai, không nằm trong không gian Hilbert, thích thì sang không gian khác.\nTất cả đều phải theo một khung cố định của quantum mechanics, và ở đây thì hệ luôn phải đảm bảo = 1.",
+    "crumbs": [
+      "Ideas",
+      "Câu hỏi trong anh"
+    ]
+  },
+  {
+    "objectID": "note/questions.html#trả-lời---30102026-1",
+    "href": "note/questions.html#trả-lời---30102026-1",
+    "title": "Câu hỏi trong anh",
+    "section": "Trả lời - (30/10/2026)",
+    "text": "Trả lời - (30/10/2026)\nVì điều 1 sai rồi nên chắc chắn điều này sẽ không diễn ra.",
+    "crumbs": [
+      "Ideas",
+      "Câu hỏi trong anh"
     ]
   }
 ]
