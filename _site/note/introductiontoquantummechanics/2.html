@@ -323,6 +323,7 @@ window.Quarto = {
   <li><a href="#povm-measurements" id="toc-povm-measurements" class="nav-link" data-scroll-target="#povm-measurements">6. POVM measurements</a></li>
   <li><a href="#phase" id="toc-phase" class="nav-link" data-scroll-target="#phase">7. Phase</a></li>
   <li><a href="#composite-systems" id="toc-composite-systems" class="nav-link" data-scroll-target="#composite-systems">8. Composite systems</a></li>
+  <li><a href="#tiên-đề-4" id="toc-tiên-đề-4" class="nav-link" data-scroll-target="#tiên-đề-4">Tiên đề 4</a></li>
   <li><a href="#quantum-mechanics-a-global-view" id="toc-quantum-mechanics-a-global-view" class="nav-link" data-scroll-target="#quantum-mechanics-a-global-view">9. Quantum mechanics: a global view</a></li>
   </ul>
 </nav>
@@ -1240,12 +1241,188 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 </section>
 <section id="phase" class="level1">
 <h1>7. Phase</h1>
+<p>‘Phase’ là một thuật ngữ thường được sử dụng trong cơ học lượng tử, với một vài ý nghĩa khác nhau phụ thuộc vào ngữ cảnh. Tại thời điểm này, thật tiện lợi để ôn lại một vài ý nghĩa này. Ví dụ, xét trạng thái <span class="math inline">e^{i\theta}\vert{}\psi\rangle</span>, trong đó <span class="math inline">\vert{}\psi\rangle</span> là một vector trạng thái, và <span class="math inline">\theta</span> là một số thực. Chúng ta nói rằng trạng thái <span class="math inline">e^{i\theta}\vert{}\psi\rangle</span> bằng với <span class="math inline">\vert{}\psi\rangle</span>, sai khác một hệ số pha toàn cục (global phase factor) <span class="math inline">e^{i\theta}</span>. Một điểm thú vị cần lưu ý là thống kê phép đo được dự đoán cho hai trạng thái này là như nhau. Để thấy điều này, giả sử <span class="math inline">M_m</span> là một toán tử đo liên kết với một phép đo lượng tử nào đó, và lưu ý rằng các xác suất tương ứng để kết quả <span class="math inline">m</span> xảy ra là <span class="math inline">\langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle</span> và <span class="math inline">\langle\psi\vert{}e^{-i\theta} M_m^\dagger M_m e^{i\theta}\vert{}\psi\rangle = \langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle</span>. Do đó, từ quan điểm quan sát, hai trạng thái này hoàn toàn giống hệt nhau. Vì lý do này, chúng ta có thể bỏ qua các hệ số pha toàn cục vì chúng không liên quan đến các tính chất quan sát được của hệ vật lý.</p>
+<hr>
+<p>Có một loại pha khác được gọi là pha tương đối (relative phase), mang một ý nghĩa khá khác biệt. Xét các trạng thái</p>
+<p><span class="math display">
+\frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}} \quad \text{và} \quad \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \tag{2.121}
+</span></p>
+<p>Trong trạng thái đầu tiên, biên độ của <span class="math inline">\vert{}1\rangle</span> là <span class="math inline">1/\sqrt{2}</span>. Đối với trạng thái thứ hai, biên độ là <span class="math inline">-1/\sqrt{2}</span>. Trong mỗi trường hợp, độ lớn của các biên độ là như nhau, nhưng chúng khác nhau về dấu. Tổng quát hơn, chúng ta nói rằng hai biên độ, <span class="math inline">a</span> và <span class="math inline">b</span>, khác nhau một pha tương đối nếu tồn tại một số thực <span class="math inline">\theta</span> sao cho <span class="math inline">a = \exp(i\theta)b</span>. Tổng quát hơn nữa, hai trạng thái được nói là sai khác một pha tương đối trong một cơ sở nào đó nếu mỗi biên độ trong cơ sở đó liên hệ với nhau bằng một hệ số pha như vậy. Ví dụ, hai trạng thái hiển thị ở trên là giống nhau sai khác một độ lệch pha tương đối bởi vì các biên độ <span class="math inline">\vert{}0\rangle</span> hoàn toàn giống hệt (hệ số pha tương đối bằng 1), và các biên độ <span class="math inline">\vert{}1\rangle</span> chỉ khác nhau một hệ số pha tương đối là <span class="math inline">-1</span>. Sự khác biệt giữa các hệ số pha tương đối và hệ số pha toàn cục là đối với pha tương đối, các hệ số pha có thể thay đổi từ biên độ này sang biên độ khác. Điều này làm cho pha tương đối trở thành một khái niệm phụ thuộc vào cơ sở (basis-dependent), không giống như pha toàn cục. Kết quả là, các trạng thái chỉ khác nhau về pha tương đối trong một cơ sở nào đó sẽ gây ra những khác biệt có thể quan sát được về mặt vật lý trong thống kê phép đo, và không thể coi những trạng thái này là tương đương về mặt vật lý, như chúng ta vẫn làm với các trạng thái khác nhau một hệ số pha toàn cục.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.65:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Biểu diễn các trạng thái <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span> và <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span> trong một cơ sở mà ở đó chúng không giống nhau theo kiểu sai khác một độ lệch pha tương đối.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="composite-systems" class="level1">
 <h1>8. Composite systems</h1>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Định đề 4 (Postulate 4) hoàn thiện nền tảng của cơ học lượng tử bằng cách cung cấp công cụ toán học để kết nối các hệ thống lượng tử biệt lập lại với nhau. Đây là nguồn gốc sinh ra đặc tính phi cổ điển kỳ lạ và mạnh mẽ nhất của vật lý lượng tử: sự vướng víu (Quantum Entanglement).</p>
+<section id="phát-biểu-toán-học-của-định-đề-4" class="level2">
+<h2 class="anchored" data-anchor-id="phát-biểu-toán-học-của-định-đề-4">Phát biểu toán học của Định đề 4</h2>
+<p>Không gian trạng thái của một hệ lượng tử phức hợp (composite system) là tích tensor (tensor product) của các không gian trạng thái của các hệ thành phần.</p>
+<p>Nếu hệ <span class="math inline">A</span> có không gian Hilbert <span class="math inline">\mathcal{H}_A</span> và hệ <span class="math inline">B</span> có không gian Hilbert <span class="math inline">\mathcal{H}_B</span>, thì hệ phức hợp <span class="math inline">AB</span> sẽ cư trú trong không gian:</p>
+<p><span class="math display">
+\mathcal{H}_{AB} = \mathcal{H}_A \otimes \mathcal{H}_B
+</span></p>
 </section>
+<section id="cấu-trúc-trạng-thái-và-không-gian-toán-học" class="level2">
+<h2 class="anchored" data-anchor-id="cấu-trúc-trạng-thái-và-không-gian-toán-học">Cấu trúc Trạng thái và Không gian Toán học</h2>
+<ul>
+<li><p>Trạng thái tích (Product State): Nếu hệ <span class="math inline">A</span> độc lập ở trạng thái <span class="math inline">\vert{}\psi_A\rangle</span> và hệ <span class="math inline">B</span> ở trạng thái <span class="math inline">\vert{}\psi_B\rangle</span>, trạng thái chung của toàn hệ là <span class="math inline">\vert{}\psi_A\rangle \otimes \vert{}\psi_B\rangle</span>, thường được viết gọn là <span class="math inline">\vert{}\psi_A\rangle\vert{}\psi_B\rangle</span> hoặc <span class="math inline">\vert{}\psi_A \psi_B\rangle</span>.</p></li>
+<li><p>Sự bùng nổ số chiều (Dimensionality Explosion): Số chiều của hệ phức hợp là tích số chiều của các hệ thành phần: <span class="math inline">\dim(\mathcal{H}_{AB}) = \dim(\mathcal{H}_A) \times \dim(\mathcal{H}_B)</span>. Khác với không gian vector cổ điển (cộng số chiều khi ghép hệ), không gian lượng tử nhân số chiều. Với một hệ gồm <span class="math inline">n</span> qubit, số chiều là <span class="math inline">2^n</span>. Đặc tính này chính là cốt lõi tạo ra sức mạnh tính toán vượt trội của máy tính lượng tử, đồng thời khiến máy tính cổ điển không thể mô phỏng hiệu quả các hệ lượng tử lớn.</p></li>
+<li><p>Toán tử trên hệ phức hợp: Nếu ta áp dụng toán tử unita (tiến hóa) <span class="math inline">U_A</span> lên hệ <span class="math inline">A</span> và <span class="math inline">U_B</span> lên hệ <span class="math inline">B</span>, toán tử chung lên toàn hệ là <span class="math inline">U_{AB} = U_A \otimes U_B</span>. Tương tự với phép đo, nếu chỉ đo hệ <span class="math inline">A</span> bằng toán tử <span class="math inline">M_A</span> và không làm gì hệ <span class="math inline">B</span>, toán tử đo lường chung sẽ là <span class="math inline">M_A \otimes I</span>.</p></li>
+</ul>
+</section>
+<section id="hệ-quả-tối-hậu-trạng-thái-vướng-víu-entangled-states" class="level2">
+<h2 class="anchored" data-anchor-id="hệ-quả-tối-hậu-trạng-thái-vướng-víu-entangled-states">Hệ quả Tối hậu: Trạng thái Vướng víu (Entangled States)</h2>
+<p>Vì <span class="math inline">\mathcal{H}_{AB}</span> là một không gian vector tuyến tính, Nguyên lý chồng chập (Định đề 1) cho phép tạo ra tổ hợp tuyến tính của các trạng thái tích. Tuy nhiên, về mặt đại số, phần lớn các vector trong không gian tổng <span class="math inline">\mathcal{H}_A \otimes \mathcal{H}_B</span> không thể được phân tích ngược lại thành dạng tích của một ket hệ <span class="math inline">A</span> và một ket hệ <span class="math inline">B</span>.</p>
+<p>Những trạng thái không thể viết dưới dạng <span class="math inline">\vert{}\psi_{AB}\rangle = \vert{}\psi_A\rangle \otimes \vert{}\psi_B\rangle</span> được gọi là trạng thái vướng víu.Ví dụ tiêu biểu nhất là trạng thái Bell trên hệ 2 qubit:</p>
+<p><span class="math display">
+\vert{}\Phi^+\rangle = \frac{1}{\sqrt{2}} (\vert{}00\rangle + \vert{}11\rangle)
+</span></p>
+<p>Trong trạng thái này, thông tin vật lý không nằm ở từng qubit riêng lẻ mà được mã hóa hoàn toàn trong mối tương quan toàn cục giữa chúng.</p>
+<p>Để phân tích cấu trúc toán học của các trạng thái thuần túy lưỡng cực (bipartite pure states) này, công cụ đại số tuyến tính mạnh nhất là Phân tích Schmidt (Schmidt Decomposition). Bất kỳ trạng thái <span class="math inline">\vert{}\psi_{AB}\rangle</span> nào cũng có thể được phân tách thành <span class="math inline">\sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle</span>. Một trạng thái được xác nhận là vướng víu khi và chỉ khi nó có nhiều hơn một hệ số Schmidt <span class="math inline">\lambda_i</span> khác không, minh chứng chặt chẽ cho việc không thể chia tách hệ thống thành các thành phần độc lập.</p>
+</section>
+</div>
+</div>
+</div>
+<p>Giả sử chúng ta quan tâm đến một hệ lượng tử phức hợp được tạo thành từ hai (hoặc nhiều) hệ vật lý riêng biệt. Chúng ta nên mô tả các trạng thái của hệ phức hợp như thế nào? Tiên đề sau đây mô tả cách không gian trạng thái của một hệ phức hợp được xây dựng từ các không gian trạng thái của các hệ thành phần.</p>
+</section>
+<section id="tiên-đề-4" class="level1 postulates">
+<h1>Tiên đề 4</h1>
+<p>Không gian trạng thái của một hệ vật lý phức hợp là tích tensor của các không gian trạng thái của các hệ vật lý thành phần. Hơn nữa, nếu chúng ta có các hệ được đánh số từ <span class="math inline">1</span> đến <span class="math inline">n</span>, và hệ số <span class="math inline">i</span> được chuẩn bị ở trạng thái <span class="math inline">\vert{}\psi_i\rangle</span>, thì trạng thái chung của toàn bộ hệ thống là <span class="math inline">\vert{}\psi_1\rangle \otimes \vert{}\psi_2\rangle \otimes \dots \otimes \vert{}\psi_n\rangle</span>.</p>
+</section>
+<p><strong>Tại sao tích tensor lại là cấu trúc toán học được sử dụng để mô tả không gian trạng thái của một hệ vật lý phức hợp?</strong></p>
+<p>Ở một mức độ nào đó, chúng ta có thể đơn giản chấp nhận nó như một tiên đề cơ bản, không thể giản lược thành thứ gì đó sơ cấp hơn, và tiếp tục. Xét cho cùng, chúng ta chắc chắn kỳ vọng rằng có một cách chính tắc (canonical way) nào đó để mô tả các hệ phức hợp trong cơ học lượng tử. Có cách nào khác để chúng ta có thể đi đến tiên đề này không? Dưới đây là một cách giải thích mang tính kinh nghiệm đôi khi được sử dụng. Các nhà vật lý đôi khi thích nói về nguyên lý chồng chập (superposition principle) của cơ học lượng tử, trong đó phát biểu rằng nếu <span class="math inline">\vert{}x\rangle</span> và <span class="math inline">\vert{}y\rangle</span> là hai trạng thái của một hệ lượng tử, thì bất kỳ sự chồng chập nào <span class="math inline">\alpha\vert{}x\rangle + \beta\vert{}y\rangle</span> cũng phải là một trạng thái cho phép của hệ lượng tử, trong đó <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span>. Đối với các hệ phức hợp, có vẻ tự nhiên rằng nếu <span class="math inline">\vert{}A\rangle</span> là một trạng thái của hệ <span class="math inline">A</span>, và <span class="math inline">\vert{}B\rangle</span> là một trạng thái của hệ <span class="math inline">B</span>, thì phải có một trạng thái tương ứng nào đó, mà chúng ta có thể ký hiệu là <span class="math inline">\vert{}A\rangle\vert{}B\rangle</span>, của hệ chung <span class="math inline">AB</span>. Áp dụng nguyên lý chồng chập cho các trạng thái tích của dạng này, chúng ta đi đến tiên đề tích tensor được đưa ra ở trên. Đây không phải là một dẫn xuất, vì chúng ta không coi nguyên lý chồng chập như một phần cơ bản trong mô tả của chúng ta về cơ học lượng tử, nhưng nó mang lại cho bạn hương vị của những cách khác nhau mà những ý tưởng này đôi khi được cấu trúc lại.</p>
+<hr>
+<p>Một loạt các ký hiệu khác nhau cho các hệ phức hợp xuất hiện trong các tài liệu. Một phần lý do cho sự sinh sôi nảy nở này là các ký hiệu khác nhau thích ứng tốt hơn với các ứng dụng khác nhau, và chúng ta cũng sẽ thấy tiện lợi khi thỉnh thoảng giới thiệu một số ký hiệu chuyên biệt. Tại thời điểm này, chỉ cần đề cập đến một ký hiệu chỉ số dưới hữu ích để biểu thị các trạng thái và toán tử trên các hệ thống khác nhau, khi nó không rõ ràng từ ngữ cảnh. Ví dụ, trong một hệ chứa ba qubit, <span class="math inline">X_2</span> là toán tử Pauli <span class="math inline">\sigma_x</span> tác dụng lên qubit thứ hai.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.66:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng giá trị trung bình của đại lượng quan sát được <span class="math inline">X_1 Z_2</span> đối với một hệ hai qubit được đo ở trạng thái <span class="math inline">(\vert{}00\rangle + \vert{}11\rangle)/\sqrt{2}</span> là bằng không.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Trong Mục 2.2.5, chúng ta đã khẳng định rằng các phép đo xạ ảnh cùng với động lực học đơn nhất là đủ để thực hiện một phép đo tổng quát. Chứng minh của phát biểu này sử dụng các hệ lượng tử phức hợp, và là một minh họa tuyệt vời cho Tiên đề 4 trong thực tế. Giả sử chúng ta có một hệ lượng tử với không gian trạng thái <span class="math inline">Q</span>, và chúng ta muốn thực hiện một phép đo được mô tả bởi các toán tử đo <span class="math inline">M_m</span> trên hệ <span class="math inline">Q</span>. Để làm điều này, chúng ta giới thiệu một hệ phụ (ancilla system), với không gian trạng thái <span class="math inline">M</span>, có một cơ sở trực chuẩn <span class="math inline">\vert{}m\rangle</span> tương ứng một-một với các kết quả có thể có của phép đo mà chúng ta muốn thực hiện. Hệ phụ này có thể chỉ được coi là một công cụ toán học xuất hiện trong quá trình xây dựng, hoặc nó có thể được diễn giải về mặt vật lý như một hệ lượng tử bổ sung được đưa vào bài toán, mà chúng ta giả định là có một không gian trạng thái với các tính chất bắt buộc.</p>
+<p>Gọi <span class="math inline">\vert{}0\rangle</span> là một trạng thái cố định bất kỳ của <span class="math inline">M</span>, định nghĩa một toán tử <span class="math inline">U</span> trên các tích <span class="math inline">\vert{}\psi\rangle\vert{}0\rangle</span> của các trạng thái <span class="math inline">\vert{}\psi\rangle</span> từ <span class="math inline">Q</span> với trạng thái <span class="math inline">\vert{}0\rangle</span> bởi</p>
+<p><span class="math display">
+U\vert{}\psi\rangle\vert{}0\rangle \equiv \sum_m M_m\vert{}\psi\rangle\vert{}m\rangle. \tag{2.122}
+</span></p>
+<p>Sử dụng tính trực chuẩn của các trạng thái <span class="math inline">\vert{}m\rangle</span> và hệ thức đầy đủ <span class="math inline">\sum_m M_m^\dagger M_m = I</span>, chúng ta có thể thấy rằng <span class="math inline">U</span> bảo toàn tích vô hướng giữa các trạng thái có dạng <span class="math inline">\vert{}\psi\rangle\vert{}0\rangle</span>,</p>
+<p><span class="math display">
+\langle\varphi\vert{}\langle0\vert{}U^\dagger U\vert{}\psi\rangle\vert{}0\rangle = \sum_{m,m'} \langle\varphi\vert{}M_m^\dagger M_{m'}\vert{}\psi\rangle \langle m\vert{}m'\rangle \tag{2.123}
+</span></p>
+<p><span class="math display">
+= \sum_m \langle\varphi\vert{}M_m^\dagger M_m\vert{}\psi\rangle \tag{2.124}
+</span></p>
+<p><span class="math display">
+= \langle\varphi\vert{}\psi\rangle. \tag{2.125}
+</span></p>
+<p>Theo kết quả của Bài tập 2.67, suy ra rằng <span class="math inline">U</span> có thể được mở rộng thành một toán tử đơn nhất trên không gian <span class="math inline">Q \otimes M</span>, mà chúng ta cũng ký hiệu là <span class="math inline">U</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.67:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">V</span> là một không gian Hilbert với không gian con <span class="math inline">W</span>. Giả sử <span class="math inline">U: W \to V</span> là một toán tử tuyến tính bảo toàn tích vô hướng, tức là, đối với bất kỳ <span class="math inline">\vert{}w_1\rangle</span> và <span class="math inline">\vert{}w_2\rangle</span> nào trong <span class="math inline">W</span>,</p>
+<p><span class="math display">
+\langle w_1\vert{}U^\dagger U\vert{}w_2\rangle = \langle w_1\vert{}w_2\rangle. \tag{2.126}
+</span></p>
+<p>Chứng minh rằng tồn tại một toán tử đơn nhất <span class="math inline">U': V \to V</span> mở rộng <span class="math inline">U</span>. Tức là, <span class="math inline">U'\vert{}w\rangle = U\vert{}w\rangle</span> với mọi <span class="math inline">\vert{}w\rangle</span> thuộc <span class="math inline">W</span>, nhưng <span class="math inline">U'</span> được định nghĩa trên toàn bộ không gian <span class="math inline">V</span>. Thông thường chúng ta bỏ qua ký hiệu phẩy ‘<span class="math inline">'</span>’ và chỉ viết <span class="math inline">U</span> để biểu thị phần mở rộng đó.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Tiếp theo, giả sử chúng ta thực hiện một phép đo xạ ảnh trên hai hệ được mô tả bởi các toán tử chiếu <span class="math inline">P_m \equiv I_Q \otimes \vert{}m\rangle\langle m\vert{}</span>. Kết quả <span class="math inline">m</span> xảy ra với xác suất</p>
+<p><span class="math display">
+p(m) = \langle\psi\vert{}\langle0\vert{}U^\dagger P_m U\vert{}\psi\rangle\vert{}0\rangle \tag{2.127}
+</span></p>
+<p><span class="math display">
+= \sum_{m', m''} \langle\psi\vert{}M_{m'}^\dagger \langle m'\vert{}(I_Q \otimes \vert{}m\rangle\langle m\vert{})M_{m''}\vert{}\psi\rangle\vert{}m''\rangle \tag{2.128}
+</span></p>
+<p><span class="math display">
+= \langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle, \tag{2.129}
+</span></p>
+<p>giống hệt như được đưa ra trong Tiên đề 3. Trạng thái chung của hệ <span class="math inline">QM</span> sau phép đo, với điều kiện kết quả <span class="math inline">m</span> đã xảy ra, được cho bởi</p>
+<p><span class="math display">
+\frac{P_m U \vert{}\psi\rangle\vert{}0\rangle}{\sqrt{\langle\psi\vert{}U^\dagger P_m U\vert{}\psi\rangle}} = \frac{M_m\vert{}\psi\rangle\vert{}m\rangle}{\sqrt{\langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle}}. \tag{2.130}
+</span></p>
+<p>Suy ra rằng trạng thái của hệ <span class="math inline">M</span> sau phép đo là <span class="math inline">\vert{}m\rangle</span>, và trạng thái của hệ <span class="math inline">Q</span> là</p>
+<p><span class="math display">
+\frac{M_m\vert{}\psi\rangle}{\sqrt{\langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle}}, \tag{2.131}
+</span></p>
+<p>giống hệt như quy định bởi Tiên đề 3. Do đó, động lực học đơn nhất, các phép đo xạ ảnh, và khả năng đưa vào các hệ phụ, khi kết hợp với nhau cho phép bất kỳ phép đo nào có dạng được mô tả trong Tiên đề 3 được hiện thực hóa.</p>
+<hr>
+<p>Tiên đề 4 cũng cho phép chúng ta định nghĩa một trong những ý tưởng thú vị và khó hiểu nhất liên quan đến các hệ lượng tử phức hợp – sự vướng víu lượng tử (entanglement). Hãy xem xét trạng thái hai qubit</p>
+<p><span class="math display">
+\vert{}\psi\rangle = \frac{\vert{}00\rangle + \vert{}11\rangle}{\sqrt{2}}. \tag{2.132}
+</span></p>
+<p>Trạng thái này có một tính chất đáng chú ý là không có các trạng thái qubit đơn lẻ <span class="math inline">\vert{}a\rangle</span> và <span class="math inline">\vert{}b\rangle</span> nào sao cho <span class="math inline">\vert{}\psi\rangle = \vert{}a\rangle\vert{}b\rangle</span>, một thực tế mà bây giờ bạn nên tự thuyết phục bản thân:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.68:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\vert{}\psi\rangle \neq \vert{}a\rangle\vert{}b\rangle</span> đối với mọi trạng thái qubit đơn lẻ <span class="math inline">\vert{}a\rangle</span> và <span class="math inline">\vert{}b\rangle</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Chúng ta nói rằng một trạng thái của một hệ phức hợp có tính chất này (rằng nó không thể được viết thành tích của các trạng thái của các hệ thành phần của nó) là một trạng thái vướng víu (entangled state). Vì những lý do mà không ai hiểu đầy đủ, các trạng thái vướng víu đóng một vai trò quan trọng trong tính toán lượng tử và thông tin lượng tử, và phát sinh lặp đi lặp lại xuyên suốt phần còn lại của cuốn sách này. Chúng ta đã thấy vướng víu đóng một vai trò thiết yếu trong viễn tải lượng tử (quantum teleportation), như được mô tả trong Mục 1.3.7. Trong chương này, chúng ta đưa ra hai ví dụ về những hiệu ứng kỳ lạ được tạo ra bởi các trạng thái lượng tử vướng víu, mã hóa siêu đặc (superdense coding - Mục 2.3), và sự vi phạm bất đẳng thức Bell (Mục 2.6).</p>
 <section id="quantum-mechanics-a-global-view" class="level1">
 <h1>9. Quantum mechanics: a global view</h1>
+<p>Chúng ta hiện đã giải thích tất cả các tiên đề cơ bản của cơ học lượng tử. Phần lớn phần còn lại của cuốn sách được dành để dẫn xuất các hệ quả của những tiên đề này. Hãy cùng ôn lại nhanh các tiên đề và cố gắng đặt chúng vào một góc nhìn toàn cảnh nào đó.</p>
+<ul>
+<li><p>Tiên đề 1 thiết lập “vũ đài” cho cơ học lượng tử, bằng cách chỉ định trạng thái của một hệ lượng tử cô lập phải được mô tả như thế nào.</p></li>
+<li><p>Tiên đề 2 cho chúng ta biết rằng động lực học của các hệ lượng tử cô lập được mô tả bởi phương trình Schrödinger, và do đó bởi sự tiến hóa đơn nhất.</p></li>
+<li><p>Tiên đề 3 cho chúng ta biết cách trích xuất thông tin từ các hệ lượng tử của mình bằng cách đưa ra quy tắc mô tả phép đo.</p></li>
+<li><p>Tiên đề 4 cho chúng ta biết làm thế nào các không gian trạng thái của các hệ lượng tử khác nhau có thể được kết hợp để tạo ra mô tả cho một hệ phức hợp.</p></li>
+</ul>
+<hr>
+<p>Điều kỳ quặc về cơ học lượng tử, ít nhất là theo lăng kính cổ điển của chúng ta, là chúng ta không thể trực tiếp quan sát vector trạng thái. Nó hơi giống một ván cờ mà bạn không bao giờ có thể biết chính xác mỗi quân cờ đang ở đâu, mà chỉ biết chúng đang nằm ở hàng nào trên bàn cờ. Vật lý cổ điển – và trực giác của chúng ta – nói rằng các tính chất cơ bản của một vật thể, như năng lượng, vị trí và vận tốc, là những thứ có thể tiếp cận trực tiếp thông qua quan sát. Trong cơ học lượng tử, các đại lượng này không còn xuất hiện như những yếu tố nền tảng nữa, mà được thay thế bằng vector trạng thái, thứ không thể quan sát trực tiếp. Cứ như thể tồn tại một thế giới ẩn trong cơ học lượng tử, mà chúng ta chỉ có thể tiếp cận một cách gián tiếp và không hoàn hảo. Hơn nữa, việc chỉ quan sát một hệ cổ điển không nhất thiết làm thay đổi trạng thái của hệ thống đó. Hãy tưởng tượng sẽ khó khăn như thế nào khi chơi quần vợt nếu mỗi lần bạn nhìn vào quả bóng, vị trí của nó lại thay đổi! Nhưng theo Tiên đề 3, việc quan sát trong cơ học lượng tử là một thủ tục xâm lấn (invasive) thường làm thay đổi trạng thái của hệ.</p>
+<p>Chúng ta nên rút ra kết luận gì từ những đặc điểm kỳ lạ này của cơ học lượng tử? Liệu có thể tái cấu trúc cơ học lượng tử theo một cách tương đương về mặt toán học để nó có một cấu trúc giống với vật lý cổ điển hơn không? Trong Mục 2.6, chúng ta sẽ chứng minh Bất đẳng thức Bell, một kết quả đáng ngạc nhiên cho thấy mọi nỗ lực tái cấu trúc như vậy đều cam chắc thất bại. Chúng ta đành phải mắc kẹt với bản chất phản trực giác của cơ học lượng tử. Tất nhiên, phản ứng đúng đắn đối với điều này là vui sướng, chứ không phải buồn rầu! Nó mang lại cho chúng ta cơ hội để phát triển các công cụ tư duy giúp làm cho cơ học lượng tử trở nên trực quan. Hơn nữa, chúng ta có thể khai thác bản chất ẩn của vector trạng thái để thực hiện các tác vụ xử lý thông tin vượt xa những gì có thể làm trong thế giới cổ điển. Nếu không có hành vi phản trực giác này, tính toán lượng tử và thông tin lượng tử sẽ kém thú vị hơn rất nhiều.</p>
+<p>Chúng ta cũng có thể lật ngược lại cuộc thảo luận này và tự hỏi: ‘Nếu cơ học lượng tử quá khác biệt so với vật lý cổ điển, thì tại sao thế giới hàng ngày lại trông có vẻ cổ điển như vậy?’ Tại sao chúng ta không thấy bằng chứng nào về một vector trạng thái ẩn trong cuộc sống hàng ngày của mình? Hóa ra rằng thế giới cổ điển mà chúng ta thấy có thể được dẫn xuất từ cơ học lượng tử như một mô tả xấp xỉ của thế giới sẽ có giá trị ở các thang thời gian, chiều dài và khối lượng mà chúng ta thường gặp trong cuộc sống hàng ngày. Việc giải thích chi tiết cách cơ học lượng tử làm nảy sinh vật lý cổ điển nằm ngoài phạm vi của cuốn sách này, nhưng những độc giả quan tâm nên tham khảo phần thảo luận về chủ đề này trong ‘Lịch sử và đọc thêm’ ở cuối Chương 8.</p>
 
 
 </section>

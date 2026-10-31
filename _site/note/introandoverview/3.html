@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>Quantum computation – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introandoverview/1.html">Introduction and overview</a></li><li class="breadcrumb-item"><a href="../../note/introandoverview/3.html">Quantum computation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#single-qubit-gates" id="toc-single-qubit-gates" class="nav-link active" data-scroll-target="#single-qubit-gates">1. Single qubit gates</a></li>
+  <li><a href="#multiple-qubit-gates" id="toc-multiple-qubit-gates" class="nav-link" data-scroll-target="#multiple-qubit-gates">2. Multiple qubit gates</a></li>
+  <li><a href="#measurements-in-bases-other-than-the-computational-basis" id="toc-measurements-in-bases-other-than-the-computational-basis" class="nav-link" data-scroll-target="#measurements-in-bases-other-than-the-computational-basis">3. Measurements in bases other than the computational basis</a></li>
+  <li><a href="#quantum-circuits" id="toc-quantum-circuits" class="nav-link" data-scroll-target="#quantum-circuits">4. Quantum circuits</a></li>
+  <li><a href="#quantum-copying-circuit" id="toc-quantum-copying-circuit" class="nav-link" data-scroll-target="#quantum-copying-circuit">5. Quantum copying circuit?</a></li>
+  <li><a href="#example-bell-states" id="toc-example-bell-states" class="nav-link" data-scroll-target="#example-bell-states">6. Example: Bell states</a></li>
+  <li><a href="#example-quantum-teleportation" id="toc-example-quantum-teleportation" class="nav-link" data-scroll-target="#example-quantum-teleportation">7. Example: quantum teleportation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introandoverview/1.html">Introduction and overview</a></li><li class="breadcrumb-item"><a href="../../note/introandoverview/3.html">Quantum computation</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Quantum computation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Sự thay đổi xảy ra đối với một trạng thái lượng tử có thể được mô tả bằng ngôn ngữ của quantum computation. Tương tự như cách một máy tính cổ điển được xây dựng từ một mạch điện chứa các dây dẫn và cổng logic, một máy tính lượng tử được xây dựng từ một mạch lượng tử chứa các dây dẫn và các cổng lượng tử sơ cấp để mang đi và thao tác với thông tin lượng tử.</p>
+<p>Trong phần này, chúng ta sẽ mô tả một số cổng lượng tử đơn giản, và trình bày một số mạch ví dụ minh họa ứng dụng của chúng, bao gồm cả một mạch có khả năng dịch chuyển tức thời qubit!</p>
+<section id="single-qubit-gates" class="level1">
+<h1>1. Single qubit gates</h1>
+<p><strong>Có thể định nghĩa một cổng NOT lượng tử tương tự cho các qubit được không?</strong></p>
+<p>Hãy tưởng tượng rằng chúng ta có một quá trình đưa trạng thái <span class="math inline">\vert 0\rangle</span> thành trạng thái <span class="math inline">\vert 1\rangle</span>, và ngược lại. Một quá trình như vậy rõ ràng sẽ là một ứng cử viên sáng giá cho một chất tương tự lượng tử của cổng NOT. Tuy nhiên, việc chỉ định hành động của cổng trên các trạng thái <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span> không cho chúng ta biết điều gì xảy ra với các trạng thái chồng chập của các trạng thái <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span>, nếu không có thêm kiến thức về các tính chất của cổng lượng tử.</p>
+<p>Trên thực tế, cổng NOT lượng tử hoạt động một cách tuyến tính (linearly), nghĩa là nó biến đổi trạng thái</p>
+<p><span class="math display">
+\alpha\vert 0\rangle + \beta\vert 1\rangle \tag {1.8}
+</span></p>
+<p>thành trạng thái tương ứng trong đó vai trò của <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span> được hoán đổi cho nhau,</p>
+<p><span class="math display">
+\alpha\vert 1\rangle + \beta\vert 0\rangle. \tag {1.9}
+</span></p>
+<p>Tại sao cổng NOT lượng tử lại hoạt động theo kiểu tuyến tính chứ không phải theo một cách phi tuyến tính nào đó là một câu hỏi rất thú vị, và câu trả lời không hề hiển nhiên chút nào. Hóa ra hành vi tuyến tính này là một tính chất chung của cơ học lượng tử, và được thúc đẩy rất tốt bởi thực nghiệm; hơn nữa, hành vi phi tuyến tính có thể dẫn đến các nghịch lý rõ rệt như du hành thời gian, truyền thông tin nhanh hơn ánh sáng, và vi phạm các định luật nhiệt động lực học thứ hai. Chúng ta sẽ khám phá điểm này sâu hơn ở các chương sau, nhưng hiện tại chúng ta sẽ tạm coi nó là một điều được thừa nhận.</p>
+<hr>
+<p>Có một cách thuận tiện để biểu diễn cổng <span class="math inline">\text{NOT}</span> lượng tử dưới dạng ma trận, cách này xuất phát trực tiếp từ tính tuyến tính của các cổng lượng tử. Giả sử chúng ta định nghĩa một ma trận <span class="math inline">X</span> để đại diện cho cổng <span class="math inline">\text{NOT}</span> lượng tử như sau:</p>
+<p><span class="math display">
+X \equiv \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}  \tag {1.10}
+</span></p>
+<p>(Ký hiệu <span class="math inline">X</span> cho cổng <span class="math inline">\text{NOT}</span> lượng tử được sử dụng vì lý do lịch sử.) Nếu trạng thái lượng tử <span class="math inline">\alpha\vert 0\rangle + \beta\vert 1\rangle</span> được viết dưới dạng ký hiệu véc-tơ là</p>
+<p><span class="math display">
+\begin{bmatrix} \alpha \\ \beta \end{bmatrix}  \tag {1.11}
+</span></p>
+<p>với phần tử ở trên tương ứng với biên độ của <span class="math inline">\vert 0\rangle</span> và phần tử ở dưới là biên độ của <span class="math inline">\vert 1\rangle</span>, thì đầu ra tương ứng từ cổng <span class="math inline">\text{NOT}</span> lượng tử là</p>
+<p><span class="math display">
+X \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = \begin{bmatrix} \beta \\ \alpha \end{bmatrix}  \tag {1.12}
+</span></p>
+<p>Lưu ý rằng tác động của cổng <span class="math inline">\text{NOT}</span> là lấy trạng thái <span class="math inline">\vert 0\rangle</span> và thay thế nó bằng trạng thái tương ứng với cột đầu tiên của ma trận <span class="math inline">X</span>. Tương tự, trạng thái <span class="math inline">\vert 1\rangle</span> được thay thế bằng trạng thái tương ứng với cột thứ hai của ma trận <span class="math inline">X</span>.</p>
+<hr>
+<p>Các cổng lượng tử trên một qubit đơn có thể được mô tả bằng các ma trận hai nhân hai.</p>
+<p><strong>Có ràng buộc nào đối với các ma trận có thể được sử dụng làm cổng lượng tử không?</strong></p>
+<p>Hóa ra là có. Hãy nhớ lại rằng điều kiện chuẩn hóa yêu cầu <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span> đối với một trạng thái lượng tử <span class="math inline">\alpha\vert 0\rangle + \beta\vert 1\rangle</span>. Điều này cũng phải đúng đối với trạng thái lượng tử <span class="math inline">\vert\psi'\rangle = \alpha'\vert 0\rangle + \beta'\vert 1\rangle</span> sau khi cổng đã tác động. Hóa ra điều kiện thích hợp cho ma trận đại diện cho cổng là ma trận <span class="math inline">U</span> mô tả cổng một qubit phải là đơn nhất (unitary), nghĩa là <span class="math inline">U^\dagger U = I</span>, trong đó <span class="math inline">U^\dagger</span> là số phức liên hợp chuyển vị (adjoint) của <span class="math inline">U</span> (được thu được bằng cách chuyển vị và sau đó lấy số phức liên hợp của <span class="math inline">U</span>), và <span class="math inline">I</span> là ma trận đơn vị hai nhân hai. Ví dụ, đối với cổng <span class="math inline">\text{NOT}</span>, rất dễ dàng để kiểm tra rằng <span class="math inline">X^\dagger X = I</span>.</p>
+<hr>
+<p>Thật đáng kinh ngạc, ràng buộc tính đơn nhất này là ràng buộc duy nhất đối với các cổng lượng tử. Bất kỳ ma trận đơn nhất nào cũng quy định một cổng lượng tử hợp lệ. Ý nghĩa thú vị là, trái ngược với trường hợp cổ điển — nơi chỉ tồn tại một cổng một bit không tầm thường duy nhất là cổng <span class="math inline">\text{NOT}</span> — có rất nhiều cổng một qubit không tầm thường. Hai cổng quan trọng mà chúng ta sẽ sử dụng sau này là cổng <span class="math inline">Z</span>:</p>
+<p><span class="math display">
+Z \equiv \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix} \tag {1.13}
+</span></p>
+<p>giữ nguyên <span class="math inline">\vert 0\rangle</span>, và lật dấu của <span class="math inline">\vert 1\rangle</span> thành <span class="math inline">-\vert 1\rangle</span>, và cổng Hadamard:</p>
+<p><span class="math display">
+H \equiv \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix} \tag {1.14}
+</span></p>
+<p>Cổng này đôi khi được mô tả giống như một cổng “căn bậc hai của NOT”, ở chỗ nó biến <span class="math inline">\vert 0\rangle</span> thành <span class="math inline">(\vert 0\rangle + \vert 1\rangle)/\sqrt{2}</span> (cột đầu tiên của <span class="math inline">H</span>), nằm “ở giữa” <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span>, và biến <span class="math inline">\vert 1\rangle</span> thành <span class="math inline">(\vert 0\rangle - \vert 1\rangle)/\sqrt{2}</span> (cột thứ hai của <span class="math inline">H</span>), cũng nằm “ở giữa” <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span>. Tuy nhiên, lưu ý rằng <span class="math inline">H^2</span> không phải là một cổng <span class="math inline">\text{NOT}</span>, vì đại số đơn giản cho thấy rằng <span class="math inline">H^2 = I</span>, và do đó việc áp dụng <span class="math inline">H</span> hai lần vào một trạng thái sẽ không làm thay đổi gì cả.</p>
+<hr>
+<p>Cổng Hadamard là một trong những cổng lượng tử hữu ích nhất, và rất đáng để thử hình dung hoạt động của nó thông qua bức tranh quả cầu Bloch. Trong bức tranh này, hóa ra các cổng một qubit tương ứng với các phép quay và phản xạ của quả cầu. Phép toán Hadamard chỉ đơn giản là một phép quay của quả cầu quanh trục <span class="math inline">y</span> một góc <span class="math inline">90^\circ</span>, theo sau là một phép quay quanh trục <span class="math inline">x</span> một góc <span class="math inline">180^\circ</span>, như minh họa trong Hình 1.4. Một số cổng một qubit quan trọng được thể hiện trong Hình 1.5, và được đối chiếu với trường hợp cổ điển.</p>
+<p><img src="../../img/1.4.png" class="img-fluid"></p>
+<p><img src="../../img/1.5.png" class="img-fluid"></p>
+<p>Có vô số ma trận đơn nhất hai nhân hai, và do đó có vô số cổng một qubit. Tuy nhiên, hóa ra các tính chất của tập hợp đầy đủ có thể được hiểu từ các tính chất của một tập hợp nhỏ hơn nhiều. Ví dụ, như được giải thích ở Hộp 1.1, một cổng đơn nhất một qubit tùy ý có thể được phân rã thành tích của các phép quay</p>
+<p><span class="math display">
+\begin{bmatrix}
+\cos \frac \gamma 2 &amp; -\sin\frac \gamma 2 \\
+\sin \frac \gamma 2 &amp; \cos \frac \gamma 2
+\end{bmatrix}
+\tag {1.15}
+</span></p>
+<p>và một cổng mà sau này chúng ta sẽ hiểu là phép quay quanh trục <span class="math inline">\hat z</span></p>
+<p><span class="math display">
+\begin{bmatrix}
+e^{-i\beta /2} &amp; 0 \\
+0 &amp; e^{i\beta/2}
+\end{bmatrix}
+\tag {1.16}
+</span></p>
+<p>cùng với một sự dịch pha (toàn cục) - một hệ số nhân hằng số có dạng <span class="math inline">e^{i\alpha}</span>. Các cổng này có thể được chia nhỏ hơn nữa - chúng ta không cần phải thực hiện các cổng này cho các giá trị <span class="math inline">\alpha</span>, <span class="math inline">\beta</span> và <span class="math inline">\gamma</span> tùy ý, mà có thể xây dựng các xấp xỉ tốt tùy ý cho các cổng đó chỉ bằng cách sử dụng một số giá trị cố định đặc biệt của <span class="math inline">\alpha</span>, <span class="math inline">\beta</span> và <span class="math inline">\gamma</span>.</p>
+<p>Bằng cách này, có thể xây dựng một cổng một qubit tùy ý bằng cách sử dụng một tập hợp hữu hạn các cổng lượng tử. Tổng quát hơn, một phép tính toán lượng tử tùy ý trên bất kỳ số lượng qubit nào có thể được tạo ra bởi một tập hợp hữu hạn các cổng được gọi là phổ biến cho tính toán lượng tử. Để có được một tập hợp phổ biến như vậy, trước tiên chúng ta cần giới thiệu một số cổng lượng tử liên quan đến nhiều qubit.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hộp 1.1. Phân rã các phép toán một qubit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ở mục 4.2 bắt đầu từ trang 174 trong sách, chúng ta chứng minh rằng một ma trận đơn nhất <span class="math inline">2 \times 2</span> tùy ý có thể được phân rã thành</p>
+<p><span class="math display">
+U = e^{i\alpha} \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &amp; e^{i\beta/2} \end{bmatrix} \begin{bmatrix} \cos\frac{\gamma}{2} &amp; -\sin\frac{\gamma}{2} \\ \sin\frac{\gamma}{2} &amp; \cos\frac{\gamma}{2} \end{bmatrix},\begin{bmatrix} e^{-i\delta/2} &amp; 0 \\ 0 &amp; e^{i\delta/2} \end{bmatrix}
+\tag{1.17}
+</span></p>
+<p>trong đó <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span> và <span class="math inline">\delta</span> là các số thực. Lưu ý rằng ma trận thứ hai chính là một phép quay thông thường. Hóa ra ma trận đầu tiên và ma trận cuối cùng cũng có thể được hiểu là các phép quay trong một mặt phẳng khác. Sự phân rã này có thể được sử dụng để đưa ra một công thức chính xác cho việc thực hiện một cổng logic lượng tử một qubit tùy ý.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Thử nghĩ xem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mọi người chỉ đề cập các kiểu vướng víu với nhau theo kiểu tuyến tính, hay chính xác hơn là tất cả qubit đều cùng cấp. Nhưng sẽ như thế nào tồn tại một qubit lồng? Một thứ tôi sẽ gọi là qubit loocj (loops)?</p>
+<p>Phát biểu như sau:</p>
+<p>Một qubit loocj sau khi đo sẽ nhảy tới hai qubit khác, tuỳ thuộc vào việc đo tiếp?</p>
+<p>Tôi hiện tại không biết rằng nó sẽ như thế nào, nhưng thử nghĩ xem, sẽ có hai hệ qubit hoàn toàn độc lập nhưng lại phụ thuộc vào nhau (hay là vướng víu).</p>
+<p>ví dụ:</p>
+<p><span class="math display">
+\vert \lambda \rangle = \gamma \vert A \rangle + \delta \vert B \rangle
+</span></p>
+<p>và <span class="math inline">|\gamma| ^ 2 + |\delta|^2 = 1</span>. Khai triển <span class="math inline">\vert \lambda\rangle</span> (lúc đo) ra:</p>
+<p><span class="math display">
+\vert \lambda \rangle = \gamma (\alpha \vert 0 \rangle + \beta \vert 1 \rangle) + \delta (\alpha \vert 2 \rangle + \beta \vert 3 \rangle)
+</span></p>
+<p>chẳng hạn?</p>
+</div>
+</div>
+</section>
+<section id="multiple-qubit-gates" class="level1">
+<h1>2. Multiple qubit gates</h1>
+<p>Bây giờ chúng ta hãy tổng quát hóa từ một qubit sang nhiều qubit.</p>
+<p><img src="../../img/1.6.png" class="img-fluid"></p>
+<p>Hình 1.6 hiển thị năm cổng cổ điển đa bit đáng chú ý, các cổng <span class="math inline">\text{AND}</span>, <span class="math inline">\text{OR}</span>, <span class="math inline">\text{XOR}</span> (exclusive-OR), <span class="math inline">\text{NAND}</span> và <span class="math inline">\text{NOR}</span>. Một kết quả lý thuyết quan trọng là bất kỳ hàm số nào trên các bit đều có thể được tính toán chỉ từ sự kết hợp của các cổng <span class="math inline">\text{NAND}</span>, do đó cổng này được gọi là một cổng vạn năng. Ngược lại, cổng <span class="math inline">\text{XOR}</span> đứng một mình hoặc thậm chí đi cùng với cổng <span class="math inline">\text{NOT}</span> thì không vạn năng Một cách để nhận ra điều này là lưu ý rằng việc áp dụng cổng <span class="math inline">\text{XOR}</span> không làm thay đổi tính chẵn lẻ tổng thể của các bit. Kết quả là, bất kỳ mạch nào chỉ bao gồm các cổng <span class="math inline">\text{NOT}</span> và <span class="math inline">\text{XOR}</span> sẽ cho ra các đầu ra có cùng tính chẵn lẻ nếu hai đầu vào <span class="math inline">x</span> và <span class="math inline">y</span> có cùng tính chẵn lẻ, từ đó giới hạn lớp các hàm có thể được tính toán, và do đó loại bỏ tính phổ biến.</p>
+<hr>
+<p>Cổng logic lượng tử đa qubit nguyên mẫu là cổng <span class="math inline">\text{controlled-NOT}</span> hay cổng <span class="math inline">\text{CNOT}</span>. Cổng này có hai qubit đầu vào, được gọi lần lượt là <strong><em>control qubit</em></strong> qubit điều khiển và <strong><em>target qubit</em></strong> qubit mục tiêu. Sơ đồ mạch cho cổng <span class="math inline">\text{CNOT}</span> được thể hiện ở góc trên bên phải của Hình 1.6; dòng trên đại diện cho qubit điều khiển, trong khi dòng dưới đại diện cho qubit mục tiêu. Hoạt động của cổng có thể được mô tả như sau:</p>
+<ul>
+<li><p>Nếu qubit điều khiển được đặt ở <span class="math inline">0</span>, thì qubit mục tiêu được giữ nguyên.</p></li>
+<li><p>Nếu qubit điều khiển được đặt ở <span class="math inline">1</span>, thì qubit mục tiêu bị lật.</p></li>
+</ul>
+<p>Theo các phương trình:</p>
+<p><span class="math display">
+\vert 00\rangle \to \vert 00\rangle; \\
+\vert01\rangle \to \vert 01\rangle; \\
+\vert10\rangle \to \vert 11\rangle; \\
+\vert11\rangle \to \vert 10\rangle \tag {1.18}
+</span></p>
+<p>Một cách khác để mô tả cổng <span class="math inline">\text{CNOT}</span> là sự tổng quát hóa của cổng <span class="math inline">\text{XOR}</span> cổ điển, vì hành động của cổng có thể được tóm tắt là <span class="math inline">\vert A, B\rangle \to \vert A, B \oplus A\rangle</span>, trong đó <span class="math inline">\oplus</span> là phép cộng modulo hai, đây chính xác là những gì cổng <span class="math inline">\text{XOR}</span> thực hiện. Nghĩa là, qubit điều khiển và qubit mục tiêu được thực hiện phép <span class="math inline">\text{XOR}</span> với nhau và kết quả được lưu trữ trong qubit mục tiêu.</p>
+<hr>
+<p>Lại một cách khác để mô tả hành động của cổng <span class="math inline">\text{CNOT}</span> là đưa ra biểu diễn ma trận, như được hiển thị ở góc dưới bên phải của Hình 1.6. Bạn có thể dễ dàng xác minh rằng cột đầu tiên của <span class="math inline">U_{CN}</span> mô tả sự biến đổi xảy ra đối với <span class="math inline">\vert 00\rangle</span>, và tương tự đối với các trạng thái cơ sở tính toán khác, <span class="math inline">\vert 01\rangle</span>, <span class="math inline">\vert 10\rangle</span> và <span class="math inline">\vert 11\rangle</span>. Đối với trường hợp một qubit, yêu cầu bảo toàn xác suất được thể hiện qua thực tế rằng <span class="math inline">U_{CN}</span> là <strong><em>unitary matrix</em></strong> một ma trận đơn nhất, nghĩa là <span class="math inline">U_{CN}^\dagger U_{CN} = I</span>.</p>
+<hr>
+<p>Chúng ta đã nhận thấy rằng cổng <span class="math inline">\text{CNOT}</span> có thể được coi là một dạng cổng <span class="math inline">\text{XOR}</span> tổng quát.</p>
+<p>Các cổng cổ điển khác như cổng <span class="math inline">\text{NAND}</span> hoặc cổng <span class="math inline">\text{XOR}</span> thông thường có thể được hiểu là các cổng đơn nhất theo một nghĩa tương tự như cách cổng <span class="math inline">\text{NOT}</span> lượng tử đại diện cho cổng <span class="math inline">\text{NOT}</span> cổ điển không?</p>
+<p>Hóa ra điều này là không thể. Lý do là vì các cổng <span class="math inline">\text{XOR}</span> và <span class="math inline">\text{NAND}</span> về cơ bản là <strong><em>irreversible or non-invertible</em></strong> không thuận nghịch hoặc không khả nghịch. Ví dụ, cho trước đầu ra <span class="math inline">A \oplus B</span> từ một cổng <span class="math inline">\text{XOR}</span>, không thể xác định được đầu vào <span class="math inline">A</span> và <span class="math inline">B</span> ban đầu là gì; có sự mất mát thông tin không thể khôi phục đi kèm với hành động không khả nghịch của cổng <span class="math inline">\text{XOR}</span>.</p>
+<p>Mặt khác, các cổng lượng tử đơn nhất thì luôn khả nghịch, vì nghịch đảo của một ma trận đơn nhất cũng là một ma trận đơn nhất, và do đó một cổng lượng tử luôn có thể được đảo ngược bởi một cổng lượng tử khác. Hiểu cách thực hiện logic cổ điển theo nghĩa khả nghịch hoặc đảo ngược này sẽ là một bước quan trọng trong việc hiểu cách khai thác sức mạnh của cơ học lượng tử cho tính toán. Chúng ta sẽ giải thích ý tưởng cơ bản về cách thực hiện tính toán khả nghịch (reversible computation) ở Mục 1.4.1.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Giải thích thêm cho dễ hiểu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Trong máy tính cổ điển</strong></p>
+<p>Ví dụ lấy cổng xor, ta có hai bit đầu vào là A và B, thì kết quả cuối cùng chỉ là một bit kết quả (0 hoặc 1).</p>
+<p>Vì vậy, chúng ta không biết chính xác đầu vào A và B là gì khi chỉ biết mỗi bit kết quả. Từ đó, thông tin về việc A và B bằng bao nhiêu đã bị trộn lẫn và vướng vào nhau, gọi là mất thông tin. Vì vậy các cổng ở máy tính cổ điển là không khả nghịch, tức là từ một cổng kết quả không thể suy ra được các cổng đầu vào ban đầu.</p>
+<p><strong>Trong máy tính lượng tử</strong></p>
+<p>Ta có cổng CNOT, nhận vào 2 qubit là <span class="math inline">\vert A, B \rangle</span>, và biến đổi chúng thành:</p>
+<p><span class="math display">
+\vert A, B\rangle \rightarrow \vert A, A \oplus B\rangle
+</span></p>
+<p>nhìn vào kết quả, ta thấy <span class="math inline">\vert A \rangle</span> vẫn còn được giữ nguyên. Chỉ có qubit thứ hai mới bị biến thành kết quả của <span class="math inline">A \oplus B</span>.</p>
+<p>Vì vậy chúng ta có thể khôi phục 2 qubit đầu vào.</p>
+<p><strong>Tại sao</strong></p>
+<p>Bởi vì các ma trận trong lượng tử (hay là cổng logic của nó nhưng ở dạng ma trận) đều phải là ma trận đơn nhất.</p>
+<p>Tức là việc ta áp dụng hai lần một cổng nào đó, sẽ cho ra kết quả như ban đầu.</p>
+</div>
+</div>
+<hr>
+<p>Tất nhiên, có rất nhiều cổng lượng tử thú vị khác ngoài cổng <span class="math inline">\text{controlled-NOT}</span>. Tuy nhiên, theo một nghĩa nào đó, cổng <span class="math inline">\text{controlled-NOT}</span> và các cổng một qubit là các nguyên mẫu cho tất cả các cổng khác vì kết quả tính phổ biến đáng chú ý sau đây:</p>
+<p><strong>Bất kỳ cổng logic đa qubit nào cũng có thể được cấu thành từ cổng <span class="math inline">\text{CNOT}</span> và các cổng một qubit.</strong></p>
+<p>Chứng minh được đưa ra ở Mục 4.5, và đây là đối trọng lượng tử của tính phổ biến của cổng <span class="math inline">\text{NAND}</span>.</p>
+</section>
+<section id="measurements-in-bases-other-than-the-computational-basis" class="level1">
+<h1>3. Measurements in bases other than the computational basis</h1>
+<p>Chúng ta đã mô tả các phép đo lượng tử của một qubit đơn ở trạng thái <span class="math inline">\alpha\vert 0\rangle + \beta\vert 1\rangle</span> mang lại kết quả <span class="math inline">0</span> hoặc <span class="math inline">1</span> và để lại qubit ở trạng thái tương ứng <span class="math inline">\vert 0\rangle</span> hoặc <span class="math inline">\vert 1\rangle</span>, với các xác suất tương ứng là <span class="math inline">\vert{}\alpha\vert{}^2</span> và <span class="math inline">\vert{}\beta\vert{}^2</span>. Trên thực tế, cơ học lượng tử cho phép sự linh hoạt hơn đôi chút trong lớp các phép đo có thể được thực hiện, mặc dù hoàn toàn không đủ để khôi phục <span class="math inline">\alpha</span> và <span class="math inline">\beta</span> từ một phép đo duy nhất!</p>
+<p>Lưu ý rằng các trạng thái <span class="math inline">\vert 0\rangle</span> và <span class="math inline">\vert 1\rangle</span> chỉ đại diện cho một trong nhiều lựa chọn khả dĩ về các trạng thái cơ sở cho một qubit. Một lựa chọn khả dĩ khác là tập hợp <span class="math inline">\vert+\rangle \equiv (\vert 0\rangle + \vert 1\rangle)/\sqrt{2}</span> và <span class="math inline">\vert-\rangle \equiv (\vert 0\rangle - \vert 1\rangle)/\sqrt{2}</span>. Một trạng thái tùy ý <span class="math inline">\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle</span> có thể được biểu diễn lại theo các trạng thái <span class="math inline">\vert+\rangle</span> và <span class="math inline">\vert-\rangle</span>:</p>
+<p><span class="math display">
+\vert\psi\rangle = \alpha\vert 0\rangle + \beta\vert 1\rangle = \alpha\frac{\vert+\rangle + \vert-\rangle}{\sqrt{2}} + \beta\frac{\vert+\rangle - \vert-\rangle}{\sqrt{2}} = \frac{\alpha + \beta}{\sqrt{2}}\vert+\rangle + \frac{\alpha - \beta}{\sqrt{2}}\vert-\rangle.
+\tag {1.19}
+</span></p>
+<p>Hóa ra là có thể coi các trạng thái <span class="math inline">\vert+\rangle</span> và <span class="math inline">\vert-\rangle</span> giống như thể chúng là các trạng thái cơ sở tính toán, và đo đạc đối với cơ sở mới này. Đương nhiên, việc đo đạc đối với cơ sở <span class="math inline">\vert+\rangle, \vert-\rangle</span> mang lại kết quả ‘<span class="math inline">+</span>’ với xác suất <span class="math inline">\vert{}\alpha + \beta\vert{}^2/2</span> và kết quả ‘<span class="math inline">-</span>’ với xác suất <span class="math inline">\vert{}\alpha - \beta\vert{}^2/2</span>, với các trạng thái sau phép đo tương ứng là <span class="math inline">\vert+\rangle</span> và <span class="math inline">\vert-\rangle</span>, tương ứng.</p>
+<p>Tổng quát hơn, cho trước bất kỳ trạng thái cơ sở nào <span class="math inline">\vert a\rangle</span> và <span class="math inline">\vert b\rangle</span> cho một qubit, có thể biểu diễn một trạng thái tùy ý dưới dạng một tổ hợp tuyến tính <span class="math inline">\alpha\vert a\rangle + \beta\vert b\rangle</span> của các trạng thái đó. Hơn nữa, miễn là các trạng thái là <strong><em>orthonormal</em></strong> trực chuẩn, có thể thực hiện một phép đo đối với cơ sở <span class="math inline">\vert a\rangle, \vert b\rangle</span>, cho ra kết quả <span class="math inline">a</span> với xác suất <span class="math inline">\vert{}\alpha\vert{}^2</span> và <span class="math inline">b</span> với xác suất <span class="math inline">\vert{}\beta\vert{}^2</span>.</p>
+<p>Ràng buộc trực chuẩn là cần thiết để <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span> như chúng ta mong đợi đối với các xác suất. Theo cách tương tự, về nguyên tắc, có thể đo một hệ lượng tử gồm nhiều qubit đối với một cơ sở trực chuẩn tùy ý. Tuy nhiên, chỉ vì có thể làm được về nguyên tắc không có nghĩa là phép đo đó có thể được thực hiện một cách dễ dàng, và chúng ta sẽ quay lại vấn đề làm thế nào để thực hiện hiệu quả một phép đo theo một cơ sở tùy ý ở phần sau.</p>
+<p>Có nhiều lý do để sử dụng hình thức mở rộng này cho các phép đo lượng tử, nhưng cuối cùng lý do tốt nhất là thế này: hình thức này cho phép chúng ta mô tả các kết quả thực nghiệm quan sát được, như chúng ta sẽ thấy trong thảo luận của mình về thí nghiệm Stern–Gerlach ở Mục 1.5.1. Một hình thức thậm chí còn tinh vi và thuận tiện hơn (nhưng về cơ bản là tương đương) để mô tả các phép đo lượng tử được mô tả trong chương tiếp theo, Mục 2.2.3.</p>
+</section>
+<section id="quantum-circuits" class="level1">
+<h1>4. Quantum circuits</h1>
+<p>Chúng ta đã gặp một vài mạch lượng tử đơn giản. Hãy cùng xem xét chi tiết hơn một chút về các thành phần của một mạch lượng tử.</p>
+<p>Một mạch lượng tử đơn giản chứa ba cổng lượng tử được thể hiện trong Hình 1.7. Mạch được đọc từ trái sang phải. Mỗi đường trong mạch đại diện cho một <strong><em>wire</em></strong> dây dẫn trong mạch lượng tử. Dây dẫn này không nhất thiết phải tương ứng với một sợi dây vật lý; thay vào đó, nó có thể tương ứng với sự trôi qua của thời gian, hoặc có thể là một hạt vật lý như một photon — một hạt ánh sáng — di chuyển từ vị trí này sang vị trí khác trong không gian. Quy ước chung là giả định rằng trạng thái đầu vào của mạch là một trạng thái cơ sở tính toán, thường là trạng thái bao gồm toàn các <span class="math inline">\vert 0\rangle</span>. Quy tắc này bị phá vỡ thường xuyên trong các tài liệu về tính toán lượng tử và thông tin lượng tử, nhưng việc thông báo trước cho người đọc khi điều này xảy ra được coi là lịch sự.</p>
+<p>Mạch trong Hình 1.7 thực hiện một tác vụ đơn giản nhưng hữu ích — nó hoán đổi trạng thái của hai qubit. Để thấy rằng mạch này thực hiện thao tác hoán đổi (swap), hãy lưu ý rằng chuỗi các cổng có trình tự tác động sau đây lên trạng thái cơ sở tính toán <span class="math inline">\vert a, b\rangle</span>:</p>
+<p><span class="math display">
+\vert a, b\rangle \longrightarrow \vert a, a \oplus b\rangle
+</span></p>
+<p><span class="math display">
+\longrightarrow \vert a \oplus (a \oplus b), a \oplus b\rangle = \vert b, a \oplus b\rangle
+</span></p>
+<p><span class="math display">
+\longrightarrow \vert b, (a \oplus b) \oplus b\rangle = \vert b, a\rangle \tag {1.20}
+</span></p>
+<p>trong đó tất cả các phép cộng đều được thực hiện theo modulo 2. Do đó, hiệu ứng của mạch là hoán đổi trạng thái của hai qubit.</p>
+<p><img src="../../img/1.7.png" class="img-fluid"></p>
+<hr>
+<p>Có một số tính năng được phép trong mạch cổ điển nhưng thường không xuất hiện trong mạch lượng tử.</p>
+<p>Thứ nhất, chúng ta không cho phép <strong><em>‘loops’</em></strong> “vòng lặp”, nghĩa là thông tin phản hồi từ một phần này của mạch lượng tử sang phần khác; chúng ta gọi mạch là <strong><em>acyclic</em></strong> không có chu trình.</p>
+<p>Thứ hai, các mạch cổ điển cho phép các đường dây được “nối” lại với nhau, một thao tác được gọi là <span class="math inline">\text{FANIN}</span>, với dây đơn kết quả chứa phép toán <span class="math inline">\text{OR}</span> theo từng bit của các đầu vào. Rõ ràng thao tác này không khả nghịch và do đó không đơn nhất, vì vậy chúng ta không cho phép <span class="math inline">\text{FANIN}</span> trong các mạch lượng tử của mình.</p>
+<p>Thứ ba, thao tác nghịch đảo của nó, <span class="math inline">\text{FANOUT}</span>, trong đó một vài bản sao của một bit được tạo ra cũng không được phép trong các mạch lượng tử. Trên thực tế, hóa ra quantum mechanic cấm việc sao chép một qubit, khiến thao tác <span class="math inline">\text{FANOUT}</span> trở thành bất khả thi! Chúng ta sẽ thấy một ví dụ về điều này trong phần tiếp theo khi chúng ta cố gắng thiết kế một mạch để sao chép một qubit.</p>
+<hr>
+<p>Khi tiến hành, chúng ta sẽ giới thiệu các cổng lượng tử mới khi cần thiết. Thật tiện lợi khi giới thiệu một quy ước khác về các mạch lượng tử tại thời điểm này. Quy ước này được minh họa trong Hình 1.8. Giả sử <span class="math inline">U</span> là bất kỳ ma trận đơn nhất nào tác động lên một số <span class="math inline">n</span> qubit nào đó, do đó <span class="math inline">U</span> có thể được coi là một cổng lượng tử trên các qubit đó. Khi đó chúng ta có thể định nghĩa một cổng <span class="math inline">\text{controlled-}U</span> vốn là sự mở rộng tự nhiên của cổng <span class="math inline">\text{controlled-NOT}</span>. Cổng này có một qubit điều khiển đơn lẻ, được chỉ định bởi đường có chấm đen, và <span class="math inline">n</span> qubit mục tiêu, được chỉ định bởi hộp <span class="math inline">U</span>. Nếu qubit điều khiển được đặt ở <span class="math inline">0</span> thì không có gì xảy ra với các qubit mục tiêu. Nếu qubit điều khiển được đặt ở <span class="math inline">1</span> thì cổng <span class="math inline">U</span> được áp dụng lên các qubit mục tiêu. Ví dụ điển hình của cổng <span class="math inline">\text{controlled-}U</span> là cổng <span class="math inline">\text{controlled-NOT}</span>, đó là cổng <span class="math inline">\text{controlled-}U</span> với <span class="math inline">U = X</span>, như được minh họa trong Hình 1.9.</p>
+<p><img src="../../img/1.9.png" class="img-fluid"></p>
+<p>Một thao tác quan trọng khác là phép đo, mà chúng ta biểu diễn bằng ký hiệu “đồng hồ đo”, như được hiển thị trong Hình 1.10. Như đã mô tả trước đó, thao tác này chuyển đổi một trạng thái qubit đơn <span class="math inline">\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle</span> thành một bit cổ điển xác suất M (được phân biệt với qubit bằng cách vẽ nó như một dây dẫn hai đường), có giá trị là 0 với xác suất <span class="math inline">\vert \alpha \vert ^2</span>, hoặc 1 với xác suất <span class="math inline">\vert \beta \vert ^2</span>.</p>
+<p><img src="../../img/1.10.png" class="img-fluid"></p>
+<p>Chúng ta sẽ thấy các mạch lượng tử hữu ích như những mô hình cho tất cả các quá trình lượng tử, bao gồm nhưng không giới hạn ở computation, communication, và thậm chí là quantum noise. Một vài ví dụ đơn giản minh họa điều này dưới đây.</p>
+</section>
+<section id="quantum-copying-circuit" class="level1">
+<h1>5. Quantum copying circuit?</h1>
+<p>Cổng <span class="math inline">\text{CNOT}</span> rất hữu ích trong việc minh họa một thuộc tính nền tảng đặc biệt của thông tin lượng tử. Hãy xem xét nhiệm vụ sao chép một bit cổ điển. Điều này có thể được thực hiện bằng cách sử dụng một cổng <span class="math inline">\text{CNOT}</span> cổ điển, nhận vào bit cần sao chép (ở một trạng thái ẩn <span class="math inline">x</span> nào đó) và một bit “nháp” (scratchpad bit) được khởi tạo bằng 0, như được minh họa trong Hình 1.11. Đầu ra là hai bit, cả hai đều ở cùng trạng thái <span class="math inline">x</span>.</p>
+<p>Giả sử chúng ta cố gắng sao chép một qubit ở trạng thái ẩn <span class="math inline">\vert\psi\rangle = a\vert 0\rangle + b\vert 1\rangle</span> theo cách tương tự bằng cách sử dụng một cổng <span class="math inline">\text{CNOT}</span>. Trạng thái đầu vào của hai qubit có thể được viết là</p>
+<p><span class="math display">
+\big[a\vert 0\rangle + b\vert 1\rangle\big]\vert 0\rangle = a\vert 00\rangle + b\vert 10\rangle \tag {1.21}
+</span></p>
+<p>Chức năng của cổng <span class="math inline">\text{CNOT}</span> là phủ định qubit thứ hai khi qubit thứ nhất là 1, và do đó đầu ra đơn giản là <span class="math inline">a\vert 00\rangle + b\vert 11\rangle</span>. Chúng ta đã sao chép thành công <span class="math inline">\vert\psi\rangle</span> chưa? Tức là, chúng ta đã tạo ra trạng thái <span class="math inline">\vert\psi\rangle\vert\psi\rangle</span> chưa?</p>
+<p>Trong trường hợp <span class="math inline">\vert\psi\rangle = \vert 0\rangle</span> hoặc <span class="math inline">\vert\psi\rangle = \vert 1\rangle</span> thì đó thực sự là những gì mạch này làm; có thể sử dụng các mạch lượng tử để sao chép thông tin cổ điển được mã hóa dưới dạng <span class="math inline">\vert 0\rangle</span> hoặc <span class="math inline">\vert 1\rangle</span>. Tuy nhiên, đối với một trạng thái tổng quát <span class="math inline">\vert\psi\rangle</span>, chúng ta thấy rằng:</p>
+<p><span class="math display">
+\vert\psi\rangle\vert\psi\rangle = a^2\vert 00\rangle + ab\vert 01\rangle + ab\vert 10\rangle + b^2\vert 11\rangle \tag {1.22}
+</span></p>
+<p>So sánh với <span class="math inline">a\vert 00\rangle + b\vert 11\rangle</span>, chúng ta thấy rằng trừ khi <span class="math inline">ab = 0</span>, mạch “sao chép” ở trên không sao chép đầu vào trạng thái lượng tử. Trên thực tế, hóa ra việc tạo ra một bản sao của một trạng thái lượng tử ẩn là bất khả thi. Tính chất này, rằng các qubit không thể bị sao chép, được gọi là <strong><em>no-cloning theorem</em></strong> định lý cấm sao chép, và đây là một trong những khác biệt chính giữa thông tin lượng tử và thông tin cổ điển. Định lý cấm sao chép được thảo luận chi tiết hơn ở Hộp 12.1 trang 532; chứng minh rất đơn giản và chúng tôi khuyến khích bạn đọc trước phần chứng minh đó ngay bây giờ.</p>
+<hr>
+<p>Có một cách nhìn khác về sự thất bại của mạch trong Hình 1.11, dựa trên trực giác rằng một qubit theo cách nào đó chứa thông tin “bị ẩn” không thể tiếp cận trực tiếp thông qua phép đo.</p>
+<p>Hãy xem xét điều gì xảy ra khi chúng ta đo một trong các qubit của trạng thái <span class="math inline">a\vert 00\rangle + b\vert 11\rangle</span>. Như đã mô tả trước đây, chúng ta thu được kết quả là <span class="math inline">0</span> hoặc <span class="math inline">1</span> với các xác suất tương ứng là <span class="math inline">\vert{}a\vert{}^2</span> và <span class="math inline">\vert{}b\vert{}^2</span>. Tuy nhiên, một khi một qubit được đo, trạng thái của qubit kia được xác định hoàn toàn và không thể thu được thêm thông tin nào về <span class="math inline">a</span> và <span class="math inline">b</span>. Theo nghĩa này, thông tin ẩn bổ sung được mang trong qubit ban đầu <span class="math inline">\vert\psi\rangle</span> đã bị mất trong phép đo đầu tiên và không thể lấy lại được. Tuy nhiên, nếu qubit đã được sao chép, thì trạng thái của qubit kia vẫn phải chứa một phần thông tin ẩn đó. Do đó, một bản sao chắc chắn không thể được tạo ra.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Giải thích thêm một số thứ
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ta cho rằng CNOT hoạt động rất tốt ở cổ điển, vì thế nó phải hoạt động tốt ở lượng tử.</p>
+<p>Nhưng việc lấy hệ thứ nhất là <span class="math inline">\vert\psi\rangle = \alpha\vert 0 \rangle + \beta \vert 1 \rangle</span> và hệ thứ hai là <span class="math inline">\vert 0 \rangle</span> CNOT với nhau, thì sẽ cho ra một hệ bị vướng víu <span class="math inline">\alpha \vert 00 \rangle + \beta \vert 1 \rangle</span>.</p>
+<p>Có thể thấy thì nếu ta đo lại phần thứ nhất, thì phần thứ hai bị sụp đổ theo.</p>
+<p>Vì vậy, theo lý thuyết, một trạng thái nhân bản hoàn hảo <span class="math inline">\vert \psi \rangle \vert \psi \rangle</span> kết quả phải là (1.22). Mỗi qubit đều giữ trọn vẹn thông tin <span class="math inline">\vert \psi \rangle</span> ban đầu mà không bị ràng buộc số phận lại với nhau.</p>
+</div>
+</div>
+</section>
+<section id="example-bell-states" class="level1">
+<h1>6. Example: Bell states</h1>
+<p>Hãy cùng xem xét một mạch phức tạp hơn một chút, được thể hiện trong Hình 1.12, có một cổng Hadamart theo sau bởi một cộng CNOT, và biến đổi bốn trạng thái tính toán cơ sở theo bảng được cho.</p>
+<p>Lấy một ví dụ cụ thể, cổng Hadamart nhận đầu vào <span class="math inline">\vert 00 \rangle</span> thành <span class="math inline">(\vert 0 \rangle + \vert 1 \rangle) \vert 0 \rangle / \sqrt 2</span>, sau đó cổng CNOT cho ra trạng thái đầu ra <span class="math inline">(\vert 00 \rangle + \vert 11 \rangle) / \sqrt 2</span>. Lưu ý cách hoạt động này: đầu tiên, phép biến đổi Hadamart đặt qubit phía trên vào trạng thái chồng chập; điều này sau đó đóng vai trò là một đầu vào điều khiển cho cổng CNOT, và qubit mục tiêu chỉ bị lật khi điều khiển bằng 1. Các trạng thái đầu ra:</p>
+<p><span class="math display">
+\vert\beta_{00}\rangle = \frac{\vert 00\rangle + \vert 11\rangle}{\sqrt{2}}; \tag {1.23}
+</span></p>
+<p><span class="math display">
+\vert\beta_{01}\rangle = \frac{\vert 01\rangle + \vert 10\rangle}{\sqrt{2}}; \tag {1.24}
+</span></p>
+<p><span class="math display">
+\vert\beta_{10}\rangle = \frac{\vert 00\rangle - \vert 11\rangle}{\sqrt{2}}; \text{ và} \tag {1.25}
+</span></p>
+<p><span class="math display">
+\vert\beta_{11}\rangle = \frac{\vert 01\rangle - \vert 10\rangle}{\sqrt{2}} \tag {1.26}
+</span></p>
+<p>được gọi là <strong><em>Bell states</em></strong> trạng thái Bell, hoặc đôi khi là <strong><em>EPR states</em></strong> trạng thái EPR, theo tên của một số người - Bell, và Eistein, Podolsky, và Rosen - những người đầu tiên chỉ ra các tính chất kỳ lạ của các trạng thái như thế này.</p>
+<p>Ký hiệu ghi nhớ <span class="math inline">\vert\beta_{00}\rangle, \vert\beta_{01}\rangle, \vert\beta_{10}\rangle, \vert\beta_{11}\rangle</span> có thể được hiểu thông qua các phương trình</p>
+<p><span class="math display">
+\vert\beta_{xy}\rangle \equiv \frac{\vert 0, y\rangle + (-1)^x\vert 1, \bar{y}\rangle}{\sqrt{2}}, \tag {1.27}
+</span></p>
+<p>trong đó <span class="math inline">\bar{y}</span> là phần bù (phủ định) của <span class="math inline">y</span></p>
+<p><img src="../../img/1.12.png" class="img-fluid"></p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Thử một ví dụ
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Trạng thái ban đầu là <span class="math inline">\vert 0 \rangle</span> và <span class="math inline">\vert 1 \rangle</span>, <span class="math inline">\vert \psi\rangle = \vert 0 \rangle \otimes \vert 1\rangle = \vert 01 \rangle</span>.</p>
+<p>Ban đầu, hệ thứ nhất đi qua cổng Hadamart, vì từ <span class="math inline">\vert 01\rangle</span> sẽ biến thành:</p>
+<p><span class="math display">
+\vert + \rangle \otimes \vert 1\rangle = \frac {\vert 01\rangle + \vert 11\rangle} {\sqrt 2}
+</span></p>
+<p>Tiếp theo, hệ đi qua cổng CNOT, <span class="math inline">\vert +\rangle</span> sẽ là control, còn <span class="math inline">\vert 1\rangle</span> sẽ là target, vì vậy, hệ sẽ biến thành:</p>
+<p><span class="math display">
+\frac {\vert 01 \rangle + \vert 10 \rangle} {\sqrt 2} = \vert \beta_{01} \rangle
+</span></p>
+</div>
+</div>
+</section>
+<section id="example-quantum-teleportation" class="level1">
+<h1>7. Example: quantum teleportation</h1>
+<p>Bây giờ chúng ta sẽ áp dụng các kỹ thuật từ vài trang vừa rồi để hiểu một thứ gì đó phi tầm thường, đầy kinh ngạc và vô cùng thú vị — quantum teleportation!</p>
+<p>Quantum teleportation là một kỹ thuật để di chuyển các quantum state đi xung quanh, ngay cả khi vắng bóng một kênh truyền thông lượng tử nối liền người gửi quantum state với người nhận.</p>
+<p>Dưới đây là cách thức hoạt động của quantum teleportation. Alice và Bob đã gặp nhau từ lâu nhưng hiện tại sống rất xa nhau. Khi còn ở bên nhau, họ đã tạo ra một cặp EPR, mỗi người cầm một qubit của cặp EPR đó khi họ chia tay. Nhiều năm sau, Bob đang ở ẩn, và nhiệm vụ của Alice, nếu cô ấy chấp nhận, là chuyển một qubit <span class="math inline">\vert{}\psi\rangle</span> đến cho Bob. Cô ấy không hề biết trạng thái của qubit này, và hơn thế nữa, cô ấy chỉ có thể gửi thông tin cổ điển cho Bob. Liệu Alice có nên nhận nhiệm vụ này?</p>
+<p>Về mặt trực giác, mọi thứ có vẻ khá tồi tệ đối với Alice. Cô ấy không biết trạng thái <span class="math inline">\vert{}\psi\rangle</span> của qubit mà cô ấy cần gửi cho Bob, và các định luật của cơ học lượng tử ngăn cấm cô ấy xác định trạng thái đó khi trong tay cô ấy chỉ sở hữu một bản sao duy nhất của <span class="math inline">\vert{}\psi\rangle</span>. Tệ hơn nữa, ngay cả khi cô ấy biết trạng thái <span class="math inline">\vert{}\psi\rangle</span>, việc mô tả nó một cách chính xác sẽ tốn một lượng thông tin cổ điển vô hạn vì <span class="math inline">\vert{}\psi\rangle</span> nhận các giá trị trong một không gian liên tục. Vì vậy, ngay cả khi cô ấy biết <span class="math inline">\vert{}\psi\rangle</span>, Alice sẽ mất cả đời để mô tả trạng thái đó cho Bob. Mọi chuyện có vẻ không mấy khả quan cho Alice. May mắn thay cho Alice, quantum teleportation là một cách thức tận dụng cặp EPR vướng víu nhằm gửi <span class="math inline">\vert{}\psi\rangle</span> đến cho Bob, chỉ với một chi phí phụ rất nhỏ về classical communication.</p>
+<p><img src="../../img/1.13.png" class="img-fluid"></p>
+<p>Tóm tắt lại, các bước của giải pháp như sau: Alice cho tương tác qubit <span class="math inline">\vert{}\psi\rangle</span> với nửa cặp EPR của cô ấy, và sau đó đo hai qubit mà cô ấy đang sở hữu, thu được một trong bốn kết quả cổ điển có thể xảy ra: <span class="math inline">00, 01, 10,</span> và <span class="math inline">11</span>. Cô ấy gửi thông tin này cho Bob. Tùy thuộc vào thông điệp cổ điển của Alice, Bob thực hiện một trong bốn phép toán trên nửa cặp EPR của anh ấy. Thật đáng kinh ngạc, bằng cách làm điều này, anh ấy có thể khôi phục lại chính xác trạng thái ban đầu <span class="math inline">\vert{}\psi\rangle</span>!</p>
+<p>Mạch lượng tử được hiển thị trong Hình 1.13 cung cấp một mô tả chính xác hơn về quantum teleportation. Trạng thái cần được dịch chuyển tức thời là <span class="math inline">\vert{}\psi\rangle = \alpha\vert{}0\rangle + \beta\vert{}1\rangle</span>, trong đó <span class="math inline">\alpha</span> và <span class="math inline">\beta</span> là các biên độ ẩn chưa biết. Trạng thái đầu vào đi vào mạch <span class="math inline">\vert{}\psi_0\rangle</span> là:</p>
+<p><span class="math display">
+\vert{}\psi_0\rangle = \vert{}\psi\rangle\vert{}\beta_{00}\rangle \tag {1.28}
+</span></p>
+<p><span class="math display">
+= \frac{1}{\sqrt{2}} \big[\alpha\vert 0\rangle(\vert 00\rangle + \vert 11\rangle) + \beta\vert 1\rangle(\vert 00\rangle + \vert 11\rangle)\big], \tag {1.29}
+</span></p>
+<p>trong đó chúng ta sử dụng quy ước rằng hai qubit đầu tiên (ở bên trái) thuộc về Alice, và qubit thứ ba thuộc về Bob. Như chúng ta đã giải thích trước đó, qubit thứ hai của Alice và qubit của Bob khởi đầu ở trạng thái EPR. Alice gửi các qubit của cô ấy qua một cổng <span class="math inline">\text{CNOT}</span>, thu được:</p>
+<p><span class="math display">
+\vert\psi_1\rangle = \frac{1}{\sqrt{2}} \big[\alpha\vert 0\rangle(\vert 00\rangle + \vert 11\rangle) + \beta\vert 1\rangle(\vert 10\rangle + \vert 01\rangle)\big].
+\tag {1.30}
+</span></p>
+<p>Sau đó cô ấy gửi qubit đầu tiên qua một cổng Hadamard, thu được:</p>
+<p><span class="math display">
+\vert\psi_2\rangle = \frac{1}{2} \big[\alpha(\vert 0\rangle + \vert 1\rangle)(\vert 00\rangle + \vert 11\rangle) + \beta(\vert 0\rangle - \vert 1\rangle)(\vert 10\rangle + \vert 01\rangle)\big].
+\tag {1.31}
+</span></p>
+<p>Trạng thái này có thể được viết lại theo cách sau, đơn giản bằng cách nhóm các số hạng lại:</p>
+<p><span class="math display">
+\vert\psi_2\rangle = \frac{1}{2} \big[\vert 00\rangle (\alpha\vert 0\rangle + \beta\vert 1\rangle) + \vert 01\rangle (\alpha\vert 1\rangle + \beta\vert 0\rangle)\\ + \vert 10\rangle (\alpha\vert 0\rangle - \beta\vert 1\rangle) + \vert 11\rangle (\alpha\vert 1\rangle - \beta\vert 0\rangle)\big].
+\tag {1.32}
+</span></p>
+<p>Biểu thức này tự nhiên phân rã thành bốn số hạng. Số hạng đầu tiên có các qubit của Alice ở trạng thái <span class="math inline">\vert 00\rangle</span>, và qubit của Bob ở trạng thái <span class="math inline">\alpha\vert 0\rangle + \beta\vert 1\rangle</span> — chính là trạng thái ban đầu <span class="math inline">\vert\psi\rangle</span>. Nếu Alice thực hiện phép đo và thu được kết quả <span class="math inline">00</span> thì hệ thống của Bob sẽ ở trạng thái <span class="math inline">\vert\psi\rangle</span>. Tương tự, từ biểu thức trước đó, chúng ta có thể đọc ra trạng thái sau phép đo của Bob, dựa trên kết quả đo của Alice:</p>
+<p><span class="math display">
+00 \longmapsto \vert\psi_3(00)\rangle \equiv \big[\alpha\vert 0\rangle + \beta\vert 1\rangle\big] \tag {1.33}
+</span></p>
+<p><span class="math display">
+01 \longmapsto \vert\psi_3(01)\rangle \equiv \big[\alpha\vert 1\rangle + \beta\vert 0\rangle\big] \tag {1.34}
+</span></p>
+<p><span class="math display">
+10 \longmapsto \vert\psi_3(10)\rangle \equiv \big[\alpha\vert 0\rangle - \beta\vert 1\rangle\big] \tag {1.35}
+</span></p>
+<p><span class="math display">
+11 \longmapsto \vert\psi_3(11)\rangle \equiv \big[\alpha\vert 1\rangle - \beta\vert 0\rangle\big]. \tag {1.36}
+</span></p>
+<p>Tùy thuộc vào kết quả đo của Alice, qubit của Bob sẽ kết thúc ở một trong bốn trạng thái khả dĩ. Tất nhiên, để biết nó đang ở trạng thái nào, Bob phải được thông báo về kết quả đo của Alice, chúng ta sẽ chỉ ra sau rằng chính thực tế này ngăn cản việc dịch chuyển tức thời được sử dụng để truyền thông tin nhanh hơn tốc độ ánh sáng.</p>
+<p>Một khi Bob đã biết kết quả đo, Bob có thể “sửa chữa” lại trạng thái của mình, khôi phục lại <span class="math inline">\vert{}\psi\rangle</span>, bằng cách áp dụng cổng lượng tử phù hợp. Ví dụ</p>
+<ul>
+<li><p>Nếu trong trường hợp kết quả đo là <span class="math inline">00</span>, Bob không cần làm gì cả.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">01</span> thì Bob có thể sửa trạng thái bằng cách áp dụng cổng <span class="math inline">X</span>.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">10</span> thì Bob có thể sửa trạng thái bằng cách áp dụng cổng <span class="math inline">Z</span>.</p></li>
+<li><p>Nếu kết quả đo là <span class="math inline">11</span> thì Bob có thể sửa trạng thái bằng cách áp dụng đầu tiên cổng <span class="math inline">X</span> và sau đó là cổng <span class="math inline">Z</span>.</p></li>
+</ul>
+<p>Tóm lại, Bob cần áp dụng phép biến đổi <span class="math inline">Z^{M_1} X^{M_2}</span> (lưu ý thời gian đi từ trái sang phải trong sơ đồ mạch, nhưng trong tích ma trận thì các số hạng ở bên phải xảy ra trước) lên qubit của anh ấy, và anh ấy sẽ khôi phục lại trạng thái <span class="math inline">\vert{}\psi\rangle</span>.</p>
+<hr>
+<p>Có rất nhiều đặc điểm thú vị về dịch chuyển tức thời, một số trong số đó chúng ta sẽ quay lại bàn sau trong sách. Hiện tại, chúng ta hài lòng với việc bình luận về một vài khía cạnh.</p>
+<p><strong>Thứ nhất, dịch chuyển tức thời không cho phép truyền các trạng thái lượng tử nhanh hơn ánh sáng sao?</strong></p>
+<p>Điều này có vẻ khá kỳ lạ, bởi vì lý thuyết tương đối ngụ ý rằng việc truyền thông tin nhanh hơn ánh sáng có thể được dùng để gửi thông tin ngược về quá khứ. May mắn thay, dịch chuyển tức thời lượng tử không cho phép truyền thông tin nhanh hơn ánh sáng, bởi vì để hoàn thành việc dịch chuyển tức thời, Alice bắt buộc phải truyền kết quả đo của cô ấy cho Bob qua một kênh truyền thông cổ điển. Chúng ta sẽ chỉ ra ở Phần 2.4.3 rằng nếu không có truyền thông cổ điển này, dịch chuyển tức thời không hề truyền được bất kỳ thông tin nào. Kênh cổ điển bị giới hạn bởi tốc độ ánh sáng, do đó suy ra rằng dịch chuyển tức thời lượng tử không thể thực hiện nhanh hơn tốc độ ánh sáng, giải quyết nghịch lý biểu kiến này.</p>
+<p>Một câu đố <strong>thứ hai về dịch chuyển tức thời là dường như nó tạo ra một bản sao của trạng thái lượng tử đang được dịch chuyển</strong>, vi phạm rõ ràng định lý cấm sao chép được thảo luận ở Phần 1.3.5. Sự vi phạm này chỉ là ảo tưởng vì sau quá trình dịch chuyển tức thời, chỉ còn lại qubit mục tiêu ở trạng thái <span class="math inline">\vert{}\psi\rangle</span>, và qubit dữ liệu ban đầu kết thúc ở một trong các trạng thái cơ sở tính toán <span class="math inline">\vert{}0\rangle</span> hoặc <span class="math inline">\vert{}1\rangle</span>, tùy thuộc vào kết quả đo trên qubit đầu tiên.</p>
+<hr>
+<p><strong>Chúng ta có thể học được gì từ dịch chuyển tức thời lượng tử?</strong></p>
+<p>Khá nhiều thứ! Nó không chỉ là một thủ thuật gọn gàng mà người ta có thể làm với các trạng thái lượng tử.</p>
+<p>Dịch chuyển tức thời lượng tử nhấn mạnh tính có thể thay thế của các tài nguyên khác nhau trong cơ học lượng tử, cho thấy rằng một cặp EPR được chia sẻ cùng với hai bit truyền thông cổ điển là một tài nguyên ít nhất tương đương với một qubit truyền thông. Tính toán lượng tử và thông tin lượng tử đã hé lộ rất nhiều phương pháp hoán đổi tài nguyên, nhiều phương pháp được xây dựng dựa trên dịch chuyển tức thời lượng tử.</p>
+<p>Cụ thể, trong Chương 10, chúng tôi giải thích cách dịch chuyển tức thời có thể được sử dụng để xây dựng các cổng lượng tử có khả năng chống lại các tác động của nhiễu, và trong Chương 12, chúng tôi chỉ ra rằng dịch chuyển tức thời gắn kết mật thiết với các tính chất của mã sửa lỗi lượng tử. Mặc dù có những kết nối này với các chủ đề khác, nhưng công bằng mà nói chúng ta chỉ mới bắt đầu hiểu tại sao dịch chuyển tức thời lại khả thi trong cơ học lượng tử; trong các chương sau, chúng ta nỗ lực giải thích một số hiểu biết sâu sắc giúp việc hiểu đó trở nên khả thi.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Thử nghĩ xem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Với rào cản của no-cloning theorem, việc chúng ta giữ qubit A rồi đưa cho thằng còn lại chép qubit của mình là điều không thể rồi.</p>
+<p>Vì vậy chúng ta phải chấp chận là cho thằng kia chép của mình, và qubit của mình bị sụp đổ.</p>
+<p>Mình cũng không thể đo ra được trạng thái của mình rồi đưa cho thằng kia được, vì nó có vô hạn hay cái continue gì đó.</p>
+<p>Vì thế chúng ta phải sử dụng quantum teleportation, chấp nhận tốc độ phải dưới tốc độ ánh sáng, và thêm 1 cặp EPR nữa.</p>
+<p>Nhưng mà thử nghĩ xem, nếu ta ném qubit của mình cho thằng kia luôn thì sao (khá là hợp lý đúng không, bởi vì thằng kia cũng nhận được qubit, còn mình cũng mất qubit, chẳng khác gì việc sụp đổ cả) nhưng mà môi trường vô cùng nhiễu loạn, vì thế không thứ gì đảm bảo là nó được truyền một cách an toàn cả. Biết đâu nó đã bị thay đổi một số hệ số rồi.</p>
+<p>Thử nghĩ xem, chúng ta có thể di chuyển một thông tin lượng tử từ A đến B, rồi B đến C, bằng trick này.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
