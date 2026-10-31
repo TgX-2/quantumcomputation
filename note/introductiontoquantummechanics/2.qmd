@@ -326,6 +326,7 @@ w = \frac 1 {4 - 2\sqrt 2} \begin{bmatrix} \sqrt 2 - 1 \\ 1 \end{bmatrix}
 $$
 
 :::
+
 ---
 
 Tiên đề 2 yêu cầu hệ thống được mô tả phải là hệ cô lập. 

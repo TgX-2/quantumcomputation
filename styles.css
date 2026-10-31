@@ -68,6 +68,15 @@ body {
   color: var(--accent-strong);
 }
 
+#quarto-margin-sidebar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#quarto-margin-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
 a {
   color: var(--accent-strong);
   text-decoration-thickness: 1px;
@@ -423,6 +432,23 @@ code {
 @media (min-width: 992px) {
   #quarto-sidebar.collapse:not(.show) {
     display: none !important;
+  }
+
+  #quarto-content.page-columns:has(> #quarto-sidebar.collapse:not(.show)) {
+    grid-template-columns:
+      [screen-start] 1em
+      [screen-start-inset] 5fr
+      [page-start page-start-inset] 35px
+      [body-start-outset] 35px
+      [body-start] 1em
+      [body-content-start] minmax(500px, calc(1050px - 2em + 250px))
+      [body-content-end] 1em
+      [body-end] 22.4px
+      [body-end-outset] minmax(48px, 92.8px)
+      [page-end-inset] 22.4px
+      [page-end] 5fr
+      [screen-end-inset] 1em
+      [screen-end];
   }
 
   #quarto-header .quarto-secondary-nav {

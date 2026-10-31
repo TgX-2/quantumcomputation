@@ -91,3 +91,6 @@ Có thể thấy Phương trình Dirac đã nâng cấp rất nhiều từ phư�
 Do Phương trình Dirac là phương trình một hạt, nên sẽ thế nào nếu thêm số lượng hạt vào phương trình?
 
 Ý tưởng này sẽ dẫn đến QED và QFT, phải học thêm thôi.
+
+# 8. (31/10/2026) - Sự sụp đổ của hàm sóng nhanh đến thế nào?
+
