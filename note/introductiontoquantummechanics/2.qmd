@@ -23,10 +23,33 @@ Các tiên đề của cơ học lượng tử được rút ra sau một quá t
 
 # 1. State space
 
-:::{.callout-warning}
-# Postulate 1
+:::{.callout}
+# tl;dr
+## Phát biểu toán học của Định đề 1
 
-Có thể nói rằng
+Bất kỳ một hệ vật lý biệt lập nào cũng được gắn liền với một không gian vector phức có tích vô hướng (tức là không gian Hilbert), được gọi là không gian trạng thái (state space) của hệ. Trạng thái vật lý của hệ tại một thời điểm nhất định được mô tả hoàn toàn bởi một vector trạng thái (state vector), là một vector đơn vị nằm trong không gian trạng thái đó.
+
+## Các tính chất cấu trúc của Không gian trạng thái
+
+* Không gian Hilbert ($\mathcal{H}$): Không gian trạng thái lượng tử bắt buộc phải là một không gian vector tuyến tính trên trường số phức $\mathbb{C}$ được trang bị tích vô hướng. Tích vô hướng $\langle \phi \vert{} \psi \rangle$ cung cấp cấu trúc hình học, cho phép xác định độ dài (chuẩn) của vector và sự trực giao (tương ứng với các trạng thái loại trừ lẫn nhau về mặt vật lý).
+
+* Vector trạng thái ($\vert{}\psi\rangle$): Sử dụng ký hiệu bra-ket của Dirac, trạng thái của hệ được biểu diễn bằng ket $\vert{}\psi\rangle$ (vector cột). Cụm từ "mô tả hoàn toàn" mang ý nghĩa nền tảng: mọi thông tin vật lý có thể biết được về hệ, từ xác suất đo lường đến sự tiến hóa theo thời gian, đều được mã hóa trọn vẹn bên trong $\vert{}\psi\rangle$.
+
+* Điều kiện chuẩn hóa (Normalization): Vector trạng thái bắt buộc phải là vector đơn vị, thỏa mãn $\langle \psi \vert{} \psi \rangle = 1$. Ràng buộc toán học này xuất phát từ định luật bảo toàn xác suất: tổng xác suất của tất cả các kết quả khả dĩ khi đo lường hệ phải luôn bằng 1. Sự chuẩn hóa này thu hẹp tập hợp các trạng thái hợp lệ của hệ lên bề mặt của một hình cầu đa chiều phức (như mặt cầu Bloch đối với qubit).
+
+* Nguyên lý chồng chập (Superposition Principle): Vì không gian trạng thái là không gian vector, tính chồng chập là một hệ quả toán học trực tiếp. Nếu $\vert{} \psi_1 \rangle$ và $\vert{} \psi_2 \rangle$ là các trạng thái hợp lệ, thì mọi tổ hợp tuyến tính $\vert{}\psi\rangle = \alpha\vert{}\psi_1\rangle + \beta\vert{}\psi_2\rangle$ (với $\alpha, \beta \in \mathbb{C}$ và $\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1$) đều là một trạng thái lượng tử vật lý hoàn toàn hợp lệ.
+
+## Hệ lượng tử nền tảng: Qubit
+Áp dụng Định đề 1, qubit là hệ cơ học lượng tử đơn giản nhất không tầm thường, có không gian trạng thái là không gian Hilbert 2 chiều ($\mathbb{C}^2$).
+
+* Mọi trạng thái của qubit được biểu diễn trong cơ sở trực chuẩn (computational basis): $\vert{}0\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ và $\vert{}1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$.
+
+* Bất kỳ trạng thái qubit nào cũng tồn tại dưới dạng: $\vert{}\psi\rangle = \alpha\vert{}0\rangle + \beta\vert{}1\rangle$, trong đó điều kiện chuẩn hóa ép buộc $\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1$.
+
+:::
+
+:::{.callout-warning}
+# Phát biểu một cách dễ hiểu
 
 > (Hệ vật lý cô lập) + (Không gian Hilbert) = (Không gian trạng thái của hệ)
 
@@ -98,10 +121,46 @@ là sự chồng chập của các trạng thái $\vert{}0\rangle$ và $\vert{}1
 
 # 2. Evolution
 
-:::{.callout-warning}
+:::{.callout}
 # tl;dr
+Định đề 2 thiết lập khuôn khổ động lực học (dynamical framework) cho cơ học lượng tử, quy định cách thức mà không gian trạng thái của một hệ lượng tử kín thay đổi theo thời gian. Có hai cách biểu diễn tương đương cho định đề này: mô hình rời rạc qua toán tử unita (thường dùng trong Quantum Computing) và mô hình liên tục qua phương trình Schrödinger (thường dùng trong vật lý lượng tử cơ bản).
 
-Có thể nói rằng
+## Biểu diễn rời rạc: Biến đổi Unita (Unitary Evolution)
+Sự tiến hóa trạng thái của một hệ lượng tử kín được mô tả bằng một biến đổi unita. Nếu trạng thái của hệ tại thời điểm $t_1$ là $\vert{}\psi(t_1)\rangle$, thì trạng thái tại thời điểm $t_2$ được xác định bởi:
+
+$$
+\vert{}\psi(t_2)\rangle = U(t_2, t_1)\vert{}\psi(t_1)\rangle
+$$
+
+* Đặc tính của $U$: $U(t_2, t_1)$ là một toán tử tuyến tính unita, thỏa mãn $U^\dagger U = U U^\dagger = I$, trong đó $U^\dagger$ là ma trận liên hợp phức chuyển vị (Hermitian conjugate) của $U$.
+
+* Bảo toàn xác suất: Tính unita là điều kiện bắt buộc để bảo toàn chuẩn của vector trạng thái (normalization). Ta có $\langle\psi(t_2)\vert{}\psi(t_2)\rangle = \langle\psi(t_1)\vert{}U^\dagger U\vert{}\psi(t_1)\rangle = \langle\psi(t_1)\vert{}I\vert{}\psi(t_1)\rangle = 1$. Điều này đảm bảo tổng xác suất của hệ tại bất kỳ thời điểm nào luôn bằng 1.
+
+* Tính thuận nghịch (Reversibility): Vì $U$ luôn tồn tại nghịch đảo ($U^{-1} = U^\dagger$), mọi tiến hóa lượng tử kín đều có tính thuận nghịch. Trong điện toán lượng tử, tính chất này có nghĩa là mọi cổng logic lượng tử (X, Y, Z, H, CNOT) đều phải là ma trận unita và mọi phép tính đều có thể bị đảo ngược (uncomputation) bằng cách áp dụng các cổng nghịch đảo tương ứng.
+
+## Biểu diễn liên tục: Phương trình Schrödinger
+Thay vì mô tả sự nhảy vọt trạng thái từ $t_1$ sang $t_2$, Định đề 2 mô tả sự tiến hóa thời gian trơn tru qua một phương trình vi phân tuyến tính bậc một:
+
+$$
+i\hbar \frac{d}{dt}\vert{}\psi(t)\rangle = H \vert{}\psi(t)\rangle
+$$
+
+* Toán tử Hamiltonian ($H$): Đây là một toán tử Hermitian ($H = H^\dagger$) đại diện cho tổng năng lượng của hệ kín. Các trạng thái riêng (eigenstates) của $H$ là các trạng thái dừng (stationary states) với mức năng lượng xác định (eigenvalues).
+
+* Bản chất tuyến tính: Phương trình Schrödinger là tuyến tính đối với $\vert{}\psi(t)\rangle$, điều này bảo toàn tính đúng đắn của Nguyên lý chồng chập từ Định đề 1 qua thời gian. Một sự chồng chập của các trạng thái sẽ tiến hóa thành sự chồng chập của các trạng thái đã tiến hóa tương ứng.
+
+## Mối liên hệ giữa Hamiltonian và Toán tử Unita
+Hai cách biểu diễn trên là hoàn toàn thống nhất. Phương trình Schrödinger thực chất là định nghĩa vi phân của toán tử tiến hóa $U(t)$. Đối với một hệ kín có Hamiltonian $H$ không phụ thuộc vào thời gian, nghiệm của phương trình Schrödinger sinh ra toán tử unita liên kết trực tiếp $t$ với trạng thái ban đầu:
+
+$$
+U(t) = \exp\left(-\frac{iHt}{\hbar}\right)
+$$
+
+Vì $H$ là ma trận Hermitian, khai triển chuỗi Taylor của hàm mũ ma trận $\exp(-iHt/\hbar)$ luôn tạo ra một ma trận unita. Hamiltonian đóng vai trò là "máy phát" (generator) của sự tịnh tiến thời gian trong không gian Hilbert.
+:::
+
+:::{.callout-warning}
+# Phát biểu một cách dễ hiểu
 
 > (Hệ tại thời điểm $t_2$) = U (Hệ tại thời điểm $t_1$)
 
@@ -156,7 +215,7 @@ $$
 H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}. \tag{2.85}
 $$
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 2.51: 
 Kiểm tra rằng cổng Hadamard $H$ là đơn nhất (unitary).   
 
@@ -184,7 +243,7 @@ $$
 
 :::
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 2.52: 
 Kiểm tra rằng $H^2 = I$.   
 
@@ -197,7 +256,7 @@ H^2 = \frac 1 2 \begin{bmatrix}
 $$
 :::
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 2.53: 
 Các trị riêng (eigenvalues) và vectơ riêng (eigenvectors) của $H$ là gì?   
 
@@ -283,7 +342,7 @@ Thứ hai, tiên đề sau đây sử dụng các công cụ của phương trì
 
 ---
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 
 # Cách suy ra từ tiền đề 2 ra tiền đề 2' - Phương trình Schrödinger
 
@@ -386,8 +445,42 @@ Kết quả là, để bắt đầu, chúng ta thường sẽ mô tả sự ti�
 
 # 3. Quantum measurement
 
-:::{.callout-warning}
+:::{.callout}
 # tl;dr
+
+Định đề 3 phá vỡ tính thuận nghịch, liên tục của sự tiến hóa unita (Định đề 2), quy định cách một hệ lượng tử tương tác với thế giới vĩ mô bên ngoài (người quan sát hoặc thiết bị đo đạc) để trích xuất thông tin, dẫn đến sự sụp đổ trạng thái tức thời.
+
+Trong hệ thống hình thức của Nielsen & Chuang, phép đo được định nghĩa qua một công thức toán học tổng quát, từ đó suy ra các mô hình hẹp hơn như phép đo xạ ảnh.
+
+## Khuôn khổ Phép đo Tổng quát (General Measurement)
+Một phép đo lượng tử được đặc trưng bởi một tập hợp các toán tử đo lường (measurement operators) $\{M_m\}$, tác động trực tiếp lên không gian trạng thái (không gian Hilbert) của hệ thống. Chỉ số $m$ đại diện cho các kết quả có thể xảy ra của phép đo.
+
+* Xác suất đo lường (Born Rule): Nếu trạng thái của hệ ngay trước phép đo được mô tả bởi ket $\vert{}\psi\rangle$, xác suất quan sát được kết quả $m$ là:
+
+$$
+p(m) = \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle
+$$
+
+* Sự sụp đổ hàm sóng (Post-measurement State): Ngay sau khi thực hiện phép đo và thu được kết quả $m$, hệ không còn ở trạng thái chồng chập ban đầu. Nó "sụp đổ" gián đoạn (collapse) về một trạng thái mới:
+
+$$
+\vert{}\psi'\rangle = \frac{M_m \vert{}\psi\rangle}{\sqrt{p(m)}}
+$$
+
+Mẫu số $\sqrt{p(m)}$ đóng vai trò vô hướng hóa, đảm bảo vector trạng thái mới $\vert{}\psi'\rangle$ được tái chuẩn hóa để có độ dài bằng 1 (tuân thủ Định đề 1).
+
+* Điều kiện đầy đủ (Completeness Equation): Tổng xác suất của tất cả các kết quả đo lường khả dĩ trên toàn bộ không gian mẫu phải luôn bằng 1 ($\sum_m p(m) = 1$ với mọi $\vert{}\psi\rangle$). Do đó, tập hợp các toán tử đo lường bắt buộc phải thỏa mãn tính phân giải đơn vị (resolution of the identity):
+
+$$
+\sum_m M_m^\dagger M_m = I
+$$
+
+## Bản chất Động lực học của Phép đo
+Khác với sự tiến hóa thời gian trơn tru, tuyến tính và hoàn toàn có thể đảo ngược được điều khiển bởi toán tử Unita / Phương trình Schrödinger ở Định đề 2, Định đề 3 mô tả một quá trình phi tuyến tính và bất thuận nghịch. Việc trích xuất thông tin vật lý bắt buộc phải phá hủy một phần hoặc toàn bộ tính chồng chập lượng tử chưa quan sát được của hệ thống, đánh dấu ranh giới giữa thế giới lượng tử và thực tại cơ học cổ điển.
+:::
+
+:::{.callout-warning}
+# Phát biểu một cách dễ hiểu
 
 Ở tiên đề 1 và tiên đề 2, hệ thống được coi là cô lập hoàn toàn và chuyển động mượt mà theo các toán tử đơn nhất.
 
@@ -528,8 +621,17 @@ $$
 
 # 5. Projective measurements
 
-:::{.callout-note}
-# Nhận định chủ quan
+:::{.callout}
+## Phép đo Xạ ảnh (Projective Measurement / Von Neumann Measurement)
+Đây là trường hợp đặc biệt thường gặp nhất trong các khóa vật lý lượng tử cơ bản. Thay vì tập hợp $\{M_m\}$, phép đo được biểu diễn thông qua một Toán tử quan sát (Observable) $M$, là một ma trận Hermitian ($M = M^\dagger$).
+
+* Phân tích phổ: Vì $M$ là Hermitian, nó có thể được phân tích thành $M = \sum_m m P_m$, trong đó $P_m$ là toán tử chiếu trực giao (orthogonal projector) lên không gian con của không gian trạng thái tương ứng với giá trị riêng $m$.
+
+* Đặc tính phép chiếu: Trong trường hợp này, các toán tử đo lường chính là các toán tử chiếu ($M_m = P_m$). Do tính chất $P_m^\dagger P_m = P_m^2 = P_m$, xác suất nhận được kết quả $m$ rút gọn thành $p(m) = \langle \psi \vert{} P_m \vert{} \psi \rangle$, và trạng thái sau phép đo là $\frac{P_m \vert{}\psi\rangle}{\sqrt{p(m)}}$.
+:::
+
+:::{.callout-warning}
+# Phát biểu một cách dễ hiểu
 
 Thay vì dùng tập ${M_m}$ vô tội vạ như trong tiên đề 3. Chúng ta sẽ thông minh hơn là dùng các toán tử chiếu (projectors). Như đã đề cập trong chương giới thiệu linear algebra.
 
@@ -541,7 +643,11 @@ $$
 
 (và rõ ràng tính chất đầu tiên phù hợp với tiên đề 2, khi U là một toán tử Hermite)
 
+---
 
+Projective measurements là một đại lượng vật lý có thể quan sát được (observable).
+
+Kết quả đo là các eigenvalue của toán tử Hermitian M.
 :::
 
 Trong mục này, chúng ta giải thích một trường hợp đặc biệt quan trọng của tiên đề đo tổng quát, Tiên đề 3. Lớp phép đo đặc biệt này được gọi là các phép đo xạ ảnh (projective measurements). Đối với nhiều ứng dụng của tính toán lượng tử và thông tin lượng tử, chúng ta sẽ chủ yếu quan tâm đến các phép đo xạ ảnh. Thật vậy, các phép đo xạ ảnh thực ra hóa ra tương đương với tiên đề đo tổng quát, khi chúng được bổ sung khả năng thực hiện các phép biến đổi đơn nhất (unitary transformations), như được mô tả trong Tiên đề 2. Chúng ta sẽ giải thích chi tiết sự tương đương này trong Mục 2.2.8, vì phát biểu của tiên đề đo đối với các phép đo xạ ảnh thoạt nhìn có vẻ khá khác biệt so với tiên đề tổng quát, Tiên đề 3.
@@ -610,6 +716,8 @@ Giả sử chúng ta chuẩn bị một hệ lượng tử ở một trạng th�
 
 Hai thuật ngữ được sử dụng rộng rãi cho các phép đo rất đáng được nhấn mạnh. Thay vì đưa ra một đại lượng quan sát được (observable) để mô tả một phép đo xạ ảnh, người ta thường chỉ liệt kê một tập hợp đầy đủ các toán tử chiếu trực giao $P_m$ thỏa mãn các hệ thức $\sum_m P_m = I$ và $P_m P_{m'} = \delta_{m,m'} P_m$. Đại lượng quan sát được tương ứng ẩn trong cách dùng này là $M = \sum_m m P_m$. Một cụm từ khác cũng được sử dụng rộng rãi, "đo trong cơ sở $\vert{}m\rangle$" (measure in a basis $\vert{}m\rangle$), trong đó $\vert{}m\rangle$ tạo thành một cơ sở trực chuẩn, đơn giản có nghĩa là thực hiện phép đo xạ ảnh với các toán tử chiếu $P_m = \vert{}m\rangle\langle m\vert{}$.   
 
+---
+
 Hãy xem xét một ví dụ về các phép đo xạ ảnh trên các qubit đơn lẻ. Đầu tiên là phép đo đại lượng quan sát được $Z$. Phép đo này có các trị riêng $+1$ và $-1$ với các vectơ riêng tương ứng là $\vert{}0\rangle$ và $\vert{}1\rangle$. Do đó, ví dụ, phép đo $Z$ trên trạng thái $\vert{}\psi\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$ cho kết quả $+1$ với xác suất $\langle\psi\vert{}0\rangle\langle0\vert{}\psi\rangle = 1/2$, và tương tự kết quả $-1$ với xác suất $1/2$. Tổng quát hơn, giả sử $\vec{v}$ là bất kỳ vectơ đơn vị thực ba chiều nào. Khi đó chúng ta có thể định nghĩa một đại lượng quan sát được:
    
 $$
@@ -635,7 +743,6 @@ Chứng minh rằng $\vec{v} \cdot \vec{\sigma}$ có các trị riêng $\pm 1$, 
 Tính xác suất thu được kết quả $+1$ đối với phép đo $\vec{v} \cdot \vec{\sigma}$, biết rằng trạng thái trước phép đo là $\vert{}0\rangle$. Trạng thái của hệ thống sau phép đo nếu thu được kết quả $+1$ là gì?
 
 :::
-
 
 ## Nguyên lý bất định Heisenberg
 :::{.callout-important}
@@ -685,6 +792,122 @@ Một hệ quả sơ cấp của điều này là $\Delta(X)$ và $\Delta(Y)$ đ
 
 # 6. POVM measurements
 
+:::{.callout}
+# tl;dr
+
+Phép đo POVM (Positive Operator-Valued Measure) là hệ quả toán học trực tiếp từ khuôn khổ đo lường tổng quát, được tối ưu hóa cho các bài toán mà ta chỉ quan tâm đến thống kê xác suất của các kết quả, thay vì trạng thái vật lý của hệ thống sau khi đo.
+
+## Định nghĩa Toán học của POVM
+Từ công thức đo lường tổng quát với tập toán tử $\{M_m\}$, xác suất để thu được kết quả $m$ trên trạng thái $\vert{}\psi\rangle$ là $p(m) = \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle$.
+
+Ta định nghĩa toán tử mới $E_m \equiv M_m^\dagger M_m$. Tập hợp các toán tử $\{E_m\}$ cấu thành một POVM, với mỗi $E_m$ là một phần tử POVM. Tập hợp này hợp lệ khi thỏa mãn hai tiên đề:
+
+* Tính nửa xác định dương (Positive Semi-definite): $E_m \ge 0$, đảm bảo xác suất thu được $p(m) = \langle \psi \vert{} E_m \vert{} \psi \rangle$ luôn là một số thực không âm.
+
+* Tính phân giải đơn vị (Completeness): $\sum_m E_m = I$, bảo toàn tổng xác suất của toàn bộ không gian mẫu bằng 1.
+
+## Sự vượt trội so với Phép đo Xạ ảnh (Projective Measurement)
+
+Trong phép đo xạ ảnh, các toán tử đo lường là các toán tử chiếu ($P_m^2 = P_m$) và bắt buộc phải trực giao lẫn nhau ($P_m P_n = \delta_{mn} P_m$). Ràng buộc không gian tuyến tính này tạo ra một giới hạn vật lý cứng: số lượng kết quả đo tối đa không thể vượt quá số chiều của không gian Hilbert. Ví dụ, một qubit ($\mathbb{C}^2$) đo bằng phép chiếu chỉ cho ra tối đa 2 kết quả trực giao (như 0 và 1).
+
+POVM loại bỏ hoàn toàn ràng buộc trực giao này. Các phần tử $E_m$ không cần là phép chiếu, cho phép một hệ lượng tử bị "chia cắt" thành số lượng kết quả lớn hơn số chiều của chính nó.
+
+## Ứng dụng thực tiễn trong Trích xuất Thông tin
+Lý thuyết thông tin lượng tử dựa nhiều vào POVM vì nó đại diện cho công cụ đo lường tối ưu nhất khả thi về mặt toán học:
+
+* Phân biệt trạng thái không mơ hồ (Unambiguous State Discrimination): Phép đo xạ ảnh không thể phân biệt hoàn hảo hai trạng thái không trực giao (ví dụ $\vert{}0\rangle$ và $\vert{}+\rangle$). Bằng POVM, ta có thể thiết lập một không gian đo với 3 phần tử: $E_1$ (chắc chắn là $\vert{}0\rangle$), $E_2$ (chắc chắn là $\vert{}+\rangle$), và $E_3$ (kết quả vô giá trị). Mặc dù phải chấp nhận một tỷ lệ rủi ro rơi vào $E_3$, khi kết quả rơi vào $E_1$ hoặc $E_2$, độ chính xác là 100% — điều bất khả thi với ma trận trực giao.
+
+* Định lý Dilation của Neumark: Về mặt vật lý, một phép đo POVM trên hệ chính thực chất là một phép đo xạ ảnh diễn ra trong một không gian lớn hơn (bao gồm hệ chính liên kết tensor với một hệ phụ trợ - ancilla qubit). POVM là công cụ toán học cô đọng để tính toán trực tiếp trên hệ chính mà không cần mô phỏng ma trận khổng lồ của môi trường vĩ mô xung quanh.
+:::
+
+:::{.callout-important}
+# Comment
+
+Tiên đề 3 là phép đo M tùy ý, sao cho thỏa mãn một số tính chất.
+
+Projective mesurements là chỉ với các toán tử chiếu, mà trong các toán tử chiếu có điều kiện phải là orthonormal.
+
+Còn POVM không yêu cầu ortho, điều này cho phép POVM mô tả được những phép đo phức tạp hơn, linh hoạt hơn (chẳng hạn như việc phân biệt các trạng thái không trực giao).
+
+---
+
+## Mô hình ví dụ
+
+Ví dụ, Alice đưa chưa Bob một hạt lượng tử và bắt Bob nói rằng: "nó đang ở trạng thái ketpsi1 hoặc ketpsi2, đố bạn biết là trạng thái nào". Và giả sử hai trạng thái này không trực giao (giống như việc phân biệt giữa màu đỏ đô và đỏ thẫm (chồng chập) trong điều kiện thiếu sáng (nhiễu)).
+
+POVM cho phép thiết kết một máy đo có 3 kết quả, ứng với 3 phần tử POVM E1, E2, E3 thỏa mãn $E_1 + E_2 + E_3 = I$:
+
+* Kết quả 1 (ứng với $E_1$): Chắc chắn hạt nằm ở trạng thái $\vert \psi_1 \rangle$.
+
+* Kết quả 2 (ứng với $E_2$): Chắc chắn hạt nằm ở trạng thái $\vert \psi_2 \rangle$.
+
+* Kết quả 3 (ứng với $E_3$): Không thể kết luận.
+
+--- 
+
+## Bản chất
+
+Bản chất của POVM:
+
+* Sự hy sinh: POVM hy sinh một chút hiệu suất (đôi khi trả về là tôi không biết) để đổi lấy sự chính xác tuyệt đổi của các kết quả còn lại.
+
+* Chỉ quan tâm xác suất: Trong bài toán trên, hạt lượng tử sau khi đo xong bị hỏng hoặc bị vứt đi, Bob không hề quan tâm trạng thái sau khi đo của nó biến thành gì. Anh ấy chỉ cần biết xác suất để các đèn số 1, số 2 hay số 3 sáng lên là bao nhiêu. Đó chính là lý do POVM gom cục $M^\dagger M$ thành $E_m$ để tính xác suất cho nhanh mà bỏ qua phần trạng thái hậu đo lường.
+
+:::
+
+Tiên đề đo lượng tử, Tiên đề 3, bao gồm hai yếu tố. Thứ nhất, nó đưa ra một quy tắc mô tả thống kê phép đo, nghĩa là, các xác suất tương ứng của các kết quả đo khác nhau có thể xảy ra. Thứ hai, nó đưa ra một quy tắc mô tả trạng thái của hệ sau phép đo. Tuy nhiên, đối với một số ứng dụng, trạng thái của hệ sau phép đo không được quan tâm nhiều, mà điểm đáng quan tâm chính là xác suất của các kết quả đo tương ứng. Đây là trường hợp, ví dụ, trong một thí nghiệm mà hệ thống chỉ được đo một lần duy nhất, vào lúc kết thúc thí nghiệm. Trong những trường hợp như vậy, có một công cụ toán học được gọi là hình thức luận POVM đặc biệt thích hợp cho việc phân tích các phép đo. (Từ viết tắt POVM là viết tắt của 'Positive Operator-Valued Measure' - Độ đo giá trị toán tử dương, một thuật ngữ kỹ thuật mà nguồn gốc lịch sử của nó chúng ta sẽ không cần bận tâm). Hình thức luận này là một hệ quả đơn giản của mô tả tổng quát về các phép đo được giới thiệu trong Tiên đề 3, nhưng lý thuyết về POVM quá thanh lịch và được sử dụng rộng rãi đến mức nó xứng đáng được thảo luận riêng ở đây.   
+
+---
+
+Giả sử một phép đo được mô tả bởi các toán tử đo $M_m$ được thực hiện trên một hệ lượng tử ở trạng thái $\vert{}\psi\rangle$. Khi đó xác suất của kết quả $m$ được cho bởi $p(m) = \langle\psi\vert{}M_m^\dagger M_m\vert{}\psi\rangle$. Giả sử chúng ta định nghĩa
+
+$$
+E_m \equiv M_m^\dagger M_m. \tag{2.117}
+$$   
+
+Khi đó, từ Tiên đề 3 và đại số tuyến tính sơ cấp, $E_m$ là một toán tử dương sao cho $\sum_m E_m = I$ và $p(m) = \langle\psi\vert{}E_m\vert{}\psi\rangle$. Do đó, tập hợp các toán tử $E_m$ là đủ để xác định xác suất của các kết quả đo khác nhau. Các toán tử $E_m$ được gọi là các phần tử POVM liên kết với phép đo. Tập hợp đầy đủ $\{E_m\}$ được gọi là một POVM.   
+
+---
+
+Như một ví dụ về POVM, hãy xem xét một phép đo xạ ảnh được mô tả bởi các toán tử đo $P_m$, trong đó $P_m$ là các toán tử chiếu sao cho $P_m P_{m'} = \delta_{mm'}P_m$ và $\sum_m P_m = I$. Trong trường hợp này (và chỉ trong trường hợp này), tất cả các phần tử POVM đều giống hệt như chính các toán tử đo, vì $E_m \equiv P_m^\dagger P_m = P_m$.  
+
+:::{.callout-note}
+# Bài tập 2.62: 
+Chứng minh rằng bất kỳ phép đo nào mà các toán tử đo và các phần tử POVM trùng nhau đều là một phép đo xạ ảnh.
+
+:::
+
+Ở trên, chúng ta nhận thấy rằng các toán tử POVM là các toán tử dương và thỏa mãn $\sum_m E_m = I$. Bây giờ giả sử rằng $\{E_m\}$ là một tập hợp tùy ý các toán tử dương sao cho $\sum_m E_m = I$. Chúng ta sẽ chứng minh rằng tồn tại một tập hợp các toán tử đo $M_m$ định nghĩa một phép đo được mô tả bởi POVM $\{E_m\}$. Định nghĩa $M_m \equiv \sqrt{E_m}$, chúng ta thấy rằng $\sum_m M_m^\dagger M_m = \sum_m E_m = I$, và do đó tập hợp $\{M_m\}$ mô tả một phép đo với POVM $\{E_m\}$. Vì lý do này, thật tiện lợi khi định nghĩa một POVM là bất kỳ tập hợp các toán tử $\{E_m\}$ nào sao cho: (a) mỗi toán tử $E_m$ là dương; và (b) hệ thức đầy đủ $\sum_m E_m = I$ được tuân thủ, biểu thị thực tế rằng tổng các xác suất bằng một. Để hoàn thiện việc mô tả về POVM, chúng ta lưu ý lại rằng cho trước một POVM $\{E_m\}$, xác suất của kết quả $m$ được cho bởi $p(m) = \langle\psi\vert{}E_m\vert{}\psi\rangle$.
+
+---
+
+Chúng ta đã xem xét các phép đo xạ ảnh như một ví dụ về việc sử dụng POVM, nhưng nó không thú vị lắm vì chúng ta không học được điều gì mới mẻ cả. Ví dụ phức tạp hơn sau đây minh họa việc sử dụng hình thức luận POVM như một hướng dẫn cho trực giác của chúng ta trong tính toán lượng tử và thông tin lượng tử. Giả sử Alice đưa cho Bob một qubit được chuẩn bị ở một trong hai trạng thái, $\vert{}\psi_1\rangle = \vert{}0\rangle$ hoặc $\vert{}\psi_2\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$. Như đã giải thích trong Mục 2.2.4, Bob không thể xác định xem mình đã được đưa cho $\vert{}\psi_1\rangle$ hay $\vert{}\psi_2\rangle$ với độ tin cậy hoàn hảo. Tuy nhiên, anh ta có thể thực hiện một phép đo giúp phân biệt các trạng thái một vài lần, nhưng không bao giờ mắc lỗi nhận dạng sai. Hãy xem xét một POVM chứa ba phần tử,
+$$
+E_1 \equiv \frac{\sqrt{2}}{1+\sqrt{2}} \vert{}1\rangle\langle1\vert{}, \tag{2.118}
+$$
+
+$$
+E_2 \equiv \frac{\sqrt{2}}{1+\sqrt{2}} \frac{(\vert{}0\rangle - \vert{}1\rangle)(\langle0\vert{} - \langle1\vert{})}{2}, \tag{2.119}
+$$
+
+$$
+E_3 \equiv I - E_1 - E_2. \tag{2.120}
+$$
+
+Thật dễ dàng để xác minh rằng đây là các toán tử dương thỏa mãn hệ thức đầy đủ $\sum_m E_m = I$, và do đó tạo thành một POVM hợp lệ.Giả sử Bob được nhận trạng thái $\vert{}\psi_1\rangle = \vert{}0\rangle$. Anh ta thực hiện phép đo được mô tả bởi POVM $\{E_1, E_2, E_3\}$. Xác suất để anh ta quan sát thấy kết quả $E_1$ bằng không, vì $E_1$ đã được chọn một cách khéo léo để đảm bảo rằng $\langle\psi_1\vert{}E_1\vert{}\psi_1\rangle = 0$. Do đó, nếu kết quả phép đo của anh ta là $E_1$ thì Bob có thể kết luận chắc chắn rằng trạng thái anh ta nhận được phải là $\vert{}\psi_2\rangle$. Một lập luận tương tự cho thấy rằng nếu kết quả phép đo $E_2$ xảy ra thì trạng thái mà Bob nhận được phải là $\vert{}\psi_1\rangle$. Tuy nhiên, trong một số lần, Bob sẽ nhận được kết quả đo $E_3$, và anh ta không thể suy luận được gì về danh tính của trạng thái mà anh ta đã nhận. Điểm mấu chốt, tuy nhiên, là Bob không bao giờ mắc lỗi trong việc nhận dạng trạng thái mà anh ta đã nhận được. Sự không thể sai lầm này phải trả giá bằng việc thỉnh thoảng Bob không thu được thông tin nào về danh tính của trạng thái.
+
+Ví dụ đơn giản này chứng minh tiện ích của hình thức luận POVM như một cách đơn giản và trực quan để đạt được hiểu biết sâu sắc về các phép đo lượng tử trong những trường hợp mà chỉ có thống kê phép đo là quan trọng. Trong nhiều trường hợp sau này trong cuốn sách, chúng ta sẽ chỉ quan tâm đến thống kê phép đo, và do đó sẽ sử dụng hình thức luận POVM thay vì hình thức luận tổng quát hơn cho các phép đo được mô tả trong Tiên đề 3.
+
+:::{.callout-important}
+# Hộp 2.5: Phép đo tổng quát, phép đo xạ ảnh và POVM
+Phần lớn các tài liệu nhập môn về cơ học lượng tử chỉ mô tả các phép đo xạ ảnh, và do đó mô tả tổng quát về phép đo được đưa ra trong Tiên đề 3 có thể không quen thuộc với nhiều nhà vật lý, cũng như hình thức luận POVM được mô tả trong Mục 2.2.6. Lý do hầu hết các nhà vật lý không học hình thức luận đo lường tổng quát là vì hầu hết các hệ vật lý chỉ có thể được đo theo một cách rất thô sơ. Trong tính toán lượng tử và thông tin lượng tử, chúng ta nhắm đến một mức độ kiểm soát tinh tế đối với các phép đo có thể được thực hiện, và do đó, việc sử dụng một hình thức luận toàn diện hơn để mô tả các phép đo là rất hữu ích. Tất nhiên, khi tính đến các tiên đề khác của cơ học lượng tử, các phép đo xạ ảnh được bổ sung bởi các phép toán đơn nhất hóa ra lại hoàn toàn tương đương với các phép đo tổng quát, như được chỉ ra trong Mục 2.2.8. Vậy một nhà vật lý được đào tạo để sử dụng các phép đo xạ ảnh có thể hỏi mục đích của việc bắt đầu với hình thức luận tổng quát, Tiên đề 3 là gì? Có một vài lý do để làm như vậy. Thứ nhất, về mặt toán học, các phép đo tổng quát theo một nghĩa nào đó đơn giản hơn các phép đo xạ ảnh, vì chúng liên quan đến ít hạn chế hơn đối với các toán tử đo; ví dụ, không có yêu cầu nào đối với các phép đo tổng quát tương tự như điều kiện $P_i P_j = \delta_{ij} P_i$ đối với các phép đo xạ ảnh. Cấu trúc đơn giản hơn này cũng tạo ra nhiều tính chất hữu ích cho các phép đo tổng quát mà các phép đo xạ ảnh không có. Thứ hai, hóa ra có những bài toán quan trọng trong tính toán lượng tử và thông tin lượng tử - chẳng hạn như cách tối ưu để phân biệt một tập hợp các trạng thái lượng tử - mà câu trả lời của chúng liên quan đến phép đo tổng quát, thay vì phép đo xạ ảnh.   
+
+Lý do thứ ba để ưu tiên Tiên đề 3 làm điểm xuất phát liên quan đến một tính chất của phép đo xạ ảnh được gọi là tính lặp lại (repeatability). Các phép đo xạ ảnh có tính lặp lại theo nghĩa là nếu chúng ta thực hiện một phép đo xạ ảnh một lần và thu được kết quả $m$, thì việc lặp lại phép đo sẽ lại cho kết quả $m$ và không làm thay đổi trạng thái. Để thấy điều này, giả sử $\vert{}\psi\rangle$ là trạng thái ban đầu. Sau phép đo đầu tiên, trạng thái là $\vert{}\psi_m\rangle = (P_m\vert{}\psi\rangle)/\sqrt{\langle\psi\vert{}P_m\vert{}\psi\rangle}$. Việc áp dụng $P_m$ lên $\vert{}\psi_m\rangle$ không làm nó thay đổi, do đó chúng ta có $\langle\psi_m\vert{}P_m\vert{}\psi_m\rangle = 1$, và vì vậy phép đo lặp lại luôn cho kết quả $m$ mỗi lần mà không làm thay đổi trạng thái.   
+
+Tính lặp lại này của các phép đo xạ ảnh gợi ý cho chúng ta thực tế rằng nhiều phép đo quan trọng trong cơ học lượng tử không phải là phép đo xạ ảnh. Ví dụ, nếu chúng ta sử dụng một màn tráng bạc để đo vị trí của một photon, chúng ta sẽ phá hủy photon trong quá trình đó. Điều này chắc chắn khiến việc lặp lại phép đo vị trí của photon là bất khả thi! Nhiều phép đo lượng tử khác cũng không lặp lại được theo nghĩa tương tự như phép đo xạ ảnh. Đối với các phép đo như vậy, tiên đề đo lường tổng quát, Tiên đề 3, bắt buộc phải được sử dụng.   
+
+Vậy POVM nằm ở đâu trong bức tranh này? Tốt nhất nên coi POVM như một trường hợp đặc biệt của hình thức luận đo lường tổng quát, cung cấp phương tiện đơn giản nhất để người ta có thể nghiên cứu thống kê phép đo tổng quát mà không cần thiết phải biết trạng thái sau phép đo. Chúng là một sự thuận tiện về mặt toán học, đôi khi mang lại cái nhìn sâu sắc hơn vào các phép đo lượng tử. 
+:::
 
 # 7. Phase 
 

@@ -589,5 +589,170 @@
       "Introduction to Quantum Mechanics",
       "The postulates of Quantum Mechanics"
     ]
+  },
+  {
+    "objectID": "note/outro/glossary.html",
+    "href": "note/outro/glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "A\n\n\nAnti-commutator - Phản giao hoán - {A, B}\nPhản giao hoán giữa hai toán tử A và B được định nghĩa là:\n\n{A, B} = AB + AB \\tag{2.67}\n\n\n\nB\n\n\nC\n\n\nCommutator - Giao hoán - [A, B]\nGiao hoán giữa hai toán tử A và B được định nghĩa là:\n\n[A, B] = AB - AB \\tag{2.66}\n\n\n\nD\n\n\nE\n\n\nExpectation value - Giá trị trung bình - \\langle M \\rangle\nGiá trị trung bình của đại lượng observable M thường được viết là:\n\n\\langle M \\rangle = \\langle \\psi \\vert M \\vert \\psi \\rangle\n\n\n\nF\n\n\nG\n\n\nH\n\n\nHermitian conjugate - Toán tử liên hợp Hermitian\nMột toán tử A được gọi là toán tử liên hợp Hermitian, nếu tồn tại duy nhất A^\\dagger sao cho với mọi \\vert v \\rangle, \\vert w \\rangle \\in V:\n\n(\\vert v \\rangle, A \\vert w \\rangle) = (A^\\dagger \\vert v \\rangle, \\vert w \\rangle) \\tag{2.32}\n\nTừ định nghĩa suy ra được:\n\n(AB)^\\dagger = B^\\dagger A^\\dagger\n\\vert v \\rangle^\\dagger \\equiv \\langle v \\vert\n(A\\vert v \\rangle)^\\dagger = \\langle v \\vert A^\\dagger\n(\\vert w\\rangle \\langle v \\vert)^\\dagger = \\vert v \\rangle \\langle w \\vert\n(\\sum_i a_iA_i)^\\dagger = \\sum_i a_i^* A_i^\\dagger\n(A^\\dagger)^\\dagger = A\n\n\n\nHermitian operator - Toán tử tự liên hợp\nLà toán tử thỏa mãn A^\\dagger = A.\n\n\nI\n\n\nJ\n\n\nK\n\n\nL\n\n\nM\n\n\nN\n\n\nO\n\n\nOrthonormal basis - Cơ sở trực chuẩn\nLà một tập hợp các vector thỏa mãn hai điều kiện:\n\nOrthogonal: Mọi cặp vector đều vuông góc với nhau.\nNormal: Mỗi vector trong cơ sở đều có độ dài bằng 1.\n\n\n\nP\n\n\nQ\n\n\nR\n\n\nS\n\n\nStandard deviation - Độ lệch chuẩn - [\\Delta(M)]^2\nĐộ lệch chuẩn của đại lượng observable M là:\n\n[\\Delta(M)]^2 = \\langle M^2 \\rangle - \\langle M \\rangle^2 \\tag {2.115}\n\n\n\nSpectral decomposition - Phân tích phổ\nLà việc biểu diễn một toán tử Hermitian (đại diện cho một đại lượng quan sát được, như năng lượng, xung lượng, spin, …) thành một tổ hợp tuyến tính của các Projection operators ứng với các eigenvalue của nó.\nNếu \\hat A là một toán tử tự liên hợp (Hermitian) tác dụng lên không gian Hilbert, nó có thể viết dưới dạng:\n\n\\hat A = \\sum_n a_n \\vert a_n \\rangle \\langle a_n \\vert\n\nhoặc dùng ký hiệu của phép chiếu \\hat P_n = \\vert a_n \\rangle \\langle a_n\\vert:\n\n\\hat A = \\sum_n a_n \\hat P_n\n\nTrong đó:\n\na_n: là eigenvalue, chính là các giá trị có thể đo lường được trong phòng thí nghiệm.\n\\vert a_n \\rangle: các eigenvector\n\\hat P_n: là các projector, thỏa mãn hệ thức đóng \\sum_n \\hat P_n = \\hat I\n\n\n\nT\n\n\nU\n\n\nUnitary matrix - Ma trận đơn nhất\nMa trận đơn nhất U là ma trận thỏa mãn:\n\nU^*U = UU^* = I",
+    "crumbs": [
+      "Appendix",
+      "Glossary"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#mô-hình-ví-dụ",
+    "href": "note/introductiontoquantummechanics/2.html#mô-hình-ví-dụ",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Mô hình ví dụ",
+    "text": "Mô hình ví dụ\nVí dụ, Alice đưa chưa Bob một hạt lượng tử và bắt Bob nói rằng: “nó đang ở trạng thái ketpsi1 hoặc ketpsi2, đố bạn biết là trạng thái nào”. Và giả sử hai trạng thái này không trực giao (giống như việc phân biệt giữa màu đỏ đô và đỏ thẫm (chồng chập) trong điều kiện thiếu sáng (nhiễu)).\nPOVM cho phép thiết kết một máy đo có 3 kết quả, ứng với 3 phần tử POVM E1, E2, E3 thỏa mãn E_1 + E_2 + E_3 = I:\n\nKết quả 1 (ứng với E_1): Chắc chắn hạt nằm ở trạng thái \\vert \\psi_1 \\rangle.\nKết quả 2 (ứng với E_2): Chắc chắn hạt nằm ở trạng thái \\vert \\psi_2 \\rangle.\nKết quả 3 (ứng với E_3): Không thể kết luận.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#bản-chất",
+    "href": "note/introductiontoquantummechanics/2.html#bản-chất",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Bản chất",
+    "text": "Bản chất\nBản chất của POVM:\n\nSự hy sinh: POVM hy sinh một chút hiệu suất (đôi khi trả về là tôi không biết) để đổi lấy sự chính xác tuyệt đổi của các kết quả còn lại.\nChỉ quan tâm xác suất: Trong bài toán trên, hạt lượng tử sau khi đo xong bị hỏng hoặc bị vứt đi, Bob không hề quan tâm trạng thái sau khi đo của nó biến thành gì. Anh ấy chỉ cần biết xác suất để các đèn số 1, số 2 hay số 3 sáng lên là bao nhiêu. Đó chính là lý do POVM gom cục M^\\dagger M thành E_m để tính xác suất cho nhanh mà bỏ qua phần trạng thái hậu đo lường.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#phát-biểu-toán-học-của-định-đề-1",
+    "href": "note/introductiontoquantummechanics/2.html#phát-biểu-toán-học-của-định-đề-1",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Phát biểu toán học của Định đề 1",
+    "text": "Phát biểu toán học của Định đề 1\nBất kỳ một hệ vật lý biệt lập nào cũng được gắn liền với một không gian vector phức có tích vô hướng (tức là không gian Hilbert), được gọi là không gian trạng thái (state space) của hệ. Trạng thái vật lý của hệ tại một thời điểm nhất định được mô tả hoàn toàn bởi một vector trạng thái (state vector), là một vector đơn vị nằm trong không gian trạng thái đó.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#các-tính-chất-cấu-trúc-của-không-gian-trạng-thái",
+    "href": "note/introductiontoquantummechanics/2.html#các-tính-chất-cấu-trúc-của-không-gian-trạng-thái",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Các tính chất cấu trúc của Không gian trạng thái",
+    "text": "Các tính chất cấu trúc của Không gian trạng thái\n\nKhông gian Hilbert (\\mathcal{H}): Không gian trạng thái lượng tử bắt buộc phải là một không gian vector tuyến tính trên trường số phức \\mathbb{C} được trang bị tích vô hướng. Tích vô hướng \\langle \\phi \\vert{} \\psi \\rangle cung cấp cấu trúc hình học, cho phép xác định độ dài (chuẩn) của vector và sự trực giao (tương ứng với các trạng thái loại trừ lẫn nhau về mặt vật lý).\nVector trạng thái (\\vert{}\\psi\\rangle): Sử dụng ký hiệu bra-ket của Dirac, trạng thái của hệ được biểu diễn bằng ket \\vert{}\\psi\\rangle (vector cột). Cụm từ “mô tả hoàn toàn” mang ý nghĩa nền tảng: mọi thông tin vật lý có thể biết được về hệ, từ xác suất đo lường đến sự tiến hóa theo thời gian, đều được mã hóa trọn vẹn bên trong \\vert{}\\psi\\rangle.\nĐiều kiện chuẩn hóa (Normalization): Vector trạng thái bắt buộc phải là vector đơn vị, thỏa mãn \\langle \\psi \\vert{} \\psi \\rangle = 1. Ràng buộc toán học này xuất phát từ định luật bảo toàn xác suất: tổng xác suất của tất cả các kết quả khả dĩ khi đo lường hệ phải luôn bằng 1. Sự chuẩn hóa này thu hẹp tập hợp các trạng thái hợp lệ của hệ lên bề mặt của một hình cầu đa chiều phức (như mặt cầu Bloch đối với qubit).\nNguyên lý chồng chập (Superposition Principle): Vì không gian trạng thái là không gian vector, tính chồng chập là một hệ quả toán học trực tiếp. Nếu \\vert{} \\psi_1 \\rangle và \\vert{} \\psi_2 \\rangle là các trạng thái hợp lệ, thì mọi tổ hợp tuyến tính \\vert{}\\psi\\rangle = \\alpha\\vert{}\\psi_1\\rangle + \\beta\\vert{}\\psi_2\\rangle (với \\alpha, \\beta \\in \\mathbb{C} và \\vert{}\\alpha\\vert{}^2 + \\vert{}\\beta\\vert{}^2 = 1) đều là một trạng thái lượng tử vật lý hoàn toàn hợp lệ.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#hệ-lượng-tử-nền-tảng-qubit",
+    "href": "note/introductiontoquantummechanics/2.html#hệ-lượng-tử-nền-tảng-qubit",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Hệ lượng tử nền tảng: Qubit",
+    "text": "Hệ lượng tử nền tảng: Qubit\nÁp dụng Định đề 1, qubit là hệ cơ học lượng tử đơn giản nhất không tầm thường, có không gian trạng thái là không gian Hilbert 2 chiều (\\mathbb{C}^2).\n\nMọi trạng thái của qubit được biểu diễn trong cơ sở trực chuẩn (computational basis): \\vert{}0\\rangle = \\begin{bmatrix} 1 \\\\ 0 \\end{bmatrix} và \\vert{}1\\rangle = \\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}.\nBất kỳ trạng thái qubit nào cũng tồn tại dưới dạng: \\vert{}\\psi\\rangle = \\alpha\\vert{}0\\rangle + \\beta\\vert{}1\\rangle, trong đó điều kiện chuẩn hóa ép buộc \\vert{}\\alpha\\vert{}^2 + \\vert{}\\beta\\vert{}^2 = 1.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#biểu-diễn-rời-rạc-biến-đổi-unita-unitary-evolution",
+    "href": "note/introductiontoquantummechanics/2.html#biểu-diễn-rời-rạc-biến-đổi-unita-unitary-evolution",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Biểu diễn rời rạc: Biến đổi Unita (Unitary Evolution)",
+    "text": "Biểu diễn rời rạc: Biến đổi Unita (Unitary Evolution)\nSự tiến hóa trạng thái của một hệ lượng tử kín được mô tả bằng một biến đổi unita. Nếu trạng thái của hệ tại thời điểm t_1 là \\vert{}\\psi(t_1)\\rangle, thì trạng thái tại thời điểm t_2 được xác định bởi:\n\n\\vert{}\\psi(t_2)\\rangle = U(t_2, t_1)\\vert{}\\psi(t_1)\\rangle\n\n\nĐặc tính của U: U(t_2, t_1) là một toán tử tuyến tính unita, thỏa mãn U^\\dagger U = U U^\\dagger = I, trong đó U^\\dagger là ma trận liên hợp phức chuyển vị (Hermitian conjugate) của U.\nBảo toàn xác suất: Tính unita là điều kiện bắt buộc để bảo toàn chuẩn của vector trạng thái (normalization). Ta có \\langle\\psi(t_2)\\vert{}\\psi(t_2)\\rangle = \\langle\\psi(t_1)\\vert{}U^\\dagger U\\vert{}\\psi(t_1)\\rangle = \\langle\\psi(t_1)\\vert{}I\\vert{}\\psi(t_1)\\rangle = 1. Điều này đảm bảo tổng xác suất của hệ tại bất kỳ thời điểm nào luôn bằng 1.\nTính thuận nghịch (Reversibility): Vì U luôn tồn tại nghịch đảo (U^{-1} = U^\\dagger), mọi tiến hóa lượng tử kín đều có tính thuận nghịch. Trong điện toán lượng tử, tính chất này có nghĩa là mọi cổng logic lượng tử (X, Y, Z, H, CNOT) đều phải là ma trận unita và mọi phép tính đều có thể bị đảo ngược (uncomputation) bằng cách áp dụng các cổng nghịch đảo tương ứng.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#biểu-diễn-liên-tục-phương-trình-schrödinger",
+    "href": "note/introductiontoquantummechanics/2.html#biểu-diễn-liên-tục-phương-trình-schrödinger",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Biểu diễn liên tục: Phương trình Schrödinger",
+    "text": "Biểu diễn liên tục: Phương trình Schrödinger\nThay vì mô tả sự nhảy vọt trạng thái từ t_1 sang t_2, Định đề 2 mô tả sự tiến hóa thời gian trơn tru qua một phương trình vi phân tuyến tính bậc một:\n\ni\\hbar \\frac{d}{dt}\\vert{}\\psi(t)\\rangle = H \\vert{}\\psi(t)\\rangle\n\n\nToán tử Hamiltonian (H): Đây là một toán tử Hermitian (H = H^\\dagger) đại diện cho tổng năng lượng của hệ kín. Các trạng thái riêng (eigenstates) của H là các trạng thái dừng (stationary states) với mức năng lượng xác định (eigenvalues).\nBản chất tuyến tính: Phương trình Schrödinger là tuyến tính đối với \\vert{}\\psi(t)\\rangle, điều này bảo toàn tính đúng đắn của Nguyên lý chồng chập từ Định đề 1 qua thời gian. Một sự chồng chập của các trạng thái sẽ tiến hóa thành sự chồng chập của các trạng thái đã tiến hóa tương ứng.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#mối-liên-hệ-giữa-hamiltonian-và-toán-tử-unita",
+    "href": "note/introductiontoquantummechanics/2.html#mối-liên-hệ-giữa-hamiltonian-và-toán-tử-unita",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Mối liên hệ giữa Hamiltonian và Toán tử Unita",
+    "text": "Mối liên hệ giữa Hamiltonian và Toán tử Unita\nHai cách biểu diễn trên là hoàn toàn thống nhất. Phương trình Schrödinger thực chất là định nghĩa vi phân của toán tử tiến hóa U(t). Đối với một hệ kín có Hamiltonian H không phụ thuộc vào thời gian, nghiệm của phương trình Schrödinger sinh ra toán tử unita liên kết trực tiếp t với trạng thái ban đầu:\n\nU(t) = \\exp\\left(-\\frac{iHt}{\\hbar}\\right)\n\nVì H là ma trận Hermitian, khai triển chuỗi Taylor của hàm mũ ma trận \\exp(-iHt/\\hbar) luôn tạo ra một ma trận unita. Hamiltonian đóng vai trò là “máy phát” (generator) của sự tịnh tiến thời gian trong không gian Hilbert.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#khuôn-khổ-phép-đo-tổng-quát-general-measurement",
+    "href": "note/introductiontoquantummechanics/2.html#khuôn-khổ-phép-đo-tổng-quát-general-measurement",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Khuôn khổ Phép đo Tổng quát (General Measurement)",
+    "text": "Khuôn khổ Phép đo Tổng quát (General Measurement)\nMột phép đo lượng tử được đặc trưng bởi một tập hợp các toán tử đo lường (measurement operators) \\{M_m\\}, tác động trực tiếp lên không gian trạng thái (không gian Hilbert) của hệ thống. Chỉ số m đại diện cho các kết quả có thể xảy ra của phép đo.\n\nXác suất đo lường (Born Rule): Nếu trạng thái của hệ ngay trước phép đo được mô tả bởi ket \\vert{}\\psi\\rangle, xác suất quan sát được kết quả m là:\n\n\np(m) = \\langle \\psi \\vert{} M_m^\\dagger M_m \\vert{} \\psi \\rangle\n\n\nSự sụp đổ hàm sóng (Post-measurement State): Ngay sau khi thực hiện phép đo và thu được kết quả m, hệ không còn ở trạng thái chồng chập ban đầu. Nó “sụp đổ” gián đoạn (collapse) về một trạng thái mới:\n\n\n\\vert{}\\psi'\\rangle = \\frac{M_m \\vert{}\\psi\\rangle}{\\sqrt{p(m)}}\n\nMẫu số \\sqrt{p(m)} đóng vai trò vô hướng hóa, đảm bảo vector trạng thái mới \\vert{}\\psi'\\rangle được tái chuẩn hóa để có độ dài bằng 1 (tuân thủ Định đề 1).\n\nĐiều kiện đầy đủ (Completeness Equation): Tổng xác suất của tất cả các kết quả đo lường khả dĩ trên toàn bộ không gian mẫu phải luôn bằng 1 (\\sum_m p(m) = 1 với mọi \\vert{}\\psi\\rangle). Do đó, tập hợp các toán tử đo lường bắt buộc phải thỏa mãn tính phân giải đơn vị (resolution of the identity):\n\n\n\\sum_m M_m^\\dagger M_m = I",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#bản-chất-động-lực-học-của-phép-đo",
+    "href": "note/introductiontoquantummechanics/2.html#bản-chất-động-lực-học-của-phép-đo",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Bản chất Động lực học của Phép đo",
+    "text": "Bản chất Động lực học của Phép đo\nKhác với sự tiến hóa thời gian trơn tru, tuyến tính và hoàn toàn có thể đảo ngược được điều khiển bởi toán tử Unita / Phương trình Schrödinger ở Định đề 2, Định đề 3 mô tả một quá trình phi tuyến tính và bất thuận nghịch. Việc trích xuất thông tin vật lý bắt buộc phải phá hủy một phần hoặc toàn bộ tính chồng chập lượng tử chưa quan sát được của hệ thống, đánh dấu ranh giới giữa thế giới lượng tử và thực tại cơ học cổ điển.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#phép-đo-xạ-ảnh-projective-measurement-von-neumann-measurement",
+    "href": "note/introductiontoquantummechanics/2.html#phép-đo-xạ-ảnh-projective-measurement-von-neumann-measurement",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Phép đo Xạ ảnh (Projective Measurement / Von Neumann Measurement)",
+    "text": "Phép đo Xạ ảnh (Projective Measurement / Von Neumann Measurement)\nĐây là trường hợp đặc biệt thường gặp nhất trong các khóa vật lý lượng tử cơ bản. Thay vì tập hợp \\{M_m\\}, phép đo được biểu diễn thông qua một Toán tử quan sát (Observable) M, là một ma trận Hermitian (M = M^\\dagger).\n\nPhân tích phổ: Vì M là Hermitian, nó có thể được phân tích thành M = \\sum_m m P_m, trong đó P_m là toán tử chiếu trực giao (orthogonal projector) lên không gian con của không gian trạng thái tương ứng với giá trị riêng m.\nĐặc tính phép chiếu: Trong trường hợp này, các toán tử đo lường chính là các toán tử chiếu (M_m = P_m). Do tính chất P_m^\\dagger P_m = P_m^2 = P_m, xác suất nhận được kết quả m rút gọn thành p(m) = \\langle \\psi \\vert{} P_m \\vert{} \\psi \\rangle, và trạng thái sau phép đo là \\frac{P_m \\vert{}\\psi\\rangle}{\\sqrt{p(m)}}.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#định-nghĩa-toán-học-của-povm",
+    "href": "note/introductiontoquantummechanics/2.html#định-nghĩa-toán-học-của-povm",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Định nghĩa Toán học của POVM",
+    "text": "Định nghĩa Toán học của POVM\nTừ công thức đo lường tổng quát với tập toán tử \\{M_m\\}, xác suất để thu được kết quả m trên trạng thái \\vert{}\\psi\\rangle là p(m) = \\langle \\psi \\vert{} M_m^\\dagger M_m \\vert{} \\psi \\rangle.\nTa định nghĩa toán tử mới E_m \\equiv M_m^\\dagger M_m. Tập hợp các toán tử \\{E_m\\} cấu thành một POVM, với mỗi E_m là một phần tử POVM. Tập hợp này hợp lệ khi thỏa mãn hai tiên đề:\n\nTính nửa xác định dương (Positive Semi-definite): E_m \\ge 0, đảm bảo xác suất thu được p(m) = \\langle \\psi \\vert{} E_m \\vert{} \\psi \\rangle luôn là một số thực không âm.\nTính phân giải đơn vị (Completeness): \\sum_m E_m = I, bảo toàn tổng xác suất của toàn bộ không gian mẫu bằng 1.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#sự-vượt-trội-so-với-phép-đo-xạ-ảnh-projective-measurement",
+    "href": "note/introductiontoquantummechanics/2.html#sự-vượt-trội-so-với-phép-đo-xạ-ảnh-projective-measurement",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Sự vượt trội so với Phép đo Xạ ảnh (Projective Measurement)",
+    "text": "Sự vượt trội so với Phép đo Xạ ảnh (Projective Measurement)\nTrong phép đo xạ ảnh, các toán tử đo lường là các toán tử chiếu (P_m^2 = P_m) và bắt buộc phải trực giao lẫn nhau (P_m P_n = \\delta_{mn} P_m). Ràng buộc không gian tuyến tính này tạo ra một giới hạn vật lý cứng: số lượng kết quả đo tối đa không thể vượt quá số chiều của không gian Hilbert. Ví dụ, một qubit (\\mathbb{C}^2) đo bằng phép chiếu chỉ cho ra tối đa 2 kết quả trực giao (như 0 và 1).\nPOVM loại bỏ hoàn toàn ràng buộc trực giao này. Các phần tử E_m không cần là phép chiếu, cho phép một hệ lượng tử bị “chia cắt” thành số lượng kết quả lớn hơn số chiều của chính nó.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
+  },
+  {
+    "objectID": "note/introductiontoquantummechanics/2.html#ứng-dụng-thực-tiễn-trong-trích-xuất-thông-tin",
+    "href": "note/introductiontoquantummechanics/2.html#ứng-dụng-thực-tiễn-trong-trích-xuất-thông-tin",
+    "title": "The postulates of Quantum Mechanics",
+    "section": "Ứng dụng thực tiễn trong Trích xuất Thông tin",
+    "text": "Ứng dụng thực tiễn trong Trích xuất Thông tin\nLý thuyết thông tin lượng tử dựa nhiều vào POVM vì nó đại diện cho công cụ đo lường tối ưu nhất khả thi về mặt toán học:\n\nPhân biệt trạng thái không mơ hồ (Unambiguous State Discrimination): Phép đo xạ ảnh không thể phân biệt hoàn hảo hai trạng thái không trực giao (ví dụ \\vert{}0\\rangle và \\vert{}+\\rangle). Bằng POVM, ta có thể thiết lập một không gian đo với 3 phần tử: E_1 (chắc chắn là \\vert{}0\\rangle), E_2 (chắc chắn là \\vert{}+\\rangle), và E_3 (kết quả vô giá trị). Mặc dù phải chấp nhận một tỷ lệ rủi ro rơi vào E_3, khi kết quả rơi vào E_1 hoặc E_2, độ chính xác là 100% — điều bất khả thi với ma trận trực giao.\nĐịnh lý Dilation của Neumark: Về mặt vật lý, một phép đo POVM trên hệ chính thực chất là một phép đo xạ ảnh diễn ra trong một không gian lớn hơn (bao gồm hệ chính liên kết tensor với một hệ phụ trợ - ancilla qubit). POVM là công cụ toán học cô đọng để tính toán trực tiếp trên hệ chính mà không cần mô phỏng ma trận khổng lồ của môi trường vĩ mô xung quanh.",
+    "crumbs": [
+      "Introduction to Quantum Mechanics",
+      "The postulates of Quantum Mechanics"
+    ]
   }
 ]

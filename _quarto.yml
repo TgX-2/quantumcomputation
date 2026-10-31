@@ -38,6 +38,11 @@ website:
           - note/introductiontoquantummechanics/1.qmd
           - note/introductiontoquantummechanics/2.qmd
 
+      - section : "Appendix"
+        contents:
+          - note/outro/glossary.qmd
+    
+
 format:
   html:
     theme: cosmo

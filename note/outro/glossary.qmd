@@ -1,0 +1,172 @@
+---
+title: "Glossary"
+chapter: "Outroduction"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# A
+
+:::{.glossary}
+# Anti-commutator - Phản giao hoán - ${A, B}$
+
+Phản giao hoán giữa hai toán tử A và B được định nghĩa là:
+
+$$
+{A, B} = AB + AB \tag{2.67}
+$$
+:::
+
+# B
+
+# C 
+
+:::{.glossary}
+# Commutator - Giao hoán - $[A, B]$
+
+Giao hoán giữa hai toán tử A và B được định nghĩa là:
+
+$$
+[A, B] = AB - AB \tag{2.66}
+$$
+:::
+
+# D
+
+# E
+
+:::{.glossary}
+# Expectation value - Giá trị trung bình - $\langle M \rangle$
+
+Giá trị trung bình của đại lượng observable M thường được viết là:
+
+$$
+\langle M \rangle = \langle \psi \vert M \vert \psi \rangle
+$$
+
+
+:::
+
+# F  
+
+# G
+
+# H
+
+:::{.glossary}
+# Hermitian conjugate - Toán tử liên hợp Hermitian
+
+Một toán tử A được gọi là toán tử liên hợp Hermitian, nếu tồn tại duy nhất $A^\dagger$ sao cho với mọi $\vert v \rangle$, $\vert w \rangle$ $\in V$:
+
+$$
+(\vert v \rangle, A \vert w \rangle) = (A^\dagger \vert v \rangle, \vert w \rangle) \tag{2.32}
+$$
+
+Từ định nghĩa suy ra được:
+
+* $(AB)^\dagger = B^\dagger A^\dagger$
+
+* $\vert v \rangle^\dagger \equiv \langle v \vert$
+
+* $(A\vert v \rangle)^\dagger = \langle v \vert A^\dagger$
+
+* $(\vert w\rangle \langle v \vert)^\dagger = \vert v \rangle \langle w \vert$
+
+* $(\sum_i a_iA_i)^\dagger = \sum_i a_i^* A_i^\dagger$
+
+* $(A^\dagger)^\dagger = A$ 
+:::
+
+:::{.glossary}
+# Hermitian operator - Toán tử tự liên hợp
+
+Là toán tử thỏa mãn $A^\dagger = A$.
+:::
+
+# I
+
+# J
+
+# K
+
+# L
+
+# M
+
+# N
+
+# O
+
+:::{.glossary}
+# Orthonormal basis - Cơ sở trực chuẩn
+
+Là một tập hợp các vector thỏa mãn hai điều kiện:
+
+- **Orthogonal:** Mọi cặp vector đều vuông góc với nhau.
+
+- **Normal:** Mỗi vector trong cơ sở đều có độ dài bằng 1.
+:::
+
+# P
+
+# Q 
+
+# R 
+
+# S 
+
+:::{.glossary}
+# Standard deviation - Độ lệch chuẩn - $[\Delta(M)]^2$
+
+Độ lệch chuẩn của đại lượng observable M là:
+
+$$
+[\Delta(M)]^2 = \langle M^2 \rangle - \langle M \rangle^2 \tag {2.115}
+$$
+
+:::
+
+:::{.glossary}
+# Spectral decomposition - Phân tích phổ
+
+Là việc biểu diễn một toán tử Hermitian (đại diện cho một đại lượng quan sát được, như năng lượng, xung lượng, spin, ...) thành một tổ hợp tuyến tính của các Projection operators ứng với các eigenvalue của nó.
+
+Nếu $\hat A$ là một toán tử tự liên hợp (Hermitian) tác dụng lên không gian Hilbert, nó có thể viết dưới dạng:
+
+$$
+\hat A = \sum_n a_n \vert a_n \rangle \langle a_n \vert 
+$$
+
+hoặc dùng ký hiệu của phép chiếu $\hat P_n = \vert a_n \rangle \langle a_n\vert$:
+
+$$
+\hat A = \sum_n a_n \hat P_n
+$$
+
+Trong đó:
+
+* a_n: là eigenvalue, chính là các giá trị có thể đo lường được trong phòng thí nghiệm.
+
+* $\vert a_n \rangle$: các eigenvector
+
+* $\hat P_n$: là các projector, thỏa mãn hệ thức đóng $\sum_n \hat P_n = \hat I$
+:::
+
+# T
+
+# U
+
+:::{.glossary}
+# Unitary matrix - Ma trận đơn nhất
+
+Ma trận đơn nhất U là ma trận thỏa mãn:
+
+$$
+U^*U = UU^* = I
+$$
+:::

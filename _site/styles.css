@@ -130,6 +130,59 @@ blockquote {
   margin-bottom: 0;
 }
 
+.glossary {
+  margin: 2rem 0;
+  color: var(--ink);
+}
+
+.glossary > :first-child {
+  margin-top: 0;
+}
+
+.glossary > :last-child {
+  margin-bottom: 0;
+}
+
+.glossary h2,
+.glossary h3,
+.glossary dt {
+  color: var(--accent-strong);
+  font-weight: 750;
+}
+
+.glossary h2,
+.glossary h3 {
+  margin: 1.8rem 0 0.4rem;
+  font-size: 1.12rem;
+  letter-spacing: -0.02em;
+}
+
+.glossary dl {
+  margin: 0;
+}
+
+.glossary dt {
+  margin-top: 1.35rem;
+}
+
+.glossary dd {
+  margin: 0.25rem 0 0 1rem;
+  color: var(--muted);
+}
+
+.glossary p,
+.glossary li {
+  color: var(--muted);
+}
+
+.glossary li::marker {
+  color: var(--accent);
+}
+
+.glossary strong {
+  color: var(--ink);
+}
+
 pre,
 code {
   border-color: var(--border);
