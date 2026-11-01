@@ -114,6 +114,15 @@ Là một tập hợp các vector thỏa mãn hai điều kiện:
 
 # P
 
+:::{.glossary}
+# Phép đo tổng quát - POVM
+
+Là phép đo không yêu cầu các toán tử đo phải trực giao, hay là phép chiếu.
+
+Giúp phân biệt các trạng thái lượng tử không trực giao với xác suất tối ưu hoặc mô tả chinh xác quá trình khi đo hệ lượng tử tương tác với môi trường xung quanh
+
+:::
+
 # Q 
 
 # R 
@@ -169,4 +178,16 @@ Ma trận đơn nhất U là ma trận thỏa mãn:
 $$
 U^*U = UU^* = I
 $$
+:::
+
+:::{.glossary}
+# Unitary quantum mechanics - Động lực học đơn nhất lượng tử
+
+Là sự tiến hóa theo thời gian của một hệ lượng tử được chi phối bởi các toán tử đơn nhất, bảo toàn xác suất và chuẩn của trạng thái lượng tử.
+
+* Nó chính là: $U(t) = e^{-iH(t -t_0)/\hbar$a, mà H là toán tử Hamilton.
+
+* Tính đơn nhất.
+
+* Khả nghịch về mặt thời gian: Vì U có toán tử nghịch đảo là $U^\dagger$, quá trình tiến hóa lượng tử có tính thuận nghịch, về cơ bản là thua ngược thời gian.
 :::
