@@ -10,4 +10,458 @@ format:
     toc-location: right
 ---
 
-Chúng ta đã hình thức hóa cơ học lượng tử bằng cách sử dụng ngôn ngữ của các vector trạng thái. Một cách hình thức hóa thay thế hoàn toàn khả thi là sử dụng một công cụ được gọi là toán tử mật độ (density operator) hoặc ma trận mật độ (density matrix). Cách hình thức hóa thay thế này tương đương về mặt toán học với phương pháp vector trạng thái, nhưng nó cung cấp một ngôn ngữ thuận tiện hơn nhiều để tư duy về một số tình huống thường gặp trong cơ học lượng tử. Ba phần tiếp theo mô tả hình thức luận toán tử mật độ của cơ học lượng tử. Mục 2.4.1 giới thiệu toán tử mật độ thông qua khái niệm tập hợp (ensemble) các trạng thái lượng tử. Mục 2.4.2 phát triển một số tính chất tổng quát của toán tử mật độ. Cuối cùng, Mục 2.4.3 mô tả một ứng dụng mà toán tử mật độ thực sự tỏa sáng – đóng vai trò như một công cụ để mô tả các hệ con riêng lẻ (individual subsystems) của một hệ lượng tử phức hợp.
+Chúng ta đã hình thức hóa cơ học lượng tử bằng cách sử dụng ngôn ngữ của các vector trạng thái. Một cách hình thức hóa thay thế hoàn toàn khả thi là sử dụng một công cụ được gọi là toán tử mật độ (density operator) hoặc ma trận mật độ (density matrix). Cách hình thức hóa thay thế này tương đương về mặt toán học với phương pháp vector trạng thái, nhưng nó cung cấp một ngôn ngữ thuận tiện hơn nhiều để tư duy về một số tình huống thường gặp trong cơ học lượng tử. Ba phần tiếp theo mô tả hình thức luận toán tử mật độ của cơ học lượng tử. 
+
+* Mục 2.4.1 giới thiệu toán tử mật độ thông qua khái niệm tập hợp (ensemble) các trạng thái lượng tử. 
+
+* Mục 2.4.2 phát triển một số tính chất tổng quát của toán tử mật độ. 
+
+* Mục 2.4.3 mô tả một ứng dụng mà toán tử mật độ thực sự tỏa sáng – đóng vai trò như một công cụ để mô tả các hệ con riêng lẻ (individual subsystems) của một hệ lượng tử phức hợp.
+
+# 1. Ensembles of quantum states
+
+Ngôn ngữ toán tử mật độ cung cấp một phương tiện thuận tiện để mô tả các hệ lượng tử mà trạng thái của chúng không được biết một cách hoàn toàn. Chính xác hơn, giả sử một hệ lượng tử ở một trong số các trạng thái $\vert{}\psi_i\rangle$, trong đó $i$ là một chỉ số, với các xác suất tương ứng $p_i$. Chúng ta sẽ gọi tập hợp $\{p_i, \vert{}\psi_i\rangle\}$ là một tập hợp các trạng thái thuần (ensemble of pure states). Toán tử mật độ cho hệ thống được định nghĩa bởi phương trình   
+
+$$
+\rho \equiv \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}. \tag{2.138}
+$$   
+
+Toán tử mật độ thường được biết đến với tên gọi là ma trận mật độ (density matrix); chúng ta sẽ sử dụng hai thuật ngữ này thay thế cho nhau. Hóa ra là tất cả các tiên đề của cơ học lượng tử đều có thể được cấu trúc lại bằng ngôn ngữ toán tử mật độ. Mục đích của phần này và phần tiếp theo là giải thích cách thực hiện việc cấu trúc lại này, và giải thích khi nào nó hữu ích. Việc người ta sử dụng ngôn ngữ toán tử mật độ hay ngôn ngữ vector trạng thái là một vấn đề về sở thích, vì cả hai đều cho cùng một kết quả; tuy nhiên, đôi khi việc tiếp cận các bài toán từ một góc nhìn này sẽ dễ dàng hơn nhiều so với góc nhìn kia.   
+
+---
+
+Ví dụ, giả sử rằng sự tiến hóa của một hệ lượng tử đóng được mô tả bởi toán tử đơn nhất $U$. Nếu ban đầu hệ thống ở trạng thái $\vert{}\psi_i\rangle$ với xác suất $p_i$ thì sau khi sự tiến hóa xảy ra, hệ thống sẽ ở trạng thái $U\vert{}\psi_i\rangle$ với xác suất $p_i$. Do đó, sự tiến hóa của toán tử mật độ được mô tả bởi phương trình   
+
+$$
+\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{} \xrightarrow{U} \sum_i p_i U\vert{}\psi_i\rangle\langle\psi_i\vert{}U^\dagger = U\rho U^\dagger. \tag{2.139}
+$$
+
+Các phép đo cũng được mô tả dễ dàng bằng ngôn ngữ toán tử mật độ. Giả sử chúng ta thực hiện một phép đo được mô tả bởi các toán tử đo $M_m$. Nếu trạng thái ban đầu là $\vert{}\psi_i\rangle$, thì xác suất nhận được kết quả $m$ là   
+
+$$
+p(m\vert{}i) = \langle\psi_i\vert{}M_m^\dagger M_m\vert{}\psi_i\rangle = \text{tr}(M_m^\dagger M_m \vert{}\psi_i\rangle\langle\psi_i\vert{}), \tag{2.140}
+$$
+
+trong đó chúng ta đã sử dụng Phương trình (2.61) để có được đẳng thức cuối cùng. Theo định lý xác suất toàn phần (xem Phụ lục 1 để biết giải thích về khái niệm này và các khái niệm sơ cấp khác của lý thuyết xác suất) xác suất thu được kết quả $m$ là   
+
+$$
+p(m) = \sum_i p(m\vert{}i)p_i \tag{2.141}
+$$   
+
+$$
+= \sum_i p_i \text{tr}(M_m^\dagger M_m\vert{}\psi_i\rangle\langle\psi_i\vert{}) \tag{2.142}
+$$   
+
+$$
+= \text{tr}(M_m^\dagger M_m \rho). \tag{2.143}
+$$   
+
+Toán tử mật độ của hệ thống sau khi thu được kết quả đo $m$ là gì? Nếu trạng thái ban đầu là $\vert{}\psi_i\rangle$ thì trạng thái sau khi thu được kết quả $m$ là   
+
+$$
+\vert{}\psi_i^m\rangle = \frac{M_m\vert{}\psi_i\rangle}{\sqrt{\langle\psi_i\vert{}M_m^\dagger M_m\vert{}\psi_i\rangle}}. \tag{2.144}
+$$   
+
+Do đó, sau một phép đo mang lại kết quả $m$, chúng ta có một tập hợp các trạng thái $\vert{}\psi_i^m\rangle$ với các xác suất tương ứng $p(i\vert{}m)$. Toán tử mật độ tương ứng $\rho_m$ vì vậy là   
+
+$$
+\rho_m = \sum_i p(i\vert{}m) \vert{}\psi_i^m\rangle\langle\psi_i^m\vert{} = \sum_i p(i\vert{}m) \frac{M_m\vert{}\psi_i\rangle\langle\psi_i\vert{}M_m^\dagger}{\langle\psi_i\vert{}M_m^\dagger M_m\vert{}\psi_i\rangle}. \tag{2.145}
+$$   
+
+Nhưng theo lý thuyết xác suất sơ cấp, $p(i\vert{}m) = p(m, i)/p(m) = p(m\vert{}i)p_i/p(m)$. Thay thế từ (2.143) và (2.140) chúng ta thu được   
+
+$$
+\rho_m = \sum_i p_i \frac{M_m\vert{}\psi_i\rangle\langle\psi_i\vert{}M_m^\dagger}{\text{tr}(M_m^\dagger M_m \rho)} \tag{2.146}
+$$   
+
+$$
+= \frac{M_m \rho M_m^\dagger}{\text{tr}(M_m^\dagger M_m \rho)}. \tag{2.147}
+$$
+
+Những gì chúng ta đã chứng minh là các tiên đề cơ bản của cơ học lượng tử liên quan đến sự tiến hóa đơn nhất và phép đo có thể được diễn đạt lại bằng ngôn ngữ của các toán tử mật độ. Trong phần tiếp theo, chúng ta hoàn thành việc diễn đạt lại này bằng cách đưa ra một đặc điểm nội tại của toán tử mật độ mà không dựa vào ý tưởng về một vector trạng thái.   
+
+Tuy nhiên, trước khi làm như vậy, thật hữu ích khi giới thiệu thêm một số thuật ngữ và một thực tế nữa về toán tử mật độ. Đầu tiên là thuật ngữ. Một hệ lượng tử mà trạng thái $\vert{}\psi\rangle$ của nó được biết chính xác được cho là ở một trạng thái thuần (pure state). Trong trường hợp này, toán tử mật độ đơn giản là $\rho = \vert{}\psi\rangle\langle\psi\vert{}$. Mặt khác, $\rho$ ở một trạng thái hỗn hợp (mixed state); nó được cho là một hỗn hợp của các trạng thái thuần khác nhau trong tập hợp cho $\rho$. Trong các bài tập, bạn sẽ được yêu cầu chứng minh một tiêu chí đơn giản để xác định xem một trạng thái là thuần hay hỗn hợp: một trạng thái thuần thỏa mãn $\text{tr}(\rho^2) = 1$, trong khi một trạng thái hỗn hợp thỏa mãn $\text{tr}(\rho^2) < 1$. Một vài lời cảnh báo về danh pháp: đôi khi người ta sử dụng thuật ngữ 'trạng thái hỗn hợp' như một thuật ngữ chung để bao gồm cả các trạng thái lượng tử thuần và hỗn hợp. Nguồn gốc của cách sử dụng này dường như là nó ngụ ý rằng người viết không nhất thiết giả định rằng một trạng thái là thuần. Thứ hai, thuật ngữ 'trạng thái thuần' thường được sử dụng để chỉ một vector trạng thái $\vert{}\psi\rangle$, để phân biệt nó với một toán tử mật độ $\rho$.   
+
+Cuối cùng, hãy tưởng tượng một hệ lượng tử được chuẩn bị ở trạng thái $\rho_i$ với xác suất $p_i$. Không khó để tự thuyết phục bản thân rằng hệ thống có thể được mô tả bằng ma trận mật độ $\sum_i p_i\rho_i$. Một bằng chứng cho điều này là giả sử rằng $\rho_i$ phát sinh từ một tập hợp $\{\rho_{ij}, \vert{}\psi_{ij}\rangle\}$ nào đó (lưu ý rằng $i$ cố định) các trạng thái thuần, do đó xác suất để ở trạng thái $\vert{}\psi_{ij}\rangle$ là $p_i p_{ij}$. Ma trận mật độ cho hệ thống do đó là
+
+$$
+\rho = \sum_{ij} p_i p_{ij} \vert{}\psi_{ij}\rangle\langle\psi_{ij}\vert{} \tag{2.148}
+$$  
+
+$$
+= \sum_i p_i \rho_i, \tag{2.149}
+$$   
+
+trong đó chúng ta đã sử dụng định nghĩa $\rho_i = \sum_j p_{ij} \vert{}\psi_{ij}\rangle\langle\psi_{ij}\vert{}$. Chúng ta nói rằng $\rho$ là một hỗn hợp của các trạng thái $\rho_i$ với xác suất $p_i$. Khái niệm về một hỗn hợp này xuất hiện lặp đi lặp lại trong phân tích các bài toán như nhiễu lượng tử, trong đó tác động của nhiễu là đưa sự thiếu hiểu biết vào kiến thức của chúng ta về trạng thái lượng tử. Một ví dụ đơn giản được cung cấp bởi kịch bản đo lường được mô tả ở trên. Hãy tưởng tượng rằng, vì lý do nào đó, bản ghi của chúng ta về kết quả $m$ của phép đo đã bị mất. Chúng ta sẽ có một hệ lượng tử ở trạng thái $\rho_m$ với xác suất $p(m)$, nhưng sẽ không còn biết giá trị thực tế của $m$. Trạng thái của một hệ lượng tử như vậy do đó sẽ được mô tả bởi toán tử mật độ
+
+$$
+\rho = \sum_m p(m)\rho_m \tag{2.150}
+$$   
+
+$$
+= \sum_m \text{tr}(M_m^\dagger M_m \rho) \frac{M_m \rho M_m^\dagger}{\text{tr}(M_m^\dagger M_m \rho)} \tag{2.151}
+$$   
+
+$$
+= \sum_m M_m \rho M_m^\dagger, \tag{2.152}
+$$   
+
+một công thức nhỏ gọn đẹp mắt có thể được sử dụng làm điểm xuất phát cho việc phân tích các hoạt động tiếp theo trên hệ thống. 
+
+# 2. General properties of the density operator
+
+Toán tử mật độ đã được giới thiệu như một phương tiện để mô tả các tập hợp trạng thái lượng tử. Trong phần này, chúng ta tách khỏi mô tả này để phát triển một đặc tính nội tại của các toán tử mật độ mà không dựa vào diễn giải tập hợp. Điều này cho phép chúng ta hoàn thành chương trình đưa ra một mô tả về cơ học lượng tử mà không lấy vector trạng thái làm nền tảng. Chúng ta cũng nhân cơ hội này để phát triển nhiều tính chất sơ cấp khác của toán tử mật độ.   
+
+Lớp các toán tử là toán tử mật độ được đặc trưng bởi định lý hữu ích sau:   
+
+:::{.postulates}
+# Định lý 2.5: (Đặc trưng của các toán tử mật độ) 
+
+Một toán tử $\rho$ là toán tử mật độ liên kết với một tập hợp $\{p_i, \vert{}\psi_i\rangle\}$ nào đó khi và chỉ khi nó thỏa mãn các điều kiện:
+
+(1) (Điều kiện Vết) $\rho$ có vết bằng một.
+
+(2) (Điều kiện Tính dương) $\rho$ là một toán tử dương.   
+
+:::
+
+:::{.callout-important}
+# Chứng minh
+
+Giả sử $\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}$ là một toán tử mật độ. Khi đó
+$$
+\text{tr}(\rho) = \sum_i p_i \text{tr}(\vert{}\psi_i\rangle\langle\psi_i\vert{}) = \sum_i p_i = 1, \tag{2.153}
+$$
+
+vì vậy điều kiện vết $\text{tr}(\rho) = 1$ được thỏa mãn. Giả sử $\vert{}\varphi\rangle$ là một vector tùy ý trong không gian trạng thái. Khi đó
+$$
+\langle\varphi\vert{}\rho\vert{}\varphi\rangle = \sum_i p_i \langle\varphi\vert{}\psi_i\rangle\langle\psi_i\vert{}\varphi\rangle \tag{2.154}
+$$   
+
+$$
+= \sum_i p_i \vert{}\langle\varphi\vert{}\psi_i\rangle\vert{}^2 \tag{2.155}
+$$   
+
+$$
+\ge 0, \tag{2.156}
+$$
+
+vì vậy điều kiện tính dương được thỏa mãn.   
+
+Ngược lại, giả sử $\rho$ là bất kỳ toán tử nào thỏa mãn các điều kiện vết và tính dương. Vì $\rho$ là toán tử dương, nó phải có một phân tích phổ (spectral decomposition)   
+
+$$
+\rho = \sum_j \lambda_j \vert{}j\rangle\langle j\vert{}, \tag{2.157}
+$$
+
+
+trong đó các vector $\vert{}j\rangle$ là trực giao, và $\lambda_j$ là các trị riêng thực, không âm của $\rho$.
+
+Từ điều kiện vết, chúng ta thấy rằng $\sum_j \lambda_j = 1$. Do đó, một hệ thống ở trạng thái $\vert{}j\rangle$ với xác suất $\lambda_j$ sẽ có toán tử mật độ $\rho$. Tức là, tập hợp $\{\lambda_j, \vert{}j\rangle\}$ là một tập hợp các trạng thái sinh ra toán tử mật độ $\rho$.  
+
+:::
+
+
+
+Định lý này cung cấp một đặc trưng của các toán tử mật độ mang tính nội tại của chính toán tử đó: chúng ta có thể định nghĩa một toán tử mật độ là một toán tử dương $\rho$ có vết bằng một. Việc đưa ra định nghĩa này cho phép chúng ta cấu trúc lại các tiên đề của cơ học lượng tử trong bức tranh toán tử mật độ. Để tiện tham khảo, chúng ta phát biểu lại tất cả các tiên đề đã được cấu trúc lại ở đây:   
+
+:::{.postulates}
+# Tiên đề 1
+Liên kết với bất kỳ hệ vật lý cô lập nào là một không gian vector phức có tích vô hướng (nghĩa là, một không gian Hilbert) được gọi là không gian trạng thái của hệ thống. Hệ thống được mô tả hoàn toàn bởi toán tử mật độ của nó, đó là một toán tử dương $\rho$ có vết bằng một, tác dụng lên không gian trạng thái của hệ thống. Nếu một hệ lượng tử ở trạng thái $\rho_i$ với xác suất $p_i$, thì toán tử mật độ của hệ thống là $\sum_i p_i \rho_i$.   
+:::
+
+:::{.postulates}
+# Tiên đề 2
+Sự tiến hóa của một hệ lượng tử đóng được mô tả bởi một phép biến đổi đơn nhất. Tức là, trạng thái $\rho$ của hệ thống ở thời điểm $t_1$ liên hệ với trạng thái $\rho'$ của hệ thống ở thời điểm $t_2$ bởi một toán tử đơn nhất $U$ chỉ phụ thuộc vào các thời điểm $t_1$ và $t_2$,
+$$
+\rho' = U\rho U^\dagger. \tag{2.158}
+$$   
+:::
+
+:::{.postulates}
+# Tiên đề 3
+Các phép đo lượng tử được mô tả bởi một tập hợp $\{M_m\}$ các toán tử đo. Đây là các toán tử tác dụng lên không gian trạng thái của hệ thống đang được đo. Chỉ số $m$ chỉ các kết quả đo có thể xảy ra trong thí nghiệm. Nếu trạng thái của hệ lượng tử là $\rho$ ngay trước khi đo thì xác suất để kết quả $m$ xảy ra được cho bởi
+$$
+p(m) = \text{tr}(M_m^\dagger M_m \rho), \tag{2.159}
+$$
+
+và trạng thái của hệ thống sau phép đo là
+$$
+\frac{M_m \rho M_m^\dagger}{\text{tr}(M_m^\dagger M_m \rho)}. \tag{2.160}
+$$
+
+Các toán tử đo thỏa mãn phương trình đầy đủ,
+$$
+\sum_m M_m^\dagger M_m = I. \tag{2.161}
+$$   
+:::
+
+:::{.postulates}
+# Tiên đề 4
+Không gian trạng thái của một hệ vật lý phức hợp là tích tensor của các không gian trạng thái của các hệ vật lý thành phần. Hơn nữa, nếu chúng ta có các hệ thống được đánh số từ $1$ đến $n$, và hệ thống số $i$ được chuẩn bị ở trạng thái $\rho_i$, thì trạng thái chung của toàn bộ hệ thống là $\rho_1 \otimes \rho_2 \otimes \dots \rho_n$.   
+:::
+
+---
+
+hững sự cấu trúc lại các tiên đề cơ bản của cơ học lượng tử dưới dạng toán tử mật độ tất nhiên là tương đương về mặt toán học với mô tả dưới dạng vector trạng thái. Tuy nhiên, như một cách tư duy về cơ học lượng tử, phương pháp toán tử mật độ thực sự tỏa sáng ở hai ứng dụng: mô tả các hệ lượng tử mà trạng thái của nó không được biết đến, và mô tả các hệ con của một hệ lượng tử phức hợp, như sẽ được mô tả trong phần tiếp theo. Trong phần còn lại của phần này, chúng ta sẽ đi sâu vào các thuộc tính của ma trận mật độ chi tiết hơn.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.71: (Tiêu chuẩn để quyết định xem một trạng thái là hỗn hợp hay thuần) 
+Cho $\rho$ là một toán tử mật độ. Chứng minh rằng $\text{tr}(\rho^2) \le 1$, với dấu bằng xảy ra khi và chỉ khi $\rho$ là một trạng thái thuần.
+:::
+
+Có một sự ngụy biện hấp dẫn (và phổ biến một cách đáng ngạc nhiên) khi cho rằng các trị riêng và vector riêng của một ma trận mật độ có một ý nghĩa đặc biệt nào đó đối với tập hợp các trạng thái lượng tử được biểu diễn bởi ma trận mật độ đó. Ví dụ, người ta có thể cho rằng một hệ lượng tử có ma trận mật độ
+$$
+\rho = \frac{3}{4} \vert{}0\rangle\langle0\vert{} + \frac{1}{4} \vert{}1\rangle\langle1\vert{} \tag{2.162}
+$$
+
+bắt buộc phải ở trạng thái $\vert{}0\rangle$ với xác suất $3/4$ và ở trạng thái $\vert{}1\rangle$ với xác suất $1/4$. Tuy nhiên, điều này không nhất thiết phải đúng. Giả sử chúng ta định nghĩa
+$$
+\vert{}a\rangle \equiv \sqrt{\frac{3}{4}} \vert{}0\rangle + \sqrt{\frac{1}{4}} \vert{}1\rangle \tag{2.163}
+$$   
+
+$$
+\vert{}b\rangle \equiv \sqrt{\frac{3}{4}} \vert{}0\rangle - \sqrt{\frac{1}{4}} \vert{}1\rangle, \tag{2.164}
+$$
+
+và hệ lượng tử được chuẩn bị ở trạng thái $\vert{}a\rangle$ với xác suất $1/2$ và ở trạng thái $\vert{}b\rangle$ với xác suất $1/2$. Khi đó dễ dàng kiểm tra được rằng ma trận mật độ tương ứng là
+   
+$$
+\rho = \frac{1}{2} \vert{}a\rangle\langle a\vert{} + \frac{1}{2} \vert{}b\rangle\langle b\vert{} = \frac{3}{4} \vert{}0\rangle\langle0\vert{} + \frac{1}{4} \vert{}1\rangle\langle1\vert{}. \tag{2.165}
+$$   
+
+Tức là, hai tập hợp các trạng thái lượng tử khác nhau này sinh ra cùng một ma trận mật độ. Nói chung, các vector riêng và trị riêng của một ma trận mật độ chỉ biểu thị một trong số nhiều tập hợp có thể sinh ra một ma trận mật độ cụ thể, và không có lý do gì để cho rằng đó là một tập hợp đặc quyền.   
+
+:::{.callout-warning}
+# Ví dụ
+
+về ảo ảnh của Ma trận mật độ.
+
+Hãy tưởng tượng 2 phòng thí nghiệm khác nhau:
+
+* Phòng 1: Một máy bắn ngẫu nhiên hạt $\vert 0 \rangle$ (xác suất 75%) và hạt $\vert 1 \rangle$ (xác suất 25%).
+
+* Phòng 2: Một máy bắn hạt $\vert a \rangle$ (xác suất 50%) và hạt $\vert b \rangle$ (xác suất 50%). Các trạng thái ket a ket b chồng chập.
+
+Tuy hai phòng thí nghiệm, tạo ra những hạt vật lý có bản chất hoàn toàn khác nhau. Tuy nhiên, khi tính ma trận mật độ $\rho$ cho cả 2 phòng, ta lại ra chung một ma trận!
+:::
+
+---
+
+Một câu hỏi tự nhiên được đặt ra dưới ánh sáng của cuộc thảo luận này là lớp các tập hợp nào sinh ra một ma trận mật độ cụ thể? Giải pháp cho bài toán này, mà bây giờ chúng ta sẽ đưa ra, có những ứng dụng nhiều một cách đáng ngạc nhiên trong tính toán lượng tử và thông tin lượng tử, đặc biệt là trong việc hiểu nhiễu lượng tử và sửa lỗi lượng tử (Chương 8 và 10). Để giải quyết, thật tiện lợi khi sử dụng các vector $\vert{}\tilde{\psi}_i\rangle$ có thể không được chuẩn hóa về độ dài đơn vị. Chúng ta nói rằng tập hợp $\vert{}\tilde{\psi}_i\rangle$ sinh ra toán tử $\rho \equiv \sum_i \vert{}\tilde{\psi}_i\rangle\langle\tilde{\psi}_i\vert{}$, và do đó mối liên hệ với bức tranh tập hợp thông thường của các toán tử mật độ được biểu diễn bằng phương trình $\vert{}\tilde{\psi}_i\rangle = \sqrt{p_i}\vert{}\psi_i\rangle$. Khi nào thì hai tập hợp các vector, $\vert{}\tilde{\psi}_i\rangle$ và $\vert{}\tilde{\phi}_j\rangle$, sinh ra cùng một toán tử $\rho$? Giải pháp cho bài toán này sẽ cho phép chúng ta trả lời câu hỏi tập hợp nào sinh ra một ma trận mật độ cho trước.   
+
+:::{.postulates}
+# Định lý 2.6: (Bậc tự do đơn nhất trong tập hợp cho các ma trận mật độ) 
+Các tập hợp $\vert{}\tilde{\psi}_i\rangle$ và $\vert{}\tilde{\phi}_j\rangle$ sinh ra cùng một ma trận mật độ khi và chỉ khi
+
+$$
+\vert{}\tilde{\psi}_i\rangle = \sum_j u_{ij} \vert{}\tilde{\phi}_j\rangle, \tag{2.166}
+$$
+
+trong đó $u_{ij}$ là một ma trận đơn nhất gồm các số phức, với các chỉ số $i$ và $j$, và chúng ta 'đệm' (pad) thêm các vector $0$ vào tập hợp các vector $\vert{}\tilde{\psi}_i\rangle$ hoặc $\vert{}\tilde{\phi}_j\rangle$ nào nhỏ hơn sao cho hai tập hợp có cùng số lượng phần tử.   
+:::
+
+Như một hệ quả của định lý, lưu ý rằng $\rho = \sum_i p_i\vert{}\psi_i\rangle\langle\psi_i\vert{} = \sum_j q_j\vert{}\phi_j\rangle\langle\phi_j\vert{}$ đối với các trạng thái được chuẩn hóa $\vert{}\psi_i\rangle, \vert{}\phi_j\rangle$ và các phân bố xác suất $p_i$ và $q_j$ khi và chỉ khi
+
+$$
+\sqrt{p_i}\vert{}\psi_i\rangle = \sum_j u_{ij} \sqrt{q_j}\vert{}\phi_j\rangle, \tag{2.167}
+$$
+
+đối với một ma trận đơn nhất $u_{ij}$ nào đó, và chúng ta có thể đệm thêm vào tập hợp nhỏ hơn các mục có xác suất bằng $0$ để làm cho hai tập hợp có cùng kích thước. Do đó, Định lý 2.6 đặc trưng cho bậc tự do trong các tập hợp $\{p_i, \vert{}\psi_i\rangle\}$ sinh ra một ma trận mật độ $\rho$ cho trước. Quả thực, dễ dàng kiểm tra thấy rằng ví dụ trước đó của chúng ta về một ma trận mật độ với hai phân tích khác nhau, (2.162), xuất hiện như một trường hợp đặc biệt của kết quả tổng quát này. Bây giờ chúng ta hãy chuyển sang phần chứng minh định lý.
+
+:::{.callout-important}
+# Chứng minh
+Giả sử $\vert{}\tilde{\psi}_i\rangle = \sum_j u_{ij}\vert{}\tilde{\varphi}_j\rangle$ đối với một ma trận đơn nhất $u_{ij}$ nào đó. Khi đó
+
+$$
+\sum_i \vert{}\tilde{\psi}_i\rangle\langle\tilde{\psi}_i\vert{} = \sum_{ijk} u_{ij}u_{ik}^* \vert{}\tilde{\varphi}_j\rangle\langle\tilde{\varphi}_k\vert{} \tag{2.168}
+$$
+
+$$
+= \sum_{jk} \left( \sum_i u_{ki}^\dagger u_{ij} \right) \vert{}\tilde{\varphi}_j\rangle\langle\tilde{\varphi}_k\vert{} \tag{2.169}
+$$
+
+$$
+= \sum_{jk} \delta_{kj} \vert{}\tilde{\varphi}_j\rangle\langle\tilde{\varphi}_k\vert{} \tag{2.170}
+$$
+
+$$
+= \sum_j \vert{}\tilde{\varphi}_j\rangle\langle\tilde{\varphi}_j\vert{}, \tag{2.171}
+$$
+
+điều này cho thấy rằng $\vert{}\tilde{\psi}_i\rangle$ và $\vert{}\tilde{\varphi}_j\rangle$ sinh ra cùng một toán tử.
+
+Ngược lại, giả sử
+
+$$
+A = \sum_i \vert{}\tilde{\psi}_i\rangle\langle\tilde{\psi}_i\vert{} = \sum_j \vert{}\tilde{\varphi}_j\rangle\langle\tilde{\varphi}_j\vert{}. \tag{2.172}
+$$
+
+Gọi $A = \sum_k \lambda_k \vert{}k\rangle\langle k\vert{}$ là một phân tích cho $A$ sao cho các trạng thái $\vert{}k\rangle$ là trực chuẩn, và các $\lambda_k$ là dương nghiêm ngặt. Chiến lược của chúng ta là liên hệ các trạng thái $\vert{}\tilde{\psi}_i\rangle$ với các trạng thái $\vert{}\tilde{k}\rangle \equiv \sqrt{\lambda_k}\vert{}k\rangle$, và tương tự liên hệ các trạng thái $\vert{}\tilde{\varphi}_j\rangle$ với các trạng thái $\vert{}\tilde{k}\rangle$. Kết hợp hai mối liên hệ sẽ cho ra kết quả. Gọi $\vert{}\psi\rangle$ là bất kỳ vector nào trực chuẩn với không gian được sinh bởi các $\vert{}k\rangle$, do đó $\langle\psi\vert{}k\rangle\langle k\vert{}\psi\rangle = 0$ với mọi $k$, và do đó chúng ta thấy rằng
+
+$$
+0 = \langle\psi\vert{}A\vert{}\psi\rangle = \sum_i \langle\psi\vert{}\tilde{\psi}_i\rangle\langle\tilde{\psi}_i\vert{}\psi\rangle = \sum_i \vert{}\langle\psi\vert{}\tilde{\psi}_i\rangle\vert{}^2. \tag{2.173}
+$$
+
+Do đó $\langle\psi\vert{}\tilde{\psi}_i\rangle = 0$ với mọi $i$ và mọi $\vert{}\psi\rangle$ trực chuẩn với không gian được sinh bởi các $\vert{}\tilde{k}\rangle$. Hệ quả là mỗi $\vert{}\tilde{\psi}_i\rangle$ có thể được biểu diễn như một tổ hợp tuyến tính của các $\vert{}\tilde{k}\rangle$, $\vert{}\tilde{\psi}_i\rangle = \sum_k c_{ik}\vert{}\tilde{k}\rangle$. Vì $A = \sum_k \vert{}\tilde{k}\rangle\langle\tilde{k}\vert{} = \sum_i \vert{}\tilde{\psi}_i\rangle\langle\tilde{\psi}_i\vert{}$ chúng ta thấy rằng
+
+$$
+\sum_k \vert{}\tilde{k}\rangle\langle\tilde{k}\vert{} = \sum_{kl} \left( \sum_i c_{ik}c_{il}^* \right) \vert{}\tilde{k}\rangle\langle\tilde{l}\vert{}. \tag{2.174}
+$$
+
+Các toán tử $\vert{}\tilde{k}\rangle\langle\tilde{l}\vert{}$ dễ dàng nhận thấy là độc lập tuyến tính, và do đó bắt buộc phải có $\sum_i c_{ik}c_{il}^* = \delta_{kl}$. Điều này đảm bảo rằng chúng ta có thể thêm các cột phụ vào $c$ để thu được một ma trận đơn nhất $v$ sao cho $\vert{}\tilde{\psi}_i\rangle = \sum_k v_{ik}\vert{}\tilde{k}\rangle$, trong đó chúng ta đã thêm các vector không vào danh sách các $\vert{}\tilde{k}\rangle$. Tương tự, chúng ta có thể tìm thấy một ma trận đơn nhất $w$ sao cho $\vert{}\tilde{\varphi}_j\rangle = \sum_k w_{jk}\vert{}\tilde{k}\rangle$. Do đó $\vert{}\tilde{\psi}_i\rangle = \sum_j u_{ij}\vert{}\tilde{\varphi}_j\rangle$, trong đó $u = vw^\dagger$ là ma trận đơn nhất. $\square$
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.72: (Mặt cầu Bloch cho các trạng thái hỗn hợp) 
+Bức tranh mặt cầu Bloch cho các trạng thái thuần của một qubit đơn lẻ đã được giới thiệu trong Mục 1.2. Mô tả này có một sự tổng quát hóa quan trọng cho các trạng thái hỗn hợp như sau.
+
+(1) Chứng minh rằng một ma trận mật độ tùy ý cho một qubit trạng thái hỗn hợp có thể được viết dưới dạng
+
+$$
+\rho = \frac{I + \vec{r} \cdot \vec{\sigma}}{2}, \tag{2.175}
+$$
+
+trong đó $\vec{r}$ là một vector ba chiều thực sao cho $\Vert{}\vec{r}\Vert{} \le 1$. Vector này được gọi là vector Bloch cho trạng thái $\rho$.
+
+(2) Biểu diễn vector Bloch cho trạng thái $\rho = I/2$ là gì?
+
+(3) Chứng minh rằng một trạng thái $\rho$ là thuần khi và chỉ khi $\Vert{}\vec{r}\Vert{} = 1$.
+
+(4) Chứng minh rằng đối với các trạng thái thuần, mô tả của vector Bloch mà chúng ta vừa đưa ra trùng khớp với mô tả trong Mục 1.2.
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.73: 
+Cho $\rho$ là một toán tử mật độ. Một tập hợp tối thiểu (minimal ensemble) cho $\rho$ là một tập hợp $\{p_i, \vert{}\psi_i\rangle\}$ chứa số lượng phần tử bằng với hạng (rank) của $\rho$. Cho $\vert{}\psi\rangle$ là bất kỳ trạng thái nào trong giá (support) của $\rho$. (Giá của một toán tử Hermitian $A$ là không gian vector được sinh bởi các vector riêng của $A$ có trị riêng khác không.) Chứng minh rằng tồn tại một tập hợp tối thiểu cho $\rho$ chứa $\vert{}\psi\rangle$, và hơn nữa trong bất kỳ tập hợp nào như vậy $\vert{}\psi\rangle$ phải xuất hiện với xác suất
+
+$$
+p_i = \frac{1}{\langle\psi\vert{}\rho^{-1}\vert{}\psi\rangle}, \tag{2.176}
+$$
+
+trong đó $\rho^{-1}$ được định nghĩa là nghịch đảo của $\rho$, khi $\rho$ được coi như một toán tử tác dụng chỉ trên giá của $\rho$. (Định nghĩa này loại bỏ vấn đề rằng $\rho$ có thể không có nghịch đảo.)
+
+:::
+
+# 3. The reduced density operator
+
+Có lẽ ứng dụng sâu sắc nhất của toán tử mật độ là đóng vai trò như một công cụ mô tả cho các hệ con của một hệ lượng tử phức hợp. Một mô tả như vậy được cung cấp bởi toán tử mật độ rút gọn, đây là chủ đề của phần này. Toán tử mật độ rút gọn hữu ích đến mức hầu như không thể thiếu trong phân tích các hệ lượng tử phức hợp.   
+
+Giả sử chúng ta có các hệ vật lý $A$ và $B$, trạng thái của chúng được mô tả bởi một toán tử mật độ $\rho^{AB}$. Toán tử mật độ rút gọn cho hệ $A$ được định nghĩa bởi
+$$
+\rho^A \equiv \text{tr}_B(\rho^{AB}), \tag{2.177}
+$$
+
+trong đó $\text{tr}_B$ là một ánh xạ của các toán tử được gọi là vết riêng phần (partial trace) trên hệ B. Vết riêng phần được định nghĩa bởi
+$$
+\text{tr}_B (\vert{}a_1\rangle\langle a_2\vert{} \otimes \vert{}b_1\rangle\langle b_2\vert{}) \equiv \vert{}a_1\rangle\langle a_2\vert{} \text{tr}(\vert{}b_1\rangle\langle b_2\vert{}), \tag{2.178}
+$$
+
+trong đó $\vert{}a_1\rangle$ và $\vert{}a_2\rangle$ là hai vector bất kỳ trong không gian trạng thái của $A$, và $\vert{}b_1\rangle$ và $\vert{}b_2\rangle$ là hai vector bất kỳ trong không gian trạng thái của $B$. Phép toán vết xuất hiện ở vế phải là phép toán vết thông thường cho hệ $B$, vì vậy $\text{tr}(\vert{}b_1\rangle\langle b_2\vert{}) = \langle b_2\vert{}b_1\rangle$. Chúng ta mới chỉ định nghĩa phép toán vết riêng phần trên một lớp con đặc biệt của các toán tử trên $AB$; đặc tả này được hoàn thiện bằng cách yêu cầu thêm vào Phương trình (2.178) rằng vết riêng phần phải tuyến tính đối với đầu vào của nó.   
+
+Không hiển nhiên rằng toán tử mật độ rút gọn cho hệ $A$ theo bất kỳ nghĩa nào là một mô tả cho trạng thái của hệ $A$. Biện minh vật lý cho việc đưa ra sự đồng nhất này là toán tử mật độ rút gọn cung cấp số liệu thống kê phép đo chính xác cho các phép đo được thực hiện trên hệ $A$. Điều này được giải thích chi tiết hơn trong Hộp 2.6 ở trang 107. Các tính toán ví dụ đơn giản sau đây cũng có thể giúp hiểu về toán tử mật độ rút gọn. Đầu tiên, giả sử một hệ lượng tử ở trạng thái tích $\rho^{AB} = \rho \otimes \sigma$, trong đó $\rho$ là một toán tử mật độ cho hệ $A$, và $\sigma$ là một toán tử mật độ cho hệ $B$. Khi đó
+$$
+\rho^A = \text{tr}_B(\rho \otimes \sigma) = \rho \text{tr}(\sigma) = \rho, \tag{2.184}
+$$
+
+đây là kết quả mà chúng ta mong đợi một cách trực quan. Tương tự, $\rho^B = \sigma$ đối với trạng thái này. Một ví dụ ít tầm thường hơn là trạng thái Bell $(\vert{}00\rangle + \vert{}11\rangle)/\sqrt{2}$. Trạng thái này có toán tử mật độ
+
+$$
+\rho = \left( \frac{\vert{}00\rangle + \vert{}11\rangle}{\sqrt{2}} \right) \left( \frac{\langle00\vert{} + \langle11\vert{}}{\sqrt{2}} \right) \tag{2.185}
+$$   
+
+
+7
+$$
+= \frac{\vert{}00\rangle\langle00\vert{} + \vert{}11\rangle\langle00\vert{} + \vert{}00\rangle\langle11\vert{} + \vert{}11\rangle\langle11\vert{}}{2}. \tag{2.186}
+$$   
+
+Lấy vết triệt tiêu qubit thứ hai, chúng ta tìm thấy toán tử mật độ rút gọn của qubit thứ nhất,
+
+$$
+\rho^1 = \text{tr}_2(\rho) \tag{2.187}
+$$   
+
+$$
+= \frac{\text{tr}_2(\vert{}00\rangle\langle00\vert{}) + \text{tr}_2(\vert{}11\rangle\langle00\vert{}) + \text{tr}_2(\vert{}00\rangle\langle11\vert{}) + \text{tr}_2(\vert{}11\rangle\langle11\vert{})}{2} \tag{2.188}
+$$   
+
+$$
+= \frac{\vert{}0\rangle\langle0\vert{}\langle0\vert{}0\rangle + \vert{}1\rangle\langle0\vert{}\langle0\vert{}1\rangle + \vert{}0\rangle\langle1\vert{}\langle1\vert{}0\rangle + \vert{}1\rangle\langle1\vert{}\langle1\vert{}1\rangle}{2} \tag{2.189}
+$$   
+
+$$
+= \frac{\vert{}0\rangle\langle0\vert{} + \vert{}1\rangle\langle1\vert{}}{2} \tag{2.190}
+$$   
+
+$$
+= \frac{I}{2}. \tag{2.191}
+$$   
+
+Lưu ý rằng trạng thái này là một trạng thái hỗn hợp, vì $\text{tr}((I/2)^2) = 1/2 < 1$. Đây là một kết quả khá đáng chú ý. Trạng thái của hệ chung gồm hai qubit là một trạng thái thuần, tức là, nó được biết chính xác; tuy nhiên, qubit thứ nhất lại ở trạng thái hỗn hợp, tức là, một trạng thái mà dường như chúng ta không có kiến thức tối đa. Đặc tính kỳ lạ này, rằng trạng thái chung của một hệ thống có thể được biết hoàn toàn, nhưng một hệ con lại ở trạng thái hỗn hợp, là một dấu ấn khác của vướng víu lượng tử.
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.74: 
+Giả sử một hệ phức hợp gồm các hệ $A$ và $B$ ở trạng thái $\vert{}a\rangle\vert{}b\rangle$, trong đó $\vert{}a\rangle$ là một trạng thái thuần của hệ $A$, và $\vert{}b\rangle$ là một trạng thái thuần của hệ $B$. Chứng minh rằng toán tử mật độ rút gọn của riêng hệ $A$ là một trạng thái thuần.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.75: 
+Đối với mỗi trạng thái trong bốn trạng thái Bell, hãy tìm toán tử mật độ rút gọn cho từng qubit.   
+:::
+
+
+## Quantum teleportation and the reduced density operator
+Một ứng dụng hữu ích của toán tử mật độ rút gọn là để phân tích viễn tải lượng tử. Nhắc lại từ Mục 1.3.7 rằng viễn tải lượng tử là một thủ tục để gửi thông tin lượng tử từ Alice đến Bob, cho trước việc Alice và Bob chia sẻ một cặp EPR, và có một kênh truyền thông cổ điển.   Thoạt nhìn, có vẻ như viễn tải có thể được sử dụng để truyền thông tin nhanh hơn ánh sáng, một điều tuyệt đối cấm kỵ theo thuyết tương đối. Chúng ta đã phỏng đoán trong Mục 1.3.7 rằng điều ngăn cản sự truyền tin nhanh hơn ánh sáng chính là yêu cầu Alice phải truyền đạt kết quả đo của mình cho Bob. Toán tử mật độ rút gọn cho phép chúng ta làm cho điều này trở nên chặt chẽ.  
+
+Nhắc lại rằng ngay trước khi Alice thực hiện phép đo của mình, trạng thái lượng tử của ba qubit là (Phương trình (1.32)):   
+
+$$
+\vert{}\psi_2\rangle = \frac{1}{2} \big[ \vert{}00\rangle(\alpha\vert{}0\rangle + \beta\vert{}1\rangle) + \vert{}01\rangle(\alpha\vert{}1\rangle + \beta\vert{}0\rangle) + \vert{}10\rangle(\alpha\vert{}0\rangle - \beta\vert{}1\rangle) + \vert{}11\rangle(\alpha\vert{}1\rangle - \beta\vert{}0\rangle) \big]. \tag{2.192}
+$$   
+
+Đo trong cơ sở tính toán của Alice, trạng thái của hệ thống sau phép đo là:   
+
+$$
+\vert{}00\rangle[\alpha\vert{}0\rangle + \beta\vert{}1\rangle] \quad \text{with probability } 1/4 \tag{2.193}
+$$   
+
+$$
+\vert{}01\rangle[\alpha\vert{}1\rangle + \beta\vert{}0\rangle] \quad \text{with probability } 1/4 \tag{2.194}
+$$   
+
+$$
+\vert{}10\rangle[\alpha\vert{}0\rangle - \beta\vert{}1\rangle] \quad \text{with probability } 1/4 \tag{2.195}
+$$   
+
+$$
+\vert{}11\rangle[\alpha\vert{}1\rangle - \beta\vert{}0\rangle] \quad \text{with probability } 1/4. \tag{2.196}
+$$   
+
+Toán tử mật độ của hệ thống do đó là   
+
+$$
+\rho = \frac{1}{4} \big[ \vert{}00\rangle\langle00\vert{} (\alpha\vert{}0\rangle + \beta\vert{}1\rangle)(\alpha^*\langle0\vert{} \\ + \beta^*\langle1\vert{}) + \vert{}01\rangle\langle01\vert{} (\alpha\vert{}1\rangle + \beta\vert{}0\rangle)(\alpha^*\langle1\vert{} \\ + \beta^*\langle0\vert{}) + \vert{}10\rangle\langle10\vert{} (\alpha\vert{}0\rangle - \beta\vert{}1\rangle)(\alpha^*\langle0\vert{} \\ - \beta^*\langle1\vert{}) + \vert{}11\rangle\langle11\vert{} (\alpha\vert{}1\rangle - \beta\vert{}0\rangle)(\alpha^*\langle1\vert{} \\ - \beta^*\langle0\vert{}) \big]. \tag{2.197}
+$$   
+
+Lấy vết riêng phần (tracing out) triệt tiêu hệ thống của Alice, chúng ta thấy rằng toán tử mật độ rút gọn của hệ thống của Bob là   
+
+$$
+\rho^B = \frac{1}{4} \big[ (\alpha\vert{}0\rangle + \beta\vert{}1\rangle)(\alpha^*\langle0\vert{}\\ + \beta^*\langle1\vert{}) + (\alpha\vert{}1\rangle + \beta\vert{}0\rangle)(\alpha^*\langle1\vert{}\\ + \beta^*\langle0\vert{}) + (\alpha\vert{}0\rangle - \beta\vert{}1\rangle)(\alpha^*\langle0\vert{}\\ - \beta^*\langle1\vert{}) + (\alpha\vert{}1\rangle - \beta\vert{}0\rangle)(\alpha^*\langle1\vert{}\\ - \beta^*\langle0\vert{}) \big] \tag{2.198}
+$$   
+
+$$
+= \frac{2(\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2)\vert{}0\rangle\langle0\vert{} + 2(\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2)\vert{}1\rangle\langle1\vert{}}{4} \tag{2.199}
+$$   
+
+$$
+= \frac{\vert{}0\rangle\langle0\vert{} + \vert{}1\rangle\langle1\vert{}}{2} \tag{2.200}
+$$   
+
+$$
+= \frac{I}{2}, \tag{2.201}
+$$   
+
+trong đó chúng ta đã sử dụng hệ thức đầy đủ ở dòng cuối cùng. Do đó, trạng thái hệ thống của Bob sau khi Alice đã thực hiện phép đo nhưng trước khi Bob biết được kết quả đo là $I/2$. Trạng thái này không có sự phụ thuộc nào vào trạng thái $\vert{}\psi\rangle$ đang được viễn tải, và do đó mọi phép đo do Bob thực hiện sẽ không chứa bất kỳ thông tin nào về $\vert{}\psi\rangle$, từ đó ngăn cản Alice sử dụng viễn tải để truyền thông tin cho Bob nhanh hơn ánh sáng.

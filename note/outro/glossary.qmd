@@ -115,12 +115,18 @@ Là một tập hợp các vector thỏa mãn hai điều kiện:
 # P
 
 :::{.glossary}
-# Phép đo tổng quát - POVM
+# POVM - Phép đo tổng quát
 
 Là phép đo không yêu cầu các toán tử đo phải trực giao, hay là phép chiếu.
 
-Giúp phân biệt các trạng thái lượng tử không trực giao với xác suất tối ưu hoặc mô tả chinh xác quá trình khi đo hệ lượng tử tương tác với môi trường xung quanh
+Giúp phân biệt các trạng thái lượng tử không trực giao với xác suất tối ưu hoặc mô tả chinh xác quá trình khi đo hệ lượng tử tương tác với môi trường xung quanh.
 
+:::
+
+:::{.glossary}
+# Pure state - Trạng thái thuần túy
+
+Là một trạng thái có thể được biểu diễn dưới dạng ma trận mật độ $\rho = \vert \psi \rangle \langle \psi \vert$, trong đó ma trận mật độ thỏa mãn tính chất $\rho^2 = \rho$ hoặc $\text{Tr}(\rho^2) = 1$.
 :::
 
 # Q 
@@ -191,3 +197,13 @@ Là sự tiến hóa theo thời gian của một hệ lượng tử được ch
 
 * Khả nghịch về mặt thời gian: Vì U có toán tử nghịch đảo là $U^\dagger$, quá trình tiến hóa lượng tử có tính thuận nghịch, về cơ bản là thua ngược thời gian.
 :::
+
+# V
+
+# W
+
+# X
+
+# Y
+
+# Z
