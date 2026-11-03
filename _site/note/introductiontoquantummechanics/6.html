@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="TgX.2">
 
-<title>quarto-input7d92fdac4d806375 – TgX.2</title>
+<title>EPR and the Bell inequality – TgX.2</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -284,12 +328,148 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">EPR and the Bell inequality</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<p>6.qmd</p>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><em>‘Anybody who is not shocked by quantum theory has not understood it.’</em> – Niels Bohr</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘I recall that during one walk Einstein suddenly stopped, turned to me and asked whether I really believed that the moon exists only when I look at it. The rest of this walk was devoted to a discussion of what a physicist should mean by the term ‘to exist’.’</em> – Abraham Pais</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘…quantum phenomena do not occur in a Hilbert space, they occur in a laboratory.’</em> – Asher Peres</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘…what is proved by impossibility proofs is lack of imagination.’</em> – John Bell</p>
+</blockquote>
+<p>Chương này đã tập trung vào việc giới thiệu các công cụ và toán học của cơ học lượng tử. Khi những kỹ thuật này được áp dụng trong các chương tiếp theo của cuốn sách này, một chủ đề quan trọng lặp đi lặp lại là những tính chất phi cổ điển, bất thường của cơ học lượng tử. Nhưng chính xác thì sự khác biệt giữa cơ học lượng tử và thế giới cổ điển là gì? Hiểu được sự khác biệt này là điều sống còn trong việc học cách thực hiện các tác vụ xử lý thông tin vốn khó hoặc không thể thực hiện được với vật lý cổ điển. Phần này kết thúc chương với một cuộc thảo luận về bất đẳng thức Bell, một ví dụ đầy thuyết phục về một sự khác biệt cốt yếu giữa vật lý lượng tử và vật lý cổ điển.</p>
+<p>Khi chúng ta nói về một vật thể như một người hay một cuốn sách, chúng ta giả định rằng các tính chất vật lý của vật thể đó có một sự tồn tại độc lập với sự quan sát. Tức là, các phép đo chỉ đơn thuần có tác dụng tiết lộ những tính chất vật lý như vậy. Ví dụ, một quả bóng tennis có một trong những tính chất vật lý của nó là vị trí, thứ mà chúng ta thường đo bằng cách sử dụng ánh sáng tán xạ từ bề mặt của quả bóng. Khi cơ học lượng tử đang được phát triển vào những năm 1920 và 1930, một quan điểm kỳ lạ đã nảy sinh, khác biệt rõ rệt so với quan điểm cổ điển. Như đã mô tả ở phần trước trong chương, theo cơ học lượng tử, một hạt không được quan sát không sở hữu các tính chất vật lý tồn tại độc lập với sự quan sát. Thay vào đó, những tính chất vật lý như vậy phát sinh như một hệ quả của các phép đo được thực hiện trên hệ thống. Ví dụ, theo cơ học lượng tử, một qubit không sở hữu các tính chất xác định về ‘spin theo hướng <span class="math inline">z</span>, <span class="math inline">\sigma_z</span>’, và ‘spin theo hướng <span class="math inline">x</span>, <span class="math inline">\sigma_x</span>’, mà mỗi tính chất này có thể được tiết lộ bằng cách thực hiện phép đo thích hợp. Đúng hơn là, cơ học lượng tử đưa ra một bộ quy tắc chỉ rõ, cho trước vector trạng thái, các xác suất cho các kết quả đo có thể xảy ra khi đại lượng quan sát <span class="math inline">\sigma_z</span> được đo, hoặc khi đại lượng quan sát <span class="math inline">\sigma_x</span> được đo.</p>
+<p>Nhiều nhà vật lý đã bác bỏ quan điểm mới này về Tự nhiên. Người phản đối nổi bật nhất là Albert Einstein. Trong ‘bài báo EPR’ nổi tiếng, đồng tác giả với Nathan Rosen và Boris Podolsky, Einstein đã đề xuất một thí nghiệm tưởng tượng mà ông tin rằng, đã chứng minh cơ học lượng tử không phải là một lý thuyết hoàn chỉnh về Tự nhiên.</p>
+<p>Bản chất của lập luận EPR là như sau. EPR quan tâm đến những gì họ gọi là ‘các yếu tố của thực tại’ (elements of reality). Niềm tin của họ là bất kỳ yếu tố thực tại nào như vậy phải được biểu diễn trong bất kỳ lý thuyết vật lý hoàn chỉnh nào. Mục tiêu của lập luận là để chứng tỏ rằng cơ học lượng tử không phải là một lý thuyết vật lý hoàn chỉnh, bằng cách xác định các yếu tố của thực tại không được bao gồm trong cơ học lượng tử. Cách họ cố gắng làm điều này là bằng cách giới thiệu những gì họ tuyên bố là một điều kiện đủ để một tính chất vật lý là một yếu tố của thực tại, cụ thể là, nó có thể được dự đoán với sự chắc chắn giá trị mà tính chất đó sẽ có, ngay trước khi đo lường.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hộp 2.7: Sự phản tương quan trong thí nghiệm EPR
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta chuẩn bị trạng thái hai qubit</p>
+<p><span class="math display">
+\vert{}\psi\rangle = \frac{\vert{}01\rangle - \vert{}10\rangle}{\sqrt{2}}, \tag{2.213}
+</span></p>
+<p>một trạng thái đôi khi được gọi là singlet spin vì các lý do lịch sử. Không khó để chứng minh rằng trạng thái này là một trạng thái vướng víu của hệ hai qubit. Giả sử chúng ta thực hiện phép đo spin dọc theo trục <span class="math inline">\vec{v}</span> trên cả hai qubit, nghĩa là, chúng ta đo đại lượng quan sát <span class="math inline">\vec{v} \cdot \vec{\sigma}</span> (được định nghĩa trong Phương trình (2.116) ở trang 90) trên mỗi qubit, thu được kết quả là <span class="math inline">+1</span> hoặc <span class="math inline">-1</span> cho mỗi qubit. Hóa ra bất kể chúng ta lựa chọn <span class="math inline">\vec{v}</span> như thế nào, kết quả của hai phép đo luôn ngược dấu nhau. Nghĩa là, nếu phép đo trên qubit thứ nhất cho kết quả <span class="math inline">+1</span>, thì phép đo trên qubit thứ hai sẽ cho kết quả <span class="math inline">-1</span>, và ngược lại. Giống như thể qubit thứ hai biết được kết quả phép đo trên qubit thứ nhất, bất kể qubit thứ nhất được đo theo cách nào. Để thấy tại sao điều này lại đúng, giả sử <span class="math inline">\vert{}a\rangle</span> và <span class="math inline">\vert{}b\rangle</span> là các trạng thái riêng của <span class="math inline">\vec{v} \cdot \vec{\sigma}</span>. Khi đó tồn tại các số phức <span class="math inline">\alpha, \beta, \gamma, \delta</span> sao cho</p>
+<p><span class="math display">
+\vert{}0\rangle = \alpha\vert{}a\rangle + \beta\vert{}b\rangle \tag{2.214}
+</span></p>
+<p><span class="math display">
+\vert{}1\rangle = \gamma\vert{}a\rangle + \delta\vert{}b\rangle. \tag{2.215}
+</span></p>
+<p>Thay thế vào chúng ta thu được</p>
+<p><span class="math display">
+\frac{\vert{}01\rangle - \vert{}10\rangle}{\sqrt{2}} = (\alpha\delta - \beta\gamma)\frac{\vert{}ab\rangle - \vert{}ba\rangle}{\sqrt{2}}. \tag{2.216}
+</span></p>
+<p>Nhưng <span class="math inline">\alpha\delta - \beta\gamma</span> là định thức của ma trận đơn nhất <span class="math inline">\begin{bmatrix} \alpha &amp; \beta \\ \gamma &amp; \delta \end{bmatrix}</span>, và do đó bằng một nhân tố pha <span class="math inline">e^{i\theta}</span> đối với một số thực <span class="math inline">\theta</span> nào đó. Do đó</p>
+<p><span class="math display">
+\frac{\vert{}01\rangle - \vert{}10\rangle}{\sqrt{2}} = \frac{\vert{}ab\rangle - \vert{}ba\rangle}{\sqrt{2}}, \tag{2.217}
+</span></p>
+<p>sai khác một nhân tố pha toàn cục không thể quan sát được. Kết quả là, nếu phép đo <span class="math inline">\vec{v} \cdot \vec{\sigma}</span> được thực hiện trên cả hai qubit, thì chúng ta có thể thấy rằng kết quả <span class="math inline">+1</span> (<span class="math inline">-1</span>) trên qubit thứ nhất kéo theo kết quả <span class="math inline">-1</span> (<span class="math inline">+1</span>) on qubit thứ hai.</p>
+</div>
+</div>
+<hr>
+<p>Ví dụ, hãy xem xét một cặp qubit vướng víu lần lượt thuộc về Alice và Bob:</p>
+<p><span class="math display">
+\frac{\vert{}01\rangle - \vert{}10\rangle}{\sqrt{2}}. \tag{2.218}
+</span></p>
+<p>Giả sử Alice và Bob ở cách xa nhau một khoảng cách rất lớn. Alice thực hiện một phép đo spin dọc theo trục <span class="math inline">\vec{v}</span>, nghĩa là cô ấy đo đại lượng quan sát <span class="math inline">\vec{v} \cdot \vec{\sigma}</span> (được định nghĩa trong Phương trình (2.116) ở trang 90). Giả sử Alice nhận được kết quả <span class="math inline">+1</span>. Khi đó, một phép tính cơ học lượng tử đơn giản, được đưa ra trong Hộp 2.7, cho thấy cô ấy có thể dự đoán chắc chắn rằng Bob sẽ đo được <span class="math inline">-1</span> trên qubit của anh ấy nếu anh ấy cũng đo spin dọc theo trục <span class="math inline">\vec{v}</span>. Tương tự, nếu Alice đo được <span class="math inline">-1</span>, thì cô ấy có thể dự đoán chắc chắn rằng Bob sẽ đo được <span class="math inline">+1</span> trên qubit của anh ấy. Bởi vì Alice luôn luôn có thể dự đoán giá trị của kết quả phép đo được ghi lại khi qubit của Bob được đo theo hướng <span class="math inline">\vec{v}</span>, tính chất vật lý đó phải tương ứng với một yếu tố của thực tại, theo tiêu chuẩn EPR, và nên được biểu diễn trong bất kỳ lý thuyết vật lý hoàn chỉnh nào. Tuy nhiên, cơ học lượng tử tiêu chuẩn, như chúng ta đã trình bày, chỉ đơn thuần cho biết cách tính xác suất của các kết quả đo tương ứng nếu <span class="math inline">\vec{v} \cdot \vec{\sigma}</span> được đo. Cơ học lượng tử tiêu chuẩn chắc chắn không bao gồm bất kỳ yếu tố cơ bản nào nhằm biểu diễn giá trị của <span class="math inline">\vec{v} \cdot \vec{\sigma}</span>, đối với tất cả các vector đơn vị <span class="math inline">\vec{v}</span>.</p>
+<p>Mục tiêu của EPR là chứng tỏ rằng cơ học lượng tử là không hoàn chỉnh, bằng cách chứng minh rằng cơ học lượng tử thiếu đi một số ‘yếu tố của thực tại’ thiết yếu, theo tiêu chuẩn của họ. Họ hy vọng có thể ép buộc một sự quay trở lại với góc nhìn cổ điển hơn về thế giới, một thế giới mà trong đó các hệ thống có thể được gán cho những tính chất tồn tại độc lập với các phép đo được thực hiện trên những hệ thống đó. Đáng tiếc cho EPR, hầu hết các nhà vật lý đã không chấp nhận lập luận trên là đủ sức thuyết phục. Nỗ lực áp đặt lên Tự nhiên bằng mệnh lệnh (by fiat) những tính chất mà nó phải tuân theo dường như là một cách rất kỳ quặc để nghiên cứu các định luật của nó.</p>
+<p>Quả thực, tự nhiên đã có màn trả đũa cuối cùng đối với EPR. Gần ba mươi năm sau khi bài báo của EPR được công bố, một thử nghiệm đã được đề xuất để kiểm tra xem liệu bức tranh về thế giới mà EPR hy vọng sẽ quay trở lại có hợp lệ hay không. Hóa ra, tự nhiên đã chứng minh bằng thực nghiệm rằng quan điểm đó là không chính xác, đồng thời lại phù hợp với cơ học lượng tử.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Tức là
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Theo vật lý cổ điển, mọi thứ đều đã mang sẵn tính chất đó rồi, việc đo chỉ là khiến chúng lộ ra mà thôi. (Ví dụ như là vị trí của một đồ vật, sẵn thì nó đã ở đó, nhưng nhờ chính phép đo chính là ánh sáng chiếu vào vật rồi chiếu vào mắt, chúng mới hiện ra) (Hay như mặt trăng, nếu chúng ta không nhìn, không đo, ánh sáng không chiếu đến nó, thì nó vẫn ở đó). Nhưng theo cơ học lượng tử, mọi thứ đều chưa được quyết định gì cả, bạn chưa đo, nó không cần phải quyết định xem nên trả về kết quả gì, bạn đo, nó bắt buộc phải chọn 1 trạng thái.</p>
+<p>Vì vậy, Eistein đã chọn một thứ gọi là singlet qubit, vì tính chất đặc biệt của nó, mà khi ta đo vật ở hệ A, ta sẽ biết ngay kết quả vật ở hệ B, khi cả hai sụp đổ cùng một lúc. Tưởng tượng xem, cả hai thằng đều không biết gì, tách biệt nhau hoàn toàn, nhưng chỉ cần đo 1 thằng, thì thằng còn lại lập tức cho kết quả đối lại, mà chẳng cần giao tiếp với nhau!</p>
+<p>Thế nên Eistein bảo rằng chắc chắn phải có “biến ẩn”, chúng chắc chắn là đã thông đồng với nhau, nếu m ra +1 thì t sẽ biến thành -1, hai hạt đã quy định sẵn kết quả của mọi đáp án khả dĩ trong vũ trụ.</p>
+</div>
+</div>
+<hr>
+<p>Chìa khóa cho sự bác bỏ bằng thực nghiệm này là một kết quả được biết đến như là bất đẳng thức Bell. Bất đẳng thức Bell không phải là một kết quả về cơ học lượng tử, vì vậy điều đầu tiên chúng ta cần làm là tạm thời quên đi toàn bộ kiến thức của mình về cơ học lượng tử. Để thu được bất đẳng thức Bell, chúng ta sẽ thực hiện một thí nghiệm tưởng tượng, mà chúng ta sẽ phân tích bằng cách sử dụng các khái niệm nhận thức thông thường của mình về cách thế giới vận hành – loại khái niệm mà Einstein và các cộng sự của ông nghĩ rằng Tự nhiên phải tuân theo. Sau khi chúng ta đã thực hiện phân tích theo nhận thức thông thường, chúng ta sẽ thực hiện một phân tích cơ học lượng tử mà chúng ta có thể chứng minh là không nhất quán với phân tích theo nhận thức thông thường. Sau đó, Tự nhiên có thể được yêu cầu, thông qua một thí nghiệm thực tế, đưa ra quyết định lựa chọn giữa các khái niệm nhận thức thông thường của chúng ta về cách thế giới vận hành, và cơ học lượng tử. Hãy tưởng tượng chúng ta thực hiện thí nghiệm sau đây, được minh họa trong Hình 2.4. Charlie chuẩn bị hai hạt. Anh ta chuẩn bị các hạt đó như thế nào không quan trọng, miễn là anh ta có khả năng lặp lại quy trình thực nghiệm mà mình sử dụng. Khi anh ta đã thực hiện xong việc chuẩn bị, anh ta gửi một hạt cho Alice, và hạt thứ hai cho Bob.</p>
+<p>Khi Alice nhận được hạt của mình, cô ấy thực hiện một phép đo trên nó. Hãy tưởng tượng rằng cô ấy có sẵn hai thiết bị đo khác nhau, do đó cô ấy có thể chọn thực hiện một trong hai phép đo khác nhau. Những phép đo này là của các tính chất vật lý mà chúng ta sẽ lần lượt dán nhãn là <span class="math inline">P_Q</span> và <span class="math inline">P_R</span>. Alice không biết trước cô ấy sẽ chọn thực hiện phép đo nào. Thay vào đó, khi nhận được hạt, cô ấy tung một đồng xu hoặc sử dụng một phương pháp ngẫu nhiên nào đó khác để quyết định xem sẽ thực hiện phép đo nào. Để cho đơn giản, chúng ta giả sử rằng mỗi phép đo có thể có một trong hai kết quả, <span class="math inline">+1</span> hoặc <span class="math inline">-1</span>. Giả sử hạt của Alice có một giá trị <span class="math inline">Q</span> đối với tính chất <span class="math inline">P_Q</span>. <span class="math inline">Q</span> được giả định là một tính chất khách quan của hạt của Alice, chỉ đơn thuần được tiết lộ bởi phép đo, giống như cách chúng ta tưởng tượng vị trí của một quả bóng tennis được tiết lộ bởi các hạt ánh sáng tán xạ ra khỏi nó. Tương tự, gọi <span class="math inline">R</span> biểu thị giá trị được tiết lộ bởi một phép đo tính chất <span class="math inline">P_R</span>.</p>
+<p>Tương tự, giả sử rằng Bob có khả năng đo một trong hai tính chất, <span class="math inline">P_S</span> hoặc <span class="math inline">P_T</span>, một lần nữa tiết lộ một giá trị tồn tại khách quan <span class="math inline">S</span> hoặc <span class="math inline">T</span> cho tính chất đó, mỗi giá trị nhận giá trị <span class="math inline">+1</span> hoặc <span class="math inline">-1</span>. Bob không quyết định trước xem anh ấy sẽ đo tính chất nào, mà đợi cho đến khi anh ấy nhận được hạt và sau đó chọn một cách ngẫu nhiên. Thời gian của thí nghiệm được sắp xếp sao cho Alice và Bob thực hiện phép đo của họ cùng một lúc (hoặc, sử dụng ngôn ngữ chính xác hơn của thuyết tương đối, theo một cách mất kết nối nhân quả). Do đó, phép đo mà Alice thực hiện không thể làm xáo trộn kết quả phép đo của Bob (hoặc ngược lại), vì các tác động vật lý không thể lan truyền nhanh hơn ánh sáng.</p>
+<p><img src="../../img/2.4.png" class="img-fluid"></p>
+<hr>
+<p>Chúng ta sẽ thực hiện một số phép đại số đơn giản với đại lượng <span class="math inline">QS + RS + RT - QT</span>. Lưu ý rằng <span class="math display">
+QS + RS + RT - QT = (Q + R)S + (R - Q)T. \tag{2.219}
+</span></p>
+<p>Bởi vì <span class="math inline">R, Q = \pm 1</span>, suy ra hoặc <span class="math inline">(Q + R)S = 0</span> hoặc <span class="math inline">(R - Q)T = 0</span>. Trong cả hai trường hợp, dễ dàng nhận thấy từ (2.219) rằng <span class="math inline">QS + RS + RT - QT = \pm 2</span>. Tiếp theo, giả sử rằng <span class="math inline">p(q, r, s, t)</span> là xác suất để trước khi thực hiện các phép đo, hệ thống ở trạng thái mà <span class="math inline">Q = q, R = r, S = s</span>, và <span class="math inline">T = t</span>. Những xác suất này có thể phụ thuộc vào cách Charlie thực hiện việc chuẩn bị của anh ta, và vào nhiễu thực nghiệm. Gọi <span class="math inline">\mathbf{E}(\cdot)</span> biểu thị giá trị trung bình của một đại lượng, chúng ta có <span class="math display">
+\mathbf{E}(QS + RS + RT - QT) = \sum_{qrst} p(q, r, s, t) (qs + rs + rt - qt) \tag{2.220}
+</span></p>
+<p><span class="math display">
+\le \sum_{qrst} p(q, r, s, t) \times 2 \tag{2.221}
+</span></p>
+<p><span class="math display">
+= 2. \tag{2.222}
+</span></p>
+<p>Ngoài ra, <span class="math display">
+\mathbf{E}(QS + RS + RT - QT) = \sum_{qrst} p(q, r, s, t) qs + \sum_{qrst} p(q, r, s, t) rs\\ + \sum_{qrst} p(q, r, s, t) rt - \sum_{qrst} p(q, r, s, t) qt \tag{2.223}
+</span></p>
+<p><span class="math display">= \mathbf{E}(QS) + \mathbf{E}(RS) + \mathbf{E}(RT) - \mathbf{E}(QT). \tag{2.224}
+</span></p>
+<p>So sánh (2.222) và (2.224), chúng ta thu được Bất đẳng thức Bell,</p>
+<p><span class="math display">
+\mathbf{E}(QS) + \mathbf{E}(RS) + \mathbf{E}(RT) - \mathbf{E}(QT) \le 2. \tag{2.225}
+</span></p>
+<p>Kết quả này cũng thường được biết đến là bất đẳng thức CHSH theo tên viết tắt của bốn người khám phá ra nó. Nó là một phần của một tập hợp các bất đẳng thức lớn hơn được gọi chung là các bất đẳng thức Bell, vì bất đẳng thức đầu tiên được tìm ra bởi John Bell. Bằng cách lặp lại thí nghiệm nhiều lần, Alice và Bob có thể xác định từng đại lượng ở vế trái của bất đẳng thức Bell. Ví dụ, sau khi kết thúc một bộ thí nghiệm, Alice và Bob tập hợp lại để phân tích dữ liệu của họ. Họ xem xét tất cả các thí nghiệm mà Alice đã đo <span class="math inline">P_Q</span> và Bob đã đo <span class="math inline">P_S</span>. Bằng cách nhân các kết quả thí nghiệm của họ với nhau, họ nhận được một mẫu các giá trị cho <span class="math inline">QS</span>. Bằng cách lấy trung bình trên mẫu này, họ có thể ước tính <span class="math inline">\mathbf{E}(QS)</span> đến một độ chính xác chỉ bị giới hạn bởi số lượng thí nghiệm mà họ thực hiện. Tương tự, họ có thể ước tính tất cả các đại lượng khác ở vế trái của bất đẳng thức Bell, và từ đó kiểm tra xem nó có được tuân theo trong một thí nghiệm thực tế hay không.</p>
+<p>Đã đến lúc đưa một chút cơ học lượng tử trở lại bức tranh. Hãy tưởng tượng chúng ta thực hiện thí nghiệm cơ học lượng tử sau đây. Charlie chuẩn bị một hệ lượng tử gồm hai qubit ở trạng thái <span class="math display">
+\vert{}\psi\rangle = \frac{\vert{}01\rangle - \vert{}10\rangle}{\sqrt{2}}. \tag{2.226}
+</span></p>
+<p>Anh ta chuyển qubit thứ nhất cho Alice, và qubit thứ hai cho Bob. Họ thực hiện các phép đo của các đại lượng quan sát sau: <span class="math display">
+Q = Z_1 \quad S = \frac{-Z_2 - X_2}{\sqrt{2}} \tag{2.227}
+</span></p>
+<p><span class="math display">
+R = X_1 \quad T = \frac{Z_2 - X_2}{\sqrt{2}}. \tag{2.228}
+</span></p>
+<p>Các phép tính toán đơn giản chỉ ra rằng các giá trị trung bình cho các đại lượng quan sát này, được viết theo ký hiệu <span class="math inline">\langle\cdot\rangle</span> của cơ học lượng tử, là: <span class="math display">
+\langle QS\rangle = \frac{1}{\sqrt{2}}; \quad \langle RS\rangle = \frac{1}{\sqrt{2}}; \quad \langle RT\rangle = \frac{1}{\sqrt{2}}; \quad \langle QT\rangle = -\frac{1}{\sqrt{2}} \tag{2.229}
+</span></p>
+<p>Do đó,</p>
+<p><span class="math display">
+\langle QS\rangle + \langle RS\rangle + \langle RT\rangle - \langle QT\rangle = 2\sqrt{2}. \tag{2.230}
+</span></p>
 
 
 
