@@ -10,6 +10,31 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# Nói thêm
+
+Một điều khá hay của ma trận mật độ so với việc biểu diễn bằng vector ketpsi.
+
+Mọi thứ biểu diễn được bằng vector ketpsi thì đều có thể được biểu diễn bằng ma trận mật độ tương ứng, nhưng ngược lại thì không.
+
+Tưởng tượng, hệ vướng víu AB, tạo thành trạng thái Bell, vậy qubit1 có biểu diễn vector ketpsi1 là gì? (trong $\mathcal{H_AB} = \mathcal{H_A} \otimes \mathcal{H_B}$, thì $\vert \psi_AB \rangle = \vert \psi_A \rangle \otimes \vert \psi_B \rangle$).
+
+Rõ ràng đây là điểm yếu của vectorketpsi khi nó chỉ có thể biểu diễn các trạng thái ở trên quả cầu blosch.
+
+Và đến đây ta sẽ dùng ma trận mật độ để thay thế.
+
+---
+
+Nhưng ma trận mật độ cũng có điểm yếu chí mạng, 2 hệ khác nhau, 2 kết quả khác nhau, nhưng lại có thể biểu diễn chung bằng 1 ma trận mật độ! 
+
+Định lý 2.6
+
+---
+
+Vậy nên như trong bài sẽ đề cập, ứng dụng sâu sắc nhất của toán tử mật độ là một công cụ để mô tả cho các hệ con của một hệ lượng tử phức hợp.
+
+:::
+
 Chúng ta đã hình thức hóa cơ học lượng tử bằng cách sử dụng ngôn ngữ của các vector trạng thái. Một cách hình thức hóa thay thế hoàn toàn khả thi là sử dụng một công cụ được gọi là toán tử mật độ (density operator) hoặc ma trận mật độ (density matrix). Cách hình thức hóa thay thế này tương đương về mặt toán học với phương pháp vector trạng thái, nhưng nó cung cấp một ngôn ngữ thuận tiện hơn nhiều để tư duy về một số tình huống thường gặp trong cơ học lượng tử. Ba phần tiếp theo mô tả hình thức luận toán tử mật độ của cơ học lượng tử. 
 
 * Mục 2.4.1 giới thiệu toán tử mật độ thông qua khái niệm tập hợp (ensemble) các trạng thái lượng tử. 
@@ -465,3 +490,161 @@ $$
 $$   
 
 trong đó chúng ta đã sử dụng hệ thức đầy đủ ở dòng cuối cùng. Do đó, trạng thái hệ thống của Bob sau khi Alice đã thực hiện phép đo nhưng trước khi Bob biết được kết quả đo là $I/2$. Trạng thái này không có sự phụ thuộc nào vào trạng thái $\vert{}\psi\rangle$ đang được viễn tải, và do đó mọi phép đo do Bob thực hiện sẽ không chứa bất kỳ thông tin nào về $\vert{}\psi\rangle$, từ đó ngăn cản Alice sử dụng viễn tải để truyền thông tin cho Bob nhanh hơn ánh sáng.
+
+:::{.callout-important}
+# Tại sao lại là partial trace?
+
+Tại sao vết riêng phần lại được sử dụng để mô tả một phần của một hệ lượng tử lớn hơn? Lý do cho việc này là vì phép toán vết riêng phần là phép toán duy nhất mang lại sự mô tả chính xác về các đại lượng quan sát được đối với các hệ con của một hệ phức hợp, theo nghĩa sau đây.   
+
+Giả sử $M$ là một đại lượng quan sát bất kỳ trên hệ $A$, và chúng ta có một thiết bị đo lường nào đó có khả năng thực hiện các phép đo của $M$. Gọi $\tilde{M}$ biểu thị đại lượng quan sát tương ứng cho cùng một phép đo đó, được thực hiện trên hệ phức hợp $AB$. Mục tiêu trước mắt của chúng ta là lập luận rằng $\tilde{M}$ nhất thiết phải bằng $M \otimes I_B$. Lưu ý rằng nếu hệ $AB$ được chuẩn bị ở trạng thái $\vert{}m\rangle\vert{}\psi\rangle$, trong đó $\vert{}m\rangle$ là một trạng thái riêng của $M$ với trị riêng $m$, và $\vert{}\psi\rangle$ là một trạng thái bất kỳ của $B$, thì thiết bị đo chắc chắn phải cho ra kết quả $m$ cho phép đo, với xác suất bằng một. Do đó, nếu $P_m$ là toán tử chiếu lên không gian con riêng $m$ của đại lượng quan sát $M$, thì toán tử chiếu tương ứng cho $\tilde{M}$ là $P_m \otimes I_B$. Vì vậy chúng ta có
+
+$$
+\tilde{M} = \sum_m m P_m \otimes I_B = M \otimes I_B. \tag{2.179}
+$$   
+
+Bước tiếp theo là chỉ ra rằng thủ tục vết riêng phần đưa ra thống kê phép đo chính xác cho các quan sát trên một phần của hệ thống. Giả sử chúng ta thực hiện một phép đo trên hệ $A$ được mô tả bởi đại lượng quan sát $M$. Tính nhất quán vật lý đòi hỏi rằng bất kỳ quy tắc nào gán một 'trạng thái', $\rho^A$, cho hệ $A$, đều phải có tính chất là các giá trị trung bình của phép đo phải giống nhau bất kể được tính toán thông qua $\rho^A$ hay $\rho^{AB}$,
+
+$$
+\text{tr}(M\rho^A) = \text{tr}(\tilde{M}\rho^{AB}) = \text{tr}((M \otimes I_B)\rho^{AB}). \tag{2.180}
+$$   
+
+Phương trình này chắc chắn được thỏa mãn nếu chúng ta chọn $\rho^A \equiv \text{tr}_B(\rho^{AB})$. Thực tế, vết riêng phần hóa ra lại là hàm duy nhất có tính chất này. Để thấy tính duy nhất này, gọi $f(\cdot)$ là bất kỳ ánh xạ nào biến đổi các toán tử mật độ trên $AB$ thành các toán tử mật độ trên $A$ sao cho
+$$
+\text{tr}(M f(\rho^{AB})) = \text{tr}((M \otimes I_B)\rho^{AB}), \tag{2.181}
+$$
+
+với mọi đại lượng quan sát $M$. Gọi $M_i$ là một cơ sở trực chuẩn của các toán tử cho không gian các toán tử Hermitian đối với tích vô hướng Hilbert-Schmidt $(X,Y) \equiv \text{tr}(XY)$ (so sánh với Bài tập 2.39 ở trang 76). Khai triển $f(\rho^{AB})$ trong cơ sở này mang lại
+
+$$
+f(\rho^{AB}) = \sum_i M_i \text{tr}(M_i f(\rho^{AB})) \tag{2.182}
+$$   
+
+$$
+= \sum_i M_i \text{tr}((M_i \otimes I_B)\rho^{AB}). \tag{2.183}
+$$   
+
+Từ đó suy ra $f$ được xác định một cách duy nhất bởi Phương trình (2.180). Hơn nữa, vết riêng phần thỏa mãn (2.180), nên nó chính là hàm duy nhất có tính chất này.  
+:::
+
+---
+
+# 5. The Schmidt decomposition and purifications
+
+Các toán tử mật độ và vết riêng phần chỉ là sự khởi đầu của một loạt các công cụ hữu ích cho việc nghiên cứu các hệ lượng tử phức hợp, vốn là trọng tâm của tính toán lượng tử và thông tin lượng tử. Hai công cụ bổ sung có giá trị lớn là phân tích Schmidt và sự thanh lọc (purifications). Trong phần này chúng ta trình bày cả hai công cụ này, và cố gắng mang lại hương vị về sức mạnh của chúng.   
+
+:::{.postulates}
+# Định lý 2.7: (Phân tích Schmidt) 
+
+Giả sử $\vert{}\psi\rangle$ là một trạng thái thuần của một hệ phức hợp, $AB$. Khi đó tồn tại các trạng thái trực chuẩn $\vert{}i_A\rangle$ cho hệ $A$, và các trạng thái trực chuẩn $\vert{}i_B\rangle$ của hệ $B$ sao cho   
+
+$$
+\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle\vert{}i_B\rangle, \tag{2.202}
+$$
+
+trong đó $\lambda_i$ là các số thực không âm thỏa mãn $\sum_i \lambda_i^2 = 1$ được gọi là các hệ số Schmidt (Schmidt co-efficients).   
+:::
+
+Kết quả này rất hữu ích. Để nếm thử sức mạnh của nó, hãy xem xét hệ quả sau: gọi $\vert{}\psi\rangle$ là một trạng thái thuần của một hệ phức hợp, $AB$. Khi đó theo phân tích Schmidt $\rho^A = \sum_i \lambda_i^2 \vert{}i_A\rangle\langle i_A\vert{}$ và $\rho^B = \sum_i \lambda_i^2 \vert{}i_B\rangle\langle i_B\vert{}$, vì vậy các trị riêng của $\rho^A$ và $\rho^B$ là hoàn toàn giống hệt nhau, cụ thể là $\lambda_i^2$ cho cả hai toán tử mật độ. Nhiều tính chất quan trọng của các hệ lượng tử được xác định hoàn toàn bởi các trị riêng của toán tử mật độ rút gọn của hệ thống, vì vậy đối với một trạng thái thuần của một hệ phức hợp, các tính chất như vậy sẽ giống nhau đối với cả hai hệ thống. Lấy một ví dụ, xem xét trạng thái của hai qubit, $(\vert{}00\rangle + \vert{}01\rangle + \vert{}11\rangle)/\sqrt{3}$. Trạng thái này không có tính chất đối xứng rõ ràng nào, nhưng nếu bạn tính $\text{tr}((\rho^A)^2)$ và $\text{tr}((\rho^B)^2)$ bạn sẽ phát hiện ra rằng chúng có cùng giá trị, $7/9$ trong mỗi trường hợp. Đây chỉ là một hệ quả nhỏ của phân tích Schmidt.
+
+:::{.callout-important}
+# Chứng minh
+Chúng ta đưa ra chứng minh cho trường hợp các hệ $A$ và $B$ có không gian trạng thái cùng số chiều, và để lại trường hợp tổng quát cho Bài tập 2.76. Gọi $\vert{}j\rangle$ và $\vert{}k\rangle$ lần lượt là các cơ sở trực chuẩn cố định bất kỳ cho các hệ $A$ và $B$. Khi đó $\vert{}\psi\rangle$ có thể được viết là
+$$
+\vert{}\psi\rangle = \sum_{jk} a_{jk} \vert{}j\rangle\vert{}k\rangle, \tag{2.203}
+$$
+
+đối với một ma trận $a$ nào đó gồm các số phức $a_{jk}$. Theo phân tích giá trị kỳ dị (singular value decomposition - SVD), $a = udv$, trong đó $d$ là một ma trận đường chéo với các phần tử không âm, và $u$ và $v$ là các ma trận đơn nhất. Do đó
+$$
+\vert{}\psi\rangle = \sum_{ijk} u_{ji} d_{ii} v_{ik} \vert{}j\rangle\vert{}k\rangle. \tag{2.204}
+$$
+
+Định nghĩa $\vert{}i_A\rangle \equiv \sum_j u_{ji} \vert{}j\rangle$, $\vert{}i_B\rangle \equiv \sum_k v_{ik} \vert{}k\rangle$, và $\lambda_i \equiv d_{ii}$, chúng ta thấy rằng điều này mang lại
+$$
+\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle. \tag{2.205}
+$$
+
+Dễ dàng kiểm tra thấy rằng $\vert{}i_A\rangle$ tạo thành một tập trực chuẩn, từ tính đơn nhất của $u$ và tính trực chuẩn của $\vert{}j\rangle$, và tương tự như vậy các $\vert{}i_B\rangle$ tạo thành một tập trực chuẩn. $\square$   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.76: 
+Mở rộng chứng minh của phân tích Schmidt cho trường hợp $A$ và $B$ có thể có không gian trạng thái với số chiều khác nhau.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.77: 
+Giả sử $ABC$ là một hệ lượng tử gồm ba thành phần. Hãy đưa ra ví dụ chứng tỏ rằng có những trạng thái lượng tử $\vert{}\psi\rangle$ của các hệ như vậy không thể viết dưới dạng
+$$
+\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle \vert{}i_C\rangle, \tag{2.206}
+$$
+
+trong đó $\lambda_i$ là các số thực, và $\vert{}i_A\rangle, \vert{}i_B\rangle, \vert{}i_C\rangle$ là các cơ sở trực chuẩn của các hệ tương ứng.
+:::
+
+Các cơ sở $\vert{}i_A\rangle$ và $\vert{}i_B\rangle$ được gọi lần lượt là các cơ sở Schmidt (Schmidt bases) cho $A$ và $B$, và số lượng các giá trị $\lambda_i$ khác không được gọi là số Schmidt (Schmidt number) của trạng thái $\vert{}\psi\rangle$. Số Schmidt là một thuộc tính quan trọng của một hệ lượng tử phức hợp, về một khía cạnh nào đó, nó định lượng 'lượng' vướng víu giữa các hệ $A$ và $B$. Để có được khái niệm về lý do tại sao lại như vậy, hãy xem xét tính chất hiển nhiên nhưng quan trọng sau đây: số Schmidt được bảo toàn dưới các phép biến đổi đơn nhất tác dụng chỉ trên riêng hệ $A$ hoặc hệ $B$. Để thấy điều này, lưu ý rằng nếu $\sum_i \lambda_i \vert{}i_A\rangle\vert{}i_B\rangle$ là phân tích Schmidt cho $\vert{}\psi\rangle$ thì $\sum_i \lambda_i (U\vert{}i_A\rangle)\vert{}i_B\rangle$ là phân tích Schmidt cho $U\vert{}\psi\rangle$, trong đó $U$ là một toán tử đơn nhất tác dụng chỉ trên riêng hệ $A$. Các tính chất bất biến đại số của loại này làm cho số Schmidt trở thành một công cụ rất hữu ích.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.78: 
+Chứng minh rằng một trạng thái $\vert{}\psi\rangle$ của một hệ phức hợp $AB$ là một trạng thái tích khi và chỉ khi nó có số Schmidt bằng $1$. Chứng minh rằng $\vert{}\psi\rangle$ là một trạng thái tích khi và chỉ khi $\rho^A$ (và do đó $\rho^B$) là các trạng thái thuần.   
+:::
+
+Một kỹ thuật thứ hai, có liên quan đối với tính toán lượng tử và thông tin lượng tử là sự thanh lọc (purification). Giả sử chúng ta được cho một trạng thái $\rho^A$ của một hệ lượng tử $A$. Hoàn toàn có thể giới thiệu một hệ thống khác, mà chúng ta ký hiệu là $R$, và định nghĩa một trạng thái thuần $\vert{}AR\rangle$ cho hệ chung $AR$ sao cho $\rho^A = \text{tr}_R(\vert{}AR\rangle\langle AR\vert{})$. Tức là, trạng thái thuần $\vert{}AR\rangle$ rút gọn thành $\rho^A$ khi chúng ta chỉ nhìn vào hệ $A$. Đây là một thủ tục thuần túy toán học, được gọi là thanh lọc, cho phép chúng ta liên kết các trạng thái thuần với các trạng thái hỗn hợp. Vì lý do này, chúng ta gọi hệ $R$ là một hệ quy chiếu (reference system): nó là một hệ thống hư cấu, không có ý nghĩa vật lý trực tiếp.   
+
+Để chứng minh rằng sự thanh lọc có thể được thực hiện đối với bất kỳ trạng thái nào, chúng ta giải thích cách xây dựng một hệ $R$ và trạng thái thanh lọc $\vert{}AR\rangle$ cho $\rho^A$. Giả sử $\rho^A$ có phân tích trực chuẩn $\rho^A = \sum_i p_i \vert{}i^A\rangle\langle i^A\vert{}$. Để thanh lọc $\rho^A$, chúng ta giới thiệu một hệ $R$ có cùng không gian trạng thái với hệ $A$, với các trạng thái cơ sở trực chuẩn $\vert{}i^R\rangle$, và định nghĩa một trạng thái thuần cho hệ thống kết hợp
+$$
+\vert{}AR\rangle \equiv \sum_i \sqrt{p_i} \vert{}i^A\rangle\vert{}i^R\rangle. \tag{2.207}
+$$
+
+Bây giờ chúng ta tính toán tử mật độ rút gọn cho hệ $A$ tương ứng với trạng thái $\vert{}AR\rangle$:   
+
+$$
+\text{tr}_R(\vert{}AR\rangle\langle AR\vert{}) = \sum_{ij} \sqrt{p_i p_j} \vert{}i^A\rangle\langle j^A\vert{} \text{tr}(\vert{}i^R\rangle\langle j^R\vert{}) \tag{2.208}
+$$   
+
+$$
+= \sum_{ij} \sqrt{p_i p_j} \vert{}i^A\rangle\langle j^A\vert{} \delta_{ij} \tag{2.209}
+$$   
+
+$$
+= \sum_i p_i \vert{}i^A\rangle\langle i^A\vert{} \tag{2.210}
+$$   
+
+$$
+= \rho^A. \tag{2.211}
+$$
+
+Do đó $\vert{}AR\rangle$ là một sự thanh lọc của $\rho^A$.   
+
+Lưu ý mối quan hệ mật thiết của phân tích Schmidt với sự thanh lọc: thủ tục được sử dụng để thanh lọc một trạng thái hỗn hợp của hệ $A$ là định nghĩa một trạng thái thuần mà cơ sở Schmidt của nó đối với hệ $A$ chính là cơ sở mà trong đó trạng thái hỗn hợp là ma trận đường chéo, với các hệ số Schmidt là căn bậc hai của các trị riêng của toán tử mật độ đang được thanh lọc
+
+Trong phần này, chúng ta đã giải thích hai công cụ để nghiên cứu các hệ lượng tử phức hợp, phân tích Schmidt và sự thanh lọc. Những công cụ này sẽ là không thể thiếu đối với việc nghiên cứu tính toán lượng tử và thông tin lượng tử, đặc biệt là thông tin lượng tử, chủ đề của Phần III của cuốn sách này.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.79: 
+Xét một hệ phức hợp gồm hai qubit. Hãy tìm các phân tích Schmidt của các trạng thái   
+
+$$
+\frac{\vert{}00\rangle + \vert{}11\rangle}{\sqrt{2}} ; \quad \frac{\vert{}00\rangle + \vert{}01\rangle + \vert{}10\rangle + \vert{}11\rangle}{2} ; \quad \text{và} \quad \frac{\vert{}00\rangle + \vert{}01\rangle + \vert{}10\rangle}{\sqrt{3}}. \tag{2.212}
+$$   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.80: 
+Giả sử $\vert{}\psi\rangle$ và $\vert{}\varphi\rangle$ là hai trạng thái thuần của một hệ lượng tử phức hợp với các thành phần $A$ và $B$, có các hệ số Schmidt giống hệt nhau. Chứng minh rằng tồn tại các phép biến đổi đơn nhất $U$ trên hệ $A$ và $V$ trên hệ $B$ sao cho $\vert{}\psi\rangle = (U \otimes V)\vert{}\varphi\rangle$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.81: (Bậc tự do trong các thanh lọc) 
+Gọi $\vert{}AR_1\rangle$ và $\vert{}AR_2\rangle$ là hai sự thanh lọc của một trạng thái $\rho^A$ sang một hệ phức hợp $AR$. Chứng minh rằng tồn tại một phép biến đổi đơn nhất $U_R$ tác dụng lên hệ $R$ sao cho $\vert{}AR_1\rangle = (I_A \otimes U_R)\vert{}AR_2\rangle$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 2.82: 
+Giả sử $\{p_i, \vert{}\psi_i\rangle\}$ là một tập hợp các trạng thái sinh ra một ma trận mật độ $\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}$ cho một hệ lượng tử $A$. Giới thiệu một hệ $R$ với cơ sở trực chuẩn $\vert{}i\rangle$.
+
+(1) Chứng minh rằng $\sum_i \sqrt{p_i}\vert{}\psi_i\rangle\vert{}i\rangle$ là một sự thanh lọc của $\rho$.
+
+(2) Giả sử chúng ta đo $R$ trong cơ sở $\vert{}i\rangle$, thu được kết quả $i$. Chúng ta thu được kết quả $i$ với xác suất bằng bao nhiêu, và trạng thái tương ứng của hệ $A$ là gì?
+
+(3) Gọi $\vert{}AR\rangle$ là bất kỳ sự thanh lọc nào của $\rho$ sang hệ $AR$. Chứng minh rằng tồn tại một cơ sở trực chuẩn $\vert{}i\rangle$ mà trong đó $R$ có thể được đo sao cho trạng thái sau phép đo tương ứng cho hệ $A$ là $\vert{}\psi_i\rangle$ với xác suất $p_i$.
+:::
