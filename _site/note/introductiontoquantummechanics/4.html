@@ -292,6 +292,12 @@ window.Quarto = {
  <span class="menu-text">The density operator</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -333,8 +339,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#quantum-teleportation-and-the-reduced-density-operator" id="toc-quantum-teleportation-and-the-reduced-density-operator" class="nav-link" data-scroll-target="#quantum-teleportation-and-the-reduced-density-operator">Quantum teleportation and the reduced density operator</a></li>
   </ul></li>
-  <li><a href="#the-schmidt-decomposition-and-purifications" id="toc-the-schmidt-decomposition-and-purifications" class="nav-link" data-scroll-target="#the-schmidt-decomposition-and-purifications">5. The Schmidt decomposition and purifications</a></li>
-  <li><a href="#định-lý-2.7-phân-tích-schmidt" id="toc-định-lý-2.7-phân-tích-schmidt" class="nav-link" data-scroll-target="#định-lý-2.7-phân-tích-schmidt">Định lý 2.7: (Phân tích Schmidt)</a></li>
   </ul>
 </nav>
     </div>
@@ -819,190 +823,10 @@ f(\rho^{AB}) = \sum_i M_i \text{tr}(M_i f(\rho^{AB})) \tag{2.182}
 <p>Từ đó suy ra <span class="math inline">f</span> được xác định một cách duy nhất bởi Phương trình (2.180). Hơn nữa, vết riêng phần thỏa mãn (2.180), nên nó chính là hàm duy nhất có tính chất này.</p>
 </div>
 </div>
-<hr>
-</section>
-</section>
-<section id="the-schmidt-decomposition-and-purifications" class="level1">
-<h1>5. The Schmidt decomposition and purifications</h1>
-<p>Các toán tử mật độ và vết riêng phần chỉ là sự khởi đầu của một loạt các công cụ hữu ích cho việc nghiên cứu các hệ lượng tử phức hợp, vốn là trọng tâm của tính toán lượng tử và thông tin lượng tử. Hai công cụ bổ sung có giá trị lớn là phân tích Schmidt và sự thanh lọc (purifications). Trong phần này chúng ta trình bày cả hai công cụ này, và cố gắng mang lại hương vị về sức mạnh của chúng.</p>
-</section>
-<section id="định-lý-2.7-phân-tích-schmidt" class="level1 postulates">
-<h1>Định lý 2.7: (Phân tích Schmidt)</h1>
-<p>Giả sử <span class="math inline">\vert{}\psi\rangle</span> là một trạng thái thuần của một hệ phức hợp, <span class="math inline">AB</span>. Khi đó tồn tại các trạng thái trực chuẩn <span class="math inline">\vert{}i_A\rangle</span> cho hệ <span class="math inline">A</span>, và các trạng thái trực chuẩn <span class="math inline">\vert{}i_B\rangle</span> của hệ <span class="math inline">B</span> sao cho</p>
-<p><span class="math display">
-\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle\vert{}i_B\rangle, \tag{2.202}
-</span></p>
-<p>trong đó <span class="math inline">\lambda_i</span> là các số thực không âm thỏa mãn <span class="math inline">\sum_i \lambda_i^2 = 1</span> được gọi là các hệ số Schmidt (Schmidt co-efficients).</p>
-</section>
-<p>Kết quả này rất hữu ích. Để nếm thử sức mạnh của nó, hãy xem xét hệ quả sau: gọi <span class="math inline">\vert{}\psi\rangle</span> là một trạng thái thuần của một hệ phức hợp, <span class="math inline">AB</span>. Khi đó theo phân tích Schmidt <span class="math inline">\rho^A = \sum_i \lambda_i^2 \vert{}i_A\rangle\langle i_A\vert{}</span> và <span class="math inline">\rho^B = \sum_i \lambda_i^2 \vert{}i_B\rangle\langle i_B\vert{}</span>, vì vậy các trị riêng của <span class="math inline">\rho^A</span> và <span class="math inline">\rho^B</span> là hoàn toàn giống hệt nhau, cụ thể là <span class="math inline">\lambda_i^2</span> cho cả hai toán tử mật độ. Nhiều tính chất quan trọng của các hệ lượng tử được xác định hoàn toàn bởi các trị riêng của toán tử mật độ rút gọn của hệ thống, vì vậy đối với một trạng thái thuần của một hệ phức hợp, các tính chất như vậy sẽ giống nhau đối với cả hai hệ thống. Lấy một ví dụ, xem xét trạng thái của hai qubit, <span class="math inline">(\vert{}00\rangle + \vert{}01\rangle + \vert{}11\rangle)/\sqrt{3}</span>. Trạng thái này không có tính chất đối xứng rõ ràng nào, nhưng nếu bạn tính <span class="math inline">\text{tr}((\rho^A)^2)</span> và <span class="math inline">\text{tr}((\rho^B)^2)</span> bạn sẽ phát hiện ra rằng chúng có cùng giá trị, <span class="math inline">7/9</span> trong mỗi trường hợp. Đây chỉ là một hệ quả nhỏ của phân tích Schmidt.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Chứng minh
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Chúng ta đưa ra chứng minh cho trường hợp các hệ <span class="math inline">A</span> và <span class="math inline">B</span> có không gian trạng thái cùng số chiều, và để lại trường hợp tổng quát cho Bài tập 2.76. Gọi <span class="math inline">\vert{}j\rangle</span> và <span class="math inline">\vert{}k\rangle</span> lần lượt là các cơ sở trực chuẩn cố định bất kỳ cho các hệ <span class="math inline">A</span> và <span class="math inline">B</span>. Khi đó <span class="math inline">\vert{}\psi\rangle</span> có thể được viết là <span class="math display">
-\vert{}\psi\rangle = \sum_{jk} a_{jk} \vert{}j\rangle\vert{}k\rangle, \tag{2.203}
-</span></p>
-<p>đối với một ma trận <span class="math inline">a</span> nào đó gồm các số phức <span class="math inline">a_{jk}</span>. Theo phân tích giá trị kỳ dị (singular value decomposition - SVD), <span class="math inline">a = udv</span>, trong đó <span class="math inline">d</span> là một ma trận đường chéo với các phần tử không âm, và <span class="math inline">u</span> và <span class="math inline">v</span> là các ma trận đơn nhất. Do đó <span class="math display">
-\vert{}\psi\rangle = \sum_{ijk} u_{ji} d_{ii} v_{ik} \vert{}j\rangle\vert{}k\rangle. \tag{2.204}
-</span></p>
-<p>Định nghĩa <span class="math inline">\vert{}i_A\rangle \equiv \sum_j u_{ji} \vert{}j\rangle</span>, <span class="math inline">\vert{}i_B\rangle \equiv \sum_k v_{ik} \vert{}k\rangle</span>, và <span class="math inline">\lambda_i \equiv d_{ii}</span>, chúng ta thấy rằng điều này mang lại <span class="math display">
-\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle. \tag{2.205}
-</span></p>
-<p>Dễ dàng kiểm tra thấy rằng <span class="math inline">\vert{}i_A\rangle</span> tạo thành một tập trực chuẩn, từ tính đơn nhất của <span class="math inline">u</span> và tính trực chuẩn của <span class="math inline">\vert{}j\rangle</span>, và tương tự như vậy các <span class="math inline">\vert{}i_B\rangle</span> tạo thành một tập trực chuẩn. <span class="math inline">\square</span></p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.76:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Mở rộng chứng minh của phân tích Schmidt cho trường hợp <span class="math inline">A</span> và <span class="math inline">B</span> có thể có không gian trạng thái với số chiều khác nhau.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.77:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Giả sử <span class="math inline">ABC</span> là một hệ lượng tử gồm ba thành phần. Hãy đưa ra ví dụ chứng tỏ rằng có những trạng thái lượng tử <span class="math inline">\vert{}\psi\rangle</span> của các hệ như vậy không thể viết dưới dạng <span class="math display">
-\vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle \vert{}i_C\rangle, \tag{2.206}
-</span></p>
-<p>trong đó <span class="math inline">\lambda_i</span> là các số thực, và <span class="math inline">\vert{}i_A\rangle, \vert{}i_B\rangle, \vert{}i_C\rangle</span> là các cơ sở trực chuẩn của các hệ tương ứng.</p>
-</div>
-</div>
-</div>
-<p>Các cơ sở <span class="math inline">\vert{}i_A\rangle</span> và <span class="math inline">\vert{}i_B\rangle</span> được gọi lần lượt là các cơ sở Schmidt (Schmidt bases) cho <span class="math inline">A</span> và <span class="math inline">B</span>, và số lượng các giá trị <span class="math inline">\lambda_i</span> khác không được gọi là số Schmidt (Schmidt number) của trạng thái <span class="math inline">\vert{}\psi\rangle</span>. Số Schmidt là một thuộc tính quan trọng của một hệ lượng tử phức hợp, về một khía cạnh nào đó, nó định lượng ‘lượng’ vướng víu giữa các hệ <span class="math inline">A</span> và <span class="math inline">B</span>. Để có được khái niệm về lý do tại sao lại như vậy, hãy xem xét tính chất hiển nhiên nhưng quan trọng sau đây: số Schmidt được bảo toàn dưới các phép biến đổi đơn nhất tác dụng chỉ trên riêng hệ <span class="math inline">A</span> hoặc hệ <span class="math inline">B</span>. Để thấy điều này, lưu ý rằng nếu <span class="math inline">\sum_i \lambda_i \vert{}i_A\rangle\vert{}i_B\rangle</span> là phân tích Schmidt cho <span class="math inline">\vert{}\psi\rangle</span> thì <span class="math inline">\sum_i \lambda_i (U\vert{}i_A\rangle)\vert{}i_B\rangle</span> là phân tích Schmidt cho <span class="math inline">U\vert{}\psi\rangle</span>, trong đó <span class="math inline">U</span> là một toán tử đơn nhất tác dụng chỉ trên riêng hệ <span class="math inline">A</span>. Các tính chất bất biến đại số của loại này làm cho số Schmidt trở thành một công cụ rất hữu ích.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.78:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Chứng minh rằng một trạng thái <span class="math inline">\vert{}\psi\rangle</span> của một hệ phức hợp <span class="math inline">AB</span> là một trạng thái tích khi và chỉ khi nó có số Schmidt bằng <span class="math inline">1</span>. Chứng minh rằng <span class="math inline">\vert{}\psi\rangle</span> là một trạng thái tích khi và chỉ khi <span class="math inline">\rho^A</span> (và do đó <span class="math inline">\rho^B</span>) là các trạng thái thuần.</p>
-</div>
-</div>
-</div>
-<p>Một kỹ thuật thứ hai, có liên quan đối với tính toán lượng tử và thông tin lượng tử là sự thanh lọc (purification). Giả sử chúng ta được cho một trạng thái <span class="math inline">\rho^A</span> của một hệ lượng tử <span class="math inline">A</span>. Hoàn toàn có thể giới thiệu một hệ thống khác, mà chúng ta ký hiệu là <span class="math inline">R</span>, và định nghĩa một trạng thái thuần <span class="math inline">\vert{}AR\rangle</span> cho hệ chung <span class="math inline">AR</span> sao cho <span class="math inline">\rho^A = \text{tr}_R(\vert{}AR\rangle\langle AR\vert{})</span>. Tức là, trạng thái thuần <span class="math inline">\vert{}AR\rangle</span> rút gọn thành <span class="math inline">\rho^A</span> khi chúng ta chỉ nhìn vào hệ <span class="math inline">A</span>. Đây là một thủ tục thuần túy toán học, được gọi là thanh lọc, cho phép chúng ta liên kết các trạng thái thuần với các trạng thái hỗn hợp. Vì lý do này, chúng ta gọi hệ <span class="math inline">R</span> là một hệ quy chiếu (reference system): nó là một hệ thống hư cấu, không có ý nghĩa vật lý trực tiếp.</p>
-<p>Để chứng minh rằng sự thanh lọc có thể được thực hiện đối với bất kỳ trạng thái nào, chúng ta giải thích cách xây dựng một hệ <span class="math inline">R</span> và trạng thái thanh lọc <span class="math inline">\vert{}AR\rangle</span> cho <span class="math inline">\rho^A</span>. Giả sử <span class="math inline">\rho^A</span> có phân tích trực chuẩn <span class="math inline">\rho^A = \sum_i p_i \vert{}i^A\rangle\langle i^A\vert{}</span>. Để thanh lọc <span class="math inline">\rho^A</span>, chúng ta giới thiệu một hệ <span class="math inline">R</span> có cùng không gian trạng thái với hệ <span class="math inline">A</span>, với các trạng thái cơ sở trực chuẩn <span class="math inline">\vert{}i^R\rangle</span>, và định nghĩa một trạng thái thuần cho hệ thống kết hợp <span class="math display">
-\vert{}AR\rangle \equiv \sum_i \sqrt{p_i} \vert{}i^A\rangle\vert{}i^R\rangle. \tag{2.207}
-</span></p>
-<p>Bây giờ chúng ta tính toán tử mật độ rút gọn cho hệ <span class="math inline">A</span> tương ứng với trạng thái <span class="math inline">\vert{}AR\rangle</span>:</p>
-<p><span class="math display">
-\text{tr}_R(\vert{}AR\rangle\langle AR\vert{}) = \sum_{ij} \sqrt{p_i p_j} \vert{}i^A\rangle\langle j^A\vert{} \text{tr}(\vert{}i^R\rangle\langle j^R\vert{}) \tag{2.208}
-</span></p>
-<p><span class="math display">
-= \sum_{ij} \sqrt{p_i p_j} \vert{}i^A\rangle\langle j^A\vert{} \delta_{ij} \tag{2.209}
-</span></p>
-<p><span class="math display">
-= \sum_i p_i \vert{}i^A\rangle\langle i^A\vert{} \tag{2.210}
-</span></p>
-<p><span class="math display">
-= \rho^A. \tag{2.211}
-</span></p>
-<p>Do đó <span class="math inline">\vert{}AR\rangle</span> là một sự thanh lọc của <span class="math inline">\rho^A</span>.</p>
-<p>Lưu ý mối quan hệ mật thiết của phân tích Schmidt với sự thanh lọc: thủ tục được sử dụng để thanh lọc một trạng thái hỗn hợp của hệ <span class="math inline">A</span> là định nghĩa một trạng thái thuần mà cơ sở Schmidt của nó đối với hệ <span class="math inline">A</span> chính là cơ sở mà trong đó trạng thái hỗn hợp là ma trận đường chéo, với các hệ số Schmidt là căn bậc hai của các trị riêng của toán tử mật độ đang được thanh lọc</p>
-<p>Trong phần này, chúng ta đã giải thích hai công cụ để nghiên cứu các hệ lượng tử phức hợp, phân tích Schmidt và sự thanh lọc. Những công cụ này sẽ là không thể thiếu đối với việc nghiên cứu tính toán lượng tử và thông tin lượng tử, đặc biệt là thông tin lượng tử, chủ đề của Phần III của cuốn sách này.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.79:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Xét một hệ phức hợp gồm hai qubit. Hãy tìm các phân tích Schmidt của các trạng thái</p>
-<p><span class="math display">
-\frac{\vert{}00\rangle + \vert{}11\rangle}{\sqrt{2}} ; \quad \frac{\vert{}00\rangle + \vert{}01\rangle + \vert{}10\rangle + \vert{}11\rangle}{2} ; \quad \text{và} \quad \frac{\vert{}00\rangle + \vert{}01\rangle + \vert{}10\rangle}{\sqrt{3}}. \tag{2.212}
-</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.80:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Giả sử <span class="math inline">\vert{}\psi\rangle</span> và <span class="math inline">\vert{}\varphi\rangle</span> là hai trạng thái thuần của một hệ lượng tử phức hợp với các thành phần <span class="math inline">A</span> và <span class="math inline">B</span>, có các hệ số Schmidt giống hệt nhau. Chứng minh rằng tồn tại các phép biến đổi đơn nhất <span class="math inline">U</span> trên hệ <span class="math inline">A</span> và <span class="math inline">V</span> trên hệ <span class="math inline">B</span> sao cho <span class="math inline">\vert{}\psi\rangle = (U \otimes V)\vert{}\varphi\rangle</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.81: (Bậc tự do trong các thanh lọc)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Gọi <span class="math inline">\vert{}AR_1\rangle</span> và <span class="math inline">\vert{}AR_2\rangle</span> là hai sự thanh lọc của một trạng thái <span class="math inline">\rho^A</span> sang một hệ phức hợp <span class="math inline">AR</span>. Chứng minh rằng tồn tại một phép biến đổi đơn nhất <span class="math inline">U_R</span> tác dụng lên hệ <span class="math inline">R</span> sao cho <span class="math inline">\vert{}AR_1\rangle = (I_A \otimes U_R)\vert{}AR_2\rangle</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.82:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Giả sử <span class="math inline">\{p_i, \vert{}\psi_i\rangle\}</span> là một tập hợp các trạng thái sinh ra một ma trận mật độ <span class="math inline">\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}</span> cho một hệ lượng tử <span class="math inline">A</span>. Giới thiệu một hệ <span class="math inline">R</span> với cơ sở trực chuẩn <span class="math inline">\vert{}i\rangle</span>.</p>
-<ol type="1">
-<li><p>Chứng minh rằng <span class="math inline">\sum_i \sqrt{p_i}\vert{}\psi_i\rangle\vert{}i\rangle</span> là một sự thanh lọc của <span class="math inline">\rho</span>.</p></li>
-<li><p>Giả sử chúng ta đo <span class="math inline">R</span> trong cơ sở <span class="math inline">\vert{}i\rangle</span>, thu được kết quả <span class="math inline">i</span>. Chúng ta thu được kết quả <span class="math inline">i</span> với xác suất bằng bao nhiêu, và trạng thái tương ứng của hệ <span class="math inline">A</span> là gì?</p></li>
-<li><p>Gọi <span class="math inline">\vert{}AR\rangle</span> là bất kỳ sự thanh lọc nào của <span class="math inline">\rho</span> sang hệ <span class="math inline">AR</span>. Chứng minh rằng tồn tại một cơ sở trực chuẩn <span class="math inline">\vert{}i\rangle</span> mà trong đó <span class="math inline">R</span> có thể được đo sao cho trạng thái sau phép đo tương ứng cho hệ <span class="math inline">A</span> là <span class="math inline">\vert{}\psi_i\rangle</span> với xác suất <span class="math inline">p_i</span>.</p></li>
-</ol>
-</div>
-</div>
-</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

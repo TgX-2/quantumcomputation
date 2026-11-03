@@ -39,6 +39,7 @@ website:
           - note/introductiontoquantummechanics/2.qmd
           - note/introductiontoquantummechanics/3.qmd
           - note/introductiontoquantummechanics/4.qmd
+          - note/introductiontoquantummechanics/5.qmd
 
       - section : "Appendix"
         contents:
