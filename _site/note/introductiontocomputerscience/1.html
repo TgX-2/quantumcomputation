@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>Models for computation – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/1.html">Models for computation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Models for computation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#turing-machines" id="toc-turing-machines" class="nav-link active" data-scroll-target="#turing-machines">1. Turing machines</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/1.html">Models for computation</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Models for computation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><em>‘…algorithms are concepts that have existence apart from any programming language.’</em> – Donald Knuth</p>
+</blockquote>
+<p>Việc có một thuật toán để thực hiện một tác vụ nào đó có ý nghĩa gì? Khi còn nhỏ, tất cả chúng ta đều học một quy trình cho phép chúng ta cộng hai số bất kỳ lại với nhau, bất kể những số đó lớn đến mức nào. Đây là một ví dụ về một thuật toán. Việc tìm ra một công thức toán học chính xác cho khái niệm thuật toán là mục tiêu của phần này.</p>
+<hr>
+<p>Về mặt lịch sử, khái niệm về một thuật toán đã có từ nhiều thế kỷ trước; sinh viên đại học được học thuật toán hai nghìn năm tuổi của Euclid để tìm ước chung lớn nhất của hai số nguyên dương. Tuy nhiên, phải đến những năm 1930, những khái niệm nền tảng của lý thuyết thuật toán hiện đại, và từ đó là của điện toán, mới được giới thiệu bởi Alonzo Church, Alan Turing, và những người tiên phong khác của kỷ nguyên máy tính. Công trình này nảy sinh nhằm đáp lại một thách thức sâu sắc do nhà toán học vĩ đại David Hilbert đặt ra vào đầu thế kỷ 20. Hilbert đặt câu hỏi liệu có tồn tại một thuật toán nào có thể được sử dụng, về nguyên tắc, để giải quyết tất cả các bài toán của toán học hay không. Hilbert kỳ vọng rằng câu trả lời cho câu hỏi này, đôi khi được biết đến là entscheidungsproblem (bài toán quyết định), sẽ là có.</p>
+<p>Đáng ngạc nhiên thay, câu trả lời cho thách thức của Hilbert hóa ra lại là không: không có thuật toán nào để giải quyết tất cả các bài toán toán học. Để chứng minh điều này, Church và Turing đã phải giải quyết một vấn đề sâu sắc là làm sao nắm bắt được bằng một định nghĩa toán học những gì chúng ta ngụ ý khi sử dụng khái niệm trực quan về một thuật toán. Bằng cách làm như vậy, họ đã đặt nền móng cho lý thuyết thuật toán hiện đại, và hệ quả là cho lý thuyết khoa học máy tính hiện đại.</p>
+<hr>
+<p>Trong chương này, chúng tôi sử dụng hai cách tiếp cận có vẻ khác nhau đối với lý thuyết tính toán. Cách tiếp cận đầu tiên là do Turing đề xuất. Turing đã định nghĩa một lớp các máy móc, hiện nay được gọi là máy Turing, nhằm nắm bắt khái niệm về một thuật toán để thực hiện một tác vụ tính toán. Trong Mục 3.1.1, chúng tôi mô tả các máy Turing, và sau đó thảo luận về một số biến thể đơn giản hơn của mô hình máy Turing. Cách tiếp cận thứ hai là thông qua mô hình mạch của tính toán, một cách tiếp cận đặc biệt hữu ích như một sự chuẩn bị cho nghiên cứu sau này của chúng ta về máy tính lượng tử. Mô hình mạch được mô tả trong Mục 3.1.2. Mặc dù các mô hình tính toán này bề ngoài có vẻ khác nhau, nhưng hóa ra chúng lại tương đương. Bạn có thể hỏi, tại sao lại giới thiệu nhiều hơn một mô hình tính toán? Chúng tôi làm như vậy bởi vì các mô hình tính toán khác nhau có thể mang lại những hiểu biết khác nhau trong việc giải quyết các bài toán cụ thể. Hai (hoặc nhiều) cách tư duy về một khái niệm thì tốt hơn là một.</p>
+<section id="turing-machines" class="level1">
+<h1>1. Turing machines</h1>
+<p>Các phần tử cơ bản của một máy Turing được minh họa trong Hình 3.1. Một máy Turing chứa bốn phần tử chính: (a) một chương trình (program), khá giống với một máy tính thông thường; (b) một bộ điều khiển trạng thái hữu hạn (finite state control), hoạt động như một bộ vi xử lý được tinh giản, điều phối các hoạt động khác của máy; (c) một dải băng (tape), hoạt động giống như bộ nhớ máy tính; và (d) một đầu đọc-ghi dải băng (read-write tape-head), trỏ đến vị trí trên dải băng hiện đang có thể đọc hoặc ghi. Bây giờ chúng ta mô tả chi tiết hơn từng phần tử trong bốn phần tử này.</p>
+<p><img src="../../img/3.1.png" class="img-fluid"></p>
+<hr>
+<p>Bộ điều khiển trạng thái hữu hạn cho một máy Turing bao gồm một tập hợp hữu hạn các trạng thái bên trong (internal states), <span class="math inline">q_1, \dots, q_m</span>. Số lượng <span class="math inline">m</span> được phép thay đổi; hóa ra đối với <span class="math inline">m</span> đủ lớn, điều này không ảnh hưởng đến sức mạnh của máy theo bất kỳ cách thiết yếu nào, do đó không mất tính tổng quát, chúng ta có thể giả sử rằng <span class="math inline">m</span> là một hằng số cố định nào đó. Cách tốt nhất để nghĩ về bộ điều khiển trạng thái hữu hạn là như một loại vi xử lý, điều phối hoạt động của máy Turing. Nó cung cấp bộ nhớ lưu trữ tạm thời bên ngoài dải băng, và một trung tâm nơi tất cả quá trình xử lý cho máy có thể được thực hiện. Ngoài các trạng thái <span class="math inline">q_1, \dots, q_m</span>, còn có hai trạng thái bên trong đặc biệt, được dán nhãn là <span class="math inline">q_s</span> và <span class="math inline">q_h</span>. Chúng ta gọi chúng lần lượt là trạng thái bắt đầu (starting state) và trạng thái dừng (halting state). Ý tưởng là vào lúc bắt đầu tính toán, máy Turing ở trạng thái bắt đầu <span class="math inline">q_s</span>. Việc thực thi tính toán làm cho trạng thái bên trong của máy Turing thay đổi. Nếu việc tính toán hoàn thành, máy Turing kết thúc ở trạng thái <span class="math inline">q_h</span> để chỉ báo rằng máy đã hoàn thành hoạt động của nó.</p>
+<p>Dải băng của máy Turing là một đối tượng một chiều, trải dài đến vô tận theo một hướng. Dải băng bao gồm một chuỗi vô hạn các ô dải băng (tape squares). Chúng ta đánh số các ô dải băng là <span class="math inline">0, 1, 2, 3, \dots</span>. Mỗi ô dải băng chứa một ký hiệu được lấy từ một bảng chữ cái (alphabet), <span class="math inline">\Gamma</span>, chứa một số lượng hữu hạn các ký hiệu phân biệt. Hiện tại, sẽ thuận tiện nếu giả sử rằng bảng chữ cái chứa bốn ký hiệu, mà chúng ta ký hiệu là <span class="math inline">0, 1, b</span> (ký hiệu ‘trống’ - blank), và <span class="math inline">\triangleright</span>, để đánh dấu mép bên trái của dải băng. Ban đầu, dải băng chứa một ký hiệu <span class="math inline">\triangleright</span> ở đầu bên trái, một số lượng hữu hạn các số <span class="math inline">0</span> và <span class="math inline">1</span>, và phần còn lại của dải băng chứa các ô trống. Đầu đọc-ghi dải băng xác định một ô duy nhất trên dải băng của máy Turing là ô hiện đang được truy cập bởi máy.</p>
+<p>Tóm lại, máy bắt đầu hoạt động với bộ điều khiển trạng thái hữu hạn ở trạng thái <span class="math inline">q_s</span>, và với đầu đọc-ghi ở ô dải băng ngoài cùng bên trái, ô được đánh số <span class="math inline">0</span>. Quá trình tính toán sau đó tiến hành theo từng bước theo chương trình, sẽ được định nghĩa ở phần dưới. Nếu trạng thái hiện tại là <span class="math inline">q_h</span>, thì quá trình tính toán đã dừng lại, và đầu ra (output) của phép tính là nội dung hiện tại (không trống) của dải băng.</p>
+<p>Một chương trình cho một máy Turing là một danh sách có thứ tự hữu hạn các dòng chương trình có dạng <span class="math inline">\langle q, x, q', x', s\rangle</span>. Phần tử đầu tiên trong dòng chương trình, <span class="math inline">q</span>, là một trạng thái từ tập hợp các trạng thái bên trong của máy. Phần tử thứ hai, <span class="math inline">x</span>, được lấy từ bảng chữ cái các ký hiệu có thể xuất hiện trên dải băng, <span class="math inline">\Gamma</span>. Cách thức hoạt động của chương trình là ở mỗi chu kỳ máy, máy Turing xem qua danh sách các dòng chương trình theo thứ tự, tìm kiếm một dòng <span class="math inline">\langle q, x, \cdot, \cdot, \cdot\rangle</span>, sao cho trạng thái bên trong hiện tại của máy là <span class="math inline">q</span>, và ký hiệu đang được đọc trên dải băng là <span class="math inline">x</span>.</p>
+<p>Nếu nó không tìm thấy dòng chương trình nào như vậy, trạng thái bên trong của máy sẽ được thay đổi thành <span class="math inline">q_h</span>, và máy dừng hoạt động. Nếu một dòng như vậy được tìm thấy, thì dòng chương trình đó được thực thi. Việc thực thi một dòng chương trình bao gồm các bước sau: trạng thái bên trong của máy được đổi thành <span class="math inline">q'</span>; ký hiệu <span class="math inline">x</span> trên dải băng được ghi đè bởi ký hiệu <span class="math inline">x'</span>, và đầu đọc-ghi dải băng di chuyển sang trái, sang phải, hoặc đứng yên, tùy thuộc vào việc <span class="math inline">s</span> tương ứng là <span class="math inline">-1</span>, <span class="math inline">+1</span>, hoặc <span class="math inline">0</span>. Ngoại lệ duy nhất cho quy tắc này là nếu đầu đọc-ghi dải băng đang ở ô dải băng ngoài cùng bên trái, và <span class="math inline">s = -1</span>, trong trường hợp đó đầu đọc-ghi vẫn giữ nguyên vị trí.</p>
+<hr>
+<p>Bây giờ chúng ta đã biết máy Turing là gì, hãy xem nó có thể được sử dụng như thế nào để tính toán một hàm đơn giản. Xét ví dụ sau về một máy Turing. Máy bắt đầu với một số nhị phân, <span class="math inline">x</span>, trên dải băng, theo sau là các khoảng trống (blanks). Máy có ba trạng thái bên trong, <span class="math inline">q_1, q_2</span>, và <span class="math inline">q_3</span>, ngoài trạng thái bắt đầu <span class="math inline">q_s</span> và trạng thái dừng <span class="math inline">q_h</span>. Chương trình chứa các dòng chương trình sau (các con số ở bên trái là để thuận tiện trong việc tham chiếu đến các dòng chương trình trong phần thảo luận sau, và không phải là một phần của chương trình):</p>
+<p><span class="math display">
+1: \langle q_s, \triangleright, q_1, \triangleright, +1 \rangle
+</span></p>
+<p><span class="math display">
+2: \langle q_1, 0, q_1, b, +1 \rangle
+</span></p>
+<p><span class="math display">
+3: \langle q_1, 1, q_1, b, +1 \rangle
+</span></p>
+<p><span class="math display">
+4: \langle q_1, b, q_2, b, -1 \rangle
+</span></p>
+<p><span class="math display">
+5: \langle q_2, b, q_2, b, -1 \rangle
+</span></p>
+<p><span class="math display">
+6: \langle q_2, \triangleright, q_3, \triangleright, +1 \rangle
+</span></p>
+<p><span class="math display">
+7: \langle q_3, b, q_h, 1, 0 \rangle
+</span></p>
+<p>Chương trình này tính toán hàm gì? Ban đầu máy ở trạng thái <span class="math inline">q_s</span> và ở vị trí ngoài cùng bên trái của dải băng nên dòng 1, <span class="math inline">\langle q_s, \triangleright, q_1, \triangleright, +1 \rangle</span>, được thực thi, điều này làm cho đầu đọc-ghi di chuyển sang phải mà không thay đổi những gì được viết trên dải băng, nhưng thay đổi trạng thái bên trong của máy thành <span class="math inline">q_1</span>. Ba dòng tiếp theo của chương trình đảm bảo rằng trong khi máy ở trạng thái <span class="math inline">q_1</span>, đầu đọc-ghi sẽ tiếp tục di chuyển sang phải trong khi nó đọc số <span class="math inline">0</span> (dòng 2) hoặc số <span class="math inline">1</span> (dòng 3) trên dải băng, ghi đè nội dung dải băng bằng các khoảng trống khi nó di chuyển và duy trì ở trạng thái <span class="math inline">q_1</span>, cho đến khi nó gặp một ô dải băng đã bị trống, tại thời điểm đó đầu đọc-ghi được di chuyển sang trái một vị trí, và trạng thái bên trong được chuyển thành <span class="math inline">q_2</span> (dòng 4). Dòng 5 sau đó đảm bảo rằng đầu đọc-ghi tiếp tục di chuyển sang trái trong khi các khoảng trống đang được đọc bởi đầu đọc-ghi, mà không thay đổi nội dung của dải băng. Quá trình này tiếp diễn cho đến khi đầu đọc-ghi quay trở lại điểm bắt đầu của nó, tại thời điểm đó nó đọc được ký hiệu <span class="math inline">\triangleright</span> trên dải băng, thay đổi trạng thái bên trong thành <span class="math inline">q_3</span>, và di chuyển sang phải một bước (dòng 6). Dòng 7 hoàn thành chương trình, đơn giản là in số <span class="math inline">1</span> lên dải băng, và sau đó dừng lại.</p>
+<hr>
+<p>Phân tích trước đó cho thấy chương trình này tính toán hàm hằng <span class="math inline">f(x) = 1</span>. Tức là, bất kể số nào được nhập vào trên dải băng, số <span class="math inline">1</span> vẫn là đầu ra. Tổng quát hơn, một máy Turing có thể được coi là tính toán các hàm từ các số nguyên không âm thành các số nguyên không âm; trạng thái ban đầu của dải băng được sử dụng để biểu diễn đầu vào cho hàm, và trạng thái cuối cùng của dải băng được sử dụng để biểu diễn đầu ra của hàm.</p>
+<p>Phân tích trước đó cho thấy chương trình này tính toán hàm hằng <span class="math inline">f(x) = 1</span>. Tức là, bất kể số nào được nhập vào trên dải băng, số <span class="math inline">1</span> vẫn là đầu ra. Tổng quát hơn, một máy Turing có thể được coi là tính toán các hàm từ các số nguyên không âm thành các số nguyên không âm; trạng thái ban đầu của dải băng được sử dụng để biểu diễn đầu vào cho hàm, và trạng thái cuối cùng của dải băng được sử dụng để biểu diễn đầu ra của hàm.</p>
+<p>Có vẻ như chúng ta đã tốn rất nhiều công sức chỉ để tính toán hàm đơn giản này bằng cách sử dụng các máy Turing của mình. Liệu có thể xây dựng các hàm phức tạp hơn bằng cách sử dụng các máy Turing không? Ví dụ, liệu chúng ta có thể chế tạo một cỗ máy sao cho khi hai số, <span class="math inline">x</span> và <span class="math inline">y</span>, được nhập vào trên dải băng với một khoảng trống để phân định chúng, nó sẽ xuất ra tổng <span class="math inline">x + y</span> trên dải băng? Tổng quát hơn, lớp các hàm nào có thể được tính toán bằng cách sử dụng một máy Turing?</p>
+<p>Hóa ra mô hình tính toán máy Turing có thể được sử dụng để tính toán vô số các hàm khác nhau. Ví dụ, nó có thể được sử dụng để thực hiện tất cả các phép toán số học cơ bản, để tìm kiếm qua văn bản được biểu diễn dưới dạng các chuỗi bit trên dải băng, và nhiều phép toán thú vị khác. Đáng ngạc nhiên là, hóa ra một máy Turing có thể được sử dụng để mô phỏng tất cả các hoạt động được thực hiện trên một máy tính hiện đại! Quả thực, theo một luận đề được đưa ra một cách độc lập bởi Church và bởi Turing, mô hình tính toán máy Turing nắm bắt hoàn toàn khái niệm về việc tính toán một hàm bằng cách sử dụng một thuật toán. Điều này được biết đến là Luận đề Church–Turing (Church-Turing thesis):</p>
+<blockquote class="blockquote">
+<p><em>The class of functions computable by a Turing machine corresponds exactly to the class of functions which we would naturally regard as being computable by an algorithm.</em></p>
+</blockquote>
+<p>Luận đề Church–Turing khẳng định một sự tương đương giữa một khái niệm toán học chặt chẽ – hàm có thể tính toán được bằng máy Turing – và khái niệm trực quan về việc tính toán được bằng một thuật toán có ý nghĩa như thế nào. Luận đề này lấy được tầm quan trọng của nó từ thực tế là nó làm cho việc nghiên cứu các thuật toán trong thế giới thực, trước năm 1936 vốn là một khái niệm khá mơ hồ, trở nên có thể thích ứng với sự nghiên cứu toán học chặt chẽ. Để hiểu ý nghĩa của điểm này, có thể hữu ích khi xem xét định nghĩa của một hàm liên tục (continuous function) từ giải tích thực. Mọi đứa trẻ đều có thể nói cho bạn biết một đường liên tục trên một tờ giấy có ý nghĩa gì, nhưng làm thế nào để nắm bắt trực giác đó trong một định nghĩa chặt chẽ lại khác xa với sự hiển nhiên. Các nhà toán học vào thế kỷ mười chín đã dành rất nhiều thời gian tranh luận về ưu điểm của các định nghĩa khác nhau về tính liên tục trước khi định nghĩa hiện đại về tính liên tục được chấp nhận. Khi đưa ra các định nghĩa nền tảng như định nghĩa về tính liên tục hay khả năng tính toán, điều quan trọng là phải chọn được những định nghĩa tốt, đảm bảo rằng các khái niệm trực quan của một người khớp chặt chẽ với định nghĩa toán học chính xác. Từ quan điểm này, luận đề Church–Turing đơn giản là sự khẳng định rằng mô hình tính toán máy Turing cung cấp một nền tảng tốt cho khoa học máy tính, nắm bắt khái niệm trực quan của một thuật toán trong một định nghĩa chặt chẽ.</p>
+<p>Về mặt suy luận tiên nghiệm (A priori), không hiển nhiên rằng mọi hàm mà chúng ta theo trực giác coi là có thể tính toán được bằng một thuật toán đều có thể được tính toán bằng cách sử dụng một máy Turing. Church, Turing và nhiều người khác đã dành rất nhiều thời gian thu thập bằng chứng cho luận đề Church–Turing, và trong suốt sáu mươi năm không có bằng chứng phản bác nào được tìm thấy. Mặc dù vậy, có khả năng trong tương lai chúng ta sẽ khám phá ra trong Tự nhiên một quá trình tính toán một hàm không thể tính toán được trên một máy Turing. Sẽ thật tuyệt vời nếu điều đó từng xảy ra, bởi vì khi đó chúng ta có thể khai thác quá trình đó để giúp chúng ta thực hiện các tính toán mới không thể thực hiện được trước đây. Tất nhiên, chúng ta cũng sẽ cần phải đại tu lại định nghĩa về khả năng tính toán, và cùng với đó, toàn bộ ngành khoa học máy tính.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.1: (Các quá trình không thể tính toán trong Tự nhiên)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Làm thế nào chúng ta có thể nhận ra rằng một quá trình trong Tự nhiên tính toán một hàm không thể tính toán được bởi một máy Turing?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.2: (Số Turing)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng mỗi máy Turing một dải băng có thể được gán một số từ danh sách <span class="math inline">1, 2, 3, \dots</span> theo cách sao cho con số đó xác định duy nhất cỗ máy tương ứng. Chúng ta gọi con số này là số Turing của máy Turing tương ứng. (Gợi ý: Mọi số nguyên dương đều có một phân tích ra thừa số nguyên tố duy nhất <span class="math inline">p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}</span>, trong đó <span class="math inline">p_i</span> là các số nguyên tố phân biệt, và <span class="math inline">a_1, \dots, a_k</span> là các số nguyên không âm.)</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Trong các chương sau, chúng ta sẽ thấy rằng các máy tính lượng tử cũng tuân theo luận đề Church–Turing. Nghĩa là, các máy tính lượng tử có thể tính toán cùng một lớp các hàm có thể tính toán được bởi một máy Turing. Sự khác biệt giữa máy tính lượng tử và máy Turing hóa ra lại nằm ở hiệu quả (efficiency) mà phép tính của hàm có thể được thực hiện – có những hàm có thể được tính toán hiệu quả hơn nhiều trên một máy tính lượng tử so với những gì được tin là có thể làm được với một thiết bị tính toán cổ điển như máy Turing.</p>
+<p>Việc chứng minh chi tiết hoàn toàn rằng mô hình tính toán máy Turing có thể được sử dụng để xây dựng tất cả các khái niệm thông thường được sử dụng trong các ngôn ngữ lập trình máy tính nằm ngoài phạm vi của cuốn sách này (xem ‘Lịch sử và đọc thêm’ ở cuối chương để biết thêm thông tin). Khi chỉ định các thuật toán, thay vì chỉ định rõ ràng máy Turing được sử dụng để tính toán thuật toán, chúng ta sẽ thường sử dụng một mã giả (pseudocode) ở cấp độ cao hơn nhiều, tin tưởng vào luận đề Church-Turing rằng mã giả này có thể được dịch sang mô hình tính toán máy Turing. Chúng ta sẽ không đưa ra bất kỳ loại định nghĩa chặt chẽ nào cho mã giả. Hãy nghĩ về nó như một phiên bản trang trọng hơn một chút của tiếng Anh hoặc, nếu bạn muốn, một phiên bản cẩu thả của một ngôn ngữ lập trình bậc cao như C++ hoặc BASIC. Mã giả cung cấp một cách thuận tiện để biểu diễn các thuật toán, mà không đi sâu vào mức độ chi tiết cực độ mà một máy Turing đòi hỏi. Một ví dụ về việc sử dụng mã giả có thể được tìm thấy trong Hộp 3.2 ở trang 130; nó cũng được sử dụng ở phần sau của cuốn sách để mô tả các thuật toán lượng tử.</p>
+<p>Có nhiều biến thể đối với mô hình máy Turing cơ bản. Chúng ta có thể tưởng tượng các máy Turing với các loại dải băng khác nhau. Ví dụ, người ta có thể xem xét các dải băng vô hạn hai chiều, hoặc có lẽ là tính toán với các dải băng có nhiều hơn một chiều. Cho đến nay, theo những gì được biết, không thể thay đổi bất kỳ khía cạnh nào của mô hình Turing theo một cách hợp lý về mặt vật lý mà lại có thể mở rộng được lớp các hàm có thể tính toán được bởi mô hình này.</p>
+<p>Lấy một ví dụ, hãy xem xét một máy Turing được trang bị nhiều dải băng. Để đơn giản, chúng ta xem xét trường hợp hai dải băng, vì sự tổng quát hóa lên nhiều hơn hai dải băng là rõ ràng từ ví dụ này. Giống như máy Turing cơ bản, một máy Turing hai dải băng có một số lượng hữu hạn các trạng thái bên trong <span class="math inline">q_1, \dots, q_m</span>, một trạng thái bắt đầu <span class="math inline">q_s</span>, và một trạng thái dừng <span class="math inline">q_h</span>. Nó có hai dải băng, mỗi dải chứa các ký hiệu từ một bảng chữ cái hữu hạn các ký hiệu, <span class="math inline">\Gamma</span>. Như trước đây, chúng ta thấy thuận tiện khi giả sử rằng bảng chữ cái chứa bốn ký hiệu, <span class="math inline">0, 1, b</span> và <span class="math inline">\triangleright</span>, trong đó <span class="math inline">\triangleright</span> đánh dấu mép bên trái của mỗi dải băng. Máy có hai đầu đọc-dải băng, một cho mỗi dải băng. Sự khác biệt chính giữa máy Turing hai dải băng và máy Turing cơ bản nằm ở chương trình. Các dòng chương trình có dạng <span class="math inline">\langle q, x_1, x_2, q', x_1', x_2', s_1, s_2 \rangle</span>, nghĩa là nếu trạng thái bên trong của máy là <span class="math inline">q</span>, dải băng một đang đọc <span class="math inline">x_1</span> ở vị trí hiện tại của nó, và dải băng hai đang đọc <span class="math inline">x_2</span> ở vị trí hiện tại của nó, thì trạng thái bên trong của máy sẽ được đổi thành <span class="math inline">q'</span>, <span class="math inline">x_1</span> bị ghi đè bằng <span class="math inline">x_1'</span>, <span class="math inline">x_2</span> bị ghi đè bằng <span class="math inline">x_2'</span>, và các đầu đọc-dải băng cho dải băng một và dải băng hai di chuyển tùy thuộc vào việc <span class="math inline">s_1</span> hoặc <span class="math inline">s_2</span> lần lượt bằng <span class="math inline">+1, -1</span> hay <span class="math inline">0</span>.</p>
+<p>Máy Turing cơ bản và máy Turing hai dải băng là những mô hình tính toán tương đương nhau theo nghĩa mô hình này có thể mô phỏng (simulate) mô hình kia. Giả sử ta có một máy hai dải băng tính toán hàm <span class="math inline">f(x)</span> dựa trên đầu vào <span class="math inline">x</span> ở dải băng thứ nhất. Đáng ngạc nhiên là luôn tồn tại một máy một dải băng tương đương cũng có khả năng tính toán hàm <span class="math inline">f</span> đó. Ý tưởng cơ bản là máy một dải băng sẽ mô phỏng máy hai dải băng bằng cách dùng dải băng duy nhất của nó để lưu trữ nội dung của cả hai dải băng kia. Việc mô phỏng này đòi hỏi một mức chi phí tính toán phụ (computational overhead), nhưng điểm quan trọng là về nguyên tắc nó luôn có thể thực hiện được. Thực tế, tồn tại một máy Turing Vạn năng (Universal Turing machine) có thể mô phỏng bất kỳ máy Turing nào khác!</p>
+<p>Một biến thể thú vị khác của mô hình máy Turing là đưa sự ngẫu nhiên (randomness) vào mô hình. Ví dụ, máy có thể thực thi một dòng lệnh với hiệu ứng như sau: nếu trạng thái bên trong là <span class="math inline">q</span> và đầu đọc thấy <span class="math inline">x</span>, hãy tung một đồng xu không thiên lệch. Nếu ra ngửa, chuyển trạng thái thành <span class="math inline">q_{i_H}</span>, nếu ra sấp, chuyển thành <span class="math inline">q_{i_T}</span>. Dòng lệnh này có dạng <span class="math inline">\langle q, x, q_{i_H}, q_{i_T} \rangle</span>. Tuy nhiên, ngay cả biến thể này cũng không làm thay đổi sức mạnh thiết yếu của mô hình tính toán máy Turing. Một máy Turing tất định (deterministic) hoàn toàn có thể mô phỏng lại thuật toán trên bằng cách “tìm kiếm vét cạn” (searching out) tất cả các nhánh đường dẫn tính toán có thể xảy ra tương ứng với các giá trị tung đồng xu khác nhau. Việc mô phỏng tất định này có thể kém hiệu quả hơn nhiều so với mô hình ngẫu nhiên, nhưng điểm mấu chốt là lớp các hàm tính toán được không hề thay đổi khi đưa sự ngẫu nhiên vào mô hình cơ sở.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.3: (Máy Turing đảo ngược chuỗi bit)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Mô tả một máy Turing nhận đầu vào là một số nhị phân <span class="math inline">x</span>, và xuất ra các bit của <span class="math inline">x</span> theo thứ tự đảo ngược. (Gợi ý: Trong bài tập này và bài tập tiếp theo, có thể hữu ích nếu sử dụng máy Turing nhiều dải băng và/hoặc các ký hiệu khác ngoài <span class="math inline">\triangleright, 0, 1</span> và khoảng trống.)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.4: (Máy Turing cộng modulo 2)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Mô tả một máy Turing cộng hai số nhị phân <span class="math inline">x</span> và <span class="math inline">y</span> theo modulo 2. Các con số được nhập vào dải băng dưới dạng nhị phân, theo định dạng <span class="math inline">x</span>, theo sau là một khoảng trống, theo sau là <span class="math inline">y</span>. Nếu một số không dài bằng số kia thì bạn có thể giả sử nó đã được đệm thêm các số 0 ở đầu để làm cho hai số có cùng độ dài</p>
+</div>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 3.1: Máy Turing Vạn năng (The Universal Turing Machine)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chúng tôi đã mô tả các máy Turing như chứa ba phần tử có thể thay đổi từ máy này sang máy khác – cấu hình ban đầu của dải băng, các trạng thái bên trong của bộ điều khiển trạng thái hữu hạn, và chương trình cho máy. Một ý tưởng thông minh được biết đến là Máy Turing Vạn năng (Universal Turing Machine - UTM) cho phép chúng ta cố định chương trình và bộ điều khiển trạng thái hữu hạn một lần và mãi mãi, chỉ để lại nội dung ban đầu của dải băng như là phần duy nhất của máy cần được thay đổi.</p>
+<p>Máy Turing Vạn năng (xem hình bên dưới) có tính chất sau. Gọi <span class="math inline">M</span> là một máy Turing bất kỳ, và gọi <span class="math inline">T_M</span> là số Turing liên kết với máy <span class="math inline">M</span>. Sau đó, trên đầu vào là biểu diễn nhị phân cho <span class="math inline">T_M</span> theo sau bởi một khoảng trống, theo sau bởi bất kỳ chuỗi ký hiệu <span class="math inline">x</span> nào trên phần còn lại của dải băng, Máy Turing Vạn năng sẽ đưa ra đầu ra giống hệt bất cứ thứ gì máy <span class="math inline">M</span> sẽ đưa ra khi nhận đầu vào là <span class="math inline">x</span>. Do đó, Máy Turing Vạn năng có khả năng mô phỏng bất kỳ máy Turing nào khác!</p>
+<p><img src="../../img/box-3.1.png" class="img-fluid"></p>
+<p>(Mô tả hình ảnh: Một sơ đồ cho thấy dải băng của UTM chứa chuỗi <span class="math inline">T_M</span>, khoảng trống <span class="math inline">b</span>, và dữ liệu <span class="math inline">x</span>. Đầu đọc của UTM trỏ vào <span class="math inline">T_M</span>. Sau quá trình tính toán, dải băng xuất ra kết quả <span class="math inline">M(x)</span>)</p>
+<p>Máy Turing Vạn năng có tinh thần tương tự như một máy tính có thể lập trình hiện đại, trong đó hành động mà máy tính sẽ thực hiện – ‘chương trình’ – được lưu trữ trong bộ nhớ, tương tự như chuỗi bit <span class="math inline">T_M</span> được lưu trữ ở đầu dải băng bởi Máy Turing Vạn năng. Dữ liệu sẽ được chương trình xử lý được lưu trữ trong một phần bộ nhớ riêng biệt, tương tự như vai trò của <span class="math inline">x</span> trong Máy Turing Vạn năng. Sau đó, một phần cứng cố định nào đó được sử dụng để chạy chương trình, tạo ra đầu ra. Phần cứng cố định này tương tự như các trạng thái bên trong và chương trình (cố định) đang được thực thi bởi Máy Turing Vạn năng.</p>
+<p>Việc mô tả cấu trúc chi tiết của một Máy Turing Vạn năng nằm ngoài phạm vi của cuốn sách này. (Mặc dù những độc giả chăm chỉ có thể muốn thử xây dựng nó.) Điểm then chốt là sự tồn tại của một cỗ máy như vậy, cho thấy rằng một cỗ máy cố định duy nhất có thể được sử dụng để chạy bất kỳ thuật toán nào. Sự tồn tại của một Máy Turing Vạn năng cũng giải thích cho phát biểu trước đây của chúng ta rằng số lượng trạng thái bên trong của một máy Turing không quan trọng lắm, vì miễn là con số <span class="math inline">m</span> đó vượt qua số lượng cần thiết cho một Máy Turing Vạn năng, một cỗ máy như vậy có thể được sử dụng để mô phỏng một máy Turing với bất kỳ số lượng trạng thái bên trong nào.</p>
+</div>
+</div>
+<hr>
+<p>Hãy quay trở lại với entscheidungsproblem (bài toán quyết định) của Hilbert, nguồn cảm hứng ban đầu cho những người sáng lập ra khoa học máy tính. Có tồn tại một thuật toán nào để quyết định tất cả các bài toán của toán học không? Câu trả lời cho câu hỏi này đã được Church và Turing chứng minh là không. Trong Hộp 3.2, chúng tôi giải thích chứng minh của Turing cho sự thật đáng chú ý này. Hiện tượng không thể quyết định được (undecidability) này ngày nay được biết là mở rộng vượt xa những ví dụ mà Church và Turing đã xây dựng. Chẳng hạn, người ta đã biết rằng bài toán quyết định xem hai không gian tô pô có tương đương tô pô (‘đồng phôi’ - homeomorphic) với nhau hay không là không thể quyết định được. Có những bài toán đơn giản liên quan đến hành vi của các hệ động lực học cũng không thể quyết định được, như bạn sẽ chứng minh trong Bài toán 3.4. Các tài liệu tham khảo cho những ví dụ này và các ví dụ khác được đưa ra ở phần cuối chương ‘Lịch sử và đọc thêm’.</p>
+<p>Bên cạnh sự thú vị nội tại của nó, tính không thể quyết định còn báo trước một chủ đề nhận được sự quan tâm rất lớn trong khoa học máy tính, cũng như đối với tính toán lượng tử và thông tin lượng tử: sự phân biệt giữa những bài toán dễ giải, và những bài toán khó giải. Tính không thể quyết định cung cấp ví dụ tối thượng về những bài toán khó giải – khó đến mức trên thực tế chúng là bất khả thi để giải.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.5: (Bài toán dừng không có đầu vào)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng cho trước một máy Turing <span class="math inline">M</span>, không có thuật toán nào để xác định xem liệu <span class="math inline">M</span> có dừng lại hay không khi đầu vào của máy là một dải băng trống.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.6: (Bài toán dừng xác suất)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta đánh số các máy Turing xác suất bằng cách sử dụng một sơ đồ tương tự như sơ đồ được tìm thấy trong Bài tập 3.2 và định nghĩa hàm dừng xác suất <span class="math inline">h_p(x)</span> là <span class="math inline">1</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất ít nhất là <span class="math inline">1/2</span> và là <span class="math inline">0</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất nhỏ hơn <span class="math inline">1/2</span>. Chứng minh rằng không có máy Turing xác suất nào có thể xuất ra <span class="math inline">h_p(x)</span> với xác suất chính xác lớn hơn hẳn <span class="math inline">1/2</span> đối với mọi <span class="math inline">x</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.7: (Oracle dừng)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử một hộp đen (black box) được cung cấp cho chúng ta, nó nhận một số nguyên không âm <span class="math inline">x</span> làm đầu vào, và sau đó xuất ra giá trị của <span class="math inline">h(x)</span>, trong đó <span class="math inline">h(\cdot)</span> là hàm dừng được định nghĩa trong Hộp 3.2 ở trang 130. Loại hộp đen này đôi khi được gọi là một oracle (nhà tiên tri) cho bài toán dừng. Giả sử chúng ta có một máy Turing thông thường được tăng cường thêm khả năng gọi oracle này. Một cách để hoàn thành việc này là sử dụng một máy Turing hai dải băng, và thêm một lệnh chương trình bổ sung vào máy Turing, dẫn đến việc oracle được gọi, và giá trị của <span class="math inline">h(x)</span> được in lên dải băng thứ hai, trong đó <span class="math inline">x</span> là nội dung hiện tại của dải băng thứ hai. Rõ ràng là mô hình tính toán này mạnh mẽ hơn mô hình máy Turing thông thường, vì nó có thể được sử dụng để tính toán hàm dừng. Bài toán dừng cho mô hình tính toán này có không thể quyết định được không? Tức là, một máy Turing được hỗ trợ bởi một oracle cho bài toán dừng có thể quyết định liệu một chương trình dành cho máy Turing có oracle có dừng lại trên một đầu vào cụ thể hay không?</p>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

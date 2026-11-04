@@ -35,11 +35,18 @@ website:
 
       - section : "Introduction to Quantum Mechanics"
         contents: 
+          - note/introductiontoquantummechanics/index.qmd
           - note/introductiontoquantummechanics/1.qmd
           - note/introductiontoquantummechanics/2.qmd
           - note/introductiontoquantummechanics/3.qmd
           - note/introductiontoquantummechanics/4.qmd
           - note/introductiontoquantummechanics/5.qmd
+          - note/introductiontoquantummechanics/6.qmd
+
+      - section : "Introduction to Computer Science"
+        contents:
+          - note/introductiontocomputerscience/index.qmd
+          - note/introductiontocomputerscience/1.qmd
 
       - section : "Appendix"
         contents:

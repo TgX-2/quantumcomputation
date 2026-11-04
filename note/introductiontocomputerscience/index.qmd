@@ -1,0 +1,41 @@
+---
+title: "Introduction to Computer Science"
+chapter: "Introduction to Computer Science"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+> *'In natural science, Nature has given us a world and we’re just to discover its laws. In computers, we can stuff laws into it and create a world.'*
+> – Alan Kay
+
+> *'Our field is still in its embryonic stage. It’s great that we haven’t been around for 2000 years. We are still at a stage where very, very important results occur in front of our eyes.'*
+> – Michael Rabin, on computer science
+
+Các thuật toán (Algorithms) là khái niệm then chốt của khoa học máy tính. Một thuật toán là một công thức chính xác để thực hiện một tác vụ nào đó, chẳng hạn như thuật toán sơ cấp để cộng hai số mà tất cả chúng ta đều học khi còn nhỏ. Chương này phác thảo lý thuyết hiện đại về các thuật toán được phát triển bởi khoa học máy tính. Mô hình cơ bản của chúng ta cho các thuật toán sẽ là máy Turing (Turing machine). Đây là một máy tính lý tưởng hóa, khá giống với một máy tính cá nhân hiện đại, nhưng với một tập lệnh cơ bản đơn giản hơn, và một bộ nhớ không giới hạn được lý tưởng hóa. Sự đơn giản bề ngoài của các máy Turing rất dễ gây hiểu lầm; chúng là những thiết bị rất mạnh mẽ. Chúng ta sẽ thấy rằng chúng có thể được sử dụng để thực thi bất kỳ thuật toán nào, ngay cả thuật toán chạy trên một máy tính có vẻ mạnh mẽ hơn rất nhiều.   
+
+Câu hỏi nền tảng mà chúng ta đang cố gắng giải quyết trong quá trình nghiên cứu thuật toán là: những tài nguyên nào được yêu cầu để thực hiện một tác vụ tính toán cho trước? Câu hỏi này chia tách một cách tự nhiên thành hai phần. Đầu tiên, chúng ta muốn hiểu những tác vụ tính toán nào là khả thi, tốt nhất là bằng cách đưa ra các thuật toán tường minh để giải quyết các bài toán cụ thể. Ví dụ, chúng ta có nhiều ví dụ xuất sắc về các thuật toán có thể nhanh chóng sắp xếp một danh sách các số theo thứ tự tăng dần. Khía cạnh thứ hai của câu hỏi này là chứng minh những hạn chế đối với những tác vụ tính toán nào có thể được hoàn thành. Ví dụ, các giới hạn dưới (lower bounds) có thể được đưa ra đối với số lượng các phép toán bắt buộc phải được thực hiện bởi bất kỳ thuật toán nào sắp xếp một danh sách các số theo thứ tự tăng dần. Lý tưởng nhất, hai nhiệm vụ này – việc tìm kiếm các thuật toán để giải quyết các bài toán tính toán, và chứng minh những hạn chế về khả năng giải quyết các bài toán tính toán của chúng ta – sẽ ăn khớp với nhau một cách hoàn hảo. Trong thực tế, một khoảng cách đáng kể thường tồn tại giữa các kỹ thuật tốt nhất được biết đến để giải quyết một bài toán tính toán, và những hạn chế khắt khe nhất được biết đến trên lời giải đó. Mục đích của chương này là đưa ra một cái nhìn tổng quan rộng rãi về các công cụ đã được phát triển để hỗ trợ việc phân tích các bài toán tính toán, cũng như trong việc xây dựng và phân tích các thuật toán để giải quyết những bài toán như vậy.
+
+---
+
+Tại sao một người quan tâm đến tính toán lượng tử và thông tin lượng tử lại nên dành thời gian nghiên cứu khoa học máy tính cổ điển? Có ba lý do tốt cho nỗ lực này. 
+
+Thứ nhất, khoa học máy tính cổ điển cung cấp một kho tàng khổng lồ các khái niệm và kỹ thuật có thể được tái sử dụng với hiệu quả tuyệt vời trong tính toán lượng tử và thông tin lượng tử. Nhiều thành tựu rực rỡ của tính toán lượng tử và thông tin lượng tử có được nhờ sự kết hợp giữa các ý tưởng sẵn có từ khoa học máy tính với những ý tưởng mới mẻ từ cơ học lượng tử. Ví dụ, một số thuật toán nhanh cho máy tính lượng tử dựa trên phép biến đổi Fourier, một công cụ mạnh mẽ được nhiều thuật toán cổ điển sử dụng. Một khi người ta nhận ra rằng máy tính lượng tử có thể thực hiện một dạng biến đổi Fourier nhanh hơn nhiều so với máy tính cổ điển, điều này đã cho phép phát triển nhiều thuật toán lượng tử quan trọng.   
+
+Thứ hai, các nhà khoa học máy tính đã bỏ ra rất nhiều nỗ lực để hiểu những tài nguyên nào được yêu cầu để thực hiện một tác vụ tính toán cho trước trên máy tính cổ điển. Những kết quả này có thể được sử dụng làm cơ sở để so sánh với tính toán lượng tử và thông tin lượng tử. Ví dụ, nhiều sự chú ý đã được tập trung vào bài toán tìm các thừa số nguyên tố của một số cho trước. Trên máy tính cổ điển, bài toán này được tin là không có lời giải 'hiệu quả', trong đó 'hiệu quả' mang một ý nghĩa mà chúng ta sẽ giải thích ở phần sau của chương. Điều thú vị là một lời giải hiệu quả cho bài toán này đã được biết đến đối với máy tính lượng tử. Bài học ở đây là, đối với tác vụ tìm thừa số nguyên tố này, dường như có một khoảng cách (gap) giữa những gì có thể làm được trên máy tính cổ điển và những gì có thể làm được trên máy tính lượng tử. Điều này vừa có giá trị tự thân thú vị, vừa thú vị theo nghĩa rộng hơn rằng nó gợi ý một khoảng cách như vậy có thể tồn tại cho một lớp các bài toán tính toán rộng lớn hơn thay vì chỉ đơn thuần là việc tìm thừa số nguyên tố. Bằng cách nghiên cứu sâu hơn bài toán cụ thể này, chúng ta có thể nhận diện được các đặc điểm của bài toán giúp nó dễ xử lý hơn trên máy tính lượng tử so với trên máy tính cổ điển, và sau đó vận dụng những hiểu biết này để tìm ra các thuật toán lượng tử thú vị cho việc giải quyết các bài toán khác. 
+
+Thứ ba, và là điều quan trọng nhất, đó là học cách tư duy như một nhà khoa học máy tính. Các nhà khoa học máy tính tư duy theo một phong cách khá khác biệt so với một nhà vật lý hay nhà khoa học tự nhiên khác. Bất kỳ ai muốn có hiểu biết sâu sắc về tính toán lượng tử và thông tin lượng tử đều phải học cách tư duy như một nhà khoa học máy tính ít nhất là trong một số thời điểm; họ phải biết một cách bản năng bài toán nào, kỹ thuật nào, và quan trọng nhất là những bài toán nào mang lại sự quan tâm lớn nhất đối với một nhà khoa học máy tính.   
+
+---
+
+Cấu trúc của chương này như sau. 
+
+Mục 3.1, chúng tôi giới thiệu hai mô hình tính toán: mô hình máy Turing và mô hình mạch. Mô hình máy Turing sẽ được sử dụng làm mô hình tính toán nền tảng của chúng ta. Tuy nhiên, trong thực tế, chúng ta chủ yếu sử dụng mô hình mạch của tính toán, và chính mô hình này là hữu ích nhất trong việc nghiên cứu tính toán lượng tử. Khi đã có trong tay các mô hình tính toán, phần còn lại của chương sẽ thảo luận về các yêu cầu tài nguyên cho tính toán. 
+
+Mục 3.2 bắt đầu bằng việc tổng quan về các tác vụ tính toán mà chúng ta quan tâm cũng như thảo luận về một số câu hỏi liên quan đến tài nguyên. Nó tiếp tục với cái nhìn tổng quan về các khái niệm then chốt của độ phức tạp tính toán, một lĩnh vực nghiên cứu các yêu cầu về thời gian (time) và không gian (space) cần thiết để giải quyết các bài toán tính toán cụ thể, và cung cấp một sự phân loại rộng rãi các bài toán dựa trên độ khó của lời giải. Cuối cùng, mục này kết thúc bằng một sự xem xét về tài nguyên năng lượng cần thiết để thực hiện tính toán. Đáng ngạc nhiên là, năng lượng cần thiết để thực hiện một tính toán có thể được làm cho nhỏ đến mức không đáng kể, miễn là người ta có thể làm cho tính toán đó trở nên khả nghịch. Chúng tôi giải thích cách xây dựng các máy tính khả nghịch, và giải thích một số lý do tại sao chúng lại quan trọng đối với cả khoa học máy tính lẫn tính toán lượng tử và thông tin lượng tử. 
+
+Mục 3.3 kết thúc chương bằng một cái nhìn rộng lớn về toàn bộ lĩnh vực khoa học máy tính, tập trung vào các vấn đề có liên quan đặc biệt đến tính toán lượng tử và thông tin lượng tử.   
