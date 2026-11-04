@@ -144,3 +144,116 @@ Sau khi đã xem xét những giá trị của việc phân loại đa thức so
 # Bài tập 3.16: (Tồn tại các hàm khó tính toán) 
 Chứng minh rằng tồn tại các hàm Boolean trên $n$ đầu vào mà yêu cầu ít nhất $2^n / \log n$ cổng logic để tính toán.   
 :::
+
+---
+
+# 3. Decision problems and the complexity classes P and NP
+
+Nhiều bài toán tính toán được định hình một cách rõ ràng nhất dưới dạng các bài toán quyết định (decision problems) – những bài toán có câu trả lời là có (yes) hoặc không (no). Ví dụ, một số $m$ cho trước có phải là số nguyên tố hay không? Đây là bài toán quyết định tính nguyên tố (primality). Những ý tưởng chính của độ phức tạp tính toán được hình thành một cách dễ dàng nhất và thường xuyên nhất dưới dạng các bài toán quyết định, vì hai lý do: lý thuyết có dạng đơn giản nhất và thanh lịch nhất ở hình thức này, trong khi vẫn có thể khái quát hóa một cách tự nhiên cho các kịch bản phức tạp hơn; và về mặt lịch sử, độ phức tạp tính toán phát sinh chủ yếu từ việc nghiên cứu các bài toán quyết định.   
+
+Mặc dù hầu hết các bài toán quyết định có thể dễ dàng được phát biểu bằng ngôn ngữ đơn giản, quen thuộc, việc thảo luận về các tính chất chung của các bài toán quyết định được hỗ trợ rất nhiều bởi thuật ngữ của các ngôn ngữ hình thức (formal languages). Trong thuật ngữ này, một ngôn ngữ $L$ trên bảng chữ cái $\Sigma$ là một tập con của tập $\Sigma^*$ gồm tất cả các chuỗi ký hiệu (hữu hạn) từ $\Sigma$. Ví dụ, nếu $\Sigma = \{0, 1\}$, thì tập hợp các biểu diễn nhị phân của các số chẵn, $L = \{0, 10, 100, 110, \dots\}$ là một ngôn ngữ trên $\Sigma$.   
+
+Các bài toán quyết định có thể được mã hóa một cách hiển nhiên thành các bài toán về ngôn ngữ. Chẳng hạn, bài toán quyết định tính nguyên tố có thể được mã hóa bằng cách sử dụng bảng chữ cái nhị phân $\Sigma = \{0, 1\}$. Các chuỗi từ $\Sigma^*$ có thể được diễn giải một cách tự nhiên như các số nguyên không âm. Ví dụ, $0010$ có thể được diễn giải là số $2$. Ngôn ngữ $L$ được định nghĩa là bao gồm tất cả các chuỗi nhị phân sao cho con số tương ứng là số nguyên tố.   
+
+Để giải bài toán quyết định tính nguyên tố, thứ mà chúng ta muốn là một máy Turing mà khi bắt đầu với một số $n$ cho trước trên dải băng đầu vào của nó, cuối cùng sẽ xuất ra một kết quả tương đương với 'có' nếu $n$ là số nguyên tố, và xuất ra 'không' nếu $n$ không phải là số nguyên tố. Để làm cho ý tưởng này trở nên chính xác, sẽ thuận tiện nếu ta sửa đổi định nghĩa máy Turing cũ của chúng ta (ở Mục 3.1.1) một chút, thay thế trạng thái dừng $q_h$ bằng hai trạng thái $q_Y$ và $q_N$ để lần lượt biểu diễn các câu trả lời 'có' và 'không'. Trong tất cả các phương diện khác, máy hành xử theo cùng một cách, và nó vẫn dừng lại khi đi vào trạng thái $q_Y$ hoặc $q_N$.   Tổng quát hơn, một ngôn ngữ $L$ được quyết định (decided) bởi một máy Turing nếu máy đó có khả năng quyết định xem một đầu vào $x$ trên dải băng của nó có phải là một thành viên của ngôn ngữ $L$ hay không, cuối cùng dừng lại ở trạng thái $q_Y$ nếu $x \in L$, và cuối cùng dừng lại ở trạng thái $q_N$ nếu $x \notin L$. Chúng ta nói rằng máy đã chấp nhận (accepted) hoặc từ chối (rejected) $x$ tùy thuộc vào việc trường hợp nào trong hai trường hợp này xảy ra.
+
+---
+
+**Chúng ta có thể xác định liệu một số có phải là số nguyên tố hay không nhanh đến mức nào?**
+
+Tức là, máy Turing nhanh nhất để quyết định ngôn ngữ biểu diễn bài toán quyết định tính nguyên tố là gì? Chúng ta nói rằng một bài toán thuộc lớp $\mathbf{TIME}(f(n))$ nếu tồn tại một máy Turing quyết định liệu một ứng cử viên $x$ có thuộc ngôn ngữ đó trong thời gian $O(f(n))$ hay không, trong đó $n$ là độ dài của $x$. Một bài toán được nói là có thể giải quyết trong thời gian đa thức (polynomial time) nếu nó thuộc $\mathbf{TIME}(n^k)$ với một số $k$ hữu hạn nào đó. Tập hợp tất cả các ngôn ngữ thuộc $\mathbf{TIME}(n^k)$, với một số $k$ nào đó, được ký hiệu là $\mathbf{P}$. $\mathbf{P}$ là ví dụ đầu tiên của chúng ta về một lớp độ phức tạp (complexity class). Tổng quát hơn, một lớp độ phức tạp được định nghĩa là một tập hợp các ngôn ngữ. Phần lớn lý thuyết độ phức tạp tính toán liên quan đến việc định nghĩa các lớp độ phức tạp khác nhau, và hiểu được mối quan hệ giữa các lớp độ phức tạp khác nhau.   
+
+Không có gì đáng ngạc nhiên khi có những bài toán không thể được giải quyết trong thời gian đa thức. Thật không may, việc chứng minh rằng bất kỳ bài toán cụ thể nào không thể giải quyết được trong thời gian đa thức dường như rất khó khăn, mặc dù các phỏng đoán thì rất nhiều! Một ví dụ đơn giản về một bài toán quyết định thú vị được tin là không thuộc $\mathbf{P}$ là bài toán quyết định phân tích thừa số (factoring decision problem):   
+
+> PHÂN TÍCH THỪA SỐ: Cho một số nguyên hợp số $m$ và $l < m$, liệu $m$ có một thừa số không tầm thường nào nhỏ hơn $l$ hay không?  
+
+Một tính chất thú vị của việc phân tích thừa số là nếu ai đó tuyên bố rằng câu trả lời là 'có, $m$ thực sự có một thừa số không tầm thường nhỏ hơn $l$' thì họ có thể chứng minh điều này bằng cách đưa ra một thừa số như vậy, thứ mà sau đó có thể được kiểm tra một cách hiệu quả bởi các bên khác, đơn giản bằng cách thực hiện phép chia dài (long-division). Chúng ta gọi một thừa số như vậy là một bằng chứng (witness) cho thực tế rằng $m$ có một thừa số nhỏ hơn $l$. Ý tưởng về một bằng chứng có thể kiểm tra dễ dàng này chính là ý tưởng then chốt trong định nghĩa của lớp độ phức tạp $\mathbf{NP}$, ở phần dưới. Chúng ta đã diễn đạt việc phân tích thừa số như một bài toán quyết định, nhưng bạn có thể dễ dàng xác minh rằng bài toán quyết định này tương đương với việc tìm các thừa số của một số:   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.17 
+Chứng minh rằng một thuật toán thời gian đa thức để tìm các thừa số của một số $m$ tồn tại khi và chỉ khi bài toán quyết định phân tích thừa số thuộc $\mathbf{P}$.
+:::
+
+Phân tích thừa số là một ví dụ về một bài toán nằm trong một lớp độ phức tạp quan trọng được gọi là $\mathbf{NP}$. Điểm phân biệt các bài toán thuộc $\mathbf{NP}$ là các trường hợp 'có' của một bài toán có thể dễ dàng được kiểm chứng với sự trợ giúp của một bằng chứng (witness) thích hợp. Chặt chẽ hơn, một ngôn ngữ $L$ thuộc $\mathbf{NP}$ nếu có một máy Turing $M$ với các thuộc tính sau:   
+
+(1) Nếu $x \in L$ thì tồn tại một chuỗi bằng chứng $w$ sao cho $M$ dừng ở trạng thái $q_Y$ sau một thời gian đa thức theo $\vert{}x\vert{}$ khi máy được khởi động ở trạng thái $x$-khoảng trống-$w$.
+
+(2) Nếu $x \notin L$ thì đối với tất cả các chuỗi $w$ cố gắng đóng vai trò là một bằng chứng, máy sẽ dừng ở trạng thái $q_N$ sau một thời gian đa thức theo $\vert{}x\vert{}$ khi $M$ được khởi động ở trạng thái $x$-khoảng trống-$w$.   
+
+Có một sự bất đối xứng thú vị trong định nghĩa của $\mathbf{NP}$. Mặc dù chúng ta phải có khả năng quyết định nhanh chóng liệu một bằng chứng khả dĩ cho $x \in L$ có thực sự là một bằng chứng hay không, không có nhu cầu tương tự đối với việc tạo ra một bằng chứng cho $x \notin L$. Ví dụ, trong bài toán phân tích thừa số, chúng ta có một cách dễ dàng để chứng minh rằng một số cho trước có một thừa số nhỏ hơn $m$, nhưng việc đưa ra một bằng chứng để chứng minh rằng một số không có thừa số nào nhỏ hơn $m$ lại khó khăn hơn nhiều. Điều này gợi ý việc định nghĩa $\mathbf{coNP}$, lớp các ngôn ngữ có các bằng chứng cho các trường hợp 'không'; rõ ràng các ngôn ngữ trong $\mathbf{coNP}$ chính là phần bù của các ngôn ngữ trong $\mathbf{NP}$.   
+
+$\mathbf{P}$ và $\mathbf{NP}$ có mối quan hệ như thế nào? Rõ ràng là $\mathbf{P}$ là một tập con của $\mathbf{NP}$. Bài toán mở nổi tiếng nhất trong khoa học máy tính là liệu có tồn tại hay không những bài toán thuộc $\mathbf{NP}$ mà không thuộc $\mathbf{P}$, thường được viết tắt là bài toán $\mathbf{P} \ne \mathbf{NP}$. Hầu hết các nhà khoa học máy tính đều tin rằng $\mathbf{P} \ne \mathbf{NP}$, nhưng bất chấp nhiều thập kỷ làm việc, vẫn chưa ai có thể chứng minh được điều này, và khả năng $\mathbf{P} = \mathbf{NP}$ vẫn còn bỏ ngỏ.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.18: 
+Chứng minh rằng nếu $\mathbf{coNP} \ne \mathbf{NP}$ thì $\mathbf{P} \ne \mathbf{NP}$.   
+:::
+
+---
+
+Trong lần làm quen đầu tiên, người ta thường dễ dàng đi đến kết luận rằng phỏng đoán $\mathbf{P} \ne \mathbf{NP}$ hẳn là khá dễ giải quyết. Để thấy tại sao nó thực sự khá tinh tế, sẽ rất hữu ích nếu xem xét một vài ví dụ về các bài toán thuộc $\mathbf{P}$ và $\mathbf{NP}$. Chúng ta sẽ lấy các ví dụ từ lý thuyết đồ thị (graph theory), một nguồn bài toán quyết định phong phú với những ứng dụng thực tế nhiều đến đáng kinh ngạc. Một đồ thị là một tập hợp hữu hạn các đỉnh (vertices) $\{v_1, \dots, v_n\}$ được kết nối bởi các cạnh (edges), là các cặp đỉnh $(v_i, v_j)$. Hiện tại, chúng ta chỉ quan tâm đến các đồ thị vô hướng (undirected graphs), trong đó thứ tự của các đỉnh (trong mỗi cặp cạnh) không quan trọng; những ý tưởng tương tự có thể được điều tra đối với các đồ thị có hướng (directed graphs) trong đó thứ tự của các đỉnh lại quan trọng. Một đồ thị điển hình được minh họa trong Hình 3.9.
+
+![](../../img/3.9.png)
+
+Một chu trình (cycle) trong một đồ thị là một chuỗi các đỉnh $v_1, \dots, v_m$ sao cho mỗi cặp $(v_j, v_{j+1})$ là một cạnh, và $(v_1, v_m)$ cũng vậy. Một chu trình đơn (simple cycle) là một chu trình trong đó không có đỉnh nào bị lặp lại, ngoại trừ đỉnh đầu tiên và đỉnh cuối cùng. Một chu trình Hamilton (Hamiltonian cycle) là một chu trình đơn đi qua tất cả các đỉnh trong đồ thị. Các ví dụ về đồ thị có và không có chu trình Hamilton được hiển thị trong Hình 3.10.  
+
+![](../../img/3.10.png)
+
+Bài toán chu trình Hamilton (HC) là xác định xem một đồ thị cho trước có chứa một chu trình Hamilton hay không. HC là một bài toán quyết định thuộc $\mathbf{NP}$, vì nếu một đồ thị cho trước có một chu trình Hamilton, thì chu trình đó có thể được sử dụng như một bằng chứng dễ dàng kiểm chứng. Hơn nữa, HC không có thuật toán thời gian đa thức nào được biết đến. Quả thực, HC là một bài toán thuộc lớp được gọi là các bài toán NP-đầy đủ (NP-complete), có thể được coi là những bài toán 'khó nhất' trong $\mathbf{NP}$, theo nghĩa là việc giải quyết HC trong thời gian $t$ cho phép bất kỳ bài toán nào khác trong $\mathbf{NP}$ được giải quyết trong thời gian $O(\text{poly}(t))$. Điều này cũng có nghĩa là nếu bất kỳ bài toán NP-đầy đủ nào có một giải pháp thời gian đa thức thì nó sẽ dẫn đến kết quả là $\mathbf{P} = \mathbf{NP}$.   
+
+Có một bài toán, bài toán quyết định chu trình Euler, bề ngoài có vẻ tương tự như HC, nhưng lại có những tính chất khác biệt đến kinh ngạc. Một chu trình Euler là một cách sắp xếp thứ tự các cạnh của một đồ thị $G$ sao cho mỗi cạnh trong đồ thị được ghé thăm chính xác một lần. Bài toán quyết định chu trình Euler (EC) là xác định xem, cho trước một đồ thị $G$ trên $n$ đỉnh, đồ thị đó có chứa một chu trình Euler hay không. EC, trên thực tế, chính xác là cùng một bài toán như HC, chỉ khác là đường đi ghé thăm các cạnh, thay vì các đỉnh. Xem xét định lý đáng chú ý sau đây, sẽ được chứng minh trong Bài tập 3.20:   
+
+:::{.postulates}
+# Định lý 3.1: (Định lý Euler) 
+Một đồ thị liên thông chứa một chu trình Euler khi và chỉ khi mọi đỉnh đều có một số chẵn các cạnh liên kết với nó.   
+:::
+
+Định lý Euler cung cấp cho chúng ta một phương pháp để giải quyết EC một cách hiệu quả. Đầu tiên, hãy kiểm tra xem đồ thị có liên thông hay không; việc này dễ dàng được thực hiện với $O(n^2)$ phép toán, như được trình bày trong Bài tập 3.19. Nếu đồ thị không liên thông, thì rõ ràng không tồn tại chu trình Euler nào. Nếu đồ thị liên thông thì đối với mỗi đỉnh, hãy kiểm tra xem có số chẵn các cạnh liên kết với đỉnh đó hay không. Nếu tìm thấy một đỉnh mà trường hợp này không đúng, thì không có chu trình Euler nào, ngược lại một chu trình Euler tồn tại. Vì có $n$ đỉnh, và tối đa $n(n - 1)/2$ cạnh, thuật toán này yêu cầu $O(n^3)$ phép toán sơ cấp. Do đó EC thuộc $\mathbf{P}$! Bằng cách nào đó, có một cấu trúc hiện diện trong bài toán ghé thăm mỗi cạnh, thứ có thể được khai thác để cung cấp một thuật toán hiệu quả cho EC, nhưng cấu trúc này dường như không được phản ánh trong bài toán ghé thăm mỗi đỉnh; hoàn toàn không hiển nhiên tại sao một cấu trúc như vậy lại nên hiện diện trong một trường hợp, nhưng không hiện diện trong trường hợp kia, nếu quả thực nó vắng mặt đối với bài toán HC.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.19: Bài toán REACHABILITY (khả năng tiếp cận) 
+là xác định xem có tồn tại một đường đi giữa hai đỉnh được chỉ định trong một đồ thị hay không. Chứng minh rằng REACHABILITY có thể được giải quyết bằng cách sử dụng $O(n)$ phép toán nếu đồ thị có $n$ đỉnh. Sử dụng giải pháp cho REACHABILITY để chứng minh rằng có thể quyết định xem một đồ thị có liên thông hay không trong $O(n^2)$ phép toán.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.20: (Định lý Euler) 
+Chứng minh định lý Euler. Cụ thể, nếu mỗi đỉnh có một số chẵn các cạnh liên kết, hãy đưa ra một thủ tục mang tính kiến thiết để tìm một chu trình Euler.   
+:::
+
+Sự tương đương giữa bài toán quyết định phân tích thừa số và bài toán phân tích thừa số đúng nghĩa là một trường hợp đặc biệt của một trong những ý tưởng quan trọng nhất trong khoa học máy tính, một ý tưởng được gọi là quy về (reduction). Về mặt trực giác, chúng ta biết rằng một số bài toán có thể được xem như những trường hợp đặc biệt của những bài toán khác. Một ví dụ ít tầm thường hơn về sự quy về là việc quy HC về bài toán quyết định người bán hàng đi dạo (TSP - traveling salesman decision problem). Bài toán quyết định người bán hàng đi dạo như sau: chúng ta được cho $n$ thành phố $1, 2, \dots, n$ và một khoảng cách nguyên không âm $d_{ij}$ giữa mỗi cặp thành phố. Cho trước một khoảng cách $d$, bài toán là xác định xem có tồn tại một chuyến đi qua tất cả các thành phố với khoảng cách nhỏ hơn $d$ hay không.  
+
+Việc quy $\text{HC}$ về $\text{TSP}$ diễn ra như sau. Giả sử chúng ta có một đồ thị chứa $n$ đỉnh. Chúng ta biến điều này thành một trường hợp của $\text{TSP}$ bằng cách coi mỗi đỉnh của đồ thị như một 'thành phố' và định nghĩa khoảng cách $d_{ij}$ giữa các thành phố $i$ và $j$ là $1$ nếu các đỉnh $i$ và $j$ được kết nối với nhau, và khoảng cách là $2$ nếu các đỉnh không được kết nối. Khi đó, một chuyến đi qua các thành phố có khoảng cách nhỏ hơn $n + 1$ bắt buộc phải có khoảng cách là $n$, và là một chu trình Hamilton cho đồ thị. Ngược lại, nếu tồn tại một chu trình Hamilton thì phải tồn tại một chuyến đi qua các thành phố có khoảng cách nhỏ hơn $n + 1$. Theo cách này, nếu có một thuật toán để giải quyết $\text{TSP}$, chúng ta có thể chuyển đổi nó thành một thuật toán để giải quyết $\text{HC}$ mà không tốn nhiều chi phí phụ (overhead). Từ điều này có thể suy ra hai hệ quả. Đầu tiên, nếu $\text{TSP}$ là một bài toán dễ xử lý, thì $\text{HC}$ cũng dễ xử lý. Thứ hai, nếu $\text{HC}$ là khó thì $\text{TSP}$ cũng phải khó. Đây là một ví dụ về một kỹ thuật tổng quát được gọi là quy về (reduction): chúng ta đã quy bài toán $\text{HC}$ về bài toán $\text{TSP}$. Đây là một kỹ thuật mà chúng ta sẽ sử dụng lặp đi lặp lại trong suốt cuốn sách này.   
+
+Một khái niệm tổng quát hơn về việc quy về được minh họa trong Hình 3.11. Một ngôn ngữ $B$ được cho là có thể quy về (reducible) một ngôn ngữ $A$ khác nếu tồn tại một máy Turing hoạt động trong thời gian đa thức sao cho khi nhận đầu vào là $x$, nó xuất ra $R(x)$, và $x \in B$ khi và chỉ khi $R(x) \in A$. Do đó, nếu chúng ta có một thuật toán để quyết định $A$, thì với một chút chi phí phụ, chúng ta có thể quyết định ngôn ngữ $B$. Theo nghĩa này, ngôn ngữ $B$ về bản chất không khó quyết định hơn ngôn ngữ $A$.   
+
+![](../../img/3.11.png)
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.21: (Tính chất bắc cầu của phép quy về) 
+Chứng minh rằng nếu một ngôn ngữ $L_1$ có thể quy về ngôn ngữ $L_2$ và ngôn ngữ $L_2$ có thể quy về $L_3$ thì ngôn ngữ $L_1$ có thể quy về ngôn ngữ $L_3$.   
+:::
+
+Một số lớp độ phức tạp có các bài toán đầy đủ (complete) đối với lớp độ phức tạp đó, nghĩa là có một ngôn ngữ $L$ trong lớp độ phức tạp được coi là 'khó' nhất để quyết định, theo nghĩa là mọi ngôn ngữ khác trong lớp độ phức tạp đó đều có thể được quy về $L$. Không phải tất cả các lớp độ phức tạp đều có các bài toán đầy đủ, nhưng nhiều lớp độ phức tạp mà chúng ta quan tâm đều có các bài toán đầy đủ. Một ví dụ tầm thường được cung cấp bởi $\mathbf{P}$. Gọi $L$ là bất kỳ ngôn ngữ nào thuộc $\mathbf{P}$ không rỗng hoặc không bằng tập hợp tất cả các từ. Tức là, tồn tại một chuỗi $x_1$ sao cho $x_1 \notin L$ và một chuỗi $x_2$ sao cho $x_2 \in L$. Khi đó, bất kỳ ngôn ngữ $L'$ nào khác thuộc $\mathbf{P}$ đều có thể được quy về $L$ bằng cách sử dụng phép quy về sau: cho trước một đầu vào $x$, sử dụng thủ tục quyết định thời gian đa thức để xác định xem $x \in L'$ hay không. Nếu không, hãy đặt $R(x) = x_1$, ngược lại đặt $R(x) = x_2$.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.22: 
+Giả sử $L$ là đầy đủ đối với một lớp độ phức tạp, và $L'$ là một ngôn ngữ khác trong lớp độ phức tạp đó sao cho $L$ quy về $L'$. Chứng minh rằng $L'$ là đầy đủ đối với lớp độ phức tạp đó.   
+:::
+
+Ít tầm thường hơn, $\mathbf{NP}$ cũng chứa các bài toán đầy đủ. Một ví dụ quan trọng của một bài toán như vậy và là nguyên mẫu cho tất cả các bài toán NP-đầy đủ khác là bài toán thỏa mãn mạch (circuit satisfiability problem) hay $\text{CSAT}$: cho trước một mạch Boolean được cấu tạo từ các cổng AND, OR và NOT, liệu có tồn tại một phép gán các giá trị cho các đầu vào của mạch dẫn đến việc mạch xuất ra giá trị $1$ hay không, tức là, mạch có có thể thỏa mãn được (satisfiable) đối với một đầu vào nào đó hay không? Tính NP-đầy đủ của $\text{CSAT}$ được biết đến là Định lý Cook–Levin, mà bây giờ chúng ta sẽ phác thảo một chứng minh cho nó. 
+
+Định lý 3.2: (Cook-Levin) $\text{CSAT}$ là bài toán NP-đầy đủ.   
+
+Chứng minh
+
+Phần chứng minh gồm có hai phần. Phần đầu tiên của chứng minh là chỉ ra rằng $\text{CSAT}$ thuộc $\mathbf{NP}$, và phần thứ hai là chỉ ra rằng bất kỳ ngôn ngữ nào trong $\mathbf{NP}$ đều có thể quy về $\text{CSAT}$. Cả hai phần của chứng minh đều dựa trên các kỹ thuật mô phỏng: phần đầu tiên của chứng minh chủ yếu chỉ ra rằng một máy Turing có thể mô phỏng một mạch một cách hiệu quả, trong khi phần thứ hai của chứng minh chủ yếu chỉ ra rằng một mạch có thể mô phỏng một máy Turing một cách hiệu quả. Cả hai phần của chứng minh đều khá đơn giản; để minh họa, chúng tôi sẽ trình bày chi tiết hơn một chút về phần thứ hai.   
+
+Phần đầu tiên của chứng minh là chỉ ra rằng $\text{CSAT}$ thuộc $\mathbf{NP}$. Cho trước một mạch chứa $n$ phần tử mạch và một bằng chứng tiềm năng $w$, rõ ràng là rất dễ dàng để kiểm tra trong thời gian đa thức trên một máy Turing xem $w$ có thỏa mãn mạch đó hay không, điều này xác nhận rằng $\text{CSAT}$ thuộc $\mathbf{NP}$.   
+
+Phần thứ hai của chứng minh là chỉ ra rằng bất kỳ ngôn ngữ $L \in \mathbf{NP}$ nào cũng có thể được quy về $\text{CSAT}$. Tức là, chúng ta hướng tới việc chỉ ra rằng tồn tại một phép quy về $R$ tính toán được trong thời gian đa thức sao cho $x \in L$ khi và chỉ khi $R(x)$ là một mạch thỏa mãn được. Ý tưởng của phép quy về là tìm ra một mạch mô phỏng hoạt động của máy $M$ — máy được dùng để kiểm tra các cặp trường hợp-bằng chứng $(x, w)$ đối với ngôn ngữ $L$. Các biến đầu vào cho mạch sẽ đại diện cho bằng chứng; ý tưởng là việc tìm ra một bằng chứng thỏa mãn mạch tương đương với việc máy $M$ chấp nhận $(x, w)$ với một bằng chứng cụ thể $w$ nào đó. Không mất tính tổng quát, chúng ta có thể đưa ra các giả định sau đây về $M$ để đơn giản hóa việc xây dựng:   
+
+(1) Bảng chữ cái dải băng của $M$ là $\triangleright, 0, 1$ và ký hiệu khoảng trống.
+
+(2) $M$ chạy với thời gian tối đa là $t(n)$ và tổng không gian tối đa là $s(n)$, trong đó $t(n)$ và $s(n)$ là các đa thức theo $n$.
+
+(3) Trên thực tế, có thể giả định rằng máy $M$ chạy với đúng thời gian $t(n)$ cho tất cả các đầu vào có kích thước $n$. Điều này được thực hiện bằng cách thêm các dòng $\langle q_Y, x, q_Y, x, 0 \rangle$ và $\langle q_N, x, q_N, x, 0 \rangle$ cho mỗi $x = \triangleright, 0, 1$ và ký hiệu khoảng trống, qua đó buộc máy dừng lại một cách nhân tạo sau đúng $t(n)$ bước.   

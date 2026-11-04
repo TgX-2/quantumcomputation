@@ -370,6 +370,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">2. Computational complexity</a></li>
   <li><a href="#strong-churchturing-thesis" id="toc-strong-churchturing-thesis" class="nav-link" data-scroll-target="#strong-churchturing-thesis">Strong Church–Turing thesis</a></li>
+  <li><a href="#decision-problems-and-the-complexity-classes-p-and-np" id="toc-decision-problems-and-the-complexity-classes-p-and-np" class="nav-link" data-scroll-target="#decision-problems-and-the-complexity-classes-p-and-np">3. Decision problems and the complexity classes P and NP</a></li>
+  <li><a href="#định-lý-3.1-định-lý-euler" id="toc-định-lý-3.1-định-lý-euler" class="nav-link" data-scroll-target="#định-lý-3.1-định-lý-euler">Định lý 3.1: (Định lý Euler)</a></li>
   </ul>
 </nav>
     </div>
@@ -595,6 +597,106 @@ end j</code></pre>
 </div>
 </div>
 </div>
+<hr>
+<section id="decision-problems-and-the-complexity-classes-p-and-np" class="level1">
+<h1>3. Decision problems and the complexity classes P and NP</h1>
+<p>Nhiều bài toán tính toán được định hình một cách rõ ràng nhất dưới dạng các bài toán quyết định (decision problems) – những bài toán có câu trả lời là có (yes) hoặc không (no). Ví dụ, một số <span class="math inline">m</span> cho trước có phải là số nguyên tố hay không? Đây là bài toán quyết định tính nguyên tố (primality). Những ý tưởng chính của độ phức tạp tính toán được hình thành một cách dễ dàng nhất và thường xuyên nhất dưới dạng các bài toán quyết định, vì hai lý do: lý thuyết có dạng đơn giản nhất và thanh lịch nhất ở hình thức này, trong khi vẫn có thể khái quát hóa một cách tự nhiên cho các kịch bản phức tạp hơn; và về mặt lịch sử, độ phức tạp tính toán phát sinh chủ yếu từ việc nghiên cứu các bài toán quyết định.</p>
+<p>Mặc dù hầu hết các bài toán quyết định có thể dễ dàng được phát biểu bằng ngôn ngữ đơn giản, quen thuộc, việc thảo luận về các tính chất chung của các bài toán quyết định được hỗ trợ rất nhiều bởi thuật ngữ của các ngôn ngữ hình thức (formal languages). Trong thuật ngữ này, một ngôn ngữ <span class="math inline">L</span> trên bảng chữ cái <span class="math inline">\Sigma</span> là một tập con của tập <span class="math inline">\Sigma^*</span> gồm tất cả các chuỗi ký hiệu (hữu hạn) từ <span class="math inline">\Sigma</span>. Ví dụ, nếu <span class="math inline">\Sigma = \{0, 1\}</span>, thì tập hợp các biểu diễn nhị phân của các số chẵn, <span class="math inline">L = \{0, 10, 100, 110, \dots\}</span> là một ngôn ngữ trên <span class="math inline">\Sigma</span>.</p>
+<p>Các bài toán quyết định có thể được mã hóa một cách hiển nhiên thành các bài toán về ngôn ngữ. Chẳng hạn, bài toán quyết định tính nguyên tố có thể được mã hóa bằng cách sử dụng bảng chữ cái nhị phân <span class="math inline">\Sigma = \{0, 1\}</span>. Các chuỗi từ <span class="math inline">\Sigma^*</span> có thể được diễn giải một cách tự nhiên như các số nguyên không âm. Ví dụ, <span class="math inline">0010</span> có thể được diễn giải là số <span class="math inline">2</span>. Ngôn ngữ <span class="math inline">L</span> được định nghĩa là bao gồm tất cả các chuỗi nhị phân sao cho con số tương ứng là số nguyên tố.</p>
+<p>Để giải bài toán quyết định tính nguyên tố, thứ mà chúng ta muốn là một máy Turing mà khi bắt đầu với một số <span class="math inline">n</span> cho trước trên dải băng đầu vào của nó, cuối cùng sẽ xuất ra một kết quả tương đương với ‘có’ nếu <span class="math inline">n</span> là số nguyên tố, và xuất ra ‘không’ nếu <span class="math inline">n</span> không phải là số nguyên tố. Để làm cho ý tưởng này trở nên chính xác, sẽ thuận tiện nếu ta sửa đổi định nghĩa máy Turing cũ của chúng ta (ở Mục 3.1.1) một chút, thay thế trạng thái dừng <span class="math inline">q_h</span> bằng hai trạng thái <span class="math inline">q_Y</span> và <span class="math inline">q_N</span> để lần lượt biểu diễn các câu trả lời ‘có’ và ‘không’. Trong tất cả các phương diện khác, máy hành xử theo cùng một cách, và nó vẫn dừng lại khi đi vào trạng thái <span class="math inline">q_Y</span> hoặc <span class="math inline">q_N</span>. Tổng quát hơn, một ngôn ngữ <span class="math inline">L</span> được quyết định (decided) bởi một máy Turing nếu máy đó có khả năng quyết định xem một đầu vào <span class="math inline">x</span> trên dải băng của nó có phải là một thành viên của ngôn ngữ <span class="math inline">L</span> hay không, cuối cùng dừng lại ở trạng thái <span class="math inline">q_Y</span> nếu <span class="math inline">x \in L</span>, và cuối cùng dừng lại ở trạng thái <span class="math inline">q_N</span> nếu <span class="math inline">x \notin L</span>. Chúng ta nói rằng máy đã chấp nhận (accepted) hoặc từ chối (rejected) <span class="math inline">x</span> tùy thuộc vào việc trường hợp nào trong hai trường hợp này xảy ra.</p>
+<hr>
+<p><strong>Chúng ta có thể xác định liệu một số có phải là số nguyên tố hay không nhanh đến mức nào?</strong></p>
+<p>Tức là, máy Turing nhanh nhất để quyết định ngôn ngữ biểu diễn bài toán quyết định tính nguyên tố là gì? Chúng ta nói rằng một bài toán thuộc lớp <span class="math inline">\mathbf{TIME}(f(n))</span> nếu tồn tại một máy Turing quyết định liệu một ứng cử viên <span class="math inline">x</span> có thuộc ngôn ngữ đó trong thời gian <span class="math inline">O(f(n))</span> hay không, trong đó <span class="math inline">n</span> là độ dài của <span class="math inline">x</span>. Một bài toán được nói là có thể giải quyết trong thời gian đa thức (polynomial time) nếu nó thuộc <span class="math inline">\mathbf{TIME}(n^k)</span> với một số <span class="math inline">k</span> hữu hạn nào đó. Tập hợp tất cả các ngôn ngữ thuộc <span class="math inline">\mathbf{TIME}(n^k)</span>, với một số <span class="math inline">k</span> nào đó, được ký hiệu là <span class="math inline">\mathbf{P}</span>. <span class="math inline">\mathbf{P}</span> là ví dụ đầu tiên của chúng ta về một lớp độ phức tạp (complexity class). Tổng quát hơn, một lớp độ phức tạp được định nghĩa là một tập hợp các ngôn ngữ. Phần lớn lý thuyết độ phức tạp tính toán liên quan đến việc định nghĩa các lớp độ phức tạp khác nhau, và hiểu được mối quan hệ giữa các lớp độ phức tạp khác nhau.</p>
+<p>Không có gì đáng ngạc nhiên khi có những bài toán không thể được giải quyết trong thời gian đa thức. Thật không may, việc chứng minh rằng bất kỳ bài toán cụ thể nào không thể giải quyết được trong thời gian đa thức dường như rất khó khăn, mặc dù các phỏng đoán thì rất nhiều! Một ví dụ đơn giản về một bài toán quyết định thú vị được tin là không thuộc <span class="math inline">\mathbf{P}</span> là bài toán quyết định phân tích thừa số (factoring decision problem):</p>
+<blockquote class="blockquote">
+<p>PHÂN TÍCH THỪA SỐ: Cho một số nguyên hợp số <span class="math inline">m</span> và <span class="math inline">l &lt; m</span>, liệu <span class="math inline">m</span> có một thừa số không tầm thường nào nhỏ hơn <span class="math inline">l</span> hay không?</p>
+</blockquote>
+<p>Một tính chất thú vị của việc phân tích thừa số là nếu ai đó tuyên bố rằng câu trả lời là ‘có, <span class="math inline">m</span> thực sự có một thừa số không tầm thường nhỏ hơn <span class="math inline">l</span>’ thì họ có thể chứng minh điều này bằng cách đưa ra một thừa số như vậy, thứ mà sau đó có thể được kiểm tra một cách hiệu quả bởi các bên khác, đơn giản bằng cách thực hiện phép chia dài (long-division). Chúng ta gọi một thừa số như vậy là một bằng chứng (witness) cho thực tế rằng <span class="math inline">m</span> có một thừa số nhỏ hơn <span class="math inline">l</span>. Ý tưởng về một bằng chứng có thể kiểm tra dễ dàng này chính là ý tưởng then chốt trong định nghĩa của lớp độ phức tạp <span class="math inline">\mathbf{NP}</span>, ở phần dưới. Chúng ta đã diễn đạt việc phân tích thừa số như một bài toán quyết định, nhưng bạn có thể dễ dàng xác minh rằng bài toán quyết định này tương đương với việc tìm các thừa số của một số:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.17
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng một thuật toán thời gian đa thức để tìm các thừa số của một số <span class="math inline">m</span> tồn tại khi và chỉ khi bài toán quyết định phân tích thừa số thuộc <span class="math inline">\mathbf{P}</span>.</p>
+</div>
+</div>
+</div>
+<p>Phân tích thừa số là một ví dụ về một bài toán nằm trong một lớp độ phức tạp quan trọng được gọi là <span class="math inline">\mathbf{NP}</span>. Điểm phân biệt các bài toán thuộc <span class="math inline">\mathbf{NP}</span> là các trường hợp ‘có’ của một bài toán có thể dễ dàng được kiểm chứng với sự trợ giúp của một bằng chứng (witness) thích hợp. Chặt chẽ hơn, một ngôn ngữ <span class="math inline">L</span> thuộc <span class="math inline">\mathbf{NP}</span> nếu có một máy Turing <span class="math inline">M</span> với các thuộc tính sau:</p>
+<ol type="1">
+<li><p>Nếu <span class="math inline">x \in L</span> thì tồn tại một chuỗi bằng chứng <span class="math inline">w</span> sao cho <span class="math inline">M</span> dừng ở trạng thái <span class="math inline">q_Y</span> sau một thời gian đa thức theo <span class="math inline">\vert{}x\vert{}</span> khi máy được khởi động ở trạng thái <span class="math inline">x</span>-khoảng trống-<span class="math inline">w</span>.</p></li>
+<li><p>Nếu <span class="math inline">x \notin L</span> thì đối với tất cả các chuỗi <span class="math inline">w</span> cố gắng đóng vai trò là một bằng chứng, máy sẽ dừng ở trạng thái <span class="math inline">q_N</span> sau một thời gian đa thức theo <span class="math inline">\vert{}x\vert{}</span> khi <span class="math inline">M</span> được khởi động ở trạng thái <span class="math inline">x</span>-khoảng trống-<span class="math inline">w</span>.</p></li>
+</ol>
+<p>Có một sự bất đối xứng thú vị trong định nghĩa của <span class="math inline">\mathbf{NP}</span>. Mặc dù chúng ta phải có khả năng quyết định nhanh chóng liệu một bằng chứng khả dĩ cho <span class="math inline">x \in L</span> có thực sự là một bằng chứng hay không, không có nhu cầu tương tự đối với việc tạo ra một bằng chứng cho <span class="math inline">x \notin L</span>. Ví dụ, trong bài toán phân tích thừa số, chúng ta có một cách dễ dàng để chứng minh rằng một số cho trước có một thừa số nhỏ hơn <span class="math inline">m</span>, nhưng việc đưa ra một bằng chứng để chứng minh rằng một số không có thừa số nào nhỏ hơn <span class="math inline">m</span> lại khó khăn hơn nhiều. Điều này gợi ý việc định nghĩa <span class="math inline">\mathbf{coNP}</span>, lớp các ngôn ngữ có các bằng chứng cho các trường hợp ‘không’; rõ ràng các ngôn ngữ trong <span class="math inline">\mathbf{coNP}</span> chính là phần bù của các ngôn ngữ trong <span class="math inline">\mathbf{NP}</span>.</p>
+<p><span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span> có mối quan hệ như thế nào? Rõ ràng là <span class="math inline">\mathbf{P}</span> là một tập con của <span class="math inline">\mathbf{NP}</span>. Bài toán mở nổi tiếng nhất trong khoa học máy tính là liệu có tồn tại hay không những bài toán thuộc <span class="math inline">\mathbf{NP}</span> mà không thuộc <span class="math inline">\mathbf{P}</span>, thường được viết tắt là bài toán <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>. Hầu hết các nhà khoa học máy tính đều tin rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, nhưng bất chấp nhiều thập kỷ làm việc, vẫn chưa ai có thể chứng minh được điều này, và khả năng <span class="math inline">\mathbf{P} = \mathbf{NP}</span> vẫn còn bỏ ngỏ.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.18:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng nếu <span class="math inline">\mathbf{coNP} \ne \mathbf{NP}</span> thì <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Trong lần làm quen đầu tiên, người ta thường dễ dàng đi đến kết luận rằng phỏng đoán <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span> hẳn là khá dễ giải quyết. Để thấy tại sao nó thực sự khá tinh tế, sẽ rất hữu ích nếu xem xét một vài ví dụ về các bài toán thuộc <span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span>. Chúng ta sẽ lấy các ví dụ từ lý thuyết đồ thị (graph theory), một nguồn bài toán quyết định phong phú với những ứng dụng thực tế nhiều đến đáng kinh ngạc. Một đồ thị là một tập hợp hữu hạn các đỉnh (vertices) <span class="math inline">\{v_1, \dots, v_n\}</span> được kết nối bởi các cạnh (edges), là các cặp đỉnh <span class="math inline">(v_i, v_j)</span>. Hiện tại, chúng ta chỉ quan tâm đến các đồ thị vô hướng (undirected graphs), trong đó thứ tự của các đỉnh (trong mỗi cặp cạnh) không quan trọng; những ý tưởng tương tự có thể được điều tra đối với các đồ thị có hướng (directed graphs) trong đó thứ tự của các đỉnh lại quan trọng. Một đồ thị điển hình được minh họa trong Hình 3.9.</p>
+<p><img src="../../img/3.9.png" class="img-fluid"></p>
+<p>Một chu trình (cycle) trong một đồ thị là một chuỗi các đỉnh <span class="math inline">v_1, \dots, v_m</span> sao cho mỗi cặp <span class="math inline">(v_j, v_{j+1})</span> là một cạnh, và <span class="math inline">(v_1, v_m)</span> cũng vậy. Một chu trình đơn (simple cycle) là một chu trình trong đó không có đỉnh nào bị lặp lại, ngoại trừ đỉnh đầu tiên và đỉnh cuối cùng. Một chu trình Hamilton (Hamiltonian cycle) là một chu trình đơn đi qua tất cả các đỉnh trong đồ thị. Các ví dụ về đồ thị có và không có chu trình Hamilton được hiển thị trong Hình 3.10.</p>
+<p><img src="../../img/3.10.png" class="img-fluid"></p>
+<p>Bài toán chu trình Hamilton (HC) là xác định xem một đồ thị cho trước có chứa một chu trình Hamilton hay không. HC là một bài toán quyết định thuộc <span class="math inline">\mathbf{NP}</span>, vì nếu một đồ thị cho trước có một chu trình Hamilton, thì chu trình đó có thể được sử dụng như một bằng chứng dễ dàng kiểm chứng. Hơn nữa, HC không có thuật toán thời gian đa thức nào được biết đến. Quả thực, HC là một bài toán thuộc lớp được gọi là các bài toán NP-đầy đủ (NP-complete), có thể được coi là những bài toán ‘khó nhất’ trong <span class="math inline">\mathbf{NP}</span>, theo nghĩa là việc giải quyết HC trong thời gian <span class="math inline">t</span> cho phép bất kỳ bài toán nào khác trong <span class="math inline">\mathbf{NP}</span> được giải quyết trong thời gian <span class="math inline">O(\text{poly}(t))</span>. Điều này cũng có nghĩa là nếu bất kỳ bài toán NP-đầy đủ nào có một giải pháp thời gian đa thức thì nó sẽ dẫn đến kết quả là <span class="math inline">\mathbf{P} = \mathbf{NP}</span>.</p>
+<p>Có một bài toán, bài toán quyết định chu trình Euler, bề ngoài có vẻ tương tự như HC, nhưng lại có những tính chất khác biệt đến kinh ngạc. Một chu trình Euler là một cách sắp xếp thứ tự các cạnh của một đồ thị <span class="math inline">G</span> sao cho mỗi cạnh trong đồ thị được ghé thăm chính xác một lần. Bài toán quyết định chu trình Euler (EC) là xác định xem, cho trước một đồ thị <span class="math inline">G</span> trên <span class="math inline">n</span> đỉnh, đồ thị đó có chứa một chu trình Euler hay không. EC, trên thực tế, chính xác là cùng một bài toán như HC, chỉ khác là đường đi ghé thăm các cạnh, thay vì các đỉnh. Xem xét định lý đáng chú ý sau đây, sẽ được chứng minh trong Bài tập 3.20:</p>
+</section>
+<section id="định-lý-3.1-định-lý-euler" class="level1 postulates">
+<h1>Định lý 3.1: (Định lý Euler)</h1>
+<p>Một đồ thị liên thông chứa một chu trình Euler khi và chỉ khi mọi đỉnh đều có một số chẵn các cạnh liên kết với nó.</p>
+</section>
+<p>Định lý Euler cung cấp cho chúng ta một phương pháp để giải quyết EC một cách hiệu quả. Đầu tiên, hãy kiểm tra xem đồ thị có liên thông hay không; việc này dễ dàng được thực hiện với <span class="math inline">O(n^2)</span> phép toán, như được trình bày trong Bài tập 3.19. Nếu đồ thị không liên thông, thì rõ ràng không tồn tại chu trình Euler nào. Nếu đồ thị liên thông thì đối với mỗi đỉnh, hãy kiểm tra xem có số chẵn các cạnh liên kết với đỉnh đó hay không. Nếu tìm thấy một đỉnh mà trường hợp này không đúng, thì không có chu trình Euler nào, ngược lại một chu trình Euler tồn tại. Vì có <span class="math inline">n</span> đỉnh, và tối đa <span class="math inline">n(n - 1)/2</span> cạnh, thuật toán này yêu cầu <span class="math inline">O(n^3)</span> phép toán sơ cấp. Do đó EC thuộc <span class="math inline">\mathbf{P}</span>! Bằng cách nào đó, có một cấu trúc hiện diện trong bài toán ghé thăm mỗi cạnh, thứ có thể được khai thác để cung cấp một thuật toán hiệu quả cho EC, nhưng cấu trúc này dường như không được phản ánh trong bài toán ghé thăm mỗi đỉnh; hoàn toàn không hiển nhiên tại sao một cấu trúc như vậy lại nên hiện diện trong một trường hợp, nhưng không hiện diện trong trường hợp kia, nếu quả thực nó vắng mặt đối với bài toán HC.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.19: Bài toán REACHABILITY (khả năng tiếp cận)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>là xác định xem có tồn tại một đường đi giữa hai đỉnh được chỉ định trong một đồ thị hay không. Chứng minh rằng REACHABILITY có thể được giải quyết bằng cách sử dụng <span class="math inline">O(n)</span> phép toán nếu đồ thị có <span class="math inline">n</span> đỉnh. Sử dụng giải pháp cho REACHABILITY để chứng minh rằng có thể quyết định xem một đồ thị có liên thông hay không trong <span class="math inline">O(n^2)</span> phép toán.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.20: (Định lý Euler)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh định lý Euler. Cụ thể, nếu mỗi đỉnh có một số chẵn các cạnh liên kết, hãy đưa ra một thủ tục mang tính kiến thiết để tìm một chu trình Euler.</p>
+</div>
+</div>
+</div>
+<p>Sự tương đương giữa bài toán quyết định phân tích thừa số và bài toán phân tích thừa số đúng nghĩa là một trường hợp đặc biệt của một trong những ý tưởng quan trọng nhất trong khoa học máy tính, một ý tưởng được gọi là quy về (reduction). Về mặt trực giác, chúng ta biết rằng một số bài toán có thể được xem như những trường hợp đặc biệt của những bài toán khác. Một ví dụ ít tầm thường hơn về sự quy về là việc quy HC về bài toán quyết định người bán hàng đi dạo (TSP - traveling salesman decision problem). Bài toán quyết định người bán hàng đi dạo như sau: chúng ta được cho <span class="math inline">n</span> thành phố <span class="math inline">1, 2, \dots, n</span> và một khoảng cách nguyên không âm <span class="math inline">d_{ij}</span> giữa mỗi cặp thành phố. Cho trước một khoảng cách <span class="math inline">d</span>, bài toán là xác định xem có tồn tại một chuyến đi qua tất cả các thành phố với khoảng cách nhỏ hơn <span class="math inline">d</span> hay không.</p>
 
 
 
