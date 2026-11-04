@@ -1,0 +1,146 @@
+---
+title: "The analysis of computational problems"
+chapter: "Introduction to Computer Science"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Việc phân tích các bài toán tính toán phụ thuộc vào câu trả lời cho ba câu hỏi nền tảng:   
+
+(1) **Một bài toán tính toán là gì?** 
+
+Nhân hai số với nhau là một bài toán tính toán; lập trình một máy tính để vượt qua khả năng của con người trong việc làm thơ cũng vậy. Để đạt được tiến bộ trong việc phát triển một lý thuyết tổng quát cho việc phân tích các bài toán tính toán, chúng ta sẽ cô lập một lớp đặc biệt các bài toán được gọi là bài toán quyết định (decision problems), và tập trung phân tích của chúng ta vào những bài toán đó. Việc tự giới hạn bản thân theo cách này cho phép phát triển một lý thuyết vừa thanh lịch vừa có cấu trúc phong phú. Quan trọng nhất, đó là một lý thuyết mà các nguyên tắc của nó có ứng dụng vượt xa các bài toán quyết định.   
+
+(2) **Chúng ta có thể thiết kế các thuật toán như thế nào để giải quyết một bài toán tính toán cho trước?** 
+
+Khi một bài toán đã được xác định, những thuật toán nào có thể được sử dụng để giải quyết bài toán đó? Có những kỹ thuật tổng quát nào có thể được sử dụng để giải quyết các lớp bài toán rộng lớn hay không? Làm thế nào chúng ta có thể chắc chắn rằng một thuật toán hành xử đúng như những gì được công bố?   
+
+(3) **Những tài nguyên tối thiểu nào được yêu cầu để giải quyết một bài toán tính toán cho trước?** 
+
+Việc chạy một thuật toán đòi hỏi sự tiêu thụ các tài nguyên, chẳng hạn như thời gian, không gian, và năng lượng. Trong các tình huống khác nhau, có thể mong muốn giảm thiểu sự tiêu thụ của một hoặc nhiều tài nguyên. Chúng ta có thể phân loại các bài toán dựa trên những yêu cầu về tài nguyên cần thiết để giải quyết chúng không?   
+
+---
+
+Trong một vài mục tiếp theo, chúng ta sẽ điều tra ba câu hỏi này, đặc biệt là câu hỏi 1 và 3. Mặc dù câu hỏi 1, 'một bài toán tính toán là gì?', có lẽ là câu hỏi nền tảng nhất, chúng ta sẽ hoãn việc trả lời nó cho đến Mục 3.2.3, tạm dừng trước tiên để thiết lập một số khái niệm nền tảng liên quan đến việc định lượng tài nguyên trong Mục 3.2.1, và sau đó xem xét các ý tưởng then chốt của độ phức tạp tính toán trong Mục 3.2.2.   
+
+Câu hỏi 2, làm thế nào để thiết kế các thuật toán tốt, là chủ đề của một lượng lớn công trình khéo léo bởi nhiều nhà nghiên cứu. Nhiều đến mức trong phần giới thiệu ngắn gọn này, chúng ta thậm chí không thể bắt đầu mô tả những ý tưởng chính được sử dụng trong việc thiết kế các thuật toán tốt. Nếu bạn quan tâm đến chủ đề tuyệt đẹp này, chúng tôi xin chuyển hướng bạn đến phần 'Lịch sử và đọc thêm' ở cuối chương. Sự tiếp xúc trực tiếp và gần gũi nhất của chúng ta với chủ đề này sẽ diễn ra ở phần sau của cuốn sách, khi chúng ta nghiên cứu các thuật toán lượng tử. Các kỹ thuật liên quan đến việc tạo ra các thuật toán lượng tử thường liên quan đến sự pha trộn giữa các ý tưởng sâu sắc hiện có trong thiết kế thuật toán cho máy tính cổ điển, và việc tạo ra các kỹ thuật cơ học lượng tử mới, hoàn toàn nguyên bản dành cho thiết kế thuật toán. Vì lý do này, và bởi vì tinh thần thiết kế thuật toán lượng tử có rất nhiều điểm tương đồng với thiết kế thuật toán cổ điển trong nhiều khía cạnh, chúng tôi khuyến khích bạn làm quen với ít nhất là những ý tưởng cơ bản của thiết kế thuật toán.   
+
+Câu hỏi 3, những tài nguyên tối thiểu nào được yêu cầu để giải quyết một bài toán tính toán cho trước, là trọng tâm chính của một vài phần tiếp theo. Ví dụ, giả sử chúng ta được cho hai số, mỗi số có độ dài $n$ bit, mà chúng ta muốn nhân lại với nhau. Nếu phép nhân được thực hiện trên một máy Turing một dải băng, máy Turing đó phải thực thi bao nhiêu bước tính toán để hoàn thành tác vụ? Bao nhiêu không gian được sử dụng trên máy Turing trong khi hoàn thành tác vụ?   
+
+Đây là những ví dụ về loại câu hỏi tài nguyên mà chúng ta có thể đặt ra. Nói chung, máy tính sử dụng nhiều loại tài nguyên khác nhau, tuy nhiên chúng ta sẽ tập trung phần lớn sự chú ý vào thời gian (time), không gian (space), và năng lượng (energy). Theo truyền thống trong khoa học máy tính, thời gian và không gian là hai mối quan tâm chính về tài nguyên trong việc nghiên cứu thuật toán, và chúng ta nghiên cứu những vấn đề này trong các Mục 3.2.2 đến 3.2.4. Năng lượng là một sự cân nhắc ít quan trọng hơn; tuy nhiên, việc nghiên cứu các yêu cầu về năng lượng lại tạo động lực cho chủ đề tính toán cổ điển khả nghịch (reversible classical computation), điều mà đến lượt nó lại là một điều kiện tiên quyết cho tính toán lượng tử, do đó chúng ta sẽ xem xét các yêu cầu về năng lượng cho tính toán một cách khá chi tiết trong Mục 3.2.5.   
+
+# 1. How to quantify computational resources
+
+Các mô hình tính toán khác nhau dẫn đến những yêu cầu tài nguyên khác nhau cho việc tính toán. Thậm chí một điều đơn giản như việc chuyển đổi từ máy Turing một dải băng sang hai dải băng cũng có thể làm thay đổi các tài nguyên cần thiết để giải quyết một bài toán tính toán cho trước. Đối với một tác vụ tính toán đã được hiểu cực kỳ rõ ràng, ví dụ như phép cộng các số nguyên, thì những sự khác biệt như vậy giữa các mô hình tính toán có thể mang lại sự quan tâm. Tuy nhiên, đối với bước đầu tiên trong việc tìm hiểu một bài toán, chúng ta muốn có một cách để định lượng các yêu cầu tài nguyên mà nó độc lập với những thay đổi tương đối nhỏ nhặt trong mô hình tính toán. Một trong những công cụ đã được phát triển để làm việc này là ký hiệu tiệm cận (asymptotic notation), có thể được sử dụng để tóm tắt hành vi cốt yếu của một hàm. Ký hiệu tiệm cận này có thể được sử dụng, ví dụ, để tóm tắt bản chất của việc một thuật toán cho trước mất bao nhiêu bước thời gian để chạy, mà không phải lo lắng quá nhiều về số đếm thời gian chính xác. Trong phần này, chúng tôi mô tả chi tiết ký hiệu này, và áp dụng nó vào một bài toán đơn giản minh họa cho việc định lượng tài nguyên tính toán – phân tích các thuật toán dùng để sắp xếp một danh sách các tên theo thứ tự bảng chữ cái.   
+
+---
+
+Ví dụ, giả sử rằng chúng ta quan tâm đến số lượng các cổng cần thiết để cộng hai số $n$ bit lại với nhau. Việc đếm chính xác số lượng cổng được yêu cầu sẽ che khuất đi bức tranh toàn cảnh: có lẽ một thuật toán cụ thể yêu cầu $24n + 2\lceil\log n\rceil + 16$ cổng để thực hiện tác vụ này. Tuy nhiên, trong giới hạn kích thước bài toán lớn, số hạng duy nhất có ý nghĩa là số hạng $24n$. Hơn nữa, chúng ta bỏ qua các hằng số nhân vì chúng chỉ có tầm quan trọng thứ yếu đối với việc phân tích thuật toán. Hành vi cốt yếu của thuật toán được tóm tắt bằng cách nói rằng số lượng phép toán được yêu cầu thay đổi tỷ lệ thuận với $n$, trong đó $n$ là số lượng bit trong các số đang được cộng. Ký hiệu tiệm cận bao gồm ba công cụ giúp làm cho khái niệm này trở nên chính xác.   
+
+Ký hiệu $O$ ('big $O$') được sử dụng để thiết lập các giới hạn trên (upper bounds) cho hành vi của một hàm. Giả sử $f(n)$ và $g(n)$ là hai hàm trên tập các số nguyên không âm. Chúng ta nói '$f(n)$ thuộc lớp các hàm $O(g(n))$', hoặc đơn giản là '$f(n)$ là $O(g(n))$', nếu tồn tại các hằng số $c$ và $n_0$ sao cho với mọi giá trị của $n$ lớn hơn $n_0$, ta có $f(n) \le cg(n)$. Tức là, đối với $n$ đủ lớn, hàm $g(n)$ là một giới hạn trên đối với $f(n)$, bỏ qua một hằng số nhân không quan trọng. Ký hiệu big $O$ đặc biệt hữu ích trong việc nghiên cứu hành vi trong trường hợp xấu nhất (worst-case behavior) của các thuật toán cụ thể, nơi mà chúng ta thường hài lòng với một giới hạn trên về lượng tài nguyên mà một thuật toán tiêu thụ.   
+
+Khi nghiên cứu hành vi của một lớp các thuật toán – ví dụ như toàn bộ lớp các thuật toán có thể được sử dụng để nhân hai số – sẽ thật thú vị khi thiết lập các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu. Đối với việc này, ký hiệu $\Omega$ ('big Omega') được sử dụng. Một hàm $f(n)$ được cho là $\Omega(g(n))$ nếu tồn tại các hằng số $c$ và $n_0$ sao cho với mọi $n$ lớn hơn $n_0$, ta có $cg(n) \le f(n)$. Tức là, đối với $n$ đủ lớn, $g(n)$ là một giới hạn dưới đối với $f(n)$, bỏ qua một hằng số nhân không quan trọng.   
+
+Cuối cùng, ký hiệu $\Theta$ ('big Theta') được sử dụng để chỉ ra rằng $f(n)$ có hành vi tiệm cận giống với $g(n)$, bỏ qua các hằng số nhân không quan trọng. Tức là, chúng ta nói $f(n)$ là $\Theta(g(n))$ nếu nó vừa là $O(g(n))$ vừa là $\Omega(g(n))$.   
+
+## Asymptotic notation: examples
+
+Hãy xem xét một vài ví dụ đơn giản về ký hiệu tiệm cận. Hàm $2n$ thuộc lớp $O(n^2)$, vì $2n \le 2n^2$ với mọi $n$ dương. Hàm $2^n$ là $\Omega(n^3)$, vì $n^3 \le 2^n$ đối với $n$ đủ lớn. Cuối cùng, hàm $7n^2 + \sqrt{n}\log(n)$ là $\Theta(n^2)$, vì $7n^2 \le 7n^2 + \sqrt{n}\log(n) \le 8n^2$ đối với mọi giá trị đủ lớn của $n$. Trong một vài bài tập tiếp theo, bạn sẽ làm việc thông qua một số tính chất sơ cấp của ký hiệu tiệm cận khiến nó trở thành một công cụ hữu ích trong việc phân tích các thuật toán.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.9: 
+Chứng minh rằng $f(n)$ là $O(g(n))$ khi và chỉ khi $g(n)$ là $\Omega(f(n))$. Suy ra rằng $f(n)$ là $\Theta(g(n))$ khi và chỉ khi $g(n)$ là $\Theta(f(n))$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.10: 
+Giả sử $g(n)$ là một đa thức bậc $k$. Chứng minh rằng $g(n)$ là $O(n^l)$ với mọi $l \ge k$.   
+:::
+
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.11: 
+Chứng minh rằng $\log n$ là $O(n^k)$ với mọi $k > 0$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.12: ($n^{\log n}$ là siêu đa thức - super-polynomial) 
+Chứng minh rằng $n^k$ là $O(n^{\log n})$ với mọi $k$, nhưng $n^{\log n}$ không bao giờ là $O(n^k)$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.13: ($n^{\log n}$ là dưới hàm mũ - sub-exponential) 
+Chứng minh rằng $c^n$ là $\Omega(n^{\log n})$ với mọi $c > 1$, nhưng $n^{\log n}$ không bao giờ là $\Omega(c^n)$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.14: 
+Giả sử $e(n)$ là $O(f(n))$ và $g(n)$ là $O(h(n))$. Chứng minh rằng $e(n)g(n)$ là $O(f(n)h(n))$.   
+:::
+
+Một ví dụ về việc sử dụng ký hiệu tiệm cận trong việc định lượng tài nguyên là ứng dụng đơn giản sau đây cho bài toán sắp xếp một danh sách gồm $n$ phần tử tên theo thứ tự bảng chữ cái. Nhiều thuật toán sắp xếp dựa trên phép toán 'so sánh-và-đổi-chỗ' (compare-and-swap): hai phần tử của một danh sách $n$ phần tử được so sánh, và đổi chỗ nếu chúng không đúng thứ tự. Nếu phép toán so sánh-và-đổi-chỗ này là phương tiện duy nhất mà qua đó chúng ta có thể truy cập danh sách, thì cần bao nhiêu phép toán như vậy để đảm bảo rằng danh sách đã được sắp xếp chính xác?   
+
+Một thuật toán so sánh-và-đổi-chỗ đơn giản để giải quyết bài toán sắp xếp như sau: (lưu ý rằng compare-and-swap(j,k) so sánh các mục danh sách được đánh số $j$ và $k$, và đổi chỗ chúng nếu chúng không đúng thứ tự)   
+
+```
+for j = 1 to n-1
+    for k = j+1 to n
+        compare-and-swap(j,k)
+    end k
+end j
+```
+
+Rõ ràng là thuật toán này sắp xếp chính xác một danh sách gồm $n$ cái tên theo thứ tự bảng chữ cái. Lưu ý rằng số lượng phép toán so sánh-và-đổi-chỗ được thuật toán thực thi là $(n - 1) + (n - 2) + \dots + 1 = n(n - 1)/2$. Do đó, số lượng phép toán so sánh-và-đổi-chỗ mà thuật toán sử dụng là $\Theta(n^2)$. Chúng ta có thể làm tốt hơn thế này không? Hóa ra là chúng ta có thể. Người ta đã biết đến các thuật toán như 'heapsort' chạy bằng cách sử dụng $O(n \log n)$ phép toán so sánh-và-đổi-chỗ. Hơn nữa, trong Bài tập 3.15, bạn sẽ làm việc thông qua một lập luận đếm đơn giản cho thấy bất kỳ thuật toán nào dựa trên phép toán so sánh-và-đổi-chỗ đều yêu cầu $\Omega(n \log n)$ phép toán như vậy. Do đó, bài toán sắp xếp nói chung yêu cầu $\Theta(n \log n)$ phép toán so sánh-và-đổi-chỗ.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.15: (Giới hạn dưới cho các thuật toán sắp xếp dựa trên so sánh-và-đổi-chỗ) 
+Giả sử một danh sách $n$ phần tử được sắp xếp bằng cách áp dụng một chuỗi các phép toán so sánh-và-đổi-chỗ cho danh sách. Có $n!$ cách sắp xếp ban đầu có thể có của danh sách. Chứng minh rằng sau khi $k$ phép toán so sánh-và-đổi-chỗ được áp dụng, tối đa $2^k$ trong số các cách sắp xếp ban đầu có thể có sẽ được sắp xếp thành thứ tự chính xác. Kết luận rằng cần phải có $\Omega(n \log n)$ phép toán so sánh-và-đổi-chỗ để sắp xếp tất cả các cách sắp xếp ban đầu có thể có thành thứ tự chính xác.   
+:::
+
+# 2. Computational complexity
+
+> *'The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me'*
+> – Stephen Cook
+
+> *'Sometimes it is good that some things are impossible. I am happy there are many things that nobody can do to me.'*
+> – Leonid Levin
+
+> *'It should not come as a surprise that our choice of polynomial algorithms as the mathematical concept that is supposed to capture the informal notion of ‘practically efficient computation’ is open to criticism from all sides. [. . . ] Ultimately, our argument for our choice must be this: Adopting polynomial worst-case performance as our criterion of efficiency results in an elegant and useful theory that says something meaningful about practical computation, and would be impossible without this simplification.'*
+> – Christos Papadimitriou
+
+Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính? Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.   
+
+---
+
+Độ phức tạp tính toán (Computational complexity) là nghiên cứu về các tài nguyên thời gian và không gian cần thiết để giải quyết các bài toán tính toán. **Tác vụ của độ phức tạp tính toán là chứng minh các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu bởi thuật toán tốt nhất có thể để giải quyết một bài toán, ngay cả khi thuật toán đó chưa được biết đến một cách rõ ràng.** Trong phần này và hai phần tiếp theo, chúng tôi đưa ra một cái nhìn tổng quan về độ phức tạp tính toán, các khái niệm chính của nó, và một số kết quả quan trọng nhất của lĩnh vực này. Lưu ý rằng độ phức tạp tính toán theo một khía cạnh nào đó là sự bổ sung cho lĩnh vực thiết kế thuật toán; lý tưởng nhất là các thuật toán hiệu quả nhất mà chúng ta có thể thiết kế sẽ khớp hoàn hảo với các giới hạn dưới được chứng minh bởi độ phức tạp tính toán. Thật không may, điều này thường không xảy ra. Như đã lưu ý, trong cuốn sách này chúng ta sẽ không xem xét thiết kế thuật toán cổ điển ở bất kỳ chiều sâu nào.   
+
+Một khó khăn trong việc xây dựng một lý thuyết về độ phức tạp tính toán là các mô hình tính toán khác nhau có thể yêu cầu các tài nguyên khác nhau để giải quyết cùng một bài toán. Chẳng hạn, các máy Turing nhiều dải băng có thể giải quyết nhiều bài toán nhanh hơn đáng kể so với các máy Turing một dải băng. Khó khăn này được giải quyết theo một cách khá thô sơ (coarse). Giả sử một bài toán được chỉ định bằng cách cung cấp $n$ bit làm đầu vào. Ví dụ, chúng ta có thể quan tâm đến việc liệu một số $n$-bit cụ thể có phải là số nguyên tố hay không. Sự phân biệt chính được đưa ra trong độ phức tạp tính toán là giữa các bài toán có thể được giải quyết bằng cách sử dụng các tài nguyên bị giới hạn bởi một đa thức (polynomial) theo $n$, và những bài toán yêu cầu các tài nguyên tăng trưởng nhanh hơn bất kỳ đa thức nào theo $n$. Trong trường hợp sau, chúng ta thường nói rằng các tài nguyên được yêu cầu là có tính hàm mũ (exponential) theo kích thước bài toán, lạm dụng thuật ngữ hàm mũ, vì có những hàm như $n^{\log n}$ tăng trưởng nhanh hơn bất kỳ đa thức nào (và do đó là 'hàm mũ' theo quy ước này), nhưng lại tăng trưởng chậm hơn bất kỳ hàm mũ thực sự nào. Một bài toán được coi là dễ (easy), dễ xử lý (tractable) hay khả thi (feasible) nếu tồn tại một thuật toán để giải quyết bài toán đó sử dụng tài nguyên đa thức, và được coi là khó (hard), khó xử lý (intractable) hay bất khả thi (infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.   
+
+Lấy một ví dụ đơn giản, giả sử chúng ta có hai số với biểu diễn nhị phân $x_1 \dots x_{m_1}$ và $y_1 \dots y_{m_2}$, và chúng ta muốn xác định tổng của hai số này. Kích thước tổng cộng của đầu vào là $n \equiv m_1 + m_2$. Rất dễ để thấy rằng hai số này có thể được cộng lại bằng cách sử dụng một số lượng các phép toán sơ cấp tỷ lệ với $\Theta(n)$; thuật toán này sử dụng một số lượng đa thức (thực ra là tuyến tính) các phép toán để thực hiện tác vụ của nó. Ngược lại, người ta tin rằng (mặc dù nó chưa bao giờ được chứng minh!) bài toán phân tích một số nguyên thành các thừa số nguyên tố của nó là khó xử lý. Nghĩa là, người ta tin rằng không có thuật toán nào có thể phân tích một số nguyên $n$-bit tùy ý bằng cách sử dụng $O(p(n))$ phép toán, trong đó $p$ là một hàm đa thức cố định nào đó của $n$. Sau này, chúng tôi sẽ đưa ra nhiều ví dụ khác về các bài toán được tin là khó xử lý theo nghĩa này. 
+
+Sự phân loại đa thức (polynomial) so với hàm mũ (exponential) là khá thô sơ. Trong thực tế, một thuật toán giải quyết một bài toán sử dụng $2^{n/1000}$ phép toán có lẽ hữu ích hơn một thuật toán chạy trong $n^{1000}$ phép toán. Chỉ đối với các kích thước đầu vào rất lớn ($n \approx 10^8$) thì thuật toán đa thức 'hiệu quả' mới được ưa thích hơn thuật toán hàm mũ 'kém hiệu quả', và đối với nhiều mục đích, việc ưu tiên thuật toán 'kém hiệu quả' có thể thực tế hơn.   
+
+Mặc dù vậy, có nhiều lý do để đặt cơ sở cho độ phức tạp tính toán chủ yếu dựa trên sự phân loại đa thức so với hàm mũ. Đầu tiên, về mặt lịch sử, với một vài ngoại lệ, các thuật toán tài nguyên đa thức đã nhanh hơn rất nhiều so với các thuật toán hàm mũ. Chúng ta có thể suy đoán rằng lý do cho điều này là sự thiếu trí tưởng tượng: việc nghĩ ra các thuật toán yêu cầu $n, n^2$ hoặc một số lượng đa thức bậc thấp các phép toán thường dễ dàng hơn nhiều so với việc tìm ra một thuật toán tự nhiên yêu cầu $n^{1000}$ phép toán, mặc dù những ví dụ như trường hợp sau vẫn tồn tại. Do đó, khuynh hướng của tâm trí con người trong việc nghĩ ra các thuật toán tương đối đơn giản đã có nghĩa là trong thực tế, các thuật toán đa thức thường thực hiện hiệu quả hơn nhiều so với những người anh em họ hàm mũ của chúng.   
+
+Một lý do thứ hai và nền tảng hơn cho việc nhấn mạnh sự phân loại đa thức so với hàm mũ được bắt nguồn từ luận đề Church-Turing mạnh (strong Church-Turing thesis). Như đã thảo luận trong Mục 1.1, người ta đã quan sát thấy vào những năm 1960 và 1970 rằng các máy Turing xác suất (probabilistic Turing machines) dường như là mô hình tính toán 'hợp lý' mạnh mẽ nhất. Cụ thể hơn, các nhà nghiên cứu liên tục nhận thấy rằng nếu có thể tính toán một hàm bằng cách sử dụng $k$ phép toán sơ cấp trong một mô hình nào đó không phải là mô hình tính toán máy Turing xác suất, thì luôn luôn có thể tính toán cùng một hàm đó trong mô hình máy Turing xác suất, sử dụng tối đa $p(k)$ phép toán sơ cấp, trong đó $p(\cdot)$ là một hàm đa thức nào đó. Phát biểu này được biết đến là luận đề Church-Turing mạnh: 
+
+:::{.postulates}
+# Strong Church–Turing thesis
+Any model of computation can be simulated on a probabilistic Turing machine with at most a polynomial increase in the number of elementary operations required.
+:::
+
+Luận đề Church-Turing mạnh là một tin tuyệt vời cho lý thuyết về độ phức tạp tính toán, vì nó ngụ ý rằng sự chú ý có thể được giới hạn trong mô hình tính toán máy Turing xác suất. Suy cho cùng, nếu một bài toán không có giải pháp sử dụng tài nguyên đa thức trên một máy Turing xác suất, thì luận đề Church-Turing mạnh ngụ ý rằng nó không có giải pháp hiệu quả trên bất kỳ thiết bị tính toán nào. Do đó, luận đề Church-Turing mạnh ngụ ý rằng toàn bộ lý thuyết về độ phức tạp tính toán sẽ mang một hình thức thanh lịch, độc lập với mô hình (model-independent) nếu khái niệm về sự hiệu quả được đồng nhất với các thuật toán tài nguyên đa thức, và sự thanh lịch này đã cung cấp một động lực mạnh mẽ hướng tới việc chấp nhận sự đồng nhất hóa giữa 'có thể giải quyết bằng tài nguyên đa thức' và 'có thể giải quyết một cách hiệu quả'. Tất nhiên, một trong những lý do chính yếu cho sự quan tâm đến máy tính lượng tử là chúng đặt ra sự hoài nghi đối với luận đề Church-Turing mạnh, bằng cách cho phép giải quyết hiệu quả một bài toán được tin là khó xử lý trên tất cả các máy tính cổ điển, bao gồm cả máy Turing xác suất! Tuy nhiên, việc hiểu và trân trọng vai trò của luận đề Church-Turing mạnh trong công cuộc tìm kiếm một lý thuyết độ phức tạp tính toán độc lập với mô hình vẫn là điều hữu ích.   
+
+Cuối cùng, chúng tôi lưu ý rằng, trong thực tế, các nhà khoa học máy tính không chỉ quan tâm đến việc phân loại bài toán thành đa thức hay hàm mũ. Đây chỉ là cách đầu tiên và thô sơ nhất để hiểu một bài toán tính toán khó đến mức nào. Tuy nhiên, nó là một sự phân biệt cực kỳ quan trọng, và minh họa cho nhiều quan điểm rộng lớn hơn về bản chất của các vấn đề tài nguyên trong khoa học máy tính. Đối với phần lớn cuốn sách này, nó sẽ là mối quan tâm trung tâm của chúng ta trong việc đánh giá hiệu quả của một thuật toán cho trước.   
+
+Sau khi đã xem xét những giá trị của việc phân loại đa thức so với hàm mũ, bây giờ chúng tôi phải thú nhận rằng lý thuyết về độ phức tạp tính toán có một thất bại vô cùng đáng chú ý: có vẻ rất khó để chứng minh rằng tồn tại những lớp bài toán thú vị yêu cầu tài nguyên hàm mũ để giải quyết. Khá dễ dàng để đưa ra các chứng minh phi kiến thiết (non-constructive proofs) rằng hầu hết các bài toán đều yêu cầu tài nguyên hàm mũ (xem Bài tập 3.16 bên dưới), và hơn nữa nhiều bài toán thú vị được suy đoán (conjectured) là yêu cầu tài nguyên hàm mũ cho giải pháp của chúng, nhưng những chứng minh chặt chẽ dường như rất khó để đạt được, ít nhất là với trạng thái kiến thức hiện tại. Thất bại này của độ phức tạp tính toán mang những hàm ý quan trọng đối với tính toán lượng tử, bởi vì hóa ra sức mạnh tính toán của máy tính lượng tử có thể có liên hệ với một số bài toán mở (open problems) lớn trong lý thuyết độ phức tạp tính toán cổ điển. Cho đến khi những bài toán này được giải quyết, không thể tuyên bố một cách chắc chắn rằng một máy tính lượng tử mạnh mẽ về mặt tính toán đến mức nào, hay thậm chí liệu nó có mạnh hơn một máy tính cổ điển hay không!   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.16: (Tồn tại các hàm khó tính toán) 
+Chứng minh rằng tồn tại các hàm Boolean trên $n$ đầu vào mà yêu cầu ít nhất $2^n / \log n$ cổng logic để tính toán.   
+:::
