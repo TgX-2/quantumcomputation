@@ -47,6 +47,7 @@ website:
         contents:
           - note/introductiontocomputerscience/index.qmd
           - note/introductiontocomputerscience/1.qmd
+          - note/introductiontocomputerscience/2.qmd
 
       - section : "Appendix"
         contents:

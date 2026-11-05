@@ -129,9 +129,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      TgX.2
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/2.html">The analysis of computational problems</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -316,13 +314,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Introduction to Computer Science</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
@@ -333,6 +331,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">The analysis of computational problems</span></a>
   </div>
 </li>
       </ul>
@@ -372,13 +376,14 @@ window.Quarto = {
   <li><a href="#strong-churchturing-thesis" id="toc-strong-churchturing-thesis" class="nav-link" data-scroll-target="#strong-churchturing-thesis">Strong Church–Turing thesis</a></li>
   <li><a href="#decision-problems-and-the-complexity-classes-p-and-np" id="toc-decision-problems-and-the-complexity-classes-p-and-np" class="nav-link" data-scroll-target="#decision-problems-and-the-complexity-classes-p-and-np">3. Decision problems and the complexity classes P and NP</a></li>
   <li><a href="#định-lý-3.1-định-lý-euler" id="toc-định-lý-3.1-định-lý-euler" class="nav-link" data-scroll-target="#định-lý-3.1-định-lý-euler">Định lý 3.1: (Định lý Euler)</a></li>
+  <li><a href="#định-lý-3.2-cook-levin" id="toc-định-lý-3.2-cook-levin" class="nav-link" data-scroll-target="#định-lý-3.2-cook-levin">Định lý 3.2: (Cook-Levin)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/2.html">The analysis of computational problems</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">The analysis of computational problems</h1>
 </div>
@@ -734,8 +739,20 @@ end j</code></pre>
 </div>
 </div>
 <p>Ít tầm thường hơn, <span class="math inline">\mathbf{NP}</span> cũng chứa các bài toán đầy đủ. Một ví dụ quan trọng của một bài toán như vậy và là nguyên mẫu cho tất cả các bài toán NP-đầy đủ khác là bài toán thỏa mãn mạch (circuit satisfiability problem) hay <span class="math inline">\text{CSAT}</span>: cho trước một mạch Boolean được cấu tạo từ các cổng AND, OR và NOT, liệu có tồn tại một phép gán các giá trị cho các đầu vào của mạch dẫn đến việc mạch xuất ra giá trị <span class="math inline">1</span> hay không, tức là, mạch có có thể thỏa mãn được (satisfiable) đối với một đầu vào nào đó hay không? Tính NP-đầy đủ của <span class="math inline">\text{CSAT}</span> được biết đến là Định lý Cook–Levin, mà bây giờ chúng ta sẽ phác thảo một chứng minh cho nó.</p>
-<p>Định lý 3.2: (Cook-Levin) <span class="math inline">\text{CSAT}</span> là bài toán NP-đầy đủ.</p>
-<p>Chứng minh</p>
+<section id="định-lý-3.2-cook-levin" class="level1 postulates">
+<h1>Định lý 3.2: (Cook-Levin)</h1>
+<p><span class="math inline">\text{CSAT}</span> là bài toán NP-đầy đủ.</p>
+</section>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Chứng minh
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Phần chứng minh gồm có hai phần. Phần đầu tiên của chứng minh là chỉ ra rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>, và phần thứ hai là chỉ ra rằng bất kỳ ngôn ngữ nào trong <span class="math inline">\mathbf{NP}</span> đều có thể quy về <span class="math inline">\text{CSAT}</span>. Cả hai phần của chứng minh đều dựa trên các kỹ thuật mô phỏng: phần đầu tiên của chứng minh chủ yếu chỉ ra rằng một máy Turing có thể mô phỏng một mạch một cách hiệu quả, trong khi phần thứ hai của chứng minh chủ yếu chỉ ra rằng một mạch có thể mô phỏng một máy Turing một cách hiệu quả. Cả hai phần của chứng minh đều khá đơn giản; để minh họa, chúng tôi sẽ trình bày chi tiết hơn một chút về phần thứ hai.</p>
 <p>Phần đầu tiên của chứng minh là chỉ ra rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>. Cho trước một mạch chứa <span class="math inline">n</span> phần tử mạch và một bằng chứng tiềm năng <span class="math inline">w</span>, rõ ràng là rất dễ dàng để kiểm tra trong thời gian đa thức trên một máy Turing xem <span class="math inline">w</span> có thỏa mãn mạch đó hay không, điều này xác nhận rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>.</p>
 <p>Phần thứ hai của chứng minh là chỉ ra rằng bất kỳ ngôn ngữ <span class="math inline">L \in \mathbf{NP}</span> nào cũng có thể được quy về <span class="math inline">\text{CSAT}</span>. Tức là, chúng ta hướng tới việc chỉ ra rằng tồn tại một phép quy về <span class="math inline">R</span> tính toán được trong thời gian đa thức sao cho <span class="math inline">x \in L</span> khi và chỉ khi <span class="math inline">R(x)</span> là một mạch thỏa mãn được. Ý tưởng của phép quy về là tìm ra một mạch mô phỏng hoạt động của máy <span class="math inline">M</span> — máy được dùng để kiểm tra các cặp trường hợp-bằng chứng <span class="math inline">(x, w)</span> đối với ngôn ngữ <span class="math inline">L</span>. Các biến đầu vào cho mạch sẽ đại diện cho bằng chứng; ý tưởng là việc tìm ra một bằng chứng thỏa mãn mạch tương đương với việc máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span> với một bằng chứng cụ thể <span class="math inline">w</span> nào đó. Không mất tính tổng quát, chúng ta có thể đưa ra các giả định sau đây về <span class="math inline">M</span> để đơn giản hóa việc xây dựng:</p>
@@ -744,6 +761,94 @@ end j</code></pre>
 <li><p><span class="math inline">M</span> chạy với thời gian tối đa là <span class="math inline">t(n)</span> và tổng không gian tối đa là <span class="math inline">s(n)</span>, trong đó <span class="math inline">t(n)</span> và <span class="math inline">s(n)</span> là các đa thức theo <span class="math inline">n</span>.</p></li>
 <li><p>Trên thực tế, có thể giả định rằng máy <span class="math inline">M</span> chạy với đúng thời gian <span class="math inline">t(n)</span> cho tất cả các đầu vào có kích thước <span class="math inline">n</span>. Điều này được thực hiện bằng cách thêm các dòng <span class="math inline">\langle q_Y, x, q_Y, x, 0 \rangle</span> và <span class="math inline">\langle q_N, x, q_N, x, 0 \rangle</span> cho mỗi <span class="math inline">x = \triangleright, 0, 1</span> và ký hiệu khoảng trống, qua đó buộc máy dừng lại một cách nhân tạo sau đúng <span class="math inline">t(n)</span> bước.</p></li>
 </ol>
+<p>Ý tưởng cơ bản của việc thiết kế để mô phỏng máy <span class="math inline">M</span> được phác thảo trong Hình 3.12. Mỗi trạng thái nội tại của máy Turing được biểu diễn bằng một bit duy nhất trong mạch. Chúng ta đặt tên cho các bit tương ứng là <span class="math inline">\tilde{q}_s, \tilde{q}_1, \dots, \tilde{q}_m, \tilde{q}_Y, \tilde{q}_N</span>. Ban đầu, <span class="math inline">\tilde{q}_s</span> được thiết lập bằng 1, và tất cả các bit khác biểu diễn trạng thái nội tại được thiết lập bằng 0. Mỗi ô vuông trên dải băng của máy Turing được biểu diễn bằng ba bit: hai bit để biểu diễn chữ cái của bảng chữ cái (<span class="math inline">\triangleright, 0, 1</span> hoặc khoảng trống) hiện đang nằm trên dải băng, và một bit ‘cờ’ (flag) duy nhất được đặt thành 1 nếu đầu đọc-ghi đang trỏ vào ô vuông đó, và được đặt thành 0 nếu ngược lại. Chúng ta biểu thị các bit biểu diễn nội dung dải băng bằng <span class="math inline">(u_1, v_1), \dots, (u_{s(n)}, v_{s(n)})</span> và các bit cờ tương ứng bằng <span class="math inline">f_1, \dots, f_{s(n)}</span>. Ban đầu, các bit <span class="math inline">u_j</span> và <span class="math inline">v_j</span> được thiết lập để đại diện cho các đầu vào <span class="math inline">x</span> và <span class="math inline">w</span> một cách thích hợp, trong khi <span class="math inline">f_1 = 1</span> và tất cả các <span class="math inline">f_j</span> khác bằng 0. Ngoài ra còn có một bit ‘cờ toàn cục’ (global flag) <span class="math inline">F</span> đơn lẻ, chức năng của nó sẽ được giải thích sau. <span class="math inline">F</span> ban đầu được thiết lập bằng 0. Chúng ta coi tất cả các bit đầu vào của mạch là cố định, ngoại trừ những bit biểu diễn bằng chứng <span class="math inline">w</span>, vốn là các bit biến đổi (variable bits) đối với mạch.</p>
+<p>Hành động của <span class="math inline">M</span> đạt được bằng cách lặp lại <span class="math inline">t(n)</span> lần một ‘bước mô phỏng’ (simulation step) mô phỏng việc thực thi một dòng chương trình duy nhất của máy Turing. Mỗi bước mô phỏng có thể được chia nhỏ thành một chuỗi các bước tương ứng lần lượt với các dòng chương trình tương ứng, với một bước cuối cùng để đặt lại cờ toàn cục <span class="math inline">F</span> về 0, như được minh họa trong Hình 3.13.</p>
+<p><img src="../../img/3.12.png" class="img-fluid"></p>
+<p>Để hoàn thành việc mô phỏng, chúng ta chỉ cần mô phỏng một dòng chương trình có dạng <span class="math inline">\langle q_i, x, q_j, x', s \rangle</span>. Để thuận tiện, chúng ta giả định <span class="math inline">q_i \ne q_j</span>, nhưng một cấu trúc tương tự cũng hoạt động trong trường hợp <span class="math inline">q_i = q_j</span>. Thủ tục như sau:</p>
+<ol type="1">
+<li><p>Kiểm tra xem <span class="math inline">\tilde{q}_i = 1</span>, cho biết trạng thái hiện tại của máy là <span class="math inline">q_i</span>.</p></li>
+<li><p>Đối với mỗi ô trên dải băng:</p>
+<ol type="a">
+<li><p>Kiểm tra xem bit cờ toàn cục có được đặt thành 0 hay không, cho biết máy Turing chưa thực hiện hành động nào.</p></li>
+<li><p>Kiểm tra xem bit cờ có được đặt thành 1 hay không, cho biết đầu đọc dải băng đang ở ô này.</p></li>
+<li><p>Kiểm tra xem nội dung dải băng được mô phỏng tại vị trí này có phải là <span class="math inline">x</span> hay không.</p></li>
+<li><p>Nếu tất cả các điều kiện đều thỏa mãn, hãy thực hiện các bước sau:</p>
+<ol type="1">
+<li><p>Đặt <span class="math inline">\tilde{q}_i = 0</span> và <span class="math inline">\tilde{q}_j = 1</span>.</p></li>
+<li><p>Cập nhật nội dung dải băng được mô phỏng tại ô này thành <span class="math inline">x'</span>.</p></li>
+<li><p>Cập nhật bit cờ của ‘ô’ này và các ô lân cận một cách thích hợp, tùy thuộc vào việc <span class="math inline">s = +1, 0, -1</span>, và liệu chúng ta có đang ở đầu tận cùng bên trái của dải băng hay không.</p></li>
+<li><p>Đặt bit cờ toàn cục thành 1, cho biết vòng tính toán này đã hoàn tất.</p></li>
+</ol></li>
+</ol></li>
+</ol>
+<p>Đây là một thủ tục cố định liên quan đến một số lượng bit không đổi, và theo kết quả vạn năng của Mục 3.1.2 có thể được thực hiện bằng cách sử dụng một mạch chứa một số lượng cổng không đổi.</p>
+<p><img src="../../img/3.13.png" class="img-fluid"></p>
+<p>Tổng số lượng cổng trong toàn bộ mạch dễ dàng thấy được là <span class="math inline">O(t(n)(s(n) + n))</span>, có kích thước đa thức. Ở cuối mạch, rõ ràng là <span class="math inline">\tilde{q}_Y = 1</span> khi và chỉ khi máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span>. Do đó, mạch có thể thỏa mãn được khi và chỉ khi tồn tại <span class="math inline">w</span> sao cho máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span>, và chúng ta đã tìm thấy phép quy về mong muốn từ <span class="math inline">L</span> sang <span class="math inline">\text{CSAT}</span>. <span class="math inline">\Box</span></p>
+</div>
+</div>
+<p><span class="math inline">\text{CSAT}</span> mở cho chúng ta một bước đệm (a foot in the door) cho phép chúng ta dễ dàng chứng minh rằng nhiều bài toán khác là NP-đầy đủ. Thay vì chứng minh trực tiếp một bài toán là NP-đầy đủ, chúng ta có thể chứng minh nó thuộc <span class="math inline">\mathbf{NP}</span> và <span class="math inline">\text{CSAT}</span> quy về nó, do đó theo Bài tập 3.22 bài toán đó phải là NP-đầy đủ. Một mẫu nhỏ các bài toán NP-đầy đủ được thảo luận trong Hộp 3.3. Một ví dụ về một bài toán NP-đầy đủ khác là bài toán thỏa mãn (<span class="math inline">\text{SAT}</span>), được phát biểu dưới dạng một công thức Boolean. Nhắc lại rằng một công thức Boolean <span class="math inline">\varphi</span> được cấu tạo từ các phần tử sau: một tập hợp các biến Boolean <span class="math inline">x_1, x_2, \dots</span>; các liên kết Boolean, tức là một hàm Boolean với một hoặc hai đầu vào và một đầu ra, chẳng hạn như <span class="math inline">\wedge</span> (AND), <span class="math inline">\vee</span> (OR), và <span class="math inline">\neg</span> (NOT); và các dấu ngoặc đơn. Tính đúng hay sai của một công thức Boolean đối với một tập hợp các biến Boolean cho trước được quyết định theo các quy luật thông thường của đại số Boolean. Ví dụ, công thức <span class="math inline">\varphi = x_1 \vee \neg x_2</span> có phép gán thỏa mãn là <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 0</span>, trong khi <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 1</span> không phải là một phép gán thỏa mãn. Bài toán thỏa mãn là xác định, cho trước một công thức Boolean <span class="math inline">\varphi</span>, liệu nó có thể thỏa mãn được bởi bất kỳ tập hợp đầu vào khả dĩ nào hay không.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.23:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\text{SAT}</span> là NP-đầy đủ bằng cách trước tiên chỉ ra rằng <span class="math inline">\text{SAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>, và sau đó chỉ ra rằng <span class="math inline">\text{CSAT}</span> quy về <span class="math inline">\text{SAT}</span>. (Gợi ý: đối với phép quy về, việc đại diện mỗi dây dẫn riêng biệt trong một trường hợp của <span class="math inline">\text{CSAT}</span> bằng các biến khác nhau trong công thức Boolean có thể sẽ hữu ích.)</p>
+</div>
+</div>
+</div>
+<p>Một trường hợp hạn chế quan trọng của <span class="math inline">\text{SAT}</span> cũng là NP-đầy đủ là bài toán 3-thỏa mãn (<span class="math inline">3\text{SAT}</span>), liên quan đến các công thức ở dạng chuẩn tắc hội 3 (3-conjunctive normal form). Một công thức được gọi là ở dạng chuẩn tắc hội (conjunctive normal form - CNF) nếu nó là phép AND của một tập hợp các mệnh đề (clauses), mỗi mệnh đề trong đó là phép OR của một hoặc nhiều literal (biến đơn dạng <span class="math inline">x</span> hoặc <span class="math inline">\neg x</span>). Ví dụ, công thức <span class="math inline">(x_1 \vee \neg x_2) \wedge (x_2 \vee x_3 \vee \neg x_4)</span> ở dạng chuẩn tắc hội. Một công thức ở dạng 3-chuẩn tắc hội hoặc 3-CNF nếu mỗi mệnh đề có chính xác ba literals. Ví dụ, công thức <span class="math inline">(\neg x_1 \vee x_2 \vee \neg x_2) \wedge (\neg x_1 \vee x_3 \vee \neg x_4) \wedge (x_2 \vee x_3 \vee x_4)</span> ở dạng 3-chuẩn tắc hội. Bài toán 3-thỏa mãn là xác định xem một công thức ở dạng 3-chuẩn tắc hội có thể thỏa mãn được hay không.</p>
+<p>Chứng minh rằng <span class="math inline">3\text{SAT}</span> là NP-đầy đủ khá đơn giản, nhưng hơi quá dài để đưa vào tổng quan này. Thậm chí còn hơn cả <span class="math inline">\text{CSAT}</span> và <span class="math inline">\text{SAT}</span>, <span class="math inline">3\text{SAT}</span> theo một nghĩa nào đó chính là bài toán NP-đầy đủ chuẩn mực, và nó là cơ sở cho vô số chứng minh rằng các bài toán khác là NP-đầy đủ. Chúng ta kết thúc phần thảo luận về tính NP-đầy đủ với một sự thật bất ngờ rằng <span class="math inline">2\text{SAT}</span>, phiên bản tương tự của <span class="math inline">3\text{SAT}</span> trong đó mỗi mệnh đề có hai literals, có thể giải quyết được trong thời gian đa thức:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.24: (2SAT có lời giải hiệu quả)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\varphi</span> là một công thức Boolean ở dạng chuẩn tắc hội, trong đó mỗi mệnh đề chỉ chứa hai literals.</p>
+<ol type="1">
+<li><p>Dựng một đồ thị (có hướng) <span class="math inline">G(\varphi)</span> với các cạnh có hướng theo cách sau: các đỉnh của <span class="math inline">G</span> tương ứng với các biến <span class="math inline">x_j</span> và phủ định <span class="math inline">\neg x_j</span> của chúng trong <span class="math inline">\varphi</span>. Tồn tại một cạnh (có hướng) <span class="math inline">(\alpha, \beta)</span> trong <span class="math inline">G</span> khi và chỉ khi mệnh đề <span class="math inline">(\neg \alpha \vee \beta)</span> hoặc mệnh đề <span class="math inline">(\beta \vee \neg \alpha)</span> xuất hiện trong <span class="math inline">\varphi</span>. Chứng minh rằng <span class="math inline">\varphi</span> không thể thỏa mãn được khi và chỉ khi tồn tại một biến <span class="math inline">x</span> sao cho có các đường đi từ <span class="math inline">x</span> đến <span class="math inline">\neg x</span> và từ <span class="math inline">\neg x</span> đến <span class="math inline">x</span> trong <span class="math inline">G(\varphi)</span>.</p></li>
+<li><p>Chứng minh rằng cho trước một đồ thị có hướng <span class="math inline">G</span> chứa <span class="math inline">n</span> đỉnh, có thể xác định xem liệu hai đỉnh <span class="math inline">v_1</span> và <span class="math inline">v_2</span> có nối với nhau hay không trong thời gian đa thức.</p></li>
+<li><p>Tìm một thuật toán hiệu quả để giải <span class="math inline">2\text{SAT}</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 3.3: Vườn thú các bài toán NP-đầy đủ (A zoo of NP-complete problems)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tầm quan trọng của lớp <span class="math inline">\mathbf{NP}</span> một phần xuất phát từ số lượng khổng lồ các bài toán tính toán đã được biết đến là NP-đầy đủ. Chúng ta không thể hy vọng khảo sát toàn bộ chủ đề này ở đây (xem phần ‘Lịch sử và đọc thêm’), nhưng các ví dụ sau đây, được lấy từ nhiều lĩnh vực toán học khác nhau, sẽ đưa ra một ý tưởng về sự pha trộn phong phú của các bài toán được biết đến là NP-đầy đủ.</p>
+<ul>
+<li><p><span class="math inline">\text{CLIQUE}</span> (lý thuyết đồ thị): Một clique trong một đồ thị vô hướng <span class="math inline">G</span> là một tập con các đỉnh mà mỗi cặp đỉnh trong đó đều được kết nối bởi một cạnh. Kích thước của một clique là số lượng đỉnh mà nó chứa. Cho trước một số nguyên <span class="math inline">m</span> và một đồ thị <span class="math inline">G</span>, liệu <span class="math inline">G</span> có chứa một clique kích thước <span class="math inline">m</span> hay không?</p></li>
+<li><p><span class="math inline">\text{SUBSET-SUM}</span> (số học): Cho trước một tập hợp hữu hạn <span class="math inline">S</span> các số nguyên dương và một số mục tiêu <span class="math inline">t</span>, liệu có tồn tại một tập con bất kỳ của <span class="math inline">S</span> có tổng bằng <span class="math inline">t</span> hay không?</p></li>
+<li><p><span class="math inline">\text{0-1 INTEGER PROGRAMMING}</span> (quy hoạch tuyến tính): Cho trước một ma trận <span class="math inline">m \times n</span> số nguyên <span class="math inline">A</span> và một vectơ <span class="math inline">m</span> chiều <span class="math inline">y</span> với các giá trị nguyên, liệu có tồn tại một vectơ <span class="math inline">n</span> chiều <span class="math inline">x</span> với các phần tử nằm trong tập <span class="math inline">\{0, 1\}</span> sao cho <span class="math inline">Ax \le y</span> hay không?</p></li>
+<li><p><span class="math inline">\text{VERTEX COVER}</span> (lý thuyết đồ thị): Một tập phủ đỉnh (vertex cover) cho một đồ thị vô hướng <span class="math inline">G</span> là một tập hợp các đỉnh <span class="math inline">V'</span> sao cho mọi cạnh trong đồ thị đều có một hoặc cả hai đỉnh nằm trong <span class="math inline">V'</span>. Cho trước một số nguyên <span class="math inline">m</span> và một đồ thị <span class="math inline">G</span>, liệu <span class="math inline">G</span> có một tập phủ đỉnh <span class="math inline">V'</span> chứa <span class="math inline">m</span> đỉnh hay không?<br>
+</p></li>
+</ul>
+</div>
+</div>
+<p>Giả định rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, người ta có thể chứng minh rằng tồn tại một lớp các bài toán khác rỗng <span class="math inline">\mathbf{NPI}</span> (<span class="math inline">\mathbf{NP}</span> trung gian - NP intermediate), những bài toán vừa không thể giải quyết được bằng các tài nguyên đa thức, vừa không phải là <span class="math inline">\mathbf{NP}</span>-đầy đủ. Rõ ràng, không có bài toán nào được biết chắc chắn là nằm trong <span class="math inline">\mathbf{NPI}</span> (nếu không chúng ta đã biết rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>), nhưng có một vài bài toán được coi là những ứng cử viên đầy triển vọng. Hai trong số những ứng cử viên sáng giá nhất là bài toán phân tích thừa số (factoring) và bài toán đẳng cấu đồ thị (graph isomorphism):</p>
+<p><span class="math inline">\text{GRAPH ISOMORPHISM}</span>: Giả sử <span class="math inline">G</span> và <span class="math inline">G'</span> là hai đồ thị vô hướng trên tập đỉnh <span class="math inline">V \equiv \{v_1, \dots, v_n\}</span>. Liệu <span class="math inline">G</span> và <span class="math inline">G'</span> có đẳng cấu với nhau hay không? Nghĩa là, có tồn tại một song ánh <span class="math inline">\varphi : V \to V</span> sao cho cạnh <span class="math inline">(v_i, v_j)</span> thuộc <span class="math inline">G</span> khi và chỉ khi cạnh <span class="math inline">(\varphi(v_i), \varphi(v_j))</span> thuộc <span class="math inline">G'</span> hay không?</p>
+<p>Các bài toán trong <span class="math inline">\mathbf{NPI}</span> thu hút sự quan tâm đặc biệt của các nhà nghiên cứu trong lĩnh vực tính toán lượng tử và thông tin lượng tử vì hai lý do. Thứ nhất, việc tìm kiếm các thuật toán lượng tử nhanh để giải quyết các bài toán không thuộc <span class="math inline">\mathbf{P}</span> là một mục tiêu rất đáng khao khát. Thứ hai, nhiều người nghi ngờ rằng máy tính lượng tử sẽ không thể giải quyết hiệu quả tất cả các bài toán trong <span class="math inline">\mathbf{NP}</span>, do đó loại trừ các bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ. Vì vậy, việc tập trung vào lớp <span class="math inline">\mathbf{NPI}</span> là một điều hoàn toàn tự nhiên. Quả thực, một thuật toán lượng tử nhanh cho bài toán phân tích thừa số đã được phát hiện (Chương 5), và điều này đã thúc đẩy việc tìm kiếm các thuật toán lượng tử nhanh cho các bài toán khác được nghi ngờ là thuộc <span class="math inline">\mathbf{NPI}</span>.</p>
 
 
 
