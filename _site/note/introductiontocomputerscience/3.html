@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>Perspectives on computer science – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      TgX.2
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The analysis of computational problems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#bài-tập-vui-vẻ" id="toc-bài-tập-vui-vẻ" class="nav-link active" data-scroll-target="#bài-tập-vui-vẻ">Bài tập vui vẻ</a>
+  <ul class="collapse">
+  <li><a href="#bài-tập-3.1.-minsky-machines" id="toc-bài-tập-3.1.-minsky-machines" class="nav-link" data-scroll-target="#bài-tập-3.1.-minsky-machines">Bài tập 3.1. Minsky Machines</a></li>
+  <li><a href="#bài-tập-3.2.-vector-games" id="toc-bài-tập-3.2.-vector-games" class="nav-link" data-scroll-target="#bài-tập-3.2.-vector-games">Bài tập 3.2. Vector games</a></li>
+  <li><a href="#bài-tập-3.3.-fractan" id="toc-bài-tập-3.3.-fractan" class="nav-link" data-scroll-target="#bài-tập-3.3.-fractan">Bài tập 3.3. Fractan</a></li>
+  <li><a href="#bài-tập-3.4.-tính-không-quyết-định-của-các-hệ-động-lực---undecidability-of-dynamical-systems" id="toc-bài-tập-3.4.-tính-không-quyết-định-của-các-hệ-động-lực---undecidability-of-dynamical-systems" class="nav-link" data-scroll-target="#bài-tập-3.4.-tính-không-quyết-định-của-các-hệ-động-lực---undecidability-of-dynamical-systems">Bài tập 3.4. Tính không quyết định của các hệ động lực - Undecidability of dynamical systems</a></li>
+  <li><a href="#bài-tập-3.5.-tính-không-vạn-năng-của-logic-khả-nghịch-2-bit---non-universality-of-two-bit-reversible-logic" id="toc-bài-tập-3.5.-tính-không-vạn-năng-của-logic-khả-nghịch-2-bit---non-universality-of-two-bit-reversible-logic" class="nav-link" data-scroll-target="#bài-tập-3.5.-tính-không-vạn-năng-của-logic-khả-nghịch-2-bit---non-universality-of-two-bit-reversible-logic">Bài tập 3.5. Tính không vạn năng của logic khả nghịch 2-bit - Non-universality of two bit reversible logic</a></li>
+  <li><a href="#bài-tập-3.6.-độ-khó-xấp-xỉ-của-tsp---hardness-of-approximation-of-texttsp" id="toc-bài-tập-3.6.-độ-khó-xấp-xỉ-của-tsp---hardness-of-approximation-of-texttsp" class="nav-link" data-scroll-target="#bài-tập-3.6.-độ-khó-xấp-xỉ-của-tsp---hardness-of-approximation-of-texttsp">Bài tập 3.6. Độ khó xấp xỉ của TSP - Hardness of approximation of <span class="math inline">\text{TSP}</span></a></li>
+  <li><a href="#bài-tập-3.7.-máy-turing-khả-nghịch---reversible-turing-machines" id="toc-bài-tập-3.7.-máy-turing-khả-nghịch---reversible-turing-machines" class="nav-link" data-scroll-target="#bài-tập-3.7.-máy-turing-khả-nghịch---reversible-turing-machines">Bài tập 3.7. Máy Turing khả nghịch - Reversible Turing machines</a></li>
+  <li><a href="#bài-tập-3.8.-find-a-hard-to-compute-class-of-functions-research" id="toc-bài-tập-3.8.-find-a-hard-to-compute-class-of-functions-research" class="nav-link" data-scroll-target="#bài-tập-3.8.-find-a-hard-to-compute-class-of-functions-research">Bài tập 3.8. Find a hard-to-compute class of functions (Research)</a></li>
+  <li><a href="#bài-tập-3.9.-reversible-pspace-pspace" id="toc-bài-tập-3.9.-reversible-pspace-pspace" class="nav-link" data-scroll-target="#bài-tập-3.9.-reversible-pspace-pspace">Bài tập 3.9. Reversible PSPACE = PSPACE</a></li>
+  <li><a href="#bài-tập-3.10.-ancilla-bits-and-efficiency-of-reversible-computation" id="toc-bài-tập-3.10.-ancilla-bits-and-efficiency-of-reversible-computation" class="nav-link" data-scroll-target="#bài-tập-3.10.-ancilla-bits-and-efficiency-of-reversible-computation">Bài tập 3.10. Ancilla bits and efficiency of reversible computation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Perspectives on computer science</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Trong một phần giới thiệu ngắn như chương này, hoàn toàn không thể bao quát chi tiết tất cả những ý tưởng vĩ đại của một lĩnh vực phong phú như khoa học máy tính. Chúng tôi hy vọng đã truyền tải được cho bạn phần nào ý nghĩa của việc tư duy như một nhà khoa học máy tính, và cung cấp một hệ thống từ vựng cơ bản cùng cái nhìn tổng quan về một số khái niệm nền tảng quan trọng trong việc thấu hiểu quá trình tính toán. Để kết thúc chương này, chúng ta sẽ lướt qua một số vấn đề tổng quát hơn, nhằm cung cấp góc nhìn về việc tính toán lượng tử và thông tin lượng tử hòa hợp như thế nào vào bức tranh tổng thể của khoa học máy tính.</p>
+<hr>
+<p>Cuộc thảo luận của chúng ta từ trước đến nay xoay quanh mô hình tính toán máy Turing. <strong>Sức mạnh tính toán của các mô hình tính toán phi truyền thống chẳng hạn như máy tính song song lớn (massively parallel computers), máy tính DNA và máy tính tương tự (analog computers) so sánh như thế nào với mô hình tính toán máy Turing chuẩn, và một cách ẩn tàng là với tính toán lượng tử?</strong></p>
+<p>Hãy bắt đầu với các kiến trúc điện toán song song. Đại đa số các máy tính tồn tại đều là máy tính tuần tự (serial computers), xử lý từng lệnh một tại một thời điểm trong một đơn vị xử lý trung tâm nào đó. Ngược lại, máy tính song song có thể xử lý nhiều hơn một lệnh tại một thời điểm, dẫn đến việc tiết kiệm đáng kể thời gian và tiền bạc cho một số ứng dụng. Mặc dù vậy, xử lý song song không mang lại lợi thế cơ bản nào so với mô hình máy Turing chuẩn khi xét đến các vấn đề về hiệu năng (efficiency), bởi vì một máy Turing có thể mô phỏng một máy tính song song với tổng tài nguyên vật lý tương đương theo cấp số đa thức — tổng không gian và thời gian được sử dụng cho quá trình tính toán. Những gì máy tính song song đạt được về mặt thời gian, nó lại mất đi về tổng tài nguyên không gian cần thiết để thực hiện phép tính, dẫn đến kết quả ròng là không có sự thay đổi thiết yếu nào về sức mạnh của mô hình tính toán.</p>
+<p>Một ví dụ cụ thể thú vị về tính toán song song lớn là kỹ thuật máy tính DNA (DNA computing). Một sợi DNA (deoxyribonucleic acid) là một phân tử được cấu thành từ một chuỗi (một polymer) gồm bốn loại nucleotide, được phân biệt bởi các bazơ mà chúng mang theo, ký hiệu là các chữ cái A (adenine), C (cytosine), G (guanine) và T (thymine). Dưới những hoàn cảnh nhất định, hai sợi có thể liên kết (anneal) với nhau để tạo thành một sợi đôi nếu các cặp bazơ tương ứng bổ sung cho nhau (A khớp với T và G khớp với C). Các đầu mút cũng rất khác biệt và phải khớp với nhau một cách thích hợp. Các kỹ thuật hóa học có thể được sử dụng để khuếch đại số lượng các sợi bắt đầu hoặc kết thúc bằng các trình tự cụ thể (phản ứng chuỗi polymerase - PCR), tách các sợi theo chiều dài (điện di trên gel), hòa tan các sợi đôi thành sợi đơn (thay đổi nhiệt độ và pH), đọc trình tự trên một sợi, cắt các sợi ở một vị trí cụ thể (enzyme giới hạn), và phát hiện xem một trình tự DNA nhất định có trong ống nghiệm hay không. Quy trình sử dụng các cơ chế này một cách mạnh mẽ khá phức tạp, nhưng ý tưởng cơ bản có thể được hiểu qua một ví dụ.</p>
+<p>Bài toán đường đi Hamilton có hướng (directed Hamiltonian path problem) là một biến thể đơn giản và có độ khó tương đương với bài toán chu trình Hamilton ở Mục 3.2.2, trong đó mục tiêu là xác định xem có tồn tại một đường đi hay không giữa hai đỉnh xác định <span class="math inline">j_1</span> và <span class="math inline">j_N</span> trong một đồ thị có hướng <span class="math inline">G</span> gồm <span class="math inline">N</span> đỉnh, đi qua mỗi đỉnh đúng một lần và chỉ tuân theo các hướng cạnh cho phép. Bài toán này có thể được giải quyết bằng một máy tính DNA sử dụng năm bước sau, trong đó <span class="math inline">x_j</span> được chọn là các trình tự bazơ duy nhất (và <span class="math inline">\bar{x}_j</span> là các phần bù của chúng), các sợi DNA <span class="math inline">x_j x_k</span> mã hóa các cạnh, và các sợi <span class="math inline">\bar{x}_j \bar{x}_j</span> mã hóa các đỉnh:</p>
+<ol type="1">
+<li><p>Tạo ra các đường đi ngẫu nhiên qua <span class="math inline">G</span>, bằng cách kết hợp một hỗn hợp tất cả các sợi DNA đỉnh và cạnh có thể có, và chờ cho các sợi liên kết.</p></li>
+<li><p>Chỉ giữ lại các đường đi bắt đầu bằng <span class="math inline">j_1</span> và kết thúc bằng <span class="math inline">j_N</span>, bằng cách khuếch đại chỉ các sợi đôi bắt đầu bằng <span class="math inline">\bar{x}_{j_1}</span> và kết thúc bằng <span class="math inline">\bar{x}_{j_N}</span>.</p></li>
+<li><p>Chỉ chọn các đường đi có độ dài <span class="math inline">N</span>, bằng cách tách các sợi theo chiều dài của chúng.</p></li>
+<li><p>Chỉ chọn các đường đi đi qua mỗi đỉnh ít nhất một lần, bằng cách hòa tan DNA thành các sợi đơn và liên kết với tất cả các sợi đỉnh có thể có từng cái một và lọc ra chỉ những sợi liên kết.</p></li>
+<li><p>Phát hiện xem có sợi nào sống sót sau các bước lựa chọn hay không; nếu có, thì tồn tại một đường đi, và ngược lại thì không.</p></li>
+</ol>
+<p>Để đảm bảo câu trả lời chính xác với xác suất đủ cao, <span class="math inline">x_j</span> có thể được chọn chứa nhiều (<span class="math inline">\approx 30</span>) bazơ, và một số lượng lớn (<span class="math inline">\approx 10^{14}</span> hoặc nhiều hơn là khả thi) các sợi được sử dụng trong phản ứng.</p>
+<p>Các phương pháp phỏng đoán (heuristic methods) có sẵn để cải tiến ý tưởng cơ bản này. Tất nhiên, các phương pháp tìm kiếm vét cạn (exhaustive search) như thế này chỉ hoạt động khi tất cả các đường đi có thể được tạo ra một cách hiệu quả, và do đó số lượng các phân tử được sử dụng phải tăng theo hàm mũ khi kích thước của bài toán tăng lên (số lượng đỉnh trong ví dụ trên). Các phân tử DNA tương đối nhỏ và dễ tổng hợp, và số lượng lớn các tổ hợp DNA mà người ta có thể nhét vào một ống nghiệm có thể trì hoãn sự gia tăng chi phí độ phức tạp theo hàm mũ trong một thời gian — lên tới vài chục đỉnh — nhưng cuối cùng chi phí hàm mũ vẫn giới hạn khả năng ứng dụng của phương pháp này. Do đó, mặc dù máy tính DNA mang lại một mô hình tính toán hấp dẫn và có thể thực hiện được về mặt vật lý để giải quyết một số bài toán nhất định, nhưng nó vẫn là một kỹ thuật tính toán cổ điển và không mang lại sự cải tiến cơ bản nào về nguyên tắc so với một máy Turing.</p>
+<p>Máy tính tương tự (Analog computers) mang đến một hệ thống khác để thực hiện tính toán. Một máy tính là analog khi sự biểu diễn vật lý của thông tin mà nó sử dụng để tính toán dựa trên các bậc tự do liên tục, thay vì các số không và một. Ví dụ, một chiếc nhiệt kế là một máy tính analog. Mạch tương tự, sử dụng điện trở, tụ điện và bộ khuếch đại, cũng được cho là thực hiện tính toán tương tự. Những cỗ máy như vậy có một nguồn tài nguyên vô hạn để khai thác trong giới hạn lý tưởng, vì các biến liên tục như vị trí và điện áp có thể lưu trữ một lượng thông tin không giới hạn. Nhưng điều này chỉ đúng khi vắng bóng nhiễu (noise). Sự hiện diện của một lượng nhiễu hữu hạn làm giảm số lượng trạng thái có thể phân biệt (distinguishable states) của một biến liên tục xuống một số hữu hạn — và do đó giới hạn máy tính analog vào việc biểu diễn một lượng thông tin hữu hạn. Trong thực tế, nhiễu làm cho máy tính analog không có sức mạnh vượt quá máy tính kỹ thuật số thông thường, và qua đó là máy Turing. Người ta có thể nghi ngờ rằng máy tính lượng tử chỉ đơn thuần là máy tính analog, bởi vì việc sử dụng các tham số liên tục trong việc mô tả trạng thái qubit; tuy nhiên, hóa ra các tác động của nhiễu lên máy tính lượng tử có thể được số hóa (digitized) một cách hiệu quả. Kết quả là, lợi thế tính toán của chúng vẫn được duy trì ngay cả khi có sự hiện diện của một lượng nhiễu hữu hạn, như chúng ta sẽ thấy ở Chương 10.</p>
+<hr>
+<p>Ảnh hưởng của nhiễu (noise) đối với máy tính kỹ thuật số là gì? Trong những ngày đầu của ngành tính toán, nhiễu là một vấn đề rất thực tế đối với máy tính; ở một số máy tính ban đầu, ống chân không (vacuum tube) có thể bị hỏng sau mỗi vài phút. Ngay cả ngày nay, nhiễu vẫn là một vấn đề đối với các thiết bị tính toán như modem và ổ cứng. Đáng kể lượng công sức đã được cống hiến cho bài toán tìm hiểu cách xây dựng các máy tính đáng tin cậy từ các linh kiện không đáng tin cậy. Von Neumann đã chứng minh rằng điều này là có thể chỉ với sự gia tăng theo cấp số đa thức (polynomial increase) về tài nguyên cần thiết cho quá trình tính toán. Tuy nhiên, trớ trêu thay, máy tính hiện đại không sử dụng bất kỳ kết quả nào trong số đó, bởi vì các linh kiện của máy tính hiện đại cực kỳ đáng tin cậy. Tỷ lệ lỗi từ <span class="math inline">10^{-17}</span> trở xuống là phổ biến trong các linh kiện điện tử hiện đại. Vì lý do này, các lỗi xảy ra rất hiếm đến mức nỗ lực bổ sung cần thiết để bảo vệ chống lại chúng không được coi là đáng thực hiện. Mặt khác, chúng ta sẽ thấy rằng máy tính lượng tử là những cỗ máy rất mong manh, và có thể sẽ đòi hỏi việc ứng dụng đáng kể các kỹ thuật sửa lỗi.</p>
+<p>Các kiến trúc khác nhau có thể làm thay đổi ảnh hưởng của nhiễu. Ví dụ, nếu ảnh hưởng của nhiễu bị bỏ qua, thì việc chuyển sang một kiến trúc máy tính trong đó nhiều phép toán được thực hiện song song có thể không làm thay đổi số lượng các phép toán cần phải thực hiện. Tuy nhiên, một hệ thống song song có thể chống chịu nhiễu tốt hơn đáng kể, bởi vì ảnh hưởng của nhiễu có ít thời gian hơn để tích lũy. Do đó, trong một phân tích thực tế, phiên bản song song của một thuật toán có thể có những ưu thế đáng kể so với việc triển khai tuần tự. Thiết kế kiến trúc là một lĩnh vực nghiên cứu rất phát triển đối với máy tính cổ điển. Hầu như không có gì tương tự được phát triển theo các hướng tương tự cho máy tính lượng tử, nhưng việc nghiên cứu về nhiễu đã gợi ý một số đặc điểm đáng mong đợi cho các kiến trúc máy tính lượng tử trong tương lai, chẳng hạn như mức độ song song cao.</p>
+<hr>
+<p>Mô hình tính toán thứ tư là tính toán phân tán (distributed computation), trong đó có từ hai đơn vị tính toán bị tách biệt về mặt không gian trở lên sẵn có để giải quyết một bài toán tính toán. Rõ ràng là, một mô hình tính toán như vậy không có sức mạnh vượt quá mô hình máy Turing theo nghĩa là nó có thể được mô phỏng một cách hiệu quả trên một máy Turing. Tuy nhiên, tính toán phân tán tạo ra một thách thức mới thú vị về tài nguyên: làm thế nào để tận dụng tốt nhất nhiều đơn vị tính toán khi chi phí giao tiếp (communication) giữa các đơn vị là cao. Vấn đề tính toán phân tán này trở nên đặc biệt thú vị khi các máy tính được kết nối thông qua các mạng tốc độ cao; mặc dù tổng dung lượng tính toán của tất cả các máy tính trên một mạng có thể cực kỳ lớn, việc tận dụng tiềm năng đó là khó khăn. Hầu hết các bài toán thú vị không dễ dàng chia thành các phần độc lập có thể được giải quyết riêng biệt, và thường có thể đòi hỏi giao tiếp toàn cục giữa các hệ thống con tính toán khác nhau để trao đổi các kết quả trung gian hoặc đồng bộ hóa trạng thái. Lĩnh vực độ phức tạp giao tiếp (communication complexity) đã được phát triển để giải quyết các vấn đề như vậy, bằng cách định lượng chi phí của các yêu cầu giao tiếp trong việc giải quyết các bài toán. Khi các tài nguyên lượng tử có sẵn và có thể được trao đổi giữa các máy tính phân tán, chi phí giao tiếp đôi khi có thể được giảm đi đáng kể.</p>
+<hr>
+<p>Một chủ đề xuyên suốt qua những suy ngẫm kết luận này và qua toàn bộ cuốn sách là bất chấp sự độc lập truyền thống của khoa học máy tính khỏi các ràng buộc vật lý, cuối cùng các định luật vật lý có tác động to lớn không chỉ đối với cách thức máy tính được hiện thực hóa, mà còn đối với lớp các bài toán mà chúng có khả năng giải quyết. Sự thành công của tính toán lượng tử và thông tin lượng tử như một mô hình tính toán thay thế hợp lý về mặt vật lý đặt ra câu hỏi cho những niềm tin bấy lâu nay của khoa học máy tính, và đẩy các khái niệm của khoa học máy tính lên vị trí tiền tiêu của vật lý. Nhiệm vụ của phần còn lại của cuốn sách này là hòa quyện các ý tưởng từ những lĩnh vực khác biệt này, và tận hưởng những kết quả đạt được!</p>
+<section id="bài-tập-vui-vẻ" class="level1">
+<h1>Bài tập vui vẻ</h1>
+<section id="bài-tập-3.1.-minsky-machines" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.1.-minsky-machines">Bài tập 3.1. Minsky Machines</h2>
+<p>Một máy Minsky bao gồm một tập hợp hữu hạn các thanh ghi <span class="math inline">r_1, r_2, \dots, r_k</span>, mỗi thanh ghi có khả năng chứa một số nguyên không âm tùy ý, và một chương trình được tạo thành từ các lệnh thuộc một trong hai loại. Loại thứ nhất có dạng:</p>
+<p><img src="../../img/3.1.1.png" class="img-fluid"></p>
+<p>Ý nghĩa của lệnh này là tại điểm <span class="math inline">m</span> trong chương trình, thanh ghi <span class="math inline">r_j</span> được tăng lên một đơn vị, và việc thực thi chuyển tiếp đến điểm <span class="math inline">n</span> trong chương trình. Loại lệnh thứ hai có dạng:</p>
+<p><img src="../../img/3.1.2.png" class="img-fluid"></p>
+<p>Ý nghĩa của lệnh này là tại điểm <span class="math inline">m</span> trong chương trình, thanh ghi <span class="math inline">r_j</span> bị giảm đi một đơn vị nếu nó chứa một số nguyên dương, và việc thực thi chuyển tiếp đến điểm <span class="math inline">n</span> trong chương trình. Nếu thanh ghi <span class="math inline">r_j</span> bằng 0 thì việc thực thi đơn giản chuyển tiếp đến điểm <span class="math inline">p</span> trong chương trình. Chương trình cho máy Minsky bao gồm một tập hợp các lệnh như vậy, có dạng giống như:</p>
+<p><img src="../../img/3.1.3.png" class="img-fluid"></p>
+<p>Điểm bắt đầu và tất cả các điểm dừng có thể có cho chương trình theo quy ước được gán nhãn là số không. Chương trình này lấy nội dung của thanh ghi <span class="math inline">r_1</span> và cộng chúng vào thanh ghi <span class="math inline">r_2</span>, đồng thời giảm <span class="math inline">r_1</span> về 0.</p>
+<ol type="1">
+<li><p>Chứng minh rằng tất cả các hàm tính được (của Turing) đều có thể tính được trên một máy Minsky, theo nghĩa là cho trước một hàm tính được <span class="math inline">f(\cdot)</span>, tồn tại một chương trình máy Minsky sao cho khi các thanh ghi bắt đầu ở trạng thái <span class="math inline">(n, 0, \dots, 0)</span> sẽ cho ra đầu ra là <span class="math inline">(f(n), 0, \dots, 0)</span>.</p></li>
+<li><p>Phác thảo chứng minh rằng bất kỳ hàm nào có thể tính được trên một máy Minsky, theo nghĩa vừa định nghĩa, cũng có thể được tính được trên một máy Turing.</p></li>
+</ol>
+</section>
+<section id="bài-tập-3.2.-vector-games" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.2.-vector-games">Bài tập 3.2. Vector games</h2>
+<p>Một trò chơi vector được xác định bởi một danh sách hữu hạn các vector, tất cả đều có cùng số chiều và có các tọa độ nguyên. Trò chơi bắt đầu với một vector <span class="math inline">x</span> có các tọa độ là số nguyên không âm và cộng vào <span class="math inline">x</span> vector đầu tiên từ danh sách sao cho vẫn bảo toàn tính không âm của tất cả các thành phần, và lặp lại quá trình này cho đến khi không còn thực hiện được nữa. Chứng minh rằng đối với bất kỳ hàm tính được <span class="math inline">f(\cdot)</span> nào, tồn tại một trò chơi vector mà khi bắt đầu với vector <span class="math inline">(n, 0, \dots, 0)</span> sẽ đạt tới <span class="math inline">(f(n), 0, \dots, 0)</span>. (Gợi ý: Chứng minh rằng một trò chơi vector trong không gian <span class="math inline">k+2</span> chiều có thể mô phỏng một máy Minsky chứa <span class="math inline">k</span> thanh ghi).</p>
+</section>
+<section id="bài-tập-3.3.-fractan" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.3.-fractan">Bài tập 3.3. Fractan</h2>
+<p>Một chương trình Fractran được định nghĩa bởi một danh sách các số hữu tỷ dương <span class="math inline">q_1, \dots, q_n</span>. Nó tác động lên một số nguyên dương <span class="math inline">m</span> bằng cách thay thế nó thành <span class="math inline">q_i m</span>, trong đó <span class="math inline">i</span> là số nhỏ nhất sao cho <span class="math inline">q_i m</span> là một số nguyên. Nếu có thời điểm mà không tồn tại số <span class="math inline">i</span> nào sao cho <span class="math inline">q_i m</span> là một số nguyên, thì quá trình thực thi dừng lại. Chứng minh rằng đối với bất kỳ hàm tính được <span class="math inline">f(\cdot)</span> nào, tồn tại một chương trình Fractran mà khi bắt đầu với <span class="math inline">2^n</span> sẽ đạt tới <span class="math inline">2^{f(n)}</span> mà không đi qua bất kỳ lũy thừa trung gian nào của 2. (Gợi ý: sử dụng bài tập trước).</p>
+</section>
+<section id="bài-tập-3.4.-tính-không-quyết-định-của-các-hệ-động-lực---undecidability-of-dynamical-systems" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.4.-tính-không-quyết-định-của-các-hệ-động-lực---undecidability-of-dynamical-systems">Bài tập 3.4. Tính không quyết định của các hệ động lực - Undecidability of dynamical systems</h2>
+<p>Một chương trình Fractran về cơ bản chỉ là một hệ động lực rất đơn giản chuyển các số nguyên dương thành các số nguyên dương. Chứng minh rằng không có thuật toán nào có thể quyết định xem một hệ động lực như vậy có bao giờ đạt tới giá trị 1 hay không.</p>
+</section>
+<section id="bài-tập-3.5.-tính-không-vạn-năng-của-logic-khả-nghịch-2-bit---non-universality-of-two-bit-reversible-logic" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.5.-tính-không-vạn-năng-của-logic-khả-nghịch-2-bit---non-universality-of-two-bit-reversible-logic">Bài tập 3.5. Tính không vạn năng của logic khả nghịch 2-bit - Non-universality of two bit reversible logic</h2>
+<p>Giả sử chúng ta đang cố gắng xây dựng các mạch chỉ sử dụng các cổng logic khả nghịch 1-bit và 2-bit, cùng với các bit ancilla. Chứng minh rằng có những hàm Boolean không thể được tính toán theo cách này. Suy ra rằng cổng Toffoli không thể được mô phỏng chỉ bằng các cổng khả nghịch 1-bit và 2-bit, ngay cả khi có sự hỗ trợ của các bit ancilla.</p>
+</section>
+<section id="bài-tập-3.6.-độ-khó-xấp-xỉ-của-tsp---hardness-of-approximation-of-texttsp" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.6.-độ-khó-xấp-xỉ-của-tsp---hardness-of-approximation-of-texttsp">Bài tập 3.6. Độ khó xấp xỉ của TSP - Hardness of approximation of <span class="math inline">\text{TSP}</span></h2>
+<p>Cho <span class="math inline">r \ge 1</span> và giả sử tồn tại một thuật toán xấp xỉ cho bài toán Người bán hàng đi dạo (<span class="math inline">\text{TSP}</span>) được đảm bảo tìm ra hành trình ngắn nhất trong số <span class="math inline">n</span> thành phố với hệ số sai số trong khoảng <span class="math inline">r</span>. Cho <span class="math inline">G = (V, E)</span> là bất kỳ đồ thị nào trên <span class="math inline">n</span> đỉnh. Định nghĩa một trường hợp của <span class="math inline">\text{TSP}</span> bằng cách đồng nhất các thành phố với các đỉnh trong <span class="math inline">V</span>, và định nghĩa khoảng cách giữa các thành phố <span class="math inline">i</span> và <span class="math inline">j</span> là <span class="math inline">1</span> nếu <span class="math inline">(i, j)</span> là cạnh của <span class="math inline">G</span>, và là <span class="math inline">\lceil r \rceil \vert{}V\vert{} + 1</span> trong trường hợp ngược lại. Chứng minh rằng nếu thuật toán xấp xỉ được áp dụng cho trường hợp <span class="math inline">\text{TSP}</span> này thì nó trả về một chu trình Hamilton cho <span class="math inline">G</span> nếu có tồn tại, và ngược lại trả về một hành trình có độ dài lớn hơn <span class="math inline">\lceil r \rceil \vert{}V\vert{}</span>. Từ tính đầy đủ <span class="math inline">\text{NP}</span> của bài toán tìm chu trình Hamilton (<span class="math inline">\text{HC}</span>), suy ra rằng không thể tồn tại một thuật toán xấp xỉ như vậy trừ khi <span class="math inline">\mathbf{P} = \mathbf{NP}</span>.</p>
+</section>
+<section id="bài-tập-3.7.-máy-turing-khả-nghịch---reversible-turing-machines" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.7.-máy-turing-khả-nghịch---reversible-turing-machines">Bài tập 3.7. Máy Turing khả nghịch - Reversible Turing machines</h2>
+<ol type="1">
+<li><p>Giải thích cách xây dựng một máy Turing khả nghịch có thể tính toán cùng lớp hàm số như có thể tính được trên một máy Turing thông thường. (Gợi ý: Sẽ hữu ích nếu sử dụng cấu trúc nhiều băng).</p></li>
+<li><p>Đưa ra các giới hạn tổng quát về không gian và thời gian cho hoạt động của máy Turing khả nghịch của bạn, xét theo thời gian <span class="math inline">t(x)</span> và không gian <span class="math inline">s(x)</span> được yêu cầu trên một máy Turing băng đơn thông thường để tính toán một hàm <span class="math inline">f(x)</span>.</p></li>
+</ol>
+</section>
+<section id="bài-tập-3.8.-find-a-hard-to-compute-class-of-functions-research" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.8.-find-a-hard-to-compute-class-of-functions-research">Bài tập 3.8. Find a hard-to-compute class of functions (Research)</h2>
+<p>Tìm một lớp hàm tự nhiên trên <span class="math inline">n</span> đầu vào đòi hỏi một số lượng cổng Boolean vượt quá đa thức (super-polynomial) để tính toán.</p>
+</section>
+<section id="bài-tập-3.9.-reversible-pspace-pspace" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.9.-reversible-pspace-pspace">Bài tập 3.9. Reversible PSPACE = PSPACE</h2>
+<p>Có thể chứng minh rằng bài toán ‘thỏa được định lượng’ (quantified satisfiability), hay <span class="math inline">\text{QSAT}</span>, là <span class="math inline">\text{PSPACE}</span>-complete. Tức là, mọi ngôn ngữ khác trong <span class="math inline">\text{PSPACE}</span> có thể được quy về <span class="math inline">\text{QSAT}</span> trong thời gian đa thức. Ngôn ngữ <span class="math inline">\text{QSAT}</span> được định nghĩa gồm tất cả các công thức Boolean <span class="math inline">\varphi</span> với <span class="math inline">n</span> biến <span class="math inline">x_1, \dots, x_n</span>, và ở dạng chuẩn tuyển hội (conjunctive normal form), sao cho:</p>
+<p><span class="math display">
+\begin{aligned}
+\exists x_1 \forall x_2 \exists x_3 \dots \forall x_n \varphi &amp;\quad \text{if } n \text{ even;} \\
+\exists x_1 \forall x_2 \exists x_3 \dots \exists x_n \varphi &amp;\quad \text{if } n \text{ odd.}
+\end{aligned}
+</span></p>
+<p>Chứng minh rằng một máy Turing khả nghịch hoạt động trong không gian đa thức có thể được sử dụng để giải <span class="math inline">\text{QSAT}</span>. Do đó, lớp các ngôn ngữ có thể quyết định bởi một máy tính hoạt động theo lối khả nghịch trong không gian đa thức thì bằng với <span class="math inline">\text{PSPACE}</span></p>
+</section>
+<section id="bài-tập-3.10.-ancilla-bits-and-efficiency-of-reversible-computation" class="level2">
+<h2 class="anchored" data-anchor-id="bài-tập-3.10.-ancilla-bits-and-efficiency-of-reversible-computation">Bài tập 3.10. Ancilla bits and efficiency of reversible computation</h2>
+<p>Cho <span class="math inline">p_m</span> là số nguyên tố thứ <span class="math inline">m</span>. Phác thảo cấu trúc của một mạch khả nghịch nhận đầu vào là <span class="math inline">m</span> và <span class="math inline">n</span> sao cho <span class="math inline">n &gt; m</span>, cho ra đầu ra là tích <span class="math inline">p_m p_n</span>, tức là <span class="math inline">(m, n) \rightarrow (p_m p_n, g(m, n))</span>, trong đó <span class="math inline">g(m, n)</span> là trạng thái cuối cùng của các bit ancilla được sử dụng bởi mạch. Ước tính số lượng qubit ancilla mà mạch của bạn yêu cầu. Chứng minh rằng nếu có thể tìm thấy một mạch khả nghịch có kích thước đa thức (theo <span class="math inline">\log n</span>) sử dụng <span class="math inline">O(\log(\log n))</span> bit ancilla thì bài toán phân tích thừa số nguyên tố (factoring) của tích hai số nguyên tố thuộc lớp <span class="math inline">\mathbf{P}</span>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
