@@ -10,8 +10,29 @@ format:
     toc-location: right
 ---
 
-# Future directions
+# Lindblad Master Equation
 
 Một thứ mà ma trận mật độ có thể hơn vector ketpsi đó là nó thể thêm nhiễu vào trong phương trình tiến hóa của mình.
 
 Nghiên cứu thêm Phương trình chủ Lindblad (Lindblad Master Equation). Phương trình này chứa các toán tử nhảy để mô phỏng chính xác sự tương tác rò rỉ thông tin ra môi trường bên ngoài.
+
+# NISQ
+
+# MERA - Multi-scale Entanglement Renormalization Ansatz
+
+# QFT - Quantum Field Theory 
+
+## CFT - Conformal Field Theory
+
+
+# QPT - Quantum Phase Transition 
+
+# # QCP - Quantum Critical Point
+
+# RQM - Relativistic Quantum Mechanics
+
+# QVST
+
+# AdS/CFT 
+
+## Giả thuyết Ryu–Takayanagi
