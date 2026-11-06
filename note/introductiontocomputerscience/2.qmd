@@ -104,6 +104,20 @@ Giả sử một danh sách $n$ phần tử được sắp xếp bằng cách á
 
 # 2. Computational complexity
 
+:::{.callout}
+# tl;dr
+
+Một bài toán dễ, dễ xử lý, khả thi (easy, tractable, feasible) nếu tồn tại một thuật để giải quyết bài toán đó sử dụng tài nguyên đa thức.
+
+Một bài toán khó, khó xử lý, bất khả thi (hard, intractable, infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.
+
+---
+
+Sự phân loại này khá là thô sô, ví dụ như người ta coi hàm mũ $2^{n/1000}$ là khó hơn $n^1000$, mặc dù thực tế là khi n đủ lớn thì cái đầu tiên dễ hơn nhiều. Nhưng mà chúng ta phải chấp nhận thôi.
+
+
+:::
+
 > *'The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me'*
 > – Stephen Cook
 
@@ -113,11 +127,15 @@ Giả sử một danh sách $n$ phần tử được sắp xếp bằng cách á
 > *'It should not come as a surprise that our choice of polynomial algorithms as the mathematical concept that is supposed to capture the informal notion of ‘practically efficient computation’ is open to criticism from all sides. [. . . ] Ultimately, our argument for our choice must be this: Adopting polynomial worst-case performance as our criterion of efficiency results in an elegant and useful theory that says something meaningful about practical computation, and would be impossible without this simplification.'*
 > – Christos Papadimitriou
 
-Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính? Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.   
+**Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính?**
+
+Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.   
 
 ---
 
 Độ phức tạp tính toán (Computational complexity) là nghiên cứu về các tài nguyên thời gian và không gian cần thiết để giải quyết các bài toán tính toán. **Tác vụ của độ phức tạp tính toán là chứng minh các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu bởi thuật toán tốt nhất có thể để giải quyết một bài toán, ngay cả khi thuật toán đó chưa được biết đến một cách rõ ràng.** Trong phần này và hai phần tiếp theo, chúng tôi đưa ra một cái nhìn tổng quan về độ phức tạp tính toán, các khái niệm chính của nó, và một số kết quả quan trọng nhất của lĩnh vực này. Lưu ý rằng độ phức tạp tính toán theo một khía cạnh nào đó là sự bổ sung cho lĩnh vực thiết kế thuật toán; lý tưởng nhất là các thuật toán hiệu quả nhất mà chúng ta có thể thiết kế sẽ khớp hoàn hảo với các giới hạn dưới được chứng minh bởi độ phức tạp tính toán. Thật không may, điều này thường không xảy ra. Như đã lưu ý, trong cuốn sách này chúng ta sẽ không xem xét thiết kế thuật toán cổ điển ở bất kỳ chiều sâu nào.   
+
+---
 
 Một khó khăn trong việc xây dựng một lý thuyết về độ phức tạp tính toán là các mô hình tính toán khác nhau có thể yêu cầu các tài nguyên khác nhau để giải quyết cùng một bài toán. Chẳng hạn, các máy Turing nhiều dải băng có thể giải quyết nhiều bài toán nhanh hơn đáng kể so với các máy Turing một dải băng. Khó khăn này được giải quyết theo một cách khá thô sơ (coarse). Giả sử một bài toán được chỉ định bằng cách cung cấp $n$ bit làm đầu vào. Ví dụ, chúng ta có thể quan tâm đến việc liệu một số $n$-bit cụ thể có phải là số nguyên tố hay không. Sự phân biệt chính được đưa ra trong độ phức tạp tính toán là giữa các bài toán có thể được giải quyết bằng cách sử dụng các tài nguyên bị giới hạn bởi một đa thức (polynomial) theo $n$, và những bài toán yêu cầu các tài nguyên tăng trưởng nhanh hơn bất kỳ đa thức nào theo $n$. Trong trường hợp sau, chúng ta thường nói rằng các tài nguyên được yêu cầu là có tính hàm mũ (exponential) theo kích thước bài toán, lạm dụng thuật ngữ hàm mũ, vì có những hàm như $n^{\log n}$ tăng trưởng nhanh hơn bất kỳ đa thức nào (và do đó là 'hàm mũ' theo quy ước này), nhưng lại tăng trưởng chậm hơn bất kỳ hàm mũ thực sự nào. Một bài toán được coi là dễ (easy), dễ xử lý (tractable) hay khả thi (feasible) nếu tồn tại một thuật toán để giải quyết bài toán đó sử dụng tài nguyên đa thức, và được coi là khó (hard), khó xử lý (intractable) hay bất khả thi (infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.   
 
@@ -148,6 +166,62 @@ Chứng minh rằng tồn tại các hàm Boolean trên $n$ đầu vào mà yêu
 ---
 
 # 3. Decision problems and the complexity classes P and NP
+
+:::{.callout}
+
+# Decision Problems
+
+Bài toán quyết định, là những bài toán trả lời câu hỏi có hay không, yes or no.
+
+Những ý tưởng chính của độ phức tạp được hình thành dưới dạng các bài toán quyết định.
+
+Ví dụ: "Cho một hợp số m nguyên và l < m, liệu m có một thừa số nào nhỏ hơn l hay không?"
+
+---
+
+# P - NP - coNP
+
+P là một lớp bài toán mà khó có thể quyết trong thời gian đa thức
+
+NP là một lớp bài toán mà có thể kiểm tra đáp án có đúng hay không.
+
+coNP là phần bù NP, một lớp bài toán mà có bằng chứng cho các trường hợp trả lời "no"
+
+Ví dụ: Bài toán quyết định được nêu ở trên/
+
+* Nếu có thể giải quyết trong thời gian đa thức, đưa ra witness trong thời gian ngắn, nó là P. Và rõ ràng ở bài trên thì rất khó để có thể đưa ra thừa số trong thời gian nhanh.
+
+* Vì chúng ta có thể kiểm tra một cách rất nhanh chóng, rằng yes, cái này có thỏa mãn hay không bằng các công cụ nhân chia cơ bản. Vì vậy bài toán trên thuộc NP.
+
+---
+
+# NP Complete - NP Hard - NPI
+
+**NP Hard**
+
+Là lớp các bài toán *ít nhất khó bằng* các bài toán khó nhất trong NP.
+
+Tức là bài toán NP Hard không bắt buộc phải thuộc lớp NP, tức là lời giải của chúng thậm chí không kiểm tra nhanh được trong thời gian đa thức, hoặc thậm chí là không quyết định được.
+
+**NP Complete**
+
+Là lớp bài toán thỏa mãn hai điều kiện:
+
+* Thuộc lớp NP.
+
+* Thuộc lớp NP Hard.
+
+Đây là những bài toán khó nhất nằm trong tập NP. Mọi bài toán NP Complete đều là NP Hard, nhưng ngược lại thì không.
+
+**NP Itermediate**
+
+Là trung gian, thuộc lớp NP, nhưng không thuộc P và cũng không phải là NP Complete.
+
+Tức là những bài toán đủ khó để trên tầm của P, nhưng cũng chẳng đủ khó để nằm trong NP Complete.
+
+> Hiện tại người ta đang tập trung nghiên cứu các bài toán này để phục vụ cho computing computation. Và hiện tại cũng có thể nói là chưa có bài toán nào thuộc lớp NPI cả, người ta chỉ đang nghi ngờ bài toán phân tích số nguyên tố thành thừa số nguyên tố thôi.
+
+:::
 
 Nhiều bài toán tính toán được định hình một cách rõ ràng nhất dưới dạng các bài toán quyết định (decision problems) – những bài toán có câu trả lời là có (yes) hoặc không (no). Ví dụ, một số $m$ cho trước có phải là số nguyên tố hay không? Đây là bài toán quyết định tính nguyên tố (primality). Những ý tưởng chính của độ phức tạp tính toán được hình thành một cách dễ dàng nhất và thường xuyên nhất dưới dạng các bài toán quyết định, vì hai lý do: lý thuyết có dạng đơn giản nhất và thanh lịch nhất ở hình thức này, trong khi vẫn có thể khái quát hóa một cách tự nhiên cho các kịch bản phức tạp hơn; và về mặt lịch sử, độ phức tạp tính toán phát sinh chủ yếu từ việc nghiên cứu các bài toán quyết định.   
 
@@ -338,3 +412,27 @@ Giả định rằng $\mathbf{P} \ne \mathbf{NP}$, người ta có thể chứng
 $\text{GRAPH ISOMORPHISM}$: Giả sử $G$ và $G'$ là hai đồ thị vô hướng trên tập đỉnh $V \equiv \{v_1, \dots, v_n\}$. Liệu $G$ và $G'$ có đẳng cấu với nhau hay không? Nghĩa là, có tồn tại một song ánh $\varphi : V \to V$ sao cho cạnh $(v_i, v_j)$ thuộc $G$ khi và chỉ khi cạnh $(\varphi(v_i), \varphi(v_j))$ thuộc $G'$ hay không?   
 
 Các bài toán trong $\mathbf{NPI}$ thu hút sự quan tâm đặc biệt của các nhà nghiên cứu trong lĩnh vực tính toán lượng tử và thông tin lượng tử vì hai lý do. Thứ nhất, việc tìm kiếm các thuật toán lượng tử nhanh để giải quyết các bài toán không thuộc $\mathbf{P}$ là một mục tiêu rất đáng khao khát. Thứ hai, nhiều người nghi ngờ rằng máy tính lượng tử sẽ không thể giải quyết hiệu quả tất cả các bài toán trong $\mathbf{NP}$, do đó loại trừ các bài toán $\mathbf{NP}$-đầy đủ. Vì vậy, việc tập trung vào lớp $\mathbf{NPI}$ là một điều hoàn toàn tự nhiên. Quả thực, một thuật toán lượng tử nhanh cho bài toán phân tích thừa số đã được phát hiện (Chương 5), và điều này đã thúc đẩy việc tìm kiếm các thuật toán lượng tử nhanh cho các bài toán khác được nghi ngờ là thuộc $\mathbf{NPI}$. 
+
+# 4. A plethora of complexity classes
+
+Chúng ta đã điều tra một số tính chất sơ cấp của vài lớp độ phức tạp quan trọng. Một "ngôi đền" (pantheon) thực sự của các lớp độ phức tạp đang tồn tại, và có nhiều mối quan hệ không tầm thường đã được biết đến hoặc bị nghi ngờ giữa các lớp này. Đối với tính toán lượng tử và thông tin lượng tử, không cần thiết phải hiểu tất cả các lớp độ phức tạp khác nhau đã được định nghĩa. Tuy nhiên, sẽ rất hữu ích nếu chúng ta có sự đánh giá nhất định đối với các lớp độ phức tạp quan trọng hơn, nhiều lớp trong số đó có các phiên bản tương tự tự nhiên trong nghiên cứu tính toán lượng tử và thông tin lượng tử. Hơn nữa, nếu chúng ta muốn hiểu máy tính lượng tử mạnh đến mức nào, thì nhiệm vụ của chúng ta là phải hiểu làm thế nào lớp các bài toán giải được trên máy tính lượng tử lại khớp với vườn thú các lớp độ phức tạp có thể được định nghĩa cho máy tính cổ điển.   
+
+Về cơ bản có ba thuộc tính có thể được thay đổi trong định nghĩa của một lớp độ phức tạp: tài nguyên được quan tâm (thời gian, không gian, ...), loại bài toán đang được xem xét (bài toán quyết định, bài toán tối ưu hóa, ...), và mô hình tính toán nền tảng (máy Turing đơn định, máy Turing xác suất, máy tính lượng tử, ...). Không có gì ngạc nhiên khi điều này cung cấp cho chúng ta một phạm vi khổng lồ để định nghĩa các lớp độ phức tạp. Trong phần này, chúng tôi điểm qua ngắn gọn một số lớp độ phức tạp quan trọng hơn và một số tính chất sơ cấp của chúng. Chúng ta bắt đầu với một lớp độ phức tạp được định nghĩa bằng cách thay đổi tài nguyên quan tâm từ thời gian (time) sang không gian (space).   
+
+Lớp độ phức tạp bị giới hạn không gian tự nhiên nhất là lớp PSPACE gồm các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc, mà không có giới hạn về lượng thời gian mà máy có thể sử dụng (xem Bài tập 3.25). Rõ ràng, $\mathbf{P}$ được bao hàm trong $\mathbf{PSPACE}$, vì một máy Turing dừng sau thời gian đa thức chỉ có thể duyệt qua một số lượng đa thức các ô, nhưng điều đúng đắn nữa là $\mathbf{NP}$ là một tập con của $\mathbf{PSPACE}$. Để thấy điều này, giả sử $L$ là một ngôn ngữ bất kỳ thuộc $\mathbf{NP}$. Giả sử các bài toán kích thước $n$ có các bằng chứng với kích thước tối đa là $p(n)$, trong đó $p(n)$ là một đa thức nào đó theo $n$. Để xác định xem bài toán có giải pháp hay không, chúng ta có thể kiểm tra tuần tự tất cả $2^{p(n)}$ bằng chứng khả dĩ. Mỗi bài kiểm tra có thể được chạy trong thời gian đa thức, và do đó là không gian đa thức. Nếu chúng ta xóa tất cả các kết quả làm việc trung gian giữa các bài kiểm tra thì chúng ta có thể kiểm tra tất cả các khả năng bằng cách sử dụng không gian đa thức. 
+
+Thật không may, hiện tại người ta thậm chí còn chưa biết liệu $\mathbf{PSPACE}$ có chứa những bài toán không thuộc $\mathbf{P}$ hay không! Đây là một tình huống khá đáng chú ý — dường như khá hiển nhiên rằng việc có thời gian không giới hạn và tài nguyên không gian đa thức phải mạnh mẽ hơn việc chỉ có một lượng thời gian đa thức. Tuy nhiên, bất chấp những nỗ lực và sự khéo léo đáng kể, điều này vẫn chưa bao giờ được chứng minh. Chúng ta sẽ thấy sau này rằng lớp các bài toán có thể giải quyết trên một máy tính lượng tử trong thời gian đa thức là một tập con của $\mathbf{PSPACE}$, do đó việc chứng minh rằng một bài toán có thể giải quyết hiệu quả trên một máy tính lượng tử mà không thể giải quyết hiệu quả trên một máy tính cổ điển sẽ thiết lập rằng $\mathbf{P} \neq \mathbf{PSPACE}$, và từ đó giải quyết một bài toán tồn đọng lớn của khoa học máy tính. Một cách nhìn lạc quan về kết quả này là những ý tưởng từ tính toán lượng tử có thể hữu ích trong việc chứng minh rằng $\mathbf{P} \neq \mathbf{PSPACE}$. Một cách bi quan, người ta có thể kết luận rằng sẽ còn rất lâu nữa mới có ai đó chứng minh một cách chặt chẽ rằng máy tính lượng tử có thể được sử dụng để giải quyết hiệu quả các bài toán khó xử lý trên máy tính cổ điển. Thậm chí còn bi quan hơn, hoàn toàn có khả năng $\mathbf{P} = \mathbf{PSPACE}$, trong trường hợp đó máy tính lượng tử không mang lại lợi thế nào so với máy tính cổ điển! Tuy nhiên, rất hiếm (nếu có) các nhà lý thuyết độ phức tạp tính toán tin rằng $\mathbf{P} = \mathbf{PSPACE}$.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.25: ($\mathbf{PSPACE} \subseteq \mathbf{EXP}$) 
+Lớp độ phức tạp $\mathbf{EXP}$ (đại diện cho thời gian hàm mũ - exponential time) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong thời gian hàm mũ, tức là thời gian $O(2^{n^k})$, trong đó $k$ là một hằng số bất kỳ. Chứng minh rằng $\mathbf{PSPACE} \subseteq \mathbf{EXP}$. (Gợi ý: Nếu một máy Turing có $l$ trạng thái nội tại, một bảng chữ cái gồm $m$ ký tự, và sử dụng không gian $p(n)$, hãy lập luận rằng máy có thể tồn tại trong một trong tối đa $l m^{p(n)}$ trạng thái khác nhau, và nếu máy Turing muốn tránh các vòng lặp vô hạn thì nó phải dừng lại trước khi thăm lại một trạng thái nào đó.)   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 3.26: ($\mathbf{L} \subseteq \mathbf{P}$) 
+Lớp độ phức tạp $\mathbf{L}$ (đại diện cho không gian logarit - logarithmic space) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong không gian logarit, tức là, trong không gian $O(\log(n))$. Cụ thể hơn, lớp $\mathbf{L}$ được định nghĩa bằng cách sử dụng một máy Turing hai dải băng. Dải băng thứ nhất chứa trường hợp bài toán, có kích thước $n$, và là một dải băng chỉ-đọc (read-only), theo nghĩa là chỉ những dòng chương trình không làm thay đổi nội dung của dải băng thứ nhất mới được phép hoạt động. Dải băng thứ hai là một dải băng làm việc mà ban đầu chỉ chứa các khoảng trống. Yêu cầu về không gian logarit chỉ được áp dụng lên dải băng làm việc thứ hai, duy nhất. Chứng minh rằng $\mathbf{L} \subseteq \mathbf{P}$.
+
+:::
+
+
+

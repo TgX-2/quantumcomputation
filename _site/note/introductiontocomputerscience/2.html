@@ -377,6 +377,7 @@ window.Quarto = {
   <li><a href="#decision-problems-and-the-complexity-classes-p-and-np" id="toc-decision-problems-and-the-complexity-classes-p-and-np" class="nav-link" data-scroll-target="#decision-problems-and-the-complexity-classes-p-and-np">3. Decision problems and the complexity classes P and NP</a></li>
   <li><a href="#định-lý-3.1-định-lý-euler" id="toc-định-lý-3.1-định-lý-euler" class="nav-link" data-scroll-target="#định-lý-3.1-định-lý-euler">Định lý 3.1: (Định lý Euler)</a></li>
   <li><a href="#định-lý-3.2-cook-levin" id="toc-định-lý-3.2-cook-levin" class="nav-link" data-scroll-target="#định-lý-3.2-cook-levin">Định lý 3.2: (Cook-Levin)</a></li>
+  <li><a href="#a-plethora-of-complexity-classes" id="toc-a-plethora-of-complexity-classes" class="nav-link" data-scroll-target="#a-plethora-of-complexity-classes">4. A plethora of complexity classes</a></li>
   </ul>
 </nav>
     </div>
@@ -561,6 +562,22 @@ end j</code></pre>
 </section>
 <section id="computational-complexity" class="level1">
 <h1>2. Computational complexity</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Một bài toán dễ, dễ xử lý, khả thi (easy, tractable, feasible) nếu tồn tại một thuật để giải quyết bài toán đó sử dụng tài nguyên đa thức.</p>
+<p>Một bài toán khó, khó xử lý, bất khả thi (hard, intractable, infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.</p>
+<hr>
+<p>Sự phân loại này khá là thô sô, ví dụ như người ta coi hàm mũ <span class="math inline">2^{n/1000}</span> là khó hơn <span class="math inline">n^1000</span>, mặc dù thực tế là khi n đủ lớn thì cái đầu tiên dễ hơn nhiều. Nhưng mà chúng ta phải chấp nhận thôi.</p>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me’</em> – Stephen Cook</p>
 </blockquote>
@@ -570,9 +587,11 @@ end j</code></pre>
 <blockquote class="blockquote">
 <p><em>‘It should not come as a surprise that our choice of polynomial algorithms as the mathematical concept that is supposed to capture the informal notion of ‘practically efficient computation’ is open to criticism from all sides. [. . . ] Ultimately, our argument for our choice must be this: Adopting polynomial worst-case performance as our criterion of efficiency results in an elegant and useful theory that says something meaningful about practical computation, and would be impossible without this simplification.’</em> – Christos Papadimitriou</p>
 </blockquote>
-<p>Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính? Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.</p>
+<p><strong>Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính?</strong></p>
+<p>Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.</p>
 <hr>
 <p>Độ phức tạp tính toán (Computational complexity) là nghiên cứu về các tài nguyên thời gian và không gian cần thiết để giải quyết các bài toán tính toán. <strong>Tác vụ của độ phức tạp tính toán là chứng minh các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu bởi thuật toán tốt nhất có thể để giải quyết một bài toán, ngay cả khi thuật toán đó chưa được biết đến một cách rõ ràng.</strong> Trong phần này và hai phần tiếp theo, chúng tôi đưa ra một cái nhìn tổng quan về độ phức tạp tính toán, các khái niệm chính của nó, và một số kết quả quan trọng nhất của lĩnh vực này. Lưu ý rằng độ phức tạp tính toán theo một khía cạnh nào đó là sự bổ sung cho lĩnh vực thiết kế thuật toán; lý tưởng nhất là các thuật toán hiệu quả nhất mà chúng ta có thể thiết kế sẽ khớp hoàn hảo với các giới hạn dưới được chứng minh bởi độ phức tạp tính toán. Thật không may, điều này thường không xảy ra. Như đã lưu ý, trong cuốn sách này chúng ta sẽ không xem xét thiết kế thuật toán cổ điển ở bất kỳ chiều sâu nào.</p>
+<hr>
 <p>Một khó khăn trong việc xây dựng một lý thuyết về độ phức tạp tính toán là các mô hình tính toán khác nhau có thể yêu cầu các tài nguyên khác nhau để giải quyết cùng một bài toán. Chẳng hạn, các máy Turing nhiều dải băng có thể giải quyết nhiều bài toán nhanh hơn đáng kể so với các máy Turing một dải băng. Khó khăn này được giải quyết theo một cách khá thô sơ (coarse). Giả sử một bài toán được chỉ định bằng cách cung cấp <span class="math inline">n</span> bit làm đầu vào. Ví dụ, chúng ta có thể quan tâm đến việc liệu một số <span class="math inline">n</span>-bit cụ thể có phải là số nguyên tố hay không. Sự phân biệt chính được đưa ra trong độ phức tạp tính toán là giữa các bài toán có thể được giải quyết bằng cách sử dụng các tài nguyên bị giới hạn bởi một đa thức (polynomial) theo <span class="math inline">n</span>, và những bài toán yêu cầu các tài nguyên tăng trưởng nhanh hơn bất kỳ đa thức nào theo <span class="math inline">n</span>. Trong trường hợp sau, chúng ta thường nói rằng các tài nguyên được yêu cầu là có tính hàm mũ (exponential) theo kích thước bài toán, lạm dụng thuật ngữ hàm mũ, vì có những hàm như <span class="math inline">n^{\log n}</span> tăng trưởng nhanh hơn bất kỳ đa thức nào (và do đó là ‘hàm mũ’ theo quy ước này), nhưng lại tăng trưởng chậm hơn bất kỳ hàm mũ thực sự nào. Một bài toán được coi là dễ (easy), dễ xử lý (tractable) hay khả thi (feasible) nếu tồn tại một thuật toán để giải quyết bài toán đó sử dụng tài nguyên đa thức, và được coi là khó (hard), khó xử lý (intractable) hay bất khả thi (infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.</p>
 <p>Lấy một ví dụ đơn giản, giả sử chúng ta có hai số với biểu diễn nhị phân <span class="math inline">x_1 \dots x_{m_1}</span> và <span class="math inline">y_1 \dots y_{m_2}</span>, và chúng ta muốn xác định tổng của hai số này. Kích thước tổng cộng của đầu vào là <span class="math inline">n \equiv m_1 + m_2</span>. Rất dễ để thấy rằng hai số này có thể được cộng lại bằng cách sử dụng một số lượng các phép toán sơ cấp tỷ lệ với <span class="math inline">\Theta(n)</span>; thuật toán này sử dụng một số lượng đa thức (thực ra là tuyến tính) các phép toán để thực hiện tác vụ của nó. Ngược lại, người ta tin rằng (mặc dù nó chưa bao giờ được chứng minh!) bài toán phân tích một số nguyên thành các thừa số nguyên tố của nó là khó xử lý. Nghĩa là, người ta tin rằng không có thuật toán nào có thể phân tích một số nguyên <span class="math inline">n</span>-bit tùy ý bằng cách sử dụng <span class="math inline">O(p(n))</span> phép toán, trong đó <span class="math inline">p</span> là một hàm đa thức cố định nào đó của <span class="math inline">n</span>. Sau này, chúng tôi sẽ đưa ra nhiều ví dụ khác về các bài toán được tin là khó xử lý theo nghĩa này.</p>
 <p>Sự phân loại đa thức (polynomial) so với hàm mũ (exponential) là khá thô sơ. Trong thực tế, một thuật toán giải quyết một bài toán sử dụng <span class="math inline">2^{n/1000}</span> phép toán có lẽ hữu ích hơn một thuật toán chạy trong <span class="math inline">n^{1000}</span> phép toán. Chỉ đối với các kích thước đầu vào rất lớn (<span class="math inline">n \approx 10^8</span>) thì thuật toán đa thức ‘hiệu quả’ mới được ưa thích hơn thuật toán hàm mũ ‘kém hiệu quả’, và đối với nhiều mục đích, việc ưu tiên thuật toán ‘kém hiệu quả’ có thể thực tế hơn.</p>
@@ -587,7 +606,7 @@ end j</code></pre>
 <p>Cuối cùng, chúng tôi lưu ý rằng, trong thực tế, các nhà khoa học máy tính không chỉ quan tâm đến việc phân loại bài toán thành đa thức hay hàm mũ. Đây chỉ là cách đầu tiên và thô sơ nhất để hiểu một bài toán tính toán khó đến mức nào. Tuy nhiên, nó là một sự phân biệt cực kỳ quan trọng, và minh họa cho nhiều quan điểm rộng lớn hơn về bản chất của các vấn đề tài nguyên trong khoa học máy tính. Đối với phần lớn cuốn sách này, nó sẽ là mối quan tâm trung tâm của chúng ta trong việc đánh giá hiệu quả của một thuật toán cho trước.</p>
 <p>Sau khi đã xem xét những giá trị của việc phân loại đa thức so với hàm mũ, bây giờ chúng tôi phải thú nhận rằng lý thuyết về độ phức tạp tính toán có một thất bại vô cùng đáng chú ý: có vẻ rất khó để chứng minh rằng tồn tại những lớp bài toán thú vị yêu cầu tài nguyên hàm mũ để giải quyết. Khá dễ dàng để đưa ra các chứng minh phi kiến thiết (non-constructive proofs) rằng hầu hết các bài toán đều yêu cầu tài nguyên hàm mũ (xem Bài tập 3.16 bên dưới), và hơn nữa nhiều bài toán thú vị được suy đoán (conjectured) là yêu cầu tài nguyên hàm mũ cho giải pháp của chúng, nhưng những chứng minh chặt chẽ dường như rất khó để đạt được, ít nhất là với trạng thái kiến thức hiện tại. Thất bại này của độ phức tạp tính toán mang những hàm ý quan trọng đối với tính toán lượng tử, bởi vì hóa ra sức mạnh tính toán của máy tính lượng tử có thể có liên hệ với một số bài toán mở (open problems) lớn trong lý thuyết độ phức tạp tính toán cổ điển. Cho đến khi những bài toán này được giải quyết, không thể tuyên bố một cách chắc chắn rằng một máy tính lượng tử mạnh mẽ về mặt tính toán đến mức nào, hay thậm chí liệu nó có mạnh hơn một máy tính cổ điển hay không!</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -596,7 +615,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng tồn tại các hàm Boolean trên <span class="math inline">n</span> đầu vào mà yêu cầu ít nhất <span class="math inline">2^n / \log n</span> cổng logic để tính toán.</p>
 </div>
@@ -605,6 +624,53 @@ end j</code></pre>
 <hr>
 <section id="decision-problems-and-the-complexity-classes-p-and-np" class="level1">
 <h1>3. Decision problems and the complexity classes P and NP</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Decision Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bài toán quyết định, là những bài toán trả lời câu hỏi có hay không, yes or no.</p>
+<p>Những ý tưởng chính của độ phức tạp được hình thành dưới dạng các bài toán quyết định.</p>
+<p>Ví dụ: “Cho một hợp số m nguyên và l &lt; m, liệu m có một thừa số nào nhỏ hơn l hay không?”</p>
+<hr>
+<section id="p---np---conp" class="level1">
+<h1>P - NP - coNP</h1>
+<p>P là một lớp bài toán mà khó có thể quyết trong thời gian đa thức</p>
+<p>NP là một lớp bài toán mà có thể kiểm tra đáp án có đúng hay không.</p>
+<p>coNP là phần bù NP, một lớp bài toán mà có bằng chứng cho các trường hợp trả lời “no”</p>
+<p>Ví dụ: Bài toán quyết định được nêu ở trên/</p>
+<ul>
+<li><p>Nếu có thể giải quyết trong thời gian đa thức, đưa ra witness trong thời gian ngắn, nó là P. Và rõ ràng ở bài trên thì rất khó để có thể đưa ra thừa số trong thời gian nhanh.</p></li>
+<li><p>Vì chúng ta có thể kiểm tra một cách rất nhanh chóng, rằng yes, cái này có thỏa mãn hay không bằng các công cụ nhân chia cơ bản. Vì vậy bài toán trên thuộc NP.</p></li>
+</ul>
+<hr>
+</section>
+<section id="np-complete---np-hard---npi" class="level1">
+<h1>NP Complete - NP Hard - NPI</h1>
+<p><strong>NP Hard</strong></p>
+<p>Là lớp các bài toán <em>ít nhất khó bằng</em> các bài toán khó nhất trong NP.</p>
+<p>Tức là bài toán NP Hard không bắt buộc phải thuộc lớp NP, tức là lời giải của chúng thậm chí không kiểm tra nhanh được trong thời gian đa thức, hoặc thậm chí là không quyết định được.</p>
+<p><strong>NP Complete</strong></p>
+<p>Là lớp bài toán thỏa mãn hai điều kiện:</p>
+<ul>
+<li><p>Thuộc lớp NP.</p></li>
+<li><p>Thuộc lớp NP Hard.</p></li>
+</ul>
+<p>Đây là những bài toán khó nhất nằm trong tập NP. Mọi bài toán NP Complete đều là NP Hard, nhưng ngược lại thì không.</p>
+<p><strong>NP Itermediate</strong></p>
+<p>Là trung gian, thuộc lớp NP, nhưng không thuộc P và cũng không phải là NP Complete.</p>
+<p>Tức là những bài toán đủ khó để trên tầm của P, nhưng cũng chẳng đủ khó để nằm trong NP Complete.</p>
+<blockquote class="blockquote">
+<p>Hiện tại người ta đang tập trung nghiên cứu các bài toán này để phục vụ cho computing computation. Và hiện tại cũng có thể nói là chưa có bài toán nào thuộc lớp NPI cả, người ta chỉ đang nghi ngờ bài toán phân tích số nguyên tố thành thừa số nguyên tố thôi.</p>
+</blockquote>
+</section>
+</div>
+</div>
 <p>Nhiều bài toán tính toán được định hình một cách rõ ràng nhất dưới dạng các bài toán quyết định (decision problems) – những bài toán có câu trả lời là có (yes) hoặc không (no). Ví dụ, một số <span class="math inline">m</span> cho trước có phải là số nguyên tố hay không? Đây là bài toán quyết định tính nguyên tố (primality). Những ý tưởng chính của độ phức tạp tính toán được hình thành một cách dễ dàng nhất và thường xuyên nhất dưới dạng các bài toán quyết định, vì hai lý do: lý thuyết có dạng đơn giản nhất và thanh lịch nhất ở hình thức này, trong khi vẫn có thể khái quát hóa một cách tự nhiên cho các kịch bản phức tạp hơn; và về mặt lịch sử, độ phức tạp tính toán phát sinh chủ yếu từ việc nghiên cứu các bài toán quyết định.</p>
 <p>Mặc dù hầu hết các bài toán quyết định có thể dễ dàng được phát biểu bằng ngôn ngữ đơn giản, quen thuộc, việc thảo luận về các tính chất chung của các bài toán quyết định được hỗ trợ rất nhiều bởi thuật ngữ của các ngôn ngữ hình thức (formal languages). Trong thuật ngữ này, một ngôn ngữ <span class="math inline">L</span> trên bảng chữ cái <span class="math inline">\Sigma</span> là một tập con của tập <span class="math inline">\Sigma^*</span> gồm tất cả các chuỗi ký hiệu (hữu hạn) từ <span class="math inline">\Sigma</span>. Ví dụ, nếu <span class="math inline">\Sigma = \{0, 1\}</span>, thì tập hợp các biểu diễn nhị phân của các số chẵn, <span class="math inline">L = \{0, 10, 100, 110, \dots\}</span> là một ngôn ngữ trên <span class="math inline">\Sigma</span>.</p>
 <p>Các bài toán quyết định có thể được mã hóa một cách hiển nhiên thành các bài toán về ngôn ngữ. Chẳng hạn, bài toán quyết định tính nguyên tố có thể được mã hóa bằng cách sử dụng bảng chữ cái nhị phân <span class="math inline">\Sigma = \{0, 1\}</span>. Các chuỗi từ <span class="math inline">\Sigma^*</span> có thể được diễn giải một cách tự nhiên như các số nguyên không âm. Ví dụ, <span class="math inline">0010</span> có thể được diễn giải là số <span class="math inline">2</span>. Ngôn ngữ <span class="math inline">L</span> được định nghĩa là bao gồm tất cả các chuỗi nhị phân sao cho con số tương ứng là số nguyên tố.</p>
@@ -618,7 +684,7 @@ end j</code></pre>
 </blockquote>
 <p>Một tính chất thú vị của việc phân tích thừa số là nếu ai đó tuyên bố rằng câu trả lời là ‘có, <span class="math inline">m</span> thực sự có một thừa số không tầm thường nhỏ hơn <span class="math inline">l</span>’ thì họ có thể chứng minh điều này bằng cách đưa ra một thừa số như vậy, thứ mà sau đó có thể được kiểm tra một cách hiệu quả bởi các bên khác, đơn giản bằng cách thực hiện phép chia dài (long-division). Chúng ta gọi một thừa số như vậy là một bằng chứng (witness) cho thực tế rằng <span class="math inline">m</span> có một thừa số nhỏ hơn <span class="math inline">l</span>. Ý tưởng về một bằng chứng có thể kiểm tra dễ dàng này chính là ý tưởng then chốt trong định nghĩa của lớp độ phức tạp <span class="math inline">\mathbf{NP}</span>, ở phần dưới. Chúng ta đã diễn đạt việc phân tích thừa số như một bài toán quyết định, nhưng bạn có thể dễ dàng xác minh rằng bài toán quyết định này tương đương với việc tìm các thừa số của một số:</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -627,7 +693,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng một thuật toán thời gian đa thức để tìm các thừa số của một số <span class="math inline">m</span> tồn tại khi và chỉ khi bài toán quyết định phân tích thừa số thuộc <span class="math inline">\mathbf{P}</span>.</p>
 </div>
@@ -641,7 +707,7 @@ end j</code></pre>
 <p>Có một sự bất đối xứng thú vị trong định nghĩa của <span class="math inline">\mathbf{NP}</span>. Mặc dù chúng ta phải có khả năng quyết định nhanh chóng liệu một bằng chứng khả dĩ cho <span class="math inline">x \in L</span> có thực sự là một bằng chứng hay không, không có nhu cầu tương tự đối với việc tạo ra một bằng chứng cho <span class="math inline">x \notin L</span>. Ví dụ, trong bài toán phân tích thừa số, chúng ta có một cách dễ dàng để chứng minh rằng một số cho trước có một thừa số nhỏ hơn <span class="math inline">m</span>, nhưng việc đưa ra một bằng chứng để chứng minh rằng một số không có thừa số nào nhỏ hơn <span class="math inline">m</span> lại khó khăn hơn nhiều. Điều này gợi ý việc định nghĩa <span class="math inline">\mathbf{coNP}</span>, lớp các ngôn ngữ có các bằng chứng cho các trường hợp ‘không’; rõ ràng các ngôn ngữ trong <span class="math inline">\mathbf{coNP}</span> chính là phần bù của các ngôn ngữ trong <span class="math inline">\mathbf{NP}</span>.</p>
 <p><span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span> có mối quan hệ như thế nào? Rõ ràng là <span class="math inline">\mathbf{P}</span> là một tập con của <span class="math inline">\mathbf{NP}</span>. Bài toán mở nổi tiếng nhất trong khoa học máy tính là liệu có tồn tại hay không những bài toán thuộc <span class="math inline">\mathbf{NP}</span> mà không thuộc <span class="math inline">\mathbf{P}</span>, thường được viết tắt là bài toán <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>. Hầu hết các nhà khoa học máy tính đều tin rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, nhưng bất chấp nhiều thập kỷ làm việc, vẫn chưa ai có thể chứng minh được điều này, và khả năng <span class="math inline">\mathbf{P} = \mathbf{NP}</span> vẫn còn bỏ ngỏ.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -650,7 +716,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng nếu <span class="math inline">\mathbf{coNP} \ne \mathbf{NP}</span> thì <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>.</p>
 </div>
@@ -670,7 +736,7 @@ end j</code></pre>
 </section>
 <p>Định lý Euler cung cấp cho chúng ta một phương pháp để giải quyết EC một cách hiệu quả. Đầu tiên, hãy kiểm tra xem đồ thị có liên thông hay không; việc này dễ dàng được thực hiện với <span class="math inline">O(n^2)</span> phép toán, như được trình bày trong Bài tập 3.19. Nếu đồ thị không liên thông, thì rõ ràng không tồn tại chu trình Euler nào. Nếu đồ thị liên thông thì đối với mỗi đỉnh, hãy kiểm tra xem có số chẵn các cạnh liên kết với đỉnh đó hay không. Nếu tìm thấy một đỉnh mà trường hợp này không đúng, thì không có chu trình Euler nào, ngược lại một chu trình Euler tồn tại. Vì có <span class="math inline">n</span> đỉnh, và tối đa <span class="math inline">n(n - 1)/2</span> cạnh, thuật toán này yêu cầu <span class="math inline">O(n^3)</span> phép toán sơ cấp. Do đó EC thuộc <span class="math inline">\mathbf{P}</span>! Bằng cách nào đó, có một cấu trúc hiện diện trong bài toán ghé thăm mỗi cạnh, thứ có thể được khai thác để cung cấp một thuật toán hiệu quả cho EC, nhưng cấu trúc này dường như không được phản ánh trong bài toán ghé thăm mỗi đỉnh; hoàn toàn không hiển nhiên tại sao một cấu trúc như vậy lại nên hiện diện trong một trường hợp, nhưng không hiện diện trong trường hợp kia, nếu quả thực nó vắng mặt đối với bài toán HC.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -679,14 +745,14 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>là xác định xem có tồn tại một đường đi giữa hai đỉnh được chỉ định trong một đồ thị hay không. Chứng minh rằng REACHABILITY có thể được giải quyết bằng cách sử dụng <span class="math inline">O(n)</span> phép toán nếu đồ thị có <span class="math inline">n</span> đỉnh. Sử dụng giải pháp cho REACHABILITY để chứng minh rằng có thể quyết định xem một đồ thị có liên thông hay không trong <span class="math inline">O(n^2)</span> phép toán.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -695,7 +761,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh định lý Euler. Cụ thể, nếu mỗi đỉnh có một số chẵn các cạnh liên kết, hãy đưa ra một thủ tục mang tính kiến thiết để tìm một chu trình Euler.</p>
 </div>
@@ -706,7 +772,7 @@ end j</code></pre>
 <p>Một khái niệm tổng quát hơn về việc quy về được minh họa trong Hình 3.11. Một ngôn ngữ <span class="math inline">B</span> được cho là có thể quy về (reducible) một ngôn ngữ <span class="math inline">A</span> khác nếu tồn tại một máy Turing hoạt động trong thời gian đa thức sao cho khi nhận đầu vào là <span class="math inline">x</span>, nó xuất ra <span class="math inline">R(x)</span>, và <span class="math inline">x \in B</span> khi và chỉ khi <span class="math inline">R(x) \in A</span>. Do đó, nếu chúng ta có một thuật toán để quyết định <span class="math inline">A</span>, thì với một chút chi phí phụ, chúng ta có thể quyết định ngôn ngữ <span class="math inline">B</span>. Theo nghĩa này, ngôn ngữ <span class="math inline">B</span> về bản chất không khó quyết định hơn ngôn ngữ <span class="math inline">A</span>.</p>
 <p><img src="../../img/3.11.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -715,7 +781,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng nếu một ngôn ngữ <span class="math inline">L_1</span> có thể quy về ngôn ngữ <span class="math inline">L_2</span> và ngôn ngữ <span class="math inline">L_2</span> có thể quy về <span class="math inline">L_3</span> thì ngôn ngữ <span class="math inline">L_1</span> có thể quy về ngôn ngữ <span class="math inline">L_3</span>.</p>
 </div>
@@ -723,7 +789,7 @@ end j</code></pre>
 </div>
 <p>Một số lớp độ phức tạp có các bài toán đầy đủ (complete) đối với lớp độ phức tạp đó, nghĩa là có một ngôn ngữ <span class="math inline">L</span> trong lớp độ phức tạp được coi là ‘khó’ nhất để quyết định, theo nghĩa là mọi ngôn ngữ khác trong lớp độ phức tạp đó đều có thể được quy về <span class="math inline">L</span>. Không phải tất cả các lớp độ phức tạp đều có các bài toán đầy đủ, nhưng nhiều lớp độ phức tạp mà chúng ta quan tâm đều có các bài toán đầy đủ. Một ví dụ tầm thường được cung cấp bởi <span class="math inline">\mathbf{P}</span>. Gọi <span class="math inline">L</span> là bất kỳ ngôn ngữ nào thuộc <span class="math inline">\mathbf{P}</span> không rỗng hoặc không bằng tập hợp tất cả các từ. Tức là, tồn tại một chuỗi <span class="math inline">x_1</span> sao cho <span class="math inline">x_1 \notin L</span> và một chuỗi <span class="math inline">x_2</span> sao cho <span class="math inline">x_2 \in L</span>. Khi đó, bất kỳ ngôn ngữ <span class="math inline">L'</span> nào khác thuộc <span class="math inline">\mathbf{P}</span> đều có thể được quy về <span class="math inline">L</span> bằng cách sử dụng phép quy về sau: cho trước một đầu vào <span class="math inline">x</span>, sử dụng thủ tục quyết định thời gian đa thức để xác định xem <span class="math inline">x \in L'</span> hay không. Nếu không, hãy đặt <span class="math inline">R(x) = x_1</span>, ngược lại đặt <span class="math inline">R(x) = x_2</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -732,7 +798,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">L</span> là đầy đủ đối với một lớp độ phức tạp, và <span class="math inline">L'</span> là một ngôn ngữ khác trong lớp độ phức tạp đó sao cho <span class="math inline">L</span> quy về <span class="math inline">L'</span>. Chứng minh rằng <span class="math inline">L'</span> là đầy đủ đối với lớp độ phức tạp đó.</p>
 </div>
@@ -788,7 +854,7 @@ end j</code></pre>
 </div>
 <p><span class="math inline">\text{CSAT}</span> mở cho chúng ta một bước đệm (a foot in the door) cho phép chúng ta dễ dàng chứng minh rằng nhiều bài toán khác là NP-đầy đủ. Thay vì chứng minh trực tiếp một bài toán là NP-đầy đủ, chúng ta có thể chứng minh nó thuộc <span class="math inline">\mathbf{NP}</span> và <span class="math inline">\text{CSAT}</span> quy về nó, do đó theo Bài tập 3.22 bài toán đó phải là NP-đầy đủ. Một mẫu nhỏ các bài toán NP-đầy đủ được thảo luận trong Hộp 3.3. Một ví dụ về một bài toán NP-đầy đủ khác là bài toán thỏa mãn (<span class="math inline">\text{SAT}</span>), được phát biểu dưới dạng một công thức Boolean. Nhắc lại rằng một công thức Boolean <span class="math inline">\varphi</span> được cấu tạo từ các phần tử sau: một tập hợp các biến Boolean <span class="math inline">x_1, x_2, \dots</span>; các liên kết Boolean, tức là một hàm Boolean với một hoặc hai đầu vào và một đầu ra, chẳng hạn như <span class="math inline">\wedge</span> (AND), <span class="math inline">\vee</span> (OR), và <span class="math inline">\neg</span> (NOT); và các dấu ngoặc đơn. Tính đúng hay sai của một công thức Boolean đối với một tập hợp các biến Boolean cho trước được quyết định theo các quy luật thông thường của đại số Boolean. Ví dụ, công thức <span class="math inline">\varphi = x_1 \vee \neg x_2</span> có phép gán thỏa mãn là <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 0</span>, trong khi <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 1</span> không phải là một phép gán thỏa mãn. Bài toán thỏa mãn là xác định, cho trước một công thức Boolean <span class="math inline">\varphi</span>, liệu nó có thể thỏa mãn được bởi bất kỳ tập hợp đầu vào khả dĩ nào hay không.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -797,7 +863,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng <span class="math inline">\text{SAT}</span> là NP-đầy đủ bằng cách trước tiên chỉ ra rằng <span class="math inline">\text{SAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>, và sau đó chỉ ra rằng <span class="math inline">\text{CSAT}</span> quy về <span class="math inline">\text{SAT}</span>. (Gợi ý: đối với phép quy về, việc đại diện mỗi dây dẫn riêng biệt trong một trường hợp của <span class="math inline">\text{CSAT}</span> bằng các biến khác nhau trong công thức Boolean có thể sẽ hữu ích.)</p>
 </div>
@@ -806,7 +872,7 @@ end j</code></pre>
 <p>Một trường hợp hạn chế quan trọng của <span class="math inline">\text{SAT}</span> cũng là NP-đầy đủ là bài toán 3-thỏa mãn (<span class="math inline">3\text{SAT}</span>), liên quan đến các công thức ở dạng chuẩn tắc hội 3 (3-conjunctive normal form). Một công thức được gọi là ở dạng chuẩn tắc hội (conjunctive normal form - CNF) nếu nó là phép AND của một tập hợp các mệnh đề (clauses), mỗi mệnh đề trong đó là phép OR của một hoặc nhiều literal (biến đơn dạng <span class="math inline">x</span> hoặc <span class="math inline">\neg x</span>). Ví dụ, công thức <span class="math inline">(x_1 \vee \neg x_2) \wedge (x_2 \vee x_3 \vee \neg x_4)</span> ở dạng chuẩn tắc hội. Một công thức ở dạng 3-chuẩn tắc hội hoặc 3-CNF nếu mỗi mệnh đề có chính xác ba literals. Ví dụ, công thức <span class="math inline">(\neg x_1 \vee x_2 \vee \neg x_2) \wedge (\neg x_1 \vee x_3 \vee \neg x_4) \wedge (x_2 \vee x_3 \vee x_4)</span> ở dạng 3-chuẩn tắc hội. Bài toán 3-thỏa mãn là xác định xem một công thức ở dạng 3-chuẩn tắc hội có thể thỏa mãn được hay không.</p>
 <p>Chứng minh rằng <span class="math inline">3\text{SAT}</span> là NP-đầy đủ khá đơn giản, nhưng hơi quá dài để đưa vào tổng quan này. Thậm chí còn hơn cả <span class="math inline">\text{CSAT}</span> và <span class="math inline">\text{SAT}</span>, <span class="math inline">3\text{SAT}</span> theo một nghĩa nào đó chính là bài toán NP-đầy đủ chuẩn mực, và nó là cơ sở cho vô số chứng minh rằng các bài toán khác là NP-đầy đủ. Chúng ta kết thúc phần thảo luận về tính NP-đầy đủ với một sự thật bất ngờ rằng <span class="math inline">2\text{SAT}</span>, phiên bản tương tự của <span class="math inline">3\text{SAT}</span> trong đó mỗi mệnh đề có hai literals, có thể giải quyết được trong thời gian đa thức:</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -815,7 +881,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">\varphi</span> là một công thức Boolean ở dạng chuẩn tắc hội, trong đó mỗi mệnh đề chỉ chứa hai literals.</p>
 <ol type="1">
@@ -849,8 +915,47 @@ end j</code></pre>
 <p>Giả định rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, người ta có thể chứng minh rằng tồn tại một lớp các bài toán khác rỗng <span class="math inline">\mathbf{NPI}</span> (<span class="math inline">\mathbf{NP}</span> trung gian - NP intermediate), những bài toán vừa không thể giải quyết được bằng các tài nguyên đa thức, vừa không phải là <span class="math inline">\mathbf{NP}</span>-đầy đủ. Rõ ràng, không có bài toán nào được biết chắc chắn là nằm trong <span class="math inline">\mathbf{NPI}</span> (nếu không chúng ta đã biết rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>), nhưng có một vài bài toán được coi là những ứng cử viên đầy triển vọng. Hai trong số những ứng cử viên sáng giá nhất là bài toán phân tích thừa số (factoring) và bài toán đẳng cấu đồ thị (graph isomorphism):</p>
 <p><span class="math inline">\text{GRAPH ISOMORPHISM}</span>: Giả sử <span class="math inline">G</span> và <span class="math inline">G'</span> là hai đồ thị vô hướng trên tập đỉnh <span class="math inline">V \equiv \{v_1, \dots, v_n\}</span>. Liệu <span class="math inline">G</span> và <span class="math inline">G'</span> có đẳng cấu với nhau hay không? Nghĩa là, có tồn tại một song ánh <span class="math inline">\varphi : V \to V</span> sao cho cạnh <span class="math inline">(v_i, v_j)</span> thuộc <span class="math inline">G</span> khi và chỉ khi cạnh <span class="math inline">(\varphi(v_i), \varphi(v_j))</span> thuộc <span class="math inline">G'</span> hay không?</p>
 <p>Các bài toán trong <span class="math inline">\mathbf{NPI}</span> thu hút sự quan tâm đặc biệt của các nhà nghiên cứu trong lĩnh vực tính toán lượng tử và thông tin lượng tử vì hai lý do. Thứ nhất, việc tìm kiếm các thuật toán lượng tử nhanh để giải quyết các bài toán không thuộc <span class="math inline">\mathbf{P}</span> là một mục tiêu rất đáng khao khát. Thứ hai, nhiều người nghi ngờ rằng máy tính lượng tử sẽ không thể giải quyết hiệu quả tất cả các bài toán trong <span class="math inline">\mathbf{NP}</span>, do đó loại trừ các bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ. Vì vậy, việc tập trung vào lớp <span class="math inline">\mathbf{NPI}</span> là một điều hoàn toàn tự nhiên. Quả thực, một thuật toán lượng tử nhanh cho bài toán phân tích thừa số đã được phát hiện (Chương 5), và điều này đã thúc đẩy việc tìm kiếm các thuật toán lượng tử nhanh cho các bài toán khác được nghi ngờ là thuộc <span class="math inline">\mathbf{NPI}</span>.</p>
+<section id="a-plethora-of-complexity-classes" class="level1">
+<h1>4. A plethora of complexity classes</h1>
+<p>Chúng ta đã điều tra một số tính chất sơ cấp của vài lớp độ phức tạp quan trọng. Một “ngôi đền” (pantheon) thực sự của các lớp độ phức tạp đang tồn tại, và có nhiều mối quan hệ không tầm thường đã được biết đến hoặc bị nghi ngờ giữa các lớp này. Đối với tính toán lượng tử và thông tin lượng tử, không cần thiết phải hiểu tất cả các lớp độ phức tạp khác nhau đã được định nghĩa. Tuy nhiên, sẽ rất hữu ích nếu chúng ta có sự đánh giá nhất định đối với các lớp độ phức tạp quan trọng hơn, nhiều lớp trong số đó có các phiên bản tương tự tự nhiên trong nghiên cứu tính toán lượng tử và thông tin lượng tử. Hơn nữa, nếu chúng ta muốn hiểu máy tính lượng tử mạnh đến mức nào, thì nhiệm vụ của chúng ta là phải hiểu làm thế nào lớp các bài toán giải được trên máy tính lượng tử lại khớp với vườn thú các lớp độ phức tạp có thể được định nghĩa cho máy tính cổ điển.</p>
+<p>Về cơ bản có ba thuộc tính có thể được thay đổi trong định nghĩa của một lớp độ phức tạp: tài nguyên được quan tâm (thời gian, không gian, …), loại bài toán đang được xem xét (bài toán quyết định, bài toán tối ưu hóa, …), và mô hình tính toán nền tảng (máy Turing đơn định, máy Turing xác suất, máy tính lượng tử, …). Không có gì ngạc nhiên khi điều này cung cấp cho chúng ta một phạm vi khổng lồ để định nghĩa các lớp độ phức tạp. Trong phần này, chúng tôi điểm qua ngắn gọn một số lớp độ phức tạp quan trọng hơn và một số tính chất sơ cấp của chúng. Chúng ta bắt đầu với một lớp độ phức tạp được định nghĩa bằng cách thay đổi tài nguyên quan tâm từ thời gian (time) sang không gian (space).</p>
+<p>Lớp độ phức tạp bị giới hạn không gian tự nhiên nhất là lớp PSPACE gồm các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc, mà không có giới hạn về lượng thời gian mà máy có thể sử dụng (xem Bài tập 3.25). Rõ ràng, <span class="math inline">\mathbf{P}</span> được bao hàm trong <span class="math inline">\mathbf{PSPACE}</span>, vì một máy Turing dừng sau thời gian đa thức chỉ có thể duyệt qua một số lượng đa thức các ô, nhưng điều đúng đắn nữa là <span class="math inline">\mathbf{NP}</span> là một tập con của <span class="math inline">\mathbf{PSPACE}</span>. Để thấy điều này, giả sử <span class="math inline">L</span> là một ngôn ngữ bất kỳ thuộc <span class="math inline">\mathbf{NP}</span>. Giả sử các bài toán kích thước <span class="math inline">n</span> có các bằng chứng với kích thước tối đa là <span class="math inline">p(n)</span>, trong đó <span class="math inline">p(n)</span> là một đa thức nào đó theo <span class="math inline">n</span>. Để xác định xem bài toán có giải pháp hay không, chúng ta có thể kiểm tra tuần tự tất cả <span class="math inline">2^{p(n)}</span> bằng chứng khả dĩ. Mỗi bài kiểm tra có thể được chạy trong thời gian đa thức, và do đó là không gian đa thức. Nếu chúng ta xóa tất cả các kết quả làm việc trung gian giữa các bài kiểm tra thì chúng ta có thể kiểm tra tất cả các khả năng bằng cách sử dụng không gian đa thức.</p>
+<p>Thật không may, hiện tại người ta thậm chí còn chưa biết liệu <span class="math inline">\mathbf{PSPACE}</span> có chứa những bài toán không thuộc <span class="math inline">\mathbf{P}</span> hay không! Đây là một tình huống khá đáng chú ý — dường như khá hiển nhiên rằng việc có thời gian không giới hạn và tài nguyên không gian đa thức phải mạnh mẽ hơn việc chỉ có một lượng thời gian đa thức. Tuy nhiên, bất chấp những nỗ lực và sự khéo léo đáng kể, điều này vẫn chưa bao giờ được chứng minh. Chúng ta sẽ thấy sau này rằng lớp các bài toán có thể giải quyết trên một máy tính lượng tử trong thời gian đa thức là một tập con của <span class="math inline">\mathbf{PSPACE}</span>, do đó việc chứng minh rằng một bài toán có thể giải quyết hiệu quả trên một máy tính lượng tử mà không thể giải quyết hiệu quả trên một máy tính cổ điển sẽ thiết lập rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>, và từ đó giải quyết một bài toán tồn đọng lớn của khoa học máy tính. Một cách nhìn lạc quan về kết quả này là những ý tưởng từ tính toán lượng tử có thể hữu ích trong việc chứng minh rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>. Một cách bi quan, người ta có thể kết luận rằng sẽ còn rất lâu nữa mới có ai đó chứng minh một cách chặt chẽ rằng máy tính lượng tử có thể được sử dụng để giải quyết hiệu quả các bài toán khó xử lý trên máy tính cổ điển. Thậm chí còn bi quan hơn, hoàn toàn có khả năng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>, trong trường hợp đó máy tính lượng tử không mang lại lợi thế nào so với máy tính cổ điển! Tuy nhiên, rất hiếm (nếu có) các nhà lý thuyết độ phức tạp tính toán tin rằng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.25: (<span class="math inline">\mathbf{PSPACE} \subseteq \mathbf{EXP}</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Lớp độ phức tạp <span class="math inline">\mathbf{EXP}</span> (đại diện cho thời gian hàm mũ - exponential time) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong thời gian hàm mũ, tức là thời gian <span class="math inline">O(2^{n^k})</span>, trong đó <span class="math inline">k</span> là một hằng số bất kỳ. Chứng minh rằng <span class="math inline">\mathbf{PSPACE} \subseteq \mathbf{EXP}</span>. (Gợi ý: Nếu một máy Turing có <span class="math inline">l</span> trạng thái nội tại, một bảng chữ cái gồm <span class="math inline">m</span> ký tự, và sử dụng không gian <span class="math inline">p(n)</span>, hãy lập luận rằng máy có thể tồn tại trong một trong tối đa <span class="math inline">l m^{p(n)}</span> trạng thái khác nhau, và nếu máy Turing muốn tránh các vòng lặp vô hạn thì nó phải dừng lại trước khi thăm lại một trạng thái nào đó.)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.26: (<span class="math inline">\mathbf{L} \subseteq \mathbf{P}</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Lớp độ phức tạp <span class="math inline">\mathbf{L}</span> (đại diện cho không gian logarit - logarithmic space) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong không gian logarit, tức là, trong không gian <span class="math inline">O(\log(n))</span>. Cụ thể hơn, lớp <span class="math inline">\mathbf{L}</span> được định nghĩa bằng cách sử dụng một máy Turing hai dải băng. Dải băng thứ nhất chứa trường hợp bài toán, có kích thước <span class="math inline">n</span>, và là một dải băng chỉ-đọc (read-only), theo nghĩa là chỉ những dòng chương trình không làm thay đổi nội dung của dải băng thứ nhất mới được phép hoạt động. Dải băng thứ hai là một dải băng làm việc mà ban đầu chỉ chứa các khoảng trống. Yêu cầu về không gian logarit chỉ được áp dụng lên dải băng làm việc thứ hai, duy nhất. Chứng minh rằng <span class="math inline">\mathbf{L} \subseteq \mathbf{P}</span>.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
