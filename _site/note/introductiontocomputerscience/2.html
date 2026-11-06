@@ -356,6 +356,12 @@ window.Quarto = {
  <span class="menu-text">Glossary</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -378,6 +384,8 @@ window.Quarto = {
   <li><a href="#định-lý-3.1-định-lý-euler" id="toc-định-lý-3.1-định-lý-euler" class="nav-link" data-scroll-target="#định-lý-3.1-định-lý-euler">Định lý 3.1: (Định lý Euler)</a></li>
   <li><a href="#định-lý-3.2-cook-levin" id="toc-định-lý-3.2-cook-levin" class="nav-link" data-scroll-target="#định-lý-3.2-cook-levin">Định lý 3.2: (Cook-Levin)</a></li>
   <li><a href="#a-plethora-of-complexity-classes" id="toc-a-plethora-of-complexity-classes" class="nav-link" data-scroll-target="#a-plethora-of-complexity-classes">4. A plethora of complexity classes</a></li>
+  <li><a href="#energy-and-computation" id="toc-energy-and-computation" class="nav-link" data-scroll-target="#energy-and-computation">5. Energy and computation</a></li>
+  <li><a href="#nguyên-lý-landauer-dạng-thứ-nhất" id="toc-nguyên-lý-landauer-dạng-thứ-nhất" class="nav-link" data-scroll-target="#nguyên-lý-landauer-dạng-thứ-nhất">Nguyên lý Landauer (dạng thứ nhất)</a></li>
   </ul>
 </nav>
     </div>
@@ -917,12 +925,28 @@ end j</code></pre>
 <p>Các bài toán trong <span class="math inline">\mathbf{NPI}</span> thu hút sự quan tâm đặc biệt của các nhà nghiên cứu trong lĩnh vực tính toán lượng tử và thông tin lượng tử vì hai lý do. Thứ nhất, việc tìm kiếm các thuật toán lượng tử nhanh để giải quyết các bài toán không thuộc <span class="math inline">\mathbf{P}</span> là một mục tiêu rất đáng khao khát. Thứ hai, nhiều người nghi ngờ rằng máy tính lượng tử sẽ không thể giải quyết hiệu quả tất cả các bài toán trong <span class="math inline">\mathbf{NP}</span>, do đó loại trừ các bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ. Vì vậy, việc tập trung vào lớp <span class="math inline">\mathbf{NPI}</span> là một điều hoàn toàn tự nhiên. Quả thực, một thuật toán lượng tử nhanh cho bài toán phân tích thừa số đã được phát hiện (Chương 5), và điều này đã thúc đẩy việc tìm kiếm các thuật toán lượng tử nhanh cho các bài toán khác được nghi ngờ là thuộc <span class="math inline">\mathbf{NPI}</span>.</p>
 <section id="a-plethora-of-complexity-classes" class="level1">
 <h1>4. A plethora of complexity classes</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>PSPACE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Là các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc.</p>
+<p>Rõ ràng <span class="math inline">P \subset PSPACE</span>, một bài toán giải được trong thời gian đa thức, thì cũng chỉ cần đa thức bit để làm việc, không thể nào yêu cầu nhiều hơn được. Và <span class="math inline">NP \subset PSPACE</span>, rõ ràng muốn kiểm tra thì cũng thì cần từng đó bit thôi, cần gì quá.</p>
+<p>Nhưng liệu PSPACE có chứa những bài toán không thuộc P hay không? Chưa ai biết được, thử tưởng tượng xem, những bài toán chỉ sử dụng đa thức bit làm việc, lại có thể giải được các bài toán mà tốn cả hàm mũ thời gian.</p>
+<p>Và máy tính lượng tử được xây dựng dựa trên giả định <span class="math inline">PSPACE \neq P</span>, vậy nên nếu một mai, giả định này bị bác bỏ thì ngành này đã kết thúc, máy tính lượng tử chẳng mang lợi gì hơn so với máy tính cổ điển.</p>
+</div>
+</div>
 <p>Chúng ta đã điều tra một số tính chất sơ cấp của vài lớp độ phức tạp quan trọng. Một “ngôi đền” (pantheon) thực sự của các lớp độ phức tạp đang tồn tại, và có nhiều mối quan hệ không tầm thường đã được biết đến hoặc bị nghi ngờ giữa các lớp này. Đối với tính toán lượng tử và thông tin lượng tử, không cần thiết phải hiểu tất cả các lớp độ phức tạp khác nhau đã được định nghĩa. Tuy nhiên, sẽ rất hữu ích nếu chúng ta có sự đánh giá nhất định đối với các lớp độ phức tạp quan trọng hơn, nhiều lớp trong số đó có các phiên bản tương tự tự nhiên trong nghiên cứu tính toán lượng tử và thông tin lượng tử. Hơn nữa, nếu chúng ta muốn hiểu máy tính lượng tử mạnh đến mức nào, thì nhiệm vụ của chúng ta là phải hiểu làm thế nào lớp các bài toán giải được trên máy tính lượng tử lại khớp với vườn thú các lớp độ phức tạp có thể được định nghĩa cho máy tính cổ điển.</p>
 <p>Về cơ bản có ba thuộc tính có thể được thay đổi trong định nghĩa của một lớp độ phức tạp: tài nguyên được quan tâm (thời gian, không gian, …), loại bài toán đang được xem xét (bài toán quyết định, bài toán tối ưu hóa, …), và mô hình tính toán nền tảng (máy Turing đơn định, máy Turing xác suất, máy tính lượng tử, …). Không có gì ngạc nhiên khi điều này cung cấp cho chúng ta một phạm vi khổng lồ để định nghĩa các lớp độ phức tạp. Trong phần này, chúng tôi điểm qua ngắn gọn một số lớp độ phức tạp quan trọng hơn và một số tính chất sơ cấp của chúng. Chúng ta bắt đầu với một lớp độ phức tạp được định nghĩa bằng cách thay đổi tài nguyên quan tâm từ thời gian (time) sang không gian (space).</p>
 <p>Lớp độ phức tạp bị giới hạn không gian tự nhiên nhất là lớp PSPACE gồm các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc, mà không có giới hạn về lượng thời gian mà máy có thể sử dụng (xem Bài tập 3.25). Rõ ràng, <span class="math inline">\mathbf{P}</span> được bao hàm trong <span class="math inline">\mathbf{PSPACE}</span>, vì một máy Turing dừng sau thời gian đa thức chỉ có thể duyệt qua một số lượng đa thức các ô, nhưng điều đúng đắn nữa là <span class="math inline">\mathbf{NP}</span> là một tập con của <span class="math inline">\mathbf{PSPACE}</span>. Để thấy điều này, giả sử <span class="math inline">L</span> là một ngôn ngữ bất kỳ thuộc <span class="math inline">\mathbf{NP}</span>. Giả sử các bài toán kích thước <span class="math inline">n</span> có các bằng chứng với kích thước tối đa là <span class="math inline">p(n)</span>, trong đó <span class="math inline">p(n)</span> là một đa thức nào đó theo <span class="math inline">n</span>. Để xác định xem bài toán có giải pháp hay không, chúng ta có thể kiểm tra tuần tự tất cả <span class="math inline">2^{p(n)}</span> bằng chứng khả dĩ. Mỗi bài kiểm tra có thể được chạy trong thời gian đa thức, và do đó là không gian đa thức. Nếu chúng ta xóa tất cả các kết quả làm việc trung gian giữa các bài kiểm tra thì chúng ta có thể kiểm tra tất cả các khả năng bằng cách sử dụng không gian đa thức.</p>
 <p>Thật không may, hiện tại người ta thậm chí còn chưa biết liệu <span class="math inline">\mathbf{PSPACE}</span> có chứa những bài toán không thuộc <span class="math inline">\mathbf{P}</span> hay không! Đây là một tình huống khá đáng chú ý — dường như khá hiển nhiên rằng việc có thời gian không giới hạn và tài nguyên không gian đa thức phải mạnh mẽ hơn việc chỉ có một lượng thời gian đa thức. Tuy nhiên, bất chấp những nỗ lực và sự khéo léo đáng kể, điều này vẫn chưa bao giờ được chứng minh. Chúng ta sẽ thấy sau này rằng lớp các bài toán có thể giải quyết trên một máy tính lượng tử trong thời gian đa thức là một tập con của <span class="math inline">\mathbf{PSPACE}</span>, do đó việc chứng minh rằng một bài toán có thể giải quyết hiệu quả trên một máy tính lượng tử mà không thể giải quyết hiệu quả trên một máy tính cổ điển sẽ thiết lập rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>, và từ đó giải quyết một bài toán tồn đọng lớn của khoa học máy tính. Một cách nhìn lạc quan về kết quả này là những ý tưởng từ tính toán lượng tử có thể hữu ích trong việc chứng minh rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>. Một cách bi quan, người ta có thể kết luận rằng sẽ còn rất lâu nữa mới có ai đó chứng minh một cách chặt chẽ rằng máy tính lượng tử có thể được sử dụng để giải quyết hiệu quả các bài toán khó xử lý trên máy tính cổ điển. Thậm chí còn bi quan hơn, hoàn toàn có khả năng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>, trong trường hợp đó máy tính lượng tử không mang lại lợi thế nào so với máy tính cổ điển! Tuy nhiên, rất hiếm (nếu có) các nhà lý thuyết độ phức tạp tính toán tin rằng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -931,14 +955,14 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Lớp độ phức tạp <span class="math inline">\mathbf{EXP}</span> (đại diện cho thời gian hàm mũ - exponential time) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong thời gian hàm mũ, tức là thời gian <span class="math inline">O(2^{n^k})</span>, trong đó <span class="math inline">k</span> là một hằng số bất kỳ. Chứng minh rằng <span class="math inline">\mathbf{PSPACE} \subseteq \mathbf{EXP}</span>. (Gợi ý: Nếu một máy Turing có <span class="math inline">l</span> trạng thái nội tại, một bảng chữ cái gồm <span class="math inline">m</span> ký tự, và sử dụng không gian <span class="math inline">p(n)</span>, hãy lập luận rằng máy có thể tồn tại trong một trong tối đa <span class="math inline">l m^{p(n)}</span> trạng thái khác nhau, và nếu máy Turing muốn tránh các vòng lặp vô hạn thì nó phải dừng lại trước khi thăm lại một trạng thái nào đó.)</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -947,15 +971,150 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Lớp độ phức tạp <span class="math inline">\mathbf{L}</span> (đại diện cho không gian logarit - logarithmic space) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong không gian logarit, tức là, trong không gian <span class="math inline">O(\log(n))</span>. Cụ thể hơn, lớp <span class="math inline">\mathbf{L}</span> được định nghĩa bằng cách sử dụng một máy Turing hai dải băng. Dải băng thứ nhất chứa trường hợp bài toán, có kích thước <span class="math inline">n</span>, và là một dải băng chỉ-đọc (read-only), theo nghĩa là chỉ những dòng chương trình không làm thay đổi nội dung của dải băng thứ nhất mới được phép hoạt động. Dải băng thứ hai là một dải băng làm việc mà ban đầu chỉ chứa các khoảng trống. Yêu cầu về không gian logarit chỉ được áp dụng lên dải băng làm việc thứ hai, duy nhất. Chứng minh rằng <span class="math inline">\mathbf{L} \subseteq \mathbf{P}</span>.</p>
 </div>
 </div>
 </div>
-
-
+<p>Việc cho phép nhiều thời gian hoặc không gian hơn có mang lại sức mạnh tính toán lớn hơn không? Câu trả lời cho câu hỏi này là có trong cả hai trường hợp. Nói một cách khái quát, định lý phân cấp thời gian (time hierarchy theorem) phát biểu rằng <span class="math inline">\mathbf{TIME}(f(n))</span> là một tập con thực sự (proper subset) của <span class="math inline">\mathbf{TIME}(f(n)\log^2(f(n)))</span>. Tương tự, định lý phân cấp không gian (space hierarchy theorem) phát biểu rằng <span class="math inline">\mathbf{SPACE}(f(n))</span> là một tập con thực sự của <span class="math inline">\mathbf{SPACE}(f(n)\log(f(n)))</span>, trong đó <span class="math inline">\mathbf{SPACE}(f(n))</span>, tất nhiên, là lớp độ phức tạp bao gồm tất cả các ngôn ngữ có thể được quyết định với tài nguyên không gian <span class="math inline">O(f(n))</span>. Các định lý phân cấp có những hệ ý thú vị liên quan đến sự bằng nhau của các lớp độ phức tạp. Chúng ta biết rằng</p>
+<p><span class="math display">
+\mathbf{L} \subseteq \mathbf{P} \subseteq \mathbf{NP} \subseteq \mathbf{PSPACE} \subseteq \mathbf{EXP} \tag{3.1}
+</span></p>
+<p>Thật không may, mặc dù mỗi sự bao hàm này được tin tưởng rộng rãi là thực sự, chưa có sự bao hàm nào từng được chứng minh là thực sự. Tuy nhiên, định lý phân cấp thời gian ngụ ý rằng <span class="math inline">\mathbf{P}</span> là một tập con thực sự của <span class="math inline">\mathbf{EXP}</span>, và định lý phân cấp không gian ngụ ý rằng <span class="math inline">\mathbf{L}</span> là một tập con thực sự của <span class="math inline">\mathbf{PSPACE}</span>! Vì vậy, chúng ta có thể kết luận rằng ít nhất một trong những sự bao hàm ở (3.1) phải là thực sự, mặc dù chúng ta không biết đó là cái nào.</p>
+<p>Chúng ta nên làm gì với một bài toán một khi chúng ta biết rằng nó là NP-đầy đủ, hoặc một tiêu chí về độ khó nào đó khác được thỏa mãn? Hóa ra đây hoàn toàn chưa phải là sự kết thúc của câu chuyện trong việc phân tích bài toán. Một hướng tấn công khả dĩ là xác định các trường hợp đặc biệt của bài toán có thể dễ bị tấn công giải quyết. Ví dụ, trong Bài tập 3.24, chúng ta đã thấy rằng bài toán <span class="math inline">2\text{SAT}</span> có một giải pháp hiệu quả, bất chấp tính NP-đầy đủ của <span class="math inline">\text{SAT}</span>.</p>
+<p>Một cách tiếp cận khác là thay đổi loại bài toán đang được xem xét, một chiến thuật thường dẫn đến việc định nghĩa các lớp độ phức tạp mới. Ví dụ, thay vì tìm kiếm các giải pháp chính xác cho một bài toán NP-đầy đủ, chúng ta có thể cố gắng tìm các thuật toán tốt để tìm các giải pháp xấp xỉ (approximate) cho một bài toán. Ví dụ, bài toán <span class="math inline">\text{VERTEX COVER}</span> là một bài toán NP-đầy đủ, nhưng trong Bài tập 3.27, chúng ta chỉ ra rằng hoàn toàn có thể tìm ra một cách hiệu quả một xấp xỉ cho tập phủ đỉnh tối thiểu sao cho nó chính xác trong khoảng hệ số là hai! Mặt khác, trong Bài toán 3.6, chúng ta chỉ ra rằng không thể tìm được các xấp xỉ cho các giải pháp của <span class="math inline">\text{TSP}</span> chính xác trong khoảng bất kỳ hệ số nào, trừ khi <span class="math inline">\mathbf{P} = \mathbf{NP}</span>!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.27: (Thuật toán xấp xỉ cho VERTEX COVER)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Cho <span class="math inline">G = (V, E)</span> là một đồ thị vô hướng. Chứng minh rằng thuật toán sau đây tìm được một tập phủ đỉnh cho <span class="math inline">G</span> nằm trong khoảng gấp hai lần kích thước của một tập phủ đỉnh tối thiểu:</p>
+</div>
+</div>
+</div>
+<p><span class="math display">
+\begin{aligned} VC &amp;= \emptyset \\
+E' &amp;= E \\ \text{do } &amp;\text{until } E' = \emptyset \\
+&amp;\text{let } (\alpha, \beta) \text{ be any edge of } E' \\
+&amp;VC = VC \cup \{\alpha, \beta\} \\
+&amp;\text{remove from } E' \text{ every edge incident on } \alpha \text{ or } \beta \\
+\text{return } &amp;VC \end{aligned}
+</span></p>
+<p>Tại sao lại có thể xấp xỉ lời giải của một bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ này, nhưng lại không thể với một bài toán khác? Rốt cuộc thì chẳng phải ta có thể chuyển đổi một cách hiệu quả từ bài toán này sang bài toán khác hay sao? Điều này hoàn toàn đúng, tuy nhiên việc chuyển đổi này không nhất thiết duy trì khái niệm về một ‘xấp xỉ tốt’ cho một lời giải. Kết quả là, lý thuyết độ phức tạp tính toán của các thuật toán xấp xỉ cho các bài toán trong <span class="math inline">\mathbf{NP}</span> có một cấu trúc vượt ra ngoài cấu trúc của bản thân <span class="math inline">\mathbf{NP}</span>. Tồn tại cả một lý thuyết độ phức tạp của các thuật toán xấp xỉ, nhưng tiếc là nó nằm ngoài phạm vi của cuốn sách này. Tuy nhiên, ý tưởng cơ bản là định nghĩa một khái niệm về sự quy về tương ứng với khả năng quy một bài toán xấp xỉ này về một bài toán khác một cách hiệu quả, sao cho khái niệm xấp xỉ tốt được bảo toàn. Với một khái niệm như vậy, ta có thể định nghĩa các lớp độ phức tạp như MAXSNP tương tự như lớp <span class="math inline">\mathbf{NP}</span>, là tập hợp các bài toán mà ở đó có thể kiểm chứng một cách hiệu quả các lời giải xấp xỉ cho bài toán. Các bài toán đầy đủ cũng tồn tại cho MAXSNP, giống như đối với <span class="math inline">\mathbf{NP}</span>, và việc xác định xem lớp MAXSNP so sánh như thế nào với lớp các bài toán xấp xỉ giải được một cách hiệu quả là một bài toán mở thú vị.</p>
+<p>Chúng ta kết thúc phần thảo luận bằng một lớp độ phức tạp xuất hiện khi bản thân mô hình tính toán nền tảng bị thay đổi. Giả sử một máy Turing được trang bị khả năng tung đồng xu, sử dụng kết quả tung đồng xu để quyết định những hành động cần thực hiện trong quá trình tính toán. Một máy Turing như vậy có thể chỉ chấp nhận hoặc từ chối các đầu vào với một xác suất nhất định. Lớp độ phức tạp BPP (cho thời gian xác suất với lỗi bị chặn - bounded-error probabilistic time) chứa tất cả các ngôn ngữ <span class="math inline">L</span> với thuộc tính là tồn tại một máy Turing xác suất <span class="math inline">M</span> sao cho nếu <span class="math inline">x \in L</span> thì <span class="math inline">M</span> chấp nhận <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">3/4</span>, và nếu <span class="math inline">x \notin L</span> thì <span class="math inline">M</span> từ chối <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">3/4</span>. Bài tập sau đây cho thấy việc lựa chọn hằng số <span class="math inline">3/4</span> về bản chất là tùy ý:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.28: (Tính tùy ý của hằng số trong định nghĩa BPP)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">k</span> là một hằng số cố định, <span class="math inline">1/2 &lt; k \le 1</span>. Giả sử <span class="math inline">L</span> là một ngôn ngữ sao cho tồn tại một máy Turing <span class="math inline">M</span> với thuộc tính là bất cứ khi nào <span class="math inline">x \in L</span>, <span class="math inline">M</span> chấp nhận <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">k</span>, và bất cứ khi nào <span class="math inline">x \notin L</span>, <span class="math inline">M</span> từ chối <span class="math inline">x</span> me với xác suất ít nhất <span class="math inline">k</span>. Chứng minh rằng <span class="math inline">L \in \mathbf{BPP}</span>.</p>
+</div>
+</div>
+</div>
+<p>Thật vậy, bất đẳng thức Chernoff, được thảo luận trong Hộp 3.4, ngụ ý rằng chỉ với một vài lần lặp lại một thuật toán quyết định một ngôn ngữ trong BPP, xác suất thành công có thể được khuếch đại đến mức về bản chất bằng 1 trên mọi khía cạnh thực tế. Vì lý do này, BPP thậm chí còn hơn cả P mới là lớp các bài toán quyết định thường được coi là giải được một cách hiệu quả trên một máy tính cổ điển, và chính bản sao lượng tử của BPP, được gọi là BQP, mới là điều thú vị nhất trong nghiên cứu của chúng ta về các thuật toán lượng tử.</p>
 </section>
+<section id="energy-and-computation" class="level1">
+<h1>5. Energy and computation</h1>
+<p>Độ phức tạp tính toán nghiên cứu lượng thời gian và không gian cần thiết để giải quyết một bài toán tính toán. Một tài nguyên tính toán quan trọng khác là năng lượng. Trong phần này, chúng ta nghiên cứu các yêu cầu về năng lượng cho tính toán. Đáng ngạc nhiên là, hóa ra tính toán, cả cổ điển và lượng tử, về nguyên tắc đều có thể được thực hiện mà không tiêu tốn bất kỳ năng lượng nào! Hóa ra, việc tiêu thụ năng lượng trong tính toán có liên hệ sâu sắc với tính khả nghịch (reversibility) của quá trình tính toán. Xem xét một cổng như cổng <span class="math inline">\text{NAND}</span>, nó nhận hai bit làm đầu vào và tạo ra một bit duy nhất làm đầu ra. Cổng này về bản chất là không khả nghịch (irreversible) bởi vì, nếu chỉ cho biết đầu ra của cổng, đầu vào không thể được xác định duy nhất. Ví dụ, nếu đầu ra của cổng <span class="math inline">\text{NAND}</span> là <span class="math inline">1</span>, thì đầu vào có thể là bất kỳ trường hợp nào trong số <span class="math inline">00, 01</span>, hoặc <span class="math inline">10</span>. Mặt khác, cổng <span class="math inline">\text{NOT}</span> là một ví dụ về cổng logic khả nghịch (reversible) bởi vì, khi có đầu ra của cổng <span class="math inline">\text{NOT}</span>, ta hoàn toàn có thể suy luận ra đầu vào chắc chắn phải là gì.</p>
+<p>Một cách khác để hiểu về tính không khả nghịch là suy nghĩ về nó dưới góc độ việc xóa thông tin (information erasure). Nếu một cổng logic là không khả nghịch, thì một phần thông tin đầu vào của cổng đó sẽ bị mất đi không thể khôi phục được khi cổng hoạt động – tức là, một phần thông tin đã bị cổng xóa đi. Ngược lại, trong một tính toán khả nghịch, không có thông tin nào từng bị xóa đi, bởi vì đầu vào luôn có thể được khôi phục ngược lại từ đầu ra. Do đó, nói rằng một tính toán là khả nghịch tương đương với việc nói rằng không có thông tin nào bị xóa đi trong quá trình tính toán.</p>
+<hr>
+<p><strong>Sự kết nối giữa việc tiêu thụ năng lượng và tính không khả nghịch trong tính toán là gì?</strong></p>
+<p>Nguyên lý Landauer (Landauer’s principle) cung cấp sự kết nối này, phát biểu rằng, để xóa thông tin, hệ thống bắt buộc phải tiêu tán năng lượng. Cụ thể hơn, nguyên lý Landauer có thể được phát biểu như sau:</p>
+</section>
+<section id="nguyên-lý-landauer-dạng-thứ-nhất" class="level1 postulates">
+<h1>Nguyên lý Landauer (dạng thứ nhất)</h1>
+<p>Giả sử một máy tính xóa một bit thông tin duy nhất. Lượng năng lượng tiêu tán ra môi trường ít nhất là <span class="math inline">k_B T \ln 2</span>, trong đó <span class="math inline">k_B</span> là một hằng số phổ quát được gọi là hằng số Boltzmann, và <span class="math inline">T</span> là nhiệt độ môi trường của máy tính.</p>
+</section>
+<p>Theo các định luật nhiệt động lực học, nguyên lý Landauer có thể được đưa ra dưới một dạng thay thế, không được phát biểu dưới dạng tiêu tán năng lượng, mà đúng hơn là dưới dạng entropy:</p>
+<div class="postulates">
+<p>Nguyên lý Landauer (dạng thứ hai): Giả sử một máy tính xóa một bit thông tin duy nhất. Entropy của môi trường tăng lên ít nhất <span class="math inline">k_B \ln 2</span>, trong đó <span class="math inline">k_B</span> là hằng số Boltzmann.</p>
+</div>
+<p>Việc biện minh cho nguyên lý Landauer là một bài toán của vật lý học nằm ngoài phạm vi của cuốn sách này – hãy xem phần ‘Lịch sử và đọc thêm’ ở cuối chương nếu bạn muốn hiểu tại sao nguyên lý Landauer lại đúng. Tuy nhiên, nếu chúng ta chấp nhận nguyên lý Landauer như một định đề, thì nó đặt ra một số câu hỏi thú vị. Trước hết, nguyên lý Landauer chỉ cung cấp một cận dưới (lower bound) về lượng năng lượng phải được tiêu tán để xóa thông tin. Các máy tính hiện hành có tiến gần đến cận dưới này không? Câu trả lời hóa ra là không mấy gần – các máy tính vào khoảng năm 2000 tiêu tán khoảng <span class="math inline">500k_B T \ln 2</span> năng lượng cho mỗi phép toán logic cơ bản.</p>
+<p>Mặc dù các máy tính hiện tại còn cách xa giới hạn do nguyên lý Landauer đặt ra, việc hiểu xem mức tiêu thụ năng lượng có thể giảm xuống bao nhiêu vẫn là một vấn đề lý thuyết thú vị. Bên cạnh sự quan tâm nội tại đối với bản thân vấn đề, một lý do thực tế cho sự quan tâm này xuất phát từ định luật Moore: nếu sức mạnh máy tính tiếp tục tăng thì lượng năng lượng tiêu tán cũng phải tăng theo, trừ khi năng lượng tiêu tán trên mỗi phép toán giảm với tốc độ nhanh bằng tốc độ tăng trưởng của sức mạnh tính toán.</p>
+<p>Nếu tất cả các phép tính có thể được thực hiện một cách khả nghịch, thì nguyên lý Landauer sẽ ngụ ý rằng không có cận dưới nào đối với lượng năng lượng do máy tính tiêu tán, vì không có bit nào bị xóa trong quá trình tính toán khả nghịch. Tất nhiên, có khả năng một số nguyên lý vật lý khác có thể yêu cầu năng lượng phải bị tiêu tán trong quá trình tính toán; may mắn thay, điều này hóa ra không đúng. Nhưng liệu có thể thực hiện tính toán vạn năng mà không xóa bất kỳ thông tin nào không? Các nhà vật lý có thể “ăn gian” ở bài toán này để thấy trước rằng câu trả lời cho câu hỏi này chắc chắn là có, bởi vì sự hiểu biết hiện tại của chúng ta về các định luật vật lý là về cơ bản chúng đều khả nghịch. Tức là, nếu chúng ta biết trạng thái cuối cùng của một hệ vật lý khép kín, thì các định luật vật lý cho phép chúng ta tính toán ra trạng thái ban đầu của hệ. Nếu chúng ta tin rằng các định luật đó là đúng, thì chúng ta phải kết luận rằng ẩn bên trong các cổng logic không khả nghịch như <span class="math inline">\text{AND}</span> và <span class="math inline">\text{OR}</span>, phải tồn tại một sự tính toán khả nghịch nền tảng nào đó. Nhưng sự khả nghịch ẩn giấu này nằm ở đâu, và chúng ta có thể sử dụng nó để xây dựng các máy tính khả nghịch một cách hiển nhiên không?</p>
+<hr>
+<p>Chúng ta sẽ sử dụng hai kỹ thuật khác nhau để đưa ra các mô hình dựa trên mạch khả nghịch có khả năng tính toán vạn năng.</p>
+<ul>
+<li><p>Mô hình đầu tiên, một máy tính được chế tạo hoàn toàn bằng các quả bóng bi-a và các tấm gương, mang đến một hiện thực hóa cụ thể và đẹp mắt về các nguyên lý của tính toán khả nghịch.</p></li>
+<li><p>Mô hình thứ hai, dựa trên một cổng logic khả nghịch được gọi là cổng Toffoli (mà chúng ta đã gặp lần đầu trong Mục 1.4.1), là một cái nhìn trừu tượng hơn về tính toán khả nghịch, thứ mà sau này sẽ rất hữu ích trong cuộc thảo luận của chúng ta về tính toán lượng tử.</p></li>
+</ul>
+<p>Người ta cũng có thể chế tạo các máy Turing khả nghịch có tính vạn năng cho tính toán; tuy nhiên, chúng ta sẽ không nghiên cứu chúng ở đây, vì các mô hình mạch khả nghịch hóa ra lại hữu ích hơn nhiều đối với tính toán lượng tử.</p>
+<hr>
+<p><img src="../../img/3.14.png" class="img-fluid"></p>
+<p>Ý tưởng cơ bản của máy tính bóng bi-a được minh họa trong Hình 3.14. Các ‘đầu vào’ bóng bi-a đi vào máy tính từ phía bên trái, bật ra khỏi các tấm gương và bật vào nhau, trước khi thoát ra dưới dạng ‘đầu ra’ ở phía bên phải. Sự hiện diện hay vắng mặt của một quả bóng bi-a tại một vị trí đầu vào khả dĩ được sử dụng để biểu thị một giá trị logic 1 hoặc logic 0, tương ứng. Điều hấp dẫn về mô hình này là nó hiển nhiên khả nghịch (manifestly reversible), ở chỗ hoạt động của nó dựa trên các định luật của cơ học cổ điển. Hơn nữa, mô hình tính toán này hóa ra lại mang tính vạn năng (universal) theo nghĩa là nó có thể được sử dụng để mô phỏng một quá trình tính toán tùy ý trong mô hình tính toán mạch tiêu chuẩn.</p>
+<p>Tất nhiên, nếu một máy tính bóng bi-a từng được chế tạo thì nó sẽ cực kỳ không ổn định. Như bất kỳ người chơi bi-a nào cũng có thể chứng thực, một quả bóng bi-a lăn không ma sát trên một bề mặt nhẵn rất dễ bị chệch hướng bởi những nhiễu loạn nhỏ. Mô hình tính toán bóng bi-a phụ thuộc vào sự vận hành hoàn hảo, và sự vắng mặt của các nhiễu loạn bên ngoài như những nhiễu loạn do nhiễu nhiệt gây ra. Có thể thực hiện các hiệu chỉnh định kỳ, nhưng thông tin thu được từ việc làm này sẽ phải bị xóa đi, đòi hỏi phải thực hiện công. Do đó, việc tiêu hao năng lượng phục vụ cho mục đích làm giảm tính nhạy cảm với nhiễu này, một điều cần thiết cho một cỗ máy tính toán thực tế trong thế giới thực. Vì mục đích của phần giới thiệu này, chúng ta sẽ bỏ qua các tác động của nhiễu lên máy tính bóng bi-a, và tập trung vào việc hiểu các yếu tố cốt lõi của tính toán khả nghịch.</p>
+<hr>
+<p>Máy tính bóng bi-a cung cấp một phương thức thanh lịch để triển khai một cổng logic vạn năng khả nghịch được gọi là cổng Fredkin. Quả thực, các thuộc tính của cổng Fredkin cung cấp một cái nhìn tổng quan đầy đủ thông tin về các nguyên lý chung của các cổng và mạch logic khả nghịch. Cổng Fredkin có ba bit đầu vào và ba bit đầu ra, mà chúng ta lần lượt gọi là <span class="math inline">a, b, c</span> và <span class="math inline">a', b', c'</span>. Bit <span class="math inline">c</span> là một bit kiểm soát (control bit), giá trị của nó không bị thay đổi bởi tác động của cổng Fredkin, tức là, <span class="math inline">c' = c</span>. Lý do <span class="math inline">c</span> được gọi là bit kiểm soát là vì nó kiểm soát những gì xảy ra với hai bit còn lại, <span class="math inline">a</span> và <span class="math inline">b</span>. Nếu <span class="math inline">c</span> được đặt thành 0 thì <span class="math inline">a</span> và <span class="math inline">b</span> được giữ nguyên, <span class="math inline">a' = a, b' = b</span>. Nếu <span class="math inline">c</span> được đặt thành 1, <span class="math inline">a</span> và <span class="math inline">b</span> được hoán đổi cho nhau, <span class="math inline">a' = b, b' = a</span>. Bảng chân lý rõ ràng của cổng Fredkin được thể hiện trong Hình 3.15. Rất dễ để thấy rằng cổng Fredkin là khả nghịch, bởi vì khi biết đầu ra <span class="math inline">a', b', c'</span>, chúng ta có thể xác định được các đầu vào <span class="math inline">a, b, c</span>. Thực tế, để khôi phục lại các đầu vào ban đầu <span class="math inline">a, b</span> và <span class="math inline">c</span> chúng ta chỉ cần áp dụng một cổng Fredkin khác lên <span class="math inline">a', b', c'</span>:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.29: (Cổng Fredkin tự nghịch đảo)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng việc áp dụng hai cổng Fredkin liên tiếp sẽ cho ra các đầu ra giống hệt như các đầu vào.</p>
+</div>
+</div>
+</div>
+<p>Xem xét các đường đi của các quả bóng bi-a trong Hình 3.14, không khó để kiểm chứng rằng máy tính bóng bi-a này triển khai cổng Fredkin:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.30:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Kiểm chứng rằng máy tính bóng bi-a trong Hình 3.14 tính toán cổng Fredkin.</p>
+</div>
+</div>
+</div>
+<p>Ngoài tính khả nghịch, cổng Fredkin còn có một thuộc tính thú vị là số lượng các giá trị 1 được bảo toàn giữa đầu vào và đầu ra. Dưới góc độ của máy tính bóng bi-a, điều này tương ứng với việc số lượng quả bóng bi-a đi vào cổng Fredkin bằng với số lượng quả bóng đi ra. Do đó, đôi khi nó được gọi là một cổng logic khả nghịch bảo toàn (conservative). Các thuộc tính khả nghịch và bảo toàn như vậy thu hút sự quan tâm của một nhà vật lý học bởi vì chúng có thể được giải thích bằng các nguyên lý vật lý cơ bản. Các định luật của Tự nhiên là khả nghịch, với ngoại lệ có thể có là định đề đo lường của cơ học lượng tử, được thảo luận trong Mục 2.2.3 ở trang 84. Thuộc tính bảo toàn có thể được coi là tương tự như các thuộc tính chẳng hạn như bảo toàn khối lượng, hoặc bảo toàn năng lượng. Quả thực, trong mô hình tính toán bóng bi-a, thuộc tính bảo toàn tương ứng chính xác với định luật bảo toàn khối lượng.</p>
+<p><img src="../../img/3.15.png" class="img-fluid"></p>
+<p><span class="math display">
+&gt; \begin{array}{ccc\|ccc} &gt; \hline \hline &gt; \multicolumn{3}{c\vert{}}{\text{Inputs}} &amp; \multicolumn{3}{c}{\text{Outputs}} \\ &gt; a &amp; b &amp; c &amp; a' &amp; b' &amp; c' \\ &gt; \hline &gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\ &gt; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ &gt; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\ &gt; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ &gt; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\ &gt; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\ &gt; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\ &gt; \hline \hline &gt; \end{array} &gt;
+</span></p>
+<p><img src="../../img/3.16.png" class="img-fluid"></p>
+<p>Cổng Fredkin không chỉ khả nghịch và bảo toàn, nó còn là một cổng logic vạn năng! Như được minh họa trong Hình 3.16, cổng Fredkin có thể được cấu hình để mô phỏng các hàm <span class="math inline">\text{AND}</span>, <span class="math inline">\text{NOT}</span>, <span class="math inline">\text{CROSSOVER}</span> và <span class="math inline">\text{FANOUT}</span>, và do đó có thể được ghép nối tiếp để mô phỏng bất kỳ mạch cổ điển nào.</p>
+<p>Để mô phỏng các cổng không khả nghịch như <span class="math inline">\text{AND}</span> bằng cổng Fredkin, chúng ta đã sử dụng hai ý tưởng. Thứ nhất, chúng ta cho phép đưa vào các bit ‘phụ trợ’ (ancilla) cho cổng Fredkin, ở các trạng thái được chuẩn bị đặc biệt, là 0 hoặc 1. Thứ hai, đầu ra của cổng Fredkin chứa ‘rác’ (garbage) dư thừa không cần thiết cho phần còn lại của quá trình tính toán. Các bit ancilla và bit rác này không trực tiếp quan trọng đối với phép tính. Tầm quan trọng của chúng nằm ở chỗ chúng làm cho quá trình tính toán trở nên khả nghịch. Quả thực, tính không khả nghịch của các cổng như <span class="math inline">\text{AND}</span> và <span class="math inline">\text{OR}</span> có thể được xem như là hệ quả của việc các bit ancilla và rác bị ‘ẩn đi’. Tóm lại, cho trước bất kỳ mạch cổ điển nào tính toán một hàm <span class="math inline">f(x)</span>, chúng ta có thể xây dựng một mạch khả nghịch tạo thành hoàn toàn từ các cổng Fredkin, trong đó với đầu vào là <span class="math inline">x</span>, cùng với một số bit ancilla ở một trạng thái tiêu chuẩn <span class="math inline">a</span>, tính toán ra <span class="math inline">f(x)</span>, cùng với một số đầu ra ‘rác’ phụ thêm, <span class="math inline">g(x)</span>. Do đó, chúng ta biểu diễn tác động của quá trình tính toán là <span class="math inline">(x, a) \rightarrow (f(x), g(x))</span>.</p>
+<hr>
+<p>Bây giờ chúng ta đã biết cách tính toán các hàm một cách khả nghịch. Thật không may, quá trình tính toán này tạo ra các bit rác không mong muốn. Với một số sửa đổi, hóa ra ta có thể thực hiện tính toán sao cho bất kỳ bit rác nào được tạo ra đều ở một trạng thái tiêu chuẩn (standard state). Cấu trúc này mang tính cốt yếu đối với tính toán lượng tử, bởi vì các bit rác có giá trị phụ thuộc vào <span class="math inline">x</span> nhìn chung sẽ phá hủy các đặc tính giao thoa vốn rất quan trọng đối với tính toán lượng tử. Để hiểu cách thức hoạt động của điều này, thật tiện lợi khi giả định rằng cổng <span class="math inline">\text{NOT}</span> có sẵn trong kho các cổng khả nghịch của chúng ta, vì vậy chúng ta cũng có thể giả định rằng tất cả các bit ancilla <span class="math inline">a</span> đều bắt đầu là 0, với các cổng <span class="math inline">\text{NOT}</span> được thêm vào ở những nơi cần thiết để biến các số 0 ancilla thành số 1. Cũng sẽ tiện lợi khi giả định rằng cổng controlled-<span class="math inline">\text{NOT}</span> cổ điển có sẵn, được định nghĩa theo cách tương tự với định nghĩa lượng tử ở Mục 1.3.2, tức là, các đầu vào <span class="math inline">(c, t)</span> được biến thành <span class="math inline">(c, t \oplus c)</span>, trong đó <span class="math inline">\oplus</span> biểu thị phép cộng modulo 2. Lưu ý rằng <span class="math inline">t = 0</span> cho <span class="math inline">(c, 0) \rightarrow (c, c)</span>, vì vậy cổng controlled-<span class="math inline">\text{NOT}</span> có thể được coi là một cổng sao chép khả nghịch hoặc cổng <span class="math inline">\text{FANOUT}</span>, không để lại bit rác ở đầu ra.</p>
+<p>Với các cổng <span class="math inline">\text{NOT}</span> bổ sung được gắn vào đầu mạch, tác động của phép tính có thể được viết là <span class="math inline">(x, 0) \rightarrow (f(x), g(x))</span>. Chúng ta cũng có thể thêm các cổng <span class="math inline">\text{CNOT}</span> vào đầu mạch, nhằm tạo ra một bản sao của <span class="math inline">x</span> mà không bị thay đổi trong quá trình tính toán tiếp theo. Với sửa đổi này, tác động của mạch có thể được viết là</p>
+<p><span class="math display">
+(x, 0, 0) \rightarrow (x, f(x), g(x)). \tag{3.7}
+</span></p>
+<p>Phương trình (3.7) là một cách rất hữu ích để viết tác động của mạch khả nghịch, bởi vì nó cho phép sử dụng một ý tưởng được gọi là tính toán lùi (uncomputation) để loại bỏ các bit rác, với một chi phí nhỏ về thời gian chạy của phép tính. Ý tưởng như sau. Giả sử chúng ta bắt đầu với một máy tính bốn thanh ghi ở trạng thái <span class="math inline">(x, 0, 0, y)</span>. Thanh ghi thứ hai được sử dụng để lưu kết quả của phép tính, và thanh ghi thứ ba được sử dụng để cung cấp không gian làm việc cho phép tính, tức là, chứa các bit rác <span class="math inline">g(x)</span>. Việc sử dụng thanh ghi thứ tư sẽ được mô tả ngay sau đây, và chúng ta giả định nó bắt đầu ở một trạng thái tùy ý <span class="math inline">y</span>.</p>
+<p>Chúng ta bắt đầu như trước, bằng cách áp dụng một mạch khả nghịch để tính <span class="math inline">f</span>, dẫn đến trạng thái <span class="math inline">(x, f(x), g(x), y)</span>. Tiếp theo, chúng ta sử dụng các cổng <span class="math inline">\text{CNOT}</span> để cộng kết quả <span class="math inline">f(x)</span> theo từng bit vào thanh ghi thứ tư, đưa cỗ máy về trạng thái <span class="math inline">(x, f(x), g(x), y \oplus f(x))</span>. Tuy nhiên, tất cả các bước được sử dụng để tính <span class="math inline">f(x)</span> đều khả nghịch và không ảnh hưởng đến thanh ghi thứ tư, vì vậy bằng cách áp dụng chiều đảo ngược của mạch đã dùng để tính <span class="math inline">f</span>, chúng ta đi đến trạng thái <span class="math inline">(x, 0, 0, y \oplus f(x))</span>. Thông thường, chúng ta bỏ qua các số 0 ancilla khỏi phần mô tả quá trình tính giá trị hàm, và chỉ viết tác động của mạch là</p>
+<p><span class="math display">
+(x, y) \rightarrow (x, y \oplus f(x)). \tag{3.8}
+</span></p>
+<p>Nhìn chung chúng ta gọi mạch đã sửa đổi này tính <span class="math inline">f</span> là mạch khả nghịch tính <span class="math inline">f</span> (the reversible circuit computing <span class="math inline">f</span>), mặc dù về nguyên tắc có nhiều mạch khả nghịch khác có thể được sử dụng để tính <span class="math inline">f</span>.</p>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,0 +1,17 @@
+---
+title: "Future"
+chapter: "Outroduction"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# Future directions
+
+Một thứ mà ma trận mật độ có thể hơn vector ketpsi đó là nó thể thêm nhiễu vào trong phương trình tiến hóa của mình.
+
+Nghiên cứu thêm Phương trình chủ Lindblad (Lindblad Master Equation). Phương trình này chứa các toán tử nhảy để mô phỏng chính xác sự tương tác rò rỉ thông tin ra môi trường bên ngoài.

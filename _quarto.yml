@@ -52,6 +52,7 @@ website:
       - section : "Appendix"
         contents:
           - note/outro/glossary.qmd
+          - note/outro/future.qmd
     
 
 format:
