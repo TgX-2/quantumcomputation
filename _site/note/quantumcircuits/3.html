@@ -780,7 +780,17 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <div class="callout-body-container callout-body">
 <p>Chỉ sử dụng các cổng <span class="math inline">\text{CNOT}</span> và Toffoli, hãy xây dựng một mạch lượng tử thực hiện phép biến đổi đại diện bởi ma trận <span class="math inline">8 \times 8</span> ở phương trình (4.31):</p>
 <p><span class="math display">
-\begin{bmatrix} &gt; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\ &gt; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ &gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &gt; \end{bmatrix} \tag{4.31}</span></p>
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix} \tag{4.31}
+</span></p>
 <p>Loại phép toán hoán vị vòng quanh một phần (partial cyclic permutation operation) này sẽ rất hữu ích sau này trong Chương 7.</p>
 </div>
 </div>
@@ -863,8 +873,9 @@ C Y_1 C = Y_1 X_2 \tag{4.33}
 <p><span class="math display">
 C Z_1 C = Z_1 \tag{4.34}
 </span></p>
-<p>$$ C X_2 C = X_2 </p>
-<p>$$</p>
+<p><span class="math display">
+C X_2 C = X_2 \tag{4.35}
+</span></p>
 <p><span class="math display">
 C Y_2 C = Z_1 Y_2 \tag{4.36}
 </span></p>

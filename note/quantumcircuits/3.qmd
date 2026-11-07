@@ -293,7 +293,17 @@ Chứng minh rằng mạch trong hình bên dưới (với các cổng quay $R_y
 Chỉ sử dụng các cổng $\text{CNOT}$ và Toffoli, hãy xây dựng một mạch lượng tử thực hiện phép biến đổi đại diện bởi ma trận $8 \times 8$ ở phương trình (4.31):   
 
 $$
-\begin{bmatrix} > 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ > 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ > 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ > 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ > 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ > 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ > 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ > 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 > \end{bmatrix} \tag{4.31}$$   
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix} \tag{4.31}
+$$   
 
 Loại phép toán hoán vị vòng quanh một phần (partial cyclic permutation operation) này sẽ rất hữu ích sau này trong Chương 7.
 :::
@@ -347,12 +357,11 @@ $$
 
 $$
 C X_2 C = X_2 \tag{4.35}
-
 $$   
 
 $$
 C Y_2 C = Z_1 Y_2 \tag{4.36}
-$$ 
+$$
 
 $$
 C Z_2 C = Z_1 Z_2 \tag{4.37}
