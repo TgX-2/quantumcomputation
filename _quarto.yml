@@ -52,7 +52,6 @@ website:
 
       - section : "Quantum Computation"
         contents:
-          - note/quantumcircuits/index.qmd
           - note/quantumcircuits/1.qmd
           - note/quantumcircuits/2.qmd
           - note/quantumcircuits/3.qmd
