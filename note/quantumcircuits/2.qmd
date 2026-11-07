@@ -379,7 +379,7 @@ Mọi chuyển động trên mặt cầu Bloch, dù có phức tạp đến đâ
 
 Không nhất thiết phải là Z-Y-Z, mà còn có thể là X-Y-X, hoặc thậm chí là hai trục $\hat n$ và $\hat m$ tùy ý (miễn chúng không song song).
 
-:::{.posulates}
+:::{.postulates}
 # Định lý 4.1: Phân rã Z - Y cho môt qubit
 
 Giả sử U là một phép toán Unita trên một qubit đơn lẻ. Khi đó tồn tại các số thức $\alpha$, $\beta$, $\gamma$, $\delta$ sao cho:
@@ -407,22 +407,64 @@ Giải thích tại sao bất kỳ toán tử unita một qubit nào cũng có t
 
 ---
 
-Một toán tử unitary $U \in U(2)$ tác động lên một qubit có 4 bậc tự do thực. Dạng tổng quát nhất của một ma trận unitary 2x2 có thể được viết là:
+Ta có:
 
 $$
-U = e^{i\alpha} \begin{bmatrix} a & b \\ -b^* & a^* \end{bmatrix}
+R_y(\gamma) = \begin{bmatrix} \cos \frac \gamma 2 & -\sin\frac\theta 2 \\ \sin\frac\theta 2 & \cos\frac\theta 2 \end{bmatrix}
 $$
 
-với điều kiện chuẩn hóa $|a|^2 + |b|^2 = 1$.
+$$
+R_z(\beta) = \begin{bmatrix} e^{-i\beta/2} & 0 \\ 0 & e^{i\beta/2} \end{bmatrix} \\ 
+R_z(\delta) = \begin{bmatrix} e^{-i\delta/2} & 0 \\ 0 & e^{i\delta/2} \end{bmatrix}
+$$
 
----
+Nhân lại với nhau thôi:
 
+$$
+R_z(\beta)R_y(\gamma)R_z(\delta) = \begin{bmatrix} e^{-i\beta/2} & 0 \\ 0 & e^{i\beta/2} \end{bmatrix} \begin{bmatrix} \cos \frac \gamma 2 & -\sin\frac\theta 2 \\ \sin\frac\theta 2 & \cos\frac\theta 2 \end{bmatrix} \begin{bmatrix} e^{-i\delta/2} & 0 \\ 0 & e^{i\delta/2} \end{bmatrix}
+$$
+
+Là ra được (4.12).
 
 :::
 
 :::{.callout-note collapse="true"}
 # Bài tập 4.10: (X-Y decomposition of rotations) 
 Hãy đưa ra một cách phân rã tương tự như Định lý 4.1 nhưng sử dụng $R_x$ thay vì $R_z$.   
+
+---
+
+Dùng nguyên lý của cổng Hadamard. 
+
+Cổng Hadamard biến trục Z thành trục X. Hệ quả đại số của việc này là:
+
+* $H \cdot R_z(\theta) \cdot H = R_x(\theta)$.
+* $H \cdot R_y(\theta) \cdot H = R_y(-\theta)$.
+* $H \cdot H = I$.
+
+Giả sử có một phép biến đổi V nào đó, áp dụng định lý chuẩn là Y-Z-Y cho biến đổi này.
+
+$$
+V = e^{i\alpha'} R_z(\beta)R_y(\gamma)R_z(\delta)
+$$
+
+Bây giờ thêm hai cổng Hadamard ở hai đầu để thành một biển đổi mới: $U = H \cdot V \cdot H$
+
+$$
+U = H [e^{i\alpha'} R_z(\beta)R_y(\gamma)R_z(\delta)] H
+$$
+
+Chèn lén $H \cdot H$ vào giữa các phép quay ở vế phải (vì $H \cdot H$ vô hại như nhân với 1):
+
+$$
+U = e^{i\alpha'} \left(H \cdot R_z(\beta) \cdot H\right) \left(H \cdot R_y(\gamma) \cdot H\right) \left(H \cdot R_z(\delta) \cdot H\right)
+$$
+
+Áp dụng tính chất như ban đầu đã nói, ta lập tức thu được cách phân rã mới:
+
+$$
+U = e^{i\alpha'}R_x(\beta)R_y(-\gamma)R_x(\delta)
+$$
 :::
 
 :::{.callout-note collapse="true"}
@@ -434,12 +476,106 @@ U = e^{i\alpha}R_{\hat{n}}(\beta)R_{\hat{m}}(\gamma)R_{\hat{n}}(\delta), \tag{4.
 $$   
 
 với các lựa chọn phù hợp cho $\alpha, \beta, \gamma$ và $\delta$.
+
+---
+
+Thật ra thì quay theo yzy hay xyx gì cũng có thể bao phủ toàn quả cầu thôi, trừ khi chọn hai trục song song nhau thì nó mới bị sập về 2D.
+
+Vậy nên nó chẳng khác gì yzy cả, chỉ là yzy thì được người ta đặt tên.
+:::
+
+:::{.postulates}
+# Hệ quả 4.2
+Giả sử $U$ là một cổng unita trên một qubit đơn lẻ. Khi đó tồn tại các toán tử unita $A, B, C$ trên một qubit đơn lẻ sao cho $ABC = I$ và $U = e^{i\alpha} AXBXC$, trong đó $\alpha$ là một hệ số pha toàn cục nào đó.
+:::
+
+:::{.callout-important}
+# Chứng minh
+Trong ký hiệu của Định lý 4.1, đặt $A \equiv R_z(\beta)R_y(\gamma/2)$, $B \equiv R_y(-\gamma/2)R_z(-(\delta+\beta)/2)$ và $C \equiv R_z((\delta-\beta)/2)$. Lưu ý rằng
+$$
+ABC = R_z(\beta)R_y\left(\frac{\gamma}{2}\right) R_y\left(-\frac{\gamma}{2}\right) R_z\left(-\frac{\delta+\beta}{2}\right) R_z\left(\frac{\delta-\beta}{2}\right) = I. \tag{4.14}
+$$
+
+Vì $X^2 = I$, và sử dụng Bài tập 4.7, ta thấy rằng
+$$
+XBX = XR_y\left(-\frac{\gamma}{2}\right)XXR_z\left(-\frac{\delta+\beta}{2}\right)X = R_y\left(\frac{\gamma}{2}\right)R_z\left(\frac{\delta+\beta}{2}\right). \tag{4.15}
+$$
+
+Do đó
+$$
+AXBXC = R_z(\beta)R_y\left(\frac{\gamma}{2}\right) R_y\left(\frac{\gamma}{2}\right) R_z\left(\frac{\delta+\beta}{2}\right) R_z\left(\frac{\delta-\beta}{2}\right) \tag{4.16}
+$$   
+
+$$
+= R_z(\beta)R_y(\gamma)R_z(\delta). \tag{4.17}
+$$
+
+Vậy $U = e^{i\alpha}AXBXC$ và $ABC = I$, như yêu cầu. $\square$ 
 :::
 
 :::{.callout-note collapse="true"}
+# Bài tập 4.12: 
+Đưa ra $A, B, C$, và $\alpha$ cho cổng Hadamard.
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.13: (Các đồng nhất thức mạch - Circuit identities) 
+Rất hữu ích khi có thể đơn giản hóa các mạch bằng cách quan sát, sử dụng các đồng nhất thức phổ biến. Chứng minh ba đồng nhất thức sau:
+$$
+HXH = Z; \quad HYH = -Y; \quad HZH = X. \tag{4.18}
+$$
 
 :::
 
 :::{.callout-note collapse="true"}
+# Bài tập 4.14: 
+Sử dụng bài tập trước để chứng minh rằng $HTH = R_x(\pi/4)$, bỏ qua một pha toàn cục.
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.15: (Kết hợp các phép toán một qubit - Composition of single qubit operations) 
+Biểu diễn Bloch cung cấp một cách tuyệt vời để hình dung tác động của việc kết hợp hai phép quay.
+
+(1) Chứng minh rằng nếu một phép quay một góc $\beta_1$ quanh trục $\hat{n}_1$ được theo sau bởi một phép quay một góc $\beta_2$ quanh trục $\hat{n}_2$, thì phép quay tổng hợp là một góc $\beta_{12}$ quanh trục $\hat{n}_{12}$ được cho bởi
+$$
+c_{12} = c_1c_2 - s_1s_2 \hat{n}_1 \cdot \hat{n}_2 \tag{4.19}
+$$   
+
+$$
+s_{12}\hat{n}_{12} = s_1c_2\hat{n}_1 + c_1s_2\hat{n}_2 - s_1s_2 \hat{n}_2 \times \hat{n}_1, \tag{4.20}
+$$
+
+trong đó $c_i = \cos(\beta_i/2)$, $s_i = \sin(\beta_i/2)$, $c_{12} = \cos(\beta_{12}/2)$, và $s_{12} = \sin(\beta_{12}/2)$.
+
+(2) Chứng minh rằng nếu $\beta_1 = \beta_2$ và $\hat{n}_1 = \hat{z}$ thì các phương trình này đơn giản hóa thành
+$$
+c_{12} = c^2 - s^2 \hat{z} \cdot \hat{n}_2 \tag{4.21}
+$$   
+
+$$
+s_{12}\hat{n}_{12} = sc(\hat{z} + \hat{n}_2) - s^2 \hat{n}_2 \times \hat{z}, \tag{4.22}
+$$
+
+trong đó $c = c_1$ và $s = s_1$
+:::
+
+Các ký hiệu cho các cổng một qubit phổ biến được thể hiện trong Hình 4.2. Nhắc lại các thuộc tính cơ bản của mạch lượng tử: thời gian trôi từ trái sang phải; các đường dây (wires) biểu diễn qubit, và dấu '/' có thể được sử dụng để chỉ một chùm qubit.
+
+![](../../img/4.2.png)
+
+:::{.callout}
+# tl;dr
+
+# Sức mạnh của Hệ quả 4.2
+
+Giả sử muốn thiết kế một cổng Controlled-U bất kỳ (controlled-u tức là nếu thanh điều khiển là 1 thì áp dụng cổng u lên thanh mục tiêu, nếu thanh điều khiển là 0 thì không làm gì cả). Thật là bất tiện khi phải chế tạo từng controlled-u riêng cho từng loại U khác nhau.
+
+Vì vậy chúng ta chỉ cần tìm cổng A, B, C và alpha tương ứng, sao cho ABC = I.
+
+# Phép chuyển đổi cơ sở
+
+Đồng nhất thức $HXH = Z$ và $HZH = X$ khá là mạnh. Việc kẹp như vậy có thể làm cho từ cơ sở tính toán ban đầu là $\vert 0 \rangle, \vert 1 \rangle$ thành $\vert + \rangle, \vert - \rangle$, ... 
+
+Khi kẹp cổng Pauli-Z vào giữa hai cổng Hadamard, nó sẽ hoạt động y hệt cổng Pauli-X trên cơ sở mới.
 
 :::
