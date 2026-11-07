@@ -1,0 +1,445 @@
+---
+title: "Single qubit operations"
+chapter: "Quantum Circuits"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Việc phát triển hộp công cụ tính toán lượng tử của chúng ta bắt đầu bằng các phép toán trên hệ lượng tử đơn giản nhất trong tất cả — một qubit đơn lẻ. Các cổng một qubit đã được giới thiệu trong Mục 1.3.1. Hãy cùng tóm tắt nhanh những gì chúng ta đã học ở đó; bạn có thể thấy hữu ích khi tham khảo các ghi chú về ký hiệu ở trang xxiii khi chúng ta tiến hành.Một qubit đơn lẻ là một vector $\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle$ được tham số hóa bởi hai số phức thỏa mãn $\vert{}a\vert{}^2 + \vert{}b\vert{}^2 = 1$. Các phép toán trên một qubit phải bảo toàn chuẩn (norm) này, và do đó được mô tả bởi các ma trận unita $2 \times 2$. Trong số này, một số ma trận quan trọng nhất là các ma trận Pauli; thật hữu ích khi liệt kê lại chúng ở đây:
+
+$$
+X = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}; \quad Y = \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix}; \quad Z = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}. \tag{4.1}
+$$
+
+Ba cổng lượng tử khác sẽ đóng một phần lớn trong những phần tiếp theo, cổng Hadamard (ký hiệu là $H$), cổng pha (ký hiệu là $S$), và cổng $\pi/8$ (ký hiệu là $T$):
+
+$$
+H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}; \quad S = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix}; \quad T = \begin{bmatrix} 1 & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix}. \tag{4.2}
+$$
+
+Một vài sự kiện đại số hữu ích cần ghi nhớ là $H = (X + Z)/\sqrt{2}$ và $S = T^2$. Bạn có thể tự hỏi tại sao cổng $T$ lại được gọi là cổng $\pi/8$ trong khi $\pi/4$ mới là giá trị xuất hiện trong định nghĩa. Lý do là về mặt lịch sử, cổng này thường được gọi là cổng $\pi/8$, đơn giản bởi vì khi bỏ qua một pha toàn cục (global phase) không quan trọng, $T$ tương đương với một cổng có $\exp(\pm i\pi/8)$ xuất hiện trên các đường chéo của nó.
+
+$$
+T' = \exp(i\pi/8) \begin{bmatrix} \exp(-i\pi/8) & 0 \\ 0 & \exp(i\pi/8) \end{bmatrix}. \tag{4.3}
+$$
+
+Mặc dù vậy, cách đặt tên theo một số khía cạnh là khá đáng tiếc, và chúng ta thường gọi cổng này là cổng $T$.Cũng cần nhắc lại rằng một qubit đơn lẻ ở trạng thái $a\vert{}0\rangle + b\vert{}1\rangle$ có thể được hình dung như một điểm $(\theta, \varphi)$ trên mặt cầu đơn vị, trong đó $a = \cos(\theta/2)$, $b = e^{i\varphi} \sin(\theta/2)$, và $a$ có thể được coi là số thực vì pha toàn cục của trạng thái là không thể quan sát được. Đây được gọi là biểu diễn mặt cầu Bloch, và vector $(\cos\varphi\sin\theta, \sin\varphi\sin\theta, \cos\theta)$ được gọi là vector Bloch. Chúng ta sẽ thường xuyên quay lại hình ảnh này như một sự hỗ trợ cho trực giác.
+
+:::{.callout-note}
+# Bài tập 4.1: 
+Trong Bài tập 2.11, bài mà bạn nên làm ngay bây giờ nếu bạn chưa làm, bạn đã tính toán các vector riêng của các ma trận Pauli. Hãy tìm các điểm trên mặt cầu Bloch tương ứng với các vector riêng được chuẩn hóa của các ma trận Pauli khác nhau.
+
+---
+
+Ta có công thức:
+
+$$
+\vert \psi \rangle = \cos \left(\frac \theta 2 \right) \vert 0 \rangle + e^{i\phi}\sin \left(\frac \theta 2\right) \vert 1 \rangle
+$$
+
+tọa độ điểm trên quả cầu Bloch:
+
+$$
+r = (x, y, z) = (\sin\theta\cos\phi, \sin\theta\sin\phi, \cos\theta)
+$$
+
+Ở bài trước tính được các eigenvalue và eigenvector bằng các biểu diễn ngoài sau:
+
+$$
+X = \vert + \rangle \langle + \vert - \vert - \rangle \langle - \vert  \\ 
+Y = -i \vert 0 \rangle \langle 1 \vert + i \vert 1 \rangle \langle 0 \vert \\ 
+Z = \vert 0 \rangle \langle 0 \vert - \vert 1 \rangle \langle 1 \vert 
+$$
+
+# 1. Pauli-X 
+
+* Eigenvector ứng với eigenvalue = 1 là: $\vert + \rangle = \frac 1 {\sqrt 2} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \frac 1 {\sqrt 2} \vert 0 \rangle + \frac 1 {\sqrt 2} \vert 1 \rangle$.
+    * Ta có: $\cos\left(\frac \theta 2\right) = \frac 1 {\sqrt 2} \Leftrightarrow \theta = \frac \pi 2$.
+    * $e^{i\phi}\sin\left(\frac \theta 2\right) = \frac 1 {\sqrt 2} \Leftrightarrow e^{i\phi}\frac {\sqrt 2} 2 = \frac 1 {\sqrt 2} \Leftrightarrow e^{i\phi} = 1 \Leftrightarrow \phi = 0$
+
+
+  Với $\theta = \frac \pi 2$ và $\phi = 0$, thì tương ứng với $r = (1, 0, 0)$ trên quả cầu.
+
+* Eigenvector úng với eigenvalue = -1 là: $\vert - \rangle = \frac 1 {\sqrt 2} \begin{bmatrix} 1 \\ -1 \end{bmatrix} = \frac 1 {\sqrt 2} \vert 0 \rangle - \frac 1 {\sqrt 2} \vert 1 \rangle$.
+    * Ta có: $\cos\left(\frac \theta 2\right) = \frac 1 {\sqrt 2} \Leftrightarrow \theta = \frac \pi 2$.
+    * $e^{i\phi}\sin\left(\frac \theta 2\right) = -\frac 1 {\sqrt 2} \Leftrightarrow e^{i\phi}\frac {\sqrt 2} 2 = -\frac 1 {\sqrt 2} \Leftrightarrow e^{i\phi} = -1 \Leftrightarrow \phi = \pi$
+
+  Với $\theta = \frac \pi 2$ và $\phi = \pi$, thì tương ứng với $r = (-1, 0, 0)$ trên quả cầu.
+
+# 2, 3. Làm tương tự vậy đi, lười gõ quá :")
+:::
+
+
+Các ma trận Pauli tạo ra ba lớp ma trận unita hữu ích khi chúng được lũy thừa hóa, các toán tử quay (rotation operators) quanh các trục $\hat{x}$, $\hat{y}$, và $\hat{z}$, được định nghĩa bởi các phương trình:
+
+$$
+R_x(\theta) \equiv e^{-i\theta X/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}X = \begin{bmatrix} \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \tag{4.4}
+$$
+
+$$
+R_y(\theta) \equiv e^{-i\theta Y/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}Y = \begin{bmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \tag{4.5}
+$$
+
+$$
+R_z(\theta) \equiv e^{-i\theta Z/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}Z = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix}. \tag{4.6}
+$$
+
+:::{.callout-note}
+# Bài tập 4.2: 
+Chứng minh $\exp(iAx) = \cos(x)I + i\sin(x)A$ với $A^2 = I$
+
+---
+
+Khai triển Taylor $exp(iAx)$, ta được:
+
+$$
+e^{iAx} = \sum_{n = 0}^{\infty} \frac {(iAx)^{n}} {n!}
+$$
+
+tách bậc chẵn với bậc lẻ ra:
+
+$$
+e^{iAx} = 
+\sum_{k = 0}^{\infty} \frac {(iAx)^{2k}} {(2k)!}
++ \sum_{k = 0}^{\infty} \frac {(iAx)^{2k + 1}} {(2k + 1)!}
+$$
+
+Ta có:
+
+* $A^{2k} = I$ (ví $A^2 = I$).
+* $A^{2k + 1} = A$.
+* $i^{2k} = (-1)^k$.
+* $i^{2k + 1} = (-1)^k i$.
+
+$$
+e^{iAx} = 
+\sum_{k = 0}^{\infty} \frac {(-1)^k \cdot x^{2k}} {(2k)!} I
++ \sum_{k = 0}^{\infty} \frac {(-1)^k \cdot x^{2k + 1}} {(2k + 1)!}iA
+$$
+
+Dễ thấy khai triển taylor của sinx và cosx. Vậy cuối cùng ta được:
+
+$$
+e^{iAx} = \cos(x)I + i\sin(x)A
+$$
+
+:::
+
+:::{.callout-note}
+# Bài tập 4.3
+Chứng minh cổng $\pi/8$ thỏa mãn $T = R_z(\pi/4)$ bỏ qua pha toàn cục.
+
+---
+
+Ma trận $T$ là:
+
+$$
+T = \begin{bmatrix} 1 & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix}
+$$
+
+Với $\theta = \pi/4$ toán tử quay $R_z$ sẽ có dạng:
+
+$$
+R_z(\pi/4) = \begin{bmatrix} \exp(-i\pi/8) & 0 \\ 0 & \exp(i\pi/8) \end{bmatrix}
+$$
+
+Đưa $\exp(-i\pi/8)$ ra ngoài.
+
+$$
+R_z(\pi/4) = \exp(-i\pi/8)\begin{bmatrix} 1 & 0 \\ 0 & \exp(i\pi/8) \cdot \exp(i\pi/8) \end{bmatrix} = \exp(-i\pi/8) T 
+$$
+
+Nhân cả hai vế với $\exp(i\pi/8)$, ta được:
+
+$$
+T = \exp(i\pi/8)R_z(\pi/4)
+$$
+:::
+
+:::{.callout-note}
+# Bài tập 4.4
+Biểu diễn cổng Hadamard $H$ qua tích của $R_x, R_z$ và $e^{i\varphi}$
+
+---
+
+Bằng một cách thần kỳ nào đó, chúng ta biết được cổng Hadamard sẽ quay quay trục z pi/2, quay quanh trục x pi/2, rồi lại quay quanh trục z pi/2. Ta có:
+
+$$
+R_z(\pi/2) = \begin{bmatrix} \exp(-i\pi/4) & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix}; \\
+R_x(\pi/2) = \begin{bmatrix} \cos(\pi/4) & -i\sin(\pi/4) \\ -i\sin(\pi/4) & \cos(\pi/4) \end{bmatrix} = 
+\frac 1 {\sqrt 2} \begin{bmatrix} 1& -i \\ -i & 1 \end{bmatrix}
+$$
+
+Nhân $R_zR_xR_z$ theo thứ tự từ phải sang trái, ta được:
+
+$$
+R_zR_xR_z = \begin{bmatrix} \exp(-i\pi/4) & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix} 
+\frac 1 {\sqrt 2} \begin{bmatrix} 1& -i \\ -i & 1 \end{bmatrix}
+ \begin{bmatrix} \exp(-i\pi/4) & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix} 
+$$
+
+$$
+= \begin{bmatrix} \exp(-i\pi/4) & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix} 
+\frac 1 {\sqrt 2} \begin{bmatrix} \exp(-i\pi/4) & -i\exp(i\pi/4) \\ -i\exp(-i\pi/4) & \exp(i\pi/4) \end{bmatrix}
+$$
+
+$$
+= \frac 1 {\sqrt 2} \begin{bmatrix} \exp(-i\pi/2) & -i \\ -i & \exp(i\pi/2) \end{bmatrix}
+$$
+
+Mà theo công thức Euler, ta có $\exp(i\pi/2) \approx i$ và $\exp(-i\pi/2) \approx -i$, ta được:
+
+$$
+= \frac 1 {\sqrt 2} \begin{bmatrix} -i & -i \\ -i & i \end{bmatrix}
+$$
+
+$$
+= -i \cdot H
+$$
+
+Nhân cả hai vế với $\exp(i\pi/2)$, ta được:
+
+$$
+H = e^{i\pi/2} R_z(\pi/2) R_x(\pi/2) R_z(\pi/2)
+$$
+
+:::
+
+
+Nếu $\hat{n} = (n_x, n_y, n_z)$ là một vector đơn vị thực trong không gian ba chiều thì chúng ta tổng quát hóa các định nghĩa trước đó bằng cách định nghĩa một phép quay một góc $\theta$ quanh trục $\hat{n}$ bởi phương trình
+
+$$
+R_{\hat{n}}(\theta) \equiv \exp(-i\theta \hat{n} \cdot \vec{\sigma} / 2) = \cos\left(\frac{\theta}{2}\right) I - i \sin\left(\frac{\theta}{2}\right) (n_x X + n_y Y + n_z Z), \tag{4.8}
+$$   
+
+trong đó $\vec{\sigma}$ biểu diễn vector ba thành phần $(X, Y, Z)$ gồm các ma trận Pauli.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.5: 
+Chứng minh rằng $(\hat{n} \cdot \vec{\sigma})^2 = I$, và sử dụng điều này để kiểm chứng Phương trình (4.8).  
+
+---
+
+Cho $\hat n = (n_x, n_y, n_z)$ là vector đơn vị, vậy nên: $n_x^2 + n_y^2 + n_z^2 = 1$.
+
+Ma trận tổng hợp:
+
+$$
+N = \hat n \cdot \sigma = n_xX + n_yY + n_zZ
+$$
+
+Bình phương ma trận, nhân phân phối đa thức:
+
+$$
+N^2 = n_x^2 X^2 + n_y^2 Y^2 + n_z^2 Z^2 + n_xn_y(XY + YX) + n_xn_z(XZ + ZX) + n_yn_z(YZ + ZY)
+$$
+
+Mà ta biết được:
+
+* Bình phương X, Y, Z bằng ma trận đơn vị: $X^2 = Y^2 = Z^2 = I$.
+* Chúng anti-commutator với nhau: $XY + YX = XZ + ZX = YZ + ZY = 0$
+
+Cuối cùng:
+
+$$
+N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
+$$
+
+--- 
+
+Kiểm chứng thì giống bài tập ở trên, chỉ có điều bài ở trên thì cho sẵn bình phương A = I, thì ở đây ta có chứng minh được bình phương N bằng I.
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.6: (Diễn giải mặt cầu Bloch của các phép quay) 
+Một lý do tại sao các toán tử $R_{\hat{n}}(\theta)$ được gọi là các toán tử quay là sự thật sau đây, điều mà bạn phải chứng minh. 
+
+Giả sử một qubit đơn lẻ có một trạng thái được biểu diễn bởi vector Bloch $\vec{\lambda}$. Khi đó tác động của phép quay $R_{\hat{n}}(\theta)$ lên trạng thái là quay nó một góc $\theta$ quanh trục $\hat{n}$ của mặt cầu Bloch. Sự thật này giải thích cho hệ số hai trông khá bí ẩn trong định nghĩa của các ma trận quay. 
+
+---
+
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.7:
+Chứng minh rằng $XYX = -Y$ và sử dụng điều này để chứng minh rằng $XR_y(\theta)X = R_y(-\theta)$.
+
+---
+
+# Chứng minh $XYX = -Y$
+
+Từ tính chất chống giao hoán, ta có $XY = -YX$.
+
+$$
+(XY)X = (-YX)X \Leftrightarrow XYX = -YX^2 \Leftrightarrow XYX = -YI
+$$
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.8: 
+Một toán tử unita một qubit tùy ý có thể được viết dưới dạng
+
+$$
+U = \exp(i\alpha)R_{\hat{n}}(\theta) \tag{4.9}
+$$   
+
+với một số thực $\alpha$ và $\theta$ nào đó, và một vector đơn vị thực ba chiều $\hat{n}$.   
+
+(1) Chứng minh sự thật này.   
+(2) Tìm các giá trị cho $\alpha, \theta$, và $\hat{n}$ tạo ra cổng Hadamard $H$.   
+(3) Tìm các giá trị cho $\alpha, \theta$, và $\hat{n}$ tạo ra cổng phase 
+
+$$
+S = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix}. \tag{4.10}
+$$ 
+
+---
+
+# 1. Chưa học đại số Lie
+
+skip
+
+# 2. Cổng Hadamard
+
+$$
+H = \frac 1 {\sqrt 2} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} = \frac 1 {\sqrt 2} X + \frac 1 {\sqrt 2} Z
+$$
+
+Đồng nhất hệ số với U:
+
+$$
+e^{i\alpha} \cos \left(\frac \theta 2 \right)I - i e^{i\alpha} \sin\left(\frac\theta 2\right)(n_xX + n_yY + n_zZ) \\ 
+= \frac 1 {\sqrt 2} X + \frac 1 {\sqrt 2} Z
+$$
+
+Rõ ràng ta thấy bên RHS không tồn tại I, vậy có thể nói:
+
+$$
+\cos \left(\frac \theta 2 \right) = 0 \Leftrightarrow \theta = \pi
+$$
+
+Thay $\theta = \pi$ vào ta được:
+
+$$
+-i e^{i\alpha} (n_xX + n_yY + n_zZ) = \frac 1 {\sqrt 2} X + \frac 1 {\sqrt 2} Z
+$$
+ 
+Chọn $\alpha = \pi/2$ để $-ie^{i\alpha} = -i (i) = 1$, khi đó:
+
+$$
+n_xX + n_yY + n_zZ = \frac 1 {\sqrt 2} X + \frac 1 {\sqrt 2} Z
+$$
+
+Kết luận: 
+
+* $\theta = \pi$.
+* $\alpha = \pi/2$.
+* $\hat n = (\frac 1 {\sqrt 2}, 0, \frac 1 {\sqrt 2})$.
+
+# 3. Cổng Phase
+
+$$
+S = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix}
+$$
+
+Rõ ràng là không thấy $e^{i\alpha}$ đâu, vì vậy ta phải tách ra để thấy:
+
+$$
+S = e^{i\pi/4} \begin{bmatrix} e^{-i\pi/4} & 0 \\ 0 & e^{i\pi/4} \end{bmatrix}
+$$
+
+Mà ma trận bên trong ngoặc vuông chính là $R_z$ với $\theta = \pi/2$. Do đó:
+
+$$
+S = e^{i\pi/4} R_z(\pi/2)
+$$
+
+Kết luận:
+
+* $\alpha = \pi/4$.
+* $\theta = \pi/2$.
+* $\hat n = (0, 0, 1)$.
+:::
+
+## Phân rã Euler
+
+Mọi chuyển động trên mặt cầu Bloch, dù có phức tạp đến đâu, đều cót hể đặt được bằng cách:
+
+(1) Quay quanh trục Z một góc delta.
+(2) Quay quanh trục Y một góc gamma.
+(3) Quay quanh trục Z một góc beta.
+(4) Cộng thêm một pha toàn cục exp(i alpha).
+
+Không nhất thiết phải là Z-Y-Z, mà còn có thể là X-Y-X, hoặc thậm chí là hai trục $\hat n$ và $\hat m$ tùy ý (miễn chúng không song song).
+
+:::{.posulates}
+# Định lý 4.1: Phân rã Z - Y cho môt qubit
+
+Giả sử U là một phép toán Unita trên một qubit đơn lẻ. Khi đó tồn tại các số thức $\alpha$, $\beta$, $\gamma$, $\delta$ sao cho:
+
+$$
+U = e^{i\alpha}R_z(\beta)R_y(\gamma)R_z(\delta). \tag{4.11}
+$$
+:::
+
+:::{.callout-important}
+# Chứng minh
+Vì $U$ là ma trận unita, các hàng và các cột của $U$ trực chuẩn (orthonormal) với nhau, từ đó suy ra tồn tại các số thực $\alpha, \beta, \gamma,$ và $\delta$ sao cho
+
+$$
+U = \begin{bmatrix} e^{i(\alpha-\beta/2-\delta/2)} \cos\frac{\gamma}{2} & -e^{i(\alpha-\beta/2+\delta/2)} \sin\frac{\gamma}{2} \\ e^{i(\alpha+\beta/2-\delta/2)} \sin\frac{\gamma}{2} & e^{i(\alpha+\beta/2+\delta/2)} \cos\frac{\gamma}{2} \end{bmatrix}. \tag{4.12}
+$$
+
+Phương trình (4.11) giờ đây tuân theo ngay lập tức từ định nghĩa của các ma trận quay và phép nhân ma trận. $\square$ 
+:::
+
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.9: 
+Giải thích tại sao bất kỳ toán tử unita một qubit nào cũng có thể được viết dưới dạng (4.12).
+
+---
+
+Một toán tử unitary $U \in U(2)$ tác động lên một qubit có 4 bậc tự do thực. Dạng tổng quát nhất của một ma trận unitary 2x2 có thể được viết là:
+
+$$
+U = e^{i\alpha} \begin{bmatrix} a & b \\ -b^* & a^* \end{bmatrix}
+$$
+
+với điều kiện chuẩn hóa $|a|^2 + |b|^2 = 1$.
+
+---
+
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.10: (X-Y decomposition of rotations) 
+Hãy đưa ra một cách phân rã tương tự như Định lý 4.1 nhưng sử dụng $R_x$ thay vì $R_z$.   
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.11: 
+Giả sử $\hat{m}$ và $\hat{n}$ là các vector đơn vị thực không song song trong không gian ba chiều. Sử dụng Định lý 4.1 để chứng minh rằng một toán tử unita một qubit tùy ý $U$ có thể được viết là   
+
+$$
+U = e^{i\alpha}R_{\hat{n}}(\beta)R_{\hat{m}}(\gamma)R_{\hat{n}}(\delta), \tag{4.13}
+$$   
+
+với các lựa chọn phù hợp cho $\alpha, \beta, \gamma$ và $\delta$.
+:::
+
+:::{.callout-note collapse="true"}
+
+:::
+
+:::{.callout-note collapse="true"}
+
+:::

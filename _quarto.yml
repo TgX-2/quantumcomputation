@@ -48,11 +48,20 @@ website:
           - note/introductiontocomputerscience/index.qmd
           - note/introductiontocomputerscience/1.qmd
           - note/introductiontocomputerscience/2.qmd
+          - note/introductiontocomputerscience/3.qmd
+
+      - section : "Quantum Computation"
+        contents:
+          - note/quantumcircuits/index.qmd
+          - note/quantumcircuits/1.qmd
+          - note/quantumcircuits/2.qmd
+          - note/quantumcircuits/3.qmd
 
       - section : "Appendix"
         contents:
           - note/outro/glossary.qmd
           - note/outro/future.qmd
+
     
 
 format:
