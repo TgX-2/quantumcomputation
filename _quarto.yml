@@ -55,6 +55,8 @@ website:
           - note/quantumcircuits/1.qmd
           - note/quantumcircuits/2.qmd
           - note/quantumcircuits/3.qmd
+          - note/quantumcircuits/4.qmd
+          - note/quantumcircuits/5.qmd
 
       - section : "Appendix"
         contents:

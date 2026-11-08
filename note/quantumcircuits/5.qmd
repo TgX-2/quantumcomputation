@@ -1,0 +1,11 @@
+---
+title: "Universal quantum gates"
+chapter: "Quantum Circuits"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---

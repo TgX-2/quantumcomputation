@@ -1081,5 +1081,38 @@
       "Quantum Computation",
       "Controlled operations"
     ]
+  },
+  {
+    "objectID": "note/quantumcircuits/4.html",
+    "href": "note/quantumcircuits/4.html",
+    "title": "Measurement",
+    "section": "",
+    "text": "Một yếu tố cuối cùng được sử dụng trong các mạch lượng tử, đôi khi gần như ngầm định, là phép đo lường. Trong các mạch của chúng ta, chúng ta sẽ biểu thị một phép đo lường chiếu (projective measurement) trong cơ sở tính toán (Mục 2.2.5) bằng cách sử dụng biểu tượng ‘đồng hồ đo’ (meter), được minh họa trong Hình 4.14. Trong lý thuyết mạch lượng tử, theo quy ước, người ta không sử dụng bất kỳ ký hiệu đặc biệt nào để biểu thị các phép đo lường tổng quát hơn, bởi vì, như đã giải thích trong Chương 2, chúng luôn có thể được biểu diễn bằng các phép biến đổi unita với các qubit ancilla, theo sau là các phép đo lường chiếu.\nCó hai nguyên lý quan trọng về mạch lượng tử mà ta cần ghi nhớ. Cả hai nguyên lý đều khá hiển nhiên; tuy nhiên, chúng có tính ứng dụng cao đến mức đáng để nhấn mạnh từ sớm. Nguyên lý đầu tiên là các phép toán có điều khiển theo kiểu cổ điển (classically conditioned operations) có thể được thay thế bằng các phép toán có điều kiện lượng tử (quantum conditioned operations):\nThường thì, các phép đo lượng tử được thực hiện như một bước trung gian trong một mạch lượng tử, và các kết quả đo lường được sử dụng để điều khiển có điều kiện các cổng lượng tử tiếp theo. Đây là trường hợp, ví dụ, trong mạch viễn tải (teleportation) ở Hình 1.13 trên trang 27. Tuy nhiên, các phép đo lường như vậy luôn luôn có thể được dời xuống cuối mạch. Hình 4.15 minh họa cách điều này có thể được thực hiện bằng cách thay thế tất cả các phép toán có điều kiện cổ điển bằng các phép toán có điều kiện lượng tử tương ứng. (Tất nhiên, một phần diễn giải của mạch này như là thực hiện sự ‘viễn tải’ bị mất đi, bởi vì không có thông tin cổ điển nào được truyền từ Alice đến Bob, nhưng rõ ràng là tác động tổng thể của hai mạch lượng tử là như nhau, đây mới là điểm then chốt.)\nNguyên lý thứ hai thậm chí còn hiển nhiên hơn – và hữu ích một cách đáng ngạc nhiên!\nĐể hiểu tại sao điều này đúng, hãy tưởng tượng bạn có một mạch lượng tử chỉ chứa hai qubit, và chỉ có qubit thứ nhất được đo lường ở cuối mạch. Khi đó các thống kê đo lường quan sát được tại thời điểm này hoàn toàn được xác định bởi ma trận mật độ rút gọn (reduced density matrix) của qubit thứ nhất. Tuy nhiên, nếu một phép đo lường cũng được thực hiện trên qubit thứ hai, thì sẽ rất đáng ngạc nhiên nếu phép đo lường đó có thể thay đổi các thống kê đo lường trên qubit thứ nhất. Bạn sẽ chứng minh điều này trong Bài tập 4.32 bằng cách chỉ ra rằng ma trận mật độ rút gọn của qubit thứ nhất không bị ảnh hưởng bởi việc thực hiện một phép đo lường trên qubit thứ hai.\nKhi bạn xem xét vai trò của các phép đo lường trong các mạch lượng tử, điều quan trọng cần ghi nhớ là trong vai trò như một giao diện giữa thế giới lượng tử và thế giới cổ điển, phép đo lường thường được coi là một phép toán không thể đảo ngược (irreversible), phá hủy thông tin lượng tử và thay thế nó bằng thông tin cổ điển. Tuy nhiên, trong một số trường hợp được thiết kế cẩn thận, điều này không nhất thiết phải đúng, như được minh họa một cách sinh động qua viễn tải và sửa lỗi lượng tử (Chương 10). Điểm chung của viễn tải và sửa lỗi lượng tử là trong cả hai trường hợp, kết quả đo lường đều không tiết lộ bất kỳ thông tin nào về danh tính của trạng thái lượng tử đang được đo lường. Quả thực, chúng ta sẽ thấy ở Chương 10 rằng đây là một đặc điểm tổng quát hơn của phép đo lường – để một phép đo lường có thể đảo ngược, nó phải không tiết lộ thông tin nào về trạng thái lượng tử đang được đo lường!",
+    "crumbs": [
+      "Quantum Computation",
+      "Measurement"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/4.html#mạch-viễn-tải-không-còn-mạnh-nữa",
+    "href": "note/quantumcircuits/4.html#mạch-viễn-tải-không-còn-mạnh-nữa",
+    "title": "Measurement",
+    "section": "Mạch viễn tải không còn mạnh nữa",
+    "text": "Mạch viễn tải không còn mạnh nữa\nÁp dụng nguyên lý đo lường ngầm định vào, ta có thể thay 2 đường dây thông tin cổ điển thành đường dâu lượng tử, và thay các thao tác điều khiển cổ điển bằng các cổng CNOT và CZ lượng tử thuần túy.\nVà? Mạch vẫn đúng về mặt toán học, nhưng nó không còn viễn tải nữa, nó trở thành một mạch tính toán cục bộ khổng lồ, nơi alice và bob phải đưa qubit của họ lại gần nhau để thực hiện cổng CNOT.",
+    "crumbs": [
+      "Quantum Computation",
+      "Measurement"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/4.html#nguyên-lý-đo-lường-ngầm-định",
+    "href": "note/quantumcircuits/4.html#nguyên-lý-đo-lường-ngầm-định",
+    "title": "Measurement",
+    "section": "Nguyên lý Đo lường Ngầm định",
+    "text": "Nguyên lý Đo lường Ngầm định\nKhi bạn bỏ mặc một qubit không đo lường ở cuối mạch, toán học tương ứng với hành động này là tính vết riêng từng phần trên không gian Hilbert của qubit đó để lấy ma trận mật độ rút gọn rho.\nViệc bạn có đo hay không đo qubit thứ hai không làm thay đổi rho của qubit thứ nhất. Đây là biểu hiện toán học của Định lý không truyền tín hiệu (Người quan sát A không thể biết người quan sát B đã đo qubit của mình hay chưa chỉ bằng cách nhìn vào các thống kê đo lường cục bộ của riêng mình).",
+    "crumbs": [
+      "Quantum Computation",
+      "Measurement"
+    ]
   }
 ]
