@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -373,8 +416,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#two-level-unitary-gates-are-universal" id="toc-two-level-unitary-gates-are-universal" class="nav-link active" data-scroll-target="#two-level-unitary-gates-are-universal">1. Two-level unitary gates are universal</a></li>
+  <li><a href="#single-qubit-and-cnot-gates-are-universal" id="toc-single-qubit-and-cnot-gates-are-universal" class="nav-link" data-scroll-target="#single-qubit-and-cnot-gates-are-universal">2. Single qubit and CNOT gates are universal</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -404,8 +454,259 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Một tập hợp nhỏ các cổng (ví dụ: <span class="math inline">\text{AND}, \text{OR}, \text{NOT}</span>) có thể được sử dụng để tính toán một hàm cổ điển tùy ý, như chúng ta đã thấy ở Mục 3.1.2. Chúng ta nói rằng một tập hợp cổng như vậy là vạn năng (universal) đối với tính toán cổ điển. Trên thực tế, vì cổng Toffoli là vạn năng đối với tính toán cổ điển, nên các mạch lượng tử bao hàm (subsume) các mạch cổ điển. Một kết quả vạn năng tương tự cũng đúng đối với tính toán lượng tử, trong đó một tập hợp các cổng được cho là vạn năng đối với tính toán lượng tử nếu bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bởi một mạch lượng tử chỉ bao gồm các cổng đó.</p>
+<p>Bây giờ chúng tôi mô tả ba cấu trúc vạn năng đối với tính toán lượng tử. Các cấu trúc này xây dựng dựa trên nhau, và đạt đến đỉnh điểm ở một chứng minh rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, <span class="math inline">\text{CNOT}</span>, và <span class="math inline">\pi/8</span>. Bạn có thể tự hỏi tại sao cổng phase lại xuất hiện trong danh sách này, vì nó có thể được xây dựng từ hai cổng <span class="math inline">\pi/8</span>; nó được đưa vào vì vai trò tự nhiên của nó trong các cấu trúc chống chịu lỗi (fault-tolerant constructions) được mô tả trong Chương 10.</p>
+<ul>
+<li>Cấu trúc thứ nhất chứng minh rằng một toán tử unita tùy ý có thể được biểu diễn một cách chính xác (exactly) dưới dạng tích của các toán tử unita mà mỗi toán tử chỉ tác động không tầm thường (non-trivially) lên một không gian con (subspace) được nối bởi hai trạng thái cơ sở tính toán.</li>
+<li>Cấu trúc thứ hai kết hợp cấu trúc thứ nhất với các kết quả của phần trước để chứng minh rằng một toán tử unita tùy ý có thể được biểu diễn một cách chính xác bằng cách sử dụng cổng một qubit và cổng <span class="math inline">\text{CNOT}</span>.</li>
+<li>Cấu trúc thứ ba kết hợp cấu trúc thứ hai với một chứng minh rằng phép toán một qubit có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, và <span class="math inline">\pi/8</span>. Đến lượt nó, điều này ngụ ý rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, <span class="math inline">\text{CNOT}</span>, và <span class="math inline">\pi/8</span>.</li>
+</ul>
+<p>Các cấu trúc của chúng tôi nói rất ít về tính hiệu quả (efficiency) — bao nhiêu cổng (nhiều theo đa thức hay hàm mũ) phải được kết hợp để tạo ra một phép biến đổi unita cho trước. Trong Mục 4.5.4, chúng tôi chứng minh rằng tồn tại các phép biến đổi unita đòi hỏi một số lượng cổng nhiều theo hàm mũ để xấp xỉ. Tất nhiên, mục tiêu của tính toán lượng tử là tìm ra các họ phép biến đổi unita thú vị có thể được thực hiện một cách hiệu quả.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.36:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Xây dựng một mạch lượng tử để cộng hai số hai bit <span class="math inline">x</span> và <span class="math inline">y</span> theo modulo 4. Tức là, mạch phải thực hiện phép biến đổi <span class="math inline">\vert{}x, y\rangle \rightarrow \vert{}x, x + y \pmod 4\rangle</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>roadmap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kế hoạch 3 bước để chứng minh rằng có thể chế tạo một máy tính lượng tử vạn năng chỉ bằng 4 loại cổng logic H, S, CNOT, T.</p>
+<section id="bước-1.-chia-để-trị" class="level2">
+<h2 class="anchored" data-anchor-id="bước-1.-chia-để-trị">Bước 1. Chia để trị</h2>
+<p>Từ một ma trận lớn, tách ra thành tích các ma trận nhỏ hơn.</p>
+</section>
+<section id="bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot" class="level2">
+<h2 class="anchored" data-anchor-id="bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot">Bước 2. Rút gọn về Cổng 1-qubit và CNOT</h2>
+</section>
+<section id="bước-3.-xấp-xỉ-rời-rạc" class="level2">
+<h2 class="anchored" data-anchor-id="bước-3.-xấp-xỉ-rời-rạc">Bước 3. Xấp xỉ rời rạc</h2>
+</section>
+</div>
+</div>
+<section id="two-level-unitary-gates-are-universal" class="level1">
+<h1>1. Two-level unitary gates are universal</h1>
+<p>Xem xét một ma trận unita <span class="math inline">U</span> tác động lên một không gian Hilbert <span class="math inline">d</span> chiều. Trong phần này, chúng tôi giải thích cách <span class="math inline">U</span> có thể được phân rã thành một tích của các ma trận unita hai mức (two-level unitary matrices); tức là, các ma trận unita chỉ tác động không tầm thường (non-trivially) lên hai hoặc ít hơn các thành phần vector. Ý tưởng cốt lõi đằng sau sự phân rã này có thể được hiểu bằng cách xem xét trường hợp khi <span class="math inline">U</span> là ma trận <span class="math inline">3 \times 3</span>, vì vậy giả sử rằng <span class="math inline">U</span> có dạng</p>
+<p><span class="math display">
+U = \begin{bmatrix} a &amp; d &amp; g \\ b &amp; e &amp; h \\ c &amp; f &amp; j \end{bmatrix}. \tag{4.41}
+</span></p>
+<p>Chúng ta sẽ tìm các ma trận unita hai mức <span class="math inline">U_1, \dots, U_3</span> sao cho</p>
+<p><span class="math display">
+U_3 U_2 U_1 U = I. \tag{4.42}
+</span></p>
+<p>Từ đó suy ra</p>
+<p><span class="math display">
+U = U_1^\dagger U_2^\dagger U_3^\dagger. \tag{4.43}
+</span></p>
+<p><span class="math inline">U_1, U_2</span> và <span class="math inline">U_3</span> đều là các ma trận unita hai mức, và thật dễ dàng để thấy rằng các nghịch đảo của chúng, <span class="math inline">U_1^\dagger, U_2^\dagger</span> và <span class="math inline">U_3^\dagger</span> cũng là các ma trận unita hai mức. Do đó, nếu chúng ta có thể chứng minh được phương trình (4.42), thì chúng ta sẽ chỉ ra được cách chia nhỏ <span class="math inline">U</span> thành một tích của các ma trận unita hai mức.</p>
+<p>Sử dụng quy trình sau để xây dựng <span class="math inline">U_1</span>: nếu <span class="math inline">b = 0</span> thì đặt</p>
+<p><span class="math display">
+U_1 \equiv \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}. \tag{4.44}
+</span></p>
+<p>Nếu <span class="math inline">b \neq 0</span> thì đặt</p>
+<p><span class="math display">
+U_1 \equiv \begin{bmatrix} \frac{a^*}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; \frac{b^*}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; 0 \\ \frac{b}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; \frac{-a}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}. \tag{4.45}
+</span></p>
+<p>Lưu ý rằng trong cả hai trường hợp <span class="math inline">U_1</span> đều là một ma trận unita hai mức, và khi chúng ta nhân các ma trận ra, ta được</p>
+<p><span class="math display">
+U_1 U = \begin{bmatrix} a' &amp; d' &amp; g' \\ 0 &amp; e' &amp; h' \\ c' &amp; f' &amp; j' \end{bmatrix}. \tag{4.46}
+</span></p>
+<p>Điểm then chốt cần lưu ý là phần tử ở giữa trong cột ngoài cùng bên trái bằng không. Chúng ta ký hiệu các phần tử khác trong ma trận bằng một dấu phẩy generic <span class="math inline">'</span> ; giá trị thực tế của chúng không quan trọng.</p>
+<p>Bây giờ áp dụng một quy trình tương tự để tìm một ma trận hai mức <span class="math inline">U_2</span> sao cho <span class="math inline">U_2 U_1 U</span> không có phần tử nào ở góc dưới cùng bên trái. Tức là, nếu <span class="math inline">c' = 0</span> thì ta đặt</p>
+<p><span class="math display">
+U_2 \equiv \begin{bmatrix} a^{\prime *} &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}, \tag{4.47}
+</span></p>
+<p>trong khi nếu <span class="math inline">c' \neq 0</span> thì ta đặt</p>
+<p><span class="math display">
+U_2 \equiv \begin{bmatrix} \frac{a^{\prime *}}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} &amp; 0 &amp; \frac{c^{\prime *}}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} \\ 0 &amp; 1 &amp; 0 \\ \frac{c'}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} &amp; 0 &amp; \frac{-a'}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} \end{bmatrix}. \tag{4.48}
+</span></p>
+<p>Trong cả hai trường hợp, khi chúng ta thực hiện phép nhân ma trận, ta thấy rằng</p>
+<p><span class="math display">
+U_2 U_1 U = \begin{bmatrix} 1 &amp; d'' &amp; g'' \\ 0 &amp; e'' &amp; h'' \\ 0 &amp; f'' &amp; j'' \end{bmatrix}. \tag{4.49}
+</span></p>
+<p>Vì <span class="math inline">U, U_1</span> và <span class="math inline">U_2</span> đều là các ma trận unita, nên suy ra <span class="math inline">U_2 U_1 U</span> cũng là ma trận unita, và do đó <span class="math inline">d'' = g'' = 0</span>, vì hàng đầu tiên của <span class="math inline">U_2 U_1 U</span> phải có chuẩn (norm) bằng 1. Cuối cùng, đặt</p>
+<p><span class="math display">
+U_3 \equiv \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; e^{\prime \prime *} &amp; f^{\prime \prime *} \\ 0 &amp; h^{\prime \prime *} &amp; j^{\prime \prime *} \end{bmatrix}. \tag{4.50}
+</span></p>
+<p>Giờ đây thật dễ dàng để kiểm chứng rằng <span class="math inline">U_3 U_2 U_1 U = I</span>, và do đó <span class="math inline">U = U_1^\dagger U_2^\dagger U_3^\dagger</span>, đây chính là sự phân rã của <span class="math inline">U</span> thành các ma trận unita hai mức.</p>
+<p>Tổng quát hơn, giả sử <span class="math inline">U</span> tác động lên một không gian <span class="math inline">d</span> chiều. Khi đó, theo một cách thức tương tự như trường hợp <span class="math inline">3 \times 3</span>, chúng ta có thể tìm được các ma trận unita hai mức <span class="math inline">U_1, \dots, U_{d-1}</span> sao cho ma trận <span class="math inline">U_{d-1} U_{d-2} \dots U_1 U</span> có một số 1 ở góc trên cùng bên trái, và tất cả các vị trí khác trong hàng đầu tiên và cột đầu tiên đều là số 0. Sau đó, chúng ta lặp lại quy trình này cho ma trận con unita <span class="math inline">(d-1) \times (d-1)</span> ở góc dưới cùng bên phải của <span class="math inline">U_{d-1} U_{d-2} \dots U_1 U</span>, và cứ tiếp tục như vậy, với kết quả cuối cùng là một ma trận unita <span class="math inline">d \times d</span> tùy ý có thể được viết dưới dạng</p>
+<p><span class="math display">
+U = V_1 \dots V_k, \tag{4.51}
+</span></p>
+<p>trong đó các ma trận <span class="math inline">V_i</span> là các ma trận unita hai mức, và <span class="math inline">k \le (d-1) + (d-2) + \dots + 1 = d(d-1)/2</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.37:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Đưa ra sự phân rã của phép biến đổi</p>
+<p><span class="math display">
+\frac{1}{2} \begin{bmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; i &amp; -1 &amp; -i \\ 1 &amp; -1 &amp; 1 &amp; -1 \\ 1 &amp; -i &amp; -1 &amp; i \end{bmatrix} \tag{4.52}
+</span></p>
+<p>thành một tích của các ma trận unita hai mức. Đây là một trường hợp đặc biệt của phép biến đổi Fourier lượng tử, thứ mà chúng ta sẽ nghiên cứu chi tiết hơn trong chương tiếp theo.</p>
+</div>
+</div>
+</div>
+<p>Một hệ quả của kết quả trên là một ma trận unita tùy ý trên một hệ <span class="math inline">n</span> qubit có thể được viết dưới dạng một tích của nhiều nhất <span class="math inline">2^{n-1}(2^n - 1)</span> ma trận unita hai mức. Đối với các ma trận unita cụ thể, có thể tìm được những cách phân rã hiệu quả hơn nhiều, nhưng như bạn sẽ chứng minh ngay bây giờ, tồn tại những ma trận không thể bị phân rã thành một tích của ít hơn <span class="math inline">d - 1</span> ma trận unita hai mức!</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>note thêm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="ý-tưởng-của-thuật-toán" class="level2">
+<h2 class="anchored" data-anchor-id="ý-tưởng-của-thuật-toán">Ý tưởng của thuật toán</h2>
+<p>Thay vì cố gắng nhân các ma trận nhỏ với nhau để ra được U, tác giả làm ngược lại, bắt đầu từ U, tìm các nhân nó với các ma trận U1, U2, U3, để biến nó thành ma trận I. (4.42)</p>
+<p>Một khi đã tìm được U1, U2, U3 thỏa mãn = I, chỉ cần lấy liên hợp phức, ta đã có công thức phân rã của U (4.43).</p>
+</section>
+<section id="ma-trận-unita-2-mức-là-gì" class="level2">
+<h2 class="anchored" data-anchor-id="ma-trận-unita-2-mức-là-gì">Ma trận Unita 2 mức là gì?</h2>
+<p>Nhìn vào phương trình (4.45), U1 là ma trận 3x3, nhưng thật ra nó chỉ hành động trên không gian 2 chiều, cột cuối cùng, hàng cuối cùng của nó giống hệ ma trận đơn vị.</p>
+<p>Vì vậy, trong vật lý lượng tử, điều này có nghĩa là U1 chỉ tác động lên 2 trạng thái cơ sở 00 và 01, hoàn toàn không chạm vào trạng thái thứ 3 - 10.</p>
+<p>Khái niệm “2-level” này bắt nguồn từ vật lý nguyên tử, nơi tia laser chỉ kích thích electron nhảy giữa đúng 2 mức năng lượng, bỏ qua các mức năng lượng khác.</p>
+</section>
+<section id="tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45" class="level2">
+<h2 class="anchored" data-anchor-id="tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45">Tại sao cấu trúc của U1 lại trong kỳ lạ (4.45)</h2>
+<p>Thật nó chính là Khử Gauss, nhưng thay vì dùng biến đổi hàng cơ bản, nó dùng phép quay Givens <strong>Givens rotations</strong> để duy trì tính Unita trong suốt quá trình biến đổi.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.38:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tồn tại một ma trận unita <span class="math inline">d \times d</span> <span class="math inline">U</span> không thể bị phân rã thành một tích của ít hơn <span class="math inline">d - 1</span> ma trận unita hai mức.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="single-qubit-and-cnot-gates-are-universal" class="level1">
+<h1>2. Single qubit and CNOT gates are universal</h1>
+<p>Chúng ta vừa chỉ ra rằng một ma trận unita tùy ý trên một không gian Hilbert <span class="math inline">d</span> chiều có thể được viết dưới dạng một tích của các ma trận unita hai mức. Bây giờ chúng ta sẽ chứng minh rằng các cổng một qubit và cổng <span class="math inline">\text{CNOT}</span> cùng nhau có thể được sử dụng để triển khai một phép toán unita hai mức tùy ý trên không gian trạng thái của <span class="math inline">n</span> qubit. Kết hợp các kết quả này, chúng ta thấy rằng các cổng một qubit và <span class="math inline">\text{CNOT}</span> có thể được sử dụng để triển khai một phép toán unita tùy ý trên <span class="math inline">n</span> qubit, và do đó chúng là vạn năng đối với tính toán lượng tử.</p>
+<p>Giả sử <span class="math inline">U</span> là một ma trận unita hai mức trên một máy tính lượng tử <span class="math inline">n</span> qubit. Giả sử cụ thể rằng <span class="math inline">U</span> tác động không tầm thường lên không gian được giăng bởi các trạng thái cơ sở tính toán <span class="math inline">\vert{}s\rangle</span> và <span class="math inline">\vert{}t\rangle</span>, trong đó <span class="math inline">s = s_1 \dots s_n</span> và <span class="math inline">t = t_1 \dots t_n</span> là các khai triển nhị phân cho <span class="math inline">s</span> và <span class="math inline">t</span>. Gọi <span class="math inline">\tilde{U}</span> là ma trận con unita <span class="math inline">2 \times 2</span> không tầm thường của <span class="math inline">U</span>; <span class="math inline">\tilde{U}</span> có thể được coi như một toán tử unita trên một qubit đơn lẻ.</p>
+<p>Mục tiêu trước mắt của chúng ta là xây dựng một mạch triển khai <span class="math inline">U</span>, được xây dựng từ các cổng một qubit và cổng <span class="math inline">\text{CNOT}</span>. Để làm điều này, chúng ta cần sử dụng mã Gray (Gray codes). Giả sử chúng ta có các số nhị phân phân biệt, <span class="math inline">s</span> và <span class="math inline">t</span>. Một mã Gray kết nối <span class="math inline">s</span> và <span class="math inline">t</span> là một chuỗi các số nhị phân, bắt đầu bằng <span class="math inline">s</span> và kết thúc bằng <span class="math inline">t</span>, sao cho các thành viên kề nhau trong danh sách khác biệt nhau chính xác một bit. Ví dụ, với <span class="math inline">s = 101001</span> và <span class="math inline">t = 110011</span>, chúng ta có mã Gray</p>
+<p><span class="math display">
+\begin{matrix} 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \end{matrix} \tag{4.53}
+</span></p>
+<p>Gọi <span class="math inline">g_1</span> đến <span class="math inline">g_m</span> là các phần tử của một mã Gray kết nối <span class="math inline">s</span> và <span class="math inline">t</span>, với <span class="math inline">g_1 = s</span> và <span class="math inline">g_m = t</span>. Lưu ý rằng chúng ta luôn có thể tìm được một mã Gray sao cho <span class="math inline">m \le n + 1</span> vì <span class="math inline">s</span> và <span class="math inline">t</span> có thể khác nhau ở nhiều nhất <span class="math inline">n</span> vị trí.</p>
+<p>Ý tưởng cơ bản của mạch lượng tử triển khai <span class="math inline">U</span> là thực hiện một chuỗi các cổng tạo ra các sự thay đổi trạng thái <span class="math inline">\vert{}g_1\rangle \rightarrow \vert{}g_2\rangle \rightarrow \dots \rightarrow \vert{}g_{m-1}\rangle</span>, sau đó thực hiện một phép toán controlled-<span class="math inline">\tilde{U}</span>, với qubit mục tiêu nằm ở bit duy nhất mà <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span> khác nhau, và cuối cùng là hoàn tác (undo) giai đoạn đầu tiên, biến đổi <span class="math inline">\vert{}g_{m-1}\rangle \rightarrow \vert{}g_{m-2}\rangle \dots \rightarrow \vert{}g_1\rangle</span>. Mỗi bước này đều có thể dễ dàng triển khai bằng cách sử dụng các phép toán đã được phát triển trước đó trong chương này, và kết quả cuối cùng là sự triển khai của <span class="math inline">U</span>.</p>
+<p>Một mô tả chính xác hơn về việc triển khai như sau. Bước đầu tiên là hoán đổi các trạng thái <span class="math inline">\vert{}g_1\rangle</span> và <span class="math inline">\vert{}g_2\rangle</span>. Giả sử <span class="math inline">g_1</span> và <span class="math inline">g_2</span> khác nhau ở chữ số thứ <span class="math inline">i</span>. Khi đó chúng ta hoàn thành việc hoán đổi bằng cách thực hiện một phép lật bit có điều khiển (controlled bit flip) trên qubit thứ <span class="math inline">i</span>, với điều kiện là giá trị của các qubit khác phải giống hệt như các giá trị xuất hiện trong cả <span class="math inline">g_1</span> và <span class="math inline">g_2</span>. Tiếp theo, chúng ta sử dụng một phép toán có điều khiển để hoán đổi <span class="math inline">\vert{}g_2\rangle</span> và <span class="math inline">\vert{}g_3\rangle</span>. Chúng ta tiếp tục theo cách này cho đến khi hoán đổi <span class="math inline">\vert{}g_{m-2}\rangle</span> với <span class="math inline">\vert{}g_{m-1}\rangle</span>. Tác động của chuỗi <span class="math inline">m - 2</span> phép toán này là đạt được phép biến đổi:</p>
+<p><span class="math display">
+\vert{}g_1\rangle \rightarrow \vert{}g_{m-1}\rangle \tag{4.54}
+</span></p>
+<p><span class="math display">
+\vert{}g_2\rangle \rightarrow \vert{}g_1\rangle \tag{4.55}
+</span></p>
+<p><span class="math display">
+\vert{}g_3\rangle \rightarrow \vert{}g_2\rangle \tag{4.56}
+</span></p>
+<p><span class="math display">
+\dots \dots \dots
+</span></p>
+<p><span class="math display">
+\vert{}g_{m-1}\rangle \rightarrow \vert{}g_{m-2}\rangle. \tag{4.57}
+</span></p>
+<p>Tất cả các trạng thái cơ sở tính toán khác đều được giữ nguyên bởi chuỗi phép toán này. Tiếp theo, giả sử <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span> khác nhau ở bit thứ <span class="math inline">j</span>. Chúng ta áp dụng một phép toán controlled-<span class="math inline">\tilde{U}</span> với qubit thứ <span class="math inline">j</span> làm mục tiêu, có điều kiện là các qubit khác có cùng giá trị như chúng xuất hiện trong cả <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span>. Cuối cùng, chúng ta hoàn thành phép toán <span class="math inline">U</span> bằng cách hoàn tác các phép toán hoán đổi: chúng ta hoán đổi <span class="math inline">\vert{}g_{m-1}\rangle</span> với <span class="math inline">\vert{}g_{m-2}\rangle</span>, sau đó <span class="math inline">\vert{}g_{m-2}\rangle</span> với <span class="math inline">\vert{}g_{m-3}\rangle</span> và cứ thế, cho đến khi chúng ta hoán đổi <span class="math inline">\vert{}g_2\rangle</span> với <span class="math inline">\vert{}g_1\rangle</span>.</p>
+<p>Một ví dụ đơn giản sẽ làm sáng tỏ thêm quy trình này. Giả sử chúng ta mong muốn triển khai phép biến đổi unita hai mức:</p>
+<p><span class="math display">
+U = \begin{bmatrix} a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ b &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; d \end{bmatrix}. \tag{4.58}
+</span></p>
+<p>Ở đây, <span class="math inline">a, b, c</span> và <span class="math inline">d</span> là các số phức bất kỳ sao cho <span class="math inline">\tilde{U} \equiv \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}</span> là một ma trận unita. Chú ý rằng <span class="math inline">U</span> chỉ tác động không tầm thường lên các trạng thái <span class="math inline">\vert{}000\rangle</span> và <span class="math inline">\vert{}111\rangle</span>. Chúng ta viết một mã Gray kết nối 000 và 111:</p>
+<p><span class="math display">
+\begin{matrix} A &amp; B &amp; C \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{matrix} \tag{4.59}
+</span></p>
+<p>Từ đây chúng ta đọc ra được mạch điện cần thiết, hiển thị trong Hình 4.16. Hai cổng đầu tiên xáo trộn các trạng thái sao cho <span class="math inline">\vert{}000\rangle</span> được hoán đổi với <span class="math inline">\vert{}011\rangle</span>. Tiếp theo, phép toán <span class="math inline">\tilde{U}</span> được áp dụng lên qubit đầu tiên của các trạng thái <span class="math inline">\vert{}011\rangle</span> và <span class="math inline">\vert{}111\rangle</span>, với điều kiện là qubit thứ hai và thứ ba đang ở trạng thái <span class="math inline">\vert{}11\rangle</span>. Cuối cùng, chúng ta xáo trộn ngược lại các trạng thái (unshuffle), đảm bảo rằng <span class="math inline">\vert{}011\rangle</span> được hoán đổi trở lại với trạng thái <span class="math inline">\vert{}000\rangle</span>.</p>
+<p><img src="../../img/4.16.png" class="img-fluid"></p>
+<p>Quay trở lại trường hợp tổng quát, chúng ta thấy rằng việc triển khai phép toán unita hai mức <span class="math inline">U</span> đòi hỏi nhiều nhất <span class="math inline">2(n - 1)</span> phép toán có điều khiển để hoán đổi <span class="math inline">\vert{}g_1\rangle</span> với <span class="math inline">\vert{}g_{m-1}\rangle</span> và sau đó hoán đổi ngược lại. Mỗi phép toán có điều khiển này có thể được thực hiện bằng cách sử dụng <span class="math inline">O(n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>; phép toán controlled-<span class="math inline">\tilde{U}</span> cũng đòi hỏi <span class="math inline">O(n)</span> cổng. Do đó, việc triển khai <span class="math inline">U</span> đòi hỏi <span class="math inline">O(n^2)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Chúng ta đã thấy ở phần trước rằng một ma trận unita tùy ý trên không gian trạng thái <span class="math inline">2^n</span> chiều của <span class="math inline">n</span> qubit có thể được viết dưới dạng một tích của <span class="math inline">O(2^{2n}) = O(4^n)</span> phép toán unita hai mức. Kết hợp các kết quả này, chúng ta thấy rằng một phép toán unita tùy ý trên <span class="math inline">n</span> qubit có thể được triển khai bằng cách sử dụng một mạch chứa <span class="math inline">O(n^2 4^n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Rõ ràng, cấu trúc này không cung cấp các mạch lượng tử hiệu quả cho lắm! Tuy nhiên, chúng tôi sẽ chỉ ra ở Mục 4.5.4 rằng cấu trúc này gần như tối ưu theo nghĩa là tồn tại các phép toán unita đòi hỏi số lượng cổng theo hàm mũ để triển khai. Do đó, để tìm ra các thuật toán lượng tử nhanh, chúng ta rõ ràng sẽ cần một cách tiếp cận khác với cách được thực hiện trong cấu trúc vạn năng.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.39:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tìm một mạch lượng tử sử dụng các phép toán một qubit và <span class="math inline">\text{CNOT}</span> để triển khai phép biến đổi<br>
+<span class="math display">
+\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; b &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; d \end{bmatrix}, \tag{4.60}
+</span></p>
+<p>trong đó <span class="math inline">\tilde{U} = \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}</span> là một ma trận unita <span class="math inline">2 \times 2</span> tùy ý.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Một ma trận Unita U -&gt; tích các ma trận hai mức.</p>
+<p>Ma trận hai mức -&gt; cổng một qubit + cổng CNOT</p>
+<p>Vậy suy ra bất kỳ ma trận Unita U nào cũng có thể tạo bởi các cổng qubit và CNOT.</p>
+<hr>
+<section id="gray-code" class="level2">
+<h2 class="anchored" data-anchor-id="gray-code">Gray code</h2>
+<p>Nhưng lỡ U có thể tác động từ <span class="math inline">\vert s \rangle</span> tới <span class="math inline">\vert t \rangle</span> ví dụ như <span class="math inline">\vert 000 \rangle</span> đến <span class="math inline">\vert 111 \rangle</span> thì sao?</p>
+<p>Ta biết rằng cổng một qubit chỉ có thể tác động lên qubit đó, còn cổng CNOT chỉ chạm tối đa 2 qubit cùng lúc.</p>
+<p>Đáp án là dùng Gray code, khoảng cách hamming giữa chúng = 1, vì vậy ý tưởng là sẽ nhích từng tí một, 000 -&gt; 001 -&gt; 011 -&gt; 111.</p>
+<hr>
+</section>
+<section id="thế" class="level2">
+<h2 class="anchored" data-anchor-id="thế">Thế</h2>
+<p>cuối cùng nó để làm gì?</p>
+<p>Nhìn phương trình (4.58) ta thấy tằng tất cả các chỉ số trên đường chéo chính đều bằng 1, chỉ trừ cột 0 và cột 7, từ đó suy ra ma trận unitary U này chỉ tác động lên hai trạng thái 000 và 111. Nhưng mà một ma trận U ngã hai mức, chỉ tác động lên tối đa 2 qubit, vì thế chúng ta phải dịch chuyển địa chỉ của 000 đến 011 (bằng Gray code) từ đó mới có thể áp dụng được U hai mức.</p>
+<p>Mà chắc chắn ma trận U không đơn giản như vậy rồi, vậy nên chúng ta có thể áp dụng cái đầu tiên đã nói, một ma trận U có thể tách thành tích các ma trận U ngã hai mức.</p>
+</section>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

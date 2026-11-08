@@ -1114,5 +1114,104 @@
       "Quantum Computation",
       "Measurement"
     ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html",
+    "href": "note/quantumcircuits/5.html",
+    "title": "Universal quantum gates",
+    "section": "",
+    "text": "Một tập hợp nhỏ các cổng (ví dụ: \\text{AND}, \\text{OR}, \\text{NOT}) có thể được sử dụng để tính toán một hàm cổ điển tùy ý, như chúng ta đã thấy ở Mục 3.1.2. Chúng ta nói rằng một tập hợp cổng như vậy là vạn năng (universal) đối với tính toán cổ điển. Trên thực tế, vì cổng Toffoli là vạn năng đối với tính toán cổ điển, nên các mạch lượng tử bao hàm (subsume) các mạch cổ điển. Một kết quả vạn năng tương tự cũng đúng đối với tính toán lượng tử, trong đó một tập hợp các cổng được cho là vạn năng đối với tính toán lượng tử nếu bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bởi một mạch lượng tử chỉ bao gồm các cổng đó.\nBây giờ chúng tôi mô tả ba cấu trúc vạn năng đối với tính toán lượng tử. Các cấu trúc này xây dựng dựa trên nhau, và đạt đến đỉnh điểm ở một chứng minh rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, \\text{CNOT}, và \\pi/8. Bạn có thể tự hỏi tại sao cổng phase lại xuất hiện trong danh sách này, vì nó có thể được xây dựng từ hai cổng \\pi/8; nó được đưa vào vì vai trò tự nhiên của nó trong các cấu trúc chống chịu lỗi (fault-tolerant constructions) được mô tả trong Chương 10.\nCác cấu trúc của chúng tôi nói rất ít về tính hiệu quả (efficiency) — bao nhiêu cổng (nhiều theo đa thức hay hàm mũ) phải được kết hợp để tạo ra một phép biến đổi unita cho trước. Trong Mục 4.5.4, chúng tôi chứng minh rằng tồn tại các phép biến đổi unita đòi hỏi một số lượng cổng nhiều theo hàm mũ để xấp xỉ. Tất nhiên, mục tiêu của tính toán lượng tử là tìm ra các họ phép biến đổi unita thú vị có thể được thực hiện một cách hiệu quả.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#bước-1.-chia-để-trị",
+    "href": "note/quantumcircuits/5.html#bước-1.-chia-để-trị",
+    "title": "Universal quantum gates",
+    "section": "Bước 1. Chia để trị",
+    "text": "Bước 1. Chia để trị\nTừ một ma trận lớn, tách ra thành tích các ma trận nhỏ hơn.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot",
+    "href": "note/quantumcircuits/5.html#bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot",
+    "title": "Universal quantum gates",
+    "section": "Bước 2. Rút gọn về Cổng 1-qubit và CNOT",
+    "text": "Bước 2. Rút gọn về Cổng 1-qubit và CNOT",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#bước-3.-xấp-xỉ-rời-rạc",
+    "href": "note/quantumcircuits/5.html#bước-3.-xấp-xỉ-rời-rạc",
+    "title": "Universal quantum gates",
+    "section": "Bước 3. Xấp xỉ rời rạc",
+    "text": "Bước 3. Xấp xỉ rời rạc",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#ý-tưởng-của-thuật-toán",
+    "href": "note/quantumcircuits/5.html#ý-tưởng-của-thuật-toán",
+    "title": "Universal quantum gates",
+    "section": "Ý tưởng của thuật toán",
+    "text": "Ý tưởng của thuật toán\nThay vì cố gắng nhân các ma trận nhỏ với nhau để ra được U, tác giả làm ngược lại, bắt đầu từ U, tìm các nhân nó với các ma trận U1, U2, U3, để biến nó thành ma trận I. (4.42)\nMột khi đã tìm được U1, U2, U3 thỏa mãn = I, chỉ cần lấy liên hợp phức, ta đã có công thức phân rã của U (4.43).",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#ma-trận-unita-2-mức-là-gì",
+    "href": "note/quantumcircuits/5.html#ma-trận-unita-2-mức-là-gì",
+    "title": "Universal quantum gates",
+    "section": "Ma trận Unita 2 mức là gì?",
+    "text": "Ma trận Unita 2 mức là gì?\nNhìn vào phương trình (4.45), U1 là ma trận 3x3, nhưng thật ra nó chỉ hành động trên không gian 2 chiều, cột cuối cùng, hàng cuối cùng của nó giống hệ ma trận đơn vị.\nVì vậy, trong vật lý lượng tử, điều này có nghĩa là U1 chỉ tác động lên 2 trạng thái cơ sở 00 và 01, hoàn toàn không chạm vào trạng thái thứ 3 - 10.\nKhái niệm “2-level” này bắt nguồn từ vật lý nguyên tử, nơi tia laser chỉ kích thích electron nhảy giữa đúng 2 mức năng lượng, bỏ qua các mức năng lượng khác.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45",
+    "href": "note/quantumcircuits/5.html#tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45",
+    "title": "Universal quantum gates",
+    "section": "Tại sao cấu trúc của U1 lại trong kỳ lạ (4.45)",
+    "text": "Tại sao cấu trúc của U1 lại trong kỳ lạ (4.45)\nThật nó chính là Khử Gauss, nhưng thay vì dùng biến đổi hàng cơ bản, nó dùng phép quay Givens Givens rotations để duy trì tính Unita trong suốt quá trình biến đổi.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#gray-code",
+    "href": "note/quantumcircuits/5.html#gray-code",
+    "title": "Universal quantum gates",
+    "section": "Gray code",
+    "text": "Gray code\nNhưng lỡ U có thể tác động từ \\vert s \\rangle tới \\vert t \\rangle ví dụ như \\vert 000 \\rangle đến \\vert 111 \\rangle thì sao?\nTa biết rằng cổng một qubit chỉ có thể tác động lên qubit đó, còn cổng CNOT chỉ chạm tối đa 2 qubit cùng lúc.\nĐáp án là dùng Gray code, khoảng cách hamming giữa chúng = 1, vì vậy ý tưởng là sẽ nhích từng tí một, 000 -&gt; 001 -&gt; 011 -&gt; 111.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
+  },
+  {
+    "objectID": "note/quantumcircuits/5.html#thế",
+    "href": "note/quantumcircuits/5.html#thế",
+    "title": "Universal quantum gates",
+    "section": "Thế",
+    "text": "Thế\ncuối cùng nó để làm gì?\nNhìn phương trình (4.58) ta thấy tằng tất cả các chỉ số trên đường chéo chính đều bằng 1, chỉ trừ cột 0 và cột 7, từ đó suy ra ma trận unitary U này chỉ tác động lên hai trạng thái 000 và 111. Nhưng mà một ma trận U ngã hai mức, chỉ tác động lên tối đa 2 qubit, vì thế chúng ta phải dịch chuyển địa chỉ của 000 đến 011 (bằng Gray code) từ đó mới có thể áp dụng được U hai mức.\nMà chắc chắn ma trận U không đơn giản như vậy rồi, vậy nên chúng ta có thể áp dụng cái đầu tiên đã nói, một ma trận U có thể tách thành tích các ma trận U ngã hai mức.",
+    "crumbs": [
+      "Quantum Computation",
+      "Universal quantum gates"
+    ]
   }
 ]
