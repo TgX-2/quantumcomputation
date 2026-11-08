@@ -423,6 +423,12 @@ window.Quarto = {
   <ul>
   <li><a href="#two-level-unitary-gates-are-universal" id="toc-two-level-unitary-gates-are-universal" class="nav-link active" data-scroll-target="#two-level-unitary-gates-are-universal">1. Two-level unitary gates are universal</a></li>
   <li><a href="#single-qubit-and-cnot-gates-are-universal" id="toc-single-qubit-and-cnot-gates-are-universal" class="nav-link" data-scroll-target="#single-qubit-and-cnot-gates-are-universal">2. Single qubit and CNOT gates are universal</a></li>
+  <li><a href="#a-discrete-set-of-universal-operations" id="toc-a-discrete-set-of-universal-operations" class="nav-link" data-scroll-target="#a-discrete-set-of-universal-operations">3. A discrete set of universal operations</a>
+  <ul class="collapse">
+  <li><a href="#approximating-unitary-operators" id="toc-approximating-unitary-operators" class="nav-link" data-scroll-target="#approximating-unitary-operators">Approximating unitary operators</a></li>
+  <li><a href="#universality-of-hadamard-phase-cnot-π8-gates" id="toc-universality-of-hadamard-phase-cnot-π8-gates" class="nav-link" data-scroll-target="#universality-of-hadamard-phase-cnot-π8-gates">Universality of Hadamard + phase + CNOT + π/8 gates</a></li>
+  </ul></li>
+  <li><a href="#approximating-arbitrary-unitary-gates-is-generically-hard" id="toc-approximating-arbitrary-unitary-gates-is-generically-hard" class="nav-link" data-scroll-target="#approximating-arbitrary-unitary-gates-is-generically-hard">4. Approximating arbitrary unitary gates is generically hard</a></li>
   </ul>
 </nav>
     </div>
@@ -704,6 +710,214 @@ U = \begin{bmatrix} a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\
 </section>
 </div>
 </div>
+</section>
+<section id="a-discrete-set-of-universal-operations" class="level1">
+<h1>3. A discrete set of universal operations</h1>
+<p>Trong phần trước, chúng ta đã chứng minh rằng <span class="math inline">\text{CNOT}</span> và các ma trận unita một qubit cùng nhau tạo thành một tập hợp vạn năng cho tính toán lượng tử. Thật không may, không có phương pháp đơn giản nào được biết đến để triển khai tất cả các cổng này theo cách có khả năng chống chịu lại lỗi (resistant to errors). May mắn thay, trong phần này chúng ta sẽ tìm thấy một tập hợp rời rạc các cổng có thể được sử dụng để thực hiện tính toán lượng tử vạn năng, và trong Chương 10, chúng ta sẽ chỉ ra cách thực hiện các cổng này theo cách chống lại lỗi, sử dụng các mã sửa lỗi lượng tử.</p>
+<section id="approximating-unitary-operators" class="level2">
+<h2 class="anchored" data-anchor-id="approximating-unitary-operators">Approximating unitary operators</h2>
+<p>Rõ ràng, một tập hợp rời rạc các cổng không thể được sử dụng để triển khai một phép toán unita tùy ý một cách chính xác, vì tập hợp các phép toán unita là liên tục. Thay vào đó, hóa ra một tập hợp rời rạc có thể được sử dụng để xấp xỉ bất kỳ phép toán unita nào. Để hiểu điều này hoạt động như thế nào, trước tiên chúng ta cần nghiên cứu xem việc xấp xỉ một phép toán unita có nghĩa là gì. Giả sử <span class="math inline">U</span> và <span class="math inline">V</span> là hai toán tử unita trên cùng một không gian trạng thái. <span class="math inline">U</span> là toán tử unita mục tiêu mà chúng ta muốn triển khai, và <span class="math inline">V</span> là toán tử unita thực sự được triển khai trong thực tế. Chúng ta định nghĩa sai số (error) khi <span class="math inline">V</span> được triển khai thay vì <span class="math inline">U</span> là:</p>
+<p><span class="math display">
+E(U, V) \equiv \max_{\vert{}\psi\rangle} \vert{}\vert{}(U - V)\vert{}\psi\rangle\vert{}\vert{}, \tag{4.61}
+</span></p>
+<p>trong đó giá trị lớn nhất được lấy trên tất cả các trạng thái lượng tử chuẩn hóa <span class="math inline">\vert{}\psi\rangle</span> trong không gian trạng thái. Trong Hộp 4.1 ở trang 195, chúng tôi chỉ ra rằng độ đo sai số này có một cách diễn giải là nếu <span class="math inline">E(U, V)</span> nhỏ, thì bất kỳ phép đo lường nào được thực hiện trên trạng thái <span class="math inline">V\vert{}\psi\rangle</span> sẽ cho ra các thống kê đo lường xấp xỉ giống như một phép đo lường trên <span class="math inline">U\vert{}\psi\rangle</span>, đối với bất kỳ trạng thái ban đầu <span class="math inline">\vert{}\psi\rangle</span> nào. Cụ thể hơn, chúng tôi chỉ ra rằng nếu <span class="math inline">M</span> là một phần tử POVM trong một POVM tùy ý, và <span class="math inline">P_U</span> (hoặc <span class="math inline">P_V</span>) là xác suất thu được kết quả này nếu <span class="math inline">U</span> (hoặc <span class="math inline">V</span>) được thực hiện với trạng thái bắt đầu <span class="math inline">\vert{}\psi\rangle</span>, thì:</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} \le 2E(U, V). \tag{4.62}
+</span></p>
+<p>Do đó, nếu <span class="math inline">E(U, V)</span> nhỏ, thì các kết quả đo lường xảy ra với các xác suất tương tự nhau, bất kể <span class="math inline">U</span> hay <span class="math inline">V</span> được thực hiện. Cũng được chỉ ra trong Hộp 4.1 là nếu chúng ta thực hiện một chuỗi các cổng <span class="math inline">V_1, \dots, V_m</span> nhằm mục đích xấp xỉ một chuỗi các cổng khác <span class="math inline">U_1, \dots, U_m</span>, thì các sai số cộng dồn nhiều nhất là tuyến tính:</p>
+<p><span class="math display">
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.63}
+</span></p>
+<p>Các kết quả xấp xỉ (4.62) và (4.63) cực kỳ hữu ích. Giả sử chúng ta muốn thực hiện một mạch lượng tử chứa <span class="math inline">m</span> cổng, từ <span class="math inline">U_1</span> đến <span class="math inline">U_m</span>. Thật không may, chúng ta chỉ có thể xấp xỉ cổng <span class="math inline">U_j</span> bằng cổng <span class="math inline">V_j</span>. Để xác suất của các kết quả đo lường khác nhau thu được từ mạch xấp xỉ nằm trong khoảng dung sai <span class="math inline">\Delta &gt; 0</span> so với các xác suất chính xác, thì chỉ cần <span class="math inline">E(U_j, V_j) \le \Delta / (2m)</span>, theo các kết quả (4.62) và (4.63).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 4.1: Xấp xỉ các mạch lượng tử
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử một hệ lượng tử bắt đầu ở trạng thái <span class="math inline">\vert{}\psi\rangle</span>, và chúng ta thực hiện phép toán unita <span class="math inline">U</span> hoặc phép toán unita <span class="math inline">V</span>. Tiếp theo đó, chúng ta thực hiện một phép đo lường. Gọi <span class="math inline">M</span> là một phần tử POVM gắn liền với phép đo lường, và gọi <span class="math inline">P_U</span> (hoặc <span class="math inline">P_V</span>) là xác suất thu được kết quả đo lường tương ứng nếu phép toán <span class="math inline">U</span> (hoặc <span class="math inline">V</span>) được thực hiện. Khi đó</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M U\vert{}\psi\rangle - \langle\psi\vert{}V^\dagger M V\vert{}\psi\rangle\vert{}. \tag{4.64}
+</span></p>
+<p>Gọi <span class="math inline">\vert{}\Delta\rangle \equiv (U - V)\vert{}\psi\rangle</span>. Một chút đại số đơn giản và bất đẳng thức Cauchy–Schwarz cho thấy rằng</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle + \langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.65}
+</span></p>
+<p><span class="math display">
+\le \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle\vert{} + \vert{}\langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.66}
+</span></p>
+<p><span class="math display">
+\le \vert{}\vert{}\Delta\vert{}\vert{} + \vert{}\vert{}\Delta\vert{}\vert{} \tag{4.67}
+</span></p>
+<p><span class="math display">
+\le 2E(U, V). \tag{4.68}
+</span></p>
+<p>Bất đẳng thức <span class="math inline">\vert{}P_U - P_V\vert{} \le 2E(U, V)</span> đưa ra biểu thức định lượng cho ý tưởng rằng khi sai số <span class="math inline">E(U, V)</span> nhỏ, thì sự khác biệt về xác suất giữa các kết quả đo lường cũng nhỏ.</p>
+<p>Giả sử chúng ta thực hiện một chuỗi các cổng <span class="math inline">V_1, V_2, \dots, V_m</span> nhằm mục đích xấp xỉ một chuỗi các cổng khác, <span class="math inline">U_1, U_2, \dots, U_m</span>. Hóa ra sai số gây ra bởi toàn bộ chuỗi các cổng không hoàn hảo này lớn nhất cũng chỉ bằng tổng các sai số trong từng cổng riêng lẻ,</p>
+<p><span class="math display">
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.69}
+</span></p>
+<p>Để chứng minh điều này, chúng ta bắt đầu với trường hợp <span class="math inline">m = 2</span>. Lưu ý rằng đối với một trạng thái <span class="math inline">\vert{}\psi\rangle</span> nào đó, chúng ta có</p>
+<p><span class="math display">
+E(U_2 U_1, V_2 V_1) = \vert{}\vert{}(U_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.70}
+</span></p>
+<p><span class="math display">
+= \vert{}\vert{}(U_2 U_1 - V_2 U_1)\vert{}\psi\rangle + (V_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{}. \tag{4.71}
+</span></p>
+<p>Sử dụng bất đẳng thức tam giác <span class="math inline">\vert{}\vert{}\vert{}a\rangle + \vert{}b\rangle\vert{}\vert{} \le \vert{}\vert{}\vert{}a\rangle\vert{}\vert{} + \vert{}\vert{}\vert{}b\rangle\vert{}\vert{}</span>, chúng ta thu được</p>
+<p><span class="math display">
+E(U_2 U_1, V_2 V_1) \le \vert{}\vert{}(U_2 - V_2)U_1\vert{}\psi\rangle\vert{}\vert{} + \vert{}\vert{}V_2(U_1 - V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.72}
+</span></p>
+<p><span class="math display">
+\le E(U_2, V_2) + E(U_1, V_1), \tag{4.73}
+</span></p>
+<p>đây chính là kết quả mong muốn. Kết quả cho số <span class="math inline">m</span> tổng quát được suy ra bằng phương pháp quy nạp.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Tại sao lại xuất hiện xấp xỉ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rõ ràng là <strong>mọi ma trận Unita U luôn luôn biểu diễn chính xác tuyệt đối</strong> thành tích của các ma trận hai mức, và các ma trận hai mức này lại biểu diễn chính xác tuyệt đối thành các cổng CNOT và cổng xoay 1-qubit.</p>
+<p>Nhưng rõ ràng các R_x, R_y, R_z, có các tham số theta, phi, là tham số thực trong đó, vì vậy không có cách nào biểu diễn một cách chính xác hoàn toàn.</p>
+<p>Tóm lại thì:</p>
+<p>Gray code + CNOT + Các phép xoay liên tục <span class="math inline">R_z(\theta), R_y(\theta)</span> -&gt; Chính xác 100%.</p>
+<p>Gray code + CNOT + Tập hợp cổng rời rạc <span class="math inline">\{H, S, T\}</span> -&gt; Xấp xỉ đúng với độ chính xác epsilon tùy ý.</p>
+<section id="phép-màu-của-sự-cộng-dồn-tuyến-tính-4.63" class="level2">
+<h2 class="anchored" data-anchor-id="phép-màu-của-sự-cộng-dồn-tuyến-tính-4.63">Phép màu của sự Cộng dồn tuyến tính (4.63)</h2>
+<p>Trong khi các hệ thống analog, sai số nhỏ ở đầu mạch có thể bị khuếch đại theo hàm mũ (hiệu ứng cánh bướm) khiến kết quả cuối cùng hoàn toàn vô nghìa.</p>
+<p>Thì trong hệ lượng tử, các sai số không bao giờ bị khuếch đại. Sai số tổng cộng của một mạch điện dài chỉ bằng tổng các sai số của từng tổng cộng lại.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="universality-of-hadamard-phase-cnot-π8-gates" class="level2">
+<h2 class="anchored" data-anchor-id="universality-of-hadamard-phase-cnot-π8-gates">Universality of Hadamard + phase + CNOT + π/8 gates</h2>
+<p>Giờ đây chúng ta đang ở một vị thế tốt để nghiên cứu việc xấp xỉ các phép toán unita tùy ý bằng các tập hợp cổng rời rạc. Chúng ta sẽ xem xét hai tập hợp cổng rời rạc khác nhau, cả hai đều là vạn năng. Tập hợp đầu tiên, tập hợp chuẩn (standard set) của các cổng vạn năng, bao gồm các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và <span class="math inline">\pi/8</span>. Chúng tôi cung cấp các cấu trúc chống chịu lỗi cho các cổng này ở Chương 10; chúng cũng cung cấp một cấu trúc vạn năng đặc biệt đơn giản. Tập hợp cổng thứ hai mà chúng ta xem xét bao gồm cổng Hadamard, cổng phase, cổng controlled-<span class="math inline">\text{NOT}</span>, và cổng Toffoli. Các cổng này cũng đều có thể được thực hiện một cách chống chịu lỗi; tuy nhiên, chứng minh tính vạn năng và cấu trúc chống chịu lỗi cho các cổng này kém hấp dẫn hơn một chút.</p>
+<p>Chúng ta bắt đầu chứng minh tính vạn năng bằng cách chỉ ra rằng các cổng Hadamard và <span class="math inline">\pi/8</span> có thể được sử dụng để xấp xỉ bất kỳ phép toán unita một qubit nào với độ chính xác tùy ý. Xem xét các cổng <span class="math inline">T</span> và <span class="math inline">HTH</span>. <span class="math inline">T</span> là, bỏ qua một pha toàn cục không quan trọng, một phép quay <span class="math inline">\pi/4</span> radian quanh trục <span class="math inline">\hat{z}</span> trên mặt cầu Bloch, trong khi <span class="math inline">HTH</span> là một phép quay <span class="math inline">\pi/4</span> radian quanh trục <span class="math inline">\hat{x}</span> trên mặt cầu Bloch (Bài tập 4.14). Kết hợp hai phép toán này cho ta, bỏ qua một pha toàn cục,</p>
+<p><span class="math display">
+\exp\left(-i \frac{\pi}{8} Z\right) \exp\left(-i \frac{\pi}{8} X\right) = \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} Z \right] \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} X \right] \tag{4.74}
+</span></p>
+<p><span class="math display">
+= \cos^2\frac{\pi}{8} I - i \left[ \cos\frac{\pi}{8} (X + Z) + \sin\frac{\pi}{8} Y \right] \sin\frac{\pi}{8}. \tag{4.75}
+</span></p>
+<p>Đây là một phép quay của mặt cầu Bloch quanh một trục dọc theo <span class="math inline">\vec{n} = (\cos\frac{\pi}{8}, \sin\frac{\pi}{8}, \cos\frac{\pi}{8})</span> với vector đơn vị tương ứng <span class="math inline">\hat{n}</span>, và quay một góc <span class="math inline">\theta</span> được định nghĩa bởi <span class="math inline">\cos(\theta/2) \equiv \cos^2\frac{\pi}{8}</span>. Tức là, chỉ sử dụng các cổng Hadamard và <span class="math inline">\pi/8</span>, chúng ta có thể xây dựng được <span class="math inline">R_{\hat{n}}(\theta)</span>. Hơn nữa, góc <span class="math inline">\theta</span> này có thể được chứng minh là một bội số vô tỉ của <span class="math inline">2\pi</span>. Việc chứng minh sự thật sau cùng này hơi vượt quá phạm vi của chúng ta; xem phần cuối chương ‘Lịch sử và đọc thêm’.</p>
+<p>Tiếp theo, chúng ta chỉ ra rằng việc lặp lại nhiều lần <span class="math inline">R_{\hat{n}}(\theta)</span> có thể được sử dụng để xấp xỉ với độ chính xác tùy ý bất kỳ phép quay <span class="math inline">R_{\hat{n}}(\alpha)</span> nào. Để thấy điều này, gọi <span class="math inline">\delta &gt; 0</span> là độ chính xác mong muốn, và gọi <span class="math inline">N</span> là một số nguyên lớn hơn <span class="math inline">2\pi/\delta</span>. Định nghĩa <span class="math inline">\theta_k</span> sao cho <span class="math inline">\theta_k \in [0, 2\pi)</span> và <span class="math inline">\theta_k = (k\theta)\pmod{2\pi}</span>. Khi đó, nguyên lý chuồng bồ câu (pigeonhole principle) ngụ ý rằng có các số <span class="math inline">j</span> và <span class="math inline">k</span> phân biệt trong khoảng từ <span class="math inline">1, \dots, N</span> sao cho <span class="math inline">\vert{}\theta_k - \theta_j\vert{} \le 2\pi/N &lt; \delta</span>. Không mất tính tổng quát, giả sử rằng <span class="math inline">k &gt; j</span>, vì vậy chúng ta có <span class="math inline">\vert{}\theta_{k-j}\vert{} &lt; \delta</span>. Vì <span class="math inline">j \neq k</span> và <span class="math inline">\theta</span> là một bội số vô tỉ của <span class="math inline">2\pi</span>, chúng ta phải có <span class="math inline">\theta_{k-j} \neq 0</span>. Suy ra chuỗi <span class="math inline">\theta_{l(k-j)}</span> lấp đầy khoảng <span class="math inline">[0, 2\pi)</span> khi <span class="math inline">l</span> thay đổi, sao cho các thành viên kề nhau của chuỗi cách nhau không quá <span class="math inline">\delta</span>. Suy ra đối với bất kỳ <span class="math inline">\epsilon &gt; 0</span> nào, tồn tại một số <span class="math inline">n</span> sao cho</p>
+<p><span class="math display">
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\theta)^n) &lt; \frac{\epsilon}{3}. \tag{4.76}
+</span></p>
+<p>Bài tập 4.40: Với <span class="math inline">\alpha</span> và <span class="math inline">\beta</span> tùy ý, hãy chứng minh rằng</p>
+<p><span class="math display">
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\alpha + \beta)) = \vert{}1 - \exp(i\beta/2)\vert{}, \tag{4.77}
+</span></p>
+<p>và sử dụng điều này để biện minh cho (4.76).</p>
+<p>Giờ đây chúng ta đã ở vị thế có thể kiểm chứng rằng bất kỳ phép toán một qubit nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard và <span class="math inline">\pi/8</span>. Đại số đơn giản ngụ ý rằng với mọi <span class="math inline">\alpha</span>,</p>
+<p><span class="math display">
+HR_{\hat{n}}(\alpha)H = R_{\hat{m}}(\alpha), \tag{4.78}
+</span></p>
+<p>trong đó <span class="math inline">\hat{m}</span> là một vector đơn vị theo hướng <span class="math inline">(\cos\frac{\pi}{8}, -\sin\frac{\pi}{8}, \cos\frac{\pi}{8})</span>, từ đó suy ra <span class="math display">
+E(R_{\hat{m}}(\alpha), R_{\hat{m}}(\theta)^n) &lt; \frac{\epsilon}{3}. \tag{4.79}
+</span></p>
+<p>Nhưng theo Bài tập 4.11, một ma trận unita <span class="math inline">U</span> tùy ý trên một qubit có thể được viết thành <span class="math display">
+U = R_{\hat{n}}(\beta) R_{\hat{m}}(\gamma) R_{\hat{n}}(\delta), \tag{4.80}
+</span></p>
+<p>nếu bỏ qua một dịch chuyển pha toàn cục không quan trọng. Các kết quả (4.76) và (4.79), cùng với bất đẳng thức chuỗi (4.63) do đó ngụ ý rằng đối với các số nguyên dương phù hợp <span class="math inline">n_1, n_2, n_3</span>, <span class="math display">
+E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)^{n_3}) &lt; \epsilon. \tag{4.81}
+</span></p>
+<p>Tức là, cho trước bất kỳ toán tử unita một qubit <span class="math inline">U</span> nào và bất kỳ <span class="math inline">\epsilon &gt; 0</span> nào, ta hoàn toàn có thể xấp xỉ <span class="math inline">U</span> trong khoảng sai số <span class="math inline">\epsilon</span> bằng cách sử dụng một mạch chỉ bao gồm các cổng Hadamard và cổng <span class="math inline">\pi/8</span>.</p>
+<p>Vì các cổng <span class="math inline">\pi/8</span> và Hadamard cho phép chúng ta xấp xỉ bất kỳ toán tử unita một qubit nào, từ các lập luận ở Mục 4.5.2 suy ra rằng chúng ta có thể xấp xỉ bất kỳ mạch lượng tử <span class="math inline">m</span> cổng nào, như sau. Cho một mạch lượng tử chứa <span class="math inline">m</span> cổng, có thể là các cổng CNOT hoặc các cổng unita một qubit, chúng ta có thể xấp xỉ nó bằng cách sử dụng các cổng Hadamard, controlled-NOT và <span class="math inline">\pi/8</span> (sau này, chúng ta sẽ thấy rằng các cổng phase làm cho việc xấp xỉ có khả năng chống chịu lỗi, nhưng đối với lập luận vạn năng hiện tại thì chúng không hoàn toàn cần thiết). Nếu chúng ta mong muốn độ chính xác <span class="math inline">\epsilon</span> cho toàn bộ mạch, thì điều này có thể đạt được bằng cách xấp xỉ mỗi cổng unita một qubit bằng quy trình trên trong khoảng sai số <span class="math inline">\epsilon/m</span> và áp dụng bất đẳng thức chuỗi (4.63) để thu được độ chính xác <span class="math inline">\epsilon</span> cho toàn bộ mạch.</p>
+<p>Quy trình xấp xỉ các mạch lượng tử bằng một tập hợp cổng rời rạc này hiệu quả đến mức nào? Đây là một câu hỏi quan trọng. Ví dụ, giả sử rằng việc xấp xỉ một cổng unita một qubit tùy ý trong khoảng cách <span class="math inline">\epsilon</span> đòi hỏi <span class="math inline">\Omega(2^{1/\epsilon})</span> cổng từ tập hợp rời rạc. Khi đó, để xấp xỉ mạch lượng tử <span class="math inline">m</span> cổng được xem xét ở đoạn trước sẽ đòi hỏi <span class="math inline">\Omega(m 2^{m/\epsilon})</span> cổng, một sự gia tăng theo hàm mũ so với kích thước mạch ban đầu!. May mắn thay, tốc độ hội tụ tốt hơn thế này rất nhiều. Về mặt trực giác, có vẻ hợp lý khi chuỗi các góc <span class="math inline">\theta_k</span> ‘lấp đầy’ khoảng <span class="math inline">[0, 2\pi)</span> theo một cách ít nhiều đồng đều, do đó để xấp xỉ một cổng một qubit tùy ý hẳn sẽ cần khoảng <span class="math inline">\Theta(1/\epsilon)</span> cổng từ tập hợp rời rạc. Nếu chúng ta sử dụng ước tính này cho số lượng cổng cần thiết để xấp xỉ một cổng một qubit tùy ý, thì số lượng cần thiết để xấp xỉ một mạch <span class="math inline">m</span> cổng với độ chính xác <span class="math inline">\epsilon</span> trở thành <span class="math inline">\Theta(m^2/\epsilon)</span>. Đây là sự gia tăng bậc hai so với kích thước ban đầu của mạch, <span class="math inline">m</span>, điều này đối với nhiều ứng dụng có thể là đủ.</p>
+<p>Tuy nhiên, thật đáng chú ý, một tốc độ hội tụ nhanh hơn nhiều có thể được chứng minh. Định lý Solovay-Kitaev, được chứng minh ở Phụ lục 3, ngụ ý rằng một cổng unita một qubit tùy ý có thể được xấp xỉ với độ chính xác <span class="math inline">\epsilon</span> bằng cách sử dụng <span class="math inline">O(\log^c(1/\epsilon))</span> cổng từ tập hợp rời rạc của chúng ta, trong đó <span class="math inline">c</span> là một hằng số xấp xỉ bằng <span class="math inline">2</span>. Do đó, định lý Solovay-Kitaev ngụ ý rằng để xấp xỉ một mạch chứa <span class="math inline">m</span> cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tới độ chính xác <span class="math inline">\epsilon</span> thì đòi hỏi <span class="math inline">O(m \log^c(m/\epsilon))</span> cổng từ tập hợp rời rạc, một sự gia tăng đa logarit (polylogarithmic) so với kích thước của mạch ban đầu, điều này có khả năng được chấp nhận cho gần như tất cả các ứng dụng.</p>
+<p>Tóm lại, chúng ta đã chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và <span class="math inline">\pi/8</span> là vạn năng cho tính toán lượng tử theo nghĩa là cho trước một mạch chứa các cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tùy ý, hoàn toàn có thể mô phỏng mạch này với độ chính xác tốt bằng cách chỉ sử dụng tập hợp cổng rời rạc này. Hơn nữa, quá trình mô phỏng có thể được thực hiện một cách hiệu quả, theo nghĩa là chi phí hoạt động (overhead) cần thiết để thực hiện mô phỏng là đa thức theo <span class="math inline">\log(m/\epsilon)</span>, trong đó <span class="math inline">m</span> là số lượng cổng trong mạch ban đầu, và <span class="math inline">\epsilon</span> là độ chính xác mong muốn của phép mô phỏng.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.41:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Bài tập này và hai bài tập tiếp theo phát triển một cấu trúc chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và Toffoli là vạn năng.</p>
+<p><img src="../../img/4.17.png" class="img-fluid"></p>
+<p>Chứng minh rằng mạch ở Hình 4.17 áp dụng phép toán <span class="math inline">R_z(\theta)</span> lên qubit thứ ba (mục tiêu) nếu các kết quả đo lường đều là <span class="math inline">0</span>, trong đó <span class="math inline">\cos\theta = 3/5</span>, và nếu không thì áp dụng <span class="math inline">Z</span> lên qubit mục tiêu. Chứng minh rằng xác suất để cả hai kết quả đo lường đều là <span class="math inline">0</span> là <span class="math inline">5/8</span>, và giải thích làm thế nào việc sử dụng lặp đi lặp lại mạch này và các cổng <span class="math inline">Z = S^2</span> có thể được dùng để áp dụng một cổng <span class="math inline">R_z(\theta)</span> với xác suất tiến tới 1.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.42: (Tính vô tỉ của <span class="math inline">\theta</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\cos\theta = 3/5</span>. Chúng ta đưa ra một chứng minh bằng phản chứng rằng <span class="math inline">\theta</span> là một bội số vô tỉ của <span class="math inline">2\pi</span>.</p>
+<ol type="1">
+<li>Sử dụng thực tế rằng <span class="math inline">e^{i\theta} = (3 + 4i)/5</span>, chứng minh rằng nếu <span class="math inline">\theta</span> là số hữu tỉ, thì phải tồn tại một số nguyên dương <span class="math inline">m</span> sao cho <span class="math inline">(3 + 4i)^m = 5^m</span>.</li>
+<li>Chứng minh rằng <span class="math inline">(3 + 4i)^m = 3 + 4i \pmod 5</span> với mọi <span class="math inline">m &gt; 0</span>, và kết luận rằng không thể tồn tại <span class="math inline">m</span> nào sao cho <span class="math inline">(3 + 4i)^m = 5^m</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.44:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Conf mấy bai nx luoi go</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="approximating-arbitrary-unitary-gates-is-generically-hard" class="level1">
+<h1>4. Approximating arbitrary unitary gates is generically hard</h1>
+<p>Chúng ta đã thấy rằng bất kỳ phép biến đổi unita nào trên <span class="math inline">n</span> qubit đều có thể được xây dựng từ một tập hợp nhỏ các cổng cơ bản. Có phải lúc nào cũng có thể làm điều này một cách hiệu quả không? Tức là, cho trước một phép biến đổi unita <span class="math inline">U</span> trên <span class="math inline">n</span> qubit, liệu có luôn tồn tại một mạch có kích thước đa thức theo <span class="math inline">n</span> để xấp xỉ <span class="math inline">U</span> hay không? Câu trả lời cho câu hỏi này hóa ra lại là một chữ không vang dội: trên thực tế, hầu hết các phép biến đổi unita chỉ có thể được triển khai một cách rất kém hiệu quả. Một cách để thấy điều này là xem xét câu hỏi: cần bao nhiêu cổng để tạo ra một trạng thái tùy ý của <span class="math inline">n</span> qubit? Một lập luận đếm đơn giản cho thấy rằng điều này đòi hỏi một số lượng phép toán theo hàm mũ, một cách tổng quát; từ đó suy ra ngay lập tức rằng có những phép toán unita đòi hỏi số lượng phép toán theo hàm mũ. Để thấy điều này, giả sử chúng ta có sẵn <span class="math inline">g</span> loại cổng khác nhau, và mỗi cổng hoạt động trên nhiều nhất <span class="math inline">f</span> qubit đầu vào. Những con số này, <span class="math inline">f</span> và <span class="math inline">g</span>, được cố định bởi phần cứng máy tính mà chúng ta có sẵn, và có thể được coi là các hằng số. Giả sử chúng ta có một mạch lượng tử chứa <span class="math inline">m</span> cổng, bắt đầu từ trạng thái cơ sở tính toán <span class="math inline">\vert{}0\rangle^{\otimes n}</span>. Đối với bất kỳ cổng cụ thể nào trong mạch, do đó có nhiều nhất <span class="math inline">\left[ \binom{n}{f} \right]^g = O(n^{fg})</span> lựa chọn khả dĩ. Từ đó suy ra rằng có nhiều nhất <span class="math inline">O(n^{fgm})</span> trạng thái khác nhau có thể được tính toán bằng cách sử dụng <span class="math inline">m</span> cổng.</p>
+<p><img src="../../img/4.18.png" class="img-fluid"></p>
+<p>Giả sử chúng ta mong muốn xấp xỉ một trạng thái cụ thể, <span class="math inline">\vert{}\psi\rangle</span>, trong phạm vi khoảng cách <span class="math inline">\epsilon</span>. Ý tưởng của chứng minh là bao phủ tập hợp tất cả các trạng thái khả dĩ bằng một tập hợp các ‘mảng’ (‘patches’), mỗi mảng có bán kính <span class="math inline">\epsilon</span> (Hình 4.18), và sau đó chứng minh rằng số lượng mảng cần thiết tăng gấp đôi theo hàm mũ (doubly exponentially) đối với <span class="math inline">n</span>; việc so sánh với số lượng hàm mũ các trạng thái khác nhau có thể được tính toán bằng cách sử dụng <span class="math inline">m</span> cổng sẽ ngụ ý kết quả.</p>
+<p>Quan sát đầu tiên chúng ta cần là không gian của các vector trạng thái của <span class="math inline">n</span> qubit có thể được coi chính là mặt cầu đơn vị <span class="math inline">(2^{n+1}-1)</span> chiều. Để thấy điều này, giả sử trạng thái <span class="math inline">n</span> qubit có các biên độ <span class="math inline">\psi_j = X_j + iY_j</span>, trong đó <span class="math inline">X_j</span> và <span class="math inline">Y_j</span> lần lượt là phần thực và phần ảo của biên độ thứ <span class="math inline">j</span>. Điều kiện chuẩn hóa cho các trạng thái lượng tử có thể được viết là <span class="math inline">\sum_j (X_j^2 + Y_j^2) = 1</span>, đây chính là điều kiện để một điểm nằm trên mặt cầu đơn vị trong <span class="math inline">2^{n+1}</span> chiều thực, tức là, mặt cầu đơn vị <span class="math inline">(2^{n+1}-1)</span> chiều. Tương tự, diện tích bề mặt có bán kính <span class="math inline">\epsilon</span> ở gần <span class="math inline">\vert{}\psi\rangle</span> xấp xỉ bằng thể tích của một hình cầu <span class="math inline">(2^{n+1}-2)</span> chiều có bán kính <span class="math inline">\epsilon</span>. Sử dụng công thức <span class="math inline">S_k(r) = 2\pi^{(k+1)/2}r^k / \Gamma((k+1)/2)</span> cho diện tích bề mặt của một mặt cầu <span class="math inline">k</span>-chiều có bán kính <span class="math inline">r</span>, và <span class="math inline">V_k(r) = 2\pi^{(k+1)/2}r^{k+1} / [(k+1)\Gamma((k+1)/2)]</span> cho thể tích của một hình cầu <span class="math inline">k</span>-chiều có bán kính <span class="math inline">r</span>, chúng ta thấy rằng số lượng mảng cần thiết để bao phủ không gian trạng thái sẽ xấp xỉ bằng</p>
+<p><span class="math display">
+\frac{S_{2^{n+1}-1}(1)}{V_{2^{n+1}-2}(\epsilon)} = \frac{\sqrt{\pi} \Gamma(2^n - \frac{1}{2}) (2^{n+1}-1)}{\Gamma(2^n) \epsilon^{2^{n+1}-1}}, \tag{4.82}
+</span></p>
+<p>trong đó <span class="math inline">\Gamma</span> là dạng tổng quát hóa thông thường của hàm giai thừa. Nhưng <span class="math inline">\Gamma(2^n - 1/2) \ge \Gamma(2^n) / 2^n</span>, do đó số lượng mảng cần thiết để bao phủ không gian ít nhất là</p>
+<p><span class="math display">
+\Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right). \tag{4.83}
+</span></p>
+<p>Nhớ lại rằng số lượng mảng có thể đạt tới bằng <span class="math inline">m</span> cổng là <span class="math inline">O(n^{fgm})</span>, vì vậy để đạt tới tất cả các mảng <span class="math inline">\epsilon</span>, chúng ta phải có</p>
+<p><span class="math display">
+O(n^{fgm}) \ge \Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right), \tag{4.84}
+</span></p>
+<p>điều này cho chúng ta</p>
+<p><span class="math display">
+m = \Omega\left( \frac{2^n \log(1/\epsilon)}{\log(n)} \right). \tag{4.85}
+</span></p>
+<p>Tức là, có những trạng thái của <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon)/\log(n))</span> phép toán để xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span>. Con số này phụ thuộc theo hàm mũ vào <span class="math inline">n</span>, và do đó là ‘khó’ (difficult), theo ý nghĩa của độ phức tạp tính toán đã được giới thiệu trong Chương 3. Hơn nữa, điều này ngay lập tức ngụ ý rằng có những phép biến đổi unita <span class="math inline">U</span> trên <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon)/\log(n))</span> phép toán để xấp xỉ bằng một mạch lượng tử thực hiện một phép toán <span class="math inline">V</span> sao cho <span class="math inline">E(U, V) \le \epsilon</span>.</p>
+<p>Ngược lại, bằng cách sử dụng các cấu trúc vạn năng của chúng ta và định lý Solovay-Kitaev, ta suy ra rằng một phép toán unita <span class="math inline">U</span> tùy ý trên <span class="math inline">n</span> qubit có thể được xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span> bằng cách sử dụng <span class="math inline">O(n^2 4^n \log^c(n^2 4^n / \epsilon))</span> cổng. Do đó, cấu trúc cho tính vạn năng mà chúng tôi đã đưa ra là tối ưu (nếu bỏ qua một hệ số đa thức); thật không may, nó không giải quyết được vấn đề xác định những họ phép toán unita nào có thể được tính toán một cách hiệu quả trong mô hình mạch lượng tử.</p>
 
 
 </section>

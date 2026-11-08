@@ -263,3 +263,235 @@ Nhìn phương trình (4.58) ta thấy tằng tất cả các chỉ số trên �
 
 Mà chắc chắn ma trận U không đơn giản như vậy rồi, vậy nên chúng ta có thể áp dụng cái đầu tiên đã nói, một ma trận U có thể tách thành tích các ma trận U ngã hai mức.
 :::
+
+# 3. A discrete set of universal operations
+
+Trong phần trước, chúng ta đã chứng minh rằng $\text{CNOT}$ và các ma trận unita một qubit cùng nhau tạo thành một tập hợp vạn năng cho tính toán lượng tử. Thật không may, không có phương pháp đơn giản nào được biết đến để triển khai tất cả các cổng này theo cách có khả năng chống chịu lại lỗi (resistant to errors). May mắn thay, trong phần này chúng ta sẽ tìm thấy một tập hợp rời rạc các cổng có thể được sử dụng để thực hiện tính toán lượng tử vạn năng, và trong Chương 10, chúng ta sẽ chỉ ra cách thực hiện các cổng này theo cách chống lại lỗi, sử dụng các mã sửa lỗi lượng tử.   
+
+## Approximating unitary operators 
+
+Rõ ràng, một tập hợp rời rạc các cổng không thể được sử dụng để triển khai một phép toán unita tùy ý một cách chính xác, vì tập hợp các phép toán unita là liên tục. Thay vào đó, hóa ra một tập hợp rời rạc có thể được sử dụng để xấp xỉ bất kỳ phép toán unita nào. Để hiểu điều này hoạt động như thế nào, trước tiên chúng ta cần nghiên cứu xem việc xấp xỉ một phép toán unita có nghĩa là gì. Giả sử $U$ và $V$ là hai toán tử unita trên cùng một không gian trạng thái. $U$ là toán tử unita mục tiêu mà chúng ta muốn triển khai, và $V$ là toán tử unita thực sự được triển khai trong thực tế. Chúng ta định nghĩa sai số (error) khi $V$ được triển khai thay vì $U$ là:   
+
+$$
+E(U, V) \equiv \max_{\vert{}\psi\rangle} \vert{}\vert{}(U - V)\vert{}\psi\rangle\vert{}\vert{}, \tag{4.61}
+$$   
+
+trong đó giá trị lớn nhất được lấy trên tất cả các trạng thái lượng tử chuẩn hóa $\vert{}\psi\rangle$ trong không gian trạng thái. Trong Hộp 4.1 ở trang 195, chúng tôi chỉ ra rằng độ đo sai số này có một cách diễn giải là nếu $E(U, V)$ nhỏ, thì bất kỳ phép đo lường nào được thực hiện trên trạng thái $V\vert{}\psi\rangle$ sẽ cho ra các thống kê đo lường xấp xỉ giống như một phép đo lường trên $U\vert{}\psi\rangle$, đối với bất kỳ trạng thái ban đầu $\vert{}\psi\rangle$ nào. Cụ thể hơn, chúng tôi chỉ ra rằng nếu $M$ là một phần tử POVM trong một POVM tùy ý, và $P_U$ (hoặc $P_V$) là xác suất thu được kết quả này nếu $U$ (hoặc $V$) được thực hiện với trạng thái bắt đầu $\vert{}\psi\rangle$, thì:   
+
+$$
+\vert{}P_U - P_V\vert{} \le 2E(U, V). \tag{4.62}
+$$   
+
+Do đó, nếu $E(U, V)$ nhỏ, thì các kết quả đo lường xảy ra với các xác suất tương tự nhau, bất kể $U$ hay $V$ được thực hiện. Cũng được chỉ ra trong Hộp 4.1 là nếu chúng ta thực hiện một chuỗi các cổng $V_1, \dots, V_m$ nhằm mục đích xấp xỉ một chuỗi các cổng khác $U_1, \dots, U_m$, thì các sai số cộng dồn nhiều nhất là tuyến tính:   
+
+$$
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.63}
+$$   
+
+Các kết quả xấp xỉ (4.62) và (4.63) cực kỳ hữu ích. Giả sử chúng ta muốn thực hiện một mạch lượng tử chứa $m$ cổng, từ $U_1$ đến $U_m$. Thật không may, chúng ta chỉ có thể xấp xỉ cổng $U_j$ bằng cổng $V_j$. Để xác suất của các kết quả đo lường khác nhau thu được từ mạch xấp xỉ nằm trong khoảng dung sai $\Delta > 0$ so với các xác suất chính xác, thì chỉ cần $E(U_j, V_j) \le \Delta / (2m)$, theo các kết quả (4.62) và (4.63).
+
+
+:::{.callout-important}
+# Hộp 4.1: Xấp xỉ các mạch lượng tử   
+
+Giả sử một hệ lượng tử bắt đầu ở trạng thái $\vert{}\psi\rangle$, và chúng ta thực hiện phép toán unita $U$ hoặc phép toán unita $V$. Tiếp theo đó, chúng ta thực hiện một phép đo lường. Gọi $M$ là một phần tử POVM gắn liền với phép đo lường, và gọi $P_U$ (hoặc $P_V$) là xác suất thu được kết quả đo lường tương ứng nếu phép toán $U$ (hoặc $V$) được thực hiện. Khi đó   
+
+$$
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M U\vert{}\psi\rangle - \langle\psi\vert{}V^\dagger M V\vert{}\psi\rangle\vert{}. \tag{4.64}
+$$   
+
+Gọi $\vert{}\Delta\rangle \equiv (U - V)\vert{}\psi\rangle$. Một chút đại số đơn giản và bất đẳng thức Cauchy–Schwarz cho thấy rằng   
+
+$$
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle + \langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.65}
+$$   
+
+$$
+\le \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle\vert{} + \vert{}\langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.66}
+$$   
+
+$$
+\le \vert{}\vert{}\Delta\vert{}\vert{} + \vert{}\vert{}\Delta\vert{}\vert{} \tag{4.67}
+$$   
+
+$$
+\le 2E(U, V). \tag{4.68}
+$$   
+
+Bất đẳng thức $\vert{}P_U - P_V\vert{} \le 2E(U, V)$ đưa ra biểu thức định lượng cho ý tưởng rằng khi sai số $E(U, V)$ nhỏ, thì sự khác biệt về xác suất giữa các kết quả đo lường cũng nhỏ.   
+
+Giả sử chúng ta thực hiện một chuỗi các cổng $V_1, V_2, \dots, V_m$ nhằm mục đích xấp xỉ một chuỗi các cổng khác, $U_1, U_2, \dots, U_m$. Hóa ra sai số gây ra bởi toàn bộ chuỗi các cổng không hoàn hảo này lớn nhất cũng chỉ bằng tổng các sai số trong từng cổng riêng lẻ,   
+
+$$
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.69}
+$$   
+
+Để chứng minh điều này, chúng ta bắt đầu với trường hợp $m = 2$. Lưu ý rằng đối với một trạng thái $\vert{}\psi\rangle$ nào đó, chúng ta có   
+
+$$
+E(U_2 U_1, V_2 V_1) = \vert{}\vert{}(U_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.70}
+$$   
+
+$$
+= \vert{}\vert{}(U_2 U_1 - V_2 U_1)\vert{}\psi\rangle + (V_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{}. \tag{4.71}
+$$   
+
+Sử dụng bất đẳng thức tam giác $\vert{}\vert{}\vert{}a\rangle + \vert{}b\rangle\vert{}\vert{} \le \vert{}\vert{}\vert{}a\rangle\vert{}\vert{} + \vert{}\vert{}\vert{}b\rangle\vert{}\vert{}$, chúng ta thu được
+
+$$
+E(U_2 U_1, V_2 V_1) \le \vert{}\vert{}(U_2 - V_2)U_1\vert{}\psi\rangle\vert{}\vert{} + \vert{}\vert{}V_2(U_1 - V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.72}
+$$   
+
+$$
+\le E(U_2, V_2) + E(U_1, V_1), \tag{4.73}
+$$   
+
+đây chính là kết quả mong muốn. Kết quả cho số $m$ tổng quát được suy ra bằng phương pháp quy nạp.  
+:::
+
+
+:::{.callout}
+# Tại sao lại xuất hiện xấp xỉ?
+
+Rõ ràng là **mọi ma trận Unita U luôn luôn biểu diễn chính xác tuyệt đối** thành tích của các ma trận hai mức, và các ma trận hai mức này lại biểu diễn chính xác tuyệt đối thành các cổng CNOT và cổng xoay 1-qubit.
+
+Nhưng rõ ràng các R_x, R_y, R_z, có các tham số theta, phi, là tham số thực trong đó, vì vậy không có cách nào biểu diễn một cách chính xác hoàn toàn.
+
+Tóm lại thì:
+
+Gray code + CNOT + Các phép xoay liên tục $R_z(\theta), R_y(\theta)$ -> Chính xác 100%.
+
+Gray code + CNOT + Tập hợp cổng rời rạc $\{H, S, T\}$ -> Xấp xỉ đúng với độ chính xác epsilon tùy ý.
+
+## Phép màu của sự Cộng dồn tuyến tính (4.63)
+
+Trong khi các hệ thống analog, sai số nhỏ ở đầu mạch có thể bị khuếch đại theo hàm mũ (hiệu ứng cánh bướm) khiến kết quả cuối cùng hoàn toàn vô nghìa.
+
+Thì trong hệ lượng tử, các sai số không bao giờ bị khuếch đại. Sai số tổng cộng của một mạch điện dài chỉ bằng tổng các sai số của từng tổng cộng lại. 
+
+:::
+
+## Universality of Hadamard + phase + CNOT + π/8 gates
+
+Giờ đây chúng ta đang ở một vị thế tốt để nghiên cứu việc xấp xỉ các phép toán unita tùy ý bằng các tập hợp cổng rời rạc. Chúng ta sẽ xem xét hai tập hợp cổng rời rạc khác nhau, cả hai đều là vạn năng. Tập hợp đầu tiên, tập hợp chuẩn (standard set) của các cổng vạn năng, bao gồm các cổng Hadamard, phase, controlled-$\text{NOT}$ và $\pi/8$. Chúng tôi cung cấp các cấu trúc chống chịu lỗi cho các cổng này ở Chương 10; chúng cũng cung cấp một cấu trúc vạn năng đặc biệt đơn giản. Tập hợp cổng thứ hai mà chúng ta xem xét bao gồm cổng Hadamard, cổng phase, cổng controlled-$\text{NOT}$, và cổng Toffoli. Các cổng này cũng đều có thể được thực hiện một cách chống chịu lỗi; tuy nhiên, chứng minh tính vạn năng và cấu trúc chống chịu lỗi cho các cổng này kém hấp dẫn hơn một chút.
+
+Chúng ta bắt đầu chứng minh tính vạn năng bằng cách chỉ ra rằng các cổng Hadamard và $\pi/8$ có thể được sử dụng để xấp xỉ bất kỳ phép toán unita một qubit nào với độ chính xác tùy ý. Xem xét các cổng $T$ và $HTH$. $T$ là, bỏ qua một pha toàn cục không quan trọng, một phép quay $\pi/4$ radian quanh trục $\hat{z}$ trên mặt cầu Bloch, trong khi $HTH$ là một phép quay $\pi/4$ radian quanh trục $\hat{x}$ trên mặt cầu Bloch (Bài tập 4.14). Kết hợp hai phép toán này cho ta, bỏ qua một pha toàn cục,
+
+$$
+\exp\left(-i \frac{\pi}{8} Z\right) \exp\left(-i \frac{\pi}{8} X\right) = \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} Z \right] \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} X \right] \tag{4.74}
+$$
+
+$$
+= \cos^2\frac{\pi}{8} I - i \left[ \cos\frac{\pi}{8} (X + Z) + \sin\frac{\pi}{8} Y \right] \sin\frac{\pi}{8}. \tag{4.75}
+$$
+
+Đây là một phép quay của mặt cầu Bloch quanh một trục dọc theo $\vec{n} = (\cos\frac{\pi}{8}, \sin\frac{\pi}{8}, \cos\frac{\pi}{8})$ với vector đơn vị tương ứng $\hat{n}$, và quay một góc $\theta$ được định nghĩa bởi $\cos(\theta/2) \equiv \cos^2\frac{\pi}{8}$. Tức là, chỉ sử dụng các cổng Hadamard và $\pi/8$, chúng ta có thể xây dựng được $R_{\hat{n}}(\theta)$. Hơn nữa, góc $\theta$ này có thể được chứng minh là một bội số vô tỉ của $2\pi$. Việc chứng minh sự thật sau cùng này hơi vượt quá phạm vi của chúng ta; xem phần cuối chương 'Lịch sử và đọc thêm'.
+
+Tiếp theo, chúng ta chỉ ra rằng việc lặp lại nhiều lần $R_{\hat{n}}(\theta)$ có thể được sử dụng để xấp xỉ với độ chính xác tùy ý bất kỳ phép quay $R_{\hat{n}}(\alpha)$ nào. Để thấy điều này, gọi $\delta > 0$ là độ chính xác mong muốn, và gọi $N$ là một số nguyên lớn hơn $2\pi/\delta$. Định nghĩa $\theta_k$ sao cho $\theta_k \in [0, 2\pi)$ và $\theta_k = (k\theta)\pmod{2\pi}$. Khi đó, nguyên lý chuồng bồ câu (pigeonhole principle) ngụ ý rằng có các số $j$ và $k$ phân biệt trong khoảng từ $1, \dots, N$ sao cho $\vert{}\theta_k - \theta_j\vert{} \le 2\pi/N < \delta$. Không mất tính tổng quát, giả sử rằng $k > j$, vì vậy chúng ta có $\vert{}\theta_{k-j}\vert{} < \delta$. Vì $j \neq k$ và $\theta$ là một bội số vô tỉ của $2\pi$, chúng ta phải có $\theta_{k-j} \neq 0$. Suy ra chuỗi $\theta_{l(k-j)}$ lấp đầy khoảng $[0, 2\pi)$ khi $l$ thay đổi, sao cho các thành viên kề nhau của chuỗi cách nhau không quá $\delta$. Suy ra đối với bất kỳ $\epsilon > 0$ nào, tồn tại một số $n$ sao cho
+
+$$
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\theta)^n) < \frac{\epsilon}{3}. \tag{4.76}
+$$   
+
+Bài tập 4.40: Với $\alpha$ và $\beta$ tùy ý, hãy chứng minh rằng
+
+$$
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\alpha + \beta)) = \vert{}1 - \exp(i\beta/2)\vert{}, \tag{4.77}
+$$
+
+và sử dụng điều này để biện minh cho (4.76).   
+
+Giờ đây chúng ta đã ở vị thế có thể kiểm chứng rằng bất kỳ phép toán một qubit nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard và $\pi/8$. Đại số đơn giản ngụ ý rằng với mọi $\alpha$,
+
+$$
+HR_{\hat{n}}(\alpha)H = R_{\hat{m}}(\alpha), \tag{4.78}
+$$
+
+trong đó $\hat{m}$ là một vector đơn vị theo hướng $(\cos\frac{\pi}{8}, -\sin\frac{\pi}{8}, \cos\frac{\pi}{8})$, từ đó suy ra
+$$
+E(R_{\hat{m}}(\alpha), R_{\hat{m}}(\theta)^n) < \frac{\epsilon}{3}. \tag{4.79}
+$$
+
+Nhưng theo Bài tập 4.11, một ma trận unita $U$ tùy ý trên một qubit có thể được viết thành
+$$
+U = R_{\hat{n}}(\beta) R_{\hat{m}}(\gamma) R_{\hat{n}}(\delta), \tag{4.80}
+$$
+
+nếu bỏ qua một dịch chuyển pha toàn cục không quan trọng. Các kết quả (4.76) và (4.79), cùng với bất đẳng thức chuỗi (4.63) do đó ngụ ý rằng đối với các số nguyên dương phù hợp $n_1, n_2, n_3$,
+$$
+E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)^{n_3}) < \epsilon. \tag{4.81}
+$$
+
+Tức là, cho trước bất kỳ toán tử unita một qubit $U$ nào và bất kỳ $\epsilon > 0$ nào, ta hoàn toàn có thể xấp xỉ $U$ trong khoảng sai số $\epsilon$ bằng cách sử dụng một mạch chỉ bao gồm các cổng Hadamard và cổng $\pi/8$.   
+
+Vì các cổng $\pi/8$ và Hadamard cho phép chúng ta xấp xỉ bất kỳ toán tử unita một qubit nào, từ các lập luận ở Mục 4.5.2 suy ra rằng chúng ta có thể xấp xỉ bất kỳ mạch lượng tử $m$ cổng nào, như sau. Cho một mạch lượng tử chứa $m$ cổng, có thể là các cổng CNOT hoặc các cổng unita một qubit, chúng ta có thể xấp xỉ nó bằng cách sử dụng các cổng Hadamard, controlled-NOT và $\pi/8$ (sau này, chúng ta sẽ thấy rằng các cổng phase làm cho việc xấp xỉ có khả năng chống chịu lỗi, nhưng đối với lập luận vạn năng hiện tại thì chúng không hoàn toàn cần thiết). Nếu chúng ta mong muốn độ chính xác $\epsilon$ cho toàn bộ mạch, thì điều này có thể đạt được bằng cách xấp xỉ mỗi cổng unita một qubit bằng quy trình trên trong khoảng sai số $\epsilon/m$ và áp dụng bất đẳng thức chuỗi (4.63) để thu được độ chính xác $\epsilon$ cho toàn bộ mạch.   
+
+Quy trình xấp xỉ các mạch lượng tử bằng một tập hợp cổng rời rạc này hiệu quả đến mức nào? Đây là một câu hỏi quan trọng. Ví dụ, giả sử rằng việc xấp xỉ một cổng unita một qubit tùy ý trong khoảng cách $\epsilon$ đòi hỏi $\Omega(2^{1/\epsilon})$ cổng từ tập hợp rời rạc. Khi đó, để xấp xỉ mạch lượng tử $m$ cổng được xem xét ở đoạn trước sẽ đòi hỏi $\Omega(m 2^{m/\epsilon})$ cổng, một sự gia tăng theo hàm mũ so với kích thước mạch ban đầu!. May mắn thay, tốc độ hội tụ tốt hơn thế này rất nhiều. Về mặt trực giác, có vẻ hợp lý khi chuỗi các góc $\theta_k$ 'lấp đầy' khoảng $[0, 2\pi)$ theo một cách ít nhiều đồng đều, do đó để xấp xỉ một cổng một qubit tùy ý hẳn sẽ cần khoảng $\Theta(1/\epsilon)$ cổng từ tập hợp rời rạc. Nếu chúng ta sử dụng ước tính này cho số lượng cổng cần thiết để xấp xỉ một cổng một qubit tùy ý, thì số lượng cần thiết để xấp xỉ một mạch $m$ cổng với độ chính xác $\epsilon$ trở thành $\Theta(m^2/\epsilon)$. Đây là sự gia tăng bậc hai so với kích thước ban đầu của mạch, $m$, điều này đối với nhiều ứng dụng có thể là đủ. 
+
+Tuy nhiên, thật đáng chú ý, một tốc độ hội tụ nhanh hơn nhiều có thể được chứng minh. Định lý Solovay-Kitaev, được chứng minh ở Phụ lục 3, ngụ ý rằng một cổng unita một qubit tùy ý có thể được xấp xỉ với độ chính xác $\epsilon$ bằng cách sử dụng $O(\log^c(1/\epsilon))$ cổng từ tập hợp rời rạc của chúng ta, trong đó $c$ là một hằng số xấp xỉ bằng $2$. Do đó, định lý Solovay-Kitaev ngụ ý rằng để xấp xỉ một mạch chứa $m$ cổng $\text{CNOT}$ và các cổng unita một qubit tới độ chính xác $\epsilon$ thì đòi hỏi $O(m \log^c(m/\epsilon))$ cổng từ tập hợp rời rạc, một sự gia tăng đa logarit (polylogarithmic) so với kích thước của mạch ban đầu, điều này có khả năng được chấp nhận cho gần như tất cả các ứng dụng.   
+
+Tóm lại, chúng ta đã chỉ ra rằng các cổng Hadamard, phase, controlled-$\text{NOT}$ và $\pi/8$ là vạn năng cho tính toán lượng tử theo nghĩa là cho trước một mạch chứa các cổng $\text{CNOT}$ và các cổng unita một qubit tùy ý, hoàn toàn có thể mô phỏng mạch này với độ chính xác tốt bằng cách chỉ sử dụng tập hợp cổng rời rạc này. Hơn nữa, quá trình mô phỏng có thể được thực hiện một cách hiệu quả, theo nghĩa là chi phí hoạt động (overhead) cần thiết để thực hiện mô phỏng là đa thức theo $\log(m/\epsilon)$, trong đó $m$ là số lượng cổng trong mạch ban đầu, và $\epsilon$ là độ chính xác mong muốn của phép mô phỏng.   
+
+
+
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.41: 
+Bài tập này và hai bài tập tiếp theo phát triển một cấu trúc chỉ ra rằng các cổng Hadamard, phase, controlled-$\text{NOT}$ và Toffoli là vạn năng.   
+
+![](../../img/4.17.png)
+
+Chứng minh rằng mạch ở Hình 4.17 áp dụng phép toán $R_z(\theta)$ lên qubit thứ ba (mục tiêu) nếu các kết quả đo lường đều là $0$, trong đó $\cos\theta = 3/5$, và nếu không thì áp dụng $Z$ lên qubit mục tiêu. Chứng minh rằng xác suất để cả hai kết quả đo lường đều là $0$ là $5/8$, và giải thích làm thế nào việc sử dụng lặp đi lặp lại mạch này và các cổng $Z = S^2$ có thể được dùng để áp dụng một cổng $R_z(\theta)$ với xác suất tiến tới 1.   
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.42: (Tính vô tỉ của $\theta$) 
+Giả sử $\cos\theta = 3/5$. Chúng ta đưa ra một chứng minh bằng phản chứng rằng $\theta$ là một bội số vô tỉ của $2\pi$.
+
+(1) Sử dụng thực tế rằng $e^{i\theta} = (3 + 4i)/5$, chứng minh rằng nếu $\theta$ là số hữu tỉ, thì phải tồn tại một số nguyên dương $m$ sao cho $(3 + 4i)^m = 5^m$.
+(2) Chứng minh rằng $(3 + 4i)^m = 3 + 4i \pmod 5$ với mọi $m > 0$, và kết luận rằng không thể tồn tại $m$ nào sao cho $(3 + 4i)^m = 5^m$.  
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 4.44:
+
+Conf mấy bai nx luoi go
+:::
+
+# 4. Approximating arbitrary unitary gates is generically hard
+
+Chúng ta đã thấy rằng bất kỳ phép biến đổi unita nào trên $n$ qubit đều có thể được xây dựng từ một tập hợp nhỏ các cổng cơ bản. Có phải lúc nào cũng có thể làm điều này một cách hiệu quả không? Tức là, cho trước một phép biến đổi unita $U$ trên $n$ qubit, liệu có luôn tồn tại một mạch có kích thước đa thức theo $n$ để xấp xỉ $U$ hay không? Câu trả lời cho câu hỏi này hóa ra lại là một chữ không vang dội: trên thực tế, hầu hết các phép biến đổi unita chỉ có thể được triển khai một cách rất kém hiệu quả. Một cách để thấy điều này là xem xét câu hỏi: cần bao nhiêu cổng để tạo ra một trạng thái tùy ý của $n$ qubit? Một lập luận đếm đơn giản cho thấy rằng điều này đòi hỏi một số lượng phép toán theo hàm mũ, một cách tổng quát; từ đó suy ra ngay lập tức rằng có những phép toán unita đòi hỏi số lượng phép toán theo hàm mũ. Để thấy điều này, giả sử chúng ta có sẵn $g$ loại cổng khác nhau, và mỗi cổng hoạt động trên nhiều nhất $f$ qubit đầu vào. Những con số này, $f$ và $g$, được cố định bởi phần cứng máy tính mà chúng ta có sẵn, và có thể được coi là các hằng số. Giả sử chúng ta có một mạch lượng tử chứa $m$ cổng, bắt đầu từ trạng thái cơ sở tính toán $\vert{}0\rangle^{\otimes n}$. Đối với bất kỳ cổng cụ thể nào trong mạch, do đó có nhiều nhất $\left[ \binom{n}{f} \right]^g = O(n^{fg})$ lựa chọn khả dĩ. Từ đó suy ra rằng có nhiều nhất $O(n^{fgm})$ trạng thái khác nhau có thể được tính toán bằng cách sử dụng $m$ cổng. 
+
+![](../../img/4.18.png)
+
+Giả sử chúng ta mong muốn xấp xỉ một trạng thái cụ thể, $\vert{}\psi\rangle$, trong phạm vi khoảng cách $\epsilon$. Ý tưởng của chứng minh là bao phủ tập hợp tất cả các trạng thái khả dĩ bằng một tập hợp các 'mảng' ('patches'), mỗi mảng có bán kính $\epsilon$ (Hình 4.18), và sau đó chứng minh rằng số lượng mảng cần thiết tăng gấp đôi theo hàm mũ (doubly exponentially) đối với $n$; việc so sánh với số lượng hàm mũ các trạng thái khác nhau có thể được tính toán bằng cách sử dụng $m$ cổng sẽ ngụ ý kết quả.   
+
+Quan sát đầu tiên chúng ta cần là không gian của các vector trạng thái của $n$ qubit có thể được coi chính là mặt cầu đơn vị $(2^{n+1}-1)$ chiều. Để thấy điều này, giả sử trạng thái $n$ qubit có các biên độ $\psi_j = X_j + iY_j$, trong đó $X_j$ và $Y_j$ lần lượt là phần thực và phần ảo của biên độ thứ $j$. Điều kiện chuẩn hóa cho các trạng thái lượng tử có thể được viết là $\sum_j (X_j^2 + Y_j^2) = 1$, đây chính là điều kiện để một điểm nằm trên mặt cầu đơn vị trong $2^{n+1}$ chiều thực, tức là, mặt cầu đơn vị $(2^{n+1}-1)$ chiều.   Tương tự, diện tích bề mặt có bán kính $\epsilon$ ở gần $\vert{}\psi\rangle$ xấp xỉ bằng thể tích của một hình cầu $(2^{n+1}-2)$ chiều có bán kính $\epsilon$. Sử dụng công thức $S_k(r) = 2\pi^{(k+1)/2}r^k / \Gamma((k+1)/2)$ cho diện tích bề mặt của một mặt cầu $k$-chiều có bán kính $r$, và $V_k(r) = 2\pi^{(k+1)/2}r^{k+1} / [(k+1)\Gamma((k+1)/2)]$ cho thể tích của một hình cầu $k$-chiều có bán kính $r$, chúng ta thấy rằng số lượng mảng cần thiết để bao phủ không gian trạng thái sẽ xấp xỉ bằng  
+
+$$
+\frac{S_{2^{n+1}-1}(1)}{V_{2^{n+1}-2}(\epsilon)} = \frac{\sqrt{\pi} \Gamma(2^n - \frac{1}{2}) (2^{n+1}-1)}{\Gamma(2^n) \epsilon^{2^{n+1}-1}}, \tag{4.82}
+$$   
+
+trong đó $\Gamma$ là dạng tổng quát hóa thông thường của hàm giai thừa. Nhưng $\Gamma(2^n - 1/2) \ge \Gamma(2^n) / 2^n$, do đó số lượng mảng cần thiết để bao phủ không gian ít nhất là   
+
+$$
+\Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right). \tag{4.83}
+$$   
+
+Nhớ lại rằng số lượng mảng có thể đạt tới bằng $m$ cổng là $O(n^{fgm})$, vì vậy để đạt tới tất cả các mảng $\epsilon$, chúng ta phải có   
+
+$$
+O(n^{fgm}) \ge \Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right), \tag{4.84}
+$$   
+
+điều này cho chúng ta   
+
+$$
+m = \Omega\left( \frac{2^n \log(1/\epsilon)}{\log(n)} \right). \tag{4.85}
+$$   
+
+Tức là, có những trạng thái của $n$ qubit đòi hỏi $\Omega(2^n \log(1/\epsilon)/\log(n))$ phép toán để xấp xỉ trong phạm vi khoảng cách $\epsilon$. Con số này phụ thuộc theo hàm mũ vào $n$, và do đó là 'khó' (difficult), theo ý nghĩa của độ phức tạp tính toán đã được giới thiệu trong Chương 3. Hơn nữa, điều này ngay lập tức ngụ ý rằng có những phép biến đổi unita $U$ trên $n$ qubit đòi hỏi $\Omega(2^n \log(1/\epsilon)/\log(n))$ phép toán để xấp xỉ bằng một mạch lượng tử thực hiện một phép toán $V$ sao cho $E(U, V) \le \epsilon$.   
+
+Ngược lại, bằng cách sử dụng các cấu trúc vạn năng của chúng ta và định lý Solovay-Kitaev, ta suy ra rằng một phép toán unita $U$ tùy ý trên $n$ qubit có thể được xấp xỉ trong phạm vi khoảng cách $\epsilon$ bằng cách sử dụng $O(n^2 4^n \log^c(n^2 4^n / \epsilon))$ cổng. Do đó, cấu trúc cho tính vạn năng mà chúng tôi đã đưa ra là tối ưu (nếu bỏ qua một hệ số đa thức); thật không may, nó không giải quyết được vấn đề xác định những họ phép toán unita nào có thể được tính toán một cách hiệu quả trong mô hình mạch lượng tử. 
