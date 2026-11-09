@@ -437,6 +437,9 @@ window.Quarto = {
   <li><a href="#the-quantum-simulation-algorithm" id="toc-the-quantum-simulation-algorithm" class="nav-link" data-scroll-target="#the-quantum-simulation-algorithm">2. The quantum simulation algorithm</a></li>
   <li><a href="#định-lý-4.3-công-thức-trotter" id="toc-định-lý-4.3-công-thức-trotter" class="nav-link" data-scroll-target="#định-lý-4.3-công-thức-trotter">Định lý 4.3: (Công thức Trotter)</a></li>
   <li><a href="#algorithm-quantum-simulation" id="toc-algorithm-quantum-simulation" class="nav-link" data-scroll-target="#algorithm-quantum-simulation">Algorithm: Quantum simulation</a></li>
+  <li><a href="#an-illustrative-example" id="toc-an-illustrative-example" class="nav-link" data-scroll-target="#an-illustrative-example">3. An illustrative example</a></li>
+  <li><a href="#perspectives-on-quantum-simulation" id="toc-perspectives-on-quantum-simulation" class="nav-link" data-scroll-target="#perspectives-on-quantum-simulation">4. Perspectives on quantum simulation</a></li>
+  <li><a href="#siêu-tóm-tắt" id="toc-siêu-tóm-tắt" class="nav-link" data-scroll-target="#siêu-tóm-tắt">Siêu tóm tắt</a></li>
   </ul>
 </nav>
     </div>
@@ -765,6 +768,97 @@ H = \frac{p^2}{2m} + V(x), \tag{4.108}
 <p>Cấu trúc của <span class="math inline">U_{\text{FFT}}</span> được thảo luận ở Chương 5.</p>
 </div>
 </div>
+</section>
+<section id="an-illustrative-example" class="level1">
+<h1>3. An illustrative example</h1>
+<p>Quy trình mà chúng ta đã mô tả cho các mô phỏng lượng tử tập trung vào việc mô phỏng các Hamiltonian là tổng của các tương tác cục bộ. Tuy nhiên, đây không phải là một yêu cầu cơ bản! Như ví dụ sau đây minh họa, các mô phỏng lượng tử hiệu quả là khả thi ngay cả đối với các Hamiltonian tác động một cách không tầm thường lên tất cả hoặc gần như tất cả các phần của một hệ thống lớn.</p>
+<p>Giả sử chúng ta có Hamiltonian</p>
+<p><span class="math display">
+H = Z_1 \otimes Z_2 \otimes \dots \otimes Z_n, \tag{4.113}
+</span></p>
+<p>tác động lên một hệ thống <span class="math inline">n</span> qubit. Mặc dù đây là một tương tác liên quan đến toàn bộ hệ thống, trên thực tế, nó có thể được mô phỏng một cách hiệu quả. Điều mà chúng ta mong muốn là một mạch lượng tử đơn giản thực thi <span class="math inline">e^{-iH\Delta t}</span>, cho các giá trị tùy ý của <span class="math inline">\Delta t</span>. Một mạch thực hiện chính xác điều này, đối với <span class="math inline">n = 3</span>, được thể hiện trong Hình 4.19. Insight chính là mặc dù Hamiltonian liên quan đến tất cả các qubit trong hệ thống, nhưng nó thực hiện điều đó theo một cách mang tính cổ điển: độ dịch pha áp dụng cho hệ thống là <span class="math inline">e^{-i\Delta t}</span> nếu tính chẵn lẻ (parity) của <span class="math inline">n</span> qubit trong cơ sở tính toán là chẵn; ngược lại, độ dịch pha sẽ là <span class="math inline">e^{i\Delta t}</span>. Do đó, việc mô phỏng đơn giản <span class="math inline">H</span> là khả thi bằng cách đầu tiên tính toán cổ điển tính chẵn lẻ (lưu trữ kết quả trong một qubit phụ - ancilla qubit), sau đó áp dụng độ dịch pha phù hợp có điều kiện theo tính chẵn lẻ, rồi tính toán ngược lại tính chẵn lẻ (để xóa qubit phụ). Chiến lược này rõ ràng hoạt động không chỉ cho <span class="math inline">n = 3</span>, mà còn cho các giá trị tùy ý của <span class="math inline">n</span>.</p>
+<p>Hơn nữa, việc mở rộng cùng một quy trình cho phép chúng ta mô phỏng các Hamiltonian mở rộng phức tạp hơn. Cụ thể, chúng ta có thể mô phỏng một cách hiệu quả bất kỳ Hamiltonian nào có dạng</p>
+<p><span class="math display">
+H = \bigotimes_{k=1}^n \sigma_{c(k)}^k, \tag{4.114}
+</span></p>
+<p>trong đó <span class="math inline">\sigma_{c(k)}^k</span> là một ma trận Pauli (hoặc toán tử đồng nhất) tác động lên qubit thứ <span class="math inline">k</span>, với <span class="math inline">c(k) \in \{0, 1, 2, 3\}</span> chỉ định một trong số các toán tử <span class="math inline">\{I, X, Y, Z\}</span>. Các qubit mà trên đó phép toán đồng nhất được thực hiện có thể được bỏ qua, và các số hạng <span class="math inline">X</span> hoặc <span class="math inline">Y</span> có thể được biến đổi bằng các cổng một qubit thành các phép toán <span class="math inline">Z</span>. Điều này đưa chúng ta về một Hamiltonian có dạng của Phương trình (4.113), được mô phỏng như đã mô tả ở trên.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.51: Xây dựng một mạch lượng tử để mô phỏng Hamiltonian
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">
+H = X_1 \otimes Y_2 \otimes Z_3, \tag{4.115}
+</span></p>
+<p>thực hiện phép biến đổi unita <span class="math inline">e^{-i\Delta t H}</span> cho bất kỳ <span class="math inline">\Delta t</span> nào.</p>
+</div>
+</div>
+</div>
+<p>Việc sử dụng quy trình này cho phép chúng ta mô phỏng một lớp rộng lớn các Hamiltonian chứa các số hạng không mang tính cục bộ. Cụ thể, có thể mô phỏng một Hamiltonian có dạng</p>
+<p><span class="math display">
+H = \sum_{k=1}^L H_k, \tag{kiểu tổng quát}
+</span></p>
+<p>trong đó giới hạn duy nhất là các số hạng riêng lẻ <span class="math inline">H_k</span> có cấu trúc tích tensor, và <span class="math inline">L</span> là một đa thức theo tổng số hạt <span class="math inline">n</span>. Tổng quát hơn, tất cả những gì được yêu cầu là phải có một mạch hiệu quả để mô phỏng từng <span class="math inline">H_k</span> một cách riêng biệt. Như một ví dụ, Hamiltonian <span class="math inline">H = \sum_{k=1}^n X_k + Z^{\otimes n}</span> có thể dễ dàng được mô phỏng bằng cách sử dụng các kỹ thuật trên. Những Hamiltonian như vậy thường không xuất hiện trong Tự nhiên. Tuy nhiên, chúng cung cấp một góc nhìn mới mẻ và có khả năng rất giá trị về thế giới của các thuật toán lượng tử.</p>
+</section>
+<section id="perspectives-on-quantum-simulation" class="level1">
+<h1>4. Perspectives on quantum simulation</h1>
+<p>Thuật toán mô phỏng lượng tử rất giống với các phương pháp cổ điển, nhưng cũng khác biệt theo một cách cơ bản. Mỗi vòng lặp của thuật toán lượng tử phải hoàn toàn thay thế trạng thái cũ bằng trạng thái mới; không có cách nào để thu được thông tin (không tầm thường) từ một bước trung gian mà không làm thay đổi đáng kể thuật toán, bởi vì trạng thái mang tính lượng tử. Hơn nữa, phép đo cuối cùng phải được chọn một cách khôn ngoan để cung cấp kết quả mong muốn, bởi vì nó làm nhiễu loạn trạng thái lượng tử. Tất nhiên, mô phỏng lượng tử có thể được lặp lại để thu được thống kê, nhưng người ta chỉ mong muốn lặp lại thuật toán tối đa một số lần đa thức. Có thể là ngay cả khi mô phỏng có thể được thực hiện một cách hiệu quả, thì vẫn không có cách nào để thực hiện một phép đo mong muốn một cách hiệu quả.</p>
+<p>Ngoài ra, có những Hamiltonian đơn giản là không thể được mô phỏng một cách hiệu quả. Ở Mục 4.5.4, chúng ta đã thấy rằng tồn tại các phép biến đổi unita mà máy tính lượng tử không thể xấp xỉ một cách hiệu quả. Hệ quả là, không phải mọi sự tiến hóa Hamiltonian đều có thể được mô phỏng một cách hiệu quả trên một máy tính lượng tử, vì nếu điều này là khả thi, thì tất cả các phép biến đổi unita đều có thể được xấp xỉ một cách hiệu quả!</p>
+<p>Một bài toán khó khác — một bài toán rất thú vị — là mô phỏng các quá trình đạt đến trạng thái cân bằng (equilibration processes). Một hệ thống với Hamiltonian <span class="math inline">H</span> tiếp xúc với một môi trường ở nhiệt độ <span class="math inline">T</span> thường sẽ đạt đến trạng thái cân bằng nhiệt trong một trạng thái được gọi là trạng thái Gibbs, <span class="math inline">\rho_{\text{therm}} = e^{-H/k_{\text{B}}T} / \mathcal{Z}</span>, trong đó <span class="math inline">k_{\text{B}}</span> là hằng số Boltzmann, và <span class="math inline">\mathcal{Z} = \text{tr}(e^{-H/k_{\text{B}}T})</span> là chuẩn hóa hàm phân phối thông thường, đảm bảo rằng <span class="math inline">\text{tr}(\rho) = 1</span>. Quá trình mà sự cân bằng này diễn ra không được hiểu rõ cho lắm, mặc dù một số yêu cầu nhất định đã được biết đến: môi trường phải lớn, nó phải có dân số khác không ở các trạng thái có năng lượng khớp với các trạng thái riêng của <span class="math inline">H</span>, và sự ghép nối của nó với hệ thống phải yếu. Việc thu được <span class="math inline">\rho_{\text{therm}}</span> cho <span class="math inline">H</span> và <span class="math inline">T</span> tùy ý nói chung là một bài toán khó theo hàm mũ đối với một máy tính cổ điển. Liệu một máy tính lượng tử có thể giải quyết điều này một cách hiệu quả không? Chúng ta vẫn chưa biết.</p>
+<p>Mặt khác, như chúng ta đã thảo luận ở trên, nhiều bài toán lượng tử thú vị thực sự có thể được mô phỏng một cách hiệu quả bằng một máy tính lượng tử, ngay cả khi chúng có thêm các ràng buộc vượt ra ngoài các thuật toán đơn giản được trình bày ở đây. Một lớp cụ thể trong số này liên quan đến các đối xứng toàn cục bắt nguồn từ thống kê hạt (particle statistics). Trong thế giới hàng ngày, chúng ta quen với việc có thể nhận dạng các hạt khác nhau; các quả bóng tennis có thể được theo dõi xung quanh sân tennis, theo dõi quả nào là quả nào. Khả năng theo dõi vật thể nào là vật thể nào là một đặc trưng chung của các vật thể cổ điển — bằng cách liên tục đo lường vị trí của một hạt cổ điển, nó có thể được theo dõi mọi lúc, và do đó được phân biệt một cách duy nhất với các hạt khác. Tuy nhiên, điều này sụp đổ trong cơ học lượng tử, thứ ngăn cản chúng ta theo dõi chính xác chuyển động của các hạt riêng lẻ. Nếu hai hạt vốn dĩ khác nhau, chẳng hạn như một proton và một electron, thì chúng ta có thể phân biệt chúng bằng cách đo dấu của điện tích để biết hạt nào là hạt nào. Nhưng trong trường hợp các hạt giống hệt nhau, như hai electron, người ta thấy rằng chúng thực sự không thể phân biệt được (truly indistinguishable).</p>
+<p>Tính không thể phân biệt của các hạt đặt ra một ràng buộc lên vector trạng thái của một hệ thống, biểu hiện theo hai cách. Về mặt thực nghiệm, các hạt trong Tự nhiên được tìm thấy có hai loại riêng biệt, được gọi là boson và fermion. Vector trạng thái của một hệ boson không thay đổi dưới sự hoán vị của bất kỳ hai thành phần nào, phản ánh tính không thể phân biệt cơ bản của chúng. Ngược lại, các hệ fermion trải qua sự đổi dấu trong vector trạng thái của chúng khi hoán đổi bất kỳ hai thành phần nào. Cả hai loại hệ thống đều có thể được mô phỏng một cách hiệu quả trên một máy tính lượng tử. Mô tả chi tiết về cách thực hiện điều này nằm ngoài phạm vi của cuốn sách này; chỉ cần nói rằng quy trình này khá dễ dàng (straightforward). Cho trước một trạng thái ban đầu có tính đối xứng sai, nó có thể được đối xứng hóa một cách hợp lý trước khi mô phỏng bắt đầu. Và các toán tử được sử dụng trong mô phỏng có thể được xây dựng để tôn trọng tính đối xứng mong muốn, ngay cả khi cho phép ảnh hưởng của các số hạng sai số bậc cao. Người đọc muốn theo đuổi chủ đề này và các chủ đề khác xa hơn sẽ tìm thấy các gợi ý đến các tài liệu trong phần ‘Lịch sử và đọc thêm’, ở cuối chương.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài toán 4.1: (Các phép dịch pha có thể tính toán được)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">m</span> và <span class="math inline">n</span> là các số nguyên dương. Cho <span class="math inline">f : \{0, \dots, 2^m - 1\} \to \{0, \dots, 2^n - 1\}</span> là một hàm cổ điển từ <span class="math inline">m</span> đến <span class="math inline">n</span> bit có thể được tính toán một cách thuận nghịch (reversibly) bằng cách sử dụng <span class="math inline">T</span> cổng Toffoli, như được mô tả trong Mục 3.2.5. Tức là, hàm <span class="math inline">(x, y) \to (x, y \oplus f(x))</span> có thể được thực hiện bằng cách sử dụng <span class="math inline">T</span> cổng Toffoli. Hãy đưa ra một mạch lượng tử sử dụng <span class="math inline">2T + n</span> (hoặc ít hơn) cổng một, hai, và ba qubit để thực hiện phép toán unita được định nghĩa bởi</p>
+<p><span class="math display">
+\vert{}x\rangle \to \exp\left( \frac{-2i\pi f(x)}{2^n} \right) \vert{}x\rangle. \tag{4.116}
+</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài toán 4.2:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tìm một cấu trúc có độ sâu <span class="math inline">O(\log n)</span> cho cổng <span class="math inline">C^n(X)</span>. (Bình luận: Độ sâu của một mạch là số lượng các bước thời gian (timesteps) riêng biệt tại đó các cổng được áp dụng; điểm của bài toán này là việc song song hóa việc xây dựng <span class="math inline">C^n(X)</span> bằng cách áp dụng nhiều cổng song song trong cùng một bước thời gian là hoàn toàn khả thi.)</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="siêu-tóm-tắt" class="level1">
+<h1>Siêu tóm tắt</h1>
+<ul>
+<li><p>Tính vạn năng (Universality): Bất kỳ phép toán unita nào trên <span class="math inline">n</span> qubit đều có thể được triển khai chính xác bằng cách kết hợp các cổng một qubit và cổng controlled-NOT.</p></li>
+<li><p>Tính vạn năng với một tập hợp rời rạc (Universality with a discrete set): Cổng Hadamard, cổng phase, cổng controlled-NOT, và cổng <span class="math inline">\pi/8</span> là vạn năng đối với tính toán lượng tử, theo nghĩa là một phép toán unita tùy ý trên <span class="math inline">n</span> qubit có thể được xấp xỉ đến một độ chính xác tùy ý <span class="math inline">\epsilon &gt; 0</span> bằng cách sử dụng một mạch chỉ bao gồm các cổng này. Việc thay thế cổng <span class="math inline">\pi/8</span> trong danh sách này bằng cổng Toffoli cũng tạo ra một họ vạn năng.</p></li>
+<li><p>Không phải mọi phép toán unita đều có thể được triển khai một cách hiệu quả (Not all unitary operations can be efficiently implemented): Tồn tại các phép toán unita trên <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon) / \log(n))</span> cổng để xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span> khi sử dụng bất kỳ tập hợp cổng hữu hạn nào.</p></li>
+<li><p>Mô phỏng (Simulation): Đối với một Hamiltonian <span class="math inline">H = \sum_k H_k</span> là tổng của một số lượng đa thức các số hạng <span class="math inline">H_k</span> sao cho các mạch lượng tử hiệu quả cho <span class="math inline">H_k</span> có thể được cấu trúc, một máy tính lượng tử có thể mô phỏng một cách hiệu quả sự tiến hóa <span class="math inline">e^{-iHt}</span> và xấp xỉ <span class="math inline">\vert{}\psi(t)\rangle = e^{-iHt}\vert{}\psi(0)\rangle</span>, cho trước <span class="math inline">\vert{}\psi(0)\rangle</span></p></li>
+</ul>
 
 
 </section>
