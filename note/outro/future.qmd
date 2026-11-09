@@ -36,3 +36,6 @@ Nghiên cứu thêm Phương trình chủ Lindblad (Lindblad Master Equation). P
 # AdS/CFT 
 
 ## Giả thuyết Ryu–Takayanagi
+
+# SYK
+
