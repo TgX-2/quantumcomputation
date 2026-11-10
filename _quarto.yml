@@ -23,7 +23,7 @@ website:
         contents:
           - note/questions.qmd
 
-      - section : "Introduction and overview"
+      - section : "1 Introduction and overview"
         contents:
           - note/introandoverview/1.qmd
           - note/introandoverview/2.qmd
@@ -33,7 +33,7 @@ website:
           - note/introandoverview/5.qmd
           - note/introandoverview/6.qmd
 
-      - section : "Introduction to Quantum Mechanics"
+      - section : "2 Introduction to Quantum Mechanics"
         contents: 
           - note/introductiontoquantummechanics/index.qmd
           - note/introductiontoquantummechanics/1.qmd
@@ -43,14 +43,14 @@ website:
           - note/introductiontoquantummechanics/5.qmd
           - note/introductiontoquantummechanics/6.qmd
 
-      - section : "Introduction to Computer Science"
+      - section : "3 Introduction to Computer Science"
         contents:
           - note/introductiontocomputerscience/index.qmd
           - note/introductiontocomputerscience/1.qmd
           - note/introductiontocomputerscience/2.qmd
           - note/introductiontocomputerscience/3.qmd
 
-      - section : "Quantum Computation"
+      - section : "4 Quantum Computation"
         contents:
           - note/quantumcircuits/1.qmd
           - note/quantumcircuits/2.qmd
@@ -59,6 +59,11 @@ website:
           - note/quantumcircuits/5.qmd
           - note/quantumcircuits/6.qmd
           - note/quantumcircuits/7.qmd
+
+      - section : "5 The quantum Fourier transform and its applications"
+        contents:
+          - note/qft/index.qmd
+          - note/qft/1.qmd
 
       - section : "Appendix"
         contents:
