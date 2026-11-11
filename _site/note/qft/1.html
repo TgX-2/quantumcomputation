@@ -421,6 +421,18 @@ window.Quarto = {
  <span class="menu-text">The quantum Fourier transform</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applications: order-finding and factoring</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -600,7 +612,7 @@ R_k \equiv \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; e^{2\pi i / 2^k} \end{bmatrix}. 
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Để cụ thể hơn, có thể sẽ hữu ích khi nhìn vào mạch điện tường minh cho biến đổi Fourier lượng tử ba qubit: (</p>
+<p>Để cụ thể hơn, có thể sẽ hữu ích khi nhìn vào mạch điện tường minh cho biến đổi Fourier lượng tử ba qubit:</p>
 <p><img src="../../img/5.1.1.png" class="img-fluid"></p>
 <p>Nhắc lại rằng <span class="math inline">S</span> và <span class="math inline">T</span> là cổng phase và cổng <span class="math inline">\pi/8</span> (xem trang xxiii). Dưới dạng một ma trận, biến đổi Fourier lượng tử trong trường hợp này có thể được viết ra một cách tường minh, sử dụng <span class="math inline">\omega = e^{2\pi i/8} = \sqrt{i}</span>, là</p>
 <p><span class="math display">
@@ -608,6 +620,9 @@ R_k \equiv \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; e^{2\pi i / 2^k} \end{bmatrix}. 
 </span></p>
 </div>
 </div>
+<p>Mạch này sử dụng bao nhiêu cổng? Chúng ta bắt đầu bằng việc thực hiện một cổng Hadamard và <span class="math inline">n-1</span> phép quay có điều kiện (conditional rotations) lên qubit đầu tiên — tổng cộng là <span class="math inline">n</span> cổng. Tiếp theo là một cổng Hadamard và <span class="math inline">n-2</span> phép quay có điều kiện lên qubit thứ hai, tổng cộng là <span class="math inline">n + (n-1)</span> cổng. Tiếp tục theo cách này, chúng ta thấy rằng cần <span class="math inline">n + (n-1) + \dots + 1 = n(n+1)/2</span> cổng, cộng thêm các cổng tham gia vào các phép hoán đổi (swaps). Cần tối đa <span class="math inline">n/2</span> phép hoán đổi, và mỗi phép hoán đổi có thể được hoàn thành bằng cách sử dụng ba cổng controlled-NOT. Do đó, mạch này cung cấp một thuật toán <span class="math inline">\Theta(n^2)</span> để thực hiện biến đổi Fourier lượng tử.</p>
+<p>Ngược lại, các thuật toán cổ điển tốt nhất để tính toán biến đổi Fourier rời rạc trên <span class="math inline">2^n</span> phần tử là các thuật toán như Biến đổi Fourier Nhanh (Fast Fourier Transform - FFT), tính toán biến đổi Fourier rời rạc bằng cách sử dụng <span class="math inline">\Theta(n2^n)</span> cổng. Tức là, nó đòi hỏi nhiều phép toán hơn theo hàm mũ để tính toán biến đổi Fourier trên một máy tính cổ điển so với việc triển khai biến đổi Fourier lượng tử trên một máy tính lượng tử.</p>
+<p>Nhìn bề ngoài, điều này nghe có vẻ tuyệt vời, vì biến đổi Fourier là một bước quan trọng trong rất nhiều ứng dụng xử lý dữ liệu thực tế. Ví dụ, trong nhận dạng giọng nói bằng máy tính, bước đầu tiên trong việc nhận dạng âm vị là biến đổi Fourier âm thanh đã được số hóa. Liệu chúng ta có thể sử dụng biến đổi Fourier lượng tử để tăng tốc độ tính toán của những biến đổi Fourier này không? Thật không may, câu trả lời là không có cách nào được biết đến để làm điều này. Vấn đề là các biên độ trong một máy tính lượng tử không thể được truy cập trực tiếp bằng phép đo. Do đó, không có cách nào để xác định các biên độ đã được biến đổi Fourier của trạng thái ban đầu. Tệ hơn nữa, nói chung không có cách nào để chuẩn bị một cách hiệu quả trạng thái ban đầu để được biến đổi Fourier. Do đó, việc tìm kiếm các ứng dụng cho biến đổi Fourier lượng tử tinh tế hơn nhiều so với những gì chúng ta có thể đã hy vọng. Trong chương này và chương tiếp theo, chúng ta phát triển một số thuật toán dựa trên một ứng dụng tinh tế hơn của biến đổi Fourier lượng tử</p>
 
 
 

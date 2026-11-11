@@ -64,6 +64,8 @@ website:
         contents:
           - note/qft/index.qmd
           - note/qft/1.qmd
+          - note/qft/2.qmd
+          - note/qft/3.qmd
 
       - section : "Appendix"
         contents:

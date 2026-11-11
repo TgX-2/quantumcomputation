@@ -137,15 +137,19 @@ So sánh với Phương trình (5.4) chúng ta thấy rằng đây chính là đ
 :::{.callout-important}
 # Hộp 5.1: Biến đổi Fourier lượng tử ba qubit   
 
-Để cụ thể hơn, có thể sẽ hữu ích khi nhìn vào mạch điện tường minh cho biến đổi Fourier lượng tử ba qubit:   (
+Để cụ thể hơn, có thể sẽ hữu ích khi nhìn vào mạch điện tường minh cho biến đổi Fourier lượng tử ba qubit:  
 
 ![](../../img/5.1.1.png)
-
 
 Nhắc lại rằng $S$ và $T$ là cổng phase và cổng $\pi/8$ (xem trang xxiii). Dưới dạng một ma trận, biến đổi Fourier lượng tử trong trường hợp này có thể được viết ra một cách tường minh, sử dụng $\omega = e^{2\pi i/8} = \sqrt{i}$, là   
 
 $$
 \frac{1}{\sqrt{8}} \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 1 & \omega & \omega^2 & \omega^3 & \omega^4 & \omega^5 & \omega^6 & \omega^7 \\ 1 & \omega^2 & \omega^4 & \omega^6 & 1 & \omega^2 & \omega^4 & \omega^6 \\ 1 & \omega^3 & \omega^6 & \omega^1 & \omega^4 & \omega^7 & \omega^2 & \omega^5 \\ 1 & \omega^4 & 1 & \omega^4 & 1 & \omega^4 & 1 & \omega^4 \\ 1 & \omega^5 & \omega^2 & \omega^7 & \omega^4 & \omega^1 & \omega^6 & \omega^3 \\ 1 & \omega^6 & \omega^4 & \omega^2 & 1 & \omega^6 & \omega^4 & \omega^2 \\ 1 & \omega^7 & \omega^6 & \omega^5 & \omega^4 & \omega^3 & \omega^2 & \omega^1 \end{bmatrix} . \tag{5.19}
 $$
-
 :::
+
+Mạch này sử dụng bao nhiêu cổng? Chúng ta bắt đầu bằng việc thực hiện một cổng Hadamard và $n-1$ phép quay có điều kiện (conditional rotations) lên qubit đầu tiên — tổng cộng là $n$ cổng. Tiếp theo là một cổng Hadamard và $n-2$ phép quay có điều kiện lên qubit thứ hai, tổng cộng là $n + (n-1)$ cổng. Tiếp tục theo cách này, chúng ta thấy rằng cần $n + (n-1) + \dots + 1 = n(n+1)/2$ cổng, cộng thêm các cổng tham gia vào các phép hoán đổi (swaps). Cần tối đa $n/2$ phép hoán đổi, và mỗi phép hoán đổi có thể được hoàn thành bằng cách sử dụng ba cổng controlled-NOT. Do đó, mạch này cung cấp một thuật toán $\Theta(n^2)$ để thực hiện biến đổi Fourier lượng tử.   
+
+Ngược lại, các thuật toán cổ điển tốt nhất để tính toán biến đổi Fourier rời rạc trên $2^n$ phần tử là các thuật toán như Biến đổi Fourier Nhanh (Fast Fourier Transform - FFT), tính toán biến đổi Fourier rời rạc bằng cách sử dụng $\Theta(n2^n)$ cổng. Tức là, nó đòi hỏi nhiều phép toán hơn theo hàm mũ để tính toán biến đổi Fourier trên một máy tính cổ điển so với việc triển khai biến đổi Fourier lượng tử trên một máy tính lượng tử.   
+
+Nhìn bề ngoài, điều này nghe có vẻ tuyệt vời, vì biến đổi Fourier là một bước quan trọng trong rất nhiều ứng dụng xử lý dữ liệu thực tế. Ví dụ, trong nhận dạng giọng nói bằng máy tính, bước đầu tiên trong việc nhận dạng âm vị là biến đổi Fourier âm thanh đã được số hóa. Liệu chúng ta có thể sử dụng biến đổi Fourier lượng tử để tăng tốc độ tính toán của những biến đổi Fourier này không? Thật không may, câu trả lời là không có cách nào được biết đến để làm điều này. Vấn đề là các biên độ trong một máy tính lượng tử không thể được truy cập trực tiếp bằng phép đo. Do đó, không có cách nào để xác định các biên độ đã được biến đổi Fourier của trạng thái ban đầu. Tệ hơn nữa, nói chung không có cách nào để chuẩn bị một cách hiệu quả trạng thái ban đầu để được biến đổi Fourier. Do đó, việc tìm kiếm các ứng dụng cho biến đổi Fourier lượng tử tinh tế hơn nhiều so với những gì chúng ta có thể đã hy vọng. Trong chương này và chương tiếp theo, chúng ta phát triển một số thuật toán dựa trên một ứng dụng tinh tế hơn của biến đổi Fourier lượng tử
