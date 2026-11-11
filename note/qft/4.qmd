@@ -1,0 +1,15 @@
+---
+title: "General applications of the quantum Fourier transform"
+chapter: "The quantum Fourier transform and its applications"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Các ứng dụng chính của biến đổi Fourier lượng tử mà chúng ta đã mô tả cho đến nay trong chương này là ước lượng pha và tìm bậc. Những bài toán nào khác có thể được giải quyết bằng các kỹ thuật này? Trong phần này, chúng ta định nghĩa một bài toán rất tổng quát được gọi là bài toán nhóm con ẩn (hidden subgroup problem), và mô tả một thuật toán lượng tử hiệu quả để giải quyết nó. Bài toán này, bao trùm tất cả các ứng dụng 'nhanh theo hàm mũ' đã biết của biến đổi Fourier lượng tử, có thể được coi là sự tổng quát hóa của nhiệm vụ tìm chu kỳ chưa biết của một hàm tuần hoàn, trong một bối cảnh nơi cấu trúc miền xác định (domain) và miền giá trị (range) của hàm có thể rất phức tạp.   
+
+Để trình bày bài toán này theo cách dễ tiếp cận nhất, chúng ta bắt đầu với hai ứng dụng cụ thể hơn: tìm chu kỳ (của một hàm một chiều), và logarit rời rạc. Sau đó chúng ta sẽ quay trở lại bài toán nhóm con ẩn tổng quát. Lưu ý rằng cách trình bày trong phần này mang tính sơ đồ và khái niệm nhiều hơn so với các phần trước trong chương này; do sự cần thiết, điều này có nghĩa là độc giả quan tâm đến việc hiểu tất cả các chi tiết sẽ phải làm việc chăm chỉ hơn rất nhiều!   

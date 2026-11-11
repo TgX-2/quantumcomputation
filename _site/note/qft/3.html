@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -390,6 +433,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Applications: order-finding and factoring</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -420,8 +469,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#application-order-finding" id="toc-application-order-finding" class="nav-link active" data-scroll-target="#application-order-finding">Application: order-finding</a>
+  <ul class="collapse">
+  <li><a href="#the-continued-fraction-expansion" id="toc-the-continued-fraction-expansion" class="nav-link" data-scroll-target="#the-continued-fraction-expansion">The continued fraction expansion</a></li>
+  <li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance">Performance</a></li>
+  <li><a href="#algorithm-quantum-order-finding" id="toc-algorithm-quantum-order-finding" class="nav-link" data-scroll-target="#algorithm-quantum-order-finding">Algorithm: Quantum order-finding</a></li>
+  </ul></li>
+  <li><a href="#application-factoring" id="toc-application-factoring" class="nav-link" data-scroll-target="#application-factoring">Application: factoring</a></li>
+  <li><a href="#định-lý-5.2" id="toc-định-lý-5.2" class="nav-link" data-scroll-target="#định-lý-5.2">Định lý 5.2</a></li>
+  <li><a href="#định-lý-5.3" id="toc-định-lý-5.3" class="nav-link" data-scroll-target="#định-lý-5.3">Định lý 5.3</a></li>
+  <li><a href="#algorithm-reduction-of-factoring-to-order-finding" id="toc-algorithm-reduction-of-factoring-to-order-finding" class="nav-link" data-scroll-target="#algorithm-reduction-of-factoring-to-order-finding">Algorithm: Reduction of factoring to order-finding</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -451,8 +515,484 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Quy trình ước lượng pha có thể được sử dụng để giải quyết một loạt các bài toán thú vị. Chúng tôi bây giờ mô tả hai trong số những bài toán thú vị nhất này: bài toán tìm bậc, và bài toán phân tích thừa số. Trên thực tế, hai bài toán này tương đương với nhau, do đó trong Mục 5.3.1 chúng tôi giải thích một thuật toán lượng tử để giải quyết bài toán tìm bậc, và trong Mục 5.3.2 chúng tôi giải thích cách bài toán tìm bậc cũng ngụ ý khả năng phân tích thừa số.</p>
+<p>Để hiểu các thuật toán lượng tử cho phân tích thừa số và tìm bậc đòi hỏi một chút kiến thức nền tảng về lý thuyết số (number theory). Tất cả các tài liệu cần thiết được tập hợp lại trong Phụ lục 4. Mô tả mà chúng tôi đưa ra trong hai mục tiếp theo tập trung vào khía cạnh lượng tử của bài toán, và chỉ yêu cầu một chút làm quen với số học modulo (modular arithmetic) để có thể đọc hiểu. Các chứng minh chi tiết cho các kết quả lý thuyết số mà chúng tôi trích dẫn ở đây có thể được tìm thấy trong Phụ lục 4.</p>
+<p>Các thuật toán lượng tử nhanh cho bài toán tìm bậc và phân tích thừa số thú vị vì ít nhất ba lý do. Thứ nhất, và quan trọng nhất theo ý kiến của chúng tôi, chúng cung cấp bằng chứng cho ý tưởng rằng máy tính lượng tử có thể về bản chất mạnh hơn máy tính cổ điển, và đưa ra một thách thức đáng tin cậy đối với luận đề Church-Turing mạnh (strong Church-Turing thesis). Thứ hai, cả hai bài toán đều có đủ giá trị nội tại để biện minh cho sự quan tâm đến bất kỳ thuật toán mới lạ nào, dù là cổ điển hay lượng tử. Thứ ba, và quan trọng nhất từ góc độ thực tiễn, các thuật toán hiệu quả cho bài toán tìm bậc và phân tích thừa số có thể được sử dụng để bẻ khóa hệ thống mật mã khóa công khai RSA (Phụ lục 5).</p>
+<section id="application-order-finding" class="level1">
+<h1>Application: order-finding</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Note thêm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="bài-toán-mở-đầu-và-một-số-định-nghĩa" class="level2">
+<h2 class="anchored" data-anchor-id="bài-toán-mở-đầu-và-một-số-định-nghĩa">Bài toán mở đầu và một số định nghĩa</h2>
+<p>Định nghĩa của một bậc là, số r nhỏ nhất sao cho <span class="math inline">x^r = 1 (mod N)</span>, với x, N cho trước và không có ước chung.</p>
+<p>Người ta tin rằng không có thuật toán nào có thể sử dụng tài nguyên theo đa thức <span class="math inline">O(L)</span> (với <span class="math inline">L = \lceil \log(N) \rceil</span>) có thể giải quyết bài toán này. (Có thể thấy L là độ dài của số ;))</p>
+<p>Và bài toán của chúng ta là tìm bậc.</p>
+<hr>
+<p>Thuật toán lượng tử để tìm bậc chính là thuật toán ước lượng pha được áp dụng cho toán tử Unita</p>
+<p><span class="math display">
+U\vert{}y\rangle \equiv \vert{}xy \pmod N\rangle, \tag{5.36}
+</span></p>
+<p>trong đó: <span class="math inline">0 \leq y \leq 2^L - 1</span>, và, U không bị đặt vào nếu <span class="math inline">0 \leq y \leq N - 1</span>, và U bị đặt vào nếu <span class="math inline">N \leq y \leq 2^L - 1</span>.</p>
+</section>
+<section id="suy-ra-bài-toán" class="level2">
+<h2 class="anchored" data-anchor-id="suy-ra-bài-toán">Suy ra bài toán</h2>
+<p>Nhìn vào (5.39) ta thấy:</p>
+<p><span class="math display">
+= \exp\left[\frac{2\pi is}{r}\right] \vert{}u_s\rangle. \tag{5.39}
+</span></p>
+<p>rõ ràng trị riêng của ket u_s là <span class="math inline">\exp\left[\frac{2\pi is}{r}\right]</span> có dạng <span class="math inline">e^{2\pi i \varphi}</span>, vậy <span class="math inline">\varphi = \frac s r</span>.</p>
+<p>Vậy là pha <span class="math inline">\varphi</span> chính là bằng <span class="math inline">s/r</span> (với s là một số nguyên ngẫu nhiên từ 0 đến r - 1, và r chính là bậc cần tìm!)</p>
+<p>Nói cách khác, nếu máy tính lượng tử đo được pha <span class="math inline">\varphi</span>, thì ra lập tức giải mã ra được chu kỳ r.</p>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">5.44</h2>
+<p>Nhưng mà để chạy được PEA, công thức (5.37) đòi hỏi phải biết trước r thì mới tạo được trạng thái riêng <span class="math inline">\vert u_s \rangle</span>. Giống như nghịch lý ở bài trước đã nói.</p>
+<p>Kết quả là, hãy nhìn vào phương trình (5.44), nếu lấy tổng chồng chập tất cả các trạng thái riêng của <span class="math inline">\vert u_s \rangle</span>, thì kết quả đại số sẽ gom lại trạng thái cơ sờ cổ điển đơn giản nhất: <span class="math inline">\vert 1 \rangle</span>.</p>
+<p>Cuối cùng, nhờ tính tuyến tính lượng tử, khi <span class="math inline">\vert 1 \rangle</span> chạy qua mạch PEA và đo lường, hệ thống sẽ ngẫu nhiên nhả ra một giá trị pha <span class="math inline">\varphi \approx s/r</span> ứng với một giá trị s nào đó.</p>
+</section>
+<section id="làm-sao-để-triển-khai-cổng-controlled-u2j-khổng-lồ" class="level2">
+<h2 class="anchored" data-anchor-id="làm-sao-để-triển-khai-cổng-controlled-u2j-khổng-lồ">Làm sao để triển khai cổng Controlled-U<sup>2</sup>j khổng lồ?</h2>
+<p>box 5.2</p>
+</section>
+<section id="cách-lấy-r-từ-kết-quả-đo" class="level2">
+<h2 class="anchored" data-anchor-id="cách-lấy-r-từ-kết-quả-đo">Cách lấy r từ kết quả đo</h2>
+<p>Vấn đề là khi chạy mạch và đo lường thanh ghi 1, máy tinh lượng tử nhả ra một giá trị thập phân <span class="math inline">\varphi</span> (được biểu diễn dưới dạng nhị phân với 2L + 1 bits chính xác).</p>
+<p>Ta biết rằng <span class="math inline">\varphi \approx s/r</span>. Tuy nhiên, vì <span class="math inline">\varphi</span> chỉ là một giá trị xấp xỉ bị nhiễu hoặc làm tròn (do hữu hạn qubit), nếu bạn dùng máy tính cổ điển để đổi <span class="math inline">\varphi</span> thành phân số tối giản theo cách ngây thơ thì bạn sẽ nhận được con số mẫu số khổng lồ, và không liên quan gì đến r.</p>
+<p><strong>Continued Fractions</strong></p>
+<p>Mọi số thực đều có thể biểu diễn thành một Liên phân số! (kiểu <span class="math inline">a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots}}</span>).</p>
+<p>Các phân số cắt cụt của chuỗi này đều hội tụ.</p>
+<p>Do thiết kế phần cứng dùng <span class="math inline">t = 2L + 1</span> qubit, sai số giữa pha đo <span class="math inline">\varphi</span> và phân số <span class="math inline">s/r</span> luôn bị chặn chặt chẽ dưới ngưỡng <span class="math inline">\frac 1 {r^2}</span> (5.48)</p>
+<p>Và nhờ đó, (thuật toán liên phân số chạy trên máy tính cổ điển với độ phức tạp cực nhanh, chỉ <span class="math inline">O(L^3)</span>) sẽ bóc tách ngay lập tức chuỗi liên phân số của <span class="math inline">\varphi</span> và trích xuất ra được phân số tối giản <span class="math inline">s'/r'</span>.</p>
+</section>
+<section id="nhưng-mà-bẫy-ước-số" class="level2">
+<h2 class="anchored" data-anchor-id="nhưng-mà-bẫy-ước-số">Nhưng mà, bẫy ước số…</h2>
+<p>Điều gì sẽ xảy ra nếu máy tính lượng tử trả về kết quả là <span class="math inline">\varphi \approx s'/r'</span>, trong đó r’ lại là ước của r? (ví du: 2/4, trả về 1/2, mà r = 4 chứ không phải = 2).</p>
+<p><strong>Phương pháp 1: Lặp ngẫu nhiên</strong></p>
+<p>Xác suất để một số s chọn ngẫu nhiên nguyên tố cùng nhau với r là khá lớn (tỉ lệ thuận với <span class="math inline">\frac 1 {\log N}</span>). (<span class="math inline">0 \leq x \leq r - 1</span>)</p>
+<p>Chỉ cần lặp lại toàn bộ thí nghiệm <span class="math inline">2\log(N)</span> lần. Xác suất để ít nhất một lần bốc trúng r nguyên tố cùng nhau với r là rất lớn. (=1)</p>
+<p><strong>Phương pháp 2: Thuật toán vét cạn</strong></p>
+<p>Nếu r’ tìm được là một ước số của r, ta sẽ tận dụng nó.</p>
+<p>Thay cơ sở x bằng <span class="math inline">x' = x^{r'} (\pmod N)</span> và tiếp tục chạy tìm bậc trên cơ sở mới này. Sau tối đa <span class="math inline">O(L)</span> lần lặp, ra sẽ quét sạch mọi ước số và tìm ra chu kỳ chính xác r.</p>
+<p><strong>Phương pháp 3: LCM Trick</strong></p>
+<p>Thay vì lặp nhiều lần hay làm đệ quy dài dòng, ta chỉ cần chạy mạch lượng tử đúng 2 lần độc lập để thu về <span class="math inline">r_1'</span> và <span class="math inline">r_2'</span>.</p>
+<p>Toán học chứng minh rằng xác suất để hai giá trị <span class="math inline">s_1'</span> và <span class="math inline">s_2'</span> sinh ra từ hai lần chạy không có chung thừa số nguyên tố là khá cao (bị chặn dưới bởi 1/4).</p>
+<p>Khi đó, chu kỳ thực sự r chính là <span class="math inline">\text{LCM}(r_1', r_2')</span>.</p>
+</section>
+<section id="cuối-cùng" class="level2">
+<h2 class="anchored" data-anchor-id="cuối-cùng">Cuối cùng</h2>
+<p>Độ phức tạp là <span class="math inline">O(L^3)</span>.</p>
+</section>
+</div>
+</div>
+<p>Đối với các số nguyên dương <span class="math inline">x</span> và <span class="math inline">N</span>, <span class="math inline">x &lt; N</span>, không có ước chung, bậc của <span class="math inline">x</span> modulo <span class="math inline">N</span> được định nghĩa là số nguyên dương nhỏ nhất <span class="math inline">r</span> sao cho <span class="math inline">x^r = 1 \pmod N</span>. Bài toán tìm bậc là xác định bậc cho một <span class="math inline">x</span> và <span class="math inline">N</span> được chỉ định. Người ta tin rằng tìm bậc là một bài toán khó trên máy tính cổ điển, theo nghĩa là không có thuật toán nào được biết đến có thể giải quyết bài toán này sử dụng tài nguyên đa thức theo <span class="math inline">O(L)</span> bit cần thiết để biểu diễn bài toán, trong đó <span class="math inline">L \equiv \lceil \log(N) \rceil</span> là số lượng bit cần thiết để biểu diễn <span class="math inline">N</span>. Trong mục này, chúng ta giải thích cách ước lượng pha có thể được sử dụng để thu được một thuật toán lượng tử hiệu quả cho việc tìm bậc.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.10:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chỉ ra rằng bậc của <span class="math inline">x = 5</span> modulo <span class="math inline">N = 21</span> là <span class="math inline">6</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.11:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chỉ ra rằng bậc của <span class="math inline">x</span> thỏa mãn <span class="math inline">r \le N</span>.</p>
+</div>
+</div>
+</div>
+<p>Thuật toán lượng tử để tìm bậc chính là thuật toán ước lượng pha được áp dụng cho toán tử unita</p>
+<p><span class="math display">
+U\vert{}y\rangle \equiv \vert{}xy \pmod N\rangle, \tag{5.36}
+</span></p>
+<p>với <span class="math inline">y \in \{0, 1\}^L</span> (Lưu ý rằng ở đây và bên dưới, khi <span class="math inline">N \le y \le 2^L - 1</span>, chúng ta sử dụng quy ước rằng <span class="math inline">xy \pmod N</span> chỉ là chính <span class="math inline">y</span>. Nghĩa là, <span class="math inline">U</span> chỉ tác động không tầm thường khi <span class="math inline">0 \le y \le N-1</span>). Một phép tính đơn giản cho thấy các trạng thái được định nghĩa bởi</p>
+<p><span class="math display">
+\vert{}u_s\rangle \equiv \frac{1}{\sqrt{r}} \sum_{k=0}^{r-1} \exp\left[\frac{-2\pi i s k}{r}\right] \vert{}x^k \pmod N\rangle, \tag{5.37}
+</span></p>
+<p>đối với số nguyên <span class="math inline">0 \le s \le r-1</span> là các trạng thái riêng của <span class="math inline">U</span>, vì</p>
+<p><span class="math display">
+U\vert{}u_s\rangle = \frac{1}{\sqrt{r}} \sum_{k=0}^{r-1} \exp\left[\frac{-2\pi i s k}{r}\right] \vert{}x^{k+1} \pmod N\rangle
+</span></p>
+<p><span class="math display">
+= \exp\left[\frac{2\pi is}{r}\right] \vert{}u_s\rangle. \tag{5.38, 5.39}
+</span></p>
+<p>Sử dụng quy trình ước lượng pha cho phép chúng ta thu được, với độ chính xác cao, các trị riêng tương ứng <span class="math inline">\exp(2\pi i s/r)</span>, từ đó chúng ta có thể thu được bậc <span class="math inline">r</span> với một chút công sức nữa.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.12:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chỉ ra rằng <span class="math inline">U</span> là unita (Gợi ý: <span class="math inline">x</span> nguyên tố cùng nhau với <span class="math inline">N</span>, và do đó có nghịch đảo modulo <span class="math inline">N</span>).</p>
+</div>
+</div>
+</div>
+<p>Có hai yêu cầu quan trọng để chúng ta có thể sử dụng quy trình ước lượng pha: chúng ta phải có các quy trình hiệu quả để thực hiện phép toán controlled-<span class="math inline">U^{2^j}</span> cho bất kỳ số nguyên <span class="math inline">j</span>, và chúng ta phải có khả năng chuẩn bị hiệu quả một trạng thái riêng <span class="math inline">\vert{}u_s\rangle</span> với một trị riêng không tầm thường, hoặc ít nhất là một chồng chập của các trạng thái riêng như vậy. Yêu cầu đầu tiên được thỏa mãn bằng cách sử dụng một quy trình được gọi là lũy thừa modulo (modular exponentiation), với quy trình này chúng ta có thể thực hiện toàn bộ chuỗi các phép toán controlled-<span class="math inline">U^{2^j}</span> được áp dụng bởi quy trình ước lượng pha sử dụng <span class="math inline">O(L^3)</span> cổng, như được mô tả trong Hộp 5.2.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 5.2: Lũy thừa modulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Làm thế nào chúng ta có thể tính toán chuỗi các phép toán controlled-<span class="math inline">U^{2^j}</span> được sử dụng bởi quy trình ước lượng pha như một phần của thuật toán tìm bậc? Tức là, chúng ta muốn tính phép biến đổi</p>
+<p><span class="math display">
+\vert{}z\rangle\vert{}y\rangle \to \vert{}z\rangle U^{z_{t-1} 2^{t-1}} \dots U^{z_0 2^0} \vert{}y\rangle \tag{5.40}
+</span></p>
+<p><span class="math display">
+= \vert{}z\rangle \vert{}x^{z_{t-1} 2^{t-1}} \times \dots \times x^{z_0 2^0} y \pmod N \rangle \tag{5.41}
+</span></p>
+<p><span class="math display">
+= \vert{}z\rangle \vert{}x^z y \pmod N\rangle. \tag{5.42}
+</span></p>
+<p>Do đó, chuỗi các phép toán controlled-<span class="math inline">U^{2^j}</span> được sử dụng trong ước lượng pha tương đương với việc nhân nội dung của thanh ghi thứ hai với lũy thừa modulo <span class="math inline">x^z \pmod N</span>, trong đó <span class="math inline">z</span> là nội dung của thanh ghi thứ nhất. Phép toán này có thể được thực hiện một cách dễ dàng bằng cách sử dụng các kỹ thuật tính toán thuận nghịch (reversible computation). Ý tưởng cơ bản là tính toán thuận nghịch hàm <span class="math inline">x^z \pmod N</span> của <span class="math inline">z</span> trong một thanh ghi thứ ba, và sau đó nhân thuận nghịch nội dung của thanh ghi thứ hai với <span class="math inline">x^z \pmod N</span>, sử dụng mẹo khử tính toán (uncomputation) để xóa nội dung của thanh ghi thứ ba khi hoàn thành.</p>
+<p>Thuật toán tính toán lũy thừa modulo có hai giai đoạn. Giai đoạn đầu tiên sử dụng phép nhân modulo để tính toán <span class="math inline">x^2 \pmod N</span> bằng cách bình phương <span class="math inline">x</span> modulo <span class="math inline">N</span>, sau đó tính <span class="math inline">x^4 \pmod N</span> bằng cách bình phương <span class="math inline">x^2 \pmod N</span>, và tiếp tục theo cách này, tính toán <span class="math inline">x^{2^j} \pmod N</span> cho mọi <span class="math inline">j</span> lên đến <span class="math inline">t-1</span>. Chúng ta sử dụng <span class="math inline">t = 2L + 1 + \lceil \log(2 + \frac{1}{2\epsilon}) \rceil = O(L)</span>, do đó tổng cộng có <span class="math inline">t-1 = O(L)</span> phép bình phương được thực hiện với chi phí <span class="math inline">O(L^2)</span> cho mỗi phép (chi phí này giả định mạch dùng để bình phương thực hiện thuật toán quen thuộc mà tất cả chúng ta học từ nhỏ cho phép nhân), cho tổng chi phí là <span class="math inline">O(L^3)</span> cho giai đoạn đầu tiên.</p>
+<p>Giai đoạn thứ hai của thuật toán dựa trên quan sát mà chúng ta đã lưu ý,</p>
+<p><span class="math display">
+x^z \pmod N = \left( x^{z_{t-1} 2^{t-1}} \pmod N \right) \left( x^{z_{t-2} 2^{t-2}} \pmod N \right) \dots \left( x^{z_0 2^0} \pmod N \right). \tag{5.43}
+</span></p>
+<p>Thực hiện <span class="math inline">t-1</span> phép nhân modulo với chi phí <span class="math inline">O(L^2)</span> mỗi phép, chúng ta thấy rằng tích này có thể được tính toán bằng cách sử dụng <span class="math inline">O(L^3)</span> cổng. Điều này đủ hiệu quả cho các mục đích của chúng ta, nhưng các thuật toán hiệu quả hơn vẫn có thể thực hiện được dựa trên các thuật toán nhân hiệu quả hơn (xem phần ‘Lịch sử và đọc thêm’). Sử dụng các kỹ thuật của Mục 3.2.5, bây giờ việc xây dựng một mạch thuận nghịch với một thanh ghi <span class="math inline">t</span> bit và một thanh ghi <span class="math inline">L</span> bit, khi bắt đầu ở trạng thái <span class="math inline">\vert{}z\rangle\vert{}y\rangle</span> sẽ đầu ra trạng thái <span class="math inline">\vert{}z\rangle \vert{}x^z y \pmod N\rangle</span>, sử dụng <span class="math inline">O(L^3)</span> cổng, thứ mà có thể được dịch thành một mạch lượng tử sử dụng <span class="math inline">O(L^3)</span> cổng tính toán phép biến đổi <span class="math inline">\vert{}z\rangle\vert{}y\rangle \to \vert{}z\rangle \vert{}x^z y \pmod N\rangle</span>.</p>
+</div>
+</div>
+<p>Yêu cầu thứ hai có vẻ phức tạp hơn một chút: chuẩn bị <span class="math inline">\vert{}u_s\rangle</span> đòi hỏi chúng ta phải biết <span class="math inline">r</span>, vì vậy điều này là bất khả thi. May mắn thay, có một quan sát thông minh cho phép chúng ta vượt qua bài toán chuẩn bị <span class="math inline">\vert{}u_s\rangle</span>, đó là</p>
+<p><span class="math display">
+\frac{1}{\sqrt{r}} \sum_{s=0}^{r-1} \vert{}u_s\rangle = \vert{}1\rangle. \tag{5.44}
+</span></p>
+<p>Khi thực hiện quy trình ước lượng pha, nếu chúng ta sử dụng <span class="math inline">t = 2L + 1 + \lceil \log(2 + \frac{1}{2\epsilon}) \rceil</span> qubit trong thanh ghi thứ nhất (tham khảo Hình 5.3), và chuẩn bị thanh ghi thứ hai ở trạng thái <span class="math inline">\vert{}1\rangle</span> — thứ mà việc xây dựng là tầm thường — thì đối với mỗi <span class="math inline">s</span> trong khoảng từ <span class="math inline">0</span> đến <span class="math inline">r-1</span>, chúng ta sẽ thu được một ước lượng của pha <span class="math inline">\varphi \approx s/r</span> chính xác đến <span class="math inline">2L + 1</span> bit, với xác suất ít nhất là <span class="math inline">(1-\epsilon)/r</span>. Thuật toán tìm bậc được phác thảo sơ lược trong Hình 5.4.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.13:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh phương trình (5.44). (Gợi ý: <span class="math inline">\sum_{s=0}^{r-1} \exp(-2\pi i s k / r) = r \delta_{k0}</span>.) Thật vậy, hãy chứng minh rằng<br>
+<span class="math display">
+\frac{1}{\sqrt{r}} \sum_{s=0}^{r-1} e^{2\pi i s k / r} \vert{}u_s\rangle = \vert{}x^k \pmod N\rangle. \tag{5.45}
+</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.14:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Trạng thái lượng tử được tạo ra trong thuật toán tìm bậc, trước khi thực hiện biến đổi Fourier ngược, là</p>
+<p><span class="math display">
+\vert{}\psi\rangle = \sum_{j=0}^{2^t-1} \vert{}j\rangle U^j \vert{}1\rangle = \sum_{j=0}^{2^t-1} \vert{}j\rangle \vert{}x^j \pmod N\rangle, \tag{5.46}
+</span></p>
+<p>nếu chúng ta khởi tạo thanh ghi thứ hai là <span class="math inline">\vert{}1\rangle</span>. Hãy chỉ ra rằng trạng thái tương tự sẽ thu được nếu chúng ta thay thế <span class="math inline">U^j</span> bằng một phép biến đổi unita <span class="math inline">V</span> khác, cái mà tính toán</p>
+<p><span class="math display">
+V\vert{}j\rangle\vert{}k\rangle = \vert{}j\rangle \vert{}k + x^j \pmod N\rangle, \tag{5.47}
+</span></p>
+<p>và bắt đầu thanh ghi thứ hai ở trạng thái <span class="math inline">\vert{}0\rangle</span>. Đồng thời hãy chỉ ra cách xây dựng <span class="math inline">V</span> sử dụng <span class="math inline">O(L^3)</span> cổng.</p>
+</div>
+</div>
+</div>
+<p><img src="../../img/5.4.png" class="img-fluid"></p>
+<section id="the-continued-fraction-expansion" class="level2">
+<h2 class="anchored" data-anchor-id="the-continued-fraction-expansion">The continued fraction expansion</h2>
+<p>Việc giảm bài toán tìm bậc về ước lượng pha được hoàn thành bằng cách mô tả cách thu được đáp án mong muốn, <span class="math inline">r</span>, từ kết quả của thuật toán ước lượng pha, <span class="math inline">\varphi \approx s/r</span>. Chúng ta chỉ biết <span class="math inline">\varphi</span> đến <span class="math inline">2L + 1</span> bit, nhưng chúng ta cũng biết trước (a priori) rằng nó là một số hữu tỉ — tỉ số của hai số nguyên bị chặn — và nếu chúng ta có thể tính toán phân số gần nhất như vậy với <span class="math inline">\varphi</span>, chúng ta có thể thu được <span class="math inline">r</span>.</p>
+<p>Đáng chú ý là có một thuật toán thực hiện tác vụ này một cách hiệu quả, được gọi là thuật toán liên phân số (continued fractions algorithm). Một ví dụ về cách thức hoạt động này được mô tả trong Hộp 5.3. Lý do thuật toán này thỏa mãn nhu cầu của chúng ta là định lý sau đây, được chứng minh trong Phụ lục 4: Định lý 5.1: Giả sử <span class="math inline">s/r</span> là một số hữu tỉ sao cho</p>
+<p><span class="math display">
+\left\vert{} \frac{s}{r} - \varphi \right\vert{} \le \frac{1}{2r^2}. \tag{5.48}
+</span></p>
+<p>Khi đó <span class="math inline">s/r</span> là một hội tụ (convergent) của liên phân số cho <span class="math inline">\varphi</span>, và do đó có thể được tính toán trong <span class="math inline">O(L^3)</span> phép toán bằng cách sử dụng thuật toán liên phân số.</p>
+<p>Vì <span class="math inline">\varphi</span> là một xấp xỉ của <span class="math inline">s/r</span> chính xác đến <span class="math inline">2L + 1</span> bit, nên suy ra rằng <span class="math inline">\vert{}s/r - \varphi\vert{} \le 2^{-2L-1} \le 1/2r^2</span>, vì <span class="math inline">r \le N \le 2^L</span>. Do đó, định lý được áp dụng.</p>
+<p>Tóm lại, cho trước <span class="math inline">\varphi</span>, thuật toán liên phân số một cách hiệu quả tạo ra các số <span class="math inline">s'</span> và <span class="math inline">r'</span> không có ước chung, sao cho <span class="math inline">s'/r' = s/r</span>. Số <span class="math inline">r'</span> là ứng viên của chúng ta cho bậc. Chúng ta có thể kiểm tra xem đó có phải là bậc hay không bằng cách tính toán <span class="math inline">x^{r'} \pmod N</span>, và xem kết quả có bằng 1 hay không. Nếu có, thì <span class="math inline">r'</span> là bậc của <span class="math inline">x \pmod N</span>, và chúng ta đã hoàn thành!</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 5.3: Thuật toán liên phân số
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ý tưởng của thuật toán liên phân số là mô tả các số thực chỉ bằng các số nguyên, sử dụng các biểu thức có dạng</p>
+<p><span class="math display">
+[a_0, \dots, a_M] \equiv a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots + \frac{1}{a_M}}}, \tag{5.49}
+</span></p>
+<p>trong đó <span class="math inline">a_0, \dots, a_M</span> là các số nguyên dương. (Đối với các ứng dụng trong tính toán lượng tử, việc cho phép <span class="math inline">a_0 = 0</span> là thuận tiện.) Chúng ta định nghĩa hội tụ (convergent) thứ <span class="math inline">m</span> (<span class="math inline">0 \le m \le M</span>) của liên phân số này là <span class="math inline">[a_0, \dots, a_m]</span>. Thuật toán liên phân số là một phương pháp để xác định khai triển liên phân số của một số thực bất kỳ.</p>
+<p>Nó rất dễ hiểu thông qua một ví dụ. Giả sử chúng ta đang cố gắng phân rã phân số <span class="math inline">31/13</span> thành một liên phân số. Bước đầu tiên của thuật toán liên phân số là tách <span class="math inline">31/13</span> thành phần nguyên và phần phân số của nó,</p>
+<p><span class="math display">
+\frac{31}{13} = 2 + \frac{5}{13}. \tag{5.50}
+</span></p>
+<p>Tiếp theo, chúng ta nghịch đảo phần phân số, thu được</p>
+<p><span class="math display">
+\frac{31}{13} = 2 + \frac{1}{\frac{13}{5}}. \tag{5.51}
+</span></p>
+<p>Các bước này — tách rồi nghịch đảo — bây giờ được áp dụng cho <span class="math inline">13/5</span>, cho ra</p>
+<p><span class="math display">
+\frac{31}{13} = 2 + \frac{1}{2 + \frac{3}{5}} = 2 + \frac{1}{2 + \frac{1}{\frac{5}{3}}}. \tag{5.52}
+</span></p>
+<p>Tiếp theo, chúng ta tách và nghịch đảo <span class="math inline">5/3</span>:</p>
+<p><span class="math display">
+\frac{31}{13} = 2 + \frac{1}{2 + \frac{1}{1 + \frac{2}{3}}} = 2 + \frac{1}{2 + \frac{1}{1 + \frac{1}{\frac{3}{2}}}}. \tag{5.53}
+</span></p>
+<p>Phép phân rã thành liên phân số bây giờ dừng lại, vì</p>
+<p><span class="math display">
+\frac{3}{2} = 1 + \frac{1}{2} \tag{5.54}
+</span></p>
+<p>có thể được viết với số 1 ở tử số mà không cần phải nghịch đảo nữa, cho ra biểu diễn liên phân số cuối cùng của <span class="math inline">31/13</span> là</p>
+<p><span class="math display">
+\frac{31}{13} = 2 + \frac{1}{2 + \frac{1}{1 + \frac{1}{2}}}. \tag{5.55}
+</span></p>
+<p>Rõ ràng là thuật toán liên phân số dừng lại sau một số hữu hạn các bước “tách và nghịch đảo” đối với bất kỳ số hữu tỉ nào, vì các tử số xuất hiện (<span class="math inline">31, 5, 3, 2, 1</span> trong ví dụ) giảm dần nghiêm ngặt. Quá trình dừng này diễn ra nhanh đến mức nào? Hóa ra nếu <span class="math inline">\varphi = s/r</span> là một số hữu tỉ, và <span class="math inline">s</span> và <span class="math inline">r</span> là các số nguyên <span class="math inline">L</span>-bit, thì khai triển liên phân số cho <span class="math inline">\varphi</span> có thể được tính toán bằng cách sử dụng <span class="math inline">O(L^3)</span> phép toán — <span class="math inline">O(L)</span> bước “tách và nghịch đảo”, mỗi bước sử dụng các cổng <span class="math inline">O(L^2)</span> cho các phép tính số học cơ bản.</p>
+</div>
+</div>
+</section>
+<section id="performance" class="level2">
+<h2 class="anchored" data-anchor-id="performance">Performance</h2>
+<p>Thuật toán tìm bậc có thể thất bại như thế nào? Có hai khả năng. Đầu tiên, quy trình ước lượng pha có thể tạo ra một ước lượng tồi cho <span class="math inline">s/r</span>. Điều này xảy ra với xác suất cao nhất là <span class="math inline">\epsilon</span>, và có thể làm cho nó trở nên nhỏ đi với một sự gia tăng không đáng kể về kích thước của mạch. Nghiêm trọng hơn, có thể là <span class="math inline">s</span> và <span class="math inline">r</span> có ước chung, trong trường hợp đó số <span class="math inline">r'</span> được trả về bởi thuật toán liên phân số sẽ là một ước số của <span class="math inline">r</span>, chứ không phải bản thân <span class="math inline">r</span>. May mắn thay, có ít nhất ba cách để giải quyết vấn đề này.</p>
+<p>Có lẽ cách trực tiếp nhất là lưu ý rằng đối với một <span class="math inline">s</span> được chọn ngẫu nhiên trong khoảng từ <span class="math inline">0</span> đến <span class="math inline">r-1</span>, khả năng cao là <span class="math inline">s</span> và <span class="math inline">r</span> nguyên tố cùng nhau, trong trường hợp đó thuật toán liên phân số phải trả về <span class="math inline">r</span>. Để thấy rằng đây là trường hợp như vậy, lưu ý rằng theo Bài tập 4.1 ở trang 638, số lượng các số nguyên tố nhỏ hơn <span class="math inline">r</span> ít nhất là <span class="math inline">r / 2\log r</span>, và do đó cơ hội để <span class="math inline">s</span> là số nguyên tố (và do đó, nguyên tố cùng nhau với <span class="math inline">r</span>) ít nhất là <span class="math inline">1 / 2\log(r) &gt; 1 / 2\log(N)</span>. Do đó, lặp lại thuật toán <span class="math inline">2\log(N)</span> lần, chúng ta sẽ, với xác suất cao, quan sát thấy một pha <span class="math inline">s/r</span> sao cho <span class="math inline">s</span> và <span class="math inline">r</span> nguyên tố cùng nhau, và do đó thuật toán liên phân số tạo ra <span class="math inline">r</span> như mong muốn.</p>
+<p>Phương pháp thứ hai là lưu ý rằng nếu <span class="math inline">r' \neq r</span>, thì <span class="math inline">r'</span> được đảm bảo là một ước số của <span class="math inline">r</span>, trừ khi <span class="math inline">s = 0</span>, khả năng này xảy ra với xác suất <span class="math inline">1/r \le 1/2</span>, và có thể được chiết khấu hơn nữa bằng một vài lần lặp. Giả sử chúng ta thay thế <span class="math inline">x</span> bằng <span class="math inline">x' \equiv x^{r'} \pmod N</span>. Khi đó bậc của <span class="math inline">x'</span> là <span class="math inline">r/r'</span>. Bây giờ chúng ta có thể lặp lại thuật toán, và cố gắng tính toán bậc của <span class="math inline">x'</span>, nếu thành công, cho phép chúng ta tính toán bậc của <span class="math inline">x</span>, vì <span class="math inline">r = r' \times r/r'</span>. Nếu chúng ta thất bại, thì chúng ta thu được <span class="math inline">r''</span> là một ước số của <span class="math inline">r/r'</span>, và bây giờ chúng ta cố gắng tính toán bậc của <span class="math inline">x'' \equiv (x')^{r''} \pmod N</span>. Chúng ta lặp lại quy trình này cho đến khi chúng ta xác định được bậc của <span class="math inline">x</span>. Tối đa <span class="math inline">\log(r) = O(L)</span> lần lặp được yêu cầu, vì mỗi lần lặp làm giảm bậc của ứng viên hiện tại <span class="math inline">x^{\dots}</span> đi một thừa số ít nhất là hai.</p>
+<p>Phương pháp thứ ba tốt hơn hai phương pháp đầu tiên ở chỗ nó chỉ đòi hỏi một số lần thử hằng số (constant number of trials), thay vì <span class="math inline">O(L)</span> lần lặp. Ý tưởng là lặp lại quy trình ước lượng pha - liên phân số hai lần, thu được <span class="math inline">r_1', s_1'</span> vào lần đầu tiên, và <span class="math inline">r_2', s_2'</span> vào lần thứ hai. Miễn là <span class="math inline">s_1'</span> và <span class="math inline">s_2'</span> không có ước chung, <span class="math inline">r</span> có thể được trích xuất bằng cách lấy bội chung nhỏ nhất (least common multiple) của <span class="math inline">r_1</span> và <span class="math inline">r_2</span>. Xác suất để <span class="math inline">s_1'</span> và <span class="math inline">s_2'</span> không có ước chung được cho bởi</p>
+<p><span class="math display">
+1 - \sum_q p(q\vert{}s_1')p(q\vert{}s_2'), \tag{5.56}
+</span></p>
+<p>trong đó tổng chạy trên tất cả các số nguyên tố <span class="math inline">q</span>, và <span class="math inline">p(x\vert{}y)</span> ở đây có nghĩa là xác suất của <span class="math inline">x</span> chia hết <span class="math inline">y</span>. Nếu <span class="math inline">q</span> chia hết <span class="math inline">s_1'</span> thì nó cũng phải chia hết giá trị thực của <span class="math inline">s</span>, là <span class="math inline">s_1</span>, ở lần lặp đầu tiên, vì vậy để chặn trên <span class="math inline">p(q\vert{}s_1')</span> thì chỉ cần chặn trên <span class="math inline">p(q\vert{}s_1)</span>, trong đó <span class="math inline">s_1</span> được chọn đồng nhất ngẫu nhiên từ <span class="math inline">0</span> đến <span class="math inline">r-1</span>. Thật dễ dàng để thấy rằng <span class="math inline">p(q\vert{}s_1) \le 1/q</span>, và do đó <span class="math inline">p(q\vert{}s_1') \le 1/q</span>. Tương tự, <span class="math inline">p(q\vert{}s_2') \le 1/q</span>, và do đó xác suất để <span class="math inline">s_1'</span> và <span class="math inline">s_2'</span> không có ước chung thỏa mãn</p>
+<p><span class="math display">
+1 - \sum_q p(q\vert{}s_1')p(q\vert{}s_2') \ge 1 - \sum_q \frac{1}{q^2}. \tag{5.57}
+</span></p>
+<p>Vế phải có thể được chặn trên theo một số cách; một kỹ thuật đơn giản được cung cấp trong Bài tập 5.16, cho ra</p>
+<p><span class="math display">
+1 - \sum_q p(q\vert{}s_1')p(q\vert{}s_2') \ge \frac{1}{4}, \tag{5.58}
+</span></p>
+<p>và do đó xác suất thu được <span class="math inline">r</span> chính xác ít nhất là <span class="math inline">1/4</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.15:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng bội chung nhỏ nhất (least common multiple) của các số nguyên dương <span class="math inline">x</span> và <span class="math inline">y</span> là <span class="math inline">xy / \gcd(x, y)</span>, và do đó có thể được tính toán trong <span class="math inline">O(L^2)</span> phép toán nếu <span class="math inline">x</span> và <span class="math inline">y</span> là các số <span class="math inline">L</span> bit.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.16:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Đối với mọi <span class="math inline">x \ge 2</span>, hãy chứng minh rằng <span class="math inline">\int_{x}^{x+1} 1/y^2 \, dy \ge 2/3x^2</span>. Chỉ ra rằng</p>
+</div>
+</div>
+</div>
+<p><span class="math display">
+\sum_q \frac{1}{q^2} \le \frac{3}{2} \int_{2}^{\infty} \frac{1}{y^2} \, dy = \frac{3}{4}, \tag{5.59}
+</span></p>
+<p>và từ đó suy ra phương trình (5.58) được thỏa mãn.</p>
+<hr>
+<p>Yêu cầu tài nguyên (Resource requirements) của thuật toán này là gì?</p>
+<p>Phép biến đổi Hadamard đòi hỏi <span class="math inline">O(L)</span> cổng, và biến đổi Fourier ngược đòi hỏi <span class="math inline">O(L^2)</span> cổng. Chi phí lớn nhất trong mạch lượng tử thực sự đến từ phép lũy thừa modulo, sử dụng <span class="math inline">O(L^3)</span> cổng, cho tổng chi phí là <span class="math inline">O(L^3)</span> cổng trong mạch lượng tử. Thuật toán liên phân số bổ sung thêm <span class="math inline">O(L^3)</span> cổng nữa, cho tổng chi phí là <span class="math inline">O(L^3)</span> để thu được <span class="math inline">r'</span>. Sử dụng phương pháp thứ ba để thu được <span class="math inline">r</span> từ <span class="math inline">r'</span>, chúng ta chỉ cần lặp lại quy trình này một số lần hằng số để thu được bậc <span class="math inline">r</span>, với tổng chi phí là <span class="math inline">O(L^3)</span>. Thuật toán được tóm tắt dưới đây.</p>
+</section>
+<section id="algorithm-quantum-order-finding" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-quantum-order-finding">Algorithm: Quantum order-finding</h2>
+<p>Thuật toán: Tìm bậc lượng tử (Quantum order-finding)</p>
+<p>Các đầu vào: (1) Một hộp đen <span class="math inline">U_{x,N}</span> thực hiện phép biến đổi <span class="math inline">\vert{}j\rangle\vert{}k\rangle \to \vert{}j\rangle \vert{}k + x^j \pmod N\rangle</span>, đối với <span class="math inline">x</span> nguyên tố cùng nhau với số <span class="math inline">L</span>-bit <span class="math inline">N</span>. (2) <span class="math inline">t = 2L + 1 + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}0\rangle</span>. (3) <span class="math inline">L</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}1\rangle</span>.</p>
+<p>Đầu ra: Số nguyên dương nhỏ nhất <span class="math inline">r &gt; 0</span> sao cho <span class="math inline">x^r \equiv 1 \pmod N</span>.</p>
+<p>Thời gian chạy (Runtime): <span class="math inline">O(L^3)</span> phép toán. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
+<p>Quy trình:</p>
+<ol type="1">
+<li><span class="math inline">\vert{}0\rangle\vert{}1\rangle</span> (trạng thái ban đầu)<br>
+</li>
+<li><span class="math inline">\to \frac{1}{\sqrt{2^t}} \sum_{j=0}^{2^t-1} \vert{}j\rangle\vert{}1\rangle</span> (tạo chồng chập)<br>
+</li>
+<li><span class="math inline">\to \frac{1}{\sqrt{2^t}} \sum_{j=0}^{2^t-1} \vert{}j\rangle \vert{}x^j \pmod N\rangle</span> (áp dụng hộp đen <span class="math inline">U_{x,N}</span>) <span class="math inline">\approx \frac{1}{\sqrt{r 2^t}} \sum_{s=0}^{r-1} \sum_{j=0}^{2^t-1} e^{2\pi i s j / r} \vert{}j\rangle \vert{}u_s\rangle</span> (khai triển theo trạng thái riêng)<br>
+</li>
+<li><span class="math inline">\to \frac{1}{\sqrt{r}} \sum_{s=0}^{r-1} \vert{}\widetilde{s/r}\rangle \vert{}u_s\rangle</span> (áp dụng biến đổi Fourier ngược lên thanh ghi thứ nhất)<br>
+</li>
+<li><span class="math inline">\to \widetilde{s/r}</span> (đo thanh ghi thứ nhất)<br>
+</li>
+<li><span class="math inline">\to r</span> (áp dụng thuật toán liên phân số)</li>
+</ol>
+</section>
+</section>
+<section id="application-factoring" class="level1">
+<h1>Application: factoring</h1>
+<blockquote class="blockquote">
+<p><em>‘The problem of distinguishing prime numbers from composites, and of resolving composite numbers into their prime factors, is one of the most important and useful in all of arithmetic. [ . . . ] The dignity of science seems to demand that every aid to the solution of such an elegant and celebrated problem be zealously cultivated.’</em> – Carl Friedrich Gauss, as quoted by Donald Knuth</p>
+</blockquote>
+<p>Cho một số nguyên dương hợp số <span class="math inline">N</span>, những số nguyên tố nào khi nhân lại với nhau thì bằng nó? Bài toán phân tích thừa số này hóa ra lại tương đương với bài toán tìm bậc mà chúng ta vừa nghiên cứu, theo nghĩa là một thuật toán nhanh cho việc tìm bậc có thể dễ dàng được biến đổi thành một thuật toán nhanh cho việc phân tích thừa số. Trong phần này, chúng tôi giải thích phương pháp được sử dụng để giản lược bài toán phân tích thừa số về bài toán tìm bậc, và đưa ra một ví dụ đơn giản về sự giản lược này.</p>
+<p>Việc giản lược bài toán phân tích thừa số về bài toán tìm bậc diễn ra theo hai bước cơ bản. Bước đầu tiên là chỉ ra rằng chúng ta có thể tính toán một thừa số của <span class="math inline">N</span> nếu chúng ta có thể tìm thấy một nghiệm không tầm thường (non-trivial solution) <span class="math inline">x \not\equiv \pm 1 \pmod N</span> cho phương trình <span class="math inline">x^2 \equiv 1 \pmod N</span>. Bước thứ hai là chỉ ra rằng một số <span class="math inline">y</span> được chọn ngẫu nhiên nguyên tố cùng nhau với <span class="math inline">N</span> có khả năng khá cao sẽ có một bậc <span class="math inline">r</span> là số chẵn, và sao cho <span class="math inline">y^{r/2} \not\equiv \pm 1 \pmod N</span>, và do đó <span class="math inline">x \equiv y^{r/2} \pmod N</span> là một nghiệm không tầm thường cho <span class="math inline">x^2 \equiv 1 \pmod N</span>. Hai bước này được hiện thân trong các định lý sau đây, mà chứng minh của chúng có thể được tìm thấy trong Mục A4.3 của Phụ lục 4.</p>
+</section>
+<section id="định-lý-5.2" class="level1 postulates">
+<h1>Định lý 5.2</h1>
+<p>Giả sử <span class="math inline">N</span> là một hợp số <span class="math inline">L</span> bit, và <span class="math inline">x</span> là một nghiệm không tầm thường cho phương trình <span class="math inline">x^2 \equiv 1 \pmod N</span> trong khoảng <span class="math inline">1 \le x \le N</span>, tức là, không phải <span class="math inline">x \equiv 1 \pmod N</span> cũng không phải <span class="math inline">x \equiv N - 1 \equiv -1 \pmod N</span>. Khi đó ít nhất một trong hai <span class="math inline">\gcd(x - 1, N)</span> và <span class="math inline">\gcd(x + 1, N)</span> là một thừa số không tầm thường của <span class="math inline">N</span> mà có thể được tính toán sử dụng <span class="math inline">O(L^3)</span> phép toán.</p>
+</section>
+<section id="định-lý-5.3" class="level1 postulates">
+<h1>Định lý 5.3</h1>
+<p>Giả sử <span class="math inline">N = p_1^{\alpha_1} \dots p_m^{\alpha_m}</span> là sự phân tích ra thừa số nguyên tố của một số nguyên dương hợp số lẻ. Cho <span class="math inline">x</span> là một số nguyên được chọn ngẫu nhiên đồng nhất, tuân theo các yêu cầu là <span class="math inline">1 \le x \le N - 1</span> và <span class="math inline">x</span> nguyên tố cùng nhau với <span class="math inline">N</span>. Cho <span class="math inline">r</span> là bậc của <span class="math inline">x</span> modulo <span class="math inline">N</span>. Khi đó</p>
+<p><span class="math display">
+p(r \text{ là số chẵn và } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}{2^m}. \tag{5.60}
+</span></p>
+</section>
+<p>Các định lý 5.2 và 5.3 có thể được kết hợp để tạo ra một thuật toán mà với xác suất cao, sẽ trả về một ước số không tầm thường của bất kỳ hợp số N nào. Tất cả các bước trong thuật toán này đều có thể được thực hiện một cách hiệu quả trên máy tính cổ điển, ngoại trừ một “subroutine” dùng để tìm bậc (order-finding) – vốn là thành phần mà cho đến nay, người ta vẫn chưa biết cách thực hiện hiệu quả trên máy tính cổ điển. Bằng cách lặp lại quy trình này, ta có thể tìm được phân tích thừa số nguyên tố đầy đủ của N. Thuật toán được tóm tắt dưới đây.</p>
+<section id="algorithm-reduction-of-factoring-to-order-finding" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-reduction-of-factoring-to-order-finding">Algorithm: Reduction of factoring to order-finding</h2>
+<p>Thuật toán: Rút gọn bài toán phân tích thừa số về tìm bậc</p>
+<p>Các đầu vào: Một hợp số <span class="math inline">N</span></p>
+<p>Đầu ra: Một thừa số không tầm thường của <span class="math inline">N</span>.</p>
+<p>Thời gian chạy: Các phép toán <span class="math inline">O((\log N)^3)</span>. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
+<p>Quy trình:</p>
+<ol type="1">
+<li>Nếu <span class="math inline">N</span> là số chẵn, trả về thừa số 2.<br>
+</li>
+<li>Xác định xem liệu <span class="math inline">N = a^b</span> cho các số nguyên <span class="math inline">a \ge 1</span> và <span class="math inline">b \ge 2</span>, và nếu vậy trả về thừa số <span class="math inline">a</span> (sử dụng thuật toán cổ điển của Bài tập 5.17).<br>
+</li>
+<li>Chọn ngẫu nhiên <span class="math inline">x</span> trong khoảng 1 đến <span class="math inline">N-1</span>. Nếu <span class="math inline">\gcd(x, N) &gt; 1</span> thì trả về thừa số <span class="math inline">\gcd(x, N)</span>.<br>
+</li>
+<li>Sử dụng chương trình con tìm bậc để tìm bậc <span class="math inline">r</span> của <span class="math inline">x</span> modulo <span class="math inline">N</span>.<br>
+</li>
+<li>Nếu <span class="math inline">r</span> là số chẵn và <span class="math inline">x^{r/2} \not\equiv -1 \pmod N</span> thì tính <span class="math inline">\gcd(x^{r/2} - 1, N)</span> và <span class="math inline">\gcd(x^{r/2} + 1, N)</span>, và kiểm tra xem một trong những số này có phải là một thừa số không tầm thường hay không, trả về thừa số đó nếu đúng như vậy. Nếu không, thuật toán thất bại.</li>
+</ol>
+<p>Các bước 1 và 2 của thuật toán hoặc trả về một thừa số, hoặc đảm bảo rằng <span class="math inline">N</span> là một số nguyên lẻ với nhiều hơn một thừa số nguyên tố. Các bước này có thể được thực hiện sử dụng <span class="math inline">O(1)</span> và <span class="math inline">O(L^3)</span> phép toán tương ứng. Bước 3 hoặc trả về một thừa số, hoặc tạo ra một phần tử <span class="math inline">x</span> được chọn ngẫu nhiên của <span class="math inline">\{0, 1, 2, \dots, N-1\}</span>. Bước 4 gọi chương trình con tìm bậc, tính toán bậc <span class="math inline">r</span> của <span class="math inline">x</span> modulo <span class="math inline">N</span>. Bước 5 hoàn thành thuật toán, vì Định lý 5.3 đảm bảo rằng với xác suất ít nhất là một phần hai <span class="math inline">r</span> sẽ là số chẵn và <span class="math inline">x^{r/2} \not\equiv -1 \pmod N</span>, và khi đó Định lý 5.2 đảm bảo rằng hoặc <span class="math inline">\gcd(x^{r/2} - 1, N)</span> hoặc <span class="math inline">\gcd(x^{r/2} + 1, N)</span> là một thừa số không tầm thường của <span class="math inline">N</span>. Một ví dụ minh họa việc sử dụng thuật toán này với chương trình con lượng tử tìm bậc được thể hiện trong Hộp 5.4.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 5.4: Phân tích thừa số 15 bằng cơ học lượng tử
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Việc sử dụng thuật toán tìm bậc, ước lượng pha, và khai triển liên phân số trong thuật toán phân tích thừa số lượng tử được minh họa bằng cách áp dụng nó để phân tích <span class="math inline">N = 15</span>. Đầu tiên, chúng ta chọn một số ngẫu nhiên không có ước chung với <span class="math inline">N</span>; giả sử chúng ta chọn <span class="math inline">x = 7</span>. Tiếp theo, chúng ta tính bậc <span class="math inline">r</span> của <span class="math inline">x</span> đối với <span class="math inline">N</span>, sử dụng thuật toán tìm bậc lượng tử: bắt đầu với trạng thái <span class="math inline">\vert{}0\rangle\vert{}0\rangle</span> và tạo ra trạng thái</p>
+<p><span class="math display">
+\frac{1}{\sqrt{2^t}} \sum_{k=0}^{2^t-1} \vert{}k\rangle\vert{}0\rangle = \frac{1}{\sqrt{2^t}} \big[ \vert{}0\rangle + \vert{}1\rangle + \vert{}2\rangle + \dots + \vert{}2^t - 1\rangle \big] \vert{}0\rangle \tag{5.61}
+</span></p>
+<p>bằng cách áp dụng <span class="math inline">t = 11</span> phép biến đổi Hadamard lên thanh ghi thứ nhất. Việc chọn giá trị này của <span class="math inline">t</span> đảm bảo xác suất lỗi <span class="math inline">\epsilon</span> tối đa là <span class="math inline">1/4</span>. Tiếp theo, tính <span class="math inline">f(k) = x^k \pmod N</span>, để lại kết quả ở thanh ghi thứ hai,</p>
+<p><span class="math display">
+\frac{1}{\sqrt{2^t}} \sum_{k=0}^{2^t-1} \vert{}k\rangle \vert{}x^k \pmod N\rangle \tag{5.62}
+</span></p>
+<p><span class="math display">
+= \frac{1}{\sqrt{2^t}} \big[ \vert{}0\rangle\vert{}1\rangle + \vert{}1\rangle\vert{}7\rangle + \vert{}2\rangle\vert{}4\rangle + \vert{}3\rangle\vert{}13\rangle + \vert{}4\rangle\vert{}1\rangle + \vert{}5\rangle\vert{}7\rangle + \vert{}6\rangle\vert{}4\rangle + \dots \big].
+</span></p>
+<p>Bây giờ chúng ta áp dụng phép biến đổi Fourier ngược <span class="math inline">FT^\dagger</span> lên thanh ghi thứ nhất và đo nó. Một cách để phân tích phân phối của các kết quả thu được là tính toán ma trận mật độ rút gọn (reduced density matrix) cho thanh ghi thứ nhất, và áp dụng <span class="math inline">FT^\dagger</span> lên nó, rồi tính toán số liệu thống kê của phép đo. Tuy nhiên, vì không có phép toán nào khác được áp dụng lên thanh ghi thứ hai, thay vào đó chúng ta có thể áp dụng nguyên lý phép đo ẩn (Mục 4.4) và giả sử rằng thanh ghi thứ hai được đo, thu được một kết quả ngẫu nhiên từ 1, 7, 4, hoặc 13. Giả sử chúng ta nhận được 4 (bất kỳ kết quả nào cũng hoạt động); điều này có nghĩa là trạng thái đầu vào cho <span class="math inline">FT^\dagger</span> sẽ là <span class="math inline">\sqrt{\frac{4}{2^t}} \big[ \vert{}2\rangle + \vert{}6\rangle + \vert{}10\rangle + \vert{}14\rangle + \dots \big]</span>. Sau khi áp dụng <span class="math inline">FT^\dagger</span>, chúng ta thu được một trạng thái <span class="math inline">\sum_\ell \alpha_\ell \vert{}\ell\rangle</span>, với phân phối xác suất</p>
+<p><img src="../../img/5.4.1.png" class="img-fluid"></p>
+<p>(Biểu đồ phân phối xác suất <span class="math inline">\vert{}\alpha_\ell\vert{}^2</span> hiển thị các đỉnh tại <span class="math inline">0, 512, 1024, 1536</span> trên trục <span class="math inline">\ell</span>)</p>
+<p>được biểu diễn cho <span class="math inline">2^t = 2048</span>. Do đó, phép đo cuối cùng cho ra <span class="math inline">0, 512, 1024</span>, hoặc <span class="math inline">1536</span>, mỗi giá trị với xác suất gần như chính xác là <span class="math inline">1/4</span>. Giả sử chúng ta thu được <span class="math inline">\ell = 1536</span> từ phép đo; do đó tính toán khai triển liên phân số cho ra <span class="math inline">1536/2048 = 1/(1 + (1/3))</span>, suy ra <span class="math inline">3/4</span> xuất hiện như một hội tụ trong khai triển, cho ra <span class="math inline">r = 4</span> là bậc của <span class="math inline">x = 7</span>. Tình cờ, <span class="math inline">r</span> là số chẵn, và hơn nữa, <span class="math inline">x^{r/2} \pmod N = 7^2 \pmod{15} = 4 \not\equiv -1 \pmod{15}</span>, vì vậy thuật toán hoạt động: tính toán ước chung lớn nhất <span class="math inline">\gcd(x^{r/2} - 1, 15) = 3</span> và <span class="math inline">\gcd(x^{r/2} + 1, 15) = 5</span> cho chúng ta biết rằng <span class="math inline">15 = 3 \times 5</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.17:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">N</span> dài <span class="math inline">L</span> bit. Mục đích của bài tập này là tìm một thuật toán cổ điển hiệu quả để xác định xem liệu <span class="math inline">N = a^b</span> đối với một số nguyên <span class="math inline">a \ge 1</span> và <span class="math inline">b \ge 2</span> nào đó hay không. Điều này có thể được thực hiện như sau:</p>
+<ol type="1">
+<li>Chứng minh rằng <span class="math inline">b</span>, nếu tồn tại, thỏa mãn <span class="math inline">b \le L</span>.</li>
+<li>Chứng minh rằng mất tối đa <span class="math inline">O(L^2)</span> phép toán để tính <span class="math inline">\log_2 N</span>, <span class="math inline">x = y/b</span> đối với <span class="math inline">b \le L</span>, và hai số nguyên <span class="math inline">u_1</span> và <span class="math inline">u_2</span> gần nhất với <span class="math inline">2^x</span>.</li>
+<li>Chứng minh rằng mất tối đa <span class="math inline">O(L^2)</span> phép toán để tính <span class="math inline">u_1^b</span> và <span class="math inline">u_2^b</span> (sử dụng bình phương liên tiếp) và kiểm tra xem một trong hai có bằng <span class="math inline">N</span> hay không.</li>
+<li>Kết hợp các kết quả trước đó để đưa ra một thuật toán <span class="math inline">O(L^3)</span> phép toán nhằm xác định xem <span class="math inline">N = a^b</span> đối với các số nguyên <span class="math inline">a</span> và <span class="math inline">b</span> hay không.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.18: (Phân tích thừa số 91)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta muốn phân tích <span class="math inline">N = 91</span>. Xác nhận rằng các bước 1 và 2 đã được vượt qua. Đối với bước 3, giả sử chúng ta chọn <span class="math inline">x = 4</span>, nguyên tố cùng nhau với <span class="math inline">91</span>. Tính bậc <span class="math inline">r</span> của <span class="math inline">x</span> đối với <span class="math inline">N</span>, và chỉ ra rằng <span class="math inline">x^{r/2} \pmod{91} = 64 \not\equiv -1 \pmod{91}</span>, vì vậy thuật toán thành công, cho ra <span class="math inline">\gcd(64 - 1, 19) = 7</span>.</p>
+<p>Không có khả năng đây là phương pháp hiệu quả nhất mà bạn từng thấy để phân tích <span class="math inline">91</span>. Thật vậy, nếu tất cả các tính toán phải được thực hiện trên một máy tính cổ điển, phép giản lược này sẽ không tạo ra một thuật toán phân tích thừa số hiệu quả, vì không có phương pháp hiệu quả nào được biết đến để giải quyết bài toán tìm bậc trên một máy tính cổ điển.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.19:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chỉ ra rằng <span class="math inline">N = 15</span> là con số nhỏ nhất mà chương trình con tìm bậc được yêu cầu, tức là, nó là hợp số nhỏ nhất không phải là số chẵn hay lũy thừa của một số nguyên nhỏ hơn nào đó.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
