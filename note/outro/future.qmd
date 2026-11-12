@@ -39,3 +39,8 @@ Nghiên cứu thêm Phương trình chủ Lindblad (Lindblad Master Equation). P
 
 # SYK
 
+
+Mô phỏng Động lực học Vật lý (Hamiltonian Simulation)
+Đây chính là lãnh địa của AdS/CFT và ER=EPR. Không có bài toán "tìm kiếm" nào ở đây cả. Bạn có một ma trận năng lượng (Hamiltonian $H$), và bạn cần mô phỏng sự biến đổi của nó theo thời gian $e^{-iHt}$.
+
+* Hướng nghiên cứu hiện tại: Tối ưu hóa các công thức Trotterization hoặc LCU (Linear Combination of Unitaries) để mô phỏng các vật liệu siêu dẫn nhiệt độ phòng, sự tương tác của Fermion trong lý thuyết trường lượng tử, hoặc đo lường hàm hỗn loạn OTOC của không thời gian.

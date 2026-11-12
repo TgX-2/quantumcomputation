@@ -30,3 +30,27 @@ format:
 Khám phá ngoạn mục nhất trong tính toán lượng tử cho đến nay là máy tính lượng tử có thể thực hiện một cách hiệu quả một số tác vụ vốn không hề khả thi trên một máy tính cổ điển. Ví dụ, việc tìm phân tích tiêu chuẩn ra thừa số nguyên tố của một số nguyên $n$-bit được cho là đòi hỏi $\exp(\Theta(n^{1/3} \log^{2/3} n))$ phép toán khi sử dụng thuật toán cổ điển tốt nhất được biết đến tại thời điểm viết sách, thứ được gọi là sàng trường số (number field sieve). Con số này có độ lớn theo hàm mũ so với kích thước của số đang được phân tích, vì vậy việc phân tích thành thừa số nhìn chung được coi là một bài toán không thể giải quyết (intractable) trên máy tính cổ điển: nó nhanh chóng trở nên bất khả thi ngay cả đối với việc phân tích những con số có kích thước khiêm tốn. Ngược lại, một thuật toán lượng tử có thể hoàn thành cùng tác vụ đó bằng cách sử dụng $O(n^2 \log n \log \log n)$ phép toán. Tức là, một máy tính lượng tử có thể phân tích một số thành thừa số nhanh hơn theo hàm mũ so với các thuật toán cổ điển tốt nhất từng được biết đến. Bản thân kết quả này đã rất quan trọng, nhưng có lẽ khía cạnh thú vị nhất chính là câu hỏi mà nó đặt ra: những bài toán nào khác có thể được thực hiện một cách hiệu quả trên máy tính lượng tử mà lại bất khả thi trên máy tính cổ điển? 
 
 Trong chương này, chúng ta phát triển biến đổi Fourier lượng tử (quantum Fourier transform), thành phần then chốt cho việc phân tích thừa số lượng tử và nhiều thuật toán lượng tử thú vị khác. Biến đổi Fourier lượng tử, mà chúng ta bắt đầu ở Mục 5.1, là một thuật toán lượng tử hiệu quả để thực hiện phép biến đổi Fourier lên các biên độ cơ học lượng tử. Nó không làm tăng tốc tác vụ cổ điển là tính toán phép biến đổi Fourier của dữ liệu cổ điển. Nhưng một tác vụ quan trọng mà nó cho phép thực hiện là ước lượng pha (phase estimation), tức là sự xấp xỉ các trị riêng của một toán tử unita trong những hoàn cảnh nhất định, như được mô tả ở Mục 5.2. Điều này cho phép chúng ta giải quyết một vài bài toán thú vị khác, bao gồm bài toán tìm bậc (order-finding problem) và bài toán phân tích thừa số (factoring problem), được đề cập trong Mục 5.3. Ước lượng pha cũng có thể được kết hợp với thuật toán tìm kiếm lượng tử để giải quyết bài toán đếm số lượng nghiệm (counting solutions) cho một bài toán tìm kiếm, như được mô tả trong chương tiếp theo. Mục 5.4 kết thúc chương với một cuộc thảo luận về cách biến đổi Fourier lượng tử có thể được sử dụng để giải quyết bài toán nhóm con ẩn (hidden subgroup problem), một sự tổng quát hóa của các bài toán ước lượng pha và tìm bậc, mà trong số các trường hợp đặc biệt của nó có một thuật toán lượng tử hiệu quả cho bài toán logarit rời rạc (discrete logarithm problem), một bài toán khác được coi là không thể giải quyết (intractable) trên máy tính cổ điển.
+
+# Summary of Chapter 5: The quantum Fourier transform and its applications
+
+Khi $N = 2^n$, biến đổi Fourier lượng tử   
+
+$$
+\vert{}j\rangle = \vert{}j_1, \dots, j_n\rangle \to \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i j k / N} \vert{}k\rangle \tag{5.81}
+$$   
+
+có thể được viết dưới dạng   
+
+$$
+\vert{}j\rangle \to \frac{1}{2^{n/2}} \left(\vert{}0\rangle + e^{2\pi i 0.j_n} \vert{}1\rangle\right) \left(\vert{}0\rangle + e^{2\pi i 0.j_{n-1}j_n} \vert{}1\rangle\right) \dots \left(\vert{}0\rangle + e^{2\pi i 0.j_1 j_2 \dots j_n} \vert{}1\rangle\right), \tag{5.82}
+$$
+
+và có thể được triển khai bằng cách sử dụng $\Theta(n^2)$ cổng logic.   
+
+**Ước lượng pha (Phase estimation):** Gọi $\vert{}u\rangle$ là một trạng thái riêng của toán tử $U$ với trị riêng $e^{2\pi i \varphi}$. Xuất phát từ trạng thái ban đầu $\vert{}0\rangle^{\otimes t}\vert{}u\rangle$, và giả định có khả năng thực hiện hiệu quả toán tử $U^{2^k}$ với số nguyên $k$, thuật toán này (được trình bày trong Hình 5.3) có thể được sử dụng để thu được một cách hiệu quả trạng thái $\vert{}\tilde{\varphi}\rangle\vert{}u\rangle$, trong đó $\tilde{\varphi}$ xấp xỉ chính xác $\varphi$ đến $t - \left\lceil \log\left(2 + \frac{1}{2\epsilon}\right) \right\rceil$ bit với xác suất ít nhất là $1 - \epsilon$.   
+
+**Tìm bậc (Order-finding):** Bậc của $x$ modulo $N$ là số nguyên dương $r$ nhỏ nhất sao cho $x^r \pmod N = 1$. Con số này có thể được tính toán trong $O(L^3)$ phép toán bằng cách sử dụng thuật toán ước lượng pha lượng tử, đối với các số nguyên $L$-bit $x$ và $N$.   
+
+**Phân tích thừa số (Factoring):** Các thừa số nguyên tố của một số nguyên $L$-bit $N$ có thể được xác định trong $O(L^3)$ phép toán bằng cách giản lược bài toán này về việc tìm bậc của một số ngẫu nhiên $x$ nguyên tố cùng nhau với $N$.   
+
+**Bài toán nhóm con ẩn (Hidden subgroup problem):** Tất cả các thuật toán lượng tử nhanh đã biết đều có thể được mô tả như là việc giải quyết bài toán sau: Cho $f$ là một hàm từ một nhóm sinh hữu hạn $G$ đến một tập hữu hạn $X$ sao cho $f$ là hằng số trên các lớp kề của một nhóm con $K$, và phân biệt trên mỗi lớp kề. Cho trước một hộp đen lượng tử để thực hiện phép biến đổi unita $U\vert{}g\rangle\vert{}h\rangle = \vert{}g\rangle\vert{}h \oplus f(g)\rangle$, đối với $g \in G$ và $h \in X$, hãy tìm một tập sinh cho $K$. 

@@ -1,0 +1,15 @@
+---
+title: "0 Quantum search algorithms"
+chapter: "6 Quantum search algorithmss"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Giả sử bạn được cho một bản đồ chứa nhiều thành phố, và muốn xác định tuyến đường ngắn nhất đi qua tất cả các thành phố trên bản đồ. Một thuật toán đơn giản để tìm tuyến đường này là tìm kiếm tất cả các tuyến đường có thể có đi qua các thành phố, lưu giữ một bản ghi động về tuyến đường nào có chiều dài ngắn nhất. Trên một máy tính cổ điển, nếu có $N$ tuyến đường có thể có, thì rõ ràng phải mất $O(N)$ phép toán để xác định tuyến đường ngắn nhất bằng phương pháp này. Đáng chú ý thay, có một thuật toán tìm kiếm lượng tử, đôi khi được gọi là thuật toán Grover, cho phép phương pháp tìm kiếm này được tăng tốc đáng kể, chỉ yêu cầu $O(\sqrt{N})$ phép toán. Hơn nữa, thuật toán tìm kiếm lượng tử mang tính tổng quát theo nghĩa là nó có thể được áp dụng vượt xa khỏi ví dụ tìm tuyến đường vừa mô tả để tăng tốc nhiều (dù không phải tất cả) các thuật toán cổ điển sử dụng heuristic tìm kiếm.   
+
+Trong chương này chúng tôi giải thích thuật toán tìm kiếm lượng tử nhanh. Thuật toán cơ bản được mô tả trong Mục 6.1. Trong Mục 6.2 chúng tôi đạo hàm thuật toán từ một góc nhìn khác, dựa trên thuật toán mô phỏng lượng tử của Mục 4.7. Ba ứng dụng quan trọng của thuật toán này cũng được mô tả: đếm lượng tử (quantum counting) ở Mục 6.3, tăng tốc giải quyết các bài toán NP-đầy đủ (NP-complete problems) ở Mục 6.4, và tìm kiếm trên các cơ sở dữ liệu phi cấu trúc ở Mục 6.5. Người ta có thể hy vọng cải thiện thuật toán tìm kiếm để làm tốt hơn cả mức tăng tốc căn bậc hai nhưng, như chúng tôi chỉ ra trong Mục 6.6, hóa ra điều này là không thể. Chúng tôi kết luận trong Mục 6.7 bằng cách chỉ ra rằng giới hạn tốc độ này áp dụng cho hầu hết các bài toán phi cấu trúc. 

@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -400,13 +443,54 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendix</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/2.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/3.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/4.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/5.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/6.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/7.qmd</span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
@@ -515,6 +599,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="syk" class="level1">
 <h1>SYK</h1>
+<p>Mô phỏng Động lực học Vật lý (Hamiltonian Simulation) Đây chính là lãnh địa của AdS/CFT và ER=EPR. Không có bài toán “tìm kiếm” nào ở đây cả. Bạn có một ma trận năng lượng (Hamiltonian <span class="math inline">H</span>), và bạn cần mô phỏng sự biến đổi của nó theo thời gian <span class="math inline">e^{-iHt}</span>.</p>
+<ul>
+<li>Hướng nghiên cứu hiện tại: Tối ưu hóa các công thức Trotterization hoặc LCU (Linear Combination of Unitaries) để mô phỏng các vật liệu siêu dẫn nhiệt độ phòng, sự tương tác của Fermion trong lý thuyết trường lượng tử, hoặc đo lường hàm hỗn loạn OTOC của không thời gian.</li>
+</ul>
 
 
 </section>

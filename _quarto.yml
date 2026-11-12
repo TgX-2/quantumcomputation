@@ -67,7 +67,18 @@ website:
           - note/qft/2.qmd
           - note/qft/3.qmd
           - note/qft/4.qmd
-
+          
+      - section : "6 Quantum search algorithms"
+        contents:
+          - note/quantumsearchalgorithms/index.qmd
+          - note/quantumsearchalgorithms/1.qmd
+          - note/quantumsearchalgorithms/2.qmd
+          - note/quantumsearchalgorithms/3.qmd
+          - note/quantumsearchalgorithms/4.qmd
+          - note/quantumsearchalgorithms/5.qmd
+          - note/quantumsearchalgorithms/6.qmd
+          - note/quantumsearchalgorithms/7.qmd
+        
       - section : "Appendix"
         contents:
           - note/outro/glossary.qmd
