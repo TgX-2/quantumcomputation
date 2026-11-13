@@ -1,0 +1,39 @@
+---
+title: " 4 Speeding up the solution of NP-complete problems"
+chapter: "6 Quantum search algorithmss"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Tìm kiếm lượng tử có thể được sử dụng để tăng tốc độ giải quyết các bài toán trong lớp độ phức tạp NP (Mục 3.2.2). Chúng ta đã thấy, ở Mục 6.1.1, cách việc phân tích thừa số có thể được tăng tốc; ở đây, chúng tôi minh họa cách tìm kiếm lượng tử có thể được áp dụng để hỗ trợ giải quyết bài toán chu trình Hamilton (HC). Nhắc lại rằng một chu trình Hamilton của một đồ thị là một chu trình đơn giản ghé thăm mọi đỉnh của đồ thị. Bài toán HC là xác định xem một đồ thị cho trước có chu trình Hamilton hay không. Bài toán này thuộc lớp các bài toán NP-đầy đủ, được tin tưởng rộng rãi (nhưng chưa được chứng minh) là không thể giải quyết được trên một máy tính cổ điển.   
+
+Một thuật toán đơn giản để giải quyết HC là thực hiện tìm kiếm qua tất cả các thứ tự có thể có của các đỉnh:
+(1) Tạo từng thứ tự $(v_1, \dots, v_n)$ có thể có của các đỉnh cho đồ thị. Các sự lặp lại sẽ được cho phép, vì chúng làm đơn giản hóa việc phân tích mà không ảnh hưởng đến kết quả cốt yếu.
+(2) Đối với mỗi thứ tự, kiểm tra xem nó có phải là một chu trình Hamilton cho đồ thị hay không. Nếu không, tiếp tục kiểm tra các thứ tự khác.   
+
+Vì có $n^n = 2^{n\log n}$ thứ tự có thể có của các đỉnh phải được tìm kiếm, thuật toán này yêu cầu $2^{n\log n}$ lần kiểm tra cho tính chất chu trình Hamilton trong trường hợp xấu nhất. Thực sự, bất kỳ bài toán nào trong NP đều có thể được giải quyết theo cách tương tự: nếu một bài toán kích thước $n$ có các nhân chứng (witnesses) có thể được chỉ định bằng cách sử dụng $w(n)$ bit, trong đó $w(n)$ là một đa thức nào đó theo $n$, thì việc tìm kiếm qua tất cả $2^{w(n)}$ nhân chứng có thể có sẽ tiết lộ một giải pháp cho bài toán, nếu có tồn tại một giải pháp.   
+
+Thuật toán tìm kiếm lượng tử có thể được sử dụng để tăng tốc thuật toán này bằng cách tăng tốc độ tìm kiếm. Cụ thể, chúng ta sử dụng thuật toán được mô tả trong Mục 6.3 để xác định xem một giải pháp cho bài toán tìm kiếm có tồn tại hay không. Đặt $m \equiv \lceil\log n\rceil$. Không gian tìm kiếm cho thuật toán sẽ được biểu diễn bằng một chuỗi $mn$ qubit, mỗi khối $m$ qubit được sử dụng để lưu trữ chỉ số cho một đỉnh duy nhất. Do đó chúng ta có thể viết các trạng thái cơ sở tính toán là $\vert{}v_1, \dots, v_n\rangle$, trong đó mỗi $\vert{}v_i\rangle$ được biểu diễn bằng chuỗi $m$ qubit thích hợp, cho tổng số $nm$ qubit. Oracle cho thuật toán tìm kiếm phải áp dụng phép biến đổi:   
+
+$$
+O\vert{}v_1, \dots, v_n\rangle = \begin{cases} \vert{}v_1, \dots, v_n\rangle & \text{if } v_1, \dots, v_n \text{ is not a Hamiltonian cycle}
+\\
+-\vert{}v_1, \dots, v_n\rangle & \text{if } v_1, \dots, v_n \text{ is a Hamiltonian cycle} \end{cases} \tag{6.34}
+$$   
+
+Một oracle như vậy rất dễ thiết kế và triển khai khi người ta có một bản mô tả đồ thị. Người ta lấy một mạch cổ điển kích thước đa thức nhận ra các chu trình Hamilton trong đồ thị, và chuyển đổi nó thành một mạch thuận nghịch, cũng có kích thước đa thức, tính toán phép biến đổi $(v_1, \dots, v_n, q) \to (v_1, \dots, v_n, q \oplus f(v_1, \dots, v_n))$, trong đó $f(v_1, \dots, v_n) = 1$ nếu $v_1, \dots, v_n$ là một chu trình Hamilton, và bằng $0$ trong trường hợp ngược lại. Việc triển khai mạch tương ứng trên một máy tính lượng tử với qubit cuối cùng bắt đầu ở trạng thái $(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}$ sẽ mang lại phép biến đổi mong muốn. Chúng tôi sẽ không mô tả một cách rõ ràng các chi tiết ở đây, ngoại trừ việc lưu ý điểm mấu chốt: oracle yêu cầu một số lượng cổng là đa thức theo $n$, như một hệ quả trực tiếp của việc các chu trình Hamilton có thể được nhận ra một cách cổ điển bằng cách sử dụng số lượng cổng đa thức. Áp dụng biến thể của thuật toán tìm kiếm xác định xem có tồn tại một giải pháp cho bài toán tìm kiếm hay không (Mục 6.3) chúng ta thấy rằng cần mất $O(2^{mn/2}) = O(2^{n\lceil\log n\rceil/2})$ lần áp dụng oracle để xác định xem có tồn tại một chu trình Hamilton hay không. Khi thực sự có tồn tại một chu trình, rất dễ để áp dụng thuật toán đếm-tìm kiếm kết hợp để tìm một ví dụ về một chu trình như vậy, cái mà sau đó có thể được trưng ra như một nhân chứng cho bài toán.
+
+---
+
+Tóm lại:   
+
+* Thuật toán cổ điển yêu cầu $O(p(n)2^{n\lceil\log n\rceil})$ phép toán để xác định xem một chu trình Hamilton có tồn tại hay không, trong đó hệ số đa thức $p(n)$ là chi phí phát sinh chủ yếu do việc triển khai oracle, tức là, các cổng kiểm tra xem một đường đi ứng viên có phải là chu trình Hamilton hay không. Hiệu ứng chi phối trong việc xác định các tài nguyên được yêu cầu là số mũ trong $2^{n\lceil\log n\rceil}$. Thuật toán cổ điển là tất định, tức là, nó thành công với xác suất 1.   
+
+* Thuật toán lượng tử yêu cầu $O(p(n)2^{n\lceil\log n\rceil/2})$ phép toán để xác định xem một chu trình Hamilton có tồn tại hay không. Một lần nữa, đa thức $p(n)$ là chi phí phát sinh chủ yếu do việc triển khai oracle. Hiệu ứng chi phối trong việc xác định các tài nguyên được yêu cầu là số mũ trong $2^{n\lceil\log n\rceil/2}$. Có một xác suất lỗi hằng số (giả sử, $1/6$) đối với thuật toán, xác suất này có thể được giảm xuống thành $1/6^r$ bằng $r$ lần lặp lại thuật toán.   
+
+* Về mặt tiệm cận, thuật toán lượng tử yêu cầu căn bậc hai số lượng phép toán mà thuật toán cổ điển yêu cầu.  

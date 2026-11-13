@@ -204,7 +204,7 @@ $$
 G = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}, \tag{6.13}
 $$
 
-![../../img/6.3.png]
+![](../../img/6.3.png)
 
 trong đó $\theta$ là một số thực trong khoảng từ $0$ đến $\pi/2$ (giả định cho đơn giản rằng $M \le N/2$; giới hạn này sẽ sớm được dỡ bỏ), được chọn sao cho   
 

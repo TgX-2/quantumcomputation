@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>5 Quantum search of an unstructured database – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/index.html">6 Quantum search algorithms</a></li><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/5.html">5 Quantum search of an unstructured database</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The analysis of computational problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Perspectives on computer science</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">4 Quantum Computation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single qubit operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlled operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measurement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Universal quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of the quantum circuit model of computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation of quantum systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 The quantum Fourier transform and its applications</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The quantum Fourier transform and its applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The quantum Fourier transform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applications: order-finding and factoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum search as a quantum simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum counting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Speeding up the solution of NP-complete problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">5 Quantum search of an unstructured database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/6.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">note/quantumsearchalgorithms/7.qmd</span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/index.html">6 Quantum search algorithms</a></li><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/5.html">5 Quantum search of an unstructured database</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">5 Quantum search of an unstructured database</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Máy tính bình thường thì tốn O(N) nạp vào và tệ nhất là O(N) kiểm tra. Tuy Grover có thể tăng tốc căn N, nhưng việc nhập dữ liệu và trạng thái chồng chập cũng tốn ít nhất là O(N). Vậy là việc tìm kiếm dữ liệu trong tập không có cấu trúc hóa ra tốn O(N) sao?</p>
+<p>Không, chúng ta dùng QRAM!</p>
+<section id="qram-grover" class="level2">
+<h2 class="anchored" data-anchor-id="qram-grover">qRAM + Grover</h2>
+<p>Giả sử chúng ta có 4 số: 07 - 04 - 23 - 01. Tương ứng với các địa chỉ là 00, 01, 10, và 11.</p>
+<p>Chúng ta chuẩn bị 4 thanh ghi, <span class="math inline">\vert \text{address} \rangle</span>, <span class="math inline">\vert \text{answer} \rangle</span> <span class="math inline">\vert \text{data} \rangle</span>, và <span class="math inline">\vert - \rangle</span>, đúng như tên của nó, chức năng lần lượt là, lưu địa chỉ, lưu đáp án cần tìm, lưu số, và ket - để phasekickback.</p>
+<p><strong>Bước 1:</strong> khởi tạo</p>
+<p>Áp dụng các cổng Hadamard lên thanh địa chỉ:</p>
+<p><span class="math display">
+\vert \text{address} \rangle = \frac 1 2 (\vert 00 \rangle + \vert 01 \rangle + \vert 10 \rangle + \vert 11 \rangle)
+</span></p>
+<p>Các thanh lưu dữ liệu</p>
+<p><strong>Bước 2:</strong> Áp qRAM lên</p>
+<p>Biến <span class="math inline">\vert \text{data} \rangle</span> từ 0 có gì sang có gì, bằng hình 6.9.</p>
+<p>Nhờ tính chồng chập, qRAM nạp cả 4 giá trị cùng một lúc, tạo ra một trạng thái vướng víu giữa thanh ghi địa chỉ và dữ liệu.</p>
+<p><span class="math display">
+\vert \psi_1 \rangle = \frac 1 2 (\vert 00 \rangle \vert 7\rangle
++ \vert 01 \rangle \vert 8 \rangle
++ \vert 10 \rangle \vert 23 \rangle
++ \vert 11 \rangle \vert 1 \rangle)
+</span></p>
+<p><strong>Bước 3:</strong> Oracle - Phasekickback</p>
+<p>Đưa thanh ghi dữ liệu qua mạch kiểm tra Oracle. Ví dụ đáp án là <span class="math inline">\vert 23 \rangle</span>, thì lúc này chỉ có pha của 23 bị đảo:</p>
+<p><span class="math display">
+\vert \psi_2 \rangle = \frac 1 2 (\vert 00 \rangle \vert 7\rangle
++ \vert 01 \rangle \vert 8 \rangle
+- \vert 10 \rangle \vert 23 \rangle
++ \vert 11 \rangle \vert 1 \rangle)
+</span></p>
+<p><strong>Bước 4:</strong> Chạy ngược qRAM</p>
+<p>Nếu chạy Grover khuếch đại bây giờ, thuật toán sẽ thất bại hoàn toàn, vì thanh ghi địa chỉ và thanh ghi dữ liệu đang vướng víu với nhau.</p>
+<p>Vì vậy chúng ta phải gọi hàm <span class="math inline">qRAM^\dagger</span> để rút toàn bộ dữ liệu về mảng cổ điển, dọn sạch thanh ghi dữ liệu về lại <span class="math inline">\vert 0 \rangle</span>, nhưng vẫn giữ lại được pha đã đảo của đáp án:</p>
+<p><span class="math display">
+\vert \psi_3 \rangle = \frac 1 2 (\vert 00 \rangle \vert 7\rangle
++ \vert 01 \rangle
++ \vert 10 \rangle
++ \vert 11 \rangle) \otimes \vert 0 \rangle
+</span></p>
+<p><strong>Bước 5:</strong> Grover</p>
+<p>Đáp án trả về là <span class="math inline">\vert 10 \rangle</span>, tương ứng với 23.</p>
+</section>
+</div>
+</div>
+<p>Giả sử ai đó đưa cho bạn một danh sách chứa một nghìn tên các loài hoa, và yêu cầu bạn tìm xem ‘Perth Rose’ (Hoa hồng Perth) xuất hiện ở đâu trên danh sách đó. Nếu bông hoa xuất hiện chính xác một lần trên danh sách, và danh sách không được sắp xếp theo bất kỳ cách hiển nhiên nào, thì bạn sẽ cần kiểm tra trung bình năm trăm cái tên, trước khi bạn tìm thấy ‘Perth Rose’. Liệu có thể tăng tốc kiểu tìm kiếm cơ sở dữ liệu này bằng cách sử dụng thuật toán tìm kiếm lượng tử không? Thật vậy, thuật toán tìm kiếm lượng tử đôi khi được gọi là thuật toán tìm kiếm cơ sở dữ liệu, nhưng tính hữu dụng của nó cho ứng dụng đó bị giới hạn, và dựa trên các giả định nhất định. Trong phần này, chúng ta sẽ xem xét cách thuật toán tìm kiếm lượng tử có thể được sử dụng về mặt khái niệm để tìm kiếm một cơ sở dữ liệu phi cấu trúc, trong một bối cảnh khá giống với những gì được tìm thấy trên một máy tính thông thường. Bức tranh mà chúng ta xây dựng sẽ làm rõ những tài nguyên nào được yêu cầu để cho phép một máy tính lượng tử tìm kiếm các cơ sở dữ liệu cổ điển.</p>
+<hr>
+<p>Giả sử chúng ta có một cơ sở dữ liệu chứa <span class="math inline">N \equiv 2^n</span> mục, mỗi mục có độ dài <span class="math inline">l</span> bit. Chúng ta sẽ gắn nhãn các mục này là <span class="math inline">d_1, \ldots, d_N</span>. Chúng ta muốn xác định xem một chuỗi <span class="math inline">l</span> bit cụ thể, <span class="math inline">s</span>, nằm ở đâu trong cơ sở dữ liệu. Một máy tính cổ điển, được sử dụng để giải quyết bài toán này, thường được chia thành hai phần, được minh họa trong Hình 6.8. Một là đơn vị xử lý trung tâm, hay CPU, nơi diễn ra các thao tác dữ liệu, sử dụng một lượng nhỏ bộ nhớ tạm thời. Phần thứ hai là một bộ nhớ lớn lưu trữ cơ sở dữ liệu trong một chuỗi <span class="math inline">2^n</span> khối của các ô <span class="math inline">l</span> bit. Bộ nhớ được giả định là thụ động, theo nghĩa là nó không có khả năng tự mình xử lý dữ liệu. Những gì có thể làm là TẢI (LOAD) dữ liệu từ bộ nhớ vào CPU, và LƯU (STORE) dữ liệu từ CPU vào bộ nhớ, và thực hiện các thao tác trên dữ liệu được lưu trữ tạm thời trong CPU. Tất nhiên, các máy tính cổ điển có thể được thiết kế theo các hướng khác nhau, nhưng sự phân chia CPU-bộ nhớ này là một kiến trúc phổ biến và thông dụng.</p>
+<p>Để tìm xem một chuỗi <span class="math inline">s</span> cho trước nằm ở đâu trong cơ sở dữ liệu phi cấu trúc, thuật toán cổ điển hiệu quả nhất như sau. Đầu tiên, một chỉ số <span class="math inline">n</span>-bit cho các phần tử cơ sở dữ liệu được thiết lập trong CPU. Chúng ta giả định rằng CPU đủ lớn để lưu trữ chỉ số <span class="math inline">n \equiv \lceil\log N\rceil</span> bit. Chỉ số bắt đầu ở số không, và được tăng lên một vào mỗi vòng lặp của thuật toán. Ở mỗi vòng lặp, mục cơ sở dữ liệu tương ứng với chỉ số được tải vào CPU, và so sánh với chuỗi đang được tìm kiếm. Nếu chúng giống nhau, thuật toán xuất ra giá trị của chỉ số và dừng lại. Nếu không, thuật toán tiếp tục tăng chỉ số. Rõ ràng, thuật toán này yêu cầu các mục phải được tải từ bộ nhớ <span class="math inline">2^n</span> lần trong trường hợp xấu nhất. Cũng rõ ràng rằng đây là thuật toán hiệu quả nhất có thể để giải quyết bài toán trong mô hình tính toán này.</p>
+<p><img src="../../img/6.8.png" class="img-fluid"></p>
+<p>Một thuật toán tương tự có thể được triển khai hiệu quả đến mức nào trên một máy tính lượng tử? Và, ngay cả khi sự tăng tốc lượng tử là có thể, thuật toán như vậy hữu ích đến mức nào? Trước tiên chúng tôi chỉ ra rằng sự tăng tốc là có thể, và sau đó quay lại câu hỏi về tính hữu dụng của một thuật toán như vậy. Giả sử máy tính lượng tử của chúng ta bao gồm hai đơn vị, giống hệt như máy tính cổ điển, một CPU và một bộ nhớ. Chúng ta giả định rằng CPU chứa bốn thanh ghi: (1) một thanh ghi ‘chỉ số’ (index) <span class="math inline">n</span> qubit được khởi tạo ở <span class="math inline">\vert{}0\rangle</span>; (2) một thanh ghi <span class="math inline">l</span> qubit được khởi tạo ở <span class="math inline">\vert{}s\rangle</span> và giữ nguyên trạng thái đó trong toàn bộ quá trình tính toán; (3) một thanh ghi ‘dữ liệu’ (data) <span class="math inline">l</span> qubit được khởi tạo ở <span class="math inline">\vert{}0\rangle</span>; và (4) một thanh ghi 1 qubit được khởi tạo ở <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span>. Đơn vị bộ nhớ có thể được triển khai theo một trong hai cách. Cách đơn giản nhất là một bộ nhớ lượng tử chứa <span class="math inline">N = 2^n</span> ô, mỗi ô gồm <span class="math inline">l</span> qubit, chứa các mục cơ sở dữ liệu <span class="math inline">\vert{}d_x\rangle</span>. Cách triển khai thứ hai là triển khai bộ nhớ như một bộ nhớ cổ điển với <span class="math inline">N = 2^n</span> ô, mỗi ô gồm <span class="math inline">l</span> bit, chứa các mục cơ sở dữ liệu <span class="math inline">d_x</span>. Tuy nhiên, không giống như một bộ nhớ cổ điển truyền thống, nó có thể được định địa chỉ bằng một chỉ số <span class="math inline">x</span> có thể ở trong một trạng thái chồng chập của nhiều giá trị. Chỉ số lượng tử này cho phép một sự chồng chập của các giá trị ô được TẢI (LOAD) từ bộ nhớ. Việc truy cập bộ nhớ hoạt động theo cách sau: nếu thanh ghi chỉ số của CPU đang ở trạng thái <span class="math inline">\vert{}x\rangle</span> và thanh ghi dữ liệu đang ở trạng thái <span class="math inline">\vert{}d\rangle</span>, thì nội dung <span class="math inline">d_x</span> của ô nhớ thứ <span class="math inline">x</span> được cộng vào thanh ghi dữ liệu: <span class="math inline">\vert{}d\rangle \to \vert{}d \oplus d_x\rangle</span>, trong đó phép cộng được thực hiện theo từng bit (bitwise), theo modulo 2. Trước tiên, hãy xem khả năng này được sử dụng như thế nào để thực hiện tìm kiếm lượng tử, sau đó chúng ta sẽ thảo luận xem một bộ nhớ như vậy có thể được chế tạo vật lý như thế nào. Phần then chốt của việc triển khai thuật toán tìm kiếm lượng tử là việc hiện thực hóa oracle, thứ phải lật pha của chỉ số định vị <span class="math inline">s</span> trong bộ nhớ. Giả sử CPU đang ở trạng thái <span class="math display">\vert{}x\rangle\vert{}s\rangle\vert{}0\rangle \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}}. \tag{6.35}</span> Áp dụng phép toán LOAD đưa máy tính vào trạng thái <span class="math display">\vert{}x\rangle\vert{}s\rangle\vert{}d_x\rangle \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}}. \tag{6.36}</span> Bây giờ thanh ghi thứ hai và thứ ba được so sánh, và nếu chúng giống nhau, thì một phép lật bit (bit flip) được áp dụng cho thanh ghi 4; nếu không thì không có gì bị thay đổi. Hiệu ứng của phép toán này là</p>
+<p><span class="math display">
+\vert{}x\rangle\vert{}s\rangle\vert{}d_x\rangle \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} \to
+\begin{cases}
+-\vert{}x\rangle\vert{}s\rangle\vert{}d_x\rangle \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} &amp; \text{if } d_x = s \\
+\vert{}x\rangle\vert{}s\rangle\vert{}d_x\rangle \frac{\vert{}0\rangle - \vert{}1\rangle}{\sqrt{2}} &amp; \text{if } d_x \neq s.
+\end{cases} \tag{6.37}
+</span></p>
+<p>Thanh ghi dữ liệu sau đó được khôi phục về trạng thái <span class="math inline">\vert{}0\rangle</span> bằng cách thực hiện lại phép toán LOAD một lần nữa. Do đó, toàn bộ tác động của oracle giữ cho các thanh ghi 2, 3 và 4 không bị ảnh hưởng, và không bị vướng víu với thanh ghi 1. Vì vậy, hiệu ứng tổng thể là đưa trạng thái của thanh ghi 1 từ <span class="math inline">\vert{}x\rangle</span> thành <span class="math inline">-\vert{}x\rangle</span> nếu <span class="math inline">d_x = s</span>, và giữ nguyên thanh ghi nếu ngược lại. Sử dụng oracle được triển khai theo cách này, chúng ta có thể áp dụng thuật toán tìm kiếm lượng tử để xác định vị trí của <span class="math inline">s</span> trong cơ sở dữ liệu, sử dụng <span class="math inline">O(\sqrt{N})</span> phép toán LOAD, so với <span class="math inline">N</span> phép toán LOAD được yêu cầu một cách cổ điển.</p>
+<p>Để oracle hoạt động chính xác trên các trạng thái chồng chập, thoạt nhìn có vẻ như bộ nhớ cần phải là cơ học lượng tử. Thực tế, như chúng ta đã lưu ý ở trên, với một số cảnh báo, bộ nhớ thực sự có thể được triển khai một cách cổ điển, điều này có khả năng làm cho nó chống chịu tốt hơn nhiều với các tác động của nhiễu. Nhưng một sơ đồ định địa chỉ (addressing) lượng tử vẫn là cần thiết; một bức tranh khái niệm minh họa cách điều này có thể được thực hiện được hiển thị trong Hình 6.9. Nguyên lý hoạt động là một phương tiện mà qua đó trạng thái được mã hóa nhị phân của chỉ số lượng tử (nơi từ <span class="math inline">0</span> đến <span class="math inline">2^n - 1</span> được biểu diễn bằng <span class="math inline">n</span> qubit) được dịch sang một mã hóa đơn phân (unary encoding) (nơi từ <span class="math inline">0</span> đến <span class="math inline">2^n - 1</span> được biểu diễn bằng vị trí của một đầu dò duy nhất (single probe) trong số <span class="math inline">2^n</span> vị trí có thể có) thứ định địa chỉ cơ sở dữ liệu cổ điển. Cơ sở dữ liệu tạo ra một sự thay đổi trên một bậc tự do bên trong đầu dò mà không liên quan đến vị trí của nó. Mã hóa từ nhị phân sang đơn phân sau đó được đảo ngược lại, để lại thanh ghi dữ liệu với nội dung mong muốn.</p>
+<hr>
+<p>Liệu có những trường hợp thực tế nào mà thuật toán tìm kiếm lượng tử có thể hữu ích cho việc tìm kiếm các cơ sở dữ liệu cổ điển không? Hai điểm khác biệt có thể được đưa ra.</p>
+<p>Thứ nhất, các cơ sở dữ liệu thông thường không phải là phi cấu trúc. Các cơ sở dữ liệu đơn giản, giống như cơ sở dữ liệu chứa tên các loài hoa đã thảo luận ở phần mở đầu của mục này, có thể được duy trì theo thứ tự bảng chữ cái, sao cho một thuật toán tìm kiếm nhị phân có thể được sử dụng để định vị một mục trong khoảng thời gian là <span class="math inline">O(\log(N))</span> đối với một cơ sở dữ liệu <span class="math inline">N</span> phần tử. Tuy nhiên, một số cơ sở dữ liệu có thể yêu cầu một cấu trúc phức tạp hơn nhiều, và mặc dù tồn tại các kỹ thuật tinh vi để tối ưu hóa các tìm kiếm cổ điển, với các truy vấn có bản chất đủ phức tạp hoặc không lường trước được, một cấu trúc được xác định trước có thể không giúp ích được gì, và bài toán về cơ bản có thể được coi là bài toán tìm kiếm cơ sở dữ liệu phi cấu trúc mà chúng ta đã thảo luận.</p>
+<p>Thứ hai, để một máy tính lượng tử có thể tìm kiếm một cơ sở dữ liệu cổ điển, một sơ đồ định địa chỉ lượng tử là cần thiết. Sơ đồ mà chúng tôi đã mô tả yêu cầu <span class="math inline">O(N \log N)</span> công tắc lượng tử – lượng phần cứng gần tương đương với những gì được yêu cầu để lưu trữ chính cơ sở dữ liệu đó. Có lẽ, những công tắc này một ngày nào đó có thể đơn giản và rẻ tiền như các phần tử bộ nhớ cổ điển, nhưng nếu không phải như vậy, thì việc chế tạo một máy tính lượng tử để thực hiện tìm kiếm lượng tử có thể không mang lại lợi thế về mặt kinh tế, so với việc sử dụng phần cứng tính toán cổ điển phân tán trên các phần tử bộ nhớ.</p>
+<p>Xem xét những cân nhắc này, có vẻ như ứng dụng chính của các thuật toán tìm kiếm lượng tử sẽ không phải là tìm kiếm các cơ sở dữ liệu cổ điển. Thay vào đó, việc sử dụng chúng có thể sẽ là tìm kiếm các giải pháp cho các bài toán khó, như đã thảo luận ở phần trước, chẳng hạn như bài toán chu trình Hamiltonian, người chào hàng, và các bài toán thỏa mãn (satisfiability).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/6.9.png" class="img-fluid figure-img"></p>
+<figcaption>Hình 6.9. Sơ đồ khái niệm của một bộ nhớ cổ điển 32 ô với một sơ đồ định địa chỉ lượng tử năm qubit. Mỗi vòng tròn đại diện cho một công tắc, được định địa chỉ bởi qubit được ghi bên trong nó. Ví dụ, khi <span class="math inline">\vert{}x_4\rangle = \vert{}0\rangle</span>, công tắc tương ứng định tuyến qubit đầu vào sang bên trái; khi <span class="math inline">\vert{}x_4\rangle = \vert{}1\rangle</span>, công tắc định tuyến qubit đầu vào sang bên phải. Nếu <span class="math inline">\vert{}x_4\rangle = (\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span>, thì một sự chồng chập đều của cả hai tuyến đường được thực hiện. Các qubit của thanh ghi dữ liệu đi vào ở đỉnh của cây, và được định tuyến xuống cơ sở dữ liệu, nơi thay đổi trạng thái của chúng tùy theo nội dung của bộ nhớ. Các qubit sau đó được định tuyến ngược trở lại vào một vị trí xác định, rời khỏi đó cùng với thông tin được truy xuất. Về mặt vật lý, điều này có thể được hiện thực hóa bằng cách sử dụng, ví dụ, các photon đơn lẻ cho các qubit của thanh ghi dữ liệu, chúng được bẻ lái bằng cách sử dụng các giao thoa kế phi tuyến (Chương 7). Cơ sở dữ liệu cổ điển có thể chỉ là một tấm nhựa đơn giản, trong đó một số ‘không’ (minh họa bằng các ô vuông màu trắng) truyền ánh sáng đi qua mà không thay đổi gì, và một số ‘một’ (các ô vuông được tô bóng) làm dịch chuyển độ phân cực của ánh sáng tới đi <span class="math inline">90^\circ</span>.</figcaption>
+</figure>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
