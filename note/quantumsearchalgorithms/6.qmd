@@ -1,0 +1,130 @@
+---
+title: " 6 Optimality of the search algorithm"
+chapter: "6 Quantum search algorithmss"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Chúng ta đã chỉ ra rằng một máy tính lượng tử có thể tìm kiếm $N$ mục, tham vấn oracle tìm kiếm chỉ $O(\sqrt{N})$ lần. Bây giờ chúng ta sẽ chứng minh rằng không có thuật toán lượng tử nào có thể thực hiện nhiệm vụ này sử dụng ít hơn $\Omega(\sqrt{N})$ lần truy cập vào oracle tìm kiếm, và do đó thuật toán mà chúng ta đã chứng minh là tối ưu.   
+
+Giả sử thuật toán bắt đầu ở trạng thái $\vert{}\psi\rangle$. Để đơn giản, chúng ta chứng minh cận dưới cho trường hợp bài toán tìm kiếm có một nghiệm duy nhất, $x$. Để xác định $x$, chúng ta được phép áp dụng một oracle $O_x$ tạo ra một sự dịch chuyển pha là $-1$ cho nghiệm $\vert{}x\rangle$ và giữ nguyên tất cả các trạng thái khác, $O_x = I - 2\vert{}x\rangle\langle x\vert{}$. Chúng ta giả sử thuật toán bắt đầu ở một trạng thái $\vert{}\psi\rangle$ và áp dụng oracle $O_x$ chính xác $k$ lần, với các phép toán unita $U_1, U_2, \dots, U_k$ xen kẽ giữa các phép toán oracle. Định nghĩa   
+
+$$
+\vert{}\psi_k^x\rangle \equiv U_k O_x U_{k-1} O_x \dots U_1 O_x \vert{}\psi\rangle \tag{6.38}
+$$   
+
+$$
+\vert{}\psi_k\rangle \equiv U_k U_{k-1} \dots U_1 \vert{}\psi\rangle. \tag{6.39}
+$$   
+
+Tức là, $\vert{}\psi_k\rangle$ là trạng thái kết quả khi chuỗi các phép toán unita $U_1, \dots, U_k$ được thực hiện, không có các phép toán oracle. Đặt $\vert{}\psi_0\rangle = \vert{}\psi\rangle$. Mục tiêu của chúng ta sẽ là chặn đại lượng   
+
+$$
+D_k \equiv \sum_x \Vert{} \psi_k^x - \psi_k \Vert{}^2, \tag{6.40}
+$$   
+
+trong đó chúng ta sử dụng ký hiệu $\psi$ thay cho $\vert{}\psi\rangle$ như một sự thuận tiện để đơn giản hóa các công thức. Về mặt trực giác, $D_k$ là một thước đo của sự sai lệch sau $k$ bước gây ra bởi oracle, so với sự tiến hóa mà lẽ ra đã xảy ra nếu không có nó. Nếu đại lượng này nhỏ, thì tất cả các trạng thái $\vert{}\psi_k^x\rangle$ đều gần giống nhau, và không thể xác định chính xác $x$ với xác suất cao. Chiến lược của chứng minh là chứng tỏ hai điều: (a) một cận của $D_k$ cho thấy nó không thể tăng nhanh hơn $O(k^2)$; và (b) một chứng minh rằng $D_k$ phải là $\Omega(N)$ nếu muốn có thể phân biệt $N$ khả năng (đáp án) khác nhau. Kết hợp hai kết quả này mang lại cận dưới mong muốn.   
+
+Đầu tiên, chúng ta đưa ra một chứng minh quy nạp rằng $D_k \le 4k^2$. Điều này hiển nhiên đúng với $k = 0$, khi đó $D_k = 0$. Lưu ý rằng   
+
+$$
+D_{k+1} = \sum_x \Vert{} O_x \psi_k^x - \psi_k \Vert{}^2 \tag{6.41}
+$$
+
+$$
+= \sum_x \Vert{} O_x (\psi_k^x - \psi_k) + (O_x - I)\psi_k \Vert{}^2. \tag{6.42}
+$$   
+
+Áp dụng bất đẳng thức $\Vert{}b + c\Vert{}^2 \le \Vert{}b\Vert{}^2 + 2\Vert{}b\Vert{}\Vert{}c\Vert{} + \Vert{}c\Vert{}^2$ với $b \equiv O_x(\psi_k^x - \psi_k)$ và $c \equiv (O_x - I)\psi_k = -2\langle x\vert{}\psi_k\rangle\vert{}x\rangle$, ta được   
+
+$$
+D_{k+1} \le \sum_x \left( \Vert{}\psi_k^x - \psi_k\Vert{}^2 + 4\Vert{}\psi_k^x - \psi_k\Vert{}\vert{}\langle x\vert{}\psi_k\rangle\vert{} + 4\vert{}\langle \psi_k\vert{}x\rangle\vert{}^2 \right). \tag{6.43}
+$$   
+
+Áp dụng bất đẳng thức Cauchy–Schwarz cho số hạng thứ hai ở vế phải, và lưu ý rằng $\sum_x \vert{}\langle x\vert{}\psi_k\rangle\vert{}^2 = 1$, ta thu được   
+
+$$
+D_{k+1} \le D_k + 4\left( \sum_x \Vert{}\psi_k^x - \psi_k\Vert{}^2 \right)^{\frac{1}{2}} \left( \sum_{x'} \vert{}\langle \psi_k\vert{}x'\rangle\vert{}^2 \right)^{\frac{1}{2}} + 4 \tag{6.44}
+$$
+
+$$
+\le D_k + 4\sqrt{D_k} + 4. \tag{6.45}
+$$   
+
+Theo giả thiết quy nạp $D_k \le 4k^2$, chúng ta thu được   
+
+$$
+D_{k+1} \le 4k^2 + 8k + 4 = 4(k+1)^2, \tag{6.46}
+$$   
+
+điều này hoàn tất phép chứng minh quy nạp.   
+
+Để hoàn tất chứng minh, chúng ta cần chỉ ra rằng xác suất thành công chỉ có thể cao nếu $D_k$ là $\Omega(N)$. Chúng ta giả sử $\vert{}\langle x\vert{}\psi_k^x\rangle\vert{}^2 \ge 1/2$ với mọi $x$, sao cho một phép quan sát mang lại nghiệm của bài toán tìm kiếm với xác suất ít nhất là một nửa. Việc thay thế $\vert{}x\rangle$ bằng $e^{i\theta}\vert{}x\rangle$ không làm thay đổi xác suất thành công, vì vậy không mất tính tổng quát, chúng ta có thể giả sử rằng $\langle x\vert{}\psi_k^x\rangle = \vert{}\langle x\vert{}\psi_k^x\rangle\vert{}$, và do đó   
+
+$$
+\Vert{}\psi_k^x - x\Vert{}^2 = 2 - 2\vert{}\langle x\vert{}\psi_k^x\rangle\vert{} \le 2 - \sqrt{2}. \tag{6.47}
+$$   
+
+Định nghĩa $E_k \equiv \sum_x \Vert{}\psi_k^x - x\Vert{}^2$, chúng ta thấy rằng $E_k \le (2 - \sqrt{2})N$. Bây giờ chúng ta đã ở vị thế để chứng minh rằng $D_k$ là $\Omega(N)$. Định nghĩa $F_k \equiv \sum_x \Vert{}x - \psi_k\Vert{}^2$, ta có   
+
+$$
+D_k = \sum_x \Vert{}(\psi_k^x - x) + (x - \psi_k)\Vert{}^2 \tag{6.48}
+$$ 
+
+$$
+\ge \sum_x \Vert{}\psi_k^x - x\Vert{}^2 - 2\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{} + \sum_x \Vert{}x - \psi_k\Vert{}^2 \tag{6.49}
+$$
+
+$$
+= E_k + F_k - 2\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{}. \tag{6.50} 
+$$   
+
+Áp dụng bất đẳng thức Cauchy–Schwarz cho ta $\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{} \le \sqrt{E_k F_k}$, vì vậy chúng ta có   
+
+$$
+D_k \ge E_k + F_k - 2\sqrt{E_k F_k} = (\sqrt{F_k} - \sqrt{E_k})^2. \tag{6.51}
+$$   
+
+Trong Bài tập 6.15, bạn sẽ chỉ ra rằng $F_k \ge 2N - 2\sqrt{N}$. Kết hợp điều này với kết quả $E_k \le (2 - \sqrt{2})N$ cho ta $D_k \ge cN$ với $N$ đủ lớn, trong đó $c$ là bất kỳ hằng số nào nhỏ hơn $(\sqrt{2} - \sqrt{2 - \sqrt{2}})^2 \approx 0.42$. Vì $D_k \le 4k^2$, điều này ngụ ý rằng   
+
+$$
+k \ge \sqrt{cN/4}. \tag{6.52}
+$$   
+
+Tóm lại, để đạt được xác suất thành công ít nhất là một nửa cho việc tìm kiếm một nghiệm của bài toán tìm kiếm, chúng ta phải gọi oracle $\Omega(\sqrt{N})$ lần.   
+
+:::{.callout-note collapse="true"}
+# Bài tập 6.15: 
+Sử dụng bất đẳng thức Cauchy–Schwarz để chỉ ra rằng đối với bất kỳ vector trạng thái chuẩn hóa $\vert{}\psi\rangle$ nào và tập hợp $N$ vector cơ sở trực chuẩn $\vert{}x\rangle$,   
+
+$$
+\sum_x \Vert{}\psi - x\Vert{}^2 \ge 2N - 2\sqrt{N}. \tag{6.53}
+$$   
+
+:::
+
+:::{.callout-note collapse="true"}
+# Bài tập 6.16: 
+Giả sử chúng ta chỉ yêu cầu xác suất mắc lỗi nhỏ hơn $1/2$ khi lấy trung bình đều trên các giá trị có thể có của $x$, thay vì cho mọi giá trị của $x$. Hãy chỉ ra rằng vẫn cần $O(\sqrt{N})$ (lưu ý: sách in nhầm ký hiệu $O$, đúng về mặt toán học là $\Omega(\sqrt{N})$) lần gọi oracle để giải quyết bài toán tìm kiếm. 
+
+:::
+
+---
+
+Kết quả này, rằng thuật toán tìm kiếm lượng tử về cơ bản là tối ưu, vừa đáng phấn khích lại vừa đáng thất vọng. Nó đáng phấn khích bởi vì nó cho chúng ta biết rằng ít nhất là đối với bài toán này, chúng ta đã thấu hiểu tận cùng chiều sâu của cơ học lượng tử; không thể có thêm bất kỳ sự cải tiến nào nữa. Sự thất vọng nảy sinh bởi vì chúng ta có thể đã hy vọng làm được tốt hơn nhiều so với mức tăng tốc căn bậc hai mà thuật toán tìm kiếm lượng tử mang lại. Kiểu kết quả trong mơ mà chúng ta có thể đã hy vọng tiên nghiệm (a priori) là việc có thể tìm kiếm một không gian gồm $N$ mục chỉ bằng $O(\log N)$ lần gọi oracle. Nếu một thuật toán như vậy tồn tại, nó sẽ cho phép chúng ta giải quyết các bài toán NP-đầy đủ (NP-complete) một cách hiệu quả trên máy tính lượng tử, vì nó có thể tìm kiếm tất cả $2^{w(n)}$ nhân chứng (witnesses) khả dĩ chỉ với khoảng $w(n)$ lần gọi oracle, trong đó đa thức $w(n)$ là độ dài của một nhân chứng tính theo bit. Đáng tiếc là một thuật toán như vậy không thể tồn tại. Đây là một thông tin hữu ích cho những nhà thiết kế thuật toán tương lai, vì nó chỉ ra rằng một phương pháp ngây thơ dựa trên tìm kiếm để tấn công các bài toán NP-đầy đủ chắc chắn sẽ thất bại.   
+
+Bước sang địa hạt của quan điểm cá nhân, chúng tôi lưu ý rằng nhiều nhà nghiên cứu tin rằng lý do cốt lõi khiến các bài toán NP-đầy đủ trở nên khó khăn là do không gian tìm kiếm của chúng về cơ bản không có cấu trúc, và rằng (xét đến các hệ số đa thức) phương pháp tốt nhất có thể để giải một bài toán như vậy là áp dụng một phương pháp tìm kiếm. Nếu đứng trên quan điểm này, thì đó là một tin xấu đối với tính toán lượng tử, ngụ ý rằng lớp các bài toán có thể giải quyết hiệu quả trên máy tính lượng tử, BQP, không chứa các bài toán NP-đầy đủ. Tất nhiên, đây chỉ đơn thuần là quan điểm, và vẫn có khả năng các bài toán NP-đầy đủ chứa đựng một cấu trúc chưa được biết đến nào đó cho phép giải quyết chúng một cách hiệu quả trên máy tính lượng tử, hoặc thậm chí trên máy tính cổ điển. Một ví dụ hay để minh họa cho điểm này là bài toán phân tích thừa số (factoring), vốn được tin rộng rãi là nằm trong lớp NPI gồm các bài toán có độ khó trung gian giữa P và các bài toán NP-đầy đủ. Chìa khóa dẫn đến lời giải cơ học lượng tử hiệu quả cho bài toán phân tích thừa số chính là việc khai thác một cấu trúc 'ẩn' bên trong bài toán – một cấu trúc được hé lộ thông qua việc quy giảm về bài toán tìm bậc (order-finding). Ngay cả khi cấu trúc tuyệt vời này đã được hé lộ, người ta vẫn chưa tìm ra cách khai thác nó để phát triển một thuật toán cổ điển hiệu quả cho việc phân tích thừa số, mặc dù tất nhiên, về mặt cơ học lượng tử, cấu trúc này có thể được tận dụng để tạo ra một thuật toán phân tích thừa số hiệu quả! Có lẽ một cấu trúc tương tự cũng đang ẩn mình trong các bài toán khác bị nghi ngờ nằm trong NPI, chẳng hạn như bài toán đẳng cấu đồ thị (graph isomorphism), hoặc thậm chí trong chính các bài toán NP-đầy đủ.   
+
+
+
+:::{.callout-note collapse="true"}
+# Bài tập 6.17: (Tính tối ưu cho trường hợp nhiều nghiệm) 
+Giả sử bài toán tìm kiếm có $M$ nghiệm. Hãy chỉ ra rằng cần $O(\sqrt{N/M})$ (lưu ý: sách in nhầm ký hiệu $O$, chính xác về mặt tiệm cận là $\Omega(\sqrt{N/M})$) lần áp dụng oracle để tìm thấy một nghiệm.
+
+:::
+

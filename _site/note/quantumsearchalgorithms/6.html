@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>6 Optimality of the search algorithm – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/index.html">6 Quantum search algorithms</a></li><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/6.html">6 Optimality of the search algorithm</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ideas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Câu hỏi trong anh</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The analysis of computational problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Perspectives on computer science</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">4 Quantum Computation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single qubit operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Controlled operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measurement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Universal quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of the quantum circuit model of computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation of quantum systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 The quantum Fourier transform and its applications</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The quantum Fourier transform and its applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The quantum Fourier transform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applications: order-finding and factoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum search as a quantum simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum counting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Speeding up the solution of NP-complete problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Quantum search of an unstructured database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">6 Optimality of the search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Black box algorithm limits</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/index.html">6 Quantum search algorithms</a></li><li class="breadcrumb-item"><a href="../../note/quantumsearchalgorithms/6.html">6 Optimality of the search algorithm</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">6 Optimality of the search algorithm</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Chúng ta đã chỉ ra rằng một máy tính lượng tử có thể tìm kiếm <span class="math inline">N</span> mục, tham vấn oracle tìm kiếm chỉ <span class="math inline">O(\sqrt{N})</span> lần. Bây giờ chúng ta sẽ chứng minh rằng không có thuật toán lượng tử nào có thể thực hiện nhiệm vụ này sử dụng ít hơn <span class="math inline">\Omega(\sqrt{N})</span> lần truy cập vào oracle tìm kiếm, và do đó thuật toán mà chúng ta đã chứng minh là tối ưu.</p>
+<p>Giả sử thuật toán bắt đầu ở trạng thái <span class="math inline">\vert{}\psi\rangle</span>. Để đơn giản, chúng ta chứng minh cận dưới cho trường hợp bài toán tìm kiếm có một nghiệm duy nhất, <span class="math inline">x</span>. Để xác định <span class="math inline">x</span>, chúng ta được phép áp dụng một oracle <span class="math inline">O_x</span> tạo ra một sự dịch chuyển pha là <span class="math inline">-1</span> cho nghiệm <span class="math inline">\vert{}x\rangle</span> và giữ nguyên tất cả các trạng thái khác, <span class="math inline">O_x = I - 2\vert{}x\rangle\langle x\vert{}</span>. Chúng ta giả sử thuật toán bắt đầu ở một trạng thái <span class="math inline">\vert{}\psi\rangle</span> và áp dụng oracle <span class="math inline">O_x</span> chính xác <span class="math inline">k</span> lần, với các phép toán unita <span class="math inline">U_1, U_2, \dots, U_k</span> xen kẽ giữa các phép toán oracle. Định nghĩa</p>
+<p><span class="math display">
+\vert{}\psi_k^x\rangle \equiv U_k O_x U_{k-1} O_x \dots U_1 O_x \vert{}\psi\rangle \tag{6.38}
+</span></p>
+<p><span class="math display">
+\vert{}\psi_k\rangle \equiv U_k U_{k-1} \dots U_1 \vert{}\psi\rangle. \tag{6.39}
+</span></p>
+<p>Tức là, <span class="math inline">\vert{}\psi_k\rangle</span> là trạng thái kết quả khi chuỗi các phép toán unita <span class="math inline">U_1, \dots, U_k</span> được thực hiện, không có các phép toán oracle. Đặt <span class="math inline">\vert{}\psi_0\rangle = \vert{}\psi\rangle</span>. Mục tiêu của chúng ta sẽ là chặn đại lượng</p>
+<p><span class="math display">
+D_k \equiv \sum_x \Vert{} \psi_k^x - \psi_k \Vert{}^2, \tag{6.40}
+</span></p>
+<p>trong đó chúng ta sử dụng ký hiệu <span class="math inline">\psi</span> thay cho <span class="math inline">\vert{}\psi\rangle</span> như một sự thuận tiện để đơn giản hóa các công thức. Về mặt trực giác, <span class="math inline">D_k</span> là một thước đo của sự sai lệch sau <span class="math inline">k</span> bước gây ra bởi oracle, so với sự tiến hóa mà lẽ ra đã xảy ra nếu không có nó. Nếu đại lượng này nhỏ, thì tất cả các trạng thái <span class="math inline">\vert{}\psi_k^x\rangle</span> đều gần giống nhau, và không thể xác định chính xác <span class="math inline">x</span> với xác suất cao. Chiến lược của chứng minh là chứng tỏ hai điều: (a) một cận của <span class="math inline">D_k</span> cho thấy nó không thể tăng nhanh hơn <span class="math inline">O(k^2)</span>; và (b) một chứng minh rằng <span class="math inline">D_k</span> phải là <span class="math inline">\Omega(N)</span> nếu muốn có thể phân biệt <span class="math inline">N</span> khả năng (đáp án) khác nhau. Kết hợp hai kết quả này mang lại cận dưới mong muốn.</p>
+<p>Đầu tiên, chúng ta đưa ra một chứng minh quy nạp rằng <span class="math inline">D_k \le 4k^2</span>. Điều này hiển nhiên đúng với <span class="math inline">k = 0</span>, khi đó <span class="math inline">D_k = 0</span>. Lưu ý rằng</p>
+<p><span class="math display">
+D_{k+1} = \sum_x \Vert{} O_x \psi_k^x - \psi_k \Vert{}^2 \tag{6.41}
+</span></p>
+<p><span class="math display">
+= \sum_x \Vert{} O_x (\psi_k^x - \psi_k) + (O_x - I)\psi_k \Vert{}^2. \tag{6.42}
+</span></p>
+<p>Áp dụng bất đẳng thức <span class="math inline">\Vert{}b + c\Vert{}^2 \le \Vert{}b\Vert{}^2 + 2\Vert{}b\Vert{}\Vert{}c\Vert{} + \Vert{}c\Vert{}^2</span> với <span class="math inline">b \equiv O_x(\psi_k^x - \psi_k)</span> và <span class="math inline">c \equiv (O_x - I)\psi_k = -2\langle x\vert{}\psi_k\rangle\vert{}x\rangle</span>, ta được</p>
+<p><span class="math display">
+D_{k+1} \le \sum_x \left( \Vert{}\psi_k^x - \psi_k\Vert{}^2 + 4\Vert{}\psi_k^x - \psi_k\Vert{}\vert{}\langle x\vert{}\psi_k\rangle\vert{} + 4\vert{}\langle \psi_k\vert{}x\rangle\vert{}^2 \right). \tag{6.43}
+</span></p>
+<p>Áp dụng bất đẳng thức Cauchy–Schwarz cho số hạng thứ hai ở vế phải, và lưu ý rằng <span class="math inline">\sum_x \vert{}\langle x\vert{}\psi_k\rangle\vert{}^2 = 1</span>, ta thu được</p>
+<p><span class="math display">
+D_{k+1} \le D_k + 4\left( \sum_x \Vert{}\psi_k^x - \psi_k\Vert{}^2 \right)^{\frac{1}{2}} \left( \sum_{x'} \vert{}\langle \psi_k\vert{}x'\rangle\vert{}^2 \right)^{\frac{1}{2}} + 4 \tag{6.44}
+</span></p>
+<p><span class="math display">
+\le D_k + 4\sqrt{D_k} + 4. \tag{6.45}
+</span></p>
+<p>Theo giả thiết quy nạp <span class="math inline">D_k \le 4k^2</span>, chúng ta thu được</p>
+<p><span class="math display">
+D_{k+1} \le 4k^2 + 8k + 4 = 4(k+1)^2, \tag{6.46}
+</span></p>
+<p>điều này hoàn tất phép chứng minh quy nạp.</p>
+<p>Để hoàn tất chứng minh, chúng ta cần chỉ ra rằng xác suất thành công chỉ có thể cao nếu <span class="math inline">D_k</span> là <span class="math inline">\Omega(N)</span>. Chúng ta giả sử <span class="math inline">\vert{}\langle x\vert{}\psi_k^x\rangle\vert{}^2 \ge 1/2</span> với mọi <span class="math inline">x</span>, sao cho một phép quan sát mang lại nghiệm của bài toán tìm kiếm với xác suất ít nhất là một nửa. Việc thay thế <span class="math inline">\vert{}x\rangle</span> bằng <span class="math inline">e^{i\theta}\vert{}x\rangle</span> không làm thay đổi xác suất thành công, vì vậy không mất tính tổng quát, chúng ta có thể giả sử rằng <span class="math inline">\langle x\vert{}\psi_k^x\rangle = \vert{}\langle x\vert{}\psi_k^x\rangle\vert{}</span>, và do đó</p>
+<p><span class="math display">
+\Vert{}\psi_k^x - x\Vert{}^2 = 2 - 2\vert{}\langle x\vert{}\psi_k^x\rangle\vert{} \le 2 - \sqrt{2}. \tag{6.47}
+</span></p>
+<p>Định nghĩa <span class="math inline">E_k \equiv \sum_x \Vert{}\psi_k^x - x\Vert{}^2</span>, chúng ta thấy rằng <span class="math inline">E_k \le (2 - \sqrt{2})N</span>. Bây giờ chúng ta đã ở vị thế để chứng minh rằng <span class="math inline">D_k</span> là <span class="math inline">\Omega(N)</span>. Định nghĩa <span class="math inline">F_k \equiv \sum_x \Vert{}x - \psi_k\Vert{}^2</span>, ta có</p>
+<p><span class="math display">
+D_k = \sum_x \Vert{}(\psi_k^x - x) + (x - \psi_k)\Vert{}^2 \tag{6.48}
+</span></p>
+<p><span class="math display">
+\ge \sum_x \Vert{}\psi_k^x - x\Vert{}^2 - 2\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{} + \sum_x \Vert{}x - \psi_k\Vert{}^2 \tag{6.49}
+</span></p>
+<p><span class="math display">
+= E_k + F_k - 2\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{}. \tag{6.50}
+</span></p>
+<p>Áp dụng bất đẳng thức Cauchy–Schwarz cho ta <span class="math inline">\sum_x \Vert{}\psi_k^x - x\Vert{}\Vert{}x - \psi_k\Vert{} \le \sqrt{E_k F_k}</span>, vì vậy chúng ta có</p>
+<p><span class="math display">
+D_k \ge E_k + F_k - 2\sqrt{E_k F_k} = (\sqrt{F_k} - \sqrt{E_k})^2. \tag{6.51}
+</span></p>
+<p>Trong Bài tập 6.15, bạn sẽ chỉ ra rằng <span class="math inline">F_k \ge 2N - 2\sqrt{N}</span>. Kết hợp điều này với kết quả <span class="math inline">E_k \le (2 - \sqrt{2})N</span> cho ta <span class="math inline">D_k \ge cN</span> với <span class="math inline">N</span> đủ lớn, trong đó <span class="math inline">c</span> là bất kỳ hằng số nào nhỏ hơn <span class="math inline">(\sqrt{2} - \sqrt{2 - \sqrt{2}})^2 \approx 0.42</span>. Vì <span class="math inline">D_k \le 4k^2</span>, điều này ngụ ý rằng</p>
+<p><span class="math display">
+k \ge \sqrt{cN/4}. \tag{6.52}
+</span></p>
+<p>Tóm lại, để đạt được xác suất thành công ít nhất là một nửa cho việc tìm kiếm một nghiệm của bài toán tìm kiếm, chúng ta phải gọi oracle <span class="math inline">\Omega(\sqrt{N})</span> lần.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 6.15:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sử dụng bất đẳng thức Cauchy–Schwarz để chỉ ra rằng đối với bất kỳ vector trạng thái chuẩn hóa <span class="math inline">\vert{}\psi\rangle</span> nào và tập hợp <span class="math inline">N</span> vector cơ sở trực chuẩn <span class="math inline">\vert{}x\rangle</span>,</p>
+<p><span class="math display">
+\sum_x \Vert{}\psi - x\Vert{}^2 \ge 2N - 2\sqrt{N}. \tag{6.53}
+</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 6.16:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta chỉ yêu cầu xác suất mắc lỗi nhỏ hơn <span class="math inline">1/2</span> khi lấy trung bình đều trên các giá trị có thể có của <span class="math inline">x</span>, thay vì cho mọi giá trị của <span class="math inline">x</span>. Hãy chỉ ra rằng vẫn cần <span class="math inline">O(\sqrt{N})</span> (lưu ý: sách in nhầm ký hiệu <span class="math inline">O</span>, đúng về mặt toán học là <span class="math inline">\Omega(\sqrt{N})</span>) lần gọi oracle để giải quyết bài toán tìm kiếm.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Kết quả này, rằng thuật toán tìm kiếm lượng tử về cơ bản là tối ưu, vừa đáng phấn khích lại vừa đáng thất vọng. Nó đáng phấn khích bởi vì nó cho chúng ta biết rằng ít nhất là đối với bài toán này, chúng ta đã thấu hiểu tận cùng chiều sâu của cơ học lượng tử; không thể có thêm bất kỳ sự cải tiến nào nữa. Sự thất vọng nảy sinh bởi vì chúng ta có thể đã hy vọng làm được tốt hơn nhiều so với mức tăng tốc căn bậc hai mà thuật toán tìm kiếm lượng tử mang lại. Kiểu kết quả trong mơ mà chúng ta có thể đã hy vọng tiên nghiệm (a priori) là việc có thể tìm kiếm một không gian gồm <span class="math inline">N</span> mục chỉ bằng <span class="math inline">O(\log N)</span> lần gọi oracle. Nếu một thuật toán như vậy tồn tại, nó sẽ cho phép chúng ta giải quyết các bài toán NP-đầy đủ (NP-complete) một cách hiệu quả trên máy tính lượng tử, vì nó có thể tìm kiếm tất cả <span class="math inline">2^{w(n)}</span> nhân chứng (witnesses) khả dĩ chỉ với khoảng <span class="math inline">w(n)</span> lần gọi oracle, trong đó đa thức <span class="math inline">w(n)</span> là độ dài của một nhân chứng tính theo bit. Đáng tiếc là một thuật toán như vậy không thể tồn tại. Đây là một thông tin hữu ích cho những nhà thiết kế thuật toán tương lai, vì nó chỉ ra rằng một phương pháp ngây thơ dựa trên tìm kiếm để tấn công các bài toán NP-đầy đủ chắc chắn sẽ thất bại.</p>
+<p>Bước sang địa hạt của quan điểm cá nhân, chúng tôi lưu ý rằng nhiều nhà nghiên cứu tin rằng lý do cốt lõi khiến các bài toán NP-đầy đủ trở nên khó khăn là do không gian tìm kiếm của chúng về cơ bản không có cấu trúc, và rằng (xét đến các hệ số đa thức) phương pháp tốt nhất có thể để giải một bài toán như vậy là áp dụng một phương pháp tìm kiếm. Nếu đứng trên quan điểm này, thì đó là một tin xấu đối với tính toán lượng tử, ngụ ý rằng lớp các bài toán có thể giải quyết hiệu quả trên máy tính lượng tử, BQP, không chứa các bài toán NP-đầy đủ. Tất nhiên, đây chỉ đơn thuần là quan điểm, và vẫn có khả năng các bài toán NP-đầy đủ chứa đựng một cấu trúc chưa được biết đến nào đó cho phép giải quyết chúng một cách hiệu quả trên máy tính lượng tử, hoặc thậm chí trên máy tính cổ điển. Một ví dụ hay để minh họa cho điểm này là bài toán phân tích thừa số (factoring), vốn được tin rộng rãi là nằm trong lớp NPI gồm các bài toán có độ khó trung gian giữa P và các bài toán NP-đầy đủ. Chìa khóa dẫn đến lời giải cơ học lượng tử hiệu quả cho bài toán phân tích thừa số chính là việc khai thác một cấu trúc ‘ẩn’ bên trong bài toán – một cấu trúc được hé lộ thông qua việc quy giảm về bài toán tìm bậc (order-finding). Ngay cả khi cấu trúc tuyệt vời này đã được hé lộ, người ta vẫn chưa tìm ra cách khai thác nó để phát triển một thuật toán cổ điển hiệu quả cho việc phân tích thừa số, mặc dù tất nhiên, về mặt cơ học lượng tử, cấu trúc này có thể được tận dụng để tạo ra một thuật toán phân tích thừa số hiệu quả! Có lẽ một cấu trúc tương tự cũng đang ẩn mình trong các bài toán khác bị nghi ngờ nằm trong NPI, chẳng hạn như bài toán đẳng cấu đồ thị (graph isomorphism), hoặc thậm chí trong chính các bài toán NP-đầy đủ.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 6.17: (Tính tối ưu cho trường hợp nhiều nghiệm)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử bài toán tìm kiếm có <span class="math inline">M</span> nghiệm. Hãy chỉ ra rằng cần <span class="math inline">O(\sqrt{N/M})</span> (lưu ý: sách in nhầm ký hiệu <span class="math inline">O</span>, chính xác về mặt tiệm cận là <span class="math inline">\Omega(\sqrt{N/M})</span>) lần áp dụng oracle để tìm thấy một nghiệm.</p>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
