@@ -581,6 +581,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#representation-of-quantum-information" id="toc-representation-of-quantum-information" class="nav-link active" data-scroll-target="#representation-of-quantum-information">1. Representation of quantum information</a></li>
+  <li><a href="#performance-of-unitary-transformations" id="toc-performance-of-unitary-transformations" class="nav-link" data-scroll-target="#performance-of-unitary-transformations">2. Performance of unitary transformations</a></li>
+  <li><a href="#preparation-of-fiducial-initial-states" id="toc-preparation-of-fiducial-initial-states" class="nav-link" data-scroll-target="#preparation-of-fiducial-initial-states">3. Preparation of fiducial initial states</a></li>
+  <li><a href="#measurement-of-output-result" id="toc-measurement-of-output-result" class="nav-link" data-scroll-target="#measurement-of-output-result">4. Measurement of output result</a></li>
   </ul>
 </nav>
     </div>
@@ -622,6 +625,84 @@ window.Quarto = {
 </li>
 <li>Đo lường kết quả đầu ra</li>
 </ol>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Siêu tổng hợp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 35%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Thước đo chất lượng</th>
+<th style="text-align: center;">Ký hiệu / Công thức</th>
+<th style="text-align: left;">Ý nghĩa Vật lý</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Thời gian mất kết hợp</td>
+<td style="text-align: center;"><span class="math inline">\tau_Q</span></td>
+<td style="text-align: left;">Khoảng thời gian hệ thống duy trì được tính kết hợp cơ học lượng tử</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Thời gian phép toán sơ cấp</td>
+<td style="text-align: center;"><span class="math inline">\tau_{op}</span></td>
+<td style="text-align: left;">Thời gian thực hiện các biến đổi Unita sơ cấp (liên quan đến ít nhất hai qubit)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Số lượng phép toán tối đa</td>
+<td style="text-align: center;"><span class="math inline">n_{op} = \lambda^{-1} = \dfrac{\tau_Q}{\tau_{op}}</span></td>
+<td style="text-align: left;">Ước tính số cổng tối đa chạy được trước khi thông bị nhiễu lượng tử phá hủy</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Thời gian hồi phục ngang</td>
+<td style="text-align: center;"><span class="math inline">T_2</span></td>
+<td style="text-align: left;">Thời gian sống tối thiểu của trạng thái chồng chập tùy ý như <span class="math inline">(\vert 0 \rangle + \vert 1 \rangle) / \sqrt 2</span> - hệ số phẩm chất chính của qubit đơn</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Thời gian hồi phục dọc</td>
+<td style="text-align: center;"><span class="math inline">T_1</span></td>
+<td style="text-align: left;">Thời gian sống của mức năng lượng cao <span class="math inline">\vert 1 \rangle</span> (thời gian sống trạng thái cổ điển, thường dài hơn <span class="math inline">T_2</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Độ trung thực tối thiểu</td>
+<td style="text-align: center;"><span class="math inline">\mathcal{F}</span></td>
+<td style="text-align: left;">Mức độ khớp tối thiểu giữa cổng vật lý thực tế và phép biến đổi Unita lý tưởng</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Thời gian thao tác tối đa</td>
+<td style="text-align: center;"><span class="math inline">t_{op}</span></td>
+<td style="text-align: left;">Thời gian tối đa để hoàn thành một phép quay spin đơn lẻ hoặc một cổng CNOT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Độ trung thực khởi tạo tối thiểu</td>
+<td style="text-align: center;"><span class="math inline">\mathcal{F}(\rho_{\text{in}})</span></td>
+<td style="text-align: left;">Độ chính xác tối thiểu khi chuẩn bị hệ về trạng thái ban đầu <span class="math inline">\rho_{in}</span> mong muốn</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Entropy của trạng thái đầu vào</td>
+<td style="text-align: center;"><span class="math inline">S(\rho_{\text{in}})</span></td>
+<td style="text-align: left;">Mức độ hỗn loạn của đầu vào; lý tưởng nhất bằng 0 (trạng thái thần), vì entropy khác không làm giảm khả năng đọc đáp án</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tý số tín hiện trên nhiễu</td>
+<td style="text-align: center;"><span class="math inline">\text{SNR}</span></td>
+<td style="text-align: left;">Đánh giá đồng thời hiệu suất bộ dò và độ mạnh tín hiệu thu dược khi ghép cặp thiết bị đo với qubit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <section id="representation-of-quantum-information" class="level1">
 <h1>1. Representation of quantum information</h1>
 <p>Tính toán lượng tử dựa trên sự biến đổi của các trạng thái lượng tử. Các bit lượng tử (qubit) là những hệ lượng tử hai mức, và với tư cách là những viên gạch xây dựng sơ cấp đơn giản nhất cho một máy tính lượng tử, chúng cung cấp một cách gắn nhãn thuận tiện cho các cặp trạng thái và sự hiện thực hóa vật lý của chúng. Vì vậy, ví dụ, bốn trạng thái của một hạt có spin-<span class="math inline">3/2</span>, <span class="math inline">\vert{}m = +3/2\rangle, \vert{}m = +1/2\rangle, \vert{}m = -1/2\rangle, \vert{}m = -3/2\rangle</span>, có thể được sử dụng để biểu diễn hai qubit.</p>
@@ -654,6 +735,28 @@ window.Quarto = {
 <p>Điều này cho thấy một qubit đơn lẻ có thể được biểu diễn bởi hai mức thấp nhất trong một thế năng giếng vuông như thế nào, và các nhiễu loạn đơn giản lên thế năng có thể tạo ra các phép toán tính toán lên qubit ra sao. Tuy nhiên, các nhiễu loạn cũng đưa vào những hiệu ứng bậc cao hơn, và trong các hệ vật lý thực tế, các hộp thế không sâu vô hạn; những mức năng lượng khác bắt đầu xuất hiện trong bức tranh, và phép xấp xỉ hai mức của chúng ta bắt đầu sụp đổ. Ngoài ra, trong thực tế, hệ thống điều khiển bản thân nó cũng chỉ là một hệ lượng tử khác, và nó ghép cặp với hệ mà chúng ta đang cố gắng thực hiện tính toán lượng tử. Những vấn đề này dẫn đến sự mất kết hợp (decoherence).</p>
 </div>
 </div>
+</section>
+<section id="performance-of-unitary-transformations" class="level1">
+<h1>2. Performance of unitary transformations</h1>
+<p>Các hệ lượng tử kín tiến hóa một cách unita theo sự quyết định của Hamiltonian của chúng, nhưng để thực hiện tính toán lượng tử, người ta phải có khả năng điều khiển Hamiltonian để tạo ra một lựa chọn tùy ý từ một họ phổ quát các phép biến đổi unita (như đã mô tả trong Mục 4.5). Ví dụ, một spin đơn lẻ có thể tiến hóa dưới tác dụng của Hamiltonian <span class="math inline">H = P_x(t)X + P_y(t)Y</span>, trong đó <span class="math inline">P_{\{x,y\}}</span> là các tham số có thể điều khiển được theo cách cổ điển. Từ Bài tập 4.10, chúng ta biết rằng bằng cách điều chỉnh <span class="math inline">P_x</span> và <span class="math inline">P_y</span> một cách thích hợp, ta có thể thực hiện các phép quay spin đơn lẻ tùy ý.</p>
+<p>Theo các định lý của Mục 4.5, bất kỳ phép biến đổi unita nào cũng có thể được cấu thành từ các phép toán spin đơn lẻ và các cổng controlled-NOT (CNOT), và do đó việc hiện thực hóa hai loại cổng logic lượng tử đó là những mục tiêu tự nhiên đối với tính toán lượng tử thực nghiệm. Tuy nhiên, một yêu cầu ngầm định khác cũng được đặt ra là khả năng định địa chỉ (truy cập riêng lẻ) từng qubit, và áp dụng các cổng này lên những qubit hoặc cặp qubit được chọn. Điều này không hề đơn giản để thực hiện trong nhiều hệ thống vật lý. Ví dụ, trong một bẫy ion, người ta có thể chiếu một tia laser vào một trong số nhiều ion riêng lẻ để kích thích chọn lọc nó, nhưng chỉ khi các ion được tách biệt về mặt không gian bằng một bước sóng hoặc lớn hơn.</p>
+<p>Những sự không hoàn hảo không được ghi nhận lại trong các phép biến đổi unita có thể dẫn đến sự mất kết hợp (decoherence). Trong Chương 8, chúng ta sẽ thấy tác động trung bình của các cú hích ngẫu nhiên (các phép quay nhỏ của một spin đơn lẻ quanh trục <span class="math inline">\hat{z}</span> của nó) dẫn đến sự mất mát thông tin lượng tử vốn được biểu diễn bởi các pha tương đối trong một trạng thái lượng tử như thế nào. Tương tự, tác động tích lũy của các sai số hệ thống cũng chính là sự mất kết hợp, khi thông tin cần thiết để có thể đảo ngược chúng bị đánh mất. Hơn nữa, các tham số điều khiển trong Hamiltonian thực chất chỉ là các điều khiển cổ điển gần đúng: trong thực tế, hệ thống điều khiển bản thân nó cũng chỉ là một hệ lượng tử khác, và Hamiltonian thực sự phải bao gồm cả tác động ngược (back-action) của hệ thống điều khiển lên máy tính lượng tử. Ví dụ, thay vì <span class="math inline">P_x(t)</span> trong ví dụ trên, trên thực tế người ta có một Hamiltonian tương tác nguyên tử–photon kiểu Jaynes–Cummings (Mục 7.5.2), với <span class="math inline">P_x(t) = \sum_k \omega_k(t)(a_k + a_k^\dagger)</span> hoặc một biểu thức tương tự đóng vai trò là trường photon trong hốc cộng hưởng. Sau khi tương tác với một qubit, một photon có thể mang đi thông tin về trạng thái của qubit đó, và do đó đây chính là một quá trình mất kết hợp.</p>
+<p>Hai hệ số phẩm chất (figures of merit) quan trọng đối với các phép biến đổi unita là độ trung thực tối thiểu có thể đạt được <span class="math inline">\mathcal{F}</span> (Chương 9), và thời gian tối đa <span class="math inline">t_{op}</span> cần thiết để thực hiện các phép toán sơ cấp chẳng hạn như các phép quay spin đơn lẻ hoặc một cổng controlled-NOT.</p>
+</section>
+<section id="preparation-of-fiducial-initial-states" class="level1">
+<h1>3. Preparation of fiducial initial states</h1>
+<p>Một trong những yêu cầu quan trọng nhất để có thể thực hiện một phép tính hữu ích, ngay cả trong tính toán cổ điển, là khả năng chuẩn bị đầu vào mong muốn. Nếu người ta có một chiếc hộp có thể thực hiện các phép tính hoàn hảo, thì nó có ích gì nếu không thể nhập các con số vào? Với các cỗ máy cổ điển, việc thiết lập một trạng thái đầu vào xác định hiếm khi là một khó khăn – người ta chỉ cần gạt một vài công tắc theo cấu hình mong muốn và điều đó sẽ định nghĩa trạng thái đầu vào. Tuy nhiên, với các hệ lượng tử, điều này có thể rất khó khăn, tùy thuộc vào cách hiện thực hóa các qubit.</p>
+<p>Lưu ý rằng ta chỉ cần có khả năng tạo ra (một cách lặp đi lặp lại) một trạng thái lượng tử cụ thể duy nhất với độ trung thực cao, vì một phép biến đổi unita có thể biến nó thành bất kỳ trạng thái đầu vào mong muốn nào khác. Ví dụ, việc có khả năng đưa <span class="math inline">n</span> spin về trạng thái <span class="math inline">\vert{}00\dots0\rangle</span> là đã đủ tốt. Thực tế là chúng có thể không duy trì ở trạng thái đó quá lâu do sự gia nhiệt (thermal heating) lại là một vấn đề thuộc về việc lựa chọn biểu diễn.</p>
+<p>Việc chuẩn bị trạng thái đầu vào là một vấn đề đáng kể đối với hầu hết các hệ vật lý. Ví dụ, các ion có thể được chuẩn bị ở các trạng thái đầu vào tốt bằng cách làm lạnh vật lý chúng về trạng thái cơ bản (Mục 7.6), nhưng điều này rất thách thức. Hơn nữa, đối với các hệ vật lý có sự tham gia của các tập hợp (ensembles) máy tính lượng tử, những mối lo ngại bổ sung sẽ nảy sinh. Trong cộng hưởng từ hạt nhân (NMR, Mục 7.7), mỗi phân tử có thể được coi như một máy tính lượng tử đơn lẻ, và cần một số lượng lớn phân tử để thu được cường độ tín hiệu có thể đo lường được. Mặc dù các qubit có thể duy trì ở các trạng thái chồng chập tùy ý trong thời gian tương đối dài, việc đưa tất cả các qubit trong tất cả các phân tử về cùng một trạng thái là rất khó, bởi vì độ chênh lệch năng lượng <span class="math inline">\hbar\omega</span> giữa hai trạng thái <span class="math inline">\vert{}0\rangle</span>và<span class="math inline">\vert{}1\rangle</span> nhỏ hơn nhiều so với <span class="math inline">k_{\text{B}}T</span>. Mặt khác, việc chỉ đơn giản để hệ thống đạt cân bằng nhiệt sẽ thiết lập nó ở một trạng thái rất quen thuộc, trạng thái nhiệt (thermal state), với ma trận mật độ <span class="math inline">\rho \approx e^{-\mathcal{H}/k_{\text{B}}T}/\mathcal{Z}</span>, trong đó <span class="math inline">\mathcal{Z}</span> là một thừa số chuẩn hóa cần thiết để duy trì <span class="math inline">\text{tr}(\rho) = 1</span>.</p>
+<p>Hai hệ số phẩm chất (figures of merit) có liên quan đến việc chuẩn bị trạng thái đầu vào: độ trung thực tối thiểu mà trạng thái ban đầu có thể được chuẩn bị ở một trạng thái cho trước <span class="math inline">\rho_{\text{in}}</span>, và entropy của <span class="math inline">\rho_{\text{in}}</span>. Entropy rất quan trọng bởi vì, chẳng hạn, rất dễ để chuẩn bị trạng thái <span class="math inline">\rho_{\text{in}} = I/2^n</span> với độ trung thực cao, nhưng đó là một trạng thái vô dụng cho tính toán lượng tử, vì nó bất biến dưới các phép biến đổi unita! Lý tưởng nhất, trạng thái đầu vào là một trạng thái thuần (pure state), với entropy bằng không. Nhìn chung, các trạng thái đầu vào có entropy khác không sẽ làm giảm khả năng truy xuất câu trả lời từ kết quả đầu ra.</p>
+</section>
+<section id="measurement-of-output-result" class="level1">
+<h1>4. Measurement of output result</h1>
+<p>Khả năng đo lường nào là cần thiết cho tính toán lượng tử? Nhằm mục đích cho cuộc thảo luận hiện tại, chúng ta hãy hình dung phép đo như một quá trình ghép cặp một hoặc nhiều qubit với một hệ cổ điển sao cho sau một khoảng thời gian nào đó, trạng thái của các qubit được biểu thị thông qua trạng thái của hệ cổ điển. Ví dụ, một trạng thái qubit <span class="math inline">a\vert{}0\rangle + b\vert{}1\rangle</span>, được biểu diễn bởi trạng thái cơ bản và trạng thái kích thích của một nguyên tử hai mức, có thể được đo bằng cách bơm kích thích trạng thái kích thích đó và quan sát sự phát huỳnh quang. Nếu một tĩnh điện kế (electrometer) chỉ ra rằng sự phát huỳnh quang đã được phát hiện bởi một ống nhân quang điện (photomultiplier tube), thì qubit sẽ sụp đổ về trạng thái <span class="math inline">\vert{}1\rangle</span>; điều này xảy ra với xác suất <span class="math inline">\vert{}b\vert{}^2</span>. Ngược lại, tĩnh điện kế sẽ không phát hiện ra điện tích nào, và qubit sẽ sụp đổ về trạng thái <span class="math inline">\vert{}0\rangle</span>.</p>
+<p>Một đặc trưng quan trọng của quá trình đo lường đối với tính toán lượng tử là sự sụp đổ hàm sóng (wavefunction collapse), vốn mô tả những gì xảy ra khi một phép đo chiếu (projective measurement) được thực hiện (Mục 2.2.5). Đầu ra từ một thuật toán lượng tử tốt là một trạng thái chồng chập mà khi đo lường sẽ mang lại một câu trả lời hữu ích với xác suất cao. Ví dụ, một bước trong thuật toán phân tích thừa số lượng tử của Shor là tìm một số nguyên <span class="math inline">r</span> từ kết quả đo lường, vốn là một số nguyên nằm gần <span class="math inline">qc/r</span>, trong đó <span class="math inline">q</span> là số chiều của một không gian Hilbert. Trạng thái đầu ra thực chất nằm trong một sự chồng chập gần như đều của tất cả các giá trị khả dĩ của <span class="math inline">c</span>, nhưng một phép đo sẽ làm sụp đổ trạng thái này về một số nguyên ngẫu nhiên duy nhất, qua đó cho phép xác định <span class="math inline">r</span> với xác suất cao (sử dụng khai triển liên phân số, như đã được mô tả trong Chương 5).</p>
+<p>Có thể hình dung ra rất nhiều khó khăn đối với việc đo lường; chẳng hạn, các bộ đếm photon kém hiệu quả và nhiễu nhiệt của bộ khuếch đại có thể làm suy giảm lượng thông tin thu được về các trạng thái qubit được đo trong sơ đồ vừa mô tả. Hơn nữa, các phép đo chiếu (đôi khi được gọi là các phép đo ‘mạnh’) thường rất khó để triển khai. Chúng đòi hỏi sự ghép cặp giữa hệ lượng tử và hệ cổ điển phải lớn, và phải có khả năng đóng/ngắt được (switchable). Các phép đo không được phép diễn ra khi không mong muốn; nếu không chúng có thể trở thành một quá trình mất kết hợp.</p>
+<p>Tuy nhiên, thật đáng ngạc nhiên là các phép đo mạnh không nhất thiết phải có; các phép đo yếu được thực hiện liên tục và không bao giờ ngắt đi vẫn có thể sử dụng được cho tính toán lượng tử. Điều này trở nên khả thi bằng cách hoàn thành phép tính trong một khoảng thời gian ngắn so với sự ghép cặp đo lường, và bằng cách sử dụng các tập hợp (ensembles) lớn gồm nhiều máy tính lượng tử. Các tập hợp này cùng nhau tạo ra một tín hiệu tổng hợp có thể quan sát được ở quy mô vĩ mô và biểu thị cho trạng thái lượng tử. Việc sử dụng một tập hợp cũng kéo theo những vấn đề bổ sung. Ví dụ, trong thuật toán phân tích thừa số, nếu đầu ra của phép đo là <span class="math inline">q\langle c\rangle/r</span>, thuật toán sẽ thất bại bởi vì <span class="math inline">\langle c\rangle</span>, giá trị trung bình của <span class="math inline">c</span>, không nhất thiết phải là một số nguyên (và do đó không thể thực hiện khai triển liên phân số). May mắn thay, người ta có thể sửa đổi các thuật toán lượng tử để hoạt động được với các kết quả đọc trung bình trên tập hợp. Điều này sẽ được thảo luận sâu hơn trong Mục 7.7.</p>
+<p>Một hệ số phẩm chất (figure of merit) tốt cho khả năng đo lường là tỷ số tín hiệu trên nhiễu (SNR). Đại lượng này tính đến sự kém hiệu quả của phép đo cũng như độ mạnh tín hiệu nội tại thu được từ việc ghép cặp một thiết bị đo với hệ lượng tử.</p>
 
 
 </section>
