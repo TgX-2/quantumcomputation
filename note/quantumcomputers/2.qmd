@@ -34,8 +34,6 @@ Chúng ta hãy quay trở lại để thảo luận chi tiết về bốn yêu c
 | Entropy của trạng thái đầu vào | $S(\rho_{\text{in}})$ | Mức độ hỗn loạn của đầu vào; lý tưởng nhất bằng 0 (trạng thái thần), vì entropy khác không làm giảm khả năng đọc đáp án | 
 | Tý số tín hiện trên nhiễu | $\text{SNR}$ | Đánh giá đồng thời hiệu suất bộ dò và độ mạnh tín hiệu thu dược khi ghép cặp thiết bị đo với qubit |
 
-
-
 :::
 
 
