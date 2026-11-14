@@ -50,7 +50,7 @@ website:
           - note/introductiontocomputerscience/2.qmd
           - note/introductiontocomputerscience/3.qmd
 
-      - section : "4 Quantum Computation"
+      - section : "4 Quantum circuits"
         contents:
           - note/quantumcircuits/1.qmd
           - note/quantumcircuits/2.qmd
@@ -79,6 +79,18 @@ website:
           - note/quantumsearchalgorithms/6.qmd
           - note/quantumsearchalgorithms/7.qmd
         
+      - section : "7 Quantum computers: Physical realization"
+        contents:
+          - note/quantumcomputers/index.qmd
+          - note/quantumcomputers/1.qmd
+          - note/quantumcomputers/2.qmd
+          - note/quantumcomputers/3.qmd
+          - note/quantumcomputers/4.qmd
+          - note/quantumcomputers/5.qmd
+          - note/quantumcomputers/6.qmd
+          - note/quantumcomputers/7.qmd
+          - note/quantumcomputers/8.qmd
+
       - section : "Appendix"
         contents:
           - note/outro/glossary.qmd

@@ -1,0 +1,22 @@
+---
+title: "0 Quantum computers: Physical realization"
+chapter: "7 Quantum computers: Physical realization"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+> *'Computers in the future may weigh no more than 1.5 tons.'*
+> – Popular Mechanics, forecasting the relentless march of science, 1949
+
+> *'I think there is a world market for maybe five computers.'*
+> – Thomas Watson, chairman of IBM, 1943
+
+
+Tính toán lượng tử và thông tin lượng tử là một lĩnh vực có tầm quan trọng nền tảng bởi vì chúng ta tin rằng các cỗ máy xử lý thông tin lượng tử thực sự có thể được chế tạo trong Tự nhiên. Nếu không, lĩnh vực này sẽ chỉ đơn thuần là một sự hiếu kỳ toán học! Tuy nhiên, việc hiện thực hóa bằng thực nghiệm các mạch lượng tử, thuật toán và hệ thống truyền thông đã chứng tỏ là vô cùng thách thức. Trong chương này, chúng ta sẽ khám phá một số nguyên lý chỉ đạo và các hệ thống mô hình cho việc triển khai vật lý của các thiết bị và hệ thống xử lý thông tin lượng tử.   
+
+Chúng ta bắt đầu ở Mục 7.1 với cái nhìn tổng quan về những sự đánh đổi trong việc lựa chọn phương án hiện thực hóa vật lý cho một máy tính lượng tử. Thảo luận này cung cấp góc nhìn nền tảng để trình bày chi tiết một tập hợp các điều kiện đủ cho việc hiện thực hóa bằng thực nghiệm phép tính lượng tử ở Mục 7.2. Những điều kiện này được minh họa trong các Mục 7.3 đến 7.7, thông qua một loạt các nghiên cứu điển hình (case studies), xem xét năm hệ thống vật lý mô hình khác nhau: dao động tử điều hòa đơn giản, photon và môi trường quang học phi tuyến, các thiết bị điện động lực học lượng tử hốc cộng hưởng (cavity QED), bẫy ion, và cộng hưởng từ hạt nhân (NMR) với các phân tử. Đối với mỗi hệ thống, chúng ta sẽ mô tả ngắn gọn thiết bị vật lý, Hamiltonian chi phối động lực học của nó, phương thức điều khiển hệ thống để thực hiện tính toán lượng tử, và những nhược điểm chính của nó. Chúng ta sẽ không đi quá sâu vào việc mô tả vật lý của các hệ thống này; vì mỗi hệ thống đều là cả một lĩnh vực chuyên ngành riêng biệt, điều đó sẽ nằm ngoài phạm vi của cuốn sách này! Thay vào đó, chúng ta chỉ tóm tắt những khái niệm liên quan đến tính toán lượng tử và thông tin lượng tử sao cho có thể thấy rõ cả thách thức thực nghiệm lẫn tiềm năng lý thuyết. Mặt khác, việc phân tích các hệ thống này từ quan điểm thông tin lượng tử cũng mang lại một góc nhìn mới mẻ mà chúng tôi hy vọng bạn sẽ thấy sâu sắc và hữu ích, vì nó cũng cho phép đưa ra những cách chứng minh đơn giản đến bất ngờ cho một số định luật vật lý quan trọng. Chúng ta kết thúc chương ở Mục 7.8 bằng việc thảo luận các khía cạnh của một số hệ thống vật lý khác – chấm lượng tử (quantum dots), cổng siêu dẫn (superconducting gates), và spin trong chất bán dẫn – những hệ thống cũng đang rất được quan tâm trong lĩnh vực này. Để thuận tiện cho độc giả chỉ muốn nắm bắt nhanh những điểm nổi bật của từng phương án triển khai, một phần tóm tắt sẽ được cung cấp ở cuối mỗi mục.   

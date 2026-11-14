@@ -1,0 +1,55 @@
+---
+title: "2 Conditions for quantum computation"
+chapter: "7 Quantum computers: Physical realization"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+
+Chúng ta hãy quay trở lại để thảo luận chi tiết về bốn yêu cầu cơ bản đối với tính toán lượng tử đã được đề cập ở đầu mục trước. Những yêu cầu này là khả năng:   
+
+(1) Biểu diễn một cách bền vững thông tin lượng tử   
+(2) Thực hiện một họ phổ quát các phép biến đổi unita   
+(3) Chuẩn bị một trạng thái ban đầu chuẩn (fiducial initial state)   
+(4) Đo lường kết quả đầu ra   
+
+# 1. Representation of quantum information
+
+Tính toán lượng tử dựa trên sự biến đổi của các trạng thái lượng tử. Các bit lượng tử (qubit) là những hệ lượng tử hai mức, và với tư cách là những viên gạch xây dựng sơ cấp đơn giản nhất cho một máy tính lượng tử, chúng cung cấp một cách gắn nhãn thuận tiện cho các cặp trạng thái và sự hiện thực hóa vật lý của chúng. Vì vậy, ví dụ, bốn trạng thái của một hạt có spin-$3/2$, $\vert{}m = +3/2\rangle, \vert{}m = +1/2\rangle, \vert{}m = -1/2\rangle, \vert{}m = -3/2\rangle$, có thể được sử dụng để biểu diễn hai qubit.   
+
+Đối với mục đích tính toán, nhận thức mang tính quyết định là tập hợp các trạng thái có thể tiếp cận được phải là hữu hạn. Vị trí $x$ của một hạt dọc theo một đường thẳng một chiều nhìn chung không phải là một tập hợp trạng thái tốt cho việc tính toán, mặc dù hạt đó có thể ở trong một trạng thái lượng tử $\vert{}x\rangle$, hoặc thậm chí một sự chồng chập $\sum_x c_x\vert{}x\rangle$ nào đó. Điều này là bởi vì $x$ có một miền giá trị liên tục của các khả năng, và không gian Hilbert có kích thước vô hạn, sao cho khi không có nhiễu thì dung lượng thông tin là vô hạn. Ví dụ, trong một thế giới hoàn hảo, toàn bộ các tác phẩm của Shakespeare có thể được lưu trữ trong (và truy xuất từ) số lượng vô hạn các chữ số của phân số nhị phân $x = 0.010111011001\dots$. Điều này rõ ràng là phi thực tế; những gì xảy ra trong thực tế là sự hiện diện của nhiễu làm giảm số lượng các trạng thái có thể phân biệt được xuống một con số hữu hạn.   
+
+Trên thực tế, người ta thường mong muốn có một khía cạnh đối xứng nào đó quy định tính hữu hạn của không gian trạng thái, nhằm giảm thiểu sự mất kết hợp (decoherence). Ví dụ, một hạt spin-$1/2$ tồn tại trong một không gian Hilbert được sinh bởi các trạng thái $\vert{}\uparrow\rangle$ và $\vert{}\downarrow\rangle$; trạng thái spin không thể là bất cứ thứ gì nằm ngoài không gian hai chiều này, và do đó là một bit lượng tử gần như lý tưởng khi được cách ly tốt.   
+
+Nếu việc lựa chọn biểu diễn là kém, thì sự mất kết hợp sẽ xảy ra. Ví dụ, như được mô tả trong Hộp 7.1, một hạt trong một giếng thế vuông hữu hạn vừa đủ sâu để chứa hai trạng thái liên kết sẽ tạo thành một bit lượng tử tầm thường, bởi vì các chuyển dời từ các trạng thái liên kết sang phổ liên tục của các trạng thái không liên kết là hoàn toàn có thể xảy ra. Những điều này sẽ dẫn đến sự mất kết hợp vì chúng có thể phá hủy các trạng thái chồng chập của qubit. Đối với các qubit đơn lẻ, hệ số phẩm chất (figure of merit) là thời gian sống tối thiểu của các trạng thái chồng chập tùy ý; một thước đo tốt, được sử dụng cho các trạng thái spin và các hệ nguyên tử, là $T_2$, thời gian hồi phục ('ngang' – 'transverse') của các trạng thái chẳng hạn như $(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}$. Lưu ý rằng $T_1$, thời gian hồi phục ('dọc' – 'longitudinal') của trạng thái mức năng lượng cao hơn $\vert{}1\rangle$, chỉ đơn thuần là thời gian sống của một trạng thái cổ điển, vốn thường dài hơn $T_2$.   
+
+:::{.callout-important}
+# Hộp 7.1: Giếng thế vuông và các qubit
+
+Một hệ lượng tử nguyên mẫu được gọi là 'giếng thế vuông' ('square well'), tức một hạt chuyển động trong một hộp một chiều, tuân theo phương trình Schrödinger (2.86). Hamiltonian của hệ này là $H = p^2/2m + V(x)$, trong đó $V(x) = 0$ với $0 < x < L$, và $V(x) = \infty$ ở mọi nơi khác. Các trạng thái riêng của năng lượng, được biểu diễn dưới dạng hàm sóng trong cơ sở vị trí, là   
+
+$$
+\vert{}\psi_n\rangle = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi}{L} x\right), \tag{7.1}
+$$   
+
+trong đó $n$ là một số nguyên, và $\vert{}\psi_n(t)\rangle = e^{-i E_n t}\vert{}\psi_n\rangle$, với $E_n = n^2 \pi^2 m / 2L^2$. Các trạng thái này có một phổ rời rạc. Cụ thể, giả sử chúng ta sắp xếp các điều kiện sao cho chỉ cần xét đến hai mức năng lượng thấp nhất trong một thí nghiệm. Chúng ta định nghĩa một hàm sóng tùy ý đang quan tâm là $\vert{}\psi\rangle = a\vert{}\psi_1\rangle + b\vert{}\psi_2\rangle$. Bởi vì   
+
+$$
+\vert{}\psi(t)\rangle = e^{-i(E_1 + E_2)/2 t} \left[ a e^{-i\omega t}\vert{}\psi_1\rangle + b e^{i\omega t}\vert{}\psi_2\rangle \right], \tag{7.2}
+$$   
+
+trong đó $\omega = (E_1 - E_2)/2$, chúng ta có thể bỏ qua mọi thứ khác ngoại trừ $a$ và $b$, và viết trạng thái của mình một cách trừu tượng dưới dạng vector hai thành phần $\vert{}\psi\rangle = \begin{bmatrix} a \\ b \end{bmatrix}$. Hệ hai mức này biểu diễn một qubit! Liệu hệ hai mức của chúng ta có biến đổi giống như một qubit không? Dưới sự tiến hóa theo thời gian, qubit này tiến hóa theo Hamiltonian hiệu dụng $H = \hbar\omega Z$, thứ có thể được loại bỏ bằng cách chuyển sang hệ quy chiếu quay (rotating frame). Để thực hiện các phép toán lên qubit này, chúng ta gây nhiễu loạn lên $H$. Hãy xem xét tác động của việc cộng thêm số hạng bổ sung   
+
+$$
+\delta V(x) = -V_0(t)\frac{9\pi^2}{16L}\left(\frac{x}{L} - \frac{1}{2}\right) \tag{7.3}
+$$   
+
+vào $V(x)$. Trong cơ sở của hệ hai mức của chúng ta, biểu thức này có thể được viết lại bằng cách lấy các phần tử ma trận $V_{nm} = \langle \psi_n \vert{} \delta V(x) \vert{} \psi_m \rangle$, cho kết quả $V_{11} = V_{22} = 0$, và $V_{12} = V_{21} = V_0$, sao cho ở bậc thấp nhất theo $V_0$, nhiễu loạn tác động lên $H$ là $H_1 = V_0(t)X$. Phép toán này sinh ra các phép quay quanh trục $\hat{x}$. Các kỹ thuật tương tự có thể được sử dụng để thực hiện những phép toán một qubit khác, bằng cách điều khiển hàm thế năng.   
+
+Điều này cho thấy một qubit đơn lẻ có thể được biểu diễn bởi hai mức thấp nhất trong một thế năng giếng vuông như thế nào, và các nhiễu loạn đơn giản lên thế năng có thể tạo ra các phép toán tính toán lên qubit ra sao. Tuy nhiên, các nhiễu loạn cũng đưa vào những hiệu ứng bậc cao hơn, và trong các hệ vật lý thực tế, các hộp thế không sâu vô hạn; những mức năng lượng khác bắt đầu xuất hiện trong bức tranh, và phép xấp xỉ hai mức của chúng ta bắt đầu sụp đổ. Ngoài ra, trong thực tế, hệ thống điều khiển bản thân nó cũng chỉ là một hệ lượng tử khác, và nó ghép cặp với hệ mà chúng ta đang cố gắng thực hiện tính toán lượng tử. Những vấn đề này dẫn đến sự mất kết hợp (decoherence). 
+:::
