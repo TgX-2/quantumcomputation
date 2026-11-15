@@ -1818,5 +1818,115 @@
       "7 Quantum computers: Physical realization",
       "5 Optical cavity quantum electrodynamics"
     ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html",
+    "href": "note/quantumcomputers/6.html",
+    "title": "6 Ion traps",
+    "section": "",
+    "text": "Cho đến phần này của chương, chúng ta chủ yếu tập trung vào việc biểu diễn các qubit bằng photon. Bây giờ hãy chuyển sang các cách biểu diễn sử dụng trạng thái nguyên tử và hạt nhân. Cụ thể, như chúng ta đã thấy ở Mục 7.1, spin của electron và spin của hạt nhân cung cấp những cách biểu diễn tiềm năng tốt cho qubit. Spin là một khái niệm kỳ lạ (nhưng hoàn toàn có thật!) (Hộp 7.7), nhưng vì sự chênh lệch năng lượng giữa các trạng thái spin khác nhau thường rất nhỏ so với các thang năng lượng khác (chẳng hạn như động năng của các nguyên tử thông thường ở nhiệt độ phòng), các trạng thái spin của một nguyên tử thường khó quan sát, và thậm chí còn khó điều khiển hơn. Tuy nhiên, trong những môi trường được thiết kế tinh vi, việc điều khiển cực kỳ chính xác là hoàn toàn khả thi. Những điều kiện như vậy được tạo ra bằng cách cô lập và bẫy một số lượng nhỏ các nguyên tử mang điện trong các bẫy điện từ, sau đó làm lạnh các nguyên tử cho đến khi động năng của chúng thấp hơn nhiều so với phần đóng góp năng lượng của spin. Sau khi làm điều này, ánh sáng đơn sắc chiếu tới có thể được điều chỉnh tần số để gây ra các chuyển dời có chọn lọc làm thay đổi một số trạng thái spin nhất định tùy thuộc vào các trạng thái spin khác. Đây chính là bản chất của cách các ion bị bẫy có thể được dùng để thực hiện tính toán lượng tử, như chúng ta sẽ mô tả trong mục này. Chúng ta bắt đầu với tổng quan về thiết bị thí nghiệm và các thành phần chính của nó, sau đó trình bày một Hamiltonian mô hình hóa hệ thống. Chúng ta mô tả một thí nghiệm đã được thực hiện để chứng minh một cổng controlled-NOT với các ion ^9\\text{Be} bị bẫy, và sau đó kết thúc với một vài nhận xét về tiềm năng cũng như hạn chế của phương pháp này.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#cách-vượt-qua-định-lý-earnshaw---bẫy-paul",
+    "href": "note/quantumcomputers/6.html#cách-vượt-qua-định-lý-earnshaw---bẫy-paul",
+    "title": "6 Ion traps",
+    "section": "Cách vượt qua Định lý Earnshaw - Bẫy Paul",
+    "text": "Cách vượt qua Định lý Earnshaw - Bẫy Paul\nKhông thể nhốt một hạt mang điện đứng yên chỉ bằng điện áp một chiều (DC) tĩnh. (Giống như việc đặt một viên bi lên cái yên ngựa).\nThế tĩnh \\Phi_{dc} bóp chặt hai đầu (trục z) để viên bi không trượt lên trước hay ra sau. Nhưng đổi lại hai bên hông (trục xy) lại trũng xuống khiến viên bi sẽ rơi ra ngoài.\nGiải pháp: Nối đất với 2 thanh kim loại, và cấp điện AC tần số cao RF cho 2 thanh còn lại. Viên bi tính trượt sang trái thì lại bị đảo lại, trượt sang phải, rồi lại đảo lại, … Cuối cùng nó ở ngay chính giữa.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#phân-tích-hamiltonian",
+    "href": "note/quantumcomputers/6.html#phân-tích-hamiltonian",
+    "title": "6 Ion traps",
+    "section": "Phân tích Hamiltonian",
+    "text": "Phân tích Hamiltonian\nCụm thứ nhất: Là năng lượng do trap ép từng ion ở tâm. Và người ta cố tình chỉnh \\omega_x, \\omega_y \\gg \\omega_z, tức là theo phương z thì “lỏng” hơn nhiều do với việc ép theo 2 phương còn lại.\nCụm thứ hai: Do các ion mang điện tích dương, chúng cũng đẩy nhau. Vì vậy phải thêm lực đẩy tĩnh điện Coulomb.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#điều-kiện-để-chuỗi-ion-rung-động-nhịp-nhàng",
+    "href": "note/quantumcomputers/6.html#điều-kiện-để-chuỗi-ion-rung-động-nhịp-nhàng",
+    "title": "6 Ion traps",
+    "section": "2 điều kiện để chuỗi ion rung động nhịp nhàng",
+    "text": "2 điều kiện để chuỗi ion rung động nhịp nhàng\nĐiều kiện 1: Chống lại nhiễu điện từ\n\nMuốn nhốt ion thì phải dùng thanh điện cực kim loại, mà dây dẫn hay nguồn điện này cũng có điện trở, sinh ra nhiệt, làm các electron chạy loạn xạ - Nhiễu Johnson.\nBề mặt kim loại cũng có những vết bẩn, khuyết tật tạo ra điện trường nhiễu cục bộ.\n\nNhờ có cấu trúc bẫy điều hòa, chuỗi ion rung động cực kỳ kén sóng. nó chỉ bị ảnh hưởng bởi những rung động có cùng tần số khớp đúng với tần số riêng \\omega_z của nó. Mọi tần số noise khác đều không quan tâm, nên chỉ cần lọc sạch nhiễu ở quanh dải tần số riêng đó là được.\nĐiều kiện 2: Làm lạnh sâu\n\nCông thức lò xo điều hòa (U \\propto z^2) chỉ đúng khi các ion rung động rất nhẹ quanh tâm trap. Nếu ion còn nóng, nó văng ra quá xa tâm trap thì lực điện trường bị méo đi, và các ion bắt đầu rung lắc, xô lệch vào nhau.\nHiệu ứng Mössbauer: Là hiện tượng hấp thụ và phản xạ cộng hưởng, tức là khi đã đứng yên gần như tuyệt đối, thì chỉ cần tác động ion đứng đầu, thì cả chuỗi ion sẽ khóa chặt với nhau thành 1 khối cứng nhắc, khi bắn laser vào 1 cái, thì đồng bộ cộng hưởng dịch chuyển chung, tạo thành 1 hạt phonon chuẩn xác.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#sideband-cooling",
+    "href": "note/quantumcomputers/6.html#sideband-cooling",
+    "title": "6 Ion traps",
+    "section": "Sideband Cooling",
+    "text": "Sideband Cooling\nTrạng thái của ion được ký hiệu là \\vert e, n \\rangle trong đó e \\in \\{0, 1\\} là mức năng lượng bên trong nguyên tử, còn n \\in \\{0, 1, 2, 3, ...\\} là số lượng hạt rung động (phonon).\n\nBước 1: Bắn laser thiếu năng lượng, thay vì bắn đủ năng lượng để bắn từ 03 lên 13, người ta chỉ bắn lên 12, tức là nguyên tử phải lấy chính năng lượng rung động của mình để bù vào.\nBước 2: Khi đang ở 12, nguyên từ không bền nên tự phát xạ ánh sáng và rơi tự do xuống mức điện tử 0. Khi rơi như vật - Lamb-Dicke - số phonon thường là giữ nguyên 12 \\to 02, hoặc thỉnh thoảng tăng/giảm 1 đơn bị, 03 hoặc 01, với xác suất nganng nhau.\nKết quả: Cứ mỗi chu kỳ, trung bình nguyên tử bị mất 1 hạt phonon, tụt dần từ n = 3 2 1 0, khi đã chạm 00, tia laser thiếu năng lượng không thể kích thích nó được nữa, nguyên tử ở trạng thái lạnh tuyệt đối.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#atomic-structure",
+    "href": "note/quantumcomputers/6.html#atomic-structure",
+    "title": "6 Ion traps",
+    "section": "Atomic structure",
+    "text": "Atomic structure\nMục đích của thiết bị bẫy được mô tả ở trên là cho phép làm lạnh các ion đến mức trạng thái dao động của chúng đủ gần với trạng thái không có phonon (\\vert{}0\\rangle), vốn là trạng thái ban đầu thích hợp cho việc tính toán. Tương tự như vậy, các trạng thái bên trong của các ion cũng phải được khởi tạo một cách phù hợp, để chúng có thể được sử dụng nhằm lưu trữ thông tin lượng tử. Bây giờ chúng ta hãy xem xét các trạng thái bên trong này là gì, và hiểu tại sao chúng lại là những cách biểu diễn qubit tốt bằng cách ước tính thời gian sống kết hợp (coherent lifetime) của chúng.\nCác trạng thái nguyên tử bên trong có liên quan đến ion bị bẫy mà chúng ta sẽ xem xét bắt nguồn từ sự kết hợp F giữa spin của electron S và spin của hạt nhân I, cho ra F = S + I. Phần lý thuyết chính quy mô tả điều này — được gọi là phép cộng mômen động lượng (addition of angular momenta) — không chỉ mô tả những cơ sở vật lý quan trọng để hiểu về cấu trúc nguyên tử, mà còn là một cơ chế thú vị cho thông tin lượng tử. Một photon đơn lẻ tương tác với một nguyên tử có thể cung cấp hoặc mang đi một đơn vị mômen động lượng, như chúng ta đã thấy ở Mục 7.5.1. Nhưng có rất nhiều nguồn mômen động lượng khả dĩ bên trong một nguyên tử: mômen quỹ đạo, spin của electron, và spin của hạt nhân. Nó đến từ đâu được quyết định một phần bởi các mức năng lượng được chọn lọc bởi năng lượng của photon, nhưng vượt ra ngoài điều đó, bản thân photon không thể phân biệt được giữa các nguồn khác nhau này, và để mô tả những gì xảy ra, chúng ta phải chọn một hệ cơ sở trong đó tổng mômen động lượng trở thành một tính chất được xác định duy nhất của trạng thái.\nVí dụ, hãy xét hai spin-1/2. Cơ sở “tính toán” cho không gian hai qubit này là \\vert{}00\\rangle, \\vert{}01\\rangle, \\vert{}10\\rangle, \\vert{}11\\rangle, nhưng để sinh ra không gian trạng thái này, chúng ta hoàn toàn có thể chọn hệ cơ sở:\n\n\\vert{}0,0\\rangle_J = \\frac{\\vert{}01\\rangle - \\vert{}10\\rangle}{\\sqrt{2}} \\tag{7.93}\n\n\n\\vert{}1,-1\\rangle_J = \\vert{}00\\rangle \\tag{7.94}\n\n\n\\vert{}1,0\\rangle_J = \\frac{\\vert{}01\\rangle + \\vert{}10\\rangle}{\\sqrt{2}} \\tag{7.95}\n\n\n\\vert{}1,1\\rangle_J = \\vert{}11\\rangle \\tag{7.96}\n\nCác trạng thái cơ sở này rất đặc biệt, bởi vì chúng là các trạng thái riêng của toán tử tổng mômen động lượng, được định nghĩa bởi j_x = (X_1 + X_2)/2, j_y = (Y_1 + Y_2)/2, j_z = (Z_1 + Z_2)/2, và:\n\nJ^2 = j_x^2 + j_y^2 + j_z^2 \\tag{7.97}\n\nCác trạng thái \\vert{}j, m_j\\rangle_J là các trạng thái riêng của J^2 với trị riêng j(j+1), và đồng thời là trạng thái riêng của j_z, với trị riêng m_j. Đây là những trạng thái tự nhiên được chọn lọc bởi nhiều tương tác vật lý; chẳng hạn, trong một từ trường hướng theo trục \\hat{z}, mômen từ \\mu trong Hamiltonian \\mu B_z tỷ lệ thuận với m_j, vốn là thành phần của tổng mômen động lượng theo phương \\hat{z}.\nLý thuyết về phép cộng mômen động lượng rất tinh vi và đã được phát triển hoàn thiện, và chúng ta mới chỉ chạm tới bề mặt của nó (đối với độc giả quan tâm, một số bài tập liên quan được cung cấp bên dưới, và các chỉ dẫn tài liệu được đưa ra trong mục “Lịch sử và đọc thêm” ở cuối chương). Tuy nhiên, một số quan sát thú vị liên quan đến thông tin lượng tử đã có thể được rút ra từ các ví dụ trên. Thông thường, chúng ta nghĩ về các trạng thái vướng víu (entangled states) như các trạng thái Bell (Mục 1.3.6) là những trạng thái phi tự nhiên của vật chất, bởi vì chúng có những tính chất phi định xứ kỳ lạ. Tuy nhiên, trạng thái \\vert{}0,0\\rangle_J lại chính là một trạng thái Bell! Tại sao Tự nhiên lại ưu ái trạng thái này ở đây? Đó là bởi vì một tính đối xứng mà theo đó tương tác liên quan đến mômen từ là bất biến dưới phép hoán đổi hai spin. Những tính đối xứng như vậy thực chất xuất hiện rộng rãi trong Tự nhiên, và có tiềm năng rất hữu ích cho việc thực hiện các phép đo và phép toán tạo vướng víu.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#single-qubit-operations",
+    "href": "note/quantumcomputers/6.html#single-qubit-operations",
+    "title": "6 Ion traps",
+    "section": "Single qubit operations",
+    "text": "Single qubit operations\nViệc chiếu một trường điện từ được điều chỉnh đúng tần số \\omega_0 sẽ bật số hạng Hamiltonian bên trong:\n\nH_I^{\\text{internal}} = \\frac{\\hbar\\Omega}{2} \\left( S_+ e^{i\\varphi} + S_- e^{-i\\varphi} \\right) \\tag{7.122}\n\nBằng cách chọn pha \\varphi và khoảng thời gian tương tác một cách phù hợp, điều này cho phép chúng ta thực hiện các phép toán quay R_x(\\theta) = \\exp(-i\\theta S_x) và R_y(\\theta) = \\exp(-i\\theta S_y), qua đó, theo Định lý 4.1 ở trang 175, cho phép chúng ta thực hiện bất kỳ phép toán một qubit nào trên trạng thái spin. Chúng ta sẽ ký hiệu các phép quay tác động lên ion thứ j bằng một chỉ số dưới, ví dụ như R_{xj}(\\theta).",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#controlled-phase-flip-gate",
+    "href": "note/quantumcomputers/6.html#controlled-phase-flip-gate",
+    "title": "6 Ion traps",
+    "section": "Controlled phase-flip gate",
+    "text": "Controlled phase-flip gate\nBây giờ, giả sử rằng một qubit được lưu trữ trong trạng thái spin bên trong của nguyên tử, và một qubit khác được lưu trữ bằng cách sử dụng các trạng thái phonon \\vert{}0\\rangle và \\vert{}1\\rangle. Nếu đúng như vậy, chúng ta có thể thực hiện một cổng lật pha có điều khiển, với phép biến đổi đơn nguyên:\n\n\\begin{bmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & -1 \\end{bmatrix} \\tag{7.123}\n\nCách dễ nhất để giải thích cách thực hiện điều này là với một nguyên tử có mức năng lượng thứ ba, như minh họa trong Hình 7.11 (mức năng lượng phụ này về cơ bản không bắt buộc phải có; xem Bài toán 7.4). Một tia laser được điều chỉnh tới tần số \\omega_{\\text{aux}} + \\omega_z, nhằm gây ra các chuyển dời giữa các trạng thái \\vert{}20\\rangle và \\vert{}11\\rangle; điều này bật lên một Hamiltonian có dạng:\n\nH_{\\text{aux}} = i \\frac{\\eta\\hbar\\Omega'}{2} \\left( S'_+ e^{i\\varphi} - S'_- e^{-i\\varphi} \\right) \\tag{7.124}\n\ntrong đó S'_+ và S'_- biểu thị các chuyển dời giữa \\vert{}20\\rangle và \\vert{}11\\rangle, và chúng ta giả sử rằng các trạng thái chuyển động bậc cao hơn đều không có hạt chiếm giữ. Lưu ý rằng vì tính duy nhất của tần số này, không có chuyển dời nào khác bị kích thích. Chúng ta chiếu tia laser với pha và khoảng thời gian để thực hiện một xung 2\\pi (tức là phép quay R_x(2\\pi)) trên không gian được sinh bởi \\vert{}11\\rangle và \\vert{}20\\rangle, vốn chính là phép biến đổi đơn nguyên \\vert{}11\\rangle \\rightarrow -\\vert{}11\\rangle. Tất cả các trạng thái khác vẫn giữ nguyên không đổi, với giả định rằng các trạng thái không mong muốn chẳng hạn như \\vert{}1,2\\rangle có biên độ xác suất bằng không. Điều này hiện thực hóa phép biến đổi của (7.123) như mong muốn. Chúng ta sẽ viết cổng này là C_j(Z) (biểu thị một phép toán controlled-Z), trong đó j chỉ ra ion nào đang được áp dụng cổng. Lưu ý rằng cùng một phonon được dùng chung bởi tất cả các ion, vì nó là một phonon khối tâm; chính vì điều này, mượn thuật ngữ kỹ thuật, nó được gọi là qubit “xe buýt” (bus qubit) phonon trong các tài liệu chuyên ngành.\n\n\n\nChú thích Hình 7.11: Các mức năng lượng của một nguyên tử ba mức trong bẫy ion, mỗi mức có hai trạng thái phonon. Các nhãn \\vert{}n, m\\rangle biểu thị trạng thái n của nguyên tử và trạng thái m của phonon. Chuyển dời \\vert{}20\\rangle \\leftrightarrow \\vert{}11\\rangle được sử dụng để thực hiện một cổng lật pha có điều khiển.\n\n\n(Cổng này được gọi là cổng Cirac–Zoller, nhưng hiện nay người ta đã thay thế bằng cổngMølmer–Sørensen.)",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#swap-gate",
+    "href": "note/quantumcomputers/6.html#swap-gate",
+    "title": "6 Ion traps",
+    "section": "Swap gate",
+    "text": "Swap gate\nCuối cùng, chúng ta cần một cách nào đó để hoán đổi các qubit giữa trạng thái spin bên trong của nguyên tử và trạng thái phonon. Điều này có thể được thực hiện bằng cách điều chỉnh một tia laser tới tần số \\omega_0 - \\omega_z, và bố trí pha sao cho chúng ta thực hiện phép quay R_y(\\pi) trên không gian con được sinh bởi \\vert{}01\\rangle và \\vert{}10\\rangle, vốn chính là phép biến đổi đơn nguyên:\n\n\\begin{bmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & -1 & 0 & 0 \\\\ 0 & 0 & 0 & 1 \\end{bmatrix} \\tag{7.125}\n\ntrên không gian \\vert{}00\\rangle, \\vert{}01\\rangle, \\vert{}10\\rangle, \\vert{}11\\rangle. Nếu trạng thái ban đầu là a\\vert{}00\\rangle + b\\vert{}10\\rangle (tức là phonon ban đầu ở trạng thái \\vert{}0\\rangle), thì trạng thái sau phép hoán đổi sẽ là a\\vert{}00\\rangle + b\\vert{}01\\rangle, do đó điều này hoàn thành thao tác hoán đổi mong muốn. Chúng ta sẽ viết phép toán này là \\text{SWAP}_j khi tác động lên ion j; phép toán nghịch đảo \\overline{\\text{SWAP}}_j tương ứng với R_y(-\\pi). Về mặt kỹ thuật, vì có dấu trừ ở phần tử \\vert{}10\\rangle\\langle 01\\vert{} của R_y(\\pi), đây không phải là một phép hoán đổi hoàn hảo, nhưng nó tương đương với một phép hoán đổi sai khác một pha tương đối (xem Bài tập 4.26). Vì vậy, đôi khi thao tác này được gọi là một “phép toán ánh xạ” (mapping operation) thay vì gọi là phép hoán đổi.",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
+  },
+  {
+    "objectID": "note/quantumcomputers/6.html#controlled-note-gate",
+    "href": "note/quantumcomputers/6.html#controlled-note-gate",
+    "title": "6 Ion traps",
+    "section": "Controlled-NOTE gate",
+    "text": "Controlled-NOTE gate\nViệc ghép các cổng này lại với nhau cho phép chúng ta xây dựng một cổng \\text{CNOT} tác động lên hai ion j (điều khiển - control) và k (mục tiêu - target) bằng chuỗi các phép toán:\n\n\\text{CNOT}_{jk} = H_k \\, \\overline{\\text{SWAP}}_k \\, C_j(Z) \\, \\text{SWAP}_k \\, H_k \\tag{7.126}\n\n(thời gian chạy từ phải sang trái, như thông lệ đối với nhân ma trận) trong đó H_k là một cổng Hadamard (được xây dựng từ các phép quay R_y và R_x trên ion k). Điều này rất giống với cách một cổng controlled-NOT được xây dựng bằng cách sử dụng các bộ tách chùm tia và môi trường quang học Kerr, như trong Phương trình (7.46).",
+    "crumbs": [
+      "7 Quantum computers: Physical realization",
+      "6 Ion traps"
+    ]
   }
 ]
