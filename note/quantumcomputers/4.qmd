@@ -1,5 +1,5 @@
 ---
-title: "4 Optical photon quantum computerr"
+title: "4 Optical photon quantum computer"
 chapter: "7 Quantum computers: Physical realization"
 author: "TgX.2"
 format:
@@ -9,7 +9,6 @@ format:
     toc-title: "Mục lục bài viết"
     toc-location: right
 ---
-
 
 Một hệ thống vật lý hấp dẫn để biểu diễn một bit lượng tử là photon quang học. Photon là các hạt không mang điện tích, và không tương tác quá mạnh với nhau, hay thậm chí với phần lớn vật chất. Chúng có thể được dẫn truyền dọc theo những khoảng cách xa với độ suy hao thấp trong các sợi quang, được làm trễ một cách hiệu quả bằng cách sử dụng các bộ dịch pha (phase shifters), và được kết hợp dễ dàng bằng các bộ tách chùm tia (beamsplitters). Các photon thể hiện những hiện tượng lượng tử đặc trưng, chẳng hạn như sự giao thoa được tạo ra trong các thí nghiệm hai khe. Hơn nữa, về mặt nguyên tắc, các photon có thể được làm cho tương tác với nhau, bằng cách sử dụng các môi trường quang học phi tuyến đóng vai trò trung gian cho các tương tác. Vẫn tồn tại những vấn đề với kịch bản lý tưởng này; tuy nhiên, ta có thể học được rất nhiều điều từ việc nghiên cứu các thành phần, kiến trúc, và những nhược điểm của một bộ xử lý thông tin lượng tử photon quang học, như chúng ta sẽ thấy trong mục này.   
 
