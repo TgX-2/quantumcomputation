@@ -278,3 +278,20 @@ Thí nghiệm được thực hiện đã kiểm chứng bảng chân trị cổ
 Tuy nhiên, các hạn chế về mặt kỹ thuật có lẽ hoàn toàn có thể vượt qua được, và thời gian sống có thể được kéo dài bằng cách chỉ sử dụng trạng thái chuyển động vốn có tuổi thọ ngắn một cách ngắt quãng (tạm thời), nhằm tận dụng thời gian kết hợp (coherence times) dài hơn nhiều của các trạng thái nguyên tử bên trong. Và việc mở rộng quy mô lên số lượng ion lớn hơn là hoàn toàn khả thi về mặt ý tưởng. Minh họa trong Hình 7.15 là một chuỗi gồm 40 ion thủy ngân đã được bẫy thành công. Còn rất nhiều rào cản để biến những hệ thống như vậy hoạt động thành các cỗ máy xử lý thông tin lượng tử hữu ích, nhưng những bất ngờ về mặt công nghệ là một câu chuyện không hồi kết. Một ngày nào đó, có lẽ, các ion bị bẫy như thế này có thể trở thành các thanh ghi qubit trong một chiếc máy tính lượng tử.
 
 ![Chú thích Hình 7.15: Ảnh chụp ánh sáng huỳnh quang phát ra từ khoảng 40 ion nguyên tử thủy ngân ($^{199}\text{Hg}^+$) bị bẫy. Các ion nằm cách nhau xấp xỉ $15\text{ micromet}$, và hai khoảng trống rõ rệt (trong chuỗi) là các đồng vị khác nhau của thủy ngân vốn không phản ứng với tia laser dò. In lại với sự cho phép của D. Wineland, tại NIST. ](../../img/7.15.png)
+
+:::{.callout-note collapse="true"}
+# Bài tập 7.32: 
+Hãy chứng minh rằng mạch lượng tử trong Hình 7.14 tương đương (sai khác các pha tương đối) với một cổng controlled-NOT, trong đó trạng thái phonon đóng vai trò là qubit điều khiển.
+:::
+
+# Ion trap quantum computer
+
+**Biểu diễn qubit:** Trạng thái siêu tinh tế (spin hạt nhân) của một nguyên tử, và các mode dao động mức thấp nhất (phonon) của các nguyên tử bị bẫy.   
+
+**Tiến hóa đơn nguyên:** Các phép biến đổi tùy ý được xây dựng từ việc chiếu các xung laser điều khiển trạng thái nguyên tử từ bên ngoài, thông qua tương tác Jaynes–Cummings. Các qubit tương tác với nhau thông qua một trạng thái phonon dùng chung.   
+
+**Chuẩn bị trạng thái ban đầu:** Làm lạnh các nguyên tử (bằng cách bẫy và sử dụng phương pháp bơm quang học) về trạng thái cơ bản của chuyển động, và trạng thái cơ bản siêu tinh tế.   
+
+**Đọc kết quả:** Đo mật độ chiếm giữ (xác suất) của các trạng thái siêu tinh tế.   
+
+**Hạn chế:** Thời gian sống của phonon ngắn, và các ion rất khó được chuẩn bị ở trạng thái cơ bản của chuyển động.  

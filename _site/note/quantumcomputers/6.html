@@ -552,11 +552,17 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item">
- <span class="menu-text">note/quantumcomputers/7.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Nuclear magnetic resonance</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">note/quantumcomputers/8.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8 Other implementation schemes</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -606,6 +612,7 @@ window.Quarto = {
   <li><a href="#controlled-note-gate" id="toc-controlled-note-gate" class="nav-link" data-scroll-target="#controlled-note-gate">Controlled-NOTE gate</a></li>
   </ul></li>
   <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">4. Experiment</a></li>
+  <li><a href="#ion-trap-quantum-computer" id="toc-ion-trap-quantum-computer" class="nav-link" data-scroll-target="#ion-trap-quantum-computer">Ion trap quantum computer</a></li>
   </ul>
 </nav>
     </div>
@@ -900,6 +907,30 @@ H_{\text{aux}} = i \frac{\eta\hbar\Omega'}{2} \left( S'_+ e^{i\varphi} - S'_- e^
 <figcaption>Chú thích Hình 7.15: Ảnh chụp ánh sáng huỳnh quang phát ra từ khoảng 40 ion nguyên tử thủy ngân (<span class="math inline">^{199}\text{Hg}^+</span>) bị bẫy. Các ion nằm cách nhau xấp xỉ <span class="math inline">15\text{ micromet}</span>, và hai khoảng trống rõ rệt (trong chuỗi) là các đồng vị khác nhau của thủy ngân vốn không phản ứng với tia laser dò. In lại với sự cho phép của D. Wineland, tại NIST.</figcaption>
 </figure>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 7.32:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Hãy chứng minh rằng mạch lượng tử trong Hình 7.14 tương đương (sai khác các pha tương đối) với một cổng controlled-NOT, trong đó trạng thái phonon đóng vai trò là qubit điều khiển.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ion-trap-quantum-computer" class="level1">
+<h1>Ion trap quantum computer</h1>
+<p><strong>Biểu diễn qubit:</strong> Trạng thái siêu tinh tế (spin hạt nhân) của một nguyên tử, và các mode dao động mức thấp nhất (phonon) của các nguyên tử bị bẫy.</p>
+<p><strong>Tiến hóa đơn nguyên:</strong> Các phép biến đổi tùy ý được xây dựng từ việc chiếu các xung laser điều khiển trạng thái nguyên tử từ bên ngoài, thông qua tương tác Jaynes–Cummings. Các qubit tương tác với nhau thông qua một trạng thái phonon dùng chung.</p>
+<p><strong>Chuẩn bị trạng thái ban đầu:</strong> Làm lạnh các nguyên tử (bằng cách bẫy và sử dụng phương pháp bơm quang học) về trạng thái cơ bản của chuyển động, và trạng thái cơ bản siêu tinh tế.</p>
+<p><strong>Đọc kết quả:</strong> Đo mật độ chiếm giữ (xác suất) của các trạng thái siêu tinh tế.</p>
+<p><strong>Hạn chế:</strong> Thời gian sống của phonon ngắn, và các ion rất khó được chuẩn bị ở trạng thái cơ bản của chuyển động.</p>
 
 
 </section>
