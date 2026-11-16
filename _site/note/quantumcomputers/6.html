@@ -605,6 +605,7 @@ window.Quarto = {
   <li><a href="#swap-gate" id="toc-swap-gate" class="nav-link" data-scroll-target="#swap-gate">Swap gate</a></li>
   <li><a href="#controlled-note-gate" id="toc-controlled-note-gate" class="nav-link" data-scroll-target="#controlled-note-gate">Controlled-NOTE gate</a></li>
   </ul></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">4. Experiment</a></li>
   </ul>
 </nav>
     </div>
@@ -637,8 +638,26 @@ window.Quarto = {
 
 
 <p>Cho đến phần này của chương, chúng ta chủ yếu tập trung vào việc biểu diễn các qubit bằng photon. Bây giờ hãy chuyển sang các cách biểu diễn sử dụng trạng thái nguyên tử và hạt nhân. Cụ thể, như chúng ta đã thấy ở Mục 7.1, spin của electron và spin của hạt nhân cung cấp những cách biểu diễn tiềm năng tốt cho qubit. Spin là một khái niệm kỳ lạ (nhưng hoàn toàn có thật!) (Hộp 7.7), nhưng vì sự chênh lệch năng lượng giữa các trạng thái spin khác nhau thường rất nhỏ so với các thang năng lượng khác (chẳng hạn như động năng của các nguyên tử thông thường ở nhiệt độ phòng), các trạng thái spin của một nguyên tử thường khó quan sát, và thậm chí còn khó điều khiển hơn. Tuy nhiên, trong những môi trường được thiết kế tinh vi, việc điều khiển cực kỳ chính xác là hoàn toàn khả thi. Những điều kiện như vậy được tạo ra bằng cách cô lập và bẫy một số lượng nhỏ các nguyên tử mang điện trong các bẫy điện từ, sau đó làm lạnh các nguyên tử cho đến khi động năng của chúng thấp hơn nhiều so với phần đóng góp năng lượng của spin. Sau khi làm điều này, ánh sáng đơn sắc chiếu tới có thể được điều chỉnh tần số để gây ra các chuyển dời có chọn lọc làm thay đổi một số trạng thái spin nhất định tùy thuộc vào các trạng thái spin khác. Đây chính là bản chất của cách các ion bị bẫy có thể được dùng để thực hiện tính toán lượng tử, như chúng ta sẽ mô tả trong mục này. Chúng ta bắt đầu với tổng quan về thiết bị thí nghiệm và các thành phần chính của nó, sau đó trình bày một Hamiltonian mô hình hóa hệ thống. Chúng ta mô tả một thí nghiệm đã được thực hiện để chứng minh một cổng controlled-NOT với các ion <span class="math inline">^9\text{Be}</span> bị bẫy, và sau đó kết thúc với một vài nhận xét về tiềm năng cũng như hạn chế của phương pháp này.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 7.7: Spin
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spin là một khái niệm kỳ lạ. Khi một hạt có spin, nó sở hữu một mômen từ hệt như thể nó là một hạt cấu hợp có một dòng điện chạy vòng quanh một mạch kín. Nhưng electron là các hạt cơ bản, còn các quark cấu tạo nên nucleon thì không được biết đến là tạo ra spin thông qua chuyển động quỹ đạo. Hơn nữa, spin của một hạt chỉ luôn mang giá trị nguyên hoặc bán nguyên.</p>
+<p>Tuy nhiên, spin hoàn toàn có thật, và là một phần quan trọng của vật lý đời thường. Các hạt có spin nguyên, được gọi là boson, bao gồm cả photon. Vì không có khối lượng, photon có phần đặc biệt và chỉ có các thành phần spin <span class="math inline">\pm 1</span> (và không có spin bằng không); những thành phần này tương ứng với hai trạng thái phân cực trực giao quen thuộc. Kính râm làm từ các tấm phân cực nhựa rẻ tiền phát huy hiệu quả khi lái xe là bởi vì ánh sáng mặt trời bị phân cực một phần theo hướng ngược lại sau khi phản xạ khỏi các bề mặt như mặt đường (ánh sáng phân cực có điện trường song song với mặt phân cách luôn phản xạ một phần bất kể góc tới là bao nhiêu, trái ngược với phân cực từ ngang vốn không phản xạ khi góc tới đạt góc Brewster). Các hạt có spin bán nguyên, được gọi là fermion, bao gồm electron, proton và neutron. Đây là các hạt “spin-<span class="math inline">1/2</span>”, ở chỗ thành phần spin của chúng có thể là <span class="math inline">+1/2</span> (spin “lên” - up) hoặc <span class="math inline">-1/2</span> (spin “xuống” - down). Khi chúng ta nói “spin”, thông thường điều được ám chỉ là một hạt spin-<span class="math inline">1/2</span>.</p>
+<p>Các trạng thái riêng năng lượng của một nguyên tử có liên quan mật thiết đến spin, và sự kết hợp của nhiều spin. Ví dụ, hạt nhân của <span class="math inline">^9\text{Be}</span> có spin <span class="math inline">3/2</span>. Các spin tương tác với từ trường giống hệt như các mômen từ; trong một từ trường <span class="math inline">\vec{B}</span>, một electron có spin <span class="math inline">\vec{S}</span> mang năng lượng <span class="math inline">g_e \vec{S}\cdot\vec{B}</span>, và tương tự, một hạt nhân <span class="math inline">\vec{I}</span> mang năng lượng <span class="math inline">g_n \vec{I}\cdot\vec{B}</span>. Minh họa bằng hình ảnh, chẳng hạn, phần đóng góp của spin vào các mức năng lượng của nguyên tử có thể được hình dung như sau:</p>
+<p><img src="../../img/7.7.2.png" class="img-fluid"></p>
+<p>trong đó chúng ta giả sử một electron có spin-<span class="math inline">1/2</span>, và một hạt nhân có spin-<span class="math inline">3/2</span>. Bằng cách điều chỉnh tần số của tia laser chiếu tới sao cho thật chuẩn xác, bất kỳ chuyển dời nào trong số này đều có thể được chọn lọc, miễn là các định luật bảo toàn (Mục 7.5.1) được thỏa mãn. Cụ thể, định luật bảo toàn mômen động lượng ngụ ý rằng khi một photon bị hấp thụ bởi một nguyên tử, một đơn vị mômen động lượng hoặc spin phải thay đổi giữa trạng thái đầu và trạng thái cuối. Do đó, các trạng thái này phải có các giá trị mômen động lượng xác định; điều này có thể được tính đến.</p>
+<p>Không giống như các biến liên tục chẳng hạn như vị trí và động lượng, cùng các hệ không gian Hilbert vô hạn chiều khác vốn bắt buộc phải bị cắt cụt một cách nhân tạo để biểu diễn các bit lượng tử, các trạng thái spin cung cấp những cách biểu diễn tuyệt vời cho thông tin lượng tử bởi vì chúng sống trong một không gian trạng thái vốn dĩ đã hữu hạn chiều.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -647,7 +666,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Năng lượng của một spin hạt nhân trong từ trường xấp xỉ bằng <span class="math inline">\mu_{\text{N}}B</span>, trong đó <span class="math inline">\mu_{\text{N}} = eh/4\pi m_{\text{p}} \approx 5\times 10^{-27}</span> joule trên tesla là magneton Bohr hạt nhân. Hãy tính năng lượng của một spin hạt nhân trong từ trường <span class="math inline">B = 10</span> tesla, và so sánh với năng lượng nhiệt <span class="math inline">k_{\text{B}}T</span> tại <span class="math inline">T = 300\text{ K}</span>.</p>
 </div>
@@ -844,9 +863,45 @@ H_{\text{aux}} = i \frac{\eta\hbar\Omega'}{2} \left( S'_+ e^{i\varphi} - S'_- e^
 \text{CNOT}_{jk} = H_k \, \overline{\text{SWAP}}_k \, C_j(Z) \, \text{SWAP}_k \, H_k \tag{7.126}
 </span></p>
 <p>(thời gian chạy từ phải sang trái, như thông lệ đối với nhân ma trận) trong đó <span class="math inline">H_k</span> là một cổng Hadamard (được xây dựng từ các phép quay <span class="math inline">R_y</span> và <span class="math inline">R_x</span> trên ion <span class="math inline">k</span>). Điều này rất giống với cách một cổng controlled-NOT được xây dựng bằng cách sử dụng các bộ tách chùm tia và môi trường quang học Kerr, như trong Phương trình (7.46).</p>
-
-
 </section>
+</section>
+<section id="experiment" class="level1">
+<h1>4. Experiment</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/7.12.png" class="img-fluid figure-img"></p>
+<figcaption>Chú thích Hình 7.12: Ảnh chụp một bẫy ion điện cực hình elip được chế tạo vi mô (microfabricated), nơi các ion đã được giam giữ bên trong. Các ion trong chiếc bẫy này là ion bari (barium), chứ không phải beryli (beryllium), nhưng các nguyên lý cơ bản là giống hệt như mô tả trong bài. Tái bản với sự cho phép của R. Devoe và C. Kurtsiefer, Trung tâm Nghiên cứu IBM Almaden.</figcaption>
+</figure>
+</div>
+<p>Một cổng controlled-NOT sử dụng một ion bị bẫy đơn lẻ đã được trình diễn thực nghiệm (xem mục “Lịch sử và đọc thêm” ở cuối chương); cách thức chính xác mà thí nghiệm này được thực hiện rất giàu tính khai sáng. Trong thí nghiệm, một ion <span class="math inline">^9\text{Be}^+</span> đơn lẻ được bẫy trong một bẫy ion RF cộng hưởng đồng trục, có cấu trúc hình học khác với bẫy ion tuyến tính ở Hình 7.7, nhưng tương đương về mặt chức năng, và tương tự như bức ảnh chụp một bẫy ion thực tế trong Hình 7.12. Beryli được chọn vì cấu trúc mức năng lượng siêu tinh tế và điện tử thuận tiện của nó, như minh họa trong Hình 7.13. Các mức năng lượng <span class="math inline">^2\text{S}_{1/2}(1, 1)</span> và <span class="math inline">^2\text{S}_{1/2}(2, 2)</span> (Bài tập 7.28) được dùng làm trạng thái qubit bên trong của nguyên tử, còn các trạng thái phonon <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> được dùng làm một qubit khác (được ký hiệu trong hình là <span class="math inline">n = 0</span> và <span class="math inline">n = 1</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/7.13.png" class="img-fluid figure-img"></p>
+<figcaption>Chú thích Hình 7.13: Các mức năng lượng của ion <span class="math inline">^9\text{Be}^+</span> được sử dụng trong thí nghiệm bẫy ion. Hình ảnh do C. Monroe tại NIST cung cấp.</figcaption>
+</figure>
+</div>
+<p>Chuyển dời <span class="math inline">\approx 313\text{ nm}</span> giữa hai mức <span class="math inline">^2\text{S}_{1/2}(1, 1)</span> và <span class="math inline">^2\text{S}_{1/2}(2, 2)</span> không được thực hiện bằng cách điều chỉnh một tia laser đơn lẻ tới tần số chuyển dời, mà thay vào đó là dùng hai tia laser có hiệu tần số đúng bằng tần số của chuyển dời đó. Phương pháp chuyển dời Raman (Raman transition) này giúp đơn giản hóa các yêu cầu về độ ổn định pha của laser. Trạng thái <span class="math inline">^2\text{S}_{1/2}(2, 0)</span> được dùng làm mức năng lượng phụ (auxiliary level); các trạng thái <span class="math inline">^2\text{S}_{1/2}</span> có mức năng lượng khác nhau là nhờ một từ trường <span class="math inline">0.18\text{ millitesla}</span> được đặt vào hệ thống. Ion bị bẫy có các tần số dao động <span class="math inline">(\omega_x, \omega_y, \omega_z)/2\pi = (11.2, 18.2, 29.8)\text{ MHz}</span> trong bẫy, và độ trải hàm sóng trạng thái cơ bản <span class="math inline">n_x = 0</span> vào khoảng <span class="math inline">7\text{ nm}</span>, mang lại tham số Lamb–Dicke vào khoảng <span class="math inline">\eta_x = 0.2</span>. Tần số Rabi của chuyển dời cộng hưởng là <span class="math inline">\Omega/2\pi = 140\text{ kHz}</span>, của hai dải biên chuyển động là <span class="math inline">\eta_x\Omega/2\pi = 30\text{ kHz}</span>, và của chuyển dời phụ là <span class="math inline">\eta_x\Omega'/2\pi = 12\text{ kHz}</span>.</p>
+<hr>
+<p>Trạng thái của ion được khởi tạo bằng phương pháp làm lạnh Doppler và làm lạnh dải biên (sideband cooling) để thu được trạng thái <span class="math inline">\vert{}00\rangle = \vert{}^2\text{S}_{1/2}(2, 2)\rangle \vert{}n_x = 0\rangle</span> với xác suất xấp xỉ <span class="math inline">95\%</span>. Sau đó, các trạng thái bên trong và trạng thái chuyển động của ion được chuẩn bị vào một trong bốn trạng thái cơ sở <span class="math inline">\vert{}00\rangle, \vert{}01\rangle, \vert{}10\rangle</span>, hoặc <span class="math inline">\vert{}11\rangle</span> bằng cách sử dụng các phép toán một qubit, rồi một cổng controlled-NOT được thực hiện bằng ba xung laser, lần lượt triển khai phép quay <span class="math inline">R_y(\pi/2)</span> lên qubit trạng thái bên trong, một phép toán controlled-<span class="math inline">Z</span> giữa hai qubit, và sau đó là một phép quay <span class="math inline">R_y(-\pi/2)</span> lên qubit trạng thái bên trong. Rất dễ dàng để chứng minh (Bài tập 7.32) rằng mạch lượng tử này, được vẽ trong Hình 7.14, hiện thực hóa một cổng controlled-NOT.</p>
+<p>Việc đọc kết quả tính toán (readout) được thực hiện thông qua hai phép đo. Phép đo thứ nhất là thu thập ánh sáng huỳnh quang phát ra từ ion khi chiếu ánh sáng phân cực tròn <span class="math inline">+</span> được điều chỉnh tới chuyển dời “tuần hoàn” (cycling transition) <span class="math inline">^2\text{S}_{1/2}(2, 2) - {}^2\text{P}_{3/2}(3, 3)</span>. Ánh sáng này hầu như không ghép nối (tương tác) với trạng thái <span class="math inline">^2\text{S}_{1/2}(1, 1)</span>, và do đó cường độ huỳnh quang quan sát được tỷ lệ thuận với xác suất qubit trạng thái bên trong đang ở trạng thái <span class="math inline">\vert{}0\rangle</span>; đây là một phép đo xạ ảnh (projective measurement).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/7.14.png" class="img-fluid figure-img"></p>
+<figcaption>Chú thích Hình 7.14: Mạch lượng tử mô hình hóa thí nghiệm cổng controlled-NOT trên bẫy ion. Đường dây phía trên biểu diễn trạng thái phonon, và đường dây phía dưới biểu diễn trạng thái siêu tinh tế bên trong của ion.</figcaption>
+</figure>
+</div>
+<p>Kỹ thuật đo lường này rất mạnh mẽ bởi vì chuyển dời trên lặp đi lặp lại nhiều lần — ion hấp thụ một photon, nhảy lên trạng thái <span class="math inline">^2\text{P}_{3/2}(3, 3)</span>, sau đó phát xạ một photon và phân rã ngược trở lại đúng trạng thái <span class="math inline">^2\text{S}_{1/2}(2, 2)</span> nơi nó bắt đầu. Hàng nghìn chu kỳ hoặc hơn có thể xảy ra, cho phép tích lũy dữ liệu thống kê tốt. Phép đo thứ hai tương tự như phép đo thứ nhất, nhưng một xung hoán đổi (swap pulse) được áp dụng trước đó để trao đổi qubit chuyển động và qubit trạng thái bên trong; điều này giúp đo xạ ảnh qubit trạng thái chuyển động.</p>
+<p>Thí nghiệm được thực hiện đã kiểm chứng bảng chân trị cổ điển (classical truth table) của phép toán controlled-NOT và, về nguyên tắc, bằng cách chuẩn bị các trạng thái đầu vào chồng chập và đo các ma trận mật độ đầu ra, phép biến đổi đơn nguyên này có thể được mô tả đặc tính hoàn toàn bằng phương pháp chụp cắt lớp quá trình (Chương 8). Cổng controlled-NOT đòi hỏi khoảng <span class="math inline">50\text{ micro-giây}</span> để thực hiện với công suất quang học được sử dụng trong thí nghiệm. Mặt khác, thời gian kết hợp (coherence time) được đo vào khoảng vài trăm đến vài nghìn micro-giây. Các cơ chế mất kết hợp (decoherence) chiếm ưu thế bao gồm sự mất ổn định về công suất chùm tia laser, tần số và biên độ điện áp điều khiển bẫy ion RF, cùng với các từ trường thăng giáng từ bên ngoài. Hơn nữa, thí nghiệm này chỉ liên quan đến một ion duy nhất, và chỉ có hai qubit, do đó chưa hữu ích cho việc tính toán thực tế; để trở nên hữu ích, một cổng controlled-NOT nhìn chung phải được áp dụng giữa các ion khác nhau, chứ không chỉ giữa một ion đơn lẻ với trạng thái chuyển động của chính nó.</p>
+<hr>
+<p>Tuy nhiên, các hạn chế về mặt kỹ thuật có lẽ hoàn toàn có thể vượt qua được, và thời gian sống có thể được kéo dài bằng cách chỉ sử dụng trạng thái chuyển động vốn có tuổi thọ ngắn một cách ngắt quãng (tạm thời), nhằm tận dụng thời gian kết hợp (coherence times) dài hơn nhiều của các trạng thái nguyên tử bên trong. Và việc mở rộng quy mô lên số lượng ion lớn hơn là hoàn toàn khả thi về mặt ý tưởng. Minh họa trong Hình 7.15 là một chuỗi gồm 40 ion thủy ngân đã được bẫy thành công. Còn rất nhiều rào cản để biến những hệ thống như vậy hoạt động thành các cỗ máy xử lý thông tin lượng tử hữu ích, nhưng những bất ngờ về mặt công nghệ là một câu chuyện không hồi kết. Một ngày nào đó, có lẽ, các ion bị bẫy như thế này có thể trở thành các thanh ghi qubit trong một chiếc máy tính lượng tử.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/7.15.png" class="img-fluid figure-img"></p>
+<figcaption>Chú thích Hình 7.15: Ảnh chụp ánh sáng huỳnh quang phát ra từ khoảng 40 ion nguyên tử thủy ngân (<span class="math inline">^{199}\text{Hg}^+</span>) bị bẫy. Các ion nằm cách nhau xấp xỉ <span class="math inline">15\text{ micromet}</span>, và hai khoảng trống rõ rệt (trong chuỗi) là các đồng vị khác nhau của thủy ngân vốn không phản ứng với tia laser dò. In lại với sự cho phép của D. Wineland, tại NIST.</figcaption>
+</figure>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
