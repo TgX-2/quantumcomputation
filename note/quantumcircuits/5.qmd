@@ -1,5 +1,5 @@
 ---
-title: "Universal quantum gates"
+title: "5 Universal quantum gates"
 chapter: "Quantum Circuits"
 author: "TgX.2"
 format:

@@ -1,5 +1,5 @@
 ---
-title: "Phase estimation"
+title: "2 Phase estimation"
 chapter: "The quantum Fourier transform and its applications"
 author: "TgX.2"
 format:

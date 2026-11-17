@@ -19,9 +19,6 @@ website:
           - note/intro/preface.qmd
           - note/intro/notation.qmd
 
-      - section : "Ideas"
-        contents:
-          - note/questions.qmd
 
       - section : "1 Introduction and overview"
         contents:
@@ -95,6 +92,7 @@ website:
         contents:
           - note/outro/glossary.qmd
           - note/outro/future.qmd
+          - note/outro/questions.qmd
 
     
 

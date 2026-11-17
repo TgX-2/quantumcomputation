@@ -1,5 +1,5 @@
 ---
-title: "Perspectives on computer science"
+title: "3 Perspectives on computer science"
 chapter: "Introduction to Computer Science"
 author: "TgX.2"
 format:

@@ -1,5 +1,5 @@
 ---
-title: "Controlled operations"
+title: "3 Controlled operations"
 chapter: "Quantum Circuits"
 author: "TgX.2"
 format:

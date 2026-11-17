@@ -1,5 +1,5 @@
 ---
-title: "Models for computation"
+title: "1 Models for computation"
 chapter: "Introduction to Computer Science"
 author: "TgX.2"
 format:

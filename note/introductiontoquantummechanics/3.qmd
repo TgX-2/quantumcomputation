@@ -1,5 +1,5 @@
 ---
-title: "Application: superdense coding"
+title: "3 Application: superdense coding"
 chapter: "Introduction to Quantum Mechanics"
 author: "TgX.2"
 format:

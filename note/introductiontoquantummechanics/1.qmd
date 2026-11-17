@@ -1,5 +1,5 @@
 ---
-title: "Linear algebra"
+title: "1 Linear algebra"
 chapter: "Introduction to Quantum Mechanics"
 author: "TgX.2"
 format:

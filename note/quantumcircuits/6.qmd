@@ -1,5 +1,5 @@
 ---
-title: "Summary of the quantum circuit model of computation"
+title: "6 Summary of the quantum circuit model of computation"
 chapter: "Quantum Circuits"
 author: "TgX.2"
 format:

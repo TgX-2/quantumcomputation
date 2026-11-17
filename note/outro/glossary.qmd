@@ -36,6 +36,12 @@ $$
 $$
 :::
 
+:::{.glossary}
+# Computational basis states - Trạng thái cơ sở tính toán
+
+Là $\vert 0 \rangle$ và $\vert 1 \rangle$
+:::
+
 # D
 
 # E
@@ -171,6 +177,11 @@ Trong đó:
 
 * $\hat P_n$: là các projector, thỏa mãn hệ thức đóng $\sum_n \hat P_n = \hat I$
 :::
+
+:::{.glossary}
+# Superpositions - Chồng chập - $\alpha \vert 1 \rangle + \beta \vert 1 \rangle$
+:::
+
 
 # T
 

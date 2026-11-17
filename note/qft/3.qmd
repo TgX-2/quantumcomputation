@@ -1,5 +1,5 @@
 ---
-title: "Applications: order-finding and factoring"
+title: "3 Applications: order-finding and factoring"
 chapter: "The quantum Fourier transform and its applications"
 author: "TgX.2"
 format:

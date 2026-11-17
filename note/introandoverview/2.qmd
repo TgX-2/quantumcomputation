@@ -1,5 +1,5 @@
 ---
-title: "Quantum bits"
+title: "2 Quantum bits"
 chapter: "Introduction and Overview"
 author: "TgX.2"
 format:
@@ -43,7 +43,6 @@ Một bit cổ điển giống như một đồng xu: hoặc là mặt ngửa, h
 $$
 \vert + \rangle = \frac{1}{\sqrt{2}}\vert 0\rangle + \frac{1}{\sqrt{2}}\vert 1\rangle \tag{1.2}
 $$
-
 
 mà khi đo, cho kết quả 0 với tỉ lệ 50% ($\vert{}1/\sqrt{2}\vert{}^2$), và kết quả 1 với tỉ lệ 50%. Chúng ta sẽ thường xuyên quay trở lại với trạng thái này, trạng thái đôi khi được ký hiệu là $\vert +\rangle$.
 

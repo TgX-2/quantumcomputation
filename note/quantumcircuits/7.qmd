@@ -1,5 +1,5 @@
 ---
-title: "Simulation of quantum systems"
+title: "7 Simulation of quantum systems"
 chapter: "Quantum Circuits"
 author: "TgX.2"
 format:

@@ -1,5 +1,5 @@
 ---
-title: "Quantum algorithms"
+title: "4 Quantum algorithms"
 chapter: "Introduction and Overview"
 author: "TgX.2"
 format:

@@ -1,5 +1,5 @@
 ---
-title: "Global perspectives"
+title: "1 Global perspectives"
 chapter: "Introduction and Overview"
 author: "TgX.2"
 format:
@@ -34,7 +34,7 @@ Câu chuyện của chúng ta bắt đầu vào những năm đầu của thế 
 
 Vấn đề là khi đó lý thuyết của vật lý (mà bây giờ chúng ta gọi là vật lý cổ điển) đã dự đoán những điều phi lý, ví dụ như là [***Ultraviolet catastrophe***](https://en.wikipedia.org/wiki/Ultraviolet_catastrophe) (thảm họa tia cực tím) liên quan đến việc vô hạn năng lượng, hay là việc dự đoán electrons sẽ di chuyển xoắn ốc không ngừng tiến vào hạt nhân nguyên tử.
 
-Một số bài toán đã được giải quyết bằng cách thêm một số lý thuyết tùy ý vào vật lý cổ điểm, nhưng việc hiểu thêm về hạt nhân và phóng xạ đã mang lại những cách giải thích cố gắng nhưng không thành, khiến cho nó càng ngày càng rắc rối. Cuộc khủng hoảng lên đến đỉnh điểm những năm 1920, sau gần 1/4 thế kỷ, và dẫn đến sự ra đời của ***quantum mechanic*** cơ học lượng tử.
+Một số bài toán đã được giải quyết bằng cách thêm một số lý thuyết tùy ý vào vật lý cổ điển, nhưng việc hiểu thêm về hạt nhân và phóng xạ đã mang lại những cách giải thích cố gắng nhưng không thành, khiến cho nó càng ngày càng rắc rối. Cuộc khủng hoảng lên đến đỉnh điểm những năm 1920, sau gần 1/4 thế kỷ, và dẫn đến sự ra đời của ***quantum mechanic*** cơ học lượng tử.
 
 Quantum mechanics đã trở thành một phần không thể thiếu của khoa học kể từ đó, và đã được áp dụng với thành công to lớn cho mọi thứ dưới và bên trong Mặt Trời, bao gồm cấu trúc của nguyên tử, phân rã hạt nhân trong những ngôi sao, vật liệu siêu dẫn, cấu trúc của DNA, và các hạt cơ bản của tự nhiên.
 
@@ -58,7 +58,7 @@ Một trong những mục tiêu của điện toán lượng tử và thông tin
 
 ---
 
-Ví dụ như, vào những năm đầu của 1980, một phong trào nổi lên rằng liệu có khả năng nào cho việc sử dụng các hiệu ứng của lượng tử để truyền tin nhanh hơn ánh sáng hay không - một điều vi phạm nguyên trọng thuyết tương đối của Einstein.
+Ví dụ như, vào những năm đầu của 1980, một phong trào nổi lên rằng liệu có khả năng nào cho việc sử dụng các hiệu ứng của lượng tử để truyền tin nhanh hơn ánh sáng hay không - một điều vi phạm nghiêm trọng thuyết tương đối của Einstein.
 
 Và kết quả của vấn đề này hóa ra lại phụ thuộc vào việc liệu có khả thi ***clone*** một ***unknown quantum state*** trạng thái lượng tử chưa biết hay không, tức là việc tái tạo bản sao một trạng thái lượng tử. Nếu việc cloning là khả thi, thì nó cũng sẽ khả thi việc truyền tin nhanh hơn tốc độ ánh sáng, bằng cách sử dụng các hiệu ứng lượng tử.
 
@@ -211,7 +211,7 @@ Thêm một số ý:
 
 Trước ông Deutsch thì người ta coi việc "tính toán" là một phạm trù tương đối là trừu tượng và độc lập với thế giới vật chất. Thế nhưng ông này lại suy nghĩ ngược lại, việc tính toán là dựa vào chính quá trình vật lý, và "Because the laws of physics are ultimately quantum mechanical".
 
-Từ đó, một máy tính vạn năng thei Deutsch, chính là một chiếc máy dựa trên Cơ học lượng tử.
+Từ đó, một máy tính vạn năng theo Deutsch, chính là một chiếc máy dựa trên Cơ học lượng tử.
 
 Và liệu nó có phải thật sự là mạnh nhất hay chưa? Không ai biết được cho tới hiện nay.
 

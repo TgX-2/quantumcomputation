@@ -1,5 +1,5 @@
 ---
-title: "Quantum information"
+title: "6 Quantum information"
 chapter: "Introduction and Overview"
 author: "TgX.2"
 format:

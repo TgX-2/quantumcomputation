@@ -1,5 +1,5 @@
 ---
-title: "The quantum Fourier transform"
+title: "1 The quantum Fourier transform"
 chapter: "The quantum Fourier transform and its applications"
 author: "TgX.2"
 format:

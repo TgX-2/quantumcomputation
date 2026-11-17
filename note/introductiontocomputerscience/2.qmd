@@ -1,5 +1,5 @@
 ---
-title: "The analysis of computational problems"
+title: "2 The analysis of computational problems"
 chapter: "Introduction to Computer Science"
 author: "TgX.2"
 format:

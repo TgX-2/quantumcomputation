@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Quantum Mechanics"
+title: "0 Introduction to Quantum Mechanics"
 chapter: "Introduction to Quantum Mechanics"
 author: "TgX.2"
 format:
