@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Qubit là đơn vị thông tin lượng tử: trạng thái tổng quát có dạng $\alpha\vert 0\rangle+\beta\vert 1\rangle$, với các biên độ phức được chuẩn hóa. Phép đo trong một cơ sở cho kết quả theo xác suất và thường làm thay đổi trạng thái; vì vậy, một lần đo không thể tiết lộ đầy đủ trạng thái, dù có thể biến đổi qubit trước khi đo. Bỏ qua pha toàn cục, trạng thái một qubit được biểu diễn trên mặt cầu Bloch.
+
+Với $n$ qubit, trạng thái có thể chứa tới $2^n$ biên độ; các trạng thái vướng víu như trạng thái Bell tạo ra tương quan không thể mô tả bằng các qubit độc lập. Tuy nhiên, không thể đọc trực tiếp toàn bộ thông tin trong các biên độ hay sao chép một trạng thái lượng tử chưa biết. Những tính chất này vừa giới hạn phép đo, vừa tạo nên các nguồn lực và khả năng đặc trưng của xử lý lượng tử.
+:::
+
 Bit là khái niệm nền tảng của classical computation và classical information. 
 
 Quantum computation và quantum information được xây dựng dựa trên một khái niệm tương tự, đó là bit lượng tử, hay gọi tắt là ***qubit***. Trong phần này, chúng ta sẽ giới thiệu các tính chất của single qubit và multiple qubits, đồng thời so sánh và đối chiếu các tính chất của chúng với các classical bit.

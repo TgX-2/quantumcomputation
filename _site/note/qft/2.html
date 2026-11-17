@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -622,44 +622,25 @@ window.Quarto = {
 </header>
 
 
-<p>Biến đổi Fourier là chìa khóa cho một quy trình tổng quát được gọi là ước lượng pha, thứ mà đến lượt nó lại là chìa khóa cho nhiều thuật toán lượng tử. Giả sử một toán tử unita <span class="math inline">U</span> có một vector riêng <span class="math inline">\vert{}u\rangle</span> với trị riêng <span class="math inline">e^{2\pi i \varphi}</span>, trong đó giá trị của <span class="math inline">\varphi</span> là chưa biết. Mục tiêu của thuật toán ước lượng pha là ước lượng <span class="math inline">\varphi</span>. Để thực hiện việc ước lượng, chúng ta giả định rằng chúng ta có sẵn các hộp đen (đôi khi được gọi là oracles) có khả năng chuẩn bị trạng thái <span class="math inline">\vert{}u\rangle</span> và thực hiện phép toán controlled-<span class="math inline">U^{2^j}</span>, đối với các số nguyên không âm <span class="math inline">j</span> phù hợp. Việc sử dụng các hộp đen chỉ ra rằng quy trình ước lượng pha không phải là một thuật toán lượng tử hoàn chỉnh theo đúng nghĩa của nó. Thay vào đó, bạn nên nghĩ về ước lượng pha như một loại ‘chương trình con’ (subroutine) hoặc ‘mô-đun’ mà khi được kết hợp với các chương trình con khác, có thể được sử dụng để thực hiện các tác vụ tính toán thú vị. Trong các ứng dụng cụ thể của quy trình ước lượng pha, chúng ta sẽ làm chính xác điều này, mô tả cách thức các phép toán hộp đen này được thực hiện, và kết hợp chúng với quy trình ước lượng pha để làm các tác vụ thực sự hữu ích. Tuy nhiên, trong thời điểm hiện tại, chúng ta sẽ tiếp tục tưởng tượng chúng như những hộp đen.</p>
-<hr>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
+<span class="screen-reader-only">Note</span>tl;dr
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<section id="chuẩn-bị" class="level2">
-<h2 class="anchored" data-anchor-id="chuẩn-bị">Chuẩn bị</h2>
-<p>t thanh ghi kết quả, việc t nhiều hay ít ảnh hưởng đến việc xác suất thành công và độ chính xác của varphi.</p>
 <ul>
-<li>Độ chính xác tới <span class="math inline">t - \lceil \log(2 + \frac 1 {2\epsilon}) \rceil</span> bits.</li>
-<li>Độ thành công ít nhất là <span class="math inline">1 - \epsilon</span>.</li>
+<li><strong>Bài toán và mạch:</strong> Với <span class="math inline">U|u\rangle=e^{2\pi i\varphi}|u\rangle</span>, Hadamard tạo chồng chập, controlled-<span class="math inline">U^{2^j}</span> ghi pha, rồi QFT ngược và phép đo cho <span class="math inline">\tilde\varphi</span>. Nếu <span class="math inline">\varphi</span> có biểu diễn nhị phân chính xác thì kết quả chính xác; nói chung ta thu được xấp xỉ.</li>
+<li><strong>Độ chính xác và giới hạn:</strong> Muốn <span class="math inline">n</span> bit chính xác với xác suất ít nhất <span class="math inline">1-\epsilon</span>, chọn <span class="math inline">t=n+\lceil\log(2+1/(2\epsilon))\rceil</span>; QFT tốn <span class="math inline">O(t^2)</span> ngoài chi phí oracle.</li>
+<li>Nếu đầu vào là <span class="math inline">|\psi\rangle=\sum_uc_u|u\rangle</span>, đầu ra gần <span class="math inline">\sum_uc_u|\widetilde{\varphi_u}\rangle|u\rangle</span>; phép đo chọn pha với xác suất theo <span class="math inline">|c_u|^2</span>. Do đó không cần chuẩn bị trước eigenvector, nhưng kết quả ngẫu nhiên. Đây là chương trình con đòi hỏi chuẩn bị trạng thái và các lũy thừa của <span class="math inline">U</span>, được dùng trong tìm bậc và phân tích thừa số.</li>
 </ul>
-<p>một ket u là eigenvector của U.</p>
-</section>
-<section id="các-giai-đoạn" class="level2">
-<h2 class="anchored" data-anchor-id="các-giai-đoạn">Các giai đoạn</h2>
-<p><strong>Giai đoạn 1:</strong></p>
-<p>Ném các thông tin của varphi lên từng thanh t một. Ví dụ ta phân tích được là <span class="math inline">0.j_1j_2j_3...j_t</span> thì ta ném <span class="math inline">j_1</span> lên thanh 1, rồi từng cái. Bằng cách là Phase kickback, <span class="math inline">CU^{2^{i - 1}}</span>.</p>
-<p><strong>Giai đoạn 2:</strong></p>
-<p>Ta có thể thấy kết quả khi lấy từng cái thông tin của varphi khá là giống với (5.4), một phép biến đổi Fourier cơ bản. Vì vậy ta có thể thấy là:</p>
-<p><span class="math display">
-\vert \text{current} \rangle = FT \vert \varphi \rangle
-</span></p>
-<p><strong>Giai đoạn 3:</strong></p>
-<p>Nhưng mà chúng ta đo ra kết quả thế méo nào được? Thế là phải dùng (h5.1) của bài trước để đảo lại ket current.</p>
-<p>Trong hình (5.1) ở bài trước, ta có thể thấy một kiểu mạch biển đổi khác, từ trạng thái bình thường sang biến đổi Fourier, vì vậy giờ chúng ta sẽ đi ngược lại thời gian (và chắc chắn không đụng đến ket u).</p>
-<p>Và không sử dụng <span class="math inline">R_k</span> mà thay vào đó sử dụng <span class="math inline">R_k^\dagger</span>.</p>
-<p>Và việc áp dụng <span class="math inline">FT^\dagger</span> cho ra kết quả cuối cùng là <span class="math inline">\vert{}\tilde{\varphi}\rangle</span>, một kết quả hơi mờ nhòe của ket varphi.</p>
-</section>
 </div>
 </div>
+<p>Biến đổi Fourier là chìa khóa cho một quy trình tổng quát được gọi là ước lượng pha, thứ mà đến lượt nó lại là chìa khóa cho nhiều thuật toán lượng tử. Giả sử một toán tử unita <span class="math inline">U</span> có một vector riêng <span class="math inline">\vert{}u\rangle</span> với trị riêng <span class="math inline">e^{2\pi i \varphi}</span>, trong đó giá trị của <span class="math inline">\varphi</span> là chưa biết. Mục tiêu của thuật toán ước lượng pha là ước lượng <span class="math inline">\varphi</span>. Để thực hiện việc ước lượng, chúng ta giả định rằng chúng ta có sẵn các hộp đen (đôi khi được gọi là oracles) có khả năng chuẩn bị trạng thái <span class="math inline">\vert{}u\rangle</span> và thực hiện phép toán controlled-<span class="math inline">U^{2^j}</span>, đối với các số nguyên không âm <span class="math inline">j</span> phù hợp. Việc sử dụng các hộp đen chỉ ra rằng quy trình ước lượng pha không phải là một thuật toán lượng tử hoàn chỉnh theo đúng nghĩa của nó. Thay vào đó, bạn nên nghĩ về ước lượng pha như một loại ‘chương trình con’ (subroutine) hoặc ‘mô-đun’ mà khi được kết hợp với các chương trình con khác, có thể được sử dụng để thực hiện các tác vụ tính toán thú vị. Trong các ứng dụng cụ thể của quy trình ước lượng pha, chúng ta sẽ làm chính xác điều này, mô tả cách thức các phép toán hộp đen này được thực hiện, và kết hợp chúng với quy trình ước lượng pha để làm các tác vụ thực sự hữu ích. Tuy nhiên, trong thời điểm hiện tại, chúng ta sẽ tiếp tục tưởng tượng chúng như những hộp đen.</p>
+<hr>
 <p>Quy trình ước lượng pha lượng tử sử dụng hai thanh ghi (registers). Thanh ghi thứ nhất chứa <span class="math inline">t</span> qubit ban đầu ở trạng thái <span class="math inline">\vert{}0\rangle</span>. Cách chúng ta chọn <span class="math inline">t</span> phụ thuộc vào hai điều: số lượng chữ số có nghĩa (digits of accuracy) mà chúng ta mong muốn có được trong kết quả ước lượng cho <span class="math inline">\varphi</span>, và xác suất mà chúng ta muốn quy trình ước lượng pha thành công là bao nhiêu. Sự phụ thuộc của <span class="math inline">t</span> vào các đại lượng này xuất hiện một cách tự nhiên từ phân tích sau đây.</p>
 <p>Thanh ghi thứ hai bắt đầu ở trạng thái <span class="math inline">\vert{}u\rangle</span>, và chứa số lượng qubit vừa đủ cần thiết để lưu trữ <span class="math inline">\vert{}u\rangle</span>. Ước lượng pha được thực hiện theo hai giai đoạn. Đầu tiên, chúng ta áp dụng mạch được hiển thị ở Hình 5.2. Mạch bắt đầu bằng cách áp dụng một phép biến đổi Hadamard lên thanh ghi thứ nhất, tiếp theo là việc áp dụng các phép toán controlled-<span class="math inline">U</span> lên thanh ghi thứ hai, với <span class="math inline">U</span> được nâng lên các lũy thừa liên tiếp của 2. Trạng thái cuối cùng của thanh ghi thứ nhất dễ dàng thấy là:</p>
 <p><span class="math display">
@@ -761,35 +742,6 @@ t = n + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil. \t
 </div>
 </div>
 <p>Tại sao ước lượng pha lại thú vị? Tự bản thân nó, ước lượng pha giải quyết một bài toán vừa không tầm thường và thú vị từ quan điểm vật lý: làm thế nào để ước lượng trị riêng liên kết với một vector riêng cho trước của một toán tử unita. Tuy nhiên, công dụng thực sự của nó đến từ quan sát rằng các bài toán thú vị khác có thể được giản lược (reduced) về bài toán ước lượng pha, như sẽ được trình bày ở các phần tiếp theo. Thuật toán ước lượng pha được tóm tắt dưới đây.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>note thêm
-</div>
-</div>
-<section id="the-catch-22-of-pea" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="the-catch-22-of-pea">The Catch-22 of PEA</h2>
-<p>Ở hình (5.2) chúng ta yêu cầu tìm chính xác eigenvector của unitary U. Nhưng mà lỡ đối với các unitary U khó tìm eigenvector thì sao? hoặc việc tạo ra nó để cho máy tính cổ điển tìm cũng được?</p>
-<p><strong>Giải pháp</strong></p>
-<p>Hãy truyền một <span class="math inline">\vert \psi \rangle</span> bừa bất kỳ mà dễ dàng tạo ra được (ví dụ ket 1).</p>
-<p>Vì các vector riêng ket u tạo thành 1 cơ sở trực chuẩn, bất kỳ trạng thái ket psi nào cũng có thể được phân tích thành một tổ hợp tuyến tính của các vector riêng:</p>
-<p><span class="math display">
-\vert \psi \rangle = \sum c_u \vert u \rangle
-</span></p>
-<p>Nhờ tính tuyến tính của các cổng lượng tử, khi ket psi chạy qua mạch PEA, bộ máy sẽ không bị lỗi. Nó sẽ tính toán song song trên tất cả vector riêng cùng một lúc.</p>
-<p>Kết quả sẽ là trạng thái vướng víu khổng lồ:</p>
-<p><span class="math display">
-\sum c_u\vert{}\widetilde{\varphi_u}\rangle\vert{}u\rangle
-</span></p>
-<p><strong>Đo đạc</strong></p>
-<p>Khi bạn thực hiện đo trên thanh ghi 1, hàm sóng sụp đổ.</p>
-<p>Bạn sẽ ngẫu nhiên nhận một pha <span class="math inline">\varphi_u</span> nào đó, thuộc vào một vector riêng nào đó.</p>
-<p>Xác suất để bạn bốc trúng pha <span class="math inline">\varphi_u</span> đó tỉ lệ thuận với bình phương biên độ <span class="math inline">\vert c_u \vert ^2</span>.</p>
-</section>
-</div>
 <section id="algorithm-quantum-phase-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="algorithm-quantum-phase-estimation">Algorithm: Quantum phase estimation</h2>
 <p>Các đầu vào: (1) Một hộp đen thực hiện phép toán controlled-<span class="math inline">U^j</span>, đối với số nguyên <span class="math inline">j</span>, (2) một trạng thái riêng <span class="math inline">\vert{}u\rangle</span> của <span class="math inline">U</span> với trị riêng <span class="math inline">e^{2\pi i\varphi_u}</span>, và (3) <span class="math inline">t = n + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil</span> qubit được khởi tạo ở <span class="math inline">\vert{}0\rangle</span>.</p>
@@ -804,7 +756,7 @@ t = n + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil. \t
 <li><p><span class="math inline">\to \widetilde{\varphi_u}</span> (đo thanh ghi thứ nhất)</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -813,7 +765,7 @@ t = n + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil. \t
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Cho <span class="math inline">U</span> là một phép biến đổi unita với các trị riêng <span class="math inline">\pm 1</span>, tác động lên một trạng thái <span class="math inline">\vert{}\psi\rangle</span>. Sử dụng quy trình ước lượng pha, hãy xây dựng một mạch lượng tử để làm sụp đổ <span class="math inline">\vert{}\psi\rangle</span> vào một trong hai không gian riêng (eigenspaces) của <span class="math inline">U</span>, đồng thời đưa ra một chỉ báo cổ điển (classical indicator) cho biết trạng thái cuối cùng nằm ở không gian nào. So sánh kết quả của bạn với Bài tập 4.34.</p>
 </div>

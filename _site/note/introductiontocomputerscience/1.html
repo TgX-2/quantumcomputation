@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -620,6 +620,23 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Máy Turing hình thức hóa thuật toán: hữu hạn trạng thái, dải băng và lệnh <span class="math inline">\langle q,x,q',x',s\rangle</span>. Ví dụ xóa đầu vào rồi ghi <span class="math inline">1</span> tính <span class="math inline">f(x)=1</span>. Luận đề Church–Turing đồng nhất hàm máy Turing tính được với khái niệm trực giác về thuật toán; đây là luận đề, không phải định lý hình thức.</li>
+<li>Máy Turing vạn năng mô phỏng <span class="math inline">M(x)</span> từ mã máy <span class="math inline">T_M</span> và dữ liệu <span class="math inline">x</span>. Ngược lại, bài toán dừng chứng minh giới hạn: không thuật toán nào quyết định tổng quát máy có dừng hay không.</li>
+<li>Mô hình mạch phi tuần hoàn dùng cổng logic; half-adder cho tổng <span class="math inline">x\oplus y</span> và bit nhớ, full-adder cộng thêm carry, còn quy nạp chứng minh tính vạn năng cho hàm Boolean. Tương đương với máy Turing đòi hỏi họ mạch <strong>đồng nhất</strong>, tức có thuật toán sinh mạch theo kích thước đầu vào; họ không đồng nhất có thể mã hóa hàm dừng. FANOUT và các cổng không khả nghịch cũng không chuyển trực tiếp sang mạch lượng tử.</li>
+</ul>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘…algorithms are concepts that have existence apart from any programming language.’</em> – Donald Knuth</p>
 </blockquote>
@@ -674,7 +691,7 @@ window.Quarto = {
 <p>Luận đề Church–Turing khẳng định một sự tương đương giữa một khái niệm toán học chặt chẽ – hàm có thể tính toán được bằng máy Turing – và khái niệm trực quan về việc tính toán được bằng một thuật toán có ý nghĩa như thế nào. Luận đề này lấy được tầm quan trọng của nó từ thực tế là nó làm cho việc nghiên cứu các thuật toán trong thế giới thực, trước năm 1936 vốn là một khái niệm khá mơ hồ, trở nên có thể thích ứng với sự nghiên cứu toán học chặt chẽ. Để hiểu ý nghĩa của điểm này, có thể hữu ích khi xem xét định nghĩa của một hàm liên tục (continuous function) từ giải tích thực. Mọi đứa trẻ đều có thể nói cho bạn biết một đường liên tục trên một tờ giấy có ý nghĩa gì, nhưng làm thế nào để nắm bắt trực giác đó trong một định nghĩa chặt chẽ lại khác xa với sự hiển nhiên. Các nhà toán học vào thế kỷ mười chín đã dành rất nhiều thời gian tranh luận về ưu điểm của các định nghĩa khác nhau về tính liên tục trước khi định nghĩa hiện đại về tính liên tục được chấp nhận. Khi đưa ra các định nghĩa nền tảng như định nghĩa về tính liên tục hay khả năng tính toán, điều quan trọng là phải chọn được những định nghĩa tốt, đảm bảo rằng các khái niệm trực quan của một người khớp chặt chẽ với định nghĩa toán học chính xác. Từ quan điểm này, luận đề Church–Turing đơn giản là sự khẳng định rằng mô hình tính toán máy Turing cung cấp một nền tảng tốt cho khoa học máy tính, nắm bắt khái niệm trực quan của một thuật toán trong một định nghĩa chặt chẽ.</p>
 <p>Về mặt suy luận tiên nghiệm (A priori), không hiển nhiên rằng mọi hàm mà chúng ta theo trực giác coi là có thể tính toán được bằng một thuật toán đều có thể được tính toán bằng cách sử dụng một máy Turing. Church, Turing và nhiều người khác đã dành rất nhiều thời gian thu thập bằng chứng cho luận đề Church–Turing, và trong suốt sáu mươi năm không có bằng chứng phản bác nào được tìm thấy. Mặc dù vậy, có khả năng trong tương lai chúng ta sẽ khám phá ra trong Tự nhiên một quá trình tính toán một hàm không thể tính toán được trên một máy Turing. Sẽ thật tuyệt vời nếu điều đó từng xảy ra, bởi vì khi đó chúng ta có thể khai thác quá trình đó để giúp chúng ta thực hiện các tính toán mới không thể thực hiện được trước đây. Tất nhiên, chúng ta cũng sẽ cần phải đại tu lại định nghĩa về khả năng tính toán, và cùng với đó, toàn bộ ngành khoa học máy tính.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -683,14 +700,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Làm thế nào chúng ta có thể nhận ra rằng một quá trình trong Tự nhiên tính toán một hàm không thể tính toán được bởi một máy Turing?</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -699,7 +716,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng mỗi máy Turing một dải băng có thể được gán một số từ danh sách <span class="math inline">1, 2, 3, \dots</span> theo cách sao cho con số đó xác định duy nhất cỗ máy tương ứng. Chúng ta gọi con số này là số Turing của máy Turing tương ứng. (Gợi ý: Mọi số nguyên dương đều có một phân tích ra thừa số nguyên tố duy nhất <span class="math inline">p_1^{a_1} p_2^{a_2} \dots p_k^{a_k}</span>, trong đó <span class="math inline">p_i</span> là các số nguyên tố phân biệt, và <span class="math inline">a_1, \dots, a_k</span> là các số nguyên không âm.)</p>
 </div>
@@ -713,7 +730,7 @@ window.Quarto = {
 <p>Máy Turing cơ bản và máy Turing hai dải băng là những mô hình tính toán tương đương nhau theo nghĩa mô hình này có thể mô phỏng (simulate) mô hình kia. Giả sử ta có một máy hai dải băng tính toán hàm <span class="math inline">f(x)</span> dựa trên đầu vào <span class="math inline">x</span> ở dải băng thứ nhất. Đáng ngạc nhiên là luôn tồn tại một máy một dải băng tương đương cũng có khả năng tính toán hàm <span class="math inline">f</span> đó. Ý tưởng cơ bản là máy một dải băng sẽ mô phỏng máy hai dải băng bằng cách dùng dải băng duy nhất của nó để lưu trữ nội dung của cả hai dải băng kia. Việc mô phỏng này đòi hỏi một mức chi phí tính toán phụ (computational overhead), nhưng điểm quan trọng là về nguyên tắc nó luôn có thể thực hiện được. Thực tế, tồn tại một máy Turing Vạn năng (Universal Turing machine) có thể mô phỏng bất kỳ máy Turing nào khác!</p>
 <p>Một biến thể thú vị khác của mô hình máy Turing là đưa sự ngẫu nhiên (randomness) vào mô hình. Ví dụ, máy có thể thực thi một dòng lệnh với hiệu ứng như sau: nếu trạng thái bên trong là <span class="math inline">q</span> và đầu đọc thấy <span class="math inline">x</span>, hãy tung một đồng xu không thiên lệch. Nếu ra ngửa, chuyển trạng thái thành <span class="math inline">q_{i_H}</span>, nếu ra sấp, chuyển thành <span class="math inline">q_{i_T}</span>. Dòng lệnh này có dạng <span class="math inline">\langle q, x, q_{i_H}, q_{i_T} \rangle</span>. Tuy nhiên, ngay cả biến thể này cũng không làm thay đổi sức mạnh thiết yếu của mô hình tính toán máy Turing. Một máy Turing tất định (deterministic) hoàn toàn có thể mô phỏng lại thuật toán trên bằng cách “tìm kiếm vét cạn” (searching out) tất cả các nhánh đường dẫn tính toán có thể xảy ra tương ứng với các giá trị tung đồng xu khác nhau. Việc mô phỏng tất định này có thể kém hiệu quả hơn nhiều so với mô hình ngẫu nhiên, nhưng điểm mấu chốt là lớp các hàm tính toán được không hề thay đổi khi đưa sự ngẫu nhiên vào mô hình cơ sở.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -722,14 +739,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Mô tả một máy Turing nhận đầu vào là một số nhị phân <span class="math inline">x</span>, và xuất ra các bit của <span class="math inline">x</span> theo thứ tự đảo ngược. (Gợi ý: Trong bài tập này và bài tập tiếp theo, có thể hữu ích nếu sử dụng máy Turing nhiều dải băng và/hoặc các ký hiệu khác ngoài <span class="math inline">\triangleright, 0, 1</span> và khoảng trống.)</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -738,7 +755,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Mô tả một máy Turing cộng hai số nhị phân <span class="math inline">x</span> và <span class="math inline">y</span> theo modulo 2. Các con số được nhập vào dải băng dưới dạng nhị phân, theo định dạng <span class="math inline">x</span>, theo sau là một khoảng trống, theo sau là <span class="math inline">y</span>. Nếu một số không dài bằng số kia thì bạn có thể giả sử nó đã được đệm thêm các số 0 ở đầu để làm cho hai số có cùng độ dài</p>
 </div>
@@ -767,7 +784,7 @@ window.Quarto = {
 <p>Hãy quay trở lại với entscheidungsproblem (bài toán quyết định) của Hilbert, nguồn cảm hứng ban đầu cho những người sáng lập ra khoa học máy tính. Có tồn tại một thuật toán nào để quyết định tất cả các bài toán của toán học không? Câu trả lời cho câu hỏi này đã được Church và Turing chứng minh là không. Trong Hộp 3.2, chúng tôi giải thích chứng minh của Turing cho sự thật đáng chú ý này. Hiện tượng không thể quyết định được (undecidability) này ngày nay được biết là mở rộng vượt xa những ví dụ mà Church và Turing đã xây dựng. Chẳng hạn, người ta đã biết rằng bài toán quyết định xem hai không gian tô pô có tương đương tô pô (‘đồng phôi’ - homeomorphic) với nhau hay không là không thể quyết định được. Có những bài toán đơn giản liên quan đến hành vi của các hệ động lực học cũng không thể quyết định được, như bạn sẽ chứng minh trong Bài toán 3.4. Các tài liệu tham khảo cho những ví dụ này và các ví dụ khác được đưa ra ở phần cuối chương ‘Lịch sử và đọc thêm’.</p>
 <p>Bên cạnh sự thú vị nội tại của nó, tính không thể quyết định còn báo trước một chủ đề nhận được sự quan tâm rất lớn trong khoa học máy tính, cũng như đối với tính toán lượng tử và thông tin lượng tử: sự phân biệt giữa những bài toán dễ giải, và những bài toán khó giải. Tính không thể quyết định cung cấp ví dụ tối thượng về những bài toán khó giải – khó đến mức trên thực tế chúng là bất khả thi để giải.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -776,25 +793,9 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Chứng minh rằng cho trước một máy Turing <span class="math inline">M</span>, không có thuật toán nào để xác định xem liệu <span class="math inline">M</span> có dừng lại hay không khi đầu vào của máy là một dải băng trống.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.6: (Bài toán dừng xác suất)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Giả sử chúng ta đánh số các máy Turing xác suất bằng cách sử dụng một sơ đồ tương tự như sơ đồ được tìm thấy trong Bài tập 3.2 và định nghĩa hàm dừng xác suất <span class="math inline">h_p(x)</span> là <span class="math inline">1</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất ít nhất là <span class="math inline">1/2</span> và là <span class="math inline">0</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất nhỏ hơn <span class="math inline">1/2</span>. Chứng minh rằng không có máy Turing xác suất nào có thể xuất ra <span class="math inline">h_p(x)</span> với xác suất chính xác lớn hơn hẳn <span class="math inline">1/2</span> đối với mọi <span class="math inline">x</span>.</p>
+<p>Chứng minh rằng cho trước một máy Turing <span class="math inline">M</span>, không có thuật toán nào để xác định xem liệu <span class="math inline">M</span> có dừng lại hay không khi đầu vào của máy là một dải băng trống.</p>
 </div>
 </div>
 </div>
@@ -804,11 +805,27 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.7: (Oracle dừng)
+<span class="screen-reader-only">Note</span>Bài tập 3.6: (Bài toán dừng xác suất)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta đánh số các máy Turing xác suất bằng cách sử dụng một sơ đồ tương tự như sơ đồ được tìm thấy trong Bài tập 3.2 và định nghĩa hàm dừng xác suất <span class="math inline">h_p(x)</span> là <span class="math inline">1</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất ít nhất là <span class="math inline">1/2</span> và là <span class="math inline">0</span> nếu máy <span class="math inline">x</span> dừng trên đầu vào là <span class="math inline">x</span> với xác suất nhỏ hơn <span class="math inline">1/2</span>. Chứng minh rằng không có máy Turing xác suất nào có thể xuất ra <span class="math inline">h_p(x)</span> với xác suất chính xác lớn hơn hẳn <span class="math inline">1/2</span> đối với mọi <span class="math inline">x</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.7: (Oracle dừng)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử một hộp đen (black box) được cung cấp cho chúng ta, nó nhận một số nguyên không âm <span class="math inline">x</span> làm đầu vào, và sau đó xuất ra giá trị của <span class="math inline">h(x)</span>, trong đó <span class="math inline">h(\cdot)</span> là hàm dừng được định nghĩa trong Hộp 3.2 ở trang 130. Loại hộp đen này đôi khi được gọi là một oracle (nhà tiên tri) cho bài toán dừng. Giả sử chúng ta có một máy Turing thông thường được tăng cường thêm khả năng gọi oracle này. Một cách để hoàn thành việc này là sử dụng một máy Turing hai dải băng, và thêm một lệnh chương trình bổ sung vào máy Turing, dẫn đến việc oracle được gọi, và giá trị của <span class="math inline">h(x)</span> được in lên dải băng thứ hai, trong đó <span class="math inline">x</span> là nội dung hiện tại của dải băng thứ hai. Rõ ràng là mô hình tính toán này mạnh mẽ hơn mô hình máy Turing thông thường, vì nó có thể được sử dụng để tính toán hàm dừng. Bài toán dừng cho mô hình tính toán này có không thể quyết định được không? Tức là, một máy Turing được hỗ trợ bởi một oracle cho bài toán dừng có thể quyết định liệu một chương trình dành cho máy Turing có oracle có dừng lại trên một đầu vào cụ thể hay không?</p>
 </div>
@@ -839,7 +856,7 @@ window.Quarto = {
 <p><img src="../../img/3.8.png" class="img-fluid"></p>
 <p>Có thể xác định năm phần tử trong cấu trúc mạch vạn năng này: (1) dây dẫn (wires), bảo tồn trạng thái của các bit; (2) bit ancilla được chuẩn bị ở các trạng thái chuẩn, được dùng trong trường hợp chứng minh <span class="math inline">n = 1</span>; (3) phép toán FANOUT, nhận một bit duy nhất làm đầu vào và xuất ra hai bản sao của bit đó; (4) phép toán CROSSOVER, hoán đổi giá trị của hai bit; và (5) các cổng AND, XOR, và NOT. Trong Chương 4, chúng ta sẽ định nghĩa mô hình tính toán mạch lượng tử theo một cách tương tự như các mạch cổ điển. Một điều thú vị cần lưu ý là nhiều phần tử trong số năm phần tử này đặt ra những thách thức thú vị khi mở rộng sang trường hợp lượng tử: không hoàn toàn hiển nhiên rằng các dây dẫn lượng tử tốt để bảo tồn qubit có thể được xây dựng, ngay cả về mặt nguyên tắc, phép toán FANOUT không thể được thực hiện một cách trực tiếp trong cơ học lượng tử, do định lý không sao chép (no-cloning theorem) (như đã giải thích trong Mục 1.3.5), và các cổng AND và XOR là không thể đảo ngược (not invertible), và do đó không thể được triển khai một cách trực tiếp dưới dạng các cổng lượng tử unitary. Chắc chắn có rất nhiều điều để suy nghĩ trong việc định nghĩa một mô hình mạch tính toán lượng tử!</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -848,7 +865,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng cổng NAND có thể được sử dụng để mô phỏng các cổng AND, XOR và NOT, với điều kiện là các dây dẫn, bit ancilla và FANOUT đều có sẵn</p>
 </div>

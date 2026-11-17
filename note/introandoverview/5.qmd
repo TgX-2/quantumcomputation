@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Thí nghiệm Stern–Gerlach cho thấy spin có hai kết quả rời rạc và phép đo theo các trục khác nhau liên hệ qua các cơ sở lượng tử, cung cấp bằng chứng thực nghiệm cho mô hình qubit. Để xây dựng bộ xử lý lượng tử thực tế, hai mối quan tâm lớn là nhiễu và khả năng cơ học lượng tử không còn đúng ở quy mô lớn. Định lý ngưỡng cho biết sửa lỗi lượng tử có thể khắc phục nhiễu dưới những giả định nhất định, còn thí nghiệm quy mô lớn cũng giúp kiểm tra các quy luật vật lý.
+
+Các hướng ứng dụng trải từ chụp cắt lớp trạng thái/quá trình, phân phối khóa lượng tử và truyền trạng thái bằng vướng víu, đến mô phỏng lượng tử và các thuật toán quy mô lớn như Shor, logarit rời rạc và Grover. Những nền tảng phần cứng được khảo sát gồm quang tử, bẫy ion/nguyên tử trung hòa và cộng hưởng từ hạt nhân; mỗi nền tảng có ưu, nhược điểm riêng. Chưa có một hệ thống đơn lẻ hội tụ đủ mọi ưu điểm, nên các thiết kế lai và tiến bộ theo từng quy mô là những hướng đáng chú ý.
+:::
+
 :::{.callout}
 * [Stern-Gerlach experiment](https://en.wikipedia.org/wiki/Stern%E2%80%93Gerlach_experiment)
 * [Ion trap](https://en.wikipedia.org/wiki/Ion_trap)

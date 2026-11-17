@@ -11,6 +11,12 @@ format:
 ---
 
 :::{.callout-note}
+# tl;dr
+
+Mã hóa siêu đặc cho phép Alice truyền hai bit cổ điển bằng cách gửi một qubit, với điều kiện Alice và Bob đã chia sẻ trước một cặp qubit vướng víu. Cặp Bell ban đầu là $|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt2$, Alice giữ qubit đầu và Bob giữ qubit thứ hai. Để mã hóa $00,01,10,11$, Alice lần lượt áp dụng $I,Z,X,iY$ lên qubit của mình; kết quả là bốn trạng thái Bell trực giao: $\Phi^+$, $\Phi^-=(|00\rangle-|11\rangle)/\sqrt2$, $\Psi^+=(|10\rangle+|01\rangle)/\sqrt2$ và $\Psi^-=(|01\rangle-|10\rangle)/\sqrt2$. Sau khi Alice gửi qubit của mình, Bob sở hữu cả hai qubit và phân biệt các trạng thái bằng phép đo trong cơ sở Bell. Như vậy, giao thức kết hợp tiến hóa unita, vướng víu và phép đo để chuyển thông tin cổ điển. Lợi thế không phải là gửi thông tin miễn phí hay vượt giới hạn cổ điển khi tính cả tài nguyên: cần chuẩn bị và phân phối vướng víu từ trước, rồi mới gửi qubit vật lý. Bối cảnh so sánh là Alice chỉ được gửi một qubit trong khi muốn truyền hai bit.
+:::
+
+:::{.callout-note}
 # Siêu phế
 
 nói chung là vậy, không có ích gì cả.

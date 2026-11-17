@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -619,6 +619,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Trang này đặt câu hỏi máy tính lượng tử hữu ích ở đâu và giới thiệu hai họ thuật toán. QFT dẫn tới tìm chu kỳ, bài toán nhóm con ẩn, phân tích thừa số và logarit rời rạc; thuật toán Shor vì thế đe dọa mật mã khóa công khai như RSA. Grover tăng tốc bậc hai cho tìm kiếm không cấu trúc, với ứng dụng tìm cực trị, ước lượng thống kê, đếm nghiệm và vét khóa đối xứng. Một số bài toán NP có thể được tăng tốc khi tìm kiếm trực tiếp là phương pháp tốt nhất đã biết, nhưng điều đó không làm NP-complete trở nên dễ nói chung. Đếm lượng tử kết hợp tìm kiếm với QFT để ước lượng số nghiệm. Các lợi thế nêu ở đây so sánh với thuật toán cổ điển tốt nhất đã biết; chúng không có nghĩa bài toán vốn bất khả thi trên máy cổ điển. Vì sáng tạo thuật toán lượng tử khó và trực giác cổ điển thường không đủ, chương kế tiếp giới thiệu mạch lượng tử và cách đo chi phí bằng số cổng, độ sâu.</p>
+</div>
+</div>
 <section id="quantum-algorithms" class="level1">
 <h1>1. Quantum Algorithms</h1>
 <p><strong>Một máy tính lượng tử hữu ích cho việc gì?</strong></p>
@@ -628,53 +641,11 @@ window.Quarto = {
 <li><p>Lớp thuật toán thứ nhất dựa trên biến đổi Fourier lượng tử (quantum Fourier transform) của Shor, và bao gồm các thuật toán đáng chú ý để giải quyết các bài toán phân tích thừa số nguyên tố (factoring) và logarit rời rạc (discrete logarithm), mang lại một sự tăng tốc theo hàm mũ (exponential speedup) nổi bật so với các thuật toán cổ điển tốt nhất được biết đến.</p></li>
 <li><p>Lớp thuật toán thứ hai dựa trên thuật toán của Grover để thực hiện tìm kiếm lượng tử (quantum searching). Chúng mang lại sự tăng tốc bậc hai (quadratic speedup) ít nổi bật hơn nhưng vẫn đáng kinh ngạc so với các thuật toán cổ điển khả dĩ tốt nhất. Thuật toán tìm kiếm lượng tử có được tầm quan trọng từ việc sử dụng rộng rãi các kỹ thuật dựa trên tìm kiếm trong các thuật toán cổ điển, điều mà trong nhiều trường hợp cho phép một sự điều chỉnh trực tiếp từ thuật toán cổ điển để tạo ra một thuật toán lượng tử nhanh hơn.</p></li>
 </ul>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Tại sao lại cần máy tính lượng tử?</p>
-<p>Cả hai lớp bài toán trên đều có thể giải quyết trên máy Turing cổ điển, việc chúng ta dùng máy tính lượng tử cốt chỉ để phân bổ lại tài nguyên tính toán bằng cách lợi dụng không gian Hilbert và sự giao thoa để vượt qua các rào cản tài nguyên.</p>
-</div>
-</div>
 <hr>
 <p>Hình 4.1 phác họa trạng thái kiến thức về các thuật toán lượng tử tại thời điểm viết sách, bao gồm một số ứng dụng mẫu của các thuật toán đó. Đương nhiên, ở cốt lõi của sơ đồ là biến đổi Fourier lượng tử và thuật toán tìm kiếm lượng tử. Đáng chú ý đặc biệt trong hình là thuật toán đếm lượng tử (quantum counting algorithm). Thuật toán này là sự kết hợp khéo léo giữa các thuật toán tìm kiếm lượng tử và biến đổi Fourier, có thể được sử dụng để ước tính số lượng nghiệm của một bài toán tìm kiếm nhanh hơn mức có thể trên một máy tính cổ điển.</p>
 <p>Thuật toán tìm kiếm lượng tử có nhiều ứng dụng tiềm năng, trong đó chỉ một vài ứng dụng được minh họa. Nó có thể được sử dụng để trích xuất các số liệu thống kê, chẳng hạn như phần tử nhỏ nhất, từ một tập dữ liệu không có thứ tự, nhanh hơn mức có thể trên một máy tính cổ điển. Nó có thể được sử dụng để tăng tốc các thuật toán cho một số bài toán thuộc lớp <span class="math inline">\mathbf{NP}</span> — cụ thể là những bài toán mà phương pháp tìm kiếm nghiệm trực tiếp (straightforward search) là thuật toán tốt nhất được biết đến. Cuối cùng, nó có thể được sử dụng để tăng tốc quá trình tìm kiếm khóa đối với các hệ thống mật mã chẳng hạn như Tiêu chuẩn Mã hóa Dữ liệu (DES) được sử dụng rộng rãi. Những ứng dụng này và các ứng dụng khác được giải thích trong Chương 6.</p>
 <p><img src="../../img/4.1.png" class="img-fluid"> (Hình 4.1. Các thuật toán lượng tử chính và các mối quan hệ giữa chúng, bao gồm một số ứng dụng nổi bật.)</p>
 <p>Biến đổi Fourier lượng tử cũng có nhiều ứng dụng thú vị. Nó có thể được sử dụng để giải quyết các bài toán logarit rời rạc và phân tích thừa số nguyên tố. Những kết quả này, đến lượt chúng, cho phép một máy tính lượng tử phá vỡ nhiều hệ thống mật mã phổ biến nhất hiện đang được sử dụng, bao gồm hệ thống mật mã RSA. Biến đổi Fourier cũng hóa ra có liên quan chặt chẽ đến một bài toán quan trọng trong toán học, bài toán tìm nhóm con ẩn (tìm kiếm chu kỳ của một hàm tuần hoàn là một trường hợp tổng quát của bài toán này). Biến đổi Fourier lượng tử và một số ứng dụng của nó, bao gồm các thuật toán lượng tử nhanh cho bài toán phân tích thừa số nguyên tố và logarit rời rạc, được giải thích trong Chương 5.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Thuật toán Tìm kiếm - Grover’s Search</li>
-</ol>
-<p>Nó là một thuật toán giúp tăng tốc bậc hai cho các bài tối ưu hóa.</p>
-<ul>
-<li><p>Thống kê: Tìm Max/Min hoặc tìm Mean của một hàm số phức tạp mà không cần tính toán hàm đó tại mọi điểm.</p></li>
-<li><p>Tấn công Mật mã đối xứng: Với chuẩn mã hóa DES (hoặc AES hiện nay), thuật toán tốt nhất của máy cổ điển là thử từng khóa một.</p></li>
-<li><p>Tăng tốt các bài toán NP.</p></li>
-</ul>
-<ol start="2" type="1">
-<li>Thuật toán biến đổi Fourier lượng tử - QFT - Shor’s algo</li>
-</ol>
-<ul>
-<li><p>Bài toán nhóm con ẩn (hidden subgroup problem): đây là bài toán gốc rễ của QFT, QFT cực kỳ xuất sắc trong việc phân tích các hàm có tính chu kỳ ẩn.</p></li>
-<li><p>Tấn công Mật mã bất đối xứng: RSA, ECC.</p></li>
-</ul>
-</div>
-</div>
 <hr>
 <p><strong>Tại sao lại có quá ít thuật toán lượng tử được biết đến là tốt hơn các bản sao cổ điển của chúng?</strong></p>
 <p>Câu trả lời là việc nghĩ ra các thuật toán lượng tử tốt dường như là một bài toán khó. Có ít nhất hai lý do cho điều này. Thứ nhất, thiết kế thuật toán, dù là cổ điển hay lượng tử, đều không phải là một công việc dễ dàng! Lịch sử của các thuật toán cho chúng ta thấy rằng thường đòi hỏi sự khéo léo đáng kể để nghĩ ra các thuật toán gần như tối ưu, ngay cả đối với những bài toán dường như rất đơn giản, như phép nhân hai số. Việc tìm kiếm các thuật toán lượng tử tốt trở nên khó khăn gấp đôi bởi vì có thêm một ràng buộc là chúng ta muốn các thuật toán lượng tử của mình phải tốt hơn các thuật toán cổ điển tốt nhất được biết đến. Lý do thứ hai cho sự khó khăn trong việc tìm kiếm các thuật toán lượng tử tốt là trực giác của chúng ta thích nghi với thế giới cổ điển tốt hơn nhiều so với thế giới lượng tử. Nếu chúng ta suy nghĩ về các bài toán bằng trực giác bẩm sinh của mình, thì những thuật toán mà chúng ta nghĩ ra sẽ là các thuật toán cổ điển. Cần có những hiểu biết sâu sắc đặc biệt và những thủ thuật đặc biệt để nghĩ ra các thuật toán lượng tử tốt.</p>

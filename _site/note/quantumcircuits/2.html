@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -621,6 +621,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mục này mô tả mọi cổng một qubit bằng ma trận unita (2), bắt đầu với Pauli (X,Y,Z), Hadamard (H), phase (S) và (T); pha toàn cục không làm thay đổi kết quả quan sát, nên (T) tương đương (R_z(/4)) tới pha đó. Trạng thái ((/2)|0+e^{i}(/2)|1) được biểu diễn bằng vector trên mặt cầu Bloch; các phép quay (R_{n}()=e^{-in/2}) quay vector Bloch quanh trục (n). Định lý Euler cho biết mọi cổng một qubit có dạng (e^{i}R_z()R_y()R_z()), và các phân rã tương đương theo những trục không song song cũng dùng được. Hệ quả (U=e^{i}AXBXC), với (ABC=I), là công cụ then chốt để dựng cổng có điều khiển; các đồng nhất thức như (HXH=Z) giải thích đổi cơ sở. Ví dụ và bài tập áp dụng các ý này để xác định trạng thái riêng, phân rã (H,S,T), và hợp thành các phép quay; cần lưu ý rằng tham số hóa không duy nhất do các góc và pha toàn cục.</p>
+</div>
+</div>
 <p>Việc phát triển hộp công cụ tính toán lượng tử của chúng ta bắt đầu bằng các phép toán trên hệ lượng tử đơn giản nhất trong tất cả — một qubit đơn lẻ. Các cổng một qubit đã được giới thiệu trong Mục 1.3.1. Hãy cùng tóm tắt nhanh những gì chúng ta đã học ở đó; bạn có thể thấy hữu ích khi tham khảo các ghi chú về ký hiệu ở trang xxiii khi chúng ta tiến hành.Một qubit đơn lẻ là một vector <span class="math inline">\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle</span> được tham số hóa bởi hai số phức thỏa mãn <span class="math inline">\vert{}a\vert{}^2 + \vert{}b\vert{}^2 = 1</span>. Các phép toán trên một qubit phải bảo toàn chuẩn (norm) này, và do đó được mô tả bởi các ma trận unita <span class="math inline">2 \times 2</span>. Trong số này, một số ma trận quan trọng nhất là các ma trận Pauli; thật hữu ích khi liệt kê lại chúng ở đây:</p>
 <p><span class="math display">
 X = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}; \quad Y = \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix}; \quad Z = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix}. \tag{4.1}
@@ -787,8 +800,7 @@ R_zR_xR_z = \begin{bmatrix} \exp(-i\pi/4) &amp; 0 \\ 0 &amp; \exp(i\pi/4) \end{b
 \begin{bmatrix} \exp(-i\pi/4) &amp; 0 \\ 0 &amp; \exp(i\pi/4) \end{bmatrix}
 </span></p>
 <p><span class="math display">
-= \begin{bmatrix} \exp(-i\pi/4) &amp; 0 \\ 0 &amp; \exp(i\pi/4) \end{bmatrix}
-\frac 1 {\sqrt 2} \begin{bmatrix} \exp(-i\pi/4) &amp; -i\exp(i\pi/4) \\ -i\exp(-i\pi/4) &amp; \exp(i\pi/4) \end{bmatrix}
+= \begin{bmatrix} \exp(-i\pi/4) &amp; 0 \\ 0 &amp; \exp(i\pi/4) \end{bmatrix} \frac 1 {\sqrt 2} \begin{bmatrix} \exp(-i\pi/4) &amp; -i\exp(i\pi/4) \\ -i\exp(-i\pi/4) &amp; \exp(i\pi/4) \end{bmatrix}
 </span></p>
 <p><span class="math display">
 = \frac 1 {\sqrt 2} \begin{bmatrix} \exp(-i\pi/2) &amp; -i \\ -i &amp; \exp(i\pi/2) \end{bmatrix}
@@ -812,7 +824,7 @@ R_{\hat{n}}(\theta) \equiv \exp(-i\theta \hat{n} \cdot \vec{\sigma} / 2) = \cos\
 </span></p>
 <p>trong đó <span class="math inline">\vec{\sigma}</span> biểu diễn vector ba thành phần <span class="math inline">(X, Y, Z)</span> gồm các ma trận Pauli.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -821,7 +833,7 @@ R_{\hat{n}}(\theta) \equiv \exp(-i\theta \hat{n} \cdot \vec{\sigma} / 2) = \cos\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng <span class="math inline">(\hat{n} \cdot \vec{\sigma})^2 = I</span>, và sử dụng điều này để kiểm chứng Phương trình (4.8).</p>
 <hr>
@@ -849,7 +861,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -858,7 +870,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Một lý do tại sao các toán tử <span class="math inline">R_{\hat{n}}(\theta)</span> được gọi là các toán tử quay là sự thật sau đây, điều mà bạn phải chứng minh.</p>
 <p>Giả sử một qubit đơn lẻ có một trạng thái được biểu diễn bởi vector Bloch <span class="math inline">\vec{\lambda}</span>. Khi đó tác động của phép quay <span class="math inline">R_{\hat{n}}(\theta)</span> lên trạng thái là quay nó một góc <span class="math inline">\theta</span> quanh trục <span class="math inline">\hat{n}</span> của mặt cầu Bloch. Sự thật này giải thích cho hệ số hai trông khá bí ẩn trong định nghĩa của các ma trận quay.</p>
@@ -867,7 +879,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -876,7 +888,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng <span class="math inline">XYX = -Y</span> và sử dụng điều này để chứng minh rằng <span class="math inline">XR_y(\theta)X = R_y(-\theta)</span>.</p>
 <hr>
@@ -891,7 +903,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -900,7 +912,7 @@ N^2 = (n_x^2 + n_y^2 + n_z^2) I = 1 \cdot I = I
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Một toán tử unita một qubit tùy ý có thể được viết dưới dạng</p>
 <p><span class="math display">
@@ -1010,7 +1022,7 @@ U = \begin{bmatrix} e^{i(\alpha-\beta/2-\delta/2)} \cos\frac{\gamma}{2} &amp; -e
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1019,7 +1031,7 @@ U = \begin{bmatrix} e^{i(\alpha-\beta/2-\delta/2)} \cos\frac{\gamma}{2} &amp; -e
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giải thích tại sao bất kỳ toán tử unita một qubit nào cũng có thể được viết dưới dạng (4.12).</p>
 <hr>
@@ -1040,7 +1052,7 @@ R_z(\beta)R_y(\gamma)R_z(\delta) = \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &a
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1049,7 +1061,7 @@ R_z(\beta)R_y(\gamma)R_z(\delta) = \begin{bmatrix} e^{-i\beta/2} &amp; 0 \\ 0 &a
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Hãy đưa ra một cách phân rã tương tự như Định lý 4.1 nhưng sử dụng <span class="math inline">R_x</span> thay vì <span class="math inline">R_z</span>.</p>
 <hr>
@@ -1080,7 +1092,7 @@ U = e^{i\alpha'}R_x(\beta)R_y(-\gamma)R_x(\delta)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1089,7 +1101,7 @@ U = e^{i\alpha'}R_x(\beta)R_y(-\gamma)R_x(\delta)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">\hat{m}</span> và <span class="math inline">\hat{n}</span> là các vector đơn vị thực không song song trong không gian ba chiều. Sử dụng Định lý 4.1 để chứng minh rằng một toán tử unita một qubit tùy ý <span class="math inline">U</span> có thể được viết là</p>
 <p><span class="math display">
@@ -1132,7 +1144,7 @@ AXBXC = R_z(\beta)R_y\left(\frac{\gamma}{2}\right) R_y\left(\frac{\gamma}{2}\rig
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1141,27 +1153,9 @@ AXBXC = R_z(\beta)R_y\left(\frac{\gamma}{2}\right) R_y\left(\frac{\gamma}{2}\rig
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Đưa ra <span class="math inline">A, B, C</span>, và <span class="math inline">\alpha</span> cho cổng Hadamard.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.13: (Các đồng nhất thức mạch - Circuit identities)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Rất hữu ích khi có thể đơn giản hóa các mạch bằng cách quan sát, sử dụng các đồng nhất thức phổ biến. Chứng minh ba đồng nhất thức sau: <span class="math display">
-HXH = Z; \quad HYH = -Y; \quad HZH = X. \tag{4.18}
-</span></p>
+<p>Đưa ra <span class="math inline">A, B, C</span>, và <span class="math inline">\alpha</span> cho cổng Hadamard.</p>
 </div>
 </div>
 </div>
@@ -1171,13 +1165,15 @@ HXH = Z; \quad HYH = -Y; \quad HZH = X. \tag{4.18}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.14:
+<span class="screen-reader-only">Note</span>Bài tập 4.13: (Các đồng nhất thức mạch - Circuit identities)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Sử dụng bài tập trước để chứng minh rằng <span class="math inline">HTH = R_x(\pi/4)</span>, bỏ qua một pha toàn cục.</p>
+<p>Rất hữu ích khi có thể đơn giản hóa các mạch bằng cách quan sát, sử dụng các đồng nhất thức phổ biến. Chứng minh ba đồng nhất thức sau: <span class="math display">
+HXH = Z; \quad HYH = -Y; \quad HZH = X. \tag{4.18}
+</span></p>
 </div>
 </div>
 </div>
@@ -1187,11 +1183,27 @@ HXH = Z; \quad HYH = -Y; \quad HZH = X. \tag{4.18}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.15: (Kết hợp các phép toán một qubit - Composition of single qubit operations)
+<span class="screen-reader-only">Note</span>Bài tập 4.14:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sử dụng bài tập trước để chứng minh rằng <span class="math inline">HTH = R_x(\pi/4)</span>, bỏ qua một pha toàn cục.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.15: (Kết hợp các phép toán một qubit - Composition of single qubit operations)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Biểu diễn Bloch cung cấp một cách tuyệt vời để hình dung tác động của việc kết hợp hai phép quay.</p>
 <ol type="1">
@@ -1217,28 +1229,6 @@ s_{12}\hat{n}_{12} = sc(\hat{z} + \hat{n}_2) - s^2 \hat{n}_2 \times \hat{z}, \ta
 </div>
 <p>Các ký hiệu cho các cổng một qubit phổ biến được thể hiện trong Hình 4.2. Nhắc lại các thuộc tính cơ bản của mạch lượng tử: thời gian trôi từ trái sang phải; các đường dây (wires) biểu diễn qubit, và dấu ‘/’ có thể được sử dụng để chỉ một chùm qubit.</p>
 <p><img src="../../img/4.2.png" class="img-fluid"></p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="sức-mạnh-của-hệ-quả-4.2" class="level1">
-<h1>Sức mạnh của Hệ quả 4.2</h1>
-<p>Giả sử muốn thiết kế một cổng Controlled-U bất kỳ (controlled-u tức là nếu thanh điều khiển là 1 thì áp dụng cổng u lên thanh mục tiêu, nếu thanh điều khiển là 0 thì không làm gì cả). Thật là bất tiện khi phải chế tạo từng controlled-u riêng cho từng loại U khác nhau.</p>
-<p>Vì vậy chúng ta chỉ cần tìm cổng A, B, C và alpha tương ứng, sao cho ABC = I.</p>
-</section>
-<section id="phép-chuyển-đổi-cơ-sở" class="level1">
-<h1>Phép chuyển đổi cơ sở</h1>
-<p>Đồng nhất thức <span class="math inline">HXH = Z</span> và <span class="math inline">HZH = X</span> khá là mạnh. Việc kẹp như vậy có thể làm cho từ cơ sở tính toán ban đầu là <span class="math inline">\vert 0 \rangle, \vert 1 \rangle</span> thành <span class="math inline">\vert + \rangle, \vert - \rangle</span>, …</p>
-<p>Khi kẹp cổng Pauli-Z vào giữa hai cổng Hadamard, nó sẽ hoạt động y hệt cổng Pauli-X trên cơ sở mới.</p>
-</section>
-</div>
-</div>
 
 
 

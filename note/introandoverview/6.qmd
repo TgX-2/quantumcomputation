@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Lý thuyết thông tin lượng tử nghiên cứu ba điều: tài nguyên tĩnh (bit, qubit, trạng thái Bell), các quá trình động (lưu trữ, truyền, sao chép, sửa lỗi) và sự đánh đổi tài nguyên để thực hiện chúng. Nó kế thừa lý thuyết Shannon về entropy, nén và dung lượng kênh; với nguồn lượng tử, định lý Schumacher dùng entropy von Neumann để mô tả giới hạn nén, còn dung lượng các kênh lượng tử có nhiễu vẫn chứa những câu hỏi mở.
+
+Các hiện tượng riêng của lượng tử làm thay đổi cách truyền và xử lý thông tin: mã hóa siêu đặc truyền hai bit cổ điển bằng một qubit khi có sẵn vướng víu; các trạng thái không trực giao không thể phân biệt hoàn hảo, giúp lý giải giới hạn truyền tin và gợi ý tiền lượng tử; vướng víu có thể được tạo, biến đổi và đôi khi làm các kênh riêng lẻ dung lượng bằng không truyền được thông tin khi kết hợp thích hợp. Những bài toán về tài nguyên vướng víu, kênh lượng tử và mạng lượng tử vẫn là chủ đề nghiên cứu mở, đồng thời giúp làm rõ nguồn gốc sức mạnh và giới hạn của xử lý lượng tử.
+:::
+
 
 Thuật ngữ ***"quantum information"*** "thông tin lượng tử" được sử dụng theo hai cách khác nhau trong lĩnh vực tính toán lượng tử và thông tin lượng tử. 
 

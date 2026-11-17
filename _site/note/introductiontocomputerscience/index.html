@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -529,7 +572,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -570,6 +613,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Thuật toán là quy trình chính xác; máy Turing với trạng thái hữu hạn và dải băng lý tưởng giúp hình thức hóa nó. Khoa học máy tính hỏi bài toán cần bao nhiêu tài nguyên, tìm thuật toán và chứng minh cận dưới—hai kết quả thường chưa khớp.</li>
+<li>Khoa học máy tính cổ điển cung cấp công cụ (như biến đổi Fourier), chuẩn so sánh và cách tư duy hữu ích cho lượng tử. Phân tích thừa số là ví dụ được tin khó trên máy cổ điển nhưng có thuật toán lượng tử hiệu quả; điều đó gợi ý lợi thế, không khẳng định mọi bài toán đều được tăng tốc.</li>
+<li>Mục 3.1 so sánh máy Turing và mạch, tương đương về sức mạnh nhưng mạch thuận tiện khi nghiên cứu lượng tử. Mục 3.2 bàn thời gian, không gian, độ phức tạp và tính toán khả nghịch: theo Landauer, xóa một bit ở nhiệt độ <span class="math inline">T</span> tiêu tán ít nhất <span class="math inline">k_BT\ln2</span>. Mục 3.3 đặt lượng tử vào bức tranh rộng hơn của khoa học máy tính.</li>
+</ul>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘In natural science, Nature has given us a world and we’re just to discover its laws. In computers, we can stuff laws into it and create a world.’</em> – Alan Kay</p>
 </blockquote>

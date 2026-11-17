@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Phần này tóm tắt mô hình mạch lượng tử qua năm thành phần: tài nguyên cổ điển hỗ trợ điều khiển; \(n\) qubit tạo không gian Hilbert phức \(2^n\) chiều với cơ sở \(|x_1,\dots,x_n\rangle\); khả năng chuẩn bị trạng thái cơ sở; thực hiện cổng unita từ họ vạn năng; và đo trong cơ sở tính toán. Họ \(H,S,\mathrm{CNOT},T\) là một ví dụ. Mô hình mạch tương đương về tài nguyên với máy Turing lượng tử; thay qubit bằng qutrit không làm đổi căn bản sức mạnh tính toán. Tuy nhiên, mô hình giả định không gian hữu hạn chiều cùng khả năng chuẩn bị, điều khiển cổng và đo lường nhất định. Phần cuối đặt câu hỏi liệu không gian vô hạn chiều, trạng thái đầu vào vướng víu tự nhiên hay phép đo đa qubit gây vướng víu có đem lại lợi ích. Chương vẫn dùng mô hình mạch—mạnh mẽ nhưng chưa chắc bao quát mọi khả năng tính toán hợp lý về vật lý.
+:::
+
 Trong cuốn sách này, thuật ngữ 'máy tính lượng tử' đồng nghĩa với mô hình mạch lượng tử của tính toán. Chương này đã cung cấp một cái nhìn chi tiết về các mạch lượng tử, các phần tử cơ bản của chúng, các họ cổng vạn năng, và một số ứng dụng. Trước khi chúng ta chuyển sang các ứng dụng phức tạp hơn, hãy tóm tắt các yếu tố then chốt của mô hình mạch lượng tử của tính toán:   
 
 (1) Các tài nguyên cổ điển (Classical resources): Một máy tính lượng tử bao gồm hai phần, một phần cổ điển và một phần lượng tử. Về nguyên tắc, không cần đến phần cổ điển của máy tính, nhưng trong thực tế, một số tác vụ nhất định có thể được thực hiện dễ dàng hơn nhiều nếu các phần của phép tính có thể được thực hiện một cách cổ điển. Ví dụ, nhiều kế hoạch cho sửa lỗi lượng tử (Chương 10) có khả năng liên quan đến các tính toán cổ điển nhằm tối đa hóa hiệu quả. Mặc dù các tính toán cổ điển luôn có thể được thực hiện, về mặt nguyên tắc, trên một máy tính lượng tử, nhưng có thể thuận tiện hơn khi thực hiện các phép tính đó trên một máy tính cổ điển.   

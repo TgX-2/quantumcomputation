@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -647,6 +647,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mục này ôn đại số tuyến tính phức làm ngôn ngữ cho cơ học lượng tử: ket là vector, bra là vector đối ngẫu, còn toán tử tuyến tính được biểu diễn bằng ma trận theo một cơ sở. Tập sinh, độc lập tuyến tính và cơ sở xác định số chiều; ma trận Pauli là ví dụ quan trọng cho qubit. Tích trong <span class="math inline">\langle v|w\rangle</span> xác định trực giao và chuẩn <span class="math inline">\|v\|=\sqrt{\langle v|v\rangle}</span>; Gram–Schmidt tạo cơ sở trực chuẩn, còn hệ thức đầy đủ <span class="math inline">\sum_i|i\rangle\langle i|=I</span> dẫn đến biểu diễn tích ngoài và bất đẳng thức Cauchy–Schwarz. Trị riêng thỏa <span class="math inline">A|v\rangle=\lambda|v\rangle</span>; toán tử Hermitian có trị riêng thực, toán tử chuẩn tắc chéo hóa được bằng cơ sở trực chuẩn, và projector thỏa <span class="math inline">P=P^\dagger=P^2</span>. Toán tử unita bảo toàn tích trong; toán tử dương có trị riêng không âm. Các phần sau bàn về tích tensor/Kronecker, hàm ma trận, vết, giao hoán tử (với điều kiện giao hoán cho phép chéo hóa đồng thời hai toán tử Hermitian), cùng phân rã cực và SVD. Biểu diễn ma trận phụ thuộc cơ sở, nên cần theo dõi cơ sở đầu vào và đầu ra.</p>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘This book is written as much to disturb and annoy as to instruct.’</em> – The first line of About Vectors, by Banesh Hoffmann.</p>
 </blockquote>
@@ -824,31 +837,6 @@ A\vert{}v_j\rangle = \sum_t A_{tj}\vert{}w_t\rangle \quad (2.12)
 </section>
 <section id="inner-products" class="level1">
 <h1>4. Inner products</h1>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Trong quantum mechanics, trạng thái của môtj qubit hay hệ lượng tử nằm trong không gian n-chiều phức <span class="math inline">\mathbb C^n</span>, khá là trừu tượng, khá là phản trực giác.</p>
-<p>Vì vậy người ta sử dụng tích trong để trả lời 3 thứ:</p>
-<ol type="1">
-<li><p><strong>Norm</strong>: tính độ dài, trạng thái lượng tử này có chuẩn hóa hợp lệ không (tổng xác suất có bằng 100% hay không)?</p></li>
-<li><p><strong>Overlapping</strong>: Hai trạng thái lượng tử giống nhau đến mức nào?</p></li>
-<li><p><strong>Orthorgonality</strong>: Hai trạng thái có trực giao hay không? Hai trạng thái có hoàn toàn phân biệt được bằng phép đo hay không? (tức là tích trong bằng 0).</p></li>
-</ol>
-<hr>
-<p>Đầu vào sẽ là 2 vector bất kỳ, ví dụ như là ket psi hay ket varphi.</p>
-<p>Đầu ra cho duy nhất 1 số phức.</p>
-<hr>
-<p>Cú pháp:</p>
-<p>Tích trong ket v và ket w là: <span class="math inline">\langle v \vert w \rangle</span>.</p>
-</div>
-</div>
 <p>Một tích trong là một hàm số nhận đầu vào là hai vector <span class="math inline">\vert v \rangle</span> và <span class="math inline">\vert w \rangle</span> từ một không gian vector và cho đầu ra là một số phức. Hiện tại, sẽ thuận tiện khi viết tích trong của <span class="math inline">\vert v \rangle</span> và <span class="math inline">\vert w\rangle</span> dưới dạng <span class="math inline">(\vert v \rangle, \vert w\rangle)</span>. Đây không phải là ký hiệu cơ học lượng tử chuẩn; vì sự rõ ràng trong sư phạm, ký hiệu <span class="math inline">(\cdot, \cdot)</span> sẽ đôi khi hữu ích trong chương này.</p>
 <p>Ký hiệu cơ học lượng tử chuẩn cho tích trong <span class="math inline">(\vert{}v\rangle, \vert{}w\rangle)</span> là <span class="math inline">\langle v\vert{}w\rangle</span>, trong đó <span class="math inline">\vert{}v\rangle</span> và <span class="math inline">\vert{}w\rangle</span> là các véc-tơ trong không gian tích trong, và ký hiệu <span class="math inline">\langle v\vert{}</span> được sử dụng cho véc-tơ đối ngẫu (dual vector) với véc-tơ <span class="math inline">\vert{}v\rangle</span>; véc-tơ đối ngẫu là một toán tử tuyến tính từ không gian tích trong <span class="math inline">V</span> đến tập hợp các số phức <span class="math inline">\mathbb{C}</span>, được định nghĩa bởi <span class="math inline">\langle v\vert{}(\vert{}w\rangle) \equiv \langle v\vert{}w\rangle \equiv (\vert{}v\rangle, \vert{}w\rangle)</span>. Chúng ta sẽ sớm thấy rằng biểu diễn ma trận của các véc-tơ đối ngẫu chính là một véc-tơ hàng.</p>
 <p>Một hàm số <span class="math inline">(\cdot, \cdot)</span> từ <span class="math inline">V \times V</span> đến <span class="math inline">\mathbb{C}</span> là một tích trong nếu nó thỏa mãn các yêu cầu sau:</p>
@@ -1844,20 +1832,6 @@ H^{\otimes n} = \frac{1}{\sqrt{2^n}} \sum_{x,y} (-1)^{x \cdot y} \vert{}x\rangle
 </div>
 <hr>
 <p><strong>Định lý 2.2: (Định lý chéo hóa đồng thời)</strong> Giả sử <span class="math inline">A</span> và <span class="math inline">B</span> là các toán tử Hermitian. Khi đó <span class="math inline">[A, B] = 0</span> khi và chỉ khi tồn tại một cơ sở trực chuẩn sao cho cả <span class="math inline">A</span> và <span class="math inline">B</span> đều là đường chéo đối với cơ sở đó. Chúng ta nói rằng <span class="math inline">A</span> và <span class="math inline">B</span> được chéo hóa đồng thời trong trường hợp này.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Nếu hai đại lượng quan sát được (đại diện bởi toán tử Hermitian A và B) có thể đo lường đồng thời mà không làm ảnh hưởng lẫn nhau khi và chỉ khi chúng giao hoán với nhau <span class="math inline">([A, B] = 0)</span>.</p>
-<p>Khi <span class="math inline">[A, B] = 0</span>, chúng chia sẽ chung một bộ vector riêng, cho phép chúng ta biểu diễn chúng trên cùng một cơ sở trực chuẩn.</p>
-</div>
-</div>
 <p>Kết quả này liên kết giao hoán tử của hai toán tử (thường dễ tính toán) với tính chất chéo hóa đồng thời (vốn a priori khá khó xác định). Như một ví dụ, hãy xét:</p>
 <p><span class="math display">
 [X, Y] = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix} - \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} \quad (2.68)

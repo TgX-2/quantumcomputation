@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Ba hướng thuật toán lượng tử nổi bật là biến đổi Fourier lượng tử, tìm kiếm lượng tử và mô phỏng lượng tử. Biến đổi Fourier lượng tử có thể được thực hiện hiệu quả hơn phép biến đổi Fourier cổ điển trên thanh ghi lớn, tạo nền tảng cho các thuật toán như Shor và các bài toán nhóm con ẩn; tuy nhiên, kết quả nằm trong biên độ lượng tử không thể được đọc trực tiếp chỉ bằng phép đo. Grover tìm kiếm trong không gian không cấu trúc với khoảng $\sqrt{N}$ phép toán thay vì khoảng $N$, tức tăng tốc bậc hai.
+
+Máy tính lượng tử cũng có thể mô phỏng hiệu quả nhiều hệ lượng tử mà mô phỏng cổ điển đòi hỏi tài nguyên tăng theo hàm mũ, nhưng vẫn cần cách trích xuất đại lượng cần biết từ kết quả. Những thuật toán này cho thấy tiềm năng vượt trội ở một số tác vụ, chứ chưa xác định toàn bộ sức mạnh tính toán: quan hệ giữa BQP và các lớp cổ điển như P, NP vẫn chưa được giải quyết.
+:::
+
 Thuật toán Deutsch–Jozsa gợi ý rằng máy tính lượng tử có thể có khả năng giải quyết một số bài toán tính toán hiệu quả hơn rất nhiều so với máy tính cổ điển. Thật không may, bài toán mà nó giải quyết lại ít có ý nghĩa thực tiễn. 
 
 Liệu có những bài toán thú vị hơn mà lời giải của chúng có thể thu được hiệu quả hơn bằng cách sử dụng các thuật toán lượng tử không? Các nguyên lý nền tảng đằng sau những thuật toán như vậy là gì? Những giới hạn cuối cùng về sức mạnh tính toán của máy tính lượng tử là gì?   

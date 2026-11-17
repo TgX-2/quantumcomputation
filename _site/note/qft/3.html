@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -628,83 +628,28 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Tìm bậc:</strong> Với <span class="math inline">x</span> nguyên tố cùng nhau với <span class="math inline">N</span>, bậc <span class="math inline">r</span> là số dương nhỏ nhất sao cho <span class="math inline">x^r\equiv1\pmod N</span>. Phép nhân modulo <span class="math inline">U|y\rangle=|xy\bmod N\rangle</span> có eigenphase <span class="math inline">s/r</span>; dù không biết eigenstate <span class="math inline">|u_s\rangle</span> để chuẩn bị, trạng thái <span class="math inline">|1\rangle</span> là chồng chập các eigenstate nên ước lượng pha vẫn lấy mẫu được <span class="math inline">s/r</span>. Lũy thừa modulo thực hiện các controlled-<span class="math inline">U^{2^j}</span> với <span class="math inline">O(L^3)</span> cổng.</li>
+<li><strong>Khôi phục chu kỳ:</strong> Đo được xấp xỉ <span class="math inline">s/r</span>; nếu sai số không quá <span class="math inline">1/(2r^2)</span>, định lý liên phân số bảo đảm <span class="math inline">s/r</span> là một hội tụ, tìm trong <span class="math inline">O(L^3)</span>. Nếu <span class="math inline">\gcd(s,r)&gt;1</span>, mẫu số rút gọn chỉ là ước <span class="math inline">r'</span>: lặp phép đo, tiếp tục với <span class="math inline">x^{r'}\bmod N</span>, hoặc lấy LCM hai ứng viên.</li>
+<li><strong>Phân tích thừa số:</strong> Bậc của <span class="math inline">x</span> ngẫu nhiên thường chẵn và thỏa <span class="math inline">x^{r/2}\not\equiv-1\pmod N</span>; khi đó <span class="math inline">\gcd(x^{r/2}\pm1,N)</span> cho ước không tầm thường. Với <span class="math inline">N=15,x=7</span>, <span class="math inline">r=4</span> cho các ước <span class="math inline">3,5</span>. Thuật toán tốn <span class="math inline">O(L^3)</span>, thành công với xác suất hằng số qua thử lại; đây là mối đe dọa nền tảng đối với RSA.</li>
+</ul>
+</div>
+</div>
 <p>Quy trình ước lượng pha có thể được sử dụng để giải quyết một loạt các bài toán thú vị. Chúng tôi bây giờ mô tả hai trong số những bài toán thú vị nhất này: bài toán tìm bậc, và bài toán phân tích thừa số. Trên thực tế, hai bài toán này tương đương với nhau, do đó trong Mục 5.3.1 chúng tôi giải thích một thuật toán lượng tử để giải quyết bài toán tìm bậc, và trong Mục 5.3.2 chúng tôi giải thích cách bài toán tìm bậc cũng ngụ ý khả năng phân tích thừa số.</p>
 <p>Để hiểu các thuật toán lượng tử cho phân tích thừa số và tìm bậc đòi hỏi một chút kiến thức nền tảng về lý thuyết số (number theory). Tất cả các tài liệu cần thiết được tập hợp lại trong Phụ lục 4. Mô tả mà chúng tôi đưa ra trong hai mục tiếp theo tập trung vào khía cạnh lượng tử của bài toán, và chỉ yêu cầu một chút làm quen với số học modulo (modular arithmetic) để có thể đọc hiểu. Các chứng minh chi tiết cho các kết quả lý thuyết số mà chúng tôi trích dẫn ở đây có thể được tìm thấy trong Phụ lục 4.</p>
 <p>Các thuật toán lượng tử nhanh cho bài toán tìm bậc và phân tích thừa số thú vị vì ít nhất ba lý do. Thứ nhất, và quan trọng nhất theo ý kiến của chúng tôi, chúng cung cấp bằng chứng cho ý tưởng rằng máy tính lượng tử có thể về bản chất mạnh hơn máy tính cổ điển, và đưa ra một thách thức đáng tin cậy đối với luận đề Church-Turing mạnh (strong Church-Turing thesis). Thứ hai, cả hai bài toán đều có đủ giá trị nội tại để biện minh cho sự quan tâm đến bất kỳ thuật toán mới lạ nào, dù là cổ điển hay lượng tử. Thứ ba, và quan trọng nhất từ góc độ thực tiễn, các thuật toán hiệu quả cho bài toán tìm bậc và phân tích thừa số có thể được sử dụng để bẻ khóa hệ thống mật mã khóa công khai RSA (Phụ lục 5).</p>
 <section id="application-order-finding" class="level1">
 <h1>Application: order-finding</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Note thêm
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="bài-toán-mở-đầu-và-một-số-định-nghĩa" class="level2">
-<h2 class="anchored" data-anchor-id="bài-toán-mở-đầu-và-một-số-định-nghĩa">Bài toán mở đầu và một số định nghĩa</h2>
-<p>Định nghĩa của một bậc là, số r nhỏ nhất sao cho <span class="math inline">x^r = 1 (mod N)</span>, với x, N cho trước và không có ước chung.</p>
-<p>Người ta tin rằng không có thuật toán nào có thể sử dụng tài nguyên theo đa thức <span class="math inline">O(L)</span> (với <span class="math inline">L = \lceil \log(N) \rceil</span>) có thể giải quyết bài toán này. (Có thể thấy L là độ dài của số ;))</p>
-<p>Và bài toán của chúng ta là tìm bậc.</p>
-<hr>
-<p>Thuật toán lượng tử để tìm bậc chính là thuật toán ước lượng pha được áp dụng cho toán tử Unita</p>
-<p><span class="math display">
-U\vert{}y\rangle \equiv \vert{}xy \pmod N\rangle, \tag{5.36}
-</span></p>
-<p>trong đó: <span class="math inline">0 \leq y \leq 2^L - 1</span>, và, U không bị đặt vào nếu <span class="math inline">0 \leq y \leq N - 1</span>, và U bị đặt vào nếu <span class="math inline">N \leq y \leq 2^L - 1</span>.</p>
-</section>
-<section id="suy-ra-bài-toán" class="level2">
-<h2 class="anchored" data-anchor-id="suy-ra-bài-toán">Suy ra bài toán</h2>
-<p>Nhìn vào (5.39) ta thấy:</p>
-<p><span class="math display">
-= \exp\left[\frac{2\pi is}{r}\right] \vert{}u_s\rangle. \tag{5.39}
-</span></p>
-<p>rõ ràng trị riêng của ket u_s là <span class="math inline">\exp\left[\frac{2\pi is}{r}\right]</span> có dạng <span class="math inline">e^{2\pi i \varphi}</span>, vậy <span class="math inline">\varphi = \frac s r</span>.</p>
-<p>Vậy là pha <span class="math inline">\varphi</span> chính là bằng <span class="math inline">s/r</span> (với s là một số nguyên ngẫu nhiên từ 0 đến r - 1, và r chính là bậc cần tìm!)</p>
-<p>Nói cách khác, nếu máy tính lượng tử đo được pha <span class="math inline">\varphi</span>, thì ra lập tức giải mã ra được chu kỳ r.</p>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">5.44</h2>
-<p>Nhưng mà để chạy được PEA, công thức (5.37) đòi hỏi phải biết trước r thì mới tạo được trạng thái riêng <span class="math inline">\vert u_s \rangle</span>. Giống như nghịch lý ở bài trước đã nói.</p>
-<p>Kết quả là, hãy nhìn vào phương trình (5.44), nếu lấy tổng chồng chập tất cả các trạng thái riêng của <span class="math inline">\vert u_s \rangle</span>, thì kết quả đại số sẽ gom lại trạng thái cơ sờ cổ điển đơn giản nhất: <span class="math inline">\vert 1 \rangle</span>.</p>
-<p>Cuối cùng, nhờ tính tuyến tính lượng tử, khi <span class="math inline">\vert 1 \rangle</span> chạy qua mạch PEA và đo lường, hệ thống sẽ ngẫu nhiên nhả ra một giá trị pha <span class="math inline">\varphi \approx s/r</span> ứng với một giá trị s nào đó.</p>
-</section>
-<section id="làm-sao-để-triển-khai-cổng-controlled-u2j-khổng-lồ" class="level2">
-<h2 class="anchored" data-anchor-id="làm-sao-để-triển-khai-cổng-controlled-u2j-khổng-lồ">Làm sao để triển khai cổng Controlled-U<sup>2</sup>j khổng lồ?</h2>
-<p>box 5.2</p>
-</section>
-<section id="cách-lấy-r-từ-kết-quả-đo" class="level2">
-<h2 class="anchored" data-anchor-id="cách-lấy-r-từ-kết-quả-đo">Cách lấy r từ kết quả đo</h2>
-<p>Vấn đề là khi chạy mạch và đo lường thanh ghi 1, máy tinh lượng tử nhả ra một giá trị thập phân <span class="math inline">\varphi</span> (được biểu diễn dưới dạng nhị phân với 2L + 1 bits chính xác).</p>
-<p>Ta biết rằng <span class="math inline">\varphi \approx s/r</span>. Tuy nhiên, vì <span class="math inline">\varphi</span> chỉ là một giá trị xấp xỉ bị nhiễu hoặc làm tròn (do hữu hạn qubit), nếu bạn dùng máy tính cổ điển để đổi <span class="math inline">\varphi</span> thành phân số tối giản theo cách ngây thơ thì bạn sẽ nhận được con số mẫu số khổng lồ, và không liên quan gì đến r.</p>
-<p><strong>Continued Fractions</strong></p>
-<p>Mọi số thực đều có thể biểu diễn thành một Liên phân số! (kiểu <span class="math inline">a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots}}</span>).</p>
-<p>Các phân số cắt cụt của chuỗi này đều hội tụ.</p>
-<p>Do thiết kế phần cứng dùng <span class="math inline">t = 2L + 1</span> qubit, sai số giữa pha đo <span class="math inline">\varphi</span> và phân số <span class="math inline">s/r</span> luôn bị chặn chặt chẽ dưới ngưỡng <span class="math inline">\frac 1 {r^2}</span> (5.48)</p>
-<p>Và nhờ đó, (thuật toán liên phân số chạy trên máy tính cổ điển với độ phức tạp cực nhanh, chỉ <span class="math inline">O(L^3)</span>) sẽ bóc tách ngay lập tức chuỗi liên phân số của <span class="math inline">\varphi</span> và trích xuất ra được phân số tối giản <span class="math inline">s'/r'</span>.</p>
-</section>
-<section id="nhưng-mà-bẫy-ước-số" class="level2">
-<h2 class="anchored" data-anchor-id="nhưng-mà-bẫy-ước-số">Nhưng mà, bẫy ước số…</h2>
-<p>Điều gì sẽ xảy ra nếu máy tính lượng tử trả về kết quả là <span class="math inline">\varphi \approx s'/r'</span>, trong đó r’ lại là ước của r? (ví du: 2/4, trả về 1/2, mà r = 4 chứ không phải = 2).</p>
-<p><strong>Phương pháp 1: Lặp ngẫu nhiên</strong></p>
-<p>Xác suất để một số s chọn ngẫu nhiên nguyên tố cùng nhau với r là khá lớn (tỉ lệ thuận với <span class="math inline">\frac 1 {\log N}</span>). (<span class="math inline">0 \leq x \leq r - 1</span>)</p>
-<p>Chỉ cần lặp lại toàn bộ thí nghiệm <span class="math inline">2\log(N)</span> lần. Xác suất để ít nhất một lần bốc trúng r nguyên tố cùng nhau với r là rất lớn. (=1)</p>
-<p><strong>Phương pháp 2: Thuật toán vét cạn</strong></p>
-<p>Nếu r’ tìm được là một ước số của r, ta sẽ tận dụng nó.</p>
-<p>Thay cơ sở x bằng <span class="math inline">x' = x^{r'} (\pmod N)</span> và tiếp tục chạy tìm bậc trên cơ sở mới này. Sau tối đa <span class="math inline">O(L)</span> lần lặp, ra sẽ quét sạch mọi ước số và tìm ra chu kỳ chính xác r.</p>
-<p><strong>Phương pháp 3: LCM Trick</strong></p>
-<p>Thay vì lặp nhiều lần hay làm đệ quy dài dòng, ta chỉ cần chạy mạch lượng tử đúng 2 lần độc lập để thu về <span class="math inline">r_1'</span> và <span class="math inline">r_2'</span>.</p>
-<p>Toán học chứng minh rằng xác suất để hai giá trị <span class="math inline">s_1'</span> và <span class="math inline">s_2'</span> sinh ra từ hai lần chạy không có chung thừa số nguyên tố là khá cao (bị chặn dưới bởi 1/4).</p>
-<p>Khi đó, chu kỳ thực sự r chính là <span class="math inline">\text{LCM}(r_1', r_2')</span>.</p>
-</section>
-<section id="cuối-cùng" class="level2">
-<h2 class="anchored" data-anchor-id="cuối-cùng">Cuối cùng</h2>
-<p>Độ phức tạp là <span class="math inline">O(L^3)</span>.</p>
-</section>
-</div>
-</div>
 <p>Đối với các số nguyên dương <span class="math inline">x</span> và <span class="math inline">N</span>, <span class="math inline">x &lt; N</span>, không có ước chung, bậc của <span class="math inline">x</span> modulo <span class="math inline">N</span> được định nghĩa là số nguyên dương nhỏ nhất <span class="math inline">r</span> sao cho <span class="math inline">x^r = 1 \pmod N</span>. Bài toán tìm bậc là xác định bậc cho một <span class="math inline">x</span> và <span class="math inline">N</span> được chỉ định. Người ta tin rằng tìm bậc là một bài toán khó trên máy tính cổ điển, theo nghĩa là không có thuật toán nào được biết đến có thể giải quyết bài toán này sử dụng tài nguyên đa thức theo <span class="math inline">O(L)</span> bit cần thiết để biểu diễn bài toán, trong đó <span class="math inline">L \equiv \lceil \log(N) \rceil</span> là số lượng bit cần thiết để biểu diễn <span class="math inline">N</span>. Trong mục này, chúng ta giải thích cách ước lượng pha có thể được sử dụng để thu được một thuật toán lượng tử hiệu quả cho việc tìm bậc.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">

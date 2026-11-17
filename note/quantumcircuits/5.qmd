@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Mục này chứng minh tính vạn năng ở ba tầng. Trước hết, phép unita trên không gian \(d\) chiều phân rã thành tối đa \(d(d-1)/2\) phép unita hai mức, mỗi phép chỉ trộn hai trạng thái cơ sở. Tiếp theo, mã Gray đưa hai trạng thái bất kỳ về những trạng thái chỉ khác một bit để mô phỏng phép hai mức bằng cổng một qubit và CNOT; kết quả cho mạch tổng quát có chi phí \(O(n^2 4^n)\), đúng về nguyên tắc nhưng thường không hiệu quả. Cuối cùng, tập rời rạc \(H,S,\mathrm{CNOT},T\) xấp xỉ unita tùy ý: sai số đo bằng chuẩn toán tử \(E(U,V)\), sai số mạch cộng tối đa theo từng cổng, còn định lý Solovay–Kitaev cho overhead đa logarit theo độ chính xác. Chương cũng chỉ ra bằng lập luận đếm rằng phần lớn unita cần số cổng tăng theo hàm mũ, nên vạn năng không đồng nghĩa hiệu quả. Phần độ phức tạp định nghĩa BQP qua họ mạch đa thức, đồng nhất và xác suất lỗi bị chặn, rồi phác thảo \(\mathrm{BPP}\subseteq\mathrm{BQP}\subseteq\mathrm{PSPACE}\); hiện chưa biết BQP khác BPP.
+:::
+
 Một tập hợp nhỏ các cổng (ví dụ: $\text{AND}, \text{OR}, \text{NOT}$) có thể được sử dụng để tính toán một hàm cổ điển tùy ý, như chúng ta đã thấy ở Mục 3.1.2. Chúng ta nói rằng một tập hợp cổng như vậy là vạn năng (universal) đối với tính toán cổ điển. Trên thực tế, vì cổng Toffoli là vạn năng đối với tính toán cổ điển, nên các mạch lượng tử bao hàm (subsume) các mạch cổ điển. Một kết quả vạn năng tương tự cũng đúng đối với tính toán lượng tử, trong đó một tập hợp các cổng được cho là vạn năng đối với tính toán lượng tử nếu bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bởi một mạch lượng tử chỉ bao gồm các cổng đó.   
 
 Bây giờ chúng tôi mô tả ba cấu trúc vạn năng đối với tính toán lượng tử. Các cấu trúc này xây dựng dựa trên nhau, và đạt đến đỉnh điểm ở một chứng minh rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, $\text{CNOT}$, và $\pi/8$. Bạn có thể tự hỏi tại sao cổng phase lại xuất hiện trong danh sách này, vì nó có thể được xây dựng từ hai cổng $\pi/8$; nó được đưa vào vì vai trò tự nhiên của nó trong các cấu trúc chống chịu lỗi (fault-tolerant constructions) được mô tả trong Chương 10.   

@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- Máy Turing hình thức hóa thuật toán: hữu hạn trạng thái, dải băng và lệnh $\langle q,x,q',x',s\rangle$. Ví dụ xóa đầu vào rồi ghi $1$ tính $f(x)=1$. Luận đề Church–Turing đồng nhất hàm máy Turing tính được với khái niệm trực giác về thuật toán; đây là luận đề, không phải định lý hình thức.
+- Máy Turing vạn năng mô phỏng $M(x)$ từ mã máy $T_M$ và dữ liệu $x$. Ngược lại, bài toán dừng chứng minh giới hạn: không thuật toán nào quyết định tổng quát máy có dừng hay không.
+- Mô hình mạch phi tuần hoàn dùng cổng logic; half-adder cho tổng $x\oplus y$ và bit nhớ, full-adder cộng thêm carry, còn quy nạp chứng minh tính vạn năng cho hàm Boolean. Tương đương với máy Turing đòi hỏi họ mạch **đồng nhất**, tức có thuật toán sinh mạch theo kích thước đầu vào; họ không đồng nhất có thể mã hóa hàm dừng. FANOUT và các cổng không khả nghịch cũng không chuyển trực tiếp sang mạch lượng tử.
+:::
+
 > *'...algorithms are concepts that have existence apart from any programming language.'*
 > – Donald Knuth
 

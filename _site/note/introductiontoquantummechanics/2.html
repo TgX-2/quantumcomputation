@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -634,6 +634,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chương trình bày bốn tiên đề và các hệ quả thực hành. Hệ cô lập có trạng thái <span class="math inline">|\psi\rangle</span> chuẩn hóa trong không gian Hilbert; qubit viết <span class="math inline">|\psi\rangle=a|0\rangle+b|1\rangle</span> với <span class="math inline">|a|^2+|b|^2=1</span>. Hệ cô lập tiến hóa unita <span class="math inline">|\psi(t_2)\rangle=U|\psi(t_1)\rangle</span>, bảo toàn chuẩn và thuận nghịch; dạng liên tục là phương trình Schrödinger <span class="math inline">i\hbar\,d|\psi\rangle/dt=H|\psi\rangle</span>, với Hamiltonian Hermitian sinh ra <span class="math inline">U=e^{-iHt/\hbar}</span> khi không đổi theo thời gian. Phép đo tổng quát <span class="math inline">\{M_m\}</span> cho <span class="math inline">p(m)=\langle\psi|M_m^\dagger M_m|\psi\rangle</span>, trạng thái hậu đo <span class="math inline">M_m|\psi\rangle/\sqrt{p(m)}</span>, và <span class="math inline">\sum_mM_m^\dagger M_m=I</span>. Trạng thái trực giao phân biệt hoàn hảo được; trạng thái không trực giao thì không thể phân biệt chắc chắn. Phép đo xạ ảnh dùng projector của observable Hermitian; giá trị trung bình là <span class="math inline">\langle\psi|M|\psi\rangle</span> và bất định thỏa <span class="math inline">\Delta A\Delta B\ge|\langle[A,B]\rangle|/2</span>. POVM dùng các phần tử dương cộng thành <span class="math inline">I</span>, hữu ích khi chỉ xét thống kê. Chương phân biệt pha toàn cục và pha tương đối, rồi ghép hệ bằng tích tensor: vướng víu, ancilla và phép đo cho thấy hệ con có thể không thuần. Phép đo là khung tiên đề riêng, không phải tiến hóa unita.</p>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘All understanding begins with our not accepting the world as it appears.’</em> - Alan Kay</p>
 </blockquote>
@@ -644,39 +657,6 @@ window.Quarto = {
 <p>Các tiên đề của cơ học lượng tử được rút ra sau một quá trình dài thử nghiệm và (phần lớn là) sai sót, bao gồm một lượng đáng kể sự đoán chừng và dò dẫm của những người sáng lập nên lý thuyết. Đừng ngạc nhiên nếu động cơ cho các tiên đề không phải lúc nào cũng rõ ràng; ngay cả đối với các chuyên gia, các tiên đề cơ bản của cơ học lượng tử vẫn trông rất đáng kinh ngạc. Điều bạn nên kỳ vọng đạt được trong một vài mục tiếp theo là nắm vững cách vận dụng tốt các tiên đề này – cách áp dụng chúng, và khi nào áp dụng.</p>
 <section id="state-space" class="level1">
 <h1>1. State space</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="phát-biểu-toán-học-của-định-đề-1" class="level2">
-<h2 class="anchored" data-anchor-id="phát-biểu-toán-học-của-định-đề-1">Phát biểu toán học của Định đề 1</h2>
-<p>Bất kỳ một hệ vật lý biệt lập nào cũng được gắn liền với một không gian vector phức có tích vô hướng (tức là không gian Hilbert), được gọi là không gian trạng thái (state space) của hệ. Trạng thái vật lý của hệ tại một thời điểm nhất định được mô tả hoàn toàn bởi một vector trạng thái (state vector), là một vector đơn vị nằm trong không gian trạng thái đó.</p>
-</section>
-<section id="các-tính-chất-cấu-trúc-của-không-gian-trạng-thái" class="level2">
-<h2 class="anchored" data-anchor-id="các-tính-chất-cấu-trúc-của-không-gian-trạng-thái">Các tính chất cấu trúc của Không gian trạng thái</h2>
-<ul>
-<li><p>Không gian Hilbert (<span class="math inline">\mathcal{H}</span>): Không gian trạng thái lượng tử bắt buộc phải là một không gian vector tuyến tính trên trường số phức <span class="math inline">\mathbb{C}</span> được trang bị tích vô hướng. Tích vô hướng <span class="math inline">\langle \phi \vert{} \psi \rangle</span> cung cấp cấu trúc hình học, cho phép xác định độ dài (chuẩn) của vector và sự trực giao (tương ứng với các trạng thái loại trừ lẫn nhau về mặt vật lý).</p></li>
-<li><p>Vector trạng thái (<span class="math inline">\vert{}\psi\rangle</span>): Sử dụng ký hiệu bra-ket của Dirac, trạng thái của hệ được biểu diễn bằng ket <span class="math inline">\vert{}\psi\rangle</span> (vector cột). Cụm từ “mô tả hoàn toàn” mang ý nghĩa nền tảng: mọi thông tin vật lý có thể biết được về hệ, từ xác suất đo lường đến sự tiến hóa theo thời gian, đều được mã hóa trọn vẹn bên trong <span class="math inline">\vert{}\psi\rangle</span>.</p></li>
-<li><p>Điều kiện chuẩn hóa (Normalization): Vector trạng thái bắt buộc phải là vector đơn vị, thỏa mãn <span class="math inline">\langle \psi \vert{} \psi \rangle = 1</span>. Ràng buộc toán học này xuất phát từ định luật bảo toàn xác suất: tổng xác suất của tất cả các kết quả khả dĩ khi đo lường hệ phải luôn bằng 1. Sự chuẩn hóa này thu hẹp tập hợp các trạng thái hợp lệ của hệ lên bề mặt của một hình cầu đa chiều phức (như mặt cầu Bloch đối với qubit).</p></li>
-<li><p>Nguyên lý chồng chập (Superposition Principle): Vì không gian trạng thái là không gian vector, tính chồng chập là một hệ quả toán học trực tiếp. Nếu <span class="math inline">\vert{} \psi_1 \rangle</span> và <span class="math inline">\vert{} \psi_2 \rangle</span> là các trạng thái hợp lệ, thì mọi tổ hợp tuyến tính <span class="math inline">\vert{}\psi\rangle = \alpha\vert{}\psi_1\rangle + \beta\vert{}\psi_2\rangle</span> (với <span class="math inline">\alpha, \beta \in \mathbb{C}</span> và <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span>) đều là một trạng thái lượng tử vật lý hoàn toàn hợp lệ.</p></li>
-</ul>
-</section>
-<section id="hệ-lượng-tử-nền-tảng-qubit" class="level2">
-<h2 class="anchored" data-anchor-id="hệ-lượng-tử-nền-tảng-qubit">Hệ lượng tử nền tảng: Qubit</h2>
-<p>Áp dụng Định đề 1, qubit là hệ cơ học lượng tử đơn giản nhất không tầm thường, có không gian trạng thái là không gian Hilbert 2 chiều (<span class="math inline">\mathbb{C}^2</span>).</p>
-<ul>
-<li><p>Mọi trạng thái của qubit được biểu diễn trong cơ sở trực chuẩn (computational basis): <span class="math inline">\vert{}0\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}</span> và <span class="math inline">\vert{}1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix}</span>.</p></li>
-<li><p>Bất kỳ trạng thái qubit nào cũng tồn tại dưới dạng: <span class="math inline">\vert{}\psi\rangle = \alpha\vert{}0\rangle + \beta\vert{}1\rangle</span>, trong đó điều kiện chuẩn hóa ép buộc <span class="math inline">\vert{}\alpha\vert{}^2 + \vert{}\beta\vert{}^2 = 1</span>.</p></li>
-</ul>
-</section>
-</div>
-</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -743,50 +723,6 @@ window.Quarto = {
 <p>là sự chồng chập của các trạng thái <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> với biên độ <span class="math inline">1/\sqrt{2}</span> cho trạng thái <span class="math inline">\vert{}0\rangle</span>, và biên độ <span class="math inline">-1/\sqrt{2}</span> cho trạng thái <span class="math inline">\vert{}1\rangle</span>.</p>
 <section id="evolution" class="level1">
 <h1>2. Evolution</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Định đề 2 thiết lập khuôn khổ động lực học (dynamical framework) cho cơ học lượng tử, quy định cách thức mà không gian trạng thái của một hệ lượng tử kín thay đổi theo thời gian. Có hai cách biểu diễn tương đương cho định đề này: mô hình rời rạc qua toán tử unita (thường dùng trong Quantum Computing) và mô hình liên tục qua phương trình Schrödinger (thường dùng trong vật lý lượng tử cơ bản).</p>
-<section id="biểu-diễn-rời-rạc-biến-đổi-unita-unitary-evolution" class="level2">
-<h2 class="anchored" data-anchor-id="biểu-diễn-rời-rạc-biến-đổi-unita-unitary-evolution">Biểu diễn rời rạc: Biến đổi Unita (Unitary Evolution)</h2>
-<p>Sự tiến hóa trạng thái của một hệ lượng tử kín được mô tả bằng một biến đổi unita. Nếu trạng thái của hệ tại thời điểm <span class="math inline">t_1</span> là <span class="math inline">\vert{}\psi(t_1)\rangle</span>, thì trạng thái tại thời điểm <span class="math inline">t_2</span> được xác định bởi:</p>
-<p><span class="math display">
-\vert{}\psi(t_2)\rangle = U(t_2, t_1)\vert{}\psi(t_1)\rangle
-</span></p>
-<ul>
-<li><p>Đặc tính của <span class="math inline">U</span>: <span class="math inline">U(t_2, t_1)</span> là một toán tử tuyến tính unita, thỏa mãn <span class="math inline">U^\dagger U = U U^\dagger = I</span>, trong đó <span class="math inline">U^\dagger</span> là ma trận liên hợp phức chuyển vị (Hermitian conjugate) của <span class="math inline">U</span>.</p></li>
-<li><p>Bảo toàn xác suất: Tính unita là điều kiện bắt buộc để bảo toàn chuẩn của vector trạng thái (normalization). Ta có <span class="math inline">\langle\psi(t_2)\vert{}\psi(t_2)\rangle = \langle\psi(t_1)\vert{}U^\dagger U\vert{}\psi(t_1)\rangle = \langle\psi(t_1)\vert{}I\vert{}\psi(t_1)\rangle = 1</span>. Điều này đảm bảo tổng xác suất của hệ tại bất kỳ thời điểm nào luôn bằng 1.</p></li>
-<li><p>Tính thuận nghịch (Reversibility): Vì <span class="math inline">U</span> luôn tồn tại nghịch đảo (<span class="math inline">U^{-1} = U^\dagger</span>), mọi tiến hóa lượng tử kín đều có tính thuận nghịch. Trong điện toán lượng tử, tính chất này có nghĩa là mọi cổng logic lượng tử (X, Y, Z, H, CNOT) đều phải là ma trận unita và mọi phép tính đều có thể bị đảo ngược (uncomputation) bằng cách áp dụng các cổng nghịch đảo tương ứng.</p></li>
-</ul>
-</section>
-<section id="biểu-diễn-liên-tục-phương-trình-schrödinger" class="level2">
-<h2 class="anchored" data-anchor-id="biểu-diễn-liên-tục-phương-trình-schrödinger">Biểu diễn liên tục: Phương trình Schrödinger</h2>
-<p>Thay vì mô tả sự nhảy vọt trạng thái từ <span class="math inline">t_1</span> sang <span class="math inline">t_2</span>, Định đề 2 mô tả sự tiến hóa thời gian trơn tru qua một phương trình vi phân tuyến tính bậc một:</p>
-<p><span class="math display">
-i\hbar \frac{d}{dt}\vert{}\psi(t)\rangle = H \vert{}\psi(t)\rangle
-</span></p>
-<ul>
-<li><p>Toán tử Hamiltonian (<span class="math inline">H</span>): Đây là một toán tử Hermitian (<span class="math inline">H = H^\dagger</span>) đại diện cho tổng năng lượng của hệ kín. Các trạng thái riêng (eigenstates) của <span class="math inline">H</span> là các trạng thái dừng (stationary states) với mức năng lượng xác định (eigenvalues).</p></li>
-<li><p>Bản chất tuyến tính: Phương trình Schrödinger là tuyến tính đối với <span class="math inline">\vert{}\psi(t)\rangle</span>, điều này bảo toàn tính đúng đắn của Nguyên lý chồng chập từ Định đề 1 qua thời gian. Một sự chồng chập của các trạng thái sẽ tiến hóa thành sự chồng chập của các trạng thái đã tiến hóa tương ứng.</p></li>
-</ul>
-</section>
-<section id="mối-liên-hệ-giữa-hamiltonian-và-toán-tử-unita" class="level2">
-<h2 class="anchored" data-anchor-id="mối-liên-hệ-giữa-hamiltonian-và-toán-tử-unita">Mối liên hệ giữa Hamiltonian và Toán tử Unita</h2>
-<p>Hai cách biểu diễn trên là hoàn toàn thống nhất. Phương trình Schrödinger thực chất là định nghĩa vi phân của toán tử tiến hóa <span class="math inline">U(t)</span>. Đối với một hệ kín có Hamiltonian <span class="math inline">H</span> không phụ thuộc vào thời gian, nghiệm của phương trình Schrödinger sinh ra toán tử unita liên kết trực tiếp <span class="math inline">t</span> với trạng thái ban đầu:</p>
-<p><span class="math display">
-U(t) = \exp\left(-\frac{iHt}{\hbar}\right)
-</span></p>
-<p>Vì <span class="math inline">H</span> là ma trận Hermitian, khai triển chuỗi Taylor của hàm mũ ma trận <span class="math inline">\exp(-iHt/\hbar)</span> luôn tạo ra một ma trận unita. Hamiltonian đóng vai trò là “máy phát” (generator) của sự tịnh tiến thời gian trong không gian Hilbert.</p>
-</section>
-</div>
-</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -836,7 +772,7 @@ U(t) = \exp\left(-\frac{iHt}{\hbar}\right)
 H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}. \tag{2.85}
 </span></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -845,7 +781,7 @@ H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}. \t
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Kiểm tra rằng cổng Hadamard <span class="math inline">H</span> là đơn nhất (unitary).</p>
 <p>Ta có:</p>
@@ -871,7 +807,7 @@ H^\dagger H = \frac 1 2 \begin{bmatrix}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -880,7 +816,7 @@ H^\dagger H = \frac 1 2 \begin{bmatrix}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Kiểm tra rằng <span class="math inline">H^2 = I</span>.</p>
 <p><span class="math display">
@@ -894,7 +830,7 @@ H^2 = \frac 1 2 \begin{bmatrix}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -903,7 +839,7 @@ H^2 = \frac 1 2 \begin{bmatrix}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Các trị riêng (eigenvalues) và vectơ riêng (eigenvectors) của <span class="math inline">H</span> là gì?</p>
 <p>Ta có:</p>
@@ -966,7 +902,7 @@ w = \frac 1 {4 - 2\sqrt 2} \begin{bmatrix} \sqrt 2 - 1 \\ 1 \end{bmatrix}
 <p>Thứ hai, tiên đề sau đây sử dụng các công cụ của phương trình vi phân. Những độc giả ít nền tảng về phương trình vi phân có thể yên tâm rằng chúng sẽ không cần thiết cho phần lớn cuốn sách, ngoại trừ một phần của Chương 7 về các hiện thực vật lý của xử lý thông tin lượng tử.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -975,7 +911,7 @@ w = \frac 1 {4 - 2\sqrt 2} \begin{bmatrix} \sqrt 2 - 1 \\ 1 \end{bmatrix}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ta có:</p>
 <p><span class="math display">
@@ -1041,47 +977,6 @@ U(t_1, t_2) \equiv \exp\left[\frac{-iH(t_2 - t_1)}{\hbar}\right]. \tag{2.91}
 <p>Kết quả là, để bắt đầu, chúng ta thường sẽ mô tả sự tiến hóa của các hệ lượng tử – ngay cả những hệ không cô lập – bằng cách sử dụng các toán tử đơn nhất. Ngoại trừ điểm chính đối lập với điều này là phép đo lượng tử sẽ được mô tả ở mục tiếp theo. Sau này, chúng ta sẽ khảo sát chi tiết hơn các độ lệch có thể có so với sự tiến hóa đơn nhất do tương tác với các hệ thống khác, đồng thời hiểu chính xác hơn về động lực học của các hệ lượng tử thực tế.</p>
 <section id="quantum-measurement" class="level1">
 <h1>3. Quantum measurement</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Định đề 3 phá vỡ tính thuận nghịch, liên tục của sự tiến hóa unita (Định đề 2), quy định cách một hệ lượng tử tương tác với thế giới vĩ mô bên ngoài (người quan sát hoặc thiết bị đo đạc) để trích xuất thông tin, dẫn đến sự sụp đổ trạng thái tức thời.</p>
-<p>Trong hệ thống hình thức của Nielsen &amp; Chuang, phép đo được định nghĩa qua một công thức toán học tổng quát, từ đó suy ra các mô hình hẹp hơn như phép đo xạ ảnh.</p>
-<section id="khuôn-khổ-phép-đo-tổng-quát-general-measurement" class="level2">
-<h2 class="anchored" data-anchor-id="khuôn-khổ-phép-đo-tổng-quát-general-measurement">Khuôn khổ Phép đo Tổng quát (General Measurement)</h2>
-<p>Một phép đo lượng tử được đặc trưng bởi một tập hợp các toán tử đo lường (measurement operators) <span class="math inline">\{M_m\}</span>, tác động trực tiếp lên không gian trạng thái (không gian Hilbert) của hệ thống. Chỉ số <span class="math inline">m</span> đại diện cho các kết quả có thể xảy ra của phép đo.</p>
-<ul>
-<li>Xác suất đo lường (Born Rule): Nếu trạng thái của hệ ngay trước phép đo được mô tả bởi ket <span class="math inline">\vert{}\psi\rangle</span>, xác suất quan sát được kết quả <span class="math inline">m</span> là:</li>
-</ul>
-<p><span class="math display">
-p(m) = \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle
-</span></p>
-<ul>
-<li>Sự sụp đổ hàm sóng (Post-measurement State): Ngay sau khi thực hiện phép đo và thu được kết quả <span class="math inline">m</span>, hệ không còn ở trạng thái chồng chập ban đầu. Nó “sụp đổ” gián đoạn (collapse) về một trạng thái mới:</li>
-</ul>
-<p><span class="math display">
-\vert{}\psi'\rangle = \frac{M_m \vert{}\psi\rangle}{\sqrt{p(m)}}
-</span></p>
-<p>Mẫu số <span class="math inline">\sqrt{p(m)}</span> đóng vai trò vô hướng hóa, đảm bảo vector trạng thái mới <span class="math inline">\vert{}\psi'\rangle</span> được tái chuẩn hóa để có độ dài bằng 1 (tuân thủ Định đề 1).</p>
-<ul>
-<li>Điều kiện đầy đủ (Completeness Equation): Tổng xác suất của tất cả các kết quả đo lường khả dĩ trên toàn bộ không gian mẫu phải luôn bằng 1 (<span class="math inline">\sum_m p(m) = 1</span> với mọi <span class="math inline">\vert{}\psi\rangle</span>). Do đó, tập hợp các toán tử đo lường bắt buộc phải thỏa mãn tính phân giải đơn vị (resolution of the identity):</li>
-</ul>
-<p><span class="math display">
-\sum_m M_m^\dagger M_m = I
-</span></p>
-</section>
-<section id="bản-chất-động-lực-học-của-phép-đo" class="level2">
-<h2 class="anchored" data-anchor-id="bản-chất-động-lực-học-của-phép-đo">Bản chất Động lực học của Phép đo</h2>
-<p>Khác với sự tiến hóa thời gian trơn tru, tuyến tính và hoàn toàn có thể đảo ngược được điều khiển bởi toán tử Unita / Phương trình Schrödinger ở Định đề 2, Định đề 3 mô tả một quá trình phi tuyến tính và bất thuận nghịch. Việc trích xuất thông tin vật lý bắt buộc phải phá hủy một phần hoặc toàn bộ tính chồng chập lượng tử chưa quan sát được của hệ thống, đánh dấu ranh giới giữa thế giới lượng tử và thực tại cơ học cổ điển.</p>
-</section>
-</div>
-</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1395,41 +1290,6 @@ p(m) = \langle\psi\vert{}P_m\vert{}\psi\rangle, \tag{2.103}
 </section>
 <section id="povm-measurements" class="level1">
 <h1>6. POVM measurements</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Phép đo POVM (Positive Operator-Valued Measure) là hệ quả toán học trực tiếp từ khuôn khổ đo lường tổng quát, được tối ưu hóa cho các bài toán mà ta chỉ quan tâm đến thống kê xác suất của các kết quả, thay vì trạng thái vật lý của hệ thống sau khi đo.</p>
-<section id="định-nghĩa-toán-học-của-povm" class="level2">
-<h2 class="anchored" data-anchor-id="định-nghĩa-toán-học-của-povm">Định nghĩa Toán học của POVM</h2>
-<p>Từ công thức đo lường tổng quát với tập toán tử <span class="math inline">\{M_m\}</span>, xác suất để thu được kết quả <span class="math inline">m</span> trên trạng thái <span class="math inline">\vert{}\psi\rangle</span> là <span class="math inline">p(m) = \langle \psi \vert{} M_m^\dagger M_m \vert{} \psi \rangle</span>.</p>
-<p>Ta định nghĩa toán tử mới <span class="math inline">E_m \equiv M_m^\dagger M_m</span>. Tập hợp các toán tử <span class="math inline">\{E_m\}</span> cấu thành một POVM, với mỗi <span class="math inline">E_m</span> là một phần tử POVM. Tập hợp này hợp lệ khi thỏa mãn hai tiên đề:</p>
-<ul>
-<li><p>Tính nửa xác định dương (Positive Semi-definite): <span class="math inline">E_m \ge 0</span>, đảm bảo xác suất thu được <span class="math inline">p(m) = \langle \psi \vert{} E_m \vert{} \psi \rangle</span> luôn là một số thực không âm.</p></li>
-<li><p>Tính phân giải đơn vị (Completeness): <span class="math inline">\sum_m E_m = I</span>, bảo toàn tổng xác suất của toàn bộ không gian mẫu bằng 1.</p></li>
-</ul>
-</section>
-<section id="sự-vượt-trội-so-với-phép-đo-xạ-ảnh-projective-measurement" class="level2">
-<h2 class="anchored" data-anchor-id="sự-vượt-trội-so-với-phép-đo-xạ-ảnh-projective-measurement">Sự vượt trội so với Phép đo Xạ ảnh (Projective Measurement)</h2>
-<p>Trong phép đo xạ ảnh, các toán tử đo lường là các toán tử chiếu (<span class="math inline">P_m^2 = P_m</span>) và bắt buộc phải trực giao lẫn nhau (<span class="math inline">P_m P_n = \delta_{mn} P_m</span>). Ràng buộc không gian tuyến tính này tạo ra một giới hạn vật lý cứng: số lượng kết quả đo tối đa không thể vượt quá số chiều của không gian Hilbert. Ví dụ, một qubit (<span class="math inline">\mathbb{C}^2</span>) đo bằng phép chiếu chỉ cho ra tối đa 2 kết quả trực giao (như 0 và 1).</p>
-<p>POVM loại bỏ hoàn toàn ràng buộc trực giao này. Các phần tử <span class="math inline">E_m</span> không cần là phép chiếu, cho phép một hệ lượng tử bị “chia cắt” thành số lượng kết quả lớn hơn số chiều của chính nó.</p>
-</section>
-<section id="ứng-dụng-thực-tiễn-trong-trích-xuất-thông-tin" class="level2">
-<h2 class="anchored" data-anchor-id="ứng-dụng-thực-tiễn-trong-trích-xuất-thông-tin">Ứng dụng thực tiễn trong Trích xuất Thông tin</h2>
-<p>Lý thuyết thông tin lượng tử dựa nhiều vào POVM vì nó đại diện cho công cụ đo lường tối ưu nhất khả thi về mặt toán học:</p>
-<ul>
-<li><p>Phân biệt trạng thái không mơ hồ (Unambiguous State Discrimination): Phép đo xạ ảnh không thể phân biệt hoàn hảo hai trạng thái không trực giao (ví dụ <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}+\rangle</span>). Bằng POVM, ta có thể thiết lập một không gian đo với 3 phần tử: <span class="math inline">E_1</span> (chắc chắn là <span class="math inline">\vert{}0\rangle</span>), <span class="math inline">E_2</span> (chắc chắn là <span class="math inline">\vert{}+\rangle</span>), và <span class="math inline">E_3</span> (kết quả vô giá trị). Mặc dù phải chấp nhận một tỷ lệ rủi ro rơi vào <span class="math inline">E_3</span>, khi kết quả rơi vào <span class="math inline">E_1</span> hoặc <span class="math inline">E_2</span>, độ chính xác là 100% — điều bất khả thi với ma trận trực giao.</p></li>
-<li><p>Định lý Dilation của Neumark: Về mặt vật lý, một phép đo POVM trên hệ chính thực chất là một phép đo xạ ảnh diễn ra trong một không gian lớn hơn (bao gồm hệ chính liên kết tensor với một hệ phụ trợ - ancilla qubit). POVM là công cụ toán học cô đọng để tính toán trực tiếp trên hệ chính mà không cần mô phỏng ma trận khổng lồ của môi trường vĩ mô xung quanh.</p></li>
-</ul>
-</section>
-</div>
-</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1527,7 +1387,7 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 </span></p>
 <p>Trong trạng thái đầu tiên, biên độ của <span class="math inline">\vert{}1\rangle</span> là <span class="math inline">1/\sqrt{2}</span>. Đối với trạng thái thứ hai, biên độ là <span class="math inline">-1/\sqrt{2}</span>. Trong mỗi trường hợp, độ lớn của các biên độ là như nhau, nhưng chúng khác nhau về dấu. Tổng quát hơn, chúng ta nói rằng hai biên độ, <span class="math inline">a</span> và <span class="math inline">b</span>, khác nhau một pha tương đối nếu tồn tại một số thực <span class="math inline">\theta</span> sao cho <span class="math inline">a = \exp(i\theta)b</span>. Tổng quát hơn nữa, hai trạng thái được nói là sai khác một pha tương đối trong một cơ sở nào đó nếu mỗi biên độ trong cơ sở đó liên hệ với nhau bằng một hệ số pha như vậy. Ví dụ, hai trạng thái hiển thị ở trên là giống nhau sai khác một độ lệch pha tương đối bởi vì các biên độ <span class="math inline">\vert{}0\rangle</span> hoàn toàn giống hệt (hệ số pha tương đối bằng 1), và các biên độ <span class="math inline">\vert{}1\rangle</span> chỉ khác nhau một hệ số pha tương đối là <span class="math inline">-1</span>. Sự khác biệt giữa các hệ số pha tương đối và hệ số pha toàn cục là đối với pha tương đối, các hệ số pha có thể thay đổi từ biên độ này sang biên độ khác. Điều này làm cho pha tương đối trở thành một khái niệm phụ thuộc vào cơ sở (basis-dependent), không giống như pha toàn cục. Kết quả là, các trạng thái chỉ khác nhau về pha tương đối trong một cơ sở nào đó sẽ gây ra những khác biệt có thể quan sát được về mặt vật lý trong thống kê phép đo, và không thể coi những trạng thái này là tương đương về mặt vật lý, như chúng ta vẫn làm với các trạng thái khác nhau một hệ số pha toàn cục.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1536,7 +1396,7 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Biểu diễn các trạng thái <span class="math inline">(\vert{}0\rangle + \vert{}1\rangle)/\sqrt{2}</span> và <span class="math inline">(\vert{}0\rangle - \vert{}1\rangle)/\sqrt{2}</span> trong một cơ sở mà ở đó chúng không giống nhau theo kiểu sai khác một độ lệch pha tương đối.</p>
 </div>
@@ -1545,42 +1405,6 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 </section>
 <section id="composite-systems" class="level1">
 <h1>8. Composite systems</h1>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Định đề 4 (Postulate 4) hoàn thiện nền tảng của cơ học lượng tử bằng cách cung cấp công cụ toán học để kết nối các hệ thống lượng tử biệt lập lại với nhau. Đây là nguồn gốc sinh ra đặc tính phi cổ điển kỳ lạ và mạnh mẽ nhất của vật lý lượng tử: sự vướng víu (Quantum Entanglement).</p>
-<section id="phát-biểu-toán-học-của-định-đề-4" class="level2">
-<h2 class="anchored" data-anchor-id="phát-biểu-toán-học-của-định-đề-4">Phát biểu toán học của Định đề 4</h2>
-<p>Không gian trạng thái của một hệ lượng tử phức hợp (composite system) là tích tensor (tensor product) của các không gian trạng thái của các hệ thành phần.</p>
-<p>Nếu hệ <span class="math inline">A</span> có không gian Hilbert <span class="math inline">\mathcal{H}_A</span> và hệ <span class="math inline">B</span> có không gian Hilbert <span class="math inline">\mathcal{H}_B</span>, thì hệ phức hợp <span class="math inline">AB</span> sẽ cư trú trong không gian:</p>
-<p><span class="math display">
-\mathcal{H}_{AB} = \mathcal{H}_A \otimes \mathcal{H}_B
-</span></p>
-</section>
-<section id="cấu-trúc-trạng-thái-và-không-gian-toán-học" class="level2">
-<h2 class="anchored" data-anchor-id="cấu-trúc-trạng-thái-và-không-gian-toán-học">Cấu trúc Trạng thái và Không gian Toán học</h2>
-<ul>
-<li><p>Trạng thái tích (Product State): Nếu hệ <span class="math inline">A</span> độc lập ở trạng thái <span class="math inline">\vert{}\psi_A\rangle</span> và hệ <span class="math inline">B</span> ở trạng thái <span class="math inline">\vert{}\psi_B\rangle</span>, trạng thái chung của toàn hệ là <span class="math inline">\vert{}\psi_A\rangle \otimes \vert{}\psi_B\rangle</span>, thường được viết gọn là <span class="math inline">\vert{}\psi_A\rangle\vert{}\psi_B\rangle</span> hoặc <span class="math inline">\vert{}\psi_A \psi_B\rangle</span>.</p></li>
-<li><p>Sự bùng nổ số chiều (Dimensionality Explosion): Số chiều của hệ phức hợp là tích số chiều của các hệ thành phần: <span class="math inline">\dim(\mathcal{H}_{AB}) = \dim(\mathcal{H}_A) \times \dim(\mathcal{H}_B)</span>. Khác với không gian vector cổ điển (cộng số chiều khi ghép hệ), không gian lượng tử nhân số chiều. Với một hệ gồm <span class="math inline">n</span> qubit, số chiều là <span class="math inline">2^n</span>. Đặc tính này chính là cốt lõi tạo ra sức mạnh tính toán vượt trội của máy tính lượng tử, đồng thời khiến máy tính cổ điển không thể mô phỏng hiệu quả các hệ lượng tử lớn.</p></li>
-<li><p>Toán tử trên hệ phức hợp: Nếu ta áp dụng toán tử unita (tiến hóa) <span class="math inline">U_A</span> lên hệ <span class="math inline">A</span> và <span class="math inline">U_B</span> lên hệ <span class="math inline">B</span>, toán tử chung lên toàn hệ là <span class="math inline">U_{AB} = U_A \otimes U_B</span>. Tương tự với phép đo, nếu chỉ đo hệ <span class="math inline">A</span> bằng toán tử <span class="math inline">M_A</span> và không làm gì hệ <span class="math inline">B</span>, toán tử đo lường chung sẽ là <span class="math inline">M_A \otimes I</span>.</p></li>
-</ul>
-</section>
-<section id="hệ-quả-tối-hậu-trạng-thái-vướng-víu-entangled-states" class="level2">
-<h2 class="anchored" data-anchor-id="hệ-quả-tối-hậu-trạng-thái-vướng-víu-entangled-states">Hệ quả Tối hậu: Trạng thái Vướng víu (Entangled States)</h2>
-<p>Vì <span class="math inline">\mathcal{H}_{AB}</span> là một không gian vector tuyến tính, Nguyên lý chồng chập (Định đề 1) cho phép tạo ra tổ hợp tuyến tính của các trạng thái tích. Tuy nhiên, về mặt đại số, phần lớn các vector trong không gian tổng <span class="math inline">\mathcal{H}_A \otimes \mathcal{H}_B</span> không thể được phân tích ngược lại thành dạng tích của một ket hệ <span class="math inline">A</span> và một ket hệ <span class="math inline">B</span>.</p>
-<p>Những trạng thái không thể viết dưới dạng <span class="math inline">\vert{}\psi_{AB}\rangle = \vert{}\psi_A\rangle \otimes \vert{}\psi_B\rangle</span> được gọi là trạng thái vướng víu.Ví dụ tiêu biểu nhất là trạng thái Bell trên hệ 2 qubit:</p>
-<p><span class="math display">
-\vert{}\Phi^+\rangle = \frac{1}{\sqrt{2}} (\vert{}00\rangle + \vert{}11\rangle)
-</span></p>
-<p>Trong trạng thái này, thông tin vật lý không nằm ở từng qubit riêng lẻ mà được mã hóa hoàn toàn trong mối tương quan toàn cục giữa chúng.</p>
-<p>Để phân tích cấu trúc toán học của các trạng thái thuần túy lưỡng cực (bipartite pure states) này, công cụ đại số tuyến tính mạnh nhất là Phân tích Schmidt (Schmidt Decomposition). Bất kỳ trạng thái <span class="math inline">\vert{}\psi_{AB}\rangle</span> nào cũng có thể được phân tách thành <span class="math inline">\sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle</span>. Một trạng thái được xác nhận là vướng víu khi và chỉ khi nó có nhiều hơn một hệ số Schmidt <span class="math inline">\lambda_i</span> khác không, minh chứng chặt chẽ cho việc không thể chia tách hệ thống thành các thành phần độc lập.</p>
-</section>
-</div>
-</div>
-</div>
 <p>Giả sử chúng ta quan tâm đến một hệ lượng tử phức hợp được tạo thành từ hai (hoặc nhiều) hệ vật lý riêng biệt. Chúng ta nên mô tả các trạng thái của hệ phức hợp như thế nào? Tiên đề sau đây mô tả cách không gian trạng thái của một hệ phức hợp được xây dựng từ các không gian trạng thái của các hệ thành phần.</p>
 </section>
 <section id="tiên-đề-4" class="level1 postulates">
@@ -1592,7 +1416,7 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 <hr>
 <p>Một loạt các ký hiệu khác nhau cho các hệ phức hợp xuất hiện trong các tài liệu. Một phần lý do cho sự sinh sôi nảy nở này là các ký hiệu khác nhau thích ứng tốt hơn với các ứng dụng khác nhau, và chúng ta cũng sẽ thấy tiện lợi khi thỉnh thoảng giới thiệu một số ký hiệu chuyên biệt. Tại thời điểm này, chỉ cần đề cập đến một ký hiệu chỉ số dưới hữu ích để biểu thị các trạng thái và toán tử trên các hệ thống khác nhau, khi nó không rõ ràng từ ngữ cảnh. Ví dụ, trong một hệ chứa ba qubit, <span class="math inline">X_2</span> là toán tử Pauli <span class="math inline">\sigma_x</span> tác dụng lên qubit thứ hai.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1601,7 +1425,7 @@ E_3 \equiv I - E_1 - E_2. \tag{2.120}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng giá trị trung bình của đại lượng quan sát được <span class="math inline">X_1 Z_2</span> đối với một hệ hai qubit được đo ở trạng thái <span class="math inline">(\vert{}00\rangle + \vert{}11\rangle)/\sqrt{2}</span> là bằng không.</p>
 </div>
@@ -1625,7 +1449,7 @@ U\vert{}\psi\rangle\vert{}0\rangle \equiv \sum_m M_m\vert{}\psi\rangle\vert{}m\r
 </span></p>
 <p>Theo kết quả của Bài tập 2.67, suy ra rằng <span class="math inline">U</span> có thể được mở rộng thành một toán tử đơn nhất trên không gian <span class="math inline">Q \otimes M</span>, mà chúng ta cũng ký hiệu là <span class="math inline">U</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1634,7 +1458,7 @@ U\vert{}\psi\rangle\vert{}0\rangle \equiv \sum_m M_m\vert{}\psi\rangle\vert{}m\r
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">V</span> là một không gian Hilbert với không gian con <span class="math inline">W</span>. Giả sử <span class="math inline">U: W \to V</span> là một toán tử tuyến tính bảo toàn tích vô hướng, tức là, đối với bất kỳ <span class="math inline">\vert{}w_1\rangle</span> và <span class="math inline">\vert{}w_2\rangle</span> nào trong <span class="math inline">W</span>,</p>
 <p><span class="math display">
@@ -1671,7 +1495,7 @@ p(m) = \langle\psi\vert{}\langle0\vert{}U^\dagger P_m U\vert{}\psi\rangle\vert{}
 </span></p>
 <p>Trạng thái này có một tính chất đáng chú ý là không có các trạng thái qubit đơn lẻ <span class="math inline">\vert{}a\rangle</span> và <span class="math inline">\vert{}b\rangle</span> nào sao cho <span class="math inline">\vert{}\psi\rangle = \vert{}a\rangle\vert{}b\rangle</span>, một thực tế mà bây giờ bạn nên tự thuyết phục bản thân:</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1680,7 +1504,7 @@ p(m) = \langle\psi\vert{}\langle0\vert{}U^\dagger P_m U\vert{}\psi\rangle\vert{}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng <span class="math inline">\vert{}\psi\rangle \neq \vert{}a\rangle\vert{}b\rangle</span> đối với mọi trạng thái qubit đơn lẻ <span class="math inline">\vert{}a\rangle</span> và <span class="math inline">\vert{}b\rangle</span>.</p>
 </div>

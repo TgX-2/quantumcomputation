@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -619,6 +619,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Định lý Schmidt nói rằng mọi trạng thái thuần lưỡng hệ <span class="math inline">AB</span> viết được <span class="math inline">|\psi\rangle=\sum_i\lambda_i|i_A\rangle|i_B\rangle</span>, với hai bộ vector trực chuẩn, <span class="math inline">\lambda_i\ge0</span> và <span class="math inline">\sum_i\lambda_i^2=1</span>. Các <span class="math inline">\lambda_i</span> là giá trị kỳ dị của ma trận hệ số; bình phương của chúng là các trị riêng khác không chung của hai ma trận mật độ rút gọn. Số hệ số Schmidt khác không bất biến dưới unita cục bộ và bằng một khi, và chỉ khi, trạng thái là tích; do đó nó đo vướng víu của trạng thái thuần hai phần. Hai hệ con có cùng phổ rút gọn dù trạng thái tổng thể không biểu lộ đối xứng. Phần sau xây dựng sự tinh chế: với <span class="math inline">\rho^A=\sum_i p_i|i_A\rangle\langle i_A|</span>, thêm hệ tham chiếu <span class="math inline">R</span> để tạo <span class="math inline">|AR\rangle=\sum_i\sqrt{p_i}|i_A\rangle|i_R\rangle</span>, sao cho <span class="math inline">\mathrm{tr}_R(|AR\rangle\langle AR|)=\rho^A</span>. Mọi trạng thái hỗn hợp đều có thể tinh chế; các cách tinh chế khác nhau liên hệ qua unita trên hệ tham chiếu. Kết quả Schmidt áp dụng cho trạng thái thuần hai phần, không mặc nhiên mở rộng thành dạng tương tự cho mọi hệ ba phần.</p>
+</div>
+</div>
 <p>Các toán tử mật độ và vết riêng phần chỉ là sự khởi đầu của một loạt các công cụ hữu ích cho việc nghiên cứu các hệ lượng tử phức hợp, vốn là trọng tâm của tính toán lượng tử và thông tin lượng tử. Hai công cụ bổ sung có giá trị lớn là phân tích Schmidt và sự thanh lọc (purifications). Trong phần này chúng ta trình bày cả hai công cụ này, và cố gắng mang lại hương vị về sức mạnh của chúng.</p>
 <section id="định-lý-2.7-phân-tích-schmidt" class="level1 postulates">
 <h1>Định lý 2.7: (Phân tích Schmidt)</h1>
@@ -652,7 +665,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -661,14 +674,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Mở rộng chứng minh của phân tích Schmidt cho trường hợp <span class="math inline">A</span> và <span class="math inline">B</span> có thể có không gian trạng thái với số chiều khác nhau.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -677,7 +690,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">ABC</span> là một hệ lượng tử gồm ba thành phần. Hãy đưa ra ví dụ chứng tỏ rằng có những trạng thái lượng tử <span class="math inline">\vert{}\psi\rangle</span> của các hệ như vậy không thể viết dưới dạng <span class="math display">
 \vert{}\psi\rangle = \sum_i \lambda_i \vert{}i_A\rangle \vert{}i_B\rangle \vert{}i_C\rangle, \tag{2.206}
@@ -688,7 +701,7 @@ window.Quarto = {
 </div>
 <p>Các cơ sở <span class="math inline">\vert{}i_A\rangle</span> và <span class="math inline">\vert{}i_B\rangle</span> được gọi lần lượt là các cơ sở Schmidt (Schmidt bases) cho <span class="math inline">A</span> và <span class="math inline">B</span>, và số lượng các giá trị <span class="math inline">\lambda_i</span> khác không được gọi là số Schmidt (Schmidt number) của trạng thái <span class="math inline">\vert{}\psi\rangle</span>. Số Schmidt là một thuộc tính quan trọng của một hệ lượng tử phức hợp, về một khía cạnh nào đó, nó định lượng ‘lượng’ vướng víu giữa các hệ <span class="math inline">A</span> và <span class="math inline">B</span>. Để có được khái niệm về lý do tại sao lại như vậy, hãy xem xét tính chất hiển nhiên nhưng quan trọng sau đây: số Schmidt được bảo toàn dưới các phép biến đổi đơn nhất tác dụng chỉ trên riêng hệ <span class="math inline">A</span> hoặc hệ <span class="math inline">B</span>. Để thấy điều này, lưu ý rằng nếu <span class="math inline">\sum_i \lambda_i \vert{}i_A\rangle\vert{}i_B\rangle</span> là phân tích Schmidt cho <span class="math inline">\vert{}\psi\rangle</span> thì <span class="math inline">\sum_i \lambda_i (U\vert{}i_A\rangle)\vert{}i_B\rangle</span> là phân tích Schmidt cho <span class="math inline">U\vert{}\psi\rangle</span>, trong đó <span class="math inline">U</span> là một toán tử đơn nhất tác dụng chỉ trên riêng hệ <span class="math inline">A</span>. Các tính chất bất biến đại số của loại này làm cho số Schmidt trở thành một công cụ rất hữu ích.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -697,7 +710,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng một trạng thái <span class="math inline">\vert{}\psi\rangle</span> của một hệ phức hợp <span class="math inline">AB</span> là một trạng thái tích khi và chỉ khi nó có số Schmidt bằng <span class="math inline">1</span>. Chứng minh rằng <span class="math inline">\vert{}\psi\rangle</span> là một trạng thái tích khi và chỉ khi <span class="math inline">\rho^A</span> (và do đó <span class="math inline">\rho^B</span>) là các trạng thái thuần.</p>
 </div>
@@ -724,7 +737,7 @@ window.Quarto = {
 <p>Lưu ý mối quan hệ mật thiết của phân tích Schmidt với sự thanh lọc: thủ tục được sử dụng để thanh lọc một trạng thái hỗn hợp của hệ <span class="math inline">A</span> là định nghĩa một trạng thái thuần mà cơ sở Schmidt của nó đối với hệ <span class="math inline">A</span> chính là cơ sở mà trong đó trạng thái hỗn hợp là ma trận đường chéo, với các hệ số Schmidt là căn bậc hai của các trị riêng của toán tử mật độ đang được thanh lọc</p>
 <p>Trong phần này, chúng ta đã giải thích hai công cụ để nghiên cứu các hệ lượng tử phức hợp, phân tích Schmidt và sự thanh lọc. Những công cụ này sẽ là không thể thiếu đối với việc nghiên cứu tính toán lượng tử và thông tin lượng tử, đặc biệt là thông tin lượng tử, chủ đề của Phần III của cuốn sách này.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -733,7 +746,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xét một hệ phức hợp gồm hai qubit. Hãy tìm các phân tích Schmidt của các trạng thái</p>
 <p><span class="math display">
@@ -743,7 +756,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -752,25 +765,9 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Giả sử <span class="math inline">\vert{}\psi\rangle</span> và <span class="math inline">\vert{}\varphi\rangle</span> là hai trạng thái thuần của một hệ lượng tử phức hợp với các thành phần <span class="math inline">A</span> và <span class="math inline">B</span>, có các hệ số Schmidt giống hệt nhau. Chứng minh rằng tồn tại các phép biến đổi đơn nhất <span class="math inline">U</span> trên hệ <span class="math inline">A</span> và <span class="math inline">V</span> trên hệ <span class="math inline">B</span> sao cho <span class="math inline">\vert{}\psi\rangle = (U \otimes V)\vert{}\varphi\rangle</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.81: (Bậc tự do trong các thanh lọc)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Gọi <span class="math inline">\vert{}AR_1\rangle</span> và <span class="math inline">\vert{}AR_2\rangle</span> là hai sự thanh lọc của một trạng thái <span class="math inline">\rho^A</span> sang một hệ phức hợp <span class="math inline">AR</span>. Chứng minh rằng tồn tại một phép biến đổi đơn nhất <span class="math inline">U_R</span> tác dụng lên hệ <span class="math inline">R</span> sao cho <span class="math inline">\vert{}AR_1\rangle = (I_A \otimes U_R)\vert{}AR_2\rangle</span>.</p>
+<p>Giả sử <span class="math inline">\vert{}\psi\rangle</span> và <span class="math inline">\vert{}\varphi\rangle</span> là hai trạng thái thuần của một hệ lượng tử phức hợp với các thành phần <span class="math inline">A</span> và <span class="math inline">B</span>, có các hệ số Schmidt giống hệt nhau. Chứng minh rằng tồn tại các phép biến đổi đơn nhất <span class="math inline">U</span> trên hệ <span class="math inline">A</span> và <span class="math inline">V</span> trên hệ <span class="math inline">B</span> sao cho <span class="math inline">\vert{}\psi\rangle = (U \otimes V)\vert{}\varphi\rangle</span>.</p>
 </div>
 </div>
 </div>
@@ -780,11 +777,27 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 2.82:
+<span class="screen-reader-only">Note</span>Bài tập 2.81: (Bậc tự do trong các thanh lọc)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Gọi <span class="math inline">\vert{}AR_1\rangle</span> và <span class="math inline">\vert{}AR_2\rangle</span> là hai sự thanh lọc của một trạng thái <span class="math inline">\rho^A</span> sang một hệ phức hợp <span class="math inline">AR</span>. Chứng minh rằng tồn tại một phép biến đổi đơn nhất <span class="math inline">U_R</span> tác dụng lên hệ <span class="math inline">R</span> sao cho <span class="math inline">\vert{}AR_1\rangle = (I_A \otimes U_R)\vert{}AR_2\rangle</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 2.82:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">\{p_i, \vert{}\psi_i\rangle\}</span> là một tập hợp các trạng thái sinh ra một ma trận mật độ <span class="math inline">\rho = \sum_i p_i \vert{}\psi_i\rangle\langle\psi_i\vert{}</span> cho một hệ lượng tử <span class="math inline">A</span>. Giới thiệu một hệ <span class="math inline">R</span> với cơ sở trực chuẩn <span class="math inline">\vert{}i\rangle</span>.</p>
 <ol type="1">

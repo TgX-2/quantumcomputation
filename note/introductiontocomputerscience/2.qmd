@@ -10,6 +10,15 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- $O,\Omega,\Theta$ lần lượt là cận trên, cận dưới và chặn khớp. Sắp xếp compare-and-swap tốn $\Theta(n^2)$; heapsort dùng $O(n\log n)$, còn đếm $n!$ thứ tự cho cận dưới $\Omega(n\log n)$. Đa thức so với siêu đa thức là tiêu chí thô: $2^{n/1000}$ có thể thực tế hơn $n^{1000}$ ở quy mô thường gặp.
+- Độ phức tạp xét thời gian và không gian. Luận đề Church–Turing mạnh giả định mô phỏng đa thức bằng máy Turing xác suất—điều lượng tử thách thức. $P$ giải trong đa thức; $NP$ kiểm chứng chứng cứ “có”; $coNP$ chứng cứ “không”. $P\subseteq NP$, còn $P=NP$ bỏ ngỏ.
+- Quy giảm đa thức truyền độ khó: Hamilton NP-đầy đủ; Euler ở $P$ theo định lý Euler (đồ thị liên thông, bậc chẵn). Cook–Levin chứng minh CSAT NP-đầy đủ, nền tảng cho SAT/3SAT. Chương khảo sát $L\subseteq P\subseteq NP\subseteq PSPACE\subseteq EXP$, xấp xỉ và BPP; các quan hệ nghiêm ngặt còn mở.
+- Landauer: xóa mỗi bit tiêu tán ít nhất $k_BT\ln2$. Fredkin/Toffoli thực hiện tính toán khả nghịch với ancilla; tính toán lùi khử “rác” theo $(x,y)\mapsto(x,y\oplus f(x))$. Nhiễu và sửa lỗi khiến tiết kiệm năng lượng chỉ là lý tưởng.
+:::
+
 Việc phân tích các bài toán tính toán phụ thuộc vào câu trả lời cho ba câu hỏi nền tảng:   
 
 (1) **Một bài toán tính toán là gì?** 
@@ -103,20 +112,6 @@ Giả sử một danh sách $n$ phần tử được sắp xếp bằng cách á
 :::
 
 # 2. Computational complexity
-
-:::{.callout}
-# tl;dr
-
-Một bài toán dễ, dễ xử lý, khả thi (easy, tractable, feasible) nếu tồn tại một thuật để giải quyết bài toán đó sử dụng tài nguyên đa thức.
-
-Một bài toán khó, khó xử lý, bất khả thi (hard, intractable, infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.
-
----
-
-Sự phân loại này khá là thô sô, ví dụ như người ta coi hàm mũ $2^{n/1000}$ là khó hơn $n^1000$, mặc dù thực tế là khi n đủ lớn thì cái đầu tiên dễ hơn nhiều. Nhưng mà chúng ta phải chấp nhận thôi.
-
-
-:::
 
 > *'The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me'*
 > – Stephen Cook

@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -593,7 +593,6 @@ window.Quarto = {
   <li><a href="#algorithm-quantum-simulation" id="toc-algorithm-quantum-simulation" class="nav-link" data-scroll-target="#algorithm-quantum-simulation">Algorithm: Quantum simulation</a></li>
   <li><a href="#an-illustrative-example" id="toc-an-illustrative-example" class="nav-link" data-scroll-target="#an-illustrative-example">3. An illustrative example</a></li>
   <li><a href="#perspectives-on-quantum-simulation" id="toc-perspectives-on-quantum-simulation" class="nav-link" data-scroll-target="#perspectives-on-quantum-simulation">4. Perspectives on quantum simulation</a></li>
-  <li><a href="#siêu-tóm-tắt" id="toc-siêu-tóm-tắt" class="nav-link" data-scroll-target="#siêu-tóm-tắt">Siêu tóm tắt</a></li>
   </ul>
 </nav>
     </div>
@@ -625,6 +624,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chương giải thích vì sao mô phỏng lượng tử là ứng dụng tự nhiên của máy tính lượng tử: trạng thái (n) qubit có (2^n) biên độ, nên mô phỏng cổ điển tổng quát tốn kém; tính trực tiếp ma trận (2<sup>n</sup>n) cũng không thực tế. Với Hamiltonian (H), tiến hóa là (|(t)=e^{-iHt}|(0)). Nếu (H=_k H_k) gồm đa thức số hạng cục bộ, từng (e^{-iH_kt}) có thể triển khai hiệu quả; công thức Trotter xử lý các hạng không giao hoán bằng nhiều bước xấp xỉ, và biến thể đối xứng giảm sai số. Thuật toán lặp các bước thời gian, kiểm soát sai số fidelity. Ví dụ hạt trong thế năng rời rạc hóa không gian rồi dùng QFT để đổi giữa biểu diễn vị trí và động lượng; chuỗi Pauli không cục bộ vẫn mô phỏng được bằng cách tính, áp pha theo rồi hoàn tác parity. Mô phỏng hiệu quả không bảo đảm phép đo đại lượng mong muốn cũng hiệu quả, cũng không áp dụng cho mọi Hamiltonian; cân bằng Gibbs còn là bài toán mở. Các ràng buộc đối xứng của boson và fermion cũng có thể được bảo toàn.</p>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘Perhaps […] we need a mathematical theory of quantum automata. […] the quantum state space has far greater capacity than the classical one: for a classical system with N states, its quantum version allowing superposition accommodates <span class="math inline">c^N</span> states. When we join two classical systems, their number of states <span class="math inline">N_1</span> and <span class="math inline">N_2</span> are multiplied, and in the quantum case we get the exponential growth <span class="math inline">c^{N1N2}</span> . […] These crude estimates show that the quantum behavior of the system might be much more complex than its classical simulation.’</em> – Yu Manin (1980)</p>
 </blockquote>
@@ -684,7 +696,7 @@ i\frac{\partial}{\partial t}\psi(x) = \left[ -\frac{1}{2m}\frac{\partial^2}{\par
 <hr>
 <p>Thách thức then chốt trong việc mô phỏng các hệ lượng tử là số lượng theo hàm mũ các phương trình vi phân cần phải được giải. Đối với một qubit tiến hóa theo phương trình Schrödinger, một hệ gồm hai phương trình vi phân phải được giải; đối với hai qubit, là bốn phương trình; và đối với <span class="math inline">n</span> qubit, là <span class="math inline">2^n</span> phương trình. Đôi khi, những phép xấp xỉ sâu sắc có thể được thực hiện giúp làm giảm số lượng hiệu dụng các phương trình liên quan, do đó làm cho việc mô phỏng cổ điển của hệ lượng tử trở nên khả thi. Tuy nhiên, có rất nhiều hệ lượng tử thú vị về mặt vật lý mà chưa có phép xấp xỉ nào như vậy được biết đến.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -693,7 +705,7 @@ i\frac{\partial}{\partial t}\psi(x) = \left[ -\frac{1}{2m}\frac{\partial^2}{\par
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Cho <span class="math inline">\rho</span> là một ma trận mật độ mô tả trạng thái của <span class="math inline">n</span> qubit. Chứng minh rằng việc mô tả <span class="math inline">\rho</span> đòi hỏi <span class="math inline">4^n - 1</span> số thực độc lập.</p>
 <hr>
@@ -725,7 +737,7 @@ H = \sum_{k=1}^L H_k, \tag{4.97}
 </span></p>
 <p>trong đó mỗi <span class="math inline">H_k</span> tác động lên nhiều nhất một số lượng hệ con <span class="math inline">c</span> không đổi, và <span class="math inline">L</span> là một đa thức theo <span class="math inline">n</span>. Ví dụ, các số hạng <span class="math inline">H_k</span> thường chỉ là các tương tác hai vật thể (two-body interactions) như <span class="math inline">X_i X_j</span> và các Hamiltonian một vật thể như <span class="math inline">X_i</span>. Cả hai mô hình Hubbard và Ising đều có Hamiltonian dạng này. Tính cục bộ như vậy là hoàn toàn hợp lý về mặt vật lý, và bắt nguồn ở nhiều hệ thống từ thực tế là hầu hết các tương tác đều giảm đi khi khoảng cách hoặc sự chênh lệch năng lượng tăng lên. Đôi khi có những ràng buộc đối xứng toàn cục bổ sung như thống kê hạt; chúng ta sẽ đề cập đến những điều đó ngay sau đây. Điểm quan trọng là mặc dù <span class="math inline">e^{-iHt}</span> khó tính toán, nhưng <span class="math inline">e^{-iH_kt}</span> tác động lên một hệ con nhỏ hơn rất nhiều, và có thể dễ dàng xấp xỉ bằng cách sử dụng các mạch lượng tử. Nhưng bởi vì <span class="math inline">[H_j, H_k] \neq 0</span> một cách tổng quát, nên <span class="math inline">e^{-iHt} \neq \prod_k e^{-iH_kt}</span>! Vậy thì, làm thế nào <span class="math inline">e^{-iH_kt}</span> có thể hữu ích trong việc xây dựng <span class="math inline">e^{-iHt}</span>?</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -734,14 +746,14 @@ H = \sum_{k=1}^L H_k, \tag{4.97}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Đối với <span class="math inline">H = \sum_k^L H_k</span>, chứng minh rằng <span class="math inline">e^{-iHt} = e^{-iH_1 t} e^{-iH_2 t} \dots e^{-iH_L t}</span> với mọi <span class="math inline">t</span> nếu <span class="math inline">[H_j, H_k] = 0</span>, với mọi <span class="math inline">j, k</span>.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -750,34 +762,10 @@ H = \sum_{k=1}^L H_k, \tag{4.97}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng giới hạn tác động của <span class="math inline">H_k</span> lên nhiều nhất <span class="math inline">c</span> hạt ngụ ý rằng trong tổng (4.97), <span class="math inline">L</span> bị chặn trên bởi một đa thức theo <span class="math inline">n</span>.</p>
 </div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Chúng ta cần giải quyết bài toán, cho biết hệ ở trạng thái t0 = 0, cần tìm trạng thái của hệ ở t bất kỳ. Tức là giải:</p>
-<p><span class="math display">
-\vert \psi(t) \rangle = e^{-iHt} \cdot \vert \psi(0) \rangle
-</span></p>
-<p>Mà ket psi 0 chúng ta đã biết, t thì đề sẽ cho. Vậy cuối cùng công việc của chúng ta là tìm H!</p>
-<p>Nhưng không đơn giản như thế, H có kích thước lên tới <span class="math inline">2^n * 2^n</span>, vậy nên nếu tính ra nó thì sẽ đái.</p>
-<p>Khai triển taylor thì sai số quá lớn.</p>
-<p>Không thể coi nó như là một ma trận Unita rồi ném nó vào bằng CNOT được, tốn tới <span class="math inline">n^24^n</span> cổng để làm.</p>
-<p>Nhưng trong tự nhiên, một eletron ở vị trí x, thì chỉ áp dụng H lên các electron lân cận. Vì vậy chúng ta có thể tách H thành các <span class="math inline">H_k</span>, trong đó k là việc tác dụng đó. (Phương trình 4.97).</p>
-<p>Và việc khai triển ra thành cổng CNOT của <span class="math inline">exp(-iH_kt)</span> là nhỏ, và đơn giản.</p>
-<p>Vậy là đã xong rồi đúng không? <span class="math inline">H = H_1 + H_2 + ... H_L</span> thì <span class="math inline">e^{-iHt} = e^{-i(H_1 + H_2 + ... + H_L)} = e^{-iH_1t} \cdot e^{-iH_2t} \cdot ... \cdot e^{-iH_Lt}</span>?</p>
-<p>Nhưng đây là ma trận, AB có thể khác BA. Nhưng thật may cuộc đời đã đẻ ra định lý ở ngay sau đây.</p>
 </div>
 </div>
 <hr>
@@ -1003,16 +991,6 @@ H = \sum_{k=1}^L H_k, \tag{kiểu tổng quát}
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="siêu-tóm-tắt" class="level1">
-<h1>Siêu tóm tắt</h1>
-<ul>
-<li><p>Tính vạn năng (Universality): Bất kỳ phép toán unita nào trên <span class="math inline">n</span> qubit đều có thể được triển khai chính xác bằng cách kết hợp các cổng một qubit và cổng controlled-NOT.</p></li>
-<li><p>Tính vạn năng với một tập hợp rời rạc (Universality with a discrete set): Cổng Hadamard, cổng phase, cổng controlled-NOT, và cổng <span class="math inline">\pi/8</span> là vạn năng đối với tính toán lượng tử, theo nghĩa là một phép toán unita tùy ý trên <span class="math inline">n</span> qubit có thể được xấp xỉ đến một độ chính xác tùy ý <span class="math inline">\epsilon &gt; 0</span> bằng cách sử dụng một mạch chỉ bao gồm các cổng này. Việc thay thế cổng <span class="math inline">\pi/8</span> trong danh sách này bằng cổng Toffoli cũng tạo ra một họ vạn năng.</p></li>
-<li><p>Không phải mọi phép toán unita đều có thể được triển khai một cách hiệu quả (Not all unitary operations can be efficiently implemented): Tồn tại các phép toán unita trên <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon) / \log(n))</span> cổng để xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span> khi sử dụng bất kỳ tập hợp cổng hữu hạn nào.</p></li>
-<li><p>Mô phỏng (Simulation): Đối với một Hamiltonian <span class="math inline">H = \sum_k H_k</span> là tổng của một số lượng đa thức các số hạng <span class="math inline">H_k</span> sao cho các mạch lượng tử hiệu quả cho <span class="math inline">H_k</span> có thể được cấu trúc, một máy tính lượng tử có thể mô phỏng một cách hiệu quả sự tiến hóa <span class="math inline">e^{-iHt}</span> và xấp xỉ <span class="math inline">\vert{}\psi(t)\rangle = e^{-iHt}\vert{}\psi(0)\rangle</span>, cho trước <span class="math inline">\vert{}\psi(0)\rangle</span></p></li>
-</ul>
 
 
 </section>

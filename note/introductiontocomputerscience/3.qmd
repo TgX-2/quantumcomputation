@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- Máy song song rút ngắn thời gian nhưng không vượt máy Turing về tổng tài nguyên. Máy DNA minh họa tìm kiếm song song đường Hamilton bằng lọc các phân tử, song số lượng cần thiết tăng hàm mũ. Máy tương tự khai thác đại lượng liên tục, nhưng nhiễu giới hạn trạng thái phân biệt nên không tự động mạnh hơn máy số.
+- Von Neumann chỉ ra rằng có thể khắc phục linh kiện lỗi với overhead đa thức; song song có thể hạn chế tích lũy nhiễu, trong khi máy lượng tử cần sửa lỗi. Tính toán phân tán không tăng sức tính toán cơ bản nhưng khiến giao tiếp trở thành tài nguyên; trao đổi lượng tử đôi khi giảm chi phí đó.
+- Các định luật vật lý chi phối hiện thực hóa và sức mạnh máy tính, nối tính toán lượng tử với thuật toán và độ phức tạp. Phần bài tập mở rộng sang máy Minsky, Fractran, tính không quyết định, logic khả nghịch và xấp xỉ TSP.
+:::
+
 Trong một phần giới thiệu ngắn như chương này, hoàn toàn không thể bao quát chi tiết tất cả những ý tưởng vĩ đại của một lĩnh vực phong phú như khoa học máy tính. Chúng tôi hy vọng đã truyền tải được cho bạn phần nào ý nghĩa của việc tư duy như một nhà khoa học máy tính, và cung cấp một hệ thống từ vựng cơ bản cùng cái nhìn tổng quan về một số khái niệm nền tảng quan trọng trong việc thấu hiểu quá trình tính toán. Để kết thúc chương này, chúng ta sẽ lướt qua một số vấn đề tổng quát hơn, nhằm cung cấp góc nhìn về việc tính toán lượng tử và thông tin lượng tử hòa hợp như thế nào vào bức tranh tổng thể của khoa học máy tính.   
 
 ---

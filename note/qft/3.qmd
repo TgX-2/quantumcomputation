@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- **Tìm bậc:** Với $x$ nguyên tố cùng nhau với $N$, bậc $r$ là số dương nhỏ nhất sao cho $x^r\equiv1\pmod N$. Phép nhân modulo $U|y\rangle=|xy\bmod N\rangle$ có eigenphase $s/r$; dù không biết eigenstate $|u_s\rangle$ để chuẩn bị, trạng thái $|1\rangle$ là chồng chập các eigenstate nên ước lượng pha vẫn lấy mẫu được $s/r$. Lũy thừa modulo thực hiện các controlled-$U^{2^j}$ với $O(L^3)$ cổng.
+- **Khôi phục chu kỳ:** Đo được xấp xỉ $s/r$; nếu sai số không quá $1/(2r^2)$, định lý liên phân số bảo đảm $s/r$ là một hội tụ, tìm trong $O(L^3)$. Nếu $\gcd(s,r)>1$, mẫu số rút gọn chỉ là ước $r'$: lặp phép đo, tiếp tục với $x^{r'}\bmod N$, hoặc lấy LCM hai ứng viên.
+- **Phân tích thừa số:** Bậc của $x$ ngẫu nhiên thường chẵn và thỏa $x^{r/2}\not\equiv-1\pmod N$; khi đó $\gcd(x^{r/2}\pm1,N)$ cho ước không tầm thường. Với $N=15,x=7$, $r=4$ cho các ước $3,5$. Thuật toán tốn $O(L^3)$, thành công với xác suất hằng số qua thử lại; đây là mối đe dọa nền tảng đối với RSA.
+:::
+
 Quy trình ước lượng pha có thể được sử dụng để giải quyết một loạt các bài toán thú vị. Chúng tôi bây giờ mô tả hai trong số những bài toán thú vị nhất này: bài toán tìm bậc, và bài toán phân tích thừa số. Trên thực tế, hai bài toán này tương đương với nhau, do đó trong Mục 5.3.1 chúng tôi giải thích một thuật toán lượng tử để giải quyết bài toán tìm bậc, và trong Mục 5.3.2 chúng tôi giải thích cách bài toán tìm bậc cũng ngụ ý khả năng phân tích thừa số.   
 
 Để hiểu các thuật toán lượng tử cho phân tích thừa số và tìm bậc đòi hỏi một chút kiến thức nền tảng về lý thuyết số (number theory). Tất cả các tài liệu cần thiết được tập hợp lại trong Phụ lục 4. Mô tả mà chúng tôi đưa ra trong hai mục tiếp theo tập trung vào khía cạnh lượng tử của bài toán, và chỉ yêu cầu một chút làm quen với số học modulo (modular arithmetic) để có thể đọc hiểu. Các chứng minh chi tiết cho các kết quả lý thuyết số mà chúng tôi trích dẫn ở đây có thể được tìm thấy trong Phụ lục 4.   
@@ -17,100 +25,6 @@ Quy trình ước lượng pha có thể được sử dụng để giải quy�
 Các thuật toán lượng tử nhanh cho bài toán tìm bậc và phân tích thừa số thú vị vì ít nhất ba lý do. Thứ nhất, và quan trọng nhất theo ý kiến của chúng tôi, chúng cung cấp bằng chứng cho ý tưởng rằng máy tính lượng tử có thể về bản chất mạnh hơn máy tính cổ điển, và đưa ra một thách thức đáng tin cậy đối với luận đề Church-Turing mạnh (strong Church-Turing thesis). Thứ hai, cả hai bài toán đều có đủ giá trị nội tại để biện minh cho sự quan tâm đến bất kỳ thuật toán mới lạ nào, dù là cổ điển hay lượng tử. Thứ ba, và quan trọng nhất từ góc độ thực tiễn, các thuật toán hiệu quả cho bài toán tìm bậc và phân tích thừa số có thể được sử dụng để bẻ khóa hệ thống mật mã khóa công khai RSA (Phụ lục 5).  
 
 # Application: order-finding
-
-:::{.callout}
-# Note thêm
-
-## Bài toán mở đầu và một số định nghĩa
-
-Định nghĩa của một bậc là, số r nhỏ nhất sao cho $x^r = 1 (mod N)$, với x, N cho trước và không có ước chung.
-
-Người ta tin rằng không có thuật toán nào có thể sử dụng tài nguyên theo đa thức $O(L)$ (với $L = \lceil \log(N) \rceil$) có thể giải quyết bài toán này. (Có thể thấy L là độ dài của số ;))
-
-Và bài toán của chúng ta là tìm bậc.
-
----
-
-Thuật toán lượng tử để tìm bậc chính là thuật toán ước lượng pha được áp dụng cho toán tử Unita
-
-$$
-U\vert{}y\rangle \equiv \vert{}xy \pmod N\rangle, \tag{5.36}
-$$   
-
-trong đó: $0 \leq y \leq 2^L - 1$, và, U không bị đặt vào nếu $0 \leq y \leq N - 1$, và U bị đặt vào nếu $N \leq y \leq 2^L - 1$.
-
-## Suy ra bài toán
-
-Nhìn vào (5.39) ta thấy:
-
-$$
-= \exp\left[\frac{2\pi is}{r}\right] \vert{}u_s\rangle. \tag{5.39}
-$$
-
-rõ ràng trị riêng của ket u_s là $\exp\left[\frac{2\pi is}{r}\right]$ có dạng $e^{2\pi i \varphi}$, vậy $\varphi = \frac s r$.
-
-Vậy là pha $\varphi$ chính là bằng $s/r$ (với s là một số nguyên ngẫu nhiên từ 0 đến r - 1, và r chính là bậc cần tìm!)
-
-Nói cách khác, nếu máy tính lượng tử đo được pha $\varphi$, thì ra lập tức giải mã ra được chu kỳ r.
-
-## 5.44
-
-Nhưng mà để chạy được PEA, công thức (5.37) đòi hỏi phải biết trước r thì mới tạo được trạng thái riêng $\vert u_s \rangle$. Giống như nghịch lý ở bài trước đã nói.
-
-Kết quả là, hãy nhìn vào phương trình (5.44), nếu lấy tổng chồng chập tất cả các trạng thái riêng của $\vert u_s \rangle$, thì kết quả đại số sẽ gom lại trạng thái cơ sờ cổ điển đơn giản nhất: $\vert 1 \rangle$.
-
-Cuối cùng, nhờ tính tuyến tính lượng tử, khi $\vert 1 \rangle$ chạy qua mạch PEA và đo lường, hệ thống sẽ ngẫu nhiên nhả ra một giá trị pha $\varphi \approx s/r$ ứng với một giá trị s nào đó.
-
-## Làm sao để triển khai cổng Controlled-U^2^j khổng lồ?
-
-box 5.2
-
-## Cách lấy r từ kết quả đo
-
-Vấn đề là khi chạy mạch và đo lường thanh ghi 1, máy tinh lượng tử nhả ra một giá trị thập phân $\varphi$ (được biểu diễn dưới dạng nhị phân với 2L + 1 bits chính xác).
-
-Ta biết rằng $\varphi \approx s/r$. Tuy nhiên, vì $\varphi$ chỉ là một giá trị xấp xỉ bị nhiễu hoặc làm tròn (do hữu hạn qubit), nếu bạn dùng máy tính cổ điển để đổi $\varphi$ thành phân số tối giản theo cách ngây thơ thì bạn sẽ nhận được con số mẫu số khổng lồ, và không liên quan gì đến r.
-
-**Continued Fractions**
-
-Mọi số thực đều có thể biểu diễn thành một Liên phân số! (kiểu  $a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \dots}}$).
-
-Các phân số cắt cụt của chuỗi này đều hội tụ.
-
-Do thiết kế phần cứng dùng $t = 2L + 1$ qubit, sai số giữa pha đo $\varphi$ và phân số $s/r$ luôn bị chặn chặt chẽ dưới ngưỡng $\frac 1 {r^2}$ (5.48)
-
-Và nhờ đó, (thuật toán liên phân số chạy trên máy tính cổ điển với độ phức tạp cực nhanh, chỉ $O(L^3)$) sẽ bóc tách ngay lập tức chuỗi liên phân số của $\varphi$ và trích xuất ra được phân số tối giản $s'/r'$.
-
-## Nhưng mà, bẫy ước số...
-
-Điều gì sẽ xảy ra nếu máy tính lượng tử trả về kết quả là $\varphi \approx s'/r'$, trong đó r' lại là ước của r? (ví du: 2/4, trả về 1/2, mà r = 4 chứ không phải = 2).
-
-**Phương pháp 1: Lặp ngẫu nhiên**
-
-Xác suất để một số s chọn ngẫu nhiên nguyên tố cùng nhau với r là khá lớn (tỉ lệ thuận với $\frac 1 {\log N}$). ($0 \leq x \leq r - 1$)
-
-Chỉ cần lặp lại toàn bộ thí nghiệm $2\log(N)$ lần. Xác suất để ít nhất một lần bốc trúng r nguyên tố cùng nhau với r là rất lớn. (=1)
-
-**Phương pháp 2: Thuật toán vét cạn**
-
-Nếu r' tìm được là một ước số của r, ta sẽ tận dụng nó.
-
-Thay cơ sở x bằng $x' = x^{r'} (\pmod N)$ và tiếp tục chạy tìm bậc trên cơ sở mới này. Sau tối đa $O(L)$ lần lặp, ra sẽ quét sạch mọi ước số và tìm ra chu kỳ chính xác r.
-
-**Phương pháp 3: LCM Trick**
-
-Thay vì lặp nhiều lần hay làm đệ quy dài dòng, ta chỉ cần chạy mạch lượng tử đúng 2 lần độc lập để thu về $r_1'$ và $r_2'$.
-
-Toán học chứng minh rằng xác suất để hai giá trị $s_1'$ và $s_2'$ sinh ra từ hai lần chạy không có chung thừa số nguyên tố là khá cao (bị chặn dưới bởi 1/4).
-
-Khi đó, chu kỳ thực sự r chính là $\text{LCM}(r_1', r_2')$. 
-
-## Cuối cùng
-
-Độ phức tạp là $O(L^3)$.
-
-:::
-
 
 Đối với các số nguyên dương $x$ và $N$, $x < N$, không có ước chung, bậc của $x$ modulo $N$ được định nghĩa là số nguyên dương nhỏ nhất $r$ sao cho $x^r = 1 \pmod N$. Bài toán tìm bậc là xác định bậc cho một $x$ và $N$ được chỉ định. Người ta tin rằng tìm bậc là một bài toán khó trên máy tính cổ điển, theo nghĩa là không có thuật toán nào được biết đến có thể giải quyết bài toán này sử dụng tài nguyên đa thức theo $O(L)$ bit cần thiết để biểu diễn bài toán, trong đó $L \equiv \lceil \log(N) \rceil$ là số lượng bit cần thiết để biểu diễn $N$. Trong mục này, chúng ta giải thích cách ước lượng pha có thể được sử dụng để thu được một thuật toán lượng tử hiệu quả cho việc tìm bậc.   
 

@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -628,39 +628,27 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Tìm chu kỳ:</strong> Với oracle <span class="math inline">U|x\rangle|y\rangle=|x\rangle|y\oplus f(x)\rangle</span>, QFT ngược sau một truy vấn cho các pha gần <span class="math inline">\ell/r</span>; liên phân số khôi phục chu kỳ <span class="math inline">r</span>. Các trạng thái Fourier <span class="math inline">|\hat f(\ell)\rangle=r^{-1/2}\sum_xe^{-2\pi i\ell x/r}|f(x)\rangle</span> giải thích tính bất biến dịch chuyển.</li>
+<li><strong>Logarit rời rạc:</strong> Với <span class="math inline">b=a^s\bmod N</span>, hàm <span class="math inline">f(x_1,x_2)=b^{x_1}a^{x_2}</span> bất biến theo hướng <span class="math inline">(\ell,-s\ell)</span>. QFT trên hai thanh ghi cho gần <span class="math inline">s\ell/r</span> và <span class="math inline">\ell/r</span>, qua đó suy ra <span class="math inline">s</span>; cần biết bậc <span class="math inline">r</span> và xử lý sai số.</li>
+<li><strong>Nhóm con ẩn:</strong> Với nhóm hữu hạn <span class="math inline">G</span>, oracle hằng trên các lớp kề của <span class="math inline">K</span> và phân biệt chúng; mục tiêu là tìm tập sinh của <span class="math inline">K</span>. QFT lấy mẫu các ký tự tương thích với <span class="math inline">K</span>. HSP Abel giải được trong thời gian đa thức theo <span class="math inline">\log|G|</span> và bao quát các bài toán trên; với nhóm phi Abel như bài toán đẳng cấu đồ thị, chưa biết thuật toán lượng tử hiệu quả. Không phải mọi tăng tốc lượng tử đều nhất thiết thuộc HSP.</li>
+</ul>
+</div>
+</div>
 <p>Các ứng dụng chính của biến đổi Fourier lượng tử mà chúng ta đã mô tả cho đến nay trong chương này là ước lượng pha và tìm bậc. Những bài toán nào khác có thể được giải quyết bằng các kỹ thuật này? Trong phần này, chúng ta định nghĩa một bài toán rất tổng quát được gọi là bài toán nhóm con ẩn (hidden subgroup problem), và mô tả một thuật toán lượng tử hiệu quả để giải quyết nó. Bài toán này, bao trùm tất cả các ứng dụng ‘nhanh theo hàm mũ’ đã biết của biến đổi Fourier lượng tử, có thể được coi là sự tổng quát hóa của nhiệm vụ tìm chu kỳ chưa biết của một hàm tuần hoàn, trong một bối cảnh nơi cấu trúc miền xác định (domain) và miền giá trị (range) của hàm có thể rất phức tạp.</p>
 <p>Để trình bày bài toán này theo cách dễ tiếp cận nhất, chúng ta bắt đầu với hai ứng dụng cụ thể hơn: tìm chu kỳ (của một hàm một chiều), và logarit rời rạc. Sau đó chúng ta sẽ quay trở lại bài toán nhóm con ẩn tổng quát. Lưu ý rằng cách trình bày trong phần này mang tính sơ đồ và khái niệm nhiều hơn so với các phần trước trong chương này; do sự cần thiết, điều này có nghĩa là độc giả quan tâm đến việc hiểu tất cả các chi tiết sẽ phải làm việc chăm chỉ hơn rất nhiều!</p>
 <section id="period-finding" class="level1">
 <h1>1. Period-finding</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="abstract" class="level2">
-<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<p>Thay vì dùng <span class="math inline">U\vert x \rangle \vert y \rangle = \vert x \rangle \vert xy \pmod N \rangle</span> như ở bài trước, ở bài này chúng ta dùng hộp đen lượng tử chuẩn</p>
-<p><span class="math display">
-U \vert x \rangle \vert y \rangle = \vert x \rangle \vert y \otimes f(x) \rangle
-</span></p>
-<p>Hàm f(x) ở đây có thể là bất cứ thứ gì, miễn là nó tuần hoàn <span class="math inline">f(x + r) = f(x)</span>.</p>
-</section>
-<section id="double-fourier" class="level2">
-<h2 class="anchored" data-anchor-id="double-fourier">Double Fourier</h2>
-<p>Ở bài cũ chúng ta dựa vào trạng thái riêng <span class="math inline">\vert u_s \rangle</span>.</p>
-<p>Thì ở bài này chúng ta dùng trạng thái <span class="math inline">\vert{}\hat{f}(\ell)\rangle</span> (5.63), đây chính là Biến đổi Fourier của hàm số f(x), được ghi thẳng vào trong register.</p>
-<p><span class="math inline">\vert{}\hat{f}(\ell)\rangle = FT\vert f(x) \rangle</span> thì:</p>
-<p><span class="math display">
-\vert{}f(x)\rangle = \frac{1}{\sqrt{r}} \sum_{\ell=0}^{r-1} e^{2\pi i \ell x / r} \vert{}\hat{f}(\ell)\rangle, \tag{5.64}
-</span></p>
-</section>
-</div>
-</div>
 <p>Hãy xem xét bài toán sau. Giả sử <span class="math inline">f</span> là một hàm tuần hoàn tạo ra một bit duy nhất làm đầu ra và sao cho <span class="math inline">f(x + r) = f(x)</span>, đối với một số <span class="math inline">0 &lt; r &lt; 2^L</span> chưa biết, trong đó <span class="math inline">x, r \in \{0, 1, 2, \dots\}</span>. Cho một hộp đen lượng tử <span class="math inline">U</span> thực hiện phép biến đổi unita <span class="math inline">U\vert{}x\rangle\vert{}y\rangle \to \vert{}x\rangle\vert{}y \oplus f(x)\rangle</span> (trong đó <span class="math inline">\oplus</span> biểu thị phép cộng modulo 2) cần bao nhiêu truy vấn hộp đen và các phép toán khác để xác định <span class="math inline">r</span>? Lưu ý rằng trong thực tế <span class="math inline">U</span> hoạt động trên một miền hữu hạn, kích thước của miền này được xác định bởi độ chính xác mong muốn đối với <span class="math inline">r</span>. Đây là một thuật toán lượng tử giải quyết bài toán này sử dụng một truy vấn, và <span class="math inline">O(L^2)</span> các phép toán khác:</p>
 <section id="algorithm-period-finding" class="level2">
 <h2 class="anchored" data-anchor-id="algorithm-period-finding">Algorithm: Period-finding</h2>
@@ -730,48 +718,6 @@ U \vert x \rangle \vert y \rangle = \vert x \rangle \vert y \otimes f(x) \rangle
 </section>
 <section id="discrete-logarithms" class="level1">
 <h1>2. Discrete logarithms</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="bài-chất-logarit-rời-rạc" class="level2">
-<h2 class="anchored" data-anchor-id="bài-chất-logarit-rời-rạc">Bài chất Logarit Rời rạc</h2>
-<p><em>Bài toán mở đầu:</em> Cho a (cơ số) và b (kết quả). Tìm số mũ s sao cho <span class="math inline">a^s \equiv b \pmod N</span>. Khác với logarit thực (<span class="math inline">s = \log_a b</span>) tính rất dễ, logarit trên vành số nguyên Modulo N là một bài toán hàm mũ siêu khó.</p>
-<p><em>Đáp án:</em> Tác giả xây dựng một hàm hai biến số: <span class="math inline">f(x_1, x_2) = b^{x_1}a^{x_2} \pmod N</span>.</p>
-<p>Vì <span class="math inline">b = a^s</span>, ta có thể viết lại hàm số thành: <span class="math inline">f(x_1, x_2) = (a^s)^{x_1} a^{x_2} = a^{sx_1 + x_2} \pmod N</span>.</p>
-</section>
-<section id="tuần-hoàn-chu-kỳ" class="level2">
-<h2 class="anchored" data-anchor-id="tuần-hoàn-chu-kỳ">Tuần hoàn, chu kỳ</h2>
-<p>Hàm số này không tuần hoàn theo 1 số nguyên, mà tuần hoàn theo một vector (2-tuple) trong không gian 2 chiều!</p>
-<p>Thật vậy, nếu ta dịch chuyển <span class="math inline">x_1</span> thêm <span class="math inline">\ell</span>, và dịch chuyển <span class="math inline">x_2</span> lùi đi <span class="math inline">\ell s</span>, ta có:</p>
-<p><span class="math display">
-f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\ell + x_2 - s\ell} = a^{sx_1 + x_2} = f(x_1, x_2)
-</span></p>
-<p>Nghĩa là, hàm số bị bất biến (hidden subgroup) dọc theo hướng của vector <span class="math inline">(\ell, -\ell s)</span>. Bí mật về logarit <span class="math inline">s</span> chính là độ dốc (slope) của cái hướng ẩn này!</p>
-</section>
-<section id="d-qft" class="level2">
-<h2 class="anchored" data-anchor-id="d-qft">2D QFT</h2>
-<p>Vì hàm có 2 biến, mạch lượng tử giờ đây cần 2 thanh ghi điều khiển (gồm <span class="math inline">x_1</span> và <span class="math inline">x_2</span>).</p>
-<p>Chú ý vào bước 3 của thuật toán, khi khai triển trạng thái Fourier của hàm <span class="math inline">f(x_1, x_2)</span>, pha của nó tách thành tổng của 2 pha độc lập cho <span class="math inline">x_1</span> và <span class="math inline">x_2</span>. Thanh ghi 1 bị khóa vào pha <span class="math inline">e^{2\pi i (s\ell_2 x_1)/r}</span>, còn thanh ghi 2 bị khóa vào pha <span class="math inline">e^{2\pi i (\ell_2 x_2)/r}</span>.</p>
-<p>Khi áp dụng QFT ngược độc lập cho cả hai thanh ghi và đo lường, bạn sẽ thu được hai phân số xấp xỉ:</p>
-<ul>
-<li>Thanh ghi 1 thả ra: <span class="math inline">\approx sl_2/r</span>.</li>
-<li>Thanh ghi 2 thả ra: <span class="math inline">\approx l_2/r</span>.</li>
-</ul>
-<p>Giờ chỉ cần việc lấy kết quả của Thanh ghi 1 chia cho kết quả của thanh ghi 2:</p>
-<p><span class="math display">
-\frac {sl_2/r}{l_2r} = s
-</span></p>
-<p>Và thế là khóa S đã có!</p>
-</section>
-</div>
-</div>
 <p>Bài toán tìm chu kỳ mà chúng ta vừa xem xét là một bài toán đơn giản, ở chỗ miền xác định và miền giá trị của hàm tuần hoàn là các số nguyên. Điều gì xảy ra khi hàm số phức tạp hơn? Xem xét hàm số <span class="math inline">f(x_1, x_2) = a^{sx_1 + x_2} \pmod N</span>, trong đó tất cả các biến đều là số nguyên, và <span class="math inline">r</span> là số nguyên dương nhỏ nhất sao cho <span class="math inline">a^r \pmod N = 1</span>. Hàm số này là tuần hoàn, vì <span class="math inline">f(x_1 + \ell, x_2 - \ell s) = f(x_1, x_2)</span>, nhưng bây giờ chu kỳ là một bộ 2 phần tử (2-tuple), <span class="math inline">(\ell, -\ell s)</span>, đối với số nguyên <span class="math inline">\ell</span>. Đây có vẻ là một hàm số kỳ lạ, nhưng nó rất hữu ích trong mật mã học, vì việc xác định <span class="math inline">s</span> cho phép người ta giải quyết cái được gọi là bài toán logarit rời rạc: cho trước <span class="math inline">a</span> và <span class="math inline">b = a^s</span>, <span class="math inline">s</span> là gì? Đây là một thuật toán lượng tử giải quyết bài toán này sử dụng một truy vấn của một hộp đen lượng tử <span class="math inline">U</span> thực hiện phép biến đổi unita <span class="math inline">U\vert{}x_1\rangle\vert{}x_2\rangle\vert{}y\rangle \to \vert{}x_1\rangle\vert{}x_2\rangle\vert{}y \oplus f(x)\rangle</span> (trong đó <span class="math inline">\oplus</span> biểu thị phép cộng bitwise modulo 2), và <span class="math inline">O(\lceil \log r \rceil^2)</span> các phép toán khác. Chúng ta giả định rằng đã biết số <span class="math inline">r &gt; 0</span> nhỏ nhất sao cho <span class="math inline">a^r \pmod N = 1</span>, giá trị này có thể thu được bằng cách sử dụng thuật toán tìm bậc đã mô tả trước đó.</p>
 <section id="algorithm-discrete-logarithm" class="level2">
 <h2 class="anchored" data-anchor-id="algorithm-discrete-logarithm">Algorithm: Discrete logarithm</h2>
@@ -802,7 +748,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </span></p>
 <p>Nếu không, biên độ của <span class="math inline">\vert{}\hat{f}(\ell_1, \ell_2)\rangle</span> gần như bằng không. Khai triển liên phân số tổng quát được sử dụng trong bước cuối cùng để xác định <span class="math inline">s</span> tương tự như các quy trình được sử dụng trong Mục 5.3.1, và được để lại như một bài tập đơn giản để bạn tự xây dựng.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -811,7 +757,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chỉ ra rằng</p>
 <p><span class="math display">
@@ -822,7 +768,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -831,7 +777,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tính toán</p>
 <p><span class="math display">
@@ -842,7 +788,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -851,14 +797,14 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xây dựng thuật toán liên phân số tổng quát cần thiết trong bước 6 của thuật toán logarit rời rạc để xác định <span class="math inline">s</span> từ các ước lượng của <span class="math inline">s\ell_2 / r</span> và <span class="math inline">\ell_2 / r</span>.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -867,7 +813,7 @@ f(x_1 + \ell, x_2 - \ell s) = a^{s(x_1 + \ell) + (x_2 - \ell s)} = a^{sx_1 + s\e
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xây dựng một mạch lượng tử cho hộp đen <span class="math inline">U</span> được sử dụng trong thuật toán logarit rời rạc lượng tử, lấy <span class="math inline">a</span> và <span class="math inline">b</span> làm tham số, và thực hiện phép biến đổi unita <span class="math inline">\vert{}x_1\rangle\vert{}x_2\rangle\vert{}y\rangle \to \vert{}x_1\rangle\vert{}x_2\rangle\vert{}y \oplus b^{x_1} a^{x_2}\rangle</span>. Cần bao nhiêu phép toán cơ bản?</p>
 </div>
@@ -908,7 +854,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </span></p>
 <p>đối với <span class="math inline">g_i \in \mathbb{Z}_{p_i}</span>. Quy trình ước lượng pha bây giờ cung cấp cho chúng ta các <span class="math inline">\ell_i'</span>, từ đó chúng ta xác định <span class="math inline">\ell</span>, và theo đó, lấy mẫu <span class="math inline">K</span> như đã mô tả ở trên, để giải quyết bài toán nhóm con ẩn.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -917,9 +863,25 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Vì <span class="math inline">K</span> là một nhóm con của <span class="math inline">G</span>, khi chúng ta phân rã <span class="math inline">G</span> thành một tích của các nhóm cyclic có bậc là lũy thừa của số nguyên tố, điều này cũng phân rã <span class="math inline">K</span>. Hãy biểu diễn lại (5.77) để chỉ ra rằng việc xác định <span class="math inline">\ell_i'</span> cho phép người ta lấy mẫu từ nhóm con cyclic <span class="math inline">K_{p_i}</span> tương ứng của <span class="math inline">K</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 5.27:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tất nhiên, việc phân rã một nhóm Abel hữu hạn tổng quát <span class="math inline">G</span> thành một tích của các nhóm cyclic có bậc là lũy thừa của số nguyên tố thường là một bài toán khó (ít nhất là khó bằng việc phân tích các số nguyên, chẳng hạn). Ở đây, các thuật toán lượng tử lại đến để giải cứu: hãy giải thích cách các thuật toán trong chương này có thể được sử dụng để phân rã <span class="math inline">G</span> một cách hiệu quả như mong muốn.</p>
 </div>
 </div>
 </div>
@@ -929,13 +891,13 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 5.27:
+<span class="screen-reader-only">Note</span>Bài tập 5.28:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tất nhiên, việc phân rã một nhóm Abel hữu hạn tổng quát <span class="math inline">G</span> thành một tích của các nhóm cyclic có bậc là lũy thừa của số nguyên tố thường là một bài toán khó (ít nhất là khó bằng việc phân tích các số nguyên, chẳng hạn). Ở đây, các thuật toán lượng tử lại đến để giải cứu: hãy giải thích cách các thuật toán trong chương này có thể được sử dụng để phân rã <span class="math inline">G</span> một cách hiệu quả như mong muốn.</p>
+<p>Viết ra một đặc tả chi tiết về thuật toán lượng tử để giải quyết bài toán nhóm con ẩn, hoàn chỉnh với các ước tính về thời gian chạy và xác suất thành công, đối với các nhóm Abel hữu hạn.</p>
 </div>
 </div>
 </div>
@@ -945,27 +907,11 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 5.28:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Viết ra một đặc tả chi tiết về thuật toán lượng tử để giải quyết bài toán nhóm con ẩn, hoàn chỉnh với các ước tính về thời gian chạy và xác suất thành công, đối với các nhóm Abel hữu hạn.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Note</span>Bài tập 5.29:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Đưa ra các thuật toán lượng tử để giải quyết các bài toán Deutsch và Simon được liệt kê trong Hình 5.5, sử dụng khuôn khổ của bài toán nhóm con ẩn.</p>
 </div>
@@ -978,7 +924,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 <p>Ngay cả khi các trường hợp tổng quát hơn của bài toán nhóm con ẩn vẫn không thể giải được bằng máy tính lượng tử, việc có khuôn khổ thống nhất này vẫn hữu ích, bởi vì nó cho phép chúng ta đặt câu hỏi về cách người ta có thể bước ra ngoài những giới hạn của nó. Thật khó để tin rằng tất cả các thuật toán lượng tử nhanh sẽ từng được khám phá ra sẽ chỉ là những cách để giải quyết bài toán nhóm con ẩn. Nếu người ta nghĩ về những bài toán này như được dựa trên tính chất bất biến lớp kề (coset invariance) của biến đổi Fourier, thì trong việc tìm kiếm các thuật toán mới, có lẽ điều cần làm sau đó là nghiên cứu các phép biến đổi khác với các tính bất biến khác. Đi theo một hướng khác, người ta có thể hỏi: những bài toán nhóm con ẩn khó nào có thể được giải quyết một cách hiệu quả nếu có một trạng thái lượng tử tùy ý (nhưng được chỉ định độc lập với bài toán) như một trợ thủ? Suy cho cùng, như đã thảo luận trong Chương 4, hầu hết các trạng thái lượng tử thực sự khó chế tạo theo hàm mũ. Một trạng thái như vậy có thể là một tài nguyên hữu ích (một ‘hộp đen lượng tử’ thực sự), nếu các thuật toán lượng tử tồn tại để sử dụng chúng nhằm giải quyết các bài toán khó!</p>
 <p>Bài toán nhóm con ẩn cũng nắm bắt một ràng buộc quan trọng nằm bên dưới lớp các thuật toán lượng tử mà nhanh hơn theo hàm mũ so với các bản sao cổ điển (đã biết) của chúng: đây là một bài toán cam kết (promise problem), nghĩa là nó có dạng ‘F(X) được cam kết là có tính chất này và tính chất nọ: hãy mô tả tính chất đó’. Có lẽ khá đáng thất vọng, chúng tôi sẽ chỉ ra ở phần cuối của chương tiếp theo rằng, trong việc giải quyết các bài toán mà không có một loại cam kết nào đó, máy tính lượng tử không thể đạt được tốc độ tăng tốc hàm mũ so với máy tính cổ điển; tốc độ tăng tốc tốt nhất là đa thức. Mặt khác, điều này cho chúng ta một manh mối quan trọng về những loại bài toán nào mà máy tính lượng tử có thể giỏi: nhìn lại, bài toán nhóm con ẩn có thể được coi là một ứng cử viên tự nhiên cho tính toán lượng tử. Còn những bài toán tự nhiên nào khác nữa? Hãy nghĩ về nó!</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -987,7 +933,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xây dựng một mạch lượng tử để thực hiện biến đổi Fourier lượng tử</p>
 <p><span class="math display">
@@ -998,7 +944,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1007,9 +953,27 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử biến đổi Fourier lượng tử được thực hiện như là bước cuối cùng của một quá trình tính toán lượng tử, theo sau là một phép đo trong cơ sở tính toán. Chỉ ra rằng sự kết hợp giữa biến đổi Fourier lượng tử và phép đo tương đương với một mạch bao gồm hoàn toàn các cổng một qubit và phép đo, với sự điều khiển cổ điển, và không có cổng hai qubit nào. Bạn có thể thấy phần thảo luận ở Mục 4.4 là hữu ích.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài toán 5.3: (Thuật toán Kitaev)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Xem xét mạch lượng tử</p>
+<p><img src="../../img/5.3.1.png" class="img-fluid"></p>
+<p>trong đó <span class="math inline">\vert{}u\rangle</span> là một trạng thái riêng của <span class="math inline">U</span> với trị riêng <span class="math inline">e^{2\pi i \varphi}</span>. Chỉ ra rằng qubit trên cùng được đo là 0 với xác suất <span class="math inline">p \equiv \cos^2(\pi \varphi)</span>. Vì trạng thái <span class="math inline">\vert{}u\rangle</span> không bị ảnh hưởng bởi mạch nên nó có thể được tái sử dụng; nếu <span class="math inline">U</span> có thể được thay thế bằng <span class="math inline">U^k</span>, trong đó <span class="math inline">k</span> là một số nguyên tùy ý dưới sự kiểm soát của bạn, hãy chỉ ra rằng bằng cách lặp lại mạch này và tăng <span class="math inline">k</span> một cách thích hợp, bạn có thể thu được hiệu quả số lượng bit của <span class="math inline">p</span> nhiều như mong muốn, và do đó, của <span class="math inline">\varphi</span>. Đây là một giải pháp thay thế cho thuật toán ước lượng pha.</p>
 </div>
 </div>
 </div>
@@ -1019,15 +983,13 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài toán 5.3: (Thuật toán Kitaev)
+<span class="screen-reader-only">Note</span>Bài toán 5.4:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Xem xét mạch lượng tử</p>
-<p><img src="../../img/5.3.1.png" class="img-fluid"></p>
-<p>trong đó <span class="math inline">\vert{}u\rangle</span> là một trạng thái riêng của <span class="math inline">U</span> với trị riêng <span class="math inline">e^{2\pi i \varphi}</span>. Chỉ ra rằng qubit trên cùng được đo là 0 với xác suất <span class="math inline">p \equiv \cos^2(\pi \varphi)</span>. Vì trạng thái <span class="math inline">\vert{}u\rangle</span> không bị ảnh hưởng bởi mạch nên nó có thể được tái sử dụng; nếu <span class="math inline">U</span> có thể được thay thế bằng <span class="math inline">U^k</span>, trong đó <span class="math inline">k</span> là một số nguyên tùy ý dưới sự kiểm soát của bạn, hãy chỉ ra rằng bằng cách lặp lại mạch này và tăng <span class="math inline">k</span> một cách thích hợp, bạn có thể thu được hiệu quả số lượng bit của <span class="math inline">p</span> nhiều như mong muốn, và do đó, của <span class="math inline">\varphi</span>. Đây là một giải pháp thay thế cho thuật toán ước lượng pha.</p>
+<p>Ranh giới thời gian chạy <span class="math inline">O(L^3)</span> mà chúng ta đã đưa ra cho thuật toán phân tích thừa số là không chặt chẽ (not tight). Chỉ ra rằng có thể đạt được một ranh giới trên tốt hơn là <span class="math inline">O(L^2 \log L \log \log L)</span> phép toán.</p>
 </div>
 </div>
 </div>
@@ -1037,27 +999,11 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài toán 5.4:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Ranh giới thời gian chạy <span class="math inline">O(L^3)</span> mà chúng ta đã đưa ra cho thuật toán phân tích thừa số là không chặt chẽ (not tight). Chỉ ra rằng có thể đạt được một ranh giới trên tốt hơn là <span class="math inline">O(L^2 \log L \log \log L)</span> phép toán.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Note</span>Bài toán 5.5: (Các nhóm con ẩn phi Abel - Nghiên cứu)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Cho <span class="math inline">f</span> là một hàm trên một nhóm hữu hạn <span class="math inline">G</span> đến một miền hữu hạn tùy ý <span class="math inline">X</span>, được cam kết là hằng số và phân biệt trên các lớp kề trái phân biệt của một nhóm con <span class="math inline">K</span>. Bắt đầu với trạng thái</p>
 <p><span class="math display">
@@ -1068,7 +1014,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1077,7 +1023,7 @@ e^{2\pi i \ell g / \vert{}G\vert{}} = \prod_{i=1}^M e^{2\pi i \ell_i' g_i / p_i}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xem xét nhiệm vụ xây dựng một mạch lượng tử để tính toán <span class="math inline">\vert{}x\rangle \to \vert{}x + y \pmod{2^n}\rangle</span>, trong đó <span class="math inline">y</span> là một hằng số cố định, và <span class="math inline">0 \le x &lt; 2^n</span>. Chỉ ra rằng một cách hiệu quả để làm điều này, đối với các giá trị của <span class="math inline">y</span> chẳng hạn như <span class="math inline">1</span>, là đầu tiên thực hiện một biến đổi Fourier lượng tử, sau đó áp dụng các dịch chuyển pha một qubit, sau đó là một biến đổi Fourier ngược. Những giá trị nào của <span class="math inline">y</span> có thể được cộng dễ dàng theo cách này, và cần bao nhiêu phép toán?</p>
 </div>

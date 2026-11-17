@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Mục này mở rộng mạch từ cổng CNOT, với \(|c,t\rangle\mapsto|c,t\oplus c\rangle\), sang controlled-\(U\): chỉ khi bit điều khiển là 1 thì \(U\) tác dụng lên mục tiêu. CNOT có thể chuyển thành controlled-\(Z\) bằng Hadamard trên mục tiêu; đổi cơ sở sang \(|+\rangle,|-\rangle\) cho thấy phase kickback và việc vai trò điều khiển/mục tiêu có thể đổi theo cơ sở. Để xây dựng controlled-\(U\) bất kỳ, dùng phân rã một qubit \(U=e^{i\alpha}AXBXC\), \(ABC=I\), rồi ghép các cổng một qubit với hai CNOT; Toffoli là trường hợp \(C^2(X)\), và có thể triển khai từ các cổng cơ bản. Tổng quát, \(C^n(U)\) chỉ kích hoạt khi mọi điều khiển bằng 1; các ancilla tính AND khả nghịch rồi được hoàn tác, giúp hiện thực hóa nhiều điều khiển mà không để lại rác. Cuối mục, vòng tròn mở biểu thị điều kiện bằng 0, có thể đổi thành điều kiện bằng 1 bằng cổng \(X\); quy ước nhiều mục tiêu và các đồng nhất thức CNOT hỗ trợ thiết kế mạch. Các phép đổi cơ sở cũng nhắc rằng nhãn “điều khiển” và “mục tiêu” phụ thuộc cách biểu diễn.
+:::
+
 'Nếu A đúng, thì thực hiện B'. Loại phép toán có điều khiển này là một trong những thứ hữu ích nhất trong điện toán, cả cổ điển lẫn lượng tử. Trong phần này, chúng tôi giải thích cách thức các phép toán có điều khiển phức tạp có thể được triển khai bằng cách sử dụng các mạch lượng tử được xây dựng từ các phép toán cơ bản.   
 
 Phép toán có điều khiển nguyên mẫu là cổng controlled-NOT, thứ mà chúng ta đã gặp trong Mục 1.2.1. Nhắc lại rằng cổng này, mà chúng ta sẽ thường gọi là CNOT, là một cổng lượng tử có hai qubit đầu vào, lần lượt được gọi là qubit điều khiển (control qubit) và qubit mục tiêu (target qubit). Nó được vẽ như trong Hình 4.3. Xét theo cơ sở tính toán (computational basis), tác động của CNOT được cho bởi $\vert c \rangle \vert t \rangle \Rightarrow \vert c \rangle \vert t \otimes c \rangle$; tức là, nếu qubit điều khiển được đặt thành $\vert 1 \rangle$ thì qubit mục tiêu bị lật, nếu không thì qubit mục tiêu được giữ nguyên. Do đó, trong cơ sở tính toán $\vert \text{control}, \text{target} \rangle$, biểu diễn ma trận của CNOT là:

@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Định lý Schmidt nói rằng mọi trạng thái thuần lưỡng hệ $AB$ viết được $|\psi\rangle=\sum_i\lambda_i|i_A\rangle|i_B\rangle$, với hai bộ vector trực chuẩn, $\lambda_i\ge0$ và $\sum_i\lambda_i^2=1$. Các $\lambda_i$ là giá trị kỳ dị của ma trận hệ số; bình phương của chúng là các trị riêng khác không chung của hai ma trận mật độ rút gọn. Số hệ số Schmidt khác không bất biến dưới unita cục bộ và bằng một khi, và chỉ khi, trạng thái là tích; do đó nó đo vướng víu của trạng thái thuần hai phần. Hai hệ con có cùng phổ rút gọn dù trạng thái tổng thể không biểu lộ đối xứng. Phần sau xây dựng sự tinh chế: với $\rho^A=\sum_i p_i|i_A\rangle\langle i_A|$, thêm hệ tham chiếu $R$ để tạo $|AR\rangle=\sum_i\sqrt{p_i}|i_A\rangle|i_R\rangle$, sao cho $\mathrm{tr}_R(|AR\rangle\langle AR|)=\rho^A$. Mọi trạng thái hỗn hợp đều có thể tinh chế; các cách tinh chế khác nhau liên hệ qua unita trên hệ tham chiếu. Kết quả Schmidt áp dụng cho trạng thái thuần hai phần, không mặc nhiên mở rộng thành dạng tương tự cho mọi hệ ba phần.
+:::
+
 Các toán tử mật độ và vết riêng phần chỉ là sự khởi đầu của một loạt các công cụ hữu ích cho việc nghiên cứu các hệ lượng tử phức hợp, vốn là trọng tâm của tính toán lượng tử và thông tin lượng tử. Hai công cụ bổ sung có giá trị lớn là phân tích Schmidt và sự thanh lọc (purifications). Trong phần này chúng ta trình bày cả hai công cụ này, và cố gắng mang lại hương vị về sức mạnh của chúng.   
 
 :::{.postulates}

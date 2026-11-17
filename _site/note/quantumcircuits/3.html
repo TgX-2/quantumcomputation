@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -613,6 +613,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mục này mở rộng mạch từ cổng CNOT, với (|c,t|c,tc), sang controlled-(U): chỉ khi bit điều khiển là 1 thì (U) tác dụng lên mục tiêu. CNOT có thể chuyển thành controlled-(Z) bằng Hadamard trên mục tiêu; đổi cơ sở sang (|+,|-) cho thấy phase kickback và việc vai trò điều khiển/mục tiêu có thể đổi theo cơ sở. Để xây dựng controlled-(U) bất kỳ, dùng phân rã một qubit (U=e^{i}AXBXC), (ABC=I), rồi ghép các cổng một qubit với hai CNOT; Toffoli là trường hợp (C^2(X)), và có thể triển khai từ các cổng cơ bản. Tổng quát, (C^n(U)) chỉ kích hoạt khi mọi điều khiển bằng 1; các ancilla tính AND khả nghịch rồi được hoàn tác, giúp hiện thực hóa nhiều điều khiển mà không để lại rác. Cuối mục, vòng tròn mở biểu thị điều kiện bằng 0, có thể đổi thành điều kiện bằng 1 bằng cổng (X); quy ước nhiều mục tiêu và các đồng nhất thức CNOT hỗ trợ thiết kế mạch. Các phép đổi cơ sở cũng nhắc rằng nhãn “điều khiển” và “mục tiêu” phụ thuộc cách biểu diễn.</p>
+</div>
+</div>
 <p>‘Nếu A đúng, thì thực hiện B’. Loại phép toán có điều khiển này là một trong những thứ hữu ích nhất trong điện toán, cả cổ điển lẫn lượng tử. Trong phần này, chúng tôi giải thích cách thức các phép toán có điều khiển phức tạp có thể được triển khai bằng cách sử dụng các mạch lượng tử được xây dựng từ các phép toán cơ bản.</p>
 <p>Phép toán có điều khiển nguyên mẫu là cổng controlled-NOT, thứ mà chúng ta đã gặp trong Mục 1.2.1. Nhắc lại rằng cổng này, mà chúng ta sẽ thường gọi là CNOT, là một cổng lượng tử có hai qubit đầu vào, lần lượt được gọi là qubit điều khiển (control qubit) và qubit mục tiêu (target qubit). Nó được vẽ như trong Hình 4.3. Xét theo cơ sở tính toán (computational basis), tác động của CNOT được cho bởi <span class="math inline">\vert c \rangle \vert t \rangle \Rightarrow \vert c \rangle \vert t \otimes c \rangle</span>; tức là, nếu qubit điều khiển được đặt thành <span class="math inline">\vert 1 \rangle</span> thì qubit mục tiêu bị lật, nếu không thì qubit mục tiêu được giữ nguyên. Do đó, trong cơ sở tính toán <span class="math inline">\vert \text{control}, \text{target} \rangle</span>, biểu diễn ma trận của CNOT là:</p>
 <p><span class="math display">
@@ -622,7 +635,7 @@ window.Quarto = {
 <p>Tổng quát hơn, giả sử <span class="math inline">U</span> là một phép toán unita một qubit tùy ý. Một phép toán controlled-<span class="math inline">U</span> là một phép toán hai qubit, lại có một qubit điều khiển và một qubit mục tiêu. Nếu qubit điều khiển được kích hoạt (set) thì <span class="math inline">U</span> được áp dụng lên qubit mục tiêu, nếu không qubit mục tiêu được giữ nguyên; tức là, <span class="math inline">\vert{}c\rangle\vert{}t\rangle \rightarrow \vert{}c\rangle U^c \vert{}t\rangle</span>. Phép toán controlled-<span class="math inline">U</span> được biểu diễn bởi mạch được thể hiện trong Hình 4.4.</p>
 <p><img src="../../img/4.4.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -631,7 +644,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ma trận unita <span class="math inline">4 \times 4</span> cho mạch</p>
 <p><img src="../../img/4.16.1.png" class="img-fluid"></p>
@@ -663,7 +676,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -672,7 +685,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xây dựng một cổng <span class="math inline">\text{CNOT}</span> từ một cổng controlled-<span class="math inline">Z</span>, tức là cổng mà tác động của nó trong cơ sở tính toán được xác định bởi ma trận unita</p>
 <p><span class="math display">
@@ -686,7 +699,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -695,7 +708,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng</p>
 <p><img src="../../img/4.18.1.png" class="img-fluid"></p>
@@ -703,7 +716,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -712,7 +725,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Cổng <span class="math inline">\text{CNOT}</span> là một phép hoán vị đơn giản mà tác động của nó lên một ma trận mật độ <span class="math inline">\rho</span> là sắp xếp lại các phần tử trong ma trận. Hãy viết rõ ràng tác động này trong cơ sở tính toán.</p>
 <hr>
@@ -728,7 +741,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -737,7 +750,7 @@ U_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; -1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Không giống như các cổng cổ điển lý tưởng, các cổng lượng tử lý tưởng không có các đầu vào ‘trở kháng cao’ (high-impedance) (như cách gọi của các kỹ sư điện). Trên thực tế, vai trò của ‘điều khiển’ và ‘mục tiêu’ là tùy ý – chúng phụ thuộc vào việc bạn nghĩ thiết bị đang hoạt động trên cơ sở nào. Chúng ta đã mô tả cách thức <span class="math inline">\text{CNOT}</span> hoạt động đối với cơ sở tính toán, và trong mô tả này, trạng thái của qubit điều khiển không bị thay đổi. Tuy nhiên, nếu chúng ta làm việc trong một cơ sở khác thì qubit điều khiển thực sự bị thay đổi: chúng ta sẽ chỉ ra rằng pha của nó bị lật phụ thuộc vào trạng thái của qubit ‘mục tiêu’! Chứng minh rằng</p>
 <p><img src="../../img/4.20.1.png" class="img-fluid"></p>
@@ -818,7 +831,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <p><img src="../../img/4.7.png" class="img-fluid"></p>
 <p>Giả sử <span class="math inline">U</span> là một toán tử unita một qubit, và <span class="math inline">V</span> là một toán tử unita được chọn sao cho <span class="math inline">V^2 = U</span>. Khi đó phép toán <span class="math inline">C^2(U)</span> có thể được triển khai sử dụng mạch được thể hiện trong Hình 4.8</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -827,7 +840,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Kiểm chứng rằng Hình 4.8 triển khai phép toán <span class="math inline">C^2(U)</span>.</p>
 <hr>
@@ -837,7 +850,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -846,14 +859,14 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng một cổng <span class="math inline">C^2(U)</span> (đối với bất kỳ cổng unita một qubit <span class="math inline">U</span> nào) có thể được xây dựng sử dụng nhiều nhất tám cổng một-qubit, và sáu cổng controlled-<span class="math inline">\text{NOT}</span>.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -862,7 +875,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Xây dựng một cổng <span class="math inline">C^1(U)</span> cho <span class="math inline">U = R_x(\theta)</span> và <span class="math inline">U = R_y(\theta)</span>, chỉ sử dụng <span class="math inline">\text{CNOT}</span> và các cổng một qubit. Bạn có thể giảm số lượng cổng một qubit cần thiết trong cấu trúc này từ ba xuống hai không?</p>
 <hr>
@@ -877,7 +890,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <p>Cuối cùng, chúng ta sẽ chứng minh rằng với bất kỳ cổng nào cũng có thể được phân tích với độ chính xác tùy ý chỉ từ các cổng Hadamard, CNOT, và T. Vì tính hữu ích to lớn của cổng Toffoli, việc tìm hiểu cách xây dựng nó chỉ từ tập cổng này rất được quan tâm. Hình 4.9 minh họa một mạch đơn giản cho cổng Toffoli được cấu thành từ các cổng Hadamard, phase, <span class="math inline">\text{CNOT}</span> và <span class="math inline">\pi/8</span></p>
 <p><img src="../../img/4.9.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -886,14 +899,14 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Kiểm chứng rằng Hình 4.9 thực sự triển khai cổng Toffoli.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -902,7 +915,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Nhắc lại rằng cổng Fredkin (cổng đổi chỗ có điều khiển - controlled-swap) thực hiện phép biến đổi được cho bởi ma trận 8×8 ở phương trình (4.30): <span class="math display">
 \begin{bmatrix}
@@ -929,7 +942,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -938,14 +951,14 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng mạch trong hình bên dưới (với các cổng quay <span class="math inline">R_y(\pi/4)</span>, <span class="math inline">R_y(\pi/2)</span>, v.v.) chỉ khác cổng Toffoli ở các pha tương đối. Cụ thể, mạch biến đổi trạng thái <span class="math inline">\vert{}c_1, c_2, t\rangle</span> thành <span class="math inline">e^{i\theta(c_1, c_2, t)}\vert{}c_1, c_2, t \oplus c_1 \cdot c_2\rangle</span>, trong đó <span class="math inline">e^{i\theta(c_1, c_2, t)}</span> là một hệ số pha tương đối. Những cổng như vậy đôi khi rất hữu ích trong các cấu trúc thực nghiệm, nơi việc triển khai một cổng sai khác với Toffoli chỉ ở pha tương đối sẽ dễ dàng hơn nhiều so với việc làm trực tiếp cổng Toffoli.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -954,7 +967,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chỉ sử dụng các cổng <span class="math inline">\text{CNOT}</span> và Toffoli, hãy xây dựng một mạch lượng tử thực hiện phép biến đổi đại diện bởi ma trận <span class="math inline">8 \times 8</span> ở phương trình (4.31):</p>
 <p><span class="math display">
@@ -978,7 +991,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <p>Tiếp theo, một phép toán <span class="math inline">U</span> trên qubit mục tiêu được thực hiện, có điều kiện là qubit làm việc cuối cùng được đặt bằng một. Tức là, <span class="math inline">U</span> chỉ được áp dụng khi và chỉ khi tất cả các bit từ <span class="math inline">c_1</span> đến <span class="math inline">c_n</span> đều được bật. Cuối cùng, phần sau của mạch chỉ đơn giản là đảo ngược các bước của giai đoạn đầu tiên, đưa tất cả các qubit làm việc trở về trạng thái ban đầu <span class="math inline">\vert{}0\rangle</span>. Do đó, kết quả kết hợp là áp dụng toán tử unita <span class="math inline">U</span> lên qubit mục tiêu, khi và chỉ khi tất cả các bit điều khiển từ <span class="math inline">c_1</span> đến <span class="math inline">c_n</span> đều được bật, đúng như mong muốn.</p>
 <p><img src="../../img/4.10.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -987,25 +1000,9 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Đối với <span class="math inline">U = V^2</span> với <span class="math inline">V</span> là unita, hãy xây dựng một cổng <span class="math inline">C^5(U)</span> tương tự như trong Hình 4.10, nhưng không sử dụng qubit làm việc nào. Bạn có thể sử dụng các cổng controlled-<span class="math inline">V</span> và controlled-<span class="math inline">V^\dagger</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.29:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tìm một mạch chứa <span class="math inline">O(n^2)</span> cổng Toffoli, <span class="math inline">\text{CNOT}</span> và các cổng một qubit để thực hiện cổng <span class="math inline">C^n(X)</span> (với <span class="math inline">n &gt; 3</span>), mà không sử dụng qubit làm việc nào.</p>
+<p>Đối với <span class="math inline">U = V^2</span> với <span class="math inline">V</span> là unita, hãy xây dựng một cổng <span class="math inline">C^5(U)</span> tương tự như trong Hình 4.10, nhưng không sử dụng qubit làm việc nào. Bạn có thể sử dụng các cổng controlled-<span class="math inline">V</span> và controlled-<span class="math inline">V^\dagger</span>.</p>
 </div>
 </div>
 </div>
@@ -1015,11 +1012,27 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.30:
+<span class="screen-reader-only">Note</span>Bài tập 4.29:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tìm một mạch chứa <span class="math inline">O(n^2)</span> cổng Toffoli, <span class="math inline">\text{CNOT}</span> và các cổng một qubit để thực hiện cổng <span class="math inline">C^n(X)</span> (với <span class="math inline">n &gt; 3</span>), mà không sử dụng qubit làm việc nào.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.30:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">U</span> là một phép toán unita một qubit. Tìm một mạch chứa <span class="math inline">O(n^2)</span> cổng Toffoli, <span class="math inline">\text{CNOT}</span> và các cổng một qubit để thực hiện cổng <span class="math inline">C^n(U)</span> (với <span class="math inline">n &gt; 3</span>), mà không sử dụng qubit làm việc nào.</p>
 </div>
@@ -1030,7 +1043,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 <p>Một ví dụ công phu hơn về quy ước này, liên quan đến ba qubit điều khiển, được minh họa trong Hình 4.12. Phép toán <span class="math inline">U</span> được áp dụng lên qubit mục tiêu nếu qubit thứ nhất và thứ ba được đặt thành không, và qubit thứ hai được đặt thành một. Thật dễ dàng để kiểm chứng bằng cách quan sát rằng mạch ở phía bên phải của hình thực hiện phép toán mong muốn. Tổng quát hơn, thật dễ dàng để chuyển đổi giữa các mạch đưa ra điều kiện trên các qubit được đặt thành một và các mạch đưa ra điều kiện trên các qubit được đặt thành không, bằng cách chèn các cổng <span class="math inline">X</span> ở các vị trí thích hợp, như được minh họa trong Hình 4.12.</p>
 <p>Một quy ước khác đôi khi hữu ích là cho phép các cổng controlled-<span class="math inline">\text{NOT}</span> có nhiều mục tiêu, như được thể hiện trong Hình 4.13. Ký hiệu tự nhiên này có nghĩa là khi qubit điều khiển là 1, thì tất cả các qubit được đánh dấu bằng ký hiệu <span class="math inline">\oplus</span> sẽ bị lật, và ngược lại thì không có gì xảy ra. Ví dụ, nó rất thuận tiện khi được sử dụng trong việc xây dựng các hàm cổ điển chẳng hạn như các phép hoán vị, hoặc trong các bộ mã hóa và giải mã cho các mạch sửa lỗi lượng tử, như chúng ta sẽ thấy ở Chương 10.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1039,7 +1052,7 @@ C^n(U)\vert{}x_1x_2 \dots x_n\rangle\vert{}\psi\rangle = \vert{}x_1x_2 \dots x_n
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Hãy để các chỉ số dưới biểu thị toán tử tác động lên qubit nào, và hãy để <span class="math inline">C</span> là một cổng <span class="math inline">\text{CNOT}</span> với qubit 1 là qubit điều khiển và qubit 2 là qubit mục tiêu. Chứng minh các đồng nhất thức sau:</p>
 <p><span class="math display">

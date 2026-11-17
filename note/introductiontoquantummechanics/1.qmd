@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Mục này ôn đại số tuyến tính phức làm ngôn ngữ cho cơ học lượng tử: ket là vector, bra là vector đối ngẫu, còn toán tử tuyến tính được biểu diễn bằng ma trận theo một cơ sở. Tập sinh, độc lập tuyến tính và cơ sở xác định số chiều; ma trận Pauli là ví dụ quan trọng cho qubit. Tích trong $\langle v|w\rangle$ xác định trực giao và chuẩn $\|v\|=\sqrt{\langle v|v\rangle}$; Gram–Schmidt tạo cơ sở trực chuẩn, còn hệ thức đầy đủ $\sum_i|i\rangle\langle i|=I$ dẫn đến biểu diễn tích ngoài và bất đẳng thức Cauchy–Schwarz. Trị riêng thỏa $A|v\rangle=\lambda|v\rangle$; toán tử Hermitian có trị riêng thực, toán tử chuẩn tắc chéo hóa được bằng cơ sở trực chuẩn, và projector thỏa $P=P^\dagger=P^2$. Toán tử unita bảo toàn tích trong; toán tử dương có trị riêng không âm. Các phần sau bàn về tích tensor/Kronecker, hàm ma trận, vết, giao hoán tử (với điều kiện giao hoán cho phép chéo hóa đồng thời hai toán tử Hermitian), cùng phân rã cực và SVD. Biểu diễn ma trận phụ thuộc cơ sở, nên cần theo dõi cơ sở đầu vào và đầu ra.
+:::
+
 > *'This book is written as much to disturb and annoy as to instruct.'*
 > – The first line of About Vectors, by Banesh Hoffmann.
 
@@ -207,33 +213,6 @@ Bốn ma trận cực kỳ hữu ích mà chúng ta sẽ thường xuyên có d�
 ![](../../img/2.2.png)
 
 # 4. Inner products
-
-:::{.callout-warning}
-# tl;dr
-
-Trong quantum mechanics, trạng thái của môtj qubit hay hệ lượng tử nằm trong không gian n-chiều phức $\mathbb C^n$, khá là trừu tượng, khá là phản trực giác.
-
-Vì vậy người ta sử dụng tích trong để trả lời 3 thứ:
-
-(1) **Norm**: tính độ dài, trạng thái lượng tử này có chuẩn hóa hợp lệ không (tổng xác suất có bằng 100% hay không)?
-
-(2) **Overlapping**: Hai trạng thái lượng tử giống nhau đến mức nào?
-
-(3) **Orthorgonality**: Hai trạng thái có trực giao hay không? Hai trạng thái có hoàn toàn phân biệt được bằng phép đo hay không? (tức là tích trong bằng 0).
-
----
-
-Đầu vào sẽ là 2 vector bất kỳ, ví dụ như là ket psi hay ket varphi.
-
-Đầu ra cho duy nhất 1 số phức.
-
----
-
-Cú pháp:
-
-Tích trong ket v và ket w là: $\langle v \vert w \rangle$.
-
-:::
 
 Một tích trong là một hàm số nhận đầu vào là hai vector $\vert v \rangle$ và $\vert w \rangle$ từ một không gian vector và cho đầu ra là một số phức. Hiện tại, sẽ thuận tiện khi viết tích trong của $\vert v \rangle$ và $\vert w\rangle$ dưới dạng $(\vert v \rangle, \vert w\rangle)$. Đây không phải là ký hiệu cơ học lượng tử chuẩn; vì sự rõ ràng trong sư phạm, ký hiệu $(\cdot, \cdot)$ sẽ đôi khi hữu ích trong chương này. 
 
@@ -1151,14 +1130,6 @@ Trong đại số thông thường, phép nhân thường có tính giao hoán (
 ---
 
 **Định lý 2.2: (Định lý chéo hóa đồng thời)** Giả sử $A$ và $B$ là các toán tử Hermitian. Khi đó $[A, B] = 0$ khi và chỉ khi tồn tại một cơ sở trực chuẩn sao cho cả $A$ và $B$ đều là đường chéo đối với cơ sở đó. Chúng ta nói rằng $A$ và $B$ được chéo hóa đồng thời trong trường hợp này.   
-
-:::{.callout}
-# tl;dr
-
-Nếu hai đại lượng quan sát được (đại diện bởi toán tử Hermitian A và B) có thể đo lường đồng thời mà không làm ảnh hưởng lẫn nhau khi và chỉ khi chúng giao hoán với nhau $([A, B] = 0)$.
-
-Khi $[A, B] = 0$, chúng chia sẽ chung một bộ vector riêng, cho phép chúng ta biểu diễn chúng trên cùng một cơ sở trực chuẩn.
-:::
 
 Kết quả này liên kết giao hoán tử của hai toán tử (thường dễ tính toán) với tính chất chéo hóa đồng thời (vốn a priori khá khó xác định). Như một ví dụ, hãy xét:   
 

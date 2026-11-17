@@ -10,49 +10,17 @@ format:
     toc-location: right
 ---
 
-Biến đổi Fourier là chìa khóa cho một quy trình tổng quát được gọi là ước lượng pha, thứ mà đến lượt nó lại là chìa khóa cho nhiều thuật toán lượng tử. Giả sử một toán tử unita $U$ có một vector riêng $\vert{}u\rangle$ với trị riêng $e^{2\pi i \varphi}$, trong đó giá trị của $\varphi$ là chưa biết. Mục tiêu của thuật toán ước lượng pha là ước lượng $\varphi$. Để thực hiện việc ước lượng, chúng ta giả định rằng chúng ta có sẵn các hộp đen (đôi khi được gọi là oracles) có khả năng chuẩn bị trạng thái $\vert{}u\rangle$ và thực hiện phép toán controlled-$U^{2^j}$, đối với các số nguyên không âm $j$ phù hợp. Việc sử dụng các hộp đen chỉ ra rằng quy trình ước lượng pha không phải là một thuật toán lượng tử hoàn chỉnh theo đúng nghĩa của nó. Thay vào đó, bạn nên nghĩ về ước lượng pha như một loại 'chương trình con' (subroutine) hoặc 'mô-đun' mà khi được kết hợp với các chương trình con khác, có thể được sử dụng để thực hiện các tác vụ tính toán thú vị. Trong các ứng dụng cụ thể của quy trình ước lượng pha, chúng ta sẽ làm chính xác điều này, mô tả cách thức các phép toán hộp đen này được thực hiện, và kết hợp chúng với quy trình ước lượng pha để làm các tác vụ thực sự hữu ích. Tuy nhiên, trong thời điểm hiện tại, chúng ta sẽ tiếp tục tưởng tượng chúng như những hộp đen.   
-
----
-
-:::{.callout}
+:::{.callout-note}
 # tl;dr
 
-## Chuẩn bị
-
-t thanh ghi kết quả, việc t nhiều hay ít ảnh hưởng đến việc xác suất thành công và độ chính xác của varphi.
-
-* Độ chính xác tới $t - \lceil \log(2 + \frac 1 {2\epsilon}) \rceil$ bits.
-* Độ thành công ít nhất là $1 - \epsilon$.
-
-một ket u là eigenvector của U.
-
-
-
-## Các giai đoạn
-
-**Giai đoạn 1:**
-
-Ném các thông tin của varphi lên từng thanh t một. Ví dụ ta phân tích được là $0.j_1j_2j_3...j_t$ thì ta ném $j_1$ lên thanh 1, rồi từng cái. Bằng cách là Phase kickback, $CU^{2^{i - 1}}$.
-
-**Giai đoạn 2:** 
-
-Ta có thể thấy kết quả khi lấy từng cái thông tin của varphi khá là giống với (5.4), một phép biến đổi Fourier cơ bản. Vì vậy ta có thể thấy là:
-
-$$
-\vert \text{current} \rangle = FT \vert \varphi \rangle
-$$
-
-**Giai đoạn 3:**
-
-Nhưng mà chúng ta đo ra kết quả thế méo nào được? Thế là phải dùng (h5.1) của bài trước để đảo lại ket current.
-
-Trong hình (5.1) ở bài trước, ta có thể thấy một kiểu mạch biển đổi khác, từ trạng thái bình thường sang biến đổi Fourier, vì vậy giờ chúng ta sẽ đi ngược lại thời gian (và chắc chắn không đụng đến ket u).
-
-Và không sử dụng $R_k$ mà thay vào đó sử dụng $R_k^\dagger$.
-
-Và việc áp dụng $FT^\dagger$ cho ra kết quả cuối cùng là $\vert{}\tilde{\varphi}\rangle$, một kết quả hơi mờ nhòe của ket varphi.
-
+- **Bài toán và mạch:** Với $U|u\rangle=e^{2\pi i\varphi}|u\rangle$, Hadamard tạo chồng chập, controlled-$U^{2^j}$ ghi pha, rồi QFT ngược và phép đo cho $\tilde\varphi$. Nếu $\varphi$ có biểu diễn nhị phân chính xác thì kết quả chính xác; nói chung ta thu được xấp xỉ.
+- **Độ chính xác và giới hạn:** Muốn $n$ bit chính xác với xác suất ít nhất $1-\epsilon$, chọn $t=n+\lceil\log(2+1/(2\epsilon))\rceil$; QFT tốn $O(t^2)$ ngoài chi phí oracle.
+- Nếu đầu vào là $|\psi\rangle=\sum_uc_u|u\rangle$, đầu ra gần $\sum_uc_u|\widetilde{\varphi_u}\rangle|u\rangle$; phép đo chọn pha với xác suất theo $|c_u|^2$. Do đó không cần chuẩn bị trước eigenvector, nhưng kết quả ngẫu nhiên. Đây là chương trình con đòi hỏi chuẩn bị trạng thái và các lũy thừa của $U$, được dùng trong tìm bậc và phân tích thừa số.
 :::
+
+Biến đổi Fourier là chìa khóa cho một quy trình tổng quát được gọi là ước lượng pha, thứ mà đến lượt nó lại là chìa khóa cho nhiều thuật toán lượng tử. Giả sử một toán tử unita $U$ có một vector riêng $\vert{}u\rangle$ với trị riêng $e^{2\pi i \varphi}$, trong đó giá trị của $\varphi$ là chưa biết. Mục tiêu của thuật toán ước lượng pha là ước lượng $\varphi$. Để thực hiện việc ước lượng, chúng ta giả định rằng chúng ta có sẵn các hộp đen (đôi khi được gọi là oracles) có khả năng chuẩn bị trạng thái $\vert{}u\rangle$ và thực hiện phép toán controlled-$U^{2^j}$, đối với các số nguyên không âm $j$ phù hợp. Việc sử dụng các hộp đen chỉ ra rằng quy trình ước lượng pha không phải là một thuật toán lượng tử hoàn chỉnh theo đúng nghĩa của nó. Thay vào đó, bạn nên nghĩ về ước lượng pha như một loại 'chương trình con' (subroutine) hoặc 'mô-đun' mà khi được kết hợp với các chương trình con khác, có thể được sử dụng để thực hiện các tác vụ tính toán thú vị. Trong các ứng dụng cụ thể của quy trình ước lượng pha, chúng ta sẽ làm chính xác điều này, mô tả cách thức các phép toán hộp đen này được thực hiện, và kết hợp chúng với quy trình ước lượng pha để làm các tác vụ thực sự hữu ích. Tuy nhiên, trong thời điểm hiện tại, chúng ta sẽ tiếp tục tưởng tượng chúng như những hộp đen.
+
+---
 
 Quy trình ước lượng pha lượng tử sử dụng hai thanh ghi (registers). Thanh ghi thứ nhất chứa $t$ qubit ban đầu ở trạng thái $\vert{}0\rangle$. Cách chúng ta chọn $t$ phụ thuộc vào hai điều: số lượng chữ số có nghĩa (digits of accuracy) mà chúng ta mong muốn có được trong kết quả ước lượng cho $\varphi$, và xác suất mà chúng ta muốn quy trình ước lượng pha thành công là bao nhiêu. Sự phụ thuộc của $t$ vào các đại lượng này xuất hiện một cách tự nhiên từ phân tích sau đây.   
 
@@ -174,42 +142,6 @@ Giả sử thuật toán ước lượng pha đưa trạng thái $\vert{}0\rangl
 :::
 
 Tại sao ước lượng pha lại thú vị? Tự bản thân nó, ước lượng pha giải quyết một bài toán vừa không tầm thường và thú vị từ quan điểm vật lý: làm thế nào để ước lượng trị riêng liên kết với một vector riêng cho trước của một toán tử unita. Tuy nhiên, công dụng thực sự của nó đến từ quan sát rằng các bài toán thú vị khác có thể được giản lược (reduced) về bài toán ước lượng pha, như sẽ được trình bày ở các phần tiếp theo. Thuật toán ước lượng pha được tóm tắt dưới đây. 
-
-:::{.callout}
-# note thêm
-
-## The Catch-22 of PEA
-
-Ở hình (5.2) chúng ta yêu cầu tìm chính xác eigenvector của unitary U. Nhưng mà lỡ đối với các unitary U khó tìm eigenvector thì sao? hoặc việc tạo ra nó để cho máy tính cổ điển tìm cũng được?
-
-**Giải pháp**
-
-Hãy truyền một $\vert \psi \rangle$ bừa bất kỳ mà dễ dàng tạo ra được (ví dụ ket 1).
-
-Vì các vector riêng ket u tạo thành 1 cơ sở trực chuẩn, bất kỳ trạng thái ket psi nào cũng có thể được phân tích thành một tổ hợp tuyến tính của các vector riêng:
-
-$$
-\vert \psi \rangle = \sum c_u \vert u \rangle
-$$
-
-Nhờ tính tuyến tính của các cổng lượng tử, khi ket psi chạy qua mạch PEA, bộ máy sẽ không bị lỗi. Nó sẽ tính toán song song trên tất cả vector riêng cùng một lúc.
-
-Kết quả sẽ là trạng thái vướng víu khổng lồ:
-
-$$
-\sum c_u\vert{}\widetilde{\varphi_u}\rangle\vert{}u\rangle
-$$
-
-**Đo đạc**
-
-Khi bạn thực hiện đo trên thanh ghi 1, hàm sóng sụp đổ.
-
-Bạn sẽ ngẫu nhiên nhận một pha $\varphi_u$ nào đó, thuộc vào một vector riêng nào đó.
-
-Xác suất để bạn bốc trúng pha $\varphi_u$ đó tỉ lệ thuận với bình phương biên độ $\vert c_u \vert ^2$.
-
-:::
-
 
 ## Algorithm: Quantum phase estimation
 

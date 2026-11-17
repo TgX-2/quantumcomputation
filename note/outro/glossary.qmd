@@ -202,7 +202,7 @@ $$
 
 Là sự tiến hóa theo thời gian của một hệ lượng tử được chi phối bởi các toán tử đơn nhất, bảo toàn xác suất và chuẩn của trạng thái lượng tử.
 
-* Nó chính là: $U(t) = e^{-iH(t -t_0)/\hbar$a, mà H là toán tử Hamilton.
+* Nó chính là: $U(t) = e^{-iH(t -t_0)/\hbar$, mà H là toán tử Hamilton.
 
 * Tính đơn nhất.
 

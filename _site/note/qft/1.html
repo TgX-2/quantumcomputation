@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -613,6 +613,23 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Định nghĩa:</strong> QFT là phiên bản lượng tử của biến đổi Fourier rời rạc: <span class="math inline">|j\rangle\mapsto 2^{-n/2}\sum_{k=0}^{2^n-1}e^{2\pi i jk/2^n}|k\rangle</span>. Vì tác động tuyến tính lên biên độ, nó biến <span class="math inline">\sum_jx_j|j\rangle</span> thành <span class="math inline">\sum_ky_k|k\rangle</span>, trong đó <span class="math inline">y_k</span> là DFT của <span class="math inline">x_j</span>; tính unita được chứng minh bằng mạch.</li>
+<li><strong>Dạng tích và mạch:</strong> Viết <span class="math inline">j=j_1\cdots j_n</span> ở dạng nhị phân thì đầu ra là tích các trạng thái <span class="math inline">(|0\rangle+e^{2\pi i\,0.j_l\cdots j_n}|1\rangle)/\sqrt2</span>. Cổng Hadamard tạo chồng chập từng qubit, các controlled-<span class="math inline">R_k=\mathrm{diag}(1,e^{2\pi i/2^k})</span> thêm các bit vào pha, rồi các SWAP đảo thứ tự qubit. Tổng cộng có <span class="math inline">\Theta(n^2)</span> cổng; ma trận và mạch ba qubit minh họa cụ thể quy ước pha.</li>
+<li><strong>Ý nghĩa và giới hạn:</strong> FFT cổ điển cần <span class="math inline">\Theta(n2^n)</span> phép toán trên <span class="math inline">2^n</span> giá trị, nhưng đây không phải cách tăng tốc xử lý dữ liệu cổ điển: không thể đọc trực tiếp toàn bộ biên độ sau QFT, và chuẩn bị trạng thái mã hóa dữ liệu cũng có thể tốn kém. Ứng dụng hữu ích nằm ở việc khai thác pha trong các thuật toán như ước lượng pha.</li>
+</ul>
+</div>
+</div>
 <blockquote class="blockquote">
 <p><em>‘A good idea has a way of becoming simpler and solving problems other than that for which it was intended.’</em> – Robert Tarjan</p>
 </blockquote>
@@ -631,7 +648,7 @@ y_k \equiv \frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} x_j e^{2\pi i j k / N}. \tag{5.1}
 </span></p>
 <p>trong đó các biên độ <span class="math inline">y_k</span> là biến đổi Fourier rời rạc của các biên độ <span class="math inline">x_j</span>. Không quá rõ ràng từ định nghĩa, nhưng phép biến đổi này là một phép biến đổi unita, và do đó có thể được triển khai như là động lực học cho một máy tính lượng tử. Chúng ta sẽ chứng minh tính unita của biến đổi Fourier bằng cách cấu trúc một mạch lượng tử mang tính unita rõ ràng để tính toán biến đổi Fourier. Việc chứng minh trực tiếp rằng biến đổi Fourier là unita cũng rất dễ dàng:</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -640,14 +657,14 @@ y_k \equiv \frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} x_j e^{2\pi i j k / N}. \tag{5.1}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Đưa ra một chứng minh trực tiếp rằng phép biến đổi tuyến tính được định nghĩa bởi Phương trình (5.2) là unita.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -656,7 +673,7 @@ y_k \equiv \frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} x_j e^{2\pi i j k / N}. \tag{5.1}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tính toán tường minh biến đổi Fourier của trạng thái <span class="math inline">n</span> qubit <span class="math inline">\vert{}00\dots 0\rangle</span>.</p>
 </div>

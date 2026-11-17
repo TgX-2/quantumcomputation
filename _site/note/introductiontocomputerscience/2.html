@@ -572,7 +572,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Câu hỏi trong anh</span></a>
+ <span class="menu-text">Questions</span></a>
   </div>
 </li>
       </ul>
@@ -631,6 +631,24 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">O,\Omega,\Theta</span> lần lượt là cận trên, cận dưới và chặn khớp. Sắp xếp compare-and-swap tốn <span class="math inline">\Theta(n^2)</span>; heapsort dùng <span class="math inline">O(n\log n)</span>, còn đếm <span class="math inline">n!</span> thứ tự cho cận dưới <span class="math inline">\Omega(n\log n)</span>. Đa thức so với siêu đa thức là tiêu chí thô: <span class="math inline">2^{n/1000}</span> có thể thực tế hơn <span class="math inline">n^{1000}</span> ở quy mô thường gặp.</li>
+<li>Độ phức tạp xét thời gian và không gian. Luận đề Church–Turing mạnh giả định mô phỏng đa thức bằng máy Turing xác suất—điều lượng tử thách thức. <span class="math inline">P</span> giải trong đa thức; <span class="math inline">NP</span> kiểm chứng chứng cứ “có”; <span class="math inline">coNP</span> chứng cứ “không”. <span class="math inline">P\subseteq NP</span>, còn <span class="math inline">P=NP</span> bỏ ngỏ.</li>
+<li>Quy giảm đa thức truyền độ khó: Hamilton NP-đầy đủ; Euler ở <span class="math inline">P</span> theo định lý Euler (đồ thị liên thông, bậc chẵn). Cook–Levin chứng minh CSAT NP-đầy đủ, nền tảng cho SAT/3SAT. Chương khảo sát <span class="math inline">L\subseteq P\subseteq NP\subseteq PSPACE\subseteq EXP</span>, xấp xỉ và BPP; các quan hệ nghiêm ngặt còn mở.</li>
+<li>Landauer: xóa mỗi bit tiêu tán ít nhất <span class="math inline">k_BT\ln2</span>. Fredkin/Toffoli thực hiện tính toán khả nghịch với ancilla; tính toán lùi khử “rác” theo <span class="math inline">(x,y)\mapsto(x,y\oplus f(x))</span>. Nhiễu và sửa lỗi khiến tiết kiệm năng lượng chỉ là lý tưởng.</li>
+</ul>
+</div>
+</div>
 <p>Việc phân tích các bài toán tính toán phụ thuộc vào câu trả lời cho ba câu hỏi nền tảng:</p>
 <ol type="1">
 <li><strong>Một bài toán tính toán là gì?</strong></li>
@@ -661,7 +679,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="asymptotic-notation-examples">Asymptotic notation: examples</h2>
 <p>Hãy xem xét một vài ví dụ đơn giản về ký hiệu tiệm cận. Hàm <span class="math inline">2n</span> thuộc lớp <span class="math inline">O(n^2)</span>, vì <span class="math inline">2n \le 2n^2</span> với mọi <span class="math inline">n</span> dương. Hàm <span class="math inline">2^n</span> là <span class="math inline">\Omega(n^3)</span>, vì <span class="math inline">n^3 \le 2^n</span> đối với <span class="math inline">n</span> đủ lớn. Cuối cùng, hàm <span class="math inline">7n^2 + \sqrt{n}\log(n)</span> là <span class="math inline">\Theta(n^2)</span>, vì <span class="math inline">7n^2 \le 7n^2 + \sqrt{n}\log(n) \le 8n^2</span> đối với mọi giá trị đủ lớn của <span class="math inline">n</span>. Trong một vài bài tập tiếp theo, bạn sẽ làm việc thông qua một số tính chất sơ cấp của ký hiệu tiệm cận khiến nó trở thành một công cụ hữu ích trong việc phân tích các thuật toán.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -670,25 +688,9 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Chứng minh rằng <span class="math inline">f(n)</span> là <span class="math inline">O(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Omega(f(n))</span>. Suy ra rằng <span class="math inline">f(n)</span> là <span class="math inline">\Theta(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Theta(f(n))</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.10:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Giả sử <span class="math inline">g(n)</span> là một đa thức bậc <span class="math inline">k</span>. Chứng minh rằng <span class="math inline">g(n)</span> là <span class="math inline">O(n^l)</span> với mọi <span class="math inline">l \ge k</span>.</p>
+<p>Chứng minh rằng <span class="math inline">f(n)</span> là <span class="math inline">O(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Omega(f(n))</span>. Suy ra rằng <span class="math inline">f(n)</span> là <span class="math inline">\Theta(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Theta(f(n))</span>.</p>
 </div>
 </div>
 </div>
@@ -698,13 +700,13 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.11:
+<span class="screen-reader-only">Note</span>Bài tập 3.10:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Chứng minh rằng <span class="math inline">\log n</span> là <span class="math inline">O(n^k)</span> với mọi <span class="math inline">k &gt; 0</span>.</p>
+<p>Giả sử <span class="math inline">g(n)</span> là một đa thức bậc <span class="math inline">k</span>. Chứng minh rằng <span class="math inline">g(n)</span> là <span class="math inline">O(n^l)</span> với mọi <span class="math inline">l \ge k</span>.</p>
 </div>
 </div>
 </div>
@@ -714,13 +716,13 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.12: (<span class="math inline">n^{\log n}</span> là siêu đa thức - super-polynomial)
+<span class="screen-reader-only">Note</span>Bài tập 3.11:
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Chứng minh rằng <span class="math inline">n^k</span> là <span class="math inline">O(n^{\log n})</span> với mọi <span class="math inline">k</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">O(n^k)</span>.</p>
+<p>Chứng minh rằng <span class="math inline">\log n</span> là <span class="math inline">O(n^k)</span> với mọi <span class="math inline">k &gt; 0</span>.</p>
 </div>
 </div>
 </div>
@@ -730,13 +732,13 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.13: (<span class="math inline">n^{\log n}</span> là dưới hàm mũ - sub-exponential)
+<span class="screen-reader-only">Note</span>Bài tập 3.12: (<span class="math inline">n^{\log n}</span> là siêu đa thức - super-polynomial)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Chứng minh rằng <span class="math inline">c^n</span> là <span class="math inline">\Omega(n^{\log n})</span> với mọi <span class="math inline">c &gt; 1</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">\Omega(c^n)</span>.</p>
+<p>Chứng minh rằng <span class="math inline">n^k</span> là <span class="math inline">O(n^{\log n})</span> với mọi <span class="math inline">k</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">O(n^k)</span>.</p>
 </div>
 </div>
 </div>
@@ -746,11 +748,27 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 3.14:
+<span class="screen-reader-only">Note</span>Bài tập 3.13: (<span class="math inline">n^{\log n}</span> là dưới hàm mũ - sub-exponential)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">c^n</span> là <span class="math inline">\Omega(n^{\log n})</span> với mọi <span class="math inline">c &gt; 1</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">\Omega(c^n)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.14:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">e(n)</span> là <span class="math inline">O(f(n))</span> và <span class="math inline">g(n)</span> là <span class="math inline">O(h(n))</span>. Chứng minh rằng <span class="math inline">e(n)g(n)</span> là <span class="math inline">O(f(n)h(n))</span>.</p>
 </div>
@@ -765,7 +783,7 @@ window.Quarto = {
 end j</code></pre>
 <p>Rõ ràng là thuật toán này sắp xếp chính xác một danh sách gồm <span class="math inline">n</span> cái tên theo thứ tự bảng chữ cái. Lưu ý rằng số lượng phép toán so sánh-và-đổi-chỗ được thuật toán thực thi là <span class="math inline">(n - 1) + (n - 2) + \dots + 1 = n(n - 1)/2</span>. Do đó, số lượng phép toán so sánh-và-đổi-chỗ mà thuật toán sử dụng là <span class="math inline">\Theta(n^2)</span>. Chúng ta có thể làm tốt hơn thế này không? Hóa ra là chúng ta có thể. Người ta đã biết đến các thuật toán như ‘heapsort’ chạy bằng cách sử dụng <span class="math inline">O(n \log n)</span> phép toán so sánh-và-đổi-chỗ. Hơn nữa, trong Bài tập 3.15, bạn sẽ làm việc thông qua một lập luận đếm đơn giản cho thấy bất kỳ thuật toán nào dựa trên phép toán so sánh-và-đổi-chỗ đều yêu cầu <span class="math inline">\Omega(n \log n)</span> phép toán như vậy. Do đó, bài toán sắp xếp nói chung yêu cầu <span class="math inline">\Theta(n \log n)</span> phép toán so sánh-và-đổi-chỗ.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -774,7 +792,7 @@ end j</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử một danh sách <span class="math inline">n</span> phần tử được sắp xếp bằng cách áp dụng một chuỗi các phép toán so sánh-và-đổi-chỗ cho danh sách. Có <span class="math inline">n!</span> cách sắp xếp ban đầu có thể có của danh sách. Chứng minh rằng sau khi <span class="math inline">k</span> phép toán so sánh-và-đổi-chỗ được áp dụng, tối đa <span class="math inline">2^k</span> trong số các cách sắp xếp ban đầu có thể có sẽ được sắp xếp thành thứ tự chính xác. Kết luận rằng cần phải có <span class="math inline">\Omega(n \log n)</span> phép toán so sánh-và-đổi-chỗ để sắp xếp tất cả các cách sắp xếp ban đầu có thể có thành thứ tự chính xác.</p>
 </div>
@@ -784,22 +802,6 @@ end j</code></pre>
 </section>
 <section id="computational-complexity" class="level1">
 <h1>2. Computational complexity</h1>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>tl;dr
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Một bài toán dễ, dễ xử lý, khả thi (easy, tractable, feasible) nếu tồn tại một thuật để giải quyết bài toán đó sử dụng tài nguyên đa thức.</p>
-<p>Một bài toán khó, khó xử lý, bất khả thi (hard, intractable, infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.</p>
-<hr>
-<p>Sự phân loại này khá là thô sô, ví dụ như người ta coi hàm mũ <span class="math inline">2^{n/1000}</span> là khó hơn <span class="math inline">n^1000</span>, mặc dù thực tế là khi n đủ lớn thì cái đầu tiên dễ hơn nhiều. Nhưng mà chúng ta phải chấp nhận thôi.</p>
-</div>
-</div>
 <blockquote class="blockquote">
 <p><em>‘The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me’</em> – Stephen Cook</p>
 </blockquote>

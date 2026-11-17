@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Chương này xây dựng nền tảng cơ học lượng tử cần cho tính toán và thông tin lượng tử; kiến thức tiên quyết là đại số tuyến tính sơ cấp. Mục 2.1 ôn ký hiệu Dirac, không gian Hilbert và các toán tử; mục 2.2 phát biểu bốn tiên đề về trạng thái, tiến hóa unita, phép đo và hệ ghép. Qubit là ví dụ xuyên suốt để áp dụng các quy tắc này. Mục 2.3 minh họa mã hóa siêu đặc: nhờ chia sẻ trước một cặp vướng víu, Alice gửi một qubit để Bob giải mã hai bit cổ điển. Mục 2.4 giới thiệu toán tử mật độ cho trạng thái hỗn hợp và hệ con; mục 2.5 trình bày phân tích Schmidt và tinh chế để nghiên cứu vướng víu. Cuối cùng, mục 2.6 dùng bất đẳng thức Bell để cho thấy tương quan lượng tử không phù hợp với mọi mô hình hiện thực cục bộ. Đây là các hệ quả và công cụ của cơ học lượng tử, không phải những tiên đề mới.
+:::
+
 > *'I ain't no physicist but I know what matters'*
 > - Popeye the Sailor
 

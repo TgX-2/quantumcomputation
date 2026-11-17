@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- Thuật toán là quy trình chính xác; máy Turing với trạng thái hữu hạn và dải băng lý tưởng giúp hình thức hóa nó. Khoa học máy tính hỏi bài toán cần bao nhiêu tài nguyên, tìm thuật toán và chứng minh cận dưới—hai kết quả thường chưa khớp.
+- Khoa học máy tính cổ điển cung cấp công cụ (như biến đổi Fourier), chuẩn so sánh và cách tư duy hữu ích cho lượng tử. Phân tích thừa số là ví dụ được tin khó trên máy cổ điển nhưng có thuật toán lượng tử hiệu quả; điều đó gợi ý lợi thế, không khẳng định mọi bài toán đều được tăng tốc.
+- Mục 3.1 so sánh máy Turing và mạch, tương đương về sức mạnh nhưng mạch thuận tiện khi nghiên cứu lượng tử. Mục 3.2 bàn thời gian, không gian, độ phức tạp và tính toán khả nghịch: theo Landauer, xóa một bit ở nhiệt độ $T$ tiêu tán ít nhất $k_BT\ln2$. Mục 3.3 đặt lượng tử vào bức tranh rộng hơn của khoa học máy tính.
+:::
+
 > *'In natural science, Nature has given us a world and we’re just to discover its laws. In computers, we can stuff laws into it and create a world.'*
 > – Alan Kay
 

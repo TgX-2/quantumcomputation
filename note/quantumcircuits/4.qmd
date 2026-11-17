@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Mục này thêm phép đo chiếu trong cơ sở tính toán vào ký hiệu mạch, rồi trình bày hai quy tắc. Theo nguyên lý đo lường trì hoãn, phép đo trung gian có thể dời xuống cuối nếu các điều khiển cổ điển được thay bằng điều khiển lượng tử; tác động tổng thể giữ nguyên, dù cách diễn giải như truyền thông cổ điển có thể mất đi. Theo nguyên lý đo lường ngầm định, qubit không dùng ở cuối có thể xem như đã đo, vì phép đo trên phần còn lại không đổi ma trận mật độ rút gọn của hệ đang xét; điều này liên hệ với vết riêng phần và không truyền tín hiệu. Phép đo thường không đảo ngược vì làm mất thông tin, nhưng có thể đảo ngược trong viễn tải và sửa lỗi khi kết quả không tiết lộ trạng thái đầu vào. Các bài tập áp dụng nguyên tắc vào trạng thái sau phép đo không biết kết quả, phép đo cơ sở Bell, phép đo observable \(U\) có trị riêng \(\pm1\), và giao hoán giữa phép đo với cổng có điều khiển.
+:::
+
 Một yếu tố cuối cùng được sử dụng trong các mạch lượng tử, đôi khi gần như ngầm định, là phép đo lường. Trong các mạch của chúng ta, chúng ta sẽ biểu thị một phép đo lường chiếu (projective measurement) trong cơ sở tính toán (Mục 2.2.5) bằng cách sử dụng biểu tượng 'đồng hồ đo' (meter), được minh họa trong Hình 4.14. Trong lý thuyết mạch lượng tử, theo quy ước, người ta không sử dụng bất kỳ ký hiệu đặc biệt nào để biểu thị các phép đo lường tổng quát hơn, bởi vì, như đã giải thích trong Chương 2, chúng luôn có thể được biểu diễn bằng các phép biến đổi unita với các qubit ancilla, theo sau là các phép đo lường chiếu.   
 
 Có hai nguyên lý quan trọng về mạch lượng tử mà ta cần ghi nhớ. Cả hai nguyên lý đều khá hiển nhiên; tuy nhiên, chúng có tính ứng dụng cao đến mức đáng để nhấn mạnh từ sớm. Nguyên lý đầu tiên là các phép toán có điều khiển theo kiểu cổ điển (classically conditioned operations) có thể được thay thế bằng các phép toán có điều kiện lượng tử (quantum conditioned operations):   

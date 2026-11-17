@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Toán tử mật độ $\rho=\sum_i p_i|\psi_i\rangle\langle\psi_i|$ biểu diễn một ensemble lượng tử và mô tả trạng thái thuần lẫn hỗn hợp. Tiến hóa unita có dạng $\rho\mapsto U\rho U^\dagger$; phép đo $\{M_m\}$ cho xác suất $\mathrm{tr}(M_m^\dagger M_m\rho)$ và trạng thái sau kết quả $m$ là $M_m\rho M_m^\dagger/p(m)$. Trạng thái hợp lệ có toán tử dương và vết một; trạng thái thuần thỏa $\mathrm{tr}(\rho^2)=1$, còn trạng thái hỗn hợp có giá trị nhỏ hơn. Một ma trận mật độ không xác định duy nhất ensemble đã tạo ra nó: các ensemble tương đương liên hệ bằng phép biến đổi unita (có thể cần đệm vector không). Ứng dụng quan trọng là trạng thái rút gọn $\rho^A=\mathrm{tr}_B(\rho^{AB})$, mô tả chính xác thống kê phép đo trên A. Chẳng hạn, mỗi qubit của trạng thái Bell thuần có trạng thái rút gọn $I/2$: hệ con hỗn hợp dù toàn hệ thuần. Trong viễn tải, trạng thái rút gọn của Bob trước khi nhận kết quả cổ điển của Alice không phụ thuộc trạng thái ban đầu, nên giao thức không truyền tin nhanh hơn ánh sáng.
+:::
+
 :::{.callout}
 # Nói thêm
 

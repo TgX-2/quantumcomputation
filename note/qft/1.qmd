@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+- **Định nghĩa:** QFT là phiên bản lượng tử của biến đổi Fourier rời rạc: $|j\rangle\mapsto 2^{-n/2}\sum_{k=0}^{2^n-1}e^{2\pi i jk/2^n}|k\rangle$. Vì tác động tuyến tính lên biên độ, nó biến $\sum_jx_j|j\rangle$ thành $\sum_ky_k|k\rangle$, trong đó $y_k$ là DFT của $x_j$; tính unita được chứng minh bằng mạch.
+- **Dạng tích và mạch:** Viết $j=j_1\cdots j_n$ ở dạng nhị phân thì đầu ra là tích các trạng thái $(|0\rangle+e^{2\pi i\,0.j_l\cdots j_n}|1\rangle)/\sqrt2$. Cổng Hadamard tạo chồng chập từng qubit, các controlled-$R_k=\mathrm{diag}(1,e^{2\pi i/2^k})$ thêm các bit vào pha, rồi các SWAP đảo thứ tự qubit. Tổng cộng có $\Theta(n^2)$ cổng; ma trận và mạch ba qubit minh họa cụ thể quy ước pha.
+- **Ý nghĩa và giới hạn:** FFT cổ điển cần $\Theta(n2^n)$ phép toán trên $2^n$ giá trị, nhưng đây không phải cách tăng tốc xử lý dữ liệu cổ điển: không thể đọc trực tiếp toàn bộ biên độ sau QFT, và chuẩn bị trạng thái mã hóa dữ liệu cũng có thể tốn kém. Ứng dụng hữu ích nằm ở việc khai thác pha trong các thuật toán như ước lượng pha.
+:::
+
 > *'A good idea has a way of becoming simpler and solving problems other than that for which it was intended.'*
 > – Robert Tarjan
 

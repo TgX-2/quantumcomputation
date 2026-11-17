@@ -10,6 +10,12 @@ format:
     toc-location: right
 ---
 
+:::{.callout-note}
+# tl;dr
+
+Chương giải thích vì sao mô phỏng lượng tử là ứng dụng tự nhiên của máy tính lượng tử: trạng thái \(n\) qubit có \(2^n\) biên độ, nên mô phỏng cổ điển tổng quát tốn kém; tính trực tiếp ma trận \(2^n\times2^n\) cũng không thực tế. Với Hamiltonian \(H\), tiến hóa là \(|\psi(t)\rangle=e^{-iHt}|\psi(0)\rangle\). Nếu \(H=\sum_k H_k\) gồm đa thức số hạng cục bộ, từng \(e^{-iH_k\Delta t}\) có thể triển khai hiệu quả; công thức Trotter xử lý các hạng không giao hoán bằng nhiều bước xấp xỉ, và biến thể đối xứng giảm sai số. Thuật toán lặp các bước thời gian, kiểm soát sai số fidelity. Ví dụ hạt trong thế năng rời rạc hóa không gian rồi dùng QFT để đổi giữa biểu diễn vị trí và động lượng; chuỗi Pauli không cục bộ vẫn mô phỏng được bằng cách tính, áp pha theo rồi hoàn tác parity. Mô phỏng hiệu quả không bảo đảm phép đo đại lượng mong muốn cũng hiệu quả, cũng không áp dụng cho mọi Hamiltonian; cân bằng Gibbs còn là bài toán mở. Các ràng buộc đối xứng của boson và fermion cũng có thể được bảo toàn.
+:::
+
 > *'Perhaps [...] we need a mathematical theory of quantum automata. [...] the quantum state space has far greater capacity than the classical one: for a classical system with N states, its quantum version allowing superposition accommodates $c^N$ states. When we join two classical systems, their number of states $N_1$ and $N_2$ are multiplied, and in the quantum case we get the exponential growth $c^{N1N2}$ . [...] These crude estimates show that the quantum behavior of the system might be much more complex than its classical simulation.'*
 > – Yu Manin (1980)
 
@@ -136,32 +142,6 @@ trong đó mỗi $H_k$ tác động lên nhiều nhất một số lượng hệ
 # Bài tập 4.48: 
 Chứng minh rằng giới hạn tác động của $H_k$ lên nhiều nhất $c$ hạt ngụ ý rằng trong tổng (4.97), $L$ bị chặn trên bởi một đa thức theo $n$.   
 
-:::
-
-:::{.callout}
-# tl;dr
-
-Chúng ta cần giải quyết bài toán, cho biết hệ ở trạng thái t0 = 0, cần tìm trạng thái của hệ ở t bất kỳ. Tức là giải:
-
-$$
-\vert \psi(t) \rangle = e^{-iHt} \cdot \vert \psi(0) \rangle
-$$
-
-Mà ket psi 0 chúng ta đã biết, t thì đề sẽ cho. Vậy cuối cùng công việc của chúng ta là tìm H!
-
-Nhưng không đơn giản như thế, H có kích thước lên tới $2^n * 2^n$, vậy nên nếu tính ra nó thì sẽ đái.
-
-Khai triển taylor thì sai số quá lớn.
-
-Không thể coi nó như là một ma trận Unita rồi ném nó vào bằng CNOT được, tốn tới $n^24^n$ cổng để làm.
-
-Nhưng trong tự nhiên, một eletron ở vị trí x, thì chỉ áp dụng H lên các electron lân cận. Vì vậy chúng ta có thể tách H thành các $H_k$, trong đó k là việc tác dụng đó. (Phương trình 4.97).
-
-Và việc khai triển ra thành cổng CNOT của $exp(-iH_kt)$ là nhỏ, và đơn giản.
-
-Vậy là đã xong rồi đúng không? $H = H_1 + H_2 + ... H_L$ thì $e^{-iHt} = e^{-i(H_1 + H_2 + ... + H_L)} = e^{-iH_1t} \cdot e^{-iH_2t} \cdot ... \cdot e^{-iH_Lt}$?
-
-Nhưng đây là ma trận, AB có thể khác BA. Nhưng thật may cuộc đời đã đẻ ra định lý ở ngay sau đây.
 :::
 
 ---
@@ -375,16 +355,3 @@ $$
 Tìm một cấu trúc có độ sâu $O(\log n)$ cho cổng $C^n(X)$. (Bình luận: Độ sâu của một mạch là số lượng các bước thời gian (timesteps) riêng biệt tại đó các cổng được áp dụng; điểm của bài toán này là việc song song hóa việc xây dựng $C^n(X)$ bằng cách áp dụng nhiều cổng song song trong cùng một bước thời gian là hoàn toàn khả thi.) 
 
 :::
-
----
-
-# Siêu tóm tắt
-
-
-* Tính vạn năng (Universality): Bất kỳ phép toán unita nào trên $n$ qubit đều có thể được triển khai chính xác bằng cách kết hợp các cổng một qubit và cổng controlled-NOT.   
-
-* Tính vạn năng với một tập hợp rời rạc (Universality with a discrete set): Cổng Hadamard, cổng phase, cổng controlled-NOT, và cổng $\pi/8$ là vạn năng đối với tính toán lượng tử, theo nghĩa là một phép toán unita tùy ý trên $n$ qubit có thể được xấp xỉ đến một độ chính xác tùy ý $\epsilon > 0$ bằng cách sử dụng một mạch chỉ bao gồm các cổng này. Việc thay thế cổng $\pi/8$ trong danh sách này bằng cổng Toffoli cũng tạo ra một họ vạn năng.   
-
-* Không phải mọi phép toán unita đều có thể được triển khai một cách hiệu quả (Not all unitary operations can be efficiently implemented): Tồn tại các phép toán unita trên $n$ qubit đòi hỏi $\Omega(2^n \log(1/\epsilon) / \log(n))$ cổng để xấp xỉ trong phạm vi khoảng cách $\epsilon$ khi sử dụng bất kỳ tập hợp cổng hữu hạn nào.   
-
-* Mô phỏng (Simulation): Đối với một Hamiltonian $H = \sum_k H_k$ là tổng của một số lượng đa thức các số hạng $H_k$ sao cho các mạch lượng tử hiệu quả cho $H_k$ có thể được cấu trúc, một máy tính lượng tử có thể mô phỏng một cách hiệu quả sự tiến hóa $e^{-iHt}$ và xấp xỉ $\vert{}\psi(t)\rangle = e^{-iHt}\vert{}\psi(0)\rangle$, cho trước $\vert{}\psi(0)\rangle$
