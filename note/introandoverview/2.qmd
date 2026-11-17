@@ -1,6 +1,6 @@
 ---
 title: "2 Quantum bits"
-chapter: "Introduction and Overview"
+chapter: "1 Introduction and Overview"
 author: "TgX.2"
 format:
   html:

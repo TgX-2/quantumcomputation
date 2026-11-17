@@ -1,0 +1,59 @@
+---
+title: "0 Quantum circuits"
+chapter: "4 Quantum circuits"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+> *'The theory of computation has traditionally been studied almost entirely in the abstract, as a topic in pure mathematics. This is to miss the point of it. Computers are physical objects, and computations are physical processes. What computers can or cannot compute is determined by the laws of physics alone, and not by pure mathematics.'*
+> – David Deutsch
+
+> *'Like mathematics, computer science will be somewhat different from the other sciences, in that it deals with artificial laws that can be proved, instead of natural laws that are never known with certainty.'*
+> – Donald Knuth
+
+> *'The opposite of a profound truth may well be another profound truth.'*
+> – Niels Bohr
+
+Chương này mở đầu Phần II của cuốn sách, trong đó chúng ta khám phá chi tiết về tính toán lượng tử. Chương này phát triển các nguyên lý nền tảng của tính toán lượng tử, và thiết lập các khối cấu trúc cơ bản cho các mạch lượng tử, một ngôn ngữ phổ quát để mô tả các quá trình tính toán lượng tử phức tạp. Hai thuật toán lượng tử nền tảng được biết đến cho đến nay được xây dựng từ các mạch này trong hai chương tiếp theo. 
+
+Chương 5 trình bày biến đổi Fourier lượng tử (quantum Fourier transform) và các ứng dụng của nó trong việc ước lượng pha (phase estimation), tìm chu kỳ (order-finding) và phân tích thừa số nguyên tố (factoring). 
+
+Chương 6 mô tả thuật toán tìm kiếm lượng tử, và các ứng dụng của nó trong tìm kiếm cơ sở dữ liệu, đếm (counting) và tăng tốc các nghiệm cho các bài toán NP-đầy đủ (NP-complete). 
+
+Chương 7 khép lại Phần II với cuộc thảo luận về cách thức tính toán lượng tử một ngày nào đó có thể được hiện thực hóa bằng thực nghiệm. Hai chủ đề khác thu hút sự quan tâm lớn đối với tính toán lượng tử, nhiễu lượng tử (quantum noise) và sửa lỗi lượng tử (quantum error-correction), được hoãn lại cho đến Phần III của cuốn sách, xét đến tầm ảnh hưởng rộng rãi của chúng ngay cả bên ngoài lĩnh vực tính toán lượng tử.
+
+:::{.callout}
+# tl;dr
+
+Chương 4: sẽ học cách chế tạo các viên gạch cơ bản của qc: cổng Pauli, cổng Hadamard, Phase, CNOT, Toffoli và cấu trúc mạch.
+
+Chương 5 (Thuật toán Shor): sử dụng các tính chất chu kỳ, đánh sập hệ thống mã hóa RSA.
+
+Chương 6 (Thuật toán Grover): tăng tốc độ tìm kiếm, gặp lại các bài toán NP-Compelete.
+:::
+
+Có hai ý tưởng chính được giới thiệu trong chương này. 
+
+* Thứ nhất, chúng tôi giải thích chi tiết mô hình cơ bản của tính toán lượng tử, mô hình mạch lượng tử. 
+
+* Thứ hai, chúng tôi chứng minh rằng tồn tại một tập hợp nhỏ các cổng mang tính vạn năng (universal), nghĩa là, bất kỳ phép tính lượng tử nào cũng có thể được biểu diễn dưới dạng các cổng đó. 
+
+Dọc theo quá trình này, chúng tôi cũng có dịp mô tả nhiều kết quả cơ bản khác của tính toán lượng tử. Mục 4.1 mở đầu chương với một cái nhìn tổng quan về các thuật toán lượng tử, tập trung vào những thuật toán nào đã được biết đến, và các kỹ thuật thống nhất làm nền tảng cho việc xây dựng chúng. Mục 4.2 là một nghiên cứu chi tiết về các phép toán trên một qubit (single qubit operations). Bất chấp sự đơn giản của chúng, các phép toán một qubit mang đến một sân chơi phong phú để xây dựng các ví dụ và kỹ thuật, và việc hiểu chúng một cách chi tiết là điều cốt yếu. Mục 4.3 chỉ ra cách thực hiện các phép toán unita có điều khiển (controlled unitary operations) trên nhiều qubit, và Mục 4.4 thảo luận về sự mô tả của phép đo lường trong mô hình mạch lượng tử. Những yếu tố này sau đó được tập hợp lại trong Mục 4.5 cho việc phát biểu và chứng minh định lý vạn năng. Chúng tôi tóm tắt tất cả các yếu tố cơ bản của tính toán lượng tử trong Mục 4.6, và thảo luận về các biến thể khả dĩ của mô hình, cũng như câu hỏi quan trọng về mối quan hệ sức mạnh tính toán giữa máy tính cổ điển và máy tính lượng tử. Mục 4.7 kết thúc chương với một ứng dụng quan trọng và đầy tính hướng dẫn của tính toán lượng tử trong việc mô phỏng (simulation) các hệ lượng tử thực tế.   
+
+---
+
+Chương này có lẽ là chương đòi hỏi người đọc làm việc nhiều nhất (reader-intensive) trong tất cả các chương của cuốn sách, với mật độ bài tập cao để bạn hoàn thành, và việc giải thích lý do cho cường độ này là điều đáng giá. Đạt được sự thuần thục với các yếu tố cơ bản của mô hình tính toán mạch lượng tử là khá dễ dàng, nhưng đòi hỏi phải thấm nhuần một số lượng lớn các kết quả và kỹ thuật đơn giản, những thứ phải trở thành bản năng (second nature) nếu người ta muốn tiến tới bài toán khó khăn hơn là thiết kế các thuật toán lượng tử. Vì lý do này, chúng tôi áp dụng một cách tiếp cận định hướng theo ví dụ (example-oriented) trong chương này, và yêu cầu bạn điền vào nhiều chi tiết, nhằm đạt được sự thuần thục như vậy. Có thể có được một cái nhìn tổng quan ít chuyên sâu hơn, nhưng phần nào hời hợt về các yếu tố cơ bản của tính toán lượng tử bằng cách nhảy cóc sang Mục 4.6
+
+:::{.callout}
+# tl;dr
+
+Xuyên suốt chương 4, tác giả sẽ chứng minh rằng điều kỳ diệu của đại số tuyến tính: Không cần chế tạo vô hạn các loại thiết bị lượng tử, chỉ cần một tập hợp rất nhỏ các cổng logic rời rạc (hadamard, phase, pi/8, cnot) là có thể xấp xỉ bất kỳ phép biến đổi Unita U nào trên không gian Hilbert 2^n chiều với độ chính xác tùy ý.
+
+Và tác giả bắt làm nhiều bài tập.
+
+:::

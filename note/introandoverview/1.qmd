@@ -1,6 +1,6 @@
 ---
 title: "1 Global perspectives"
-chapter: "Introduction and Overview"
+chapter: "1 Introduction and Overview"
 author: "TgX.2"
 format:
   html:
@@ -20,7 +20,7 @@ Những khái niệm cơ bản của quantum computation và quantum information
 
 ---
 
-**Global perspective** - Góc nhìn quốc tế hay là Quan điểm toàn cục? Tôi cũng không biết nữa.
+# 1. Global perspective
 
 Quantum computation và quantum information là một ngành học mà nhiệm vụ xử lý thông tin có thể thực hiện được bằng ***quantum mechanical systems*** hệ thống cơ học lượng tử.
 
@@ -28,7 +28,7 @@ Nghe khá là dễ hiểu và rõ ràng, đúng không? Giống như nhiều ý 
 
 Trong chuyến tham quan ngắn gọn về lịch sử của các lĩnh vực này, hãy tự coi mình trước tiên là một nhà vật lý, sau đó là một nhà khoa học máy tính, tiếp theo là một nhà lý thuyết thông tin, và cuối cùng là một nhà mật mã học. để mà có thể hiểu rõ những quan điểm khác nhau đã hội tụ trong quantum computation và quantum information.
 
-# Lịch sử của Điện toán lượng tử và Thông tin lượng tử
+## History of Quantum Computation and Quantum Information
 
 Câu chuyện của chúng ta bắt đầu vào những năm đầu của thế kỷ 20, khi một cuộc cách mạng không được báo trước đang diễn ra trong khoa học. Một chuỗi của khủng hoảng và phát sinh trong vật lý.
 
@@ -40,7 +40,7 @@ Quantum mechanics đã trở thành một phần không thể thiếu của khoa
 
 ---
 
-## Lịch sử của Quantum Mechanic
+## History of Quantum Mechanics
 
 **Quantum mechanics là gì?**
 
@@ -106,7 +106,7 @@ Các nguyên mẫu thử nghiệm cho việc thực hiện ***quantum cryptograp
 
 ---
 
-## Lịch sử của Computer Science
+## History of Computer Science
 
 Và chúng ta sẽ chuyển từ quantum mechanics sang một thành tựu trí tuệ vĩ đại khác của thế kỷ 20, computer science. Nguồn gốc của khoa học máy tính đã bị chìm vào lãng quên suốt chiều dài lịch sử.
 
@@ -258,7 +258,7 @@ Thậm chí một cách rộng lớn hơn, chúng ta có thể đặt câu hỏi
 
 Một trong những điều thú vị nhất về tính toán lượng tử và thông tin lượng tử là chúng ta biết rất ít về câu trả lời cho những câu hỏi này! Đó là một thách thức lớn cho tương lai để hiểu rõ hơn những câu hỏi này.
 
-## Lịch sử của Information Theory
+## History of Information Theory
 
 Sau khi đã tiến đến ranh giới cốt lõi của tính toán lượng tử, chúng ta hãy chuyển sang lịch sử của một luồng tư tưởng khác cũng đóng góp vào tính toán lượng tử và thông tin lượng tử: ***Information theory*** Lý thuyết thông tin.
 
@@ -362,7 +362,7 @@ Việc đảo chiều dòng chảy thông tin lượng tử tạo ra một sự 
 
 :::
 
-## Lịch sử của Cryptograpghy
+## History of Cryptograpghy
 
 Hãy chuyển sang một lĩnh vực cuối cùng, bước vào nghệ thuật và khoa học lâu đời của ngành ***cryptography*** mật mã học. Nói một cách tổng quát, mật mã học là bài toán thực hiện giao tiếp hoặc tính toán liên quan đến từ hai bên trở lên, những bên có thể không tin tưởng lẫn nhau. Bài toán mật mã nổi tiếng nhất chính là việc truyền tải các thông điệp bí mật.
 
@@ -404,7 +404,7 @@ Có lẽ điều nổi bật nhất trong số này là việc nghiên cứu v�
 
 Trong những năm gần đây, đã có nỗ lực rất lớn nhằm hiểu rõ hơn về các tính chất của vướng víu khi xem nó như một tài nguyên cơ bản của Tự nhiên, có tầm quan trọng tương đương với năng lượng, thông tin, entropy, hay bất kỳ tài nguyên cơ bản nào khác. Mặc dù cho đến nay vẫn chưa có một lý thuyết hoàn chỉnh về vướng víu, một số tiến bộ đã đạt được trong việc thấu hiểu tính chất kỳ lạ này của cơ học lượng tử. Nhiều nhà nghiên cứu hy vọng rằng việc nghiên cứu sâu hơn về các tính chất của vướng víu sẽ mang lại những góc nhìn mới giúp thúc đẩy việc phát triển các ứng dụng mới trong quantum computation và quantum information.
 
-# Hướng đi trong tương lai
+# 2. Future directions
 
 Chúng ta đã xem xét một số khía cạnh lịch sử và hiện trạng của tính toán lượng tử và thông tin lượng tử. Còn tương lai thì sao? Tính toán lượng tử và thông tin lượng tử có thể mang lại những gì cho khoa học, công nghệ và nhân loại? Những lợi ích nào mà tính toán lượng tử và thông tin lượng tử đem lại cho các lĩnh vực cha đẻ của chúng — khoa học máy tính, lý thuyết thông tin và vật lý? Đâu là những bài toán mở then chốt của tính toán lượng tử và thông tin lượng tử? Chúng ta sẽ đưa ra một vài nhận xét rất ngắn gọn về những câu hỏi tổng quát này trước khi chuyển sang các nghiên cứu chi tiết hơn.
 
