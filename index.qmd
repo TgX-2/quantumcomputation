@@ -43,19 +43,43 @@ QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版
 ::: {.home-grid}
 
 ::: {.home-card}
-### [本編を読む →](note/introandoverview/1.qmd)
-量子計算と量子情報の導入から読み始める。
+### [1 Introduction and overview →](note/introandoverview/1.qmd)
+Speed run cực nhanh kiến thức của các chương tiếp theo.
 :::
 
 ::: {.home-card}
-### [アイデアと問い →](note/questions.qmd)
-読みながら考えたい問いやアイデアをまとめています。
+### [2 Introduction to Quantum Mechanics →](note/introductiontoquantummechanics/index.qmd)
+Tóm gọn kiến thức linearalgebra, nêu ra các tiền đề của quantummechanics, và một cách khác để biểu diễn hệ lượng tử - ma trận mật độ.
 :::
 
 ::: {.home-card}
-### [まえがきを読む →](note/intro/preface.qmd)
-本文に入る前に、翻訳ノートの背景を読む。
+### [3 Introduction to Computer Science →](note/introductiontocomputerscience/index.qmd)
+Độ phức tạp là cái chi?
 :::
+
+::: {.home-card}
+### [4 Quantum circuits →](note/quantumcircuits/1.qmd)
+Tất cả những thứ gì cần, để tạo ra máy tính lượng tử: thuật toán, cổng 1 qubit, cổng controlled.
+:::
+
+::: {.home-card}
+### [5 The QFT and its applications →](note/qft/index.qmd)
+QFT, thuật toán Shor.
+:::
+
+
+::: {.home-card}
+### [6 Quantum search algorithms →](note/quantumsearchalgorithms/index.qmd)
+Grover, và ?
+:::
+
+
+::: {.home-card}
+### [7 Quantum computers: Physical realization →](note/quantumcomputers/index.qmd)
+Siêu khó, QED, QFT, Hóa học, .... + lượng tử ra máy tính lượng tử.
+:::
+
+
 
 :::
 </section>
