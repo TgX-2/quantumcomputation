@@ -10,6 +10,28 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# note
+
+## Nguyên lý đo lường trì hoãn
+
+Thay vì đo ở giữa một mạch rồi mới quyết định có dùng cổng khác hay không, như hình dưới:
+
+![](../../img/1.13.png)
+
+Thì chúng ta có thể dùng các cổng Controlled-U để quyết định luôn:
+
+![](../../img/4.15.png)
+
+như trên hình là CX và CZ, thay vì phải $X^{M_2}$ và $Z^{M_1}$ (với $M_1, M_2$ là kết quả đã đo).
+
+## Nguyên lý đo lường ngầm định
+
+Không mất tính tổng quát, bất kỳ đường dây lượng tử nào không được kết thúc (các qubit không được đo lường) ở cuối một mạch lượng tử đều có thể được giả định là đã được đo lường.
+
+:::
+
+
 :::{.callout-note}
 # tl;dr
 

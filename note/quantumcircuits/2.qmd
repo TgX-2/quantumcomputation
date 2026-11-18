@@ -10,13 +10,81 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# note
+
+## Các cổng phổ biến
+
+$$
+X = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}; \quad Y = \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix}; \quad Z = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}. \tag{4.1}
+$$
+
+và 
+
+$$
+H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}; \quad S = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix}; \quad T = \begin{bmatrix} 1 & 0 \\ 0 & \exp(i\pi/4) \end{bmatrix}. \tag{4.2}
+$$
+
+Một số đẳng thức: 
+
+$$
+H = (X + Z) / \sqrt 2 \\ 
+S = T^2
+$$
+
+## Toán tử quay
+
+$$
+R_x(\theta) \equiv e^{-i\theta X/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}X = \begin{bmatrix} \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \tag{4.4}
+$$
+
+$$
+R_y(\theta) \equiv e^{-i\theta Y/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}Y = \begin{bmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{bmatrix} \tag{4.5}
+$$
+
+$$
+R_z(\theta) \equiv e^{-i\theta Z/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}Z = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix}. \tag{4.6}
+$$
+
+Và dạng tổng quát
+
+$$
+R_{\hat{n}}(\theta) \equiv \exp(-i\theta \hat{n} \cdot \vec{\sigma} / 2) = \cos\left(\frac{\theta}{2}\right) I - i \sin\left(\frac{\theta}{2}\right) (n_x X + n_y Y + n_z Z), \tag{4.8}
+$$   
+
+trong đó: $\vec{\sigma} = \langle X, Y, Z \rangle$ 
+
+## Phân rã Euler
+
+Cho một phép toán Unita trên một qubit đơn lẻ. Khi đó tồn tại các số thực $\alpha, \beta, \gamma, \delta$, sao cho:
+
+$$
+U = e^{i\alpha}R_z(\beta)R_y(\gamma)R_z(\delta). \tag{4.11}
+$$
+
+## Hệ quả phân rã Euler
+
+Có thể phân rã cổng unita U trên một phép toán đơn lẻ thành
+
+$$
+U = e^{i\alpha}AXBXC
+$$
+
+trong đó: $ABC = I$, và $\alpha$ là một hệ số pha toàn cục nào đó.
+
+:::
+
 :::{.callout-note}
 # tl;dr
 
 Mục này mô tả mọi cổng một qubit bằng ma trận unita \(2\times2\), bắt đầu với Pauli \(X,Y,Z\), Hadamard \(H\), phase \(S\) và \(T\); pha toàn cục không làm thay đổi kết quả quan sát, nên \(T\) tương đương \(R_z(\pi/4)\) tới pha đó. Trạng thái \(\cos(\theta/2)|0\rangle+e^{i\phi}\sin(\theta/2)|1\rangle\) được biểu diễn bằng vector trên mặt cầu Bloch; các phép quay \(R_{\hat n}(\theta)=e^{-i\theta\hat n\cdot\vec\sigma/2}\) quay vector Bloch quanh trục \(\hat n\). Định lý Euler cho biết mọi cổng một qubit có dạng \(e^{i\alpha}R_z(\beta)R_y(\gamma)R_z(\delta)\), và các phân rã tương đương theo những trục không song song cũng dùng được. Hệ quả \(U=e^{i\alpha}AXBXC\), với \(ABC=I\), là công cụ then chốt để dựng cổng có điều khiển; các đồng nhất thức như \(HXH=Z\) giải thích đổi cơ sở. Ví dụ và bài tập áp dụng các ý này để xác định trạng thái riêng, phân rã \(H,S,T\), và hợp thành các phép quay; cần lưu ý rằng tham số hóa không duy nhất do các góc và pha toàn cục.
 :::
 
-Việc phát triển hộp công cụ tính toán lượng tử của chúng ta bắt đầu bằng các phép toán trên hệ lượng tử đơn giản nhất trong tất cả — một qubit đơn lẻ. Các cổng một qubit đã được giới thiệu trong Mục 1.3.1. Hãy cùng tóm tắt nhanh những gì chúng ta đã học ở đó; bạn có thể thấy hữu ích khi tham khảo các ghi chú về ký hiệu ở trang xxiii khi chúng ta tiến hành.Một qubit đơn lẻ là một vector $\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle$ được tham số hóa bởi hai số phức thỏa mãn $\vert{}a\vert{}^2 + \vert{}b\vert{}^2 = 1$. Các phép toán trên một qubit phải bảo toàn chuẩn (norm) này, và do đó được mô tả bởi các ma trận unita $2 \times 2$. Trong số này, một số ma trận quan trọng nhất là các ma trận Pauli; thật hữu ích khi liệt kê lại chúng ở đây:
+Việc phát triển hộp công cụ tính toán lượng tử của chúng ta bắt đầu bằng các phép toán trên hệ lượng tử đơn giản nhất trong tất cả — một qubit đơn lẻ. Các cổng một qubit đã được giới thiệu trong Mục 1.3.1. Hãy cùng tóm tắt nhanh những gì chúng ta đã học ở đó; bạn có thể thấy hữu ích khi tham khảo các ghi chú về ký hiệu ở trang xxiii khi chúng ta tiến hành.
+
+---
+
+Một qubit đơn lẻ là một vector $\vert{}\psi\rangle = a\vert{}0\rangle + b\vert{}1\rangle$ được tham số hóa bởi hai số phức thỏa mãn $\vert{}a\vert{}^2 + \vert{}b\vert{}^2 = 1$. Các phép toán trên một qubit phải bảo toàn chuẩn (norm) này, và do đó được mô tả bởi các ma trận unita $2 \times 2$. Trong số này, một số ma trận quan trọng nhất là các ma trận Pauli; thật hữu ích khi liệt kê lại chúng ở đây:
 
 $$
 X = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}; \quad Y = \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix}; \quad Z = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}. \tag{4.1}
@@ -34,9 +102,11 @@ $$
 T' = \exp(i\pi/8) \begin{bmatrix} \exp(-i\pi/8) & 0 \\ 0 & \exp(i\pi/8) \end{bmatrix}. \tag{4.3}
 $$
 
-Mặc dù vậy, cách đặt tên theo một số khía cạnh là khá đáng tiếc, và chúng ta thường gọi cổng này là cổng $T$.Cũng cần nhắc lại rằng một qubit đơn lẻ ở trạng thái $a\vert{}0\rangle + b\vert{}1\rangle$ có thể được hình dung như một điểm $(\theta, \varphi)$ trên mặt cầu đơn vị, trong đó $a = \cos(\theta/2)$, $b = e^{i\varphi} \sin(\theta/2)$, và $a$ có thể được coi là số thực vì pha toàn cục của trạng thái là không thể quan sát được. Đây được gọi là biểu diễn mặt cầu Bloch, và vector $(\cos\varphi\sin\theta, \sin\varphi\sin\theta, \cos\theta)$ được gọi là vector Bloch. Chúng ta sẽ thường xuyên quay lại hình ảnh này như một sự hỗ trợ cho trực giác.
+Mặc dù vậy, cách đặt tên theo một số khía cạnh là khá đáng tiếc, và chúng ta thường gọi cổng này là cổng $T$.
 
-:::{.callout-note}
+Cũng cần nhắc lại rằng một qubit đơn lẻ ở trạng thái $a\vert{}0\rangle + b\vert{}1\rangle$ có thể được hình dung như một điểm $(\theta, \varphi)$ trên mặt cầu đơn vị, trong đó $a = \cos(\theta/2)$, $b = e^{i\varphi} \sin(\theta/2)$, và $a$ có thể được coi là số thực vì pha toàn cục của trạng thái là không thể quan sát được. Đây được gọi là biểu diễn mặt cầu Bloch, và vector $(\cos\varphi\sin\theta, \sin\varphi\sin\theta, \cos\theta)$ được gọi là vector Bloch. Chúng ta sẽ thường xuyên quay lại hình ảnh này như một sự hỗ trợ cho trực giác.
+
+:::{.callout-note collapse="true"}
 # Bài tập 4.1: 
 Trong Bài tập 2.11, bài mà bạn nên làm ngay bây giờ nếu bạn chưa làm, bạn đã tính toán các vector riêng của các ma trận Pauli. Hãy tìm các điểm trên mặt cầu Bloch tương ứng với các vector riêng được chuẩn hóa của các ma trận Pauli khác nhau.
 
@@ -95,7 +165,7 @@ $$
 R_z(\theta) \equiv e^{-i\theta Z/2} = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}Z = \begin{bmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{bmatrix}. \tag{4.6}
 $$
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 4.2: 
 Chứng minh $\exp(iAx) = \cos(x)I + i\sin(x)A$ với $A^2 = I$
 
@@ -136,7 +206,7 @@ $$
 
 :::
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 4.3
 Chứng minh cổng $\pi/8$ thỏa mãn $T = R_z(\pi/4)$ bỏ qua pha toàn cục.
 
@@ -167,7 +237,7 @@ T = \exp(i\pi/8)R_z(\pi/4)
 $$
 :::
 
-:::{.callout-note}
+:::{.callout-note collapse="true"}
 # Bài tập 4.4
 Biểu diễn cổng Hadamard $H$ qua tích của $R_x, R_z$ và $e^{i\varphi}$
 
@@ -375,7 +445,7 @@ Kết luận:
 
 ## Phân rã Euler
 
-Mọi chuyển động trên mặt cầu Bloch, dù có phức tạp đến đâu, đều cót hể đặt được bằng cách:
+Mọi chuyển động trên mặt cầu Bloch, dù có phức tạp đến đâu, đều có thể đặt được bằng cách:
 
 (1) Quay quanh trục Z một góc delta.
 (2) Quay quanh trục Y một góc gamma.

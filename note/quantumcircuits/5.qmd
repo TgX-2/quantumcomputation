@@ -10,6 +10,30 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+
+Mọi cổng 2x2 đều có thể phân rã Euler được, nhưng với những cái lớn hơn $2^n \times 2^n$, cần một số kỹ thuật khác.
+
+## Các bước thực hiện 
+
+**Bước 1:** Khử Gauss, tức là phân tích nó thành ma trận hai mức.
+
+**Bước 2:** Dùng Graycode để đi từ s đến t.
+
+**Bước 3:** Phân rã Euler.
+
+## Future
+
+Nhưng, phương pháp dùng ma trận hai mức + gray code có độ phức tạp tăng theo hàm mũ $O(n^24^n)$, vì thế hiện đại người ta dùng [Cosine-Sine decomposition](../future/csd.qmd) hoặc [Quantum Shannon Decomposition](../future/qsd.qmd).
+
+## Tính vạn năng của H + S + T + CNOT
+
+Là một tập cổng Clifford, có khả năng vạn năng xấp xỉ.
+
+
+
+:::
+
 :::{.callout-note}
 # tl;dr
 
@@ -30,23 +54,6 @@ Các cấu trúc của chúng tôi nói rất ít về tính hiệu quả (effic
 # Bài tập 4.36: 
 Xây dựng một mạch lượng tử để cộng hai số hai bit $x$ và $y$ theo modulo 4. Tức là, mạch phải thực hiện phép biến đổi $\vert{}x, y\rangle \rightarrow \vert{}x, x + y \pmod 4\rangle$. 
 :::
-
-:::{.callout}
-# roadmap
-
-Kế hoạch 3 bước để chứng minh rằng có thể chế tạo một máy tính lượng tử vạn năng chỉ bằng 4 loại cổng logic H, S, CNOT, T.
-
-## Bước 1. Chia để trị
-
-Từ một ma trận lớn, tách ra thành tích các ma trận nhỏ hơn.
-
-## Bước 2. Rút gọn về Cổng 1-qubit và CNOT
-
-
-
-## Bước 3. Xấp xỉ rời rạc
-:::
-
 
 # 1. Two-level unitary gates are universal
 

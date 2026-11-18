@@ -10,6 +10,11 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# Mapping
+
+:::
+
 :::{.callout-note}
 # tl;dr
 
@@ -59,7 +64,7 @@ Việc nghiên cứu sâu hơn về các thuật toán lượng tử sẽ đư�
 
 2. Rào cảo ngôn ngữ
 
-* Trực giác của chúng ta mắc kẹt ở thế giới cổ điển/
+* Trực giác của chúng ta mắc kẹt ở thế giới cổ điển.
 
 * Chúng ta phải ép não tư duy theo ngôn ngữ của đại số tuyến tính, không gian Hilbert, các phép biến đổi Unita.
 :::

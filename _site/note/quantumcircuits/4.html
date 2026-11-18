@@ -620,6 +620,30 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="nguyên-lý-đo-lường-trì-hoãn" class="level2">
+<h2 class="anchored" data-anchor-id="nguyên-lý-đo-lường-trì-hoãn">Nguyên lý đo lường trì hoãn</h2>
+<p>Thay vì đo ở giữa một mạch rồi mới quyết định có dùng cổng khác hay không, như hình dưới:</p>
+<p><img src="../../img/1.13.png" class="img-fluid"></p>
+<p>Thì chúng ta có thể dùng các cổng Controlled-U để quyết định luôn:</p>
+<p><img src="../../img/4.15.png" class="img-fluid"></p>
+<p>như trên hình là CX và CZ, thay vì phải <span class="math inline">X^{M_2}</span> và <span class="math inline">Z^{M_1}</span> (với <span class="math inline">M_1, M_2</span> là kết quả đã đo).</p>
+</section>
+<section id="nguyên-lý-đo-lường-ngầm-định" class="level2">
+<h2 class="anchored" data-anchor-id="nguyên-lý-đo-lường-ngầm-định">Nguyên lý đo lường ngầm định</h2>
+<p>Không mất tính tổng quát, bất kỳ đường dây lượng tử nào không được kết thúc (các qubit không được đo lường) ở cuối một mạch lượng tử đều có thể được giả định là đã được đo lường.</p>
+</section>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -679,8 +703,8 @@ window.Quarto = {
 <p>Áp dụng nguyên lý đo lường ngầm định vào, ta có thể thay 2 đường dây thông tin cổ điển thành đường dâu lượng tử, và thay các thao tác điều khiển cổ điển bằng các cổng CNOT và CZ lượng tử thuần túy.</p>
 <p>Và? Mạch vẫn đúng về mặt toán học, nhưng nó không còn viễn tải nữa, nó trở thành một mạch tính toán cục bộ khổng lồ, nơi alice và bob phải đưa qubit của họ lại gần nhau để thực hiện cổng CNOT.</p>
 </section>
-<section id="nguyên-lý-đo-lường-ngầm-định" class="level2">
-<h2 class="anchored" data-anchor-id="nguyên-lý-đo-lường-ngầm-định">Nguyên lý Đo lường Ngầm định</h2>
+<section id="nguyên-lý-đo-lường-ngầm-định-1" class="level2">
+<h2 class="anchored" data-anchor-id="nguyên-lý-đo-lường-ngầm-định-1">Nguyên lý Đo lường Ngầm định</h2>
 <p>Khi bạn bỏ mặc một qubit không đo lường ở cuối mạch, toán học tương ứng với hành động này là tính vết riêng từng phần trên không gian Hilbert của qubit đó để lấy ma trận mật độ rút gọn rho.</p>
 <p>Việc bạn có đo hay không đo qubit thứ hai không làm thay đổi rho của qubit thứ nhất. Đây là biểu hiện toán học của <strong>Định lý không truyền tín hiệu</strong> (Người quan sát A không thể biết người quan sát B đã đo qubit của mình hay chưa chỉ bằng cách nhìn vào các thống kê đo lường cục bộ của riêng mình).</p>
 </section>
@@ -702,7 +726,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -711,7 +735,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">\rho</span> là ma trận mật độ mô tả một hệ hai qubit. Giả sử chúng ta thực hiện một phép đo chiếu (projective measurement) trong cơ sở tính toán trên qubit thứ hai. Gọi <span class="math inline">P_0 = \vert{}0\rangle\langle0\vert{}</span> và <span class="math inline">P_1 = \vert{}1\rangle\langle1\vert{}</span> lần lượt là các toán tử chiếu lên trạng thái <span class="math inline">\vert{}0\rangle</span> và <span class="math inline">\vert{}1\rangle</span> của qubit thứ hai. Gọi <span class="math inline">\rho'</span> là ma trận mật độ được gán cho hệ thống sau phép đo bởi một người quan sát không biết kết quả đo lường. Chứng minh rằng <span class="math display">
 \rho' = P_0\rho P_0 + P_1\rho P_1. \tag{4.40}
@@ -721,7 +745,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -730,28 +754,11 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Mô hình đo lường mà chúng ta đã xác định cho mô hình mạch lượng tử là các phép đo chỉ được thực hiện trong cơ sở tính toán. Tuy nhiên, thường thì chúng ta muốn thực hiện phép đo trong một cơ sở khác, được xác định bởi một tập hợp đầy đủ các trạng thái trực chuẩn. Để thực hiện phép đo này, đơn giản là biến đổi unita từ cơ sở mà chúng ta muốn đo về cơ sở tính toán, sau đó tiến hành đo lường. Ví dụ, hãy chứng minh rằng mạch</p>
 <p><img src="../../img/4.33.1.png" class="img-fluid"></p>
 <p>thực hiện một phép đo trong cơ sở của các trạng thái Bell. Cụ thể hơn, hãy chứng minh rằng mạch này dẫn đến một phép đo được thực hiện với các phần tử POVM tương ứng là bốn toán tử chiếu lên các trạng thái Bell. Các toán tử đo lường tương ứng là gì?</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.34: (Đo lường một toán tử)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Giả sử chúng ta có một toán tử một qubit <span class="math inline">U</span> với các giá trị riêng là <span class="math inline">\pm 1</span>, sao cho <span class="math inline">U</span> vừa là toán tử Hermitian vừa là toán tử unita, do đó nó có thể được coi vừa là một đại lượng quan sát được (observable) vừa là một cổng lượng tử. Giả sử chúng ta muốn đo đại lượng quan sát <span class="math inline">U</span>. Tức là, chúng ta mong muốn thu được một kết quả đo lường chỉ ra một trong hai giá trị riêng, và để lại một trạng thái hậu đo lường là vector riêng tương ứng. Điều này có thể được triển khai bằng một mạch lượng tử như thế nào? Chứng minh rằng mạch sau đây triển khai một phép đo lường của <span class="math inline">U</span>:</p>
-<p><img src="../../img/4.34.1.png" class="img-fluid"></p>
 </div>
 </div>
 </div>
@@ -761,11 +768,28 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Bài tập 4.35: (Phép đo lường giao hoán với các điều khiển)
+<span class="screen-reader-only">Note</span>Bài tập 4.34: (Đo lường một toán tử)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử chúng ta có một toán tử một qubit <span class="math inline">U</span> với các giá trị riêng là <span class="math inline">\pm 1</span>, sao cho <span class="math inline">U</span> vừa là toán tử Hermitian vừa là toán tử unita, do đó nó có thể được coi vừa là một đại lượng quan sát được (observable) vừa là một cổng lượng tử. Giả sử chúng ta muốn đo đại lượng quan sát <span class="math inline">U</span>. Tức là, chúng ta mong muốn thu được một kết quả đo lường chỉ ra một trong hai giá trị riêng, và để lại một trạng thái hậu đo lường là vector riêng tương ứng. Điều này có thể được triển khai bằng một mạch lượng tử như thế nào? Chứng minh rằng mạch sau đây triển khai một phép đo lường của <span class="math inline">U</span>:</p>
+<p><img src="../../img/4.34.1.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.35: (Phép đo lường giao hoán với các điều khiển)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Một hệ quả của nguyên lý đo lường trì hoãn là các phép đo lường giao hoán với các cổng lượng tử khi qubit được đo là một qubit điều khiển, tức là:</p>
 <p><img src="../../img/4.35.1.png" class="img-fluid"></p>

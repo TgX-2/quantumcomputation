@@ -10,6 +10,36 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# note
+
+Cổng controlled-U có nghĩa là if (control_register == 1) then target_register = U(target_register).
+
+## Controlled-U
+
+Nhờ hệ quả của định lý phân rã Euler của phần trước, ta biết được một U bất kỳ có thể được phân rã thành $U = e^{i\alpha}AXBXC$ với $ABC = I$, thì khi đó ta có mạch:
+
+![](../../img/4.6.png)
+
+## Cổng Toffoli
+
+![](../../img/4.9.png)
+
+## Cổng $C^n(U)$
+
+Giả sử chúng ta cần đủ n điều kiện đúng, thì khi đó mới thực hiện U trên k bit.
+
+![](../../img/4.10.png)
+
+Với Controlled-U và cổng Toffoli đã được định nghĩa ở trên.
+
+## Cổng Controlled-NOT
+
+![](../../img/4.11.png)
+
+
+:::
+
 :::{.callout-note}
 # tl;dr
 
@@ -314,7 +344,11 @@ $$
 Loại phép toán hoán vị vòng quanh một phần (partial cyclic permutation operation) này sẽ rất hữu ích sau này trong Chương 7.
 :::
 
-Chúng ta có thể triển khai các cổng $C^n(U)$ bằng cách sử dụng các cổng hiện có của chúng ta như thế nào, trong đó $U$ là một phép toán unita một qubit tùy ý? Một mạch cực kỳ đơn giản để đạt được nhiệm vụ này được minh họa trong Hình 4.10. Mạch được chia thành ba giai đoạn, và sử dụng một số ít ($n - 1$) qubit làm việc (working qubits / ancilla qubits), tất cả đều bắt đầu và kết thúc ở trạng thái $\vert{}0\rangle$.   
+---
+
+**Chúng ta có thể triển khai các cổng $C^n(U)$ bằng cách sử dụng các cổng hiện có của chúng ta như thế nào, trong đó $U$ là một phép toán unita một qubit tùy ý?**
+
+Một mạch cực kỳ đơn giản để đạt được nhiệm vụ này được minh họa trong Hình 4.10. Mạch được chia thành ba giai đoạn, và sử dụng một số ít ($n - 1$) qubit làm việc (working qubits / ancilla qubits), tất cả đều bắt đầu và kết thúc ở trạng thái $\vert{}0\rangle$.   
 
 Giả sử các qubit điều khiển đang ở trạng thái cơ sở tính toán $\vert{}c_1, c_2, \dots, c_n\rangle$. Giai đoạn đầu tiên của mạch là thực hiện phép $\text{AND}$ khả nghịch tất cả các bit điều khiển $c_1, \dots, c_n$ lại với nhau để tạo ra tích $c_1 \cdot c_2 \dots c_n$. Để làm điều này, cổng đầu tiên trong mạch thực hiện $\text{AND}$ hai bit $c_1$ và $c_2$ với nhau, sử dụng một cổng Toffoli, làm thay đổi trạng thái của qubit làm việc đầu tiên thành $\vert{}c_1 \cdot c_2\rangle$. Cổng Toffoli tiếp theo thực hiện $\text{AND}$ bit $c_3$ với tích $c_1 \cdot c_2$, làm thay đổi trạng thái của qubit làm việc thứ hai thành $\vert{}c_1 \cdot c_2 \cdot c_3\rangle$. Chúng ta tiếp tục áp dụng các cổng Toffoli theo cách này, cho đến khi qubit làm việc cuối cùng ở trạng thái $\vert{}c_1 \cdot c_2 \dots c_n\rangle$.   
 

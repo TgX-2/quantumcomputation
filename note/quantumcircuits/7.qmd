@@ -10,6 +10,67 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+# note
+
+Bài này sẽ giải thích một cách mơ hồ về việc mô phỏng một hệ vật lý. Một điều không thể chối cãi là việc giải quyết các phương trình để tìm nghiệm trong các phương trình vật lý lượng tử là khó! vì tính chất vướng víu của nó, mặc dù là nó đều là phương trình vi phân cơ bản giống (4.88) -> (4.91).
+
+Hamiltonian là tổng năng lượng của hệ.
+
+## Công thức Trotter
+
+Tại sai lại sinh ra cái này? Căn bản là một Hamiltonian là việc mã hóa mọi thứ tác động đến hệ, ví dụ như, schrodinger:
+
+$$
+H = E = T + V
+$$
+
+tức là cơ năng (động năng + thế năng) phiên bản lượng tử, và hệ tiến hóa:
+
+$$
+\vert{}\psi(t)\rangle = e^{-iHt} \vert{}\psi(0)\rangle = e^{-i(A + B + ... + ?)t} \vert \psi_0 \rangle \tag{4.96}
+$$   
+
+xui xẻo thay, đôi lúc A và B không giao hoán, tức là $e^{-iHt} \neq e^{-iA}e^{-iBt}...e^{-i?t}$. Vì vậy chúng ta phải dùng công thức xấp xỉ Lie-Trotter bậc nhất:
+
+$$
+\lim_{n \to \infty} \left( e^{iAt/n} e^{iBt/n} \right)^n = e^{i(A+B)t}. \tag{4.98}
+$$   
+
+hoặc là các dạng khai triển bậc hai Trotter-Suzuki:
+
+$$
+e^{i(A+B)\Delta t} = e^{iA\Delta t} e^{iB\Delta t} + O(\Delta t^2). \tag{4.103}
+$$   
+
+$$
+e^{i(A+B)\Delta t} = e^{iA\Delta t/2} e^{iB\Delta t} e^{iA\Delta t/2} + O(\Delta t^3). \tag{4.104}
+$$   
+
+## Future
+
+**Near-integrable Product Formulas**
+
+Trong nhiều bài toán vật lý thực tế, H có thể được chia làm 2 phần:
+
+$$
+H = A + B
+$$
+
+trong đó:
+
+* A là phần tích phân được: Phần này chiếm phần lớn năng lượng hoặc hành vi chính của hệ thống. Ví nó "tích phân được" nên toán tử $e^{-iAt}$ có thể được tính toán một cách dễ dàng và chính xác.
+
+* B là phần nhiễu loạn nhỏ: Phần này mô tả các tương tác phụ hoặc sai lệch nhỏ, khiến cho H "gần tích phân được" thay vì "tích phân được". Do B rất nhỏ so với A ($\vert\vert B \vert \vert \ll \vert \vert A \vert \vert$).
+
+xem thêm ở [Near-integrable Product Formulas](../future/npf.qmd).
+
+**Quantum Stochastic Drift**
+
+
+
+:::
+
 :::{.callout-note}
 # tl;dr
 

@@ -627,6 +627,30 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Mọi cổng 2x2 đều có thể phân rã Euler được, nhưng với những cái lớn hơn <span class="math inline">2^n \times 2^n</span>, cần một số kỹ thuật khác.</p>
+<section id="các-bước-thực-hiện" class="level2">
+<h2 class="anchored" data-anchor-id="các-bước-thực-hiện">Các bước thực hiện</h2>
+<p><strong>Bước 1:</strong> Khử Gauss, tức là phân tích nó thành ma trận hai mức.</p>
+<p><strong>Bước 2:</strong> Dùng Graycode để đi từ s đến t.</p>
+<p><strong>Bước 3:</strong> Phân rã Euler.</p>
+</section>
+<section id="future" class="level2">
+<h2 class="anchored" data-anchor-id="future">Future</h2>
+<p>Nhưng, phương pháp dùng ma trận hai mức + gray code có độ phức tạp tăng theo hàm mũ <span class="math inline">O(n^24^n)</span>, vì thế hiện đại người ta dùng <a href="../../note/future/csd.html">Cosine-Sine decomposition</a> hoặc <a href="../../note/future/qsd.html">Quantum Shannon Decomposition</a>.</p>
+</section>
+<section id="tính-vạn-năng-của-h-s-t-cnot" class="level2">
+<h2 class="anchored" data-anchor-id="tính-vạn-năng-của-h-s-t-cnot">Tính vạn năng của H + S + T + CNOT</h2>
+<p>Là một tập cổng Clifford, có khả năng vạn năng xấp xỉ.</p>
+</section>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -662,29 +686,6 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <p>Xây dựng một mạch lượng tử để cộng hai số hai bit <span class="math inline">x</span> và <span class="math inline">y</span> theo modulo 4. Tức là, mạch phải thực hiện phép biến đổi <span class="math inline">\vert{}x, y\rangle \rightarrow \vert{}x, x + y \pmod 4\rangle</span>.</p>
 </div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>roadmap
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Kế hoạch 3 bước để chứng minh rằng có thể chế tạo một máy tính lượng tử vạn năng chỉ bằng 4 loại cổng logic H, S, CNOT, T.</p>
-<section id="bước-1.-chia-để-trị" class="level2">
-<h2 class="anchored" data-anchor-id="bước-1.-chia-để-trị">Bước 1. Chia để trị</h2>
-<p>Từ một ma trận lớn, tách ra thành tích các ma trận nhỏ hơn.</p>
-</section>
-<section id="bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot" class="level2">
-<h2 class="anchored" data-anchor-id="bước-2.-rút-gọn-về-cổng-1-qubit-và-cnot">Bước 2. Rút gọn về Cổng 1-qubit và CNOT</h2>
-</section>
-<section id="bước-3.-xấp-xỉ-rời-rạc" class="level2">
-<h2 class="anchored" data-anchor-id="bước-3.-xấp-xỉ-rời-rạc">Bước 3. Xấp xỉ rời rạc</h2>
-</section>
 </div>
 </div>
 <section id="two-level-unitary-gates-are-universal" class="level1">
@@ -738,7 +739,7 @@ U = V_1 \dots V_k, \tag{4.51}
 </span></p>
 <p>trong đó các ma trận <span class="math inline">V_i</span> là các ma trận unita hai mức, và <span class="math inline">k \le (d-1) + (d-2) + \dots + 1 = d(d-1)/2</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -747,7 +748,7 @@ U = V_1 \dots V_k, \tag{4.51}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Đưa ra sự phân rã của phép biến đổi</p>
 <p><span class="math display">
@@ -786,7 +787,7 @@ U = V_1 \dots V_k, \tag{4.51}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -795,7 +796,7 @@ U = V_1 \dots V_k, \tag{4.51}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Chứng minh rằng tồn tại một ma trận unita <span class="math inline">d \times d</span> <span class="math inline">U</span> không thể bị phân rã thành một tích của ít hơn <span class="math inline">d - 1</span> ma trận unita hai mức.</p>
 </div>
@@ -841,7 +842,7 @@ U = \begin{bmatrix} a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\
 <p><img src="../../img/4.16.png" class="img-fluid"></p>
 <p>Quay trở lại trường hợp tổng quát, chúng ta thấy rằng việc triển khai phép toán unita hai mức <span class="math inline">U</span> đòi hỏi nhiều nhất <span class="math inline">2(n - 1)</span> phép toán có điều khiển để hoán đổi <span class="math inline">\vert{}g_1\rangle</span> với <span class="math inline">\vert{}g_{m-1}\rangle</span> và sau đó hoán đổi ngược lại. Mỗi phép toán có điều khiển này có thể được thực hiện bằng cách sử dụng <span class="math inline">O(n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>; phép toán controlled-<span class="math inline">\tilde{U}</span> cũng đòi hỏi <span class="math inline">O(n)</span> cổng. Do đó, việc triển khai <span class="math inline">U</span> đòi hỏi <span class="math inline">O(n^2)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Chúng ta đã thấy ở phần trước rằng một ma trận unita tùy ý trên không gian trạng thái <span class="math inline">2^n</span> chiều của <span class="math inline">n</span> qubit có thể được viết dưới dạng một tích của <span class="math inline">O(2^{2n}) = O(4^n)</span> phép toán unita hai mức. Kết hợp các kết quả này, chúng ta thấy rằng một phép toán unita tùy ý trên <span class="math inline">n</span> qubit có thể được triển khai bằng cách sử dụng một mạch chứa <span class="math inline">O(n^2 4^n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Rõ ràng, cấu trúc này không cung cấp các mạch lượng tử hiệu quả cho lắm! Tuy nhiên, chúng tôi sẽ chỉ ra ở Mục 4.5.4 rằng cấu trúc này gần như tối ưu theo nghĩa là tồn tại các phép toán unita đòi hỏi số lượng cổng theo hàm mũ để triển khai. Do đó, để tìm ra các thuật toán lượng tử nhanh, chúng ta rõ ràng sẽ cần một cách tiếp cận khác với cách được thực hiện trong cấu trúc vạn năng.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -850,7 +851,7 @@ U = \begin{bmatrix} a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tìm một mạch lượng tử sử dụng các phép toán một qubit và <span class="math inline">\text{CNOT}</span> để triển khai phép biến đổi<br>
 <span class="math display">
@@ -1020,7 +1021,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 <p>Tuy nhiên, thật đáng chú ý, một tốc độ hội tụ nhanh hơn nhiều có thể được chứng minh. Định lý Solovay-Kitaev, được chứng minh ở Phụ lục 3, ngụ ý rằng một cổng unita một qubit tùy ý có thể được xấp xỉ với độ chính xác <span class="math inline">\epsilon</span> bằng cách sử dụng <span class="math inline">O(\log^c(1/\epsilon))</span> cổng từ tập hợp rời rạc của chúng ta, trong đó <span class="math inline">c</span> là một hằng số xấp xỉ bằng <span class="math inline">2</span>. Do đó, định lý Solovay-Kitaev ngụ ý rằng để xấp xỉ một mạch chứa <span class="math inline">m</span> cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tới độ chính xác <span class="math inline">\epsilon</span> thì đòi hỏi <span class="math inline">O(m \log^c(m/\epsilon))</span> cổng từ tập hợp rời rạc, một sự gia tăng đa logarit (polylogarithmic) so với kích thước của mạch ban đầu, điều này có khả năng được chấp nhận cho gần như tất cả các ứng dụng.</p>
 <p>Tóm lại, chúng ta đã chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và <span class="math inline">\pi/8</span> là vạn năng cho tính toán lượng tử theo nghĩa là cho trước một mạch chứa các cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tùy ý, hoàn toàn có thể mô phỏng mạch này với độ chính xác tốt bằng cách chỉ sử dụng tập hợp cổng rời rạc này. Hơn nữa, quá trình mô phỏng có thể được thực hiện một cách hiệu quả, theo nghĩa là chi phí hoạt động (overhead) cần thiết để thực hiện mô phỏng là đa thức theo <span class="math inline">\log(m/\epsilon)</span>, trong đó <span class="math inline">m</span> là số lượng cổng trong mạch ban đầu, và <span class="math inline">\epsilon</span> là độ chính xác mong muốn của phép mô phỏng.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1029,7 +1030,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Bài tập này và hai bài tập tiếp theo phát triển một cấu trúc chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và Toffoli là vạn năng.</p>
 <p><img src="../../img/4.17.png" class="img-fluid"></p>
@@ -1038,7 +1039,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1047,7 +1048,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Giả sử <span class="math inline">\cos\theta = 3/5</span>. Chúng ta đưa ra một chứng minh bằng phản chứng rằng <span class="math inline">\theta</span> là một bội số vô tỉ của <span class="math inline">2\pi</span>.</p>
 <ol type="1">
@@ -1058,7 +1059,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1067,7 +1068,7 @@ E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Conf mấy bai nx luoi go</p>
 </div>
