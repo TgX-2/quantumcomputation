@@ -97,6 +97,7 @@ website:
       - section : "Future"
         contents:
           - note/future/simulation.qmd
+          - note/future/directions.qmd
 
 
     

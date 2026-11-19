@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>2 The analysis of computational problems – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">3 Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/2.html">2 The analysis of computational problems</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">3 Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2 The analysis of computational problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Perspectives on computer science</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">4 Quantum circuits</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Quantum Algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Single qubit operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Controlled operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Measurement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Universal quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Summary of the quantum circuit model of computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Simulation of quantum systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 The quantum Fourier transform and its applications</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 The quantum Fourier transform and its applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum Fourier transform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Applications: order-finding and factoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum search as a quantum simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum counting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Speeding up the solution of NP-complete problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Quantum search of an unstructured database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Optimality of the search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Black box algorithm limits</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">7 Quantum computers: Physical realization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum computers: Physical realization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Guiding principles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Conditions for quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Harmonic oscillator quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Optical photon quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Optical cavity quantum electrodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Ion traps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Nuclear magnetic resonance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8 Other implementation schemes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Questions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Future</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#how-to-quantify-computational-resources" id="toc-how-to-quantify-computational-resources" class="nav-link active" data-scroll-target="#how-to-quantify-computational-resources">1. How to quantify computational resources</a>
+  <ul class="collapse">
+  <li><a href="#asymptotic-notation-examples" id="toc-asymptotic-notation-examples" class="nav-link" data-scroll-target="#asymptotic-notation-examples">Asymptotic notation: examples</a></li>
+  </ul></li>
+  <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">2. Computational complexity</a></li>
+  <li><a href="#strong-churchturing-thesis" id="toc-strong-churchturing-thesis" class="nav-link" data-scroll-target="#strong-churchturing-thesis">Strong Church–Turing thesis</a></li>
+  <li><a href="#decision-problems-and-the-complexity-classes-p-and-np" id="toc-decision-problems-and-the-complexity-classes-p-and-np" class="nav-link" data-scroll-target="#decision-problems-and-the-complexity-classes-p-and-np">3. Decision problems and the complexity classes P and NP</a></li>
+  <li><a href="#định-lý-3.1-định-lý-euler" id="toc-định-lý-3.1-định-lý-euler" class="nav-link" data-scroll-target="#định-lý-3.1-định-lý-euler">Định lý 3.1: (Định lý Euler)</a></li>
+  <li><a href="#định-lý-3.2-cook-levin" id="toc-định-lý-3.2-cook-levin" class="nav-link" data-scroll-target="#định-lý-3.2-cook-levin">Định lý 3.2: (Cook-Levin)</a></li>
+  <li><a href="#a-plethora-of-complexity-classes" id="toc-a-plethora-of-complexity-classes" class="nav-link" data-scroll-target="#a-plethora-of-complexity-classes">4. A plethora of complexity classes</a></li>
+  <li><a href="#energy-and-computation" id="toc-energy-and-computation" class="nav-link" data-scroll-target="#energy-and-computation">5. Energy and computation</a></li>
+  <li><a href="#nguyên-lý-landauer-dạng-thứ-nhất" id="toc-nguyên-lý-landauer-dạng-thứ-nhất" class="nav-link" data-scroll-target="#nguyên-lý-landauer-dạng-thứ-nhất">Nguyên lý Landauer (dạng thứ nhất)</a></li>
+  <li><a href="#nguyên-lý-landauer-dạng-thứ-hai" id="toc-nguyên-lý-landauer-dạng-thứ-hai" class="nav-link" data-scroll-target="#nguyên-lý-landauer-dạng-thứ-hai">Nguyên lý Landauer (dạng thứ hai)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/index.html">3 Introduction to Computer Science</a></li><li class="breadcrumb-item"><a href="../../note/introductiontocomputerscience/2.html">2 The analysis of computational problems</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">2 The analysis of computational problems</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">O,\Omega,\Theta</span> lần lượt là cận trên, cận dưới và chặn khớp. Sắp xếp compare-and-swap tốn <span class="math inline">\Theta(n^2)</span>; heapsort dùng <span class="math inline">O(n\log n)</span>, còn đếm <span class="math inline">n!</span> thứ tự cho cận dưới <span class="math inline">\Omega(n\log n)</span>. Đa thức so với siêu đa thức là tiêu chí thô: <span class="math inline">2^{n/1000}</span> có thể thực tế hơn <span class="math inline">n^{1000}</span> ở quy mô thường gặp.</li>
+<li>Độ phức tạp xét thời gian và không gian. Luận đề Church–Turing mạnh giả định mô phỏng đa thức bằng máy Turing xác suất—điều lượng tử thách thức. <span class="math inline">P</span> giải trong đa thức; <span class="math inline">NP</span> kiểm chứng chứng cứ “có”; <span class="math inline">coNP</span> chứng cứ “không”. <span class="math inline">P\subseteq NP</span>, còn <span class="math inline">P=NP</span> bỏ ngỏ.</li>
+<li>Quy giảm đa thức truyền độ khó: Hamilton NP-đầy đủ; Euler ở <span class="math inline">P</span> theo định lý Euler (đồ thị liên thông, bậc chẵn). Cook–Levin chứng minh CSAT NP-đầy đủ, nền tảng cho SAT/3SAT. Chương khảo sát <span class="math inline">L\subseteq P\subseteq NP\subseteq PSPACE\subseteq EXP</span>, xấp xỉ và BPP; các quan hệ nghiêm ngặt còn mở.</li>
+<li>Landauer: xóa mỗi bit tiêu tán ít nhất <span class="math inline">k_BT\ln2</span>. Fredkin/Toffoli thực hiện tính toán khả nghịch với ancilla; tính toán lùi khử “rác” theo <span class="math inline">(x,y)\mapsto(x,y\oplus f(x))</span>. Nhiễu và sửa lỗi khiến tiết kiệm năng lượng chỉ là lý tưởng.</li>
+</ul>
+</div>
+</div>
+<p>Việc phân tích các bài toán tính toán phụ thuộc vào câu trả lời cho ba câu hỏi nền tảng:</p>
+<ol type="1">
+<li><strong>Một bài toán tính toán là gì?</strong></li>
+</ol>
+<p>Nhân hai số với nhau là một bài toán tính toán; lập trình một máy tính để vượt qua khả năng của con người trong việc làm thơ cũng vậy. Để đạt được tiến bộ trong việc phát triển một lý thuyết tổng quát cho việc phân tích các bài toán tính toán, chúng ta sẽ cô lập một lớp đặc biệt các bài toán được gọi là bài toán quyết định (decision problems), và tập trung phân tích của chúng ta vào những bài toán đó. Việc tự giới hạn bản thân theo cách này cho phép phát triển một lý thuyết vừa thanh lịch vừa có cấu trúc phong phú. Quan trọng nhất, đó là một lý thuyết mà các nguyên tắc của nó có ứng dụng vượt xa các bài toán quyết định.</p>
+<ol start="2" type="1">
+<li><strong>Chúng ta có thể thiết kế các thuật toán như thế nào để giải quyết một bài toán tính toán cho trước?</strong></li>
+</ol>
+<p>Khi một bài toán đã được xác định, những thuật toán nào có thể được sử dụng để giải quyết bài toán đó? Có những kỹ thuật tổng quát nào có thể được sử dụng để giải quyết các lớp bài toán rộng lớn hay không? Làm thế nào chúng ta có thể chắc chắn rằng một thuật toán hành xử đúng như những gì được công bố?</p>
+<ol start="3" type="1">
+<li><strong>Những tài nguyên tối thiểu nào được yêu cầu để giải quyết một bài toán tính toán cho trước?</strong></li>
+</ol>
+<p>Việc chạy một thuật toán đòi hỏi sự tiêu thụ các tài nguyên, chẳng hạn như thời gian, không gian, và năng lượng. Trong các tình huống khác nhau, có thể mong muốn giảm thiểu sự tiêu thụ của một hoặc nhiều tài nguyên. Chúng ta có thể phân loại các bài toán dựa trên những yêu cầu về tài nguyên cần thiết để giải quyết chúng không?</p>
+<hr>
+<p>Trong một vài mục tiếp theo, chúng ta sẽ điều tra ba câu hỏi này, đặc biệt là câu hỏi 1 và 3. Mặc dù câu hỏi 1, ‘một bài toán tính toán là gì?’, có lẽ là câu hỏi nền tảng nhất, chúng ta sẽ hoãn việc trả lời nó cho đến Mục 3.2.3, tạm dừng trước tiên để thiết lập một số khái niệm nền tảng liên quan đến việc định lượng tài nguyên trong Mục 3.2.1, và sau đó xem xét các ý tưởng then chốt của độ phức tạp tính toán trong Mục 3.2.2.</p>
+<p>Câu hỏi 2, làm thế nào để thiết kế các thuật toán tốt, là chủ đề của một lượng lớn công trình khéo léo bởi nhiều nhà nghiên cứu. Nhiều đến mức trong phần giới thiệu ngắn gọn này, chúng ta thậm chí không thể bắt đầu mô tả những ý tưởng chính được sử dụng trong việc thiết kế các thuật toán tốt. Nếu bạn quan tâm đến chủ đề tuyệt đẹp này, chúng tôi xin chuyển hướng bạn đến phần ‘Lịch sử và đọc thêm’ ở cuối chương. Sự tiếp xúc trực tiếp và gần gũi nhất của chúng ta với chủ đề này sẽ diễn ra ở phần sau của cuốn sách, khi chúng ta nghiên cứu các thuật toán lượng tử. Các kỹ thuật liên quan đến việc tạo ra các thuật toán lượng tử thường liên quan đến sự pha trộn giữa các ý tưởng sâu sắc hiện có trong thiết kế thuật toán cho máy tính cổ điển, và việc tạo ra các kỹ thuật cơ học lượng tử mới, hoàn toàn nguyên bản dành cho thiết kế thuật toán. Vì lý do này, và bởi vì tinh thần thiết kế thuật toán lượng tử có rất nhiều điểm tương đồng với thiết kế thuật toán cổ điển trong nhiều khía cạnh, chúng tôi khuyến khích bạn làm quen với ít nhất là những ý tưởng cơ bản của thiết kế thuật toán.</p>
+<p>Câu hỏi 3, những tài nguyên tối thiểu nào được yêu cầu để giải quyết một bài toán tính toán cho trước, là trọng tâm chính của một vài phần tiếp theo. Ví dụ, giả sử chúng ta được cho hai số, mỗi số có độ dài <span class="math inline">n</span> bit, mà chúng ta muốn nhân lại với nhau. Nếu phép nhân được thực hiện trên một máy Turing một dải băng, máy Turing đó phải thực thi bao nhiêu bước tính toán để hoàn thành tác vụ? Bao nhiêu không gian được sử dụng trên máy Turing trong khi hoàn thành tác vụ?</p>
+<p>Đây là những ví dụ về loại câu hỏi tài nguyên mà chúng ta có thể đặt ra. Nói chung, máy tính sử dụng nhiều loại tài nguyên khác nhau, tuy nhiên chúng ta sẽ tập trung phần lớn sự chú ý vào thời gian (time), không gian (space), và năng lượng (energy). Theo truyền thống trong khoa học máy tính, thời gian và không gian là hai mối quan tâm chính về tài nguyên trong việc nghiên cứu thuật toán, và chúng ta nghiên cứu những vấn đề này trong các Mục 3.2.2 đến 3.2.4. Năng lượng là một sự cân nhắc ít quan trọng hơn; tuy nhiên, việc nghiên cứu các yêu cầu về năng lượng lại tạo động lực cho chủ đề tính toán cổ điển khả nghịch (reversible classical computation), điều mà đến lượt nó lại là một điều kiện tiên quyết cho tính toán lượng tử, do đó chúng ta sẽ xem xét các yêu cầu về năng lượng cho tính toán một cách khá chi tiết trong Mục 3.2.5.</p>
+<section id="how-to-quantify-computational-resources" class="level1">
+<h1>1. How to quantify computational resources</h1>
+<p>Các mô hình tính toán khác nhau dẫn đến những yêu cầu tài nguyên khác nhau cho việc tính toán. Thậm chí một điều đơn giản như việc chuyển đổi từ máy Turing một dải băng sang hai dải băng cũng có thể làm thay đổi các tài nguyên cần thiết để giải quyết một bài toán tính toán cho trước. Đối với một tác vụ tính toán đã được hiểu cực kỳ rõ ràng, ví dụ như phép cộng các số nguyên, thì những sự khác biệt như vậy giữa các mô hình tính toán có thể mang lại sự quan tâm. Tuy nhiên, đối với bước đầu tiên trong việc tìm hiểu một bài toán, chúng ta muốn có một cách để định lượng các yêu cầu tài nguyên mà nó độc lập với những thay đổi tương đối nhỏ nhặt trong mô hình tính toán. Một trong những công cụ đã được phát triển để làm việc này là ký hiệu tiệm cận (asymptotic notation), có thể được sử dụng để tóm tắt hành vi cốt yếu của một hàm. Ký hiệu tiệm cận này có thể được sử dụng, ví dụ, để tóm tắt bản chất của việc một thuật toán cho trước mất bao nhiêu bước thời gian để chạy, mà không phải lo lắng quá nhiều về số đếm thời gian chính xác. Trong phần này, chúng tôi mô tả chi tiết ký hiệu này, và áp dụng nó vào một bài toán đơn giản minh họa cho việc định lượng tài nguyên tính toán – phân tích các thuật toán dùng để sắp xếp một danh sách các tên theo thứ tự bảng chữ cái.</p>
+<hr>
+<p>Ví dụ, giả sử rằng chúng ta quan tâm đến số lượng các cổng cần thiết để cộng hai số <span class="math inline">n</span> bit lại với nhau. Việc đếm chính xác số lượng cổng được yêu cầu sẽ che khuất đi bức tranh toàn cảnh: có lẽ một thuật toán cụ thể yêu cầu <span class="math inline">24n + 2\lceil\log n\rceil + 16</span> cổng để thực hiện tác vụ này. Tuy nhiên, trong giới hạn kích thước bài toán lớn, số hạng duy nhất có ý nghĩa là số hạng <span class="math inline">24n</span>. Hơn nữa, chúng ta bỏ qua các hằng số nhân vì chúng chỉ có tầm quan trọng thứ yếu đối với việc phân tích thuật toán. Hành vi cốt yếu của thuật toán được tóm tắt bằng cách nói rằng số lượng phép toán được yêu cầu thay đổi tỷ lệ thuận với <span class="math inline">n</span>, trong đó <span class="math inline">n</span> là số lượng bit trong các số đang được cộng. Ký hiệu tiệm cận bao gồm ba công cụ giúp làm cho khái niệm này trở nên chính xác.</p>
+<p>Ký hiệu <span class="math inline">O</span> (‘big <span class="math inline">O</span>’) được sử dụng để thiết lập các giới hạn trên (upper bounds) cho hành vi của một hàm. Giả sử <span class="math inline">f(n)</span> và <span class="math inline">g(n)</span> là hai hàm trên tập các số nguyên không âm. Chúng ta nói ‘<span class="math inline">f(n)</span> thuộc lớp các hàm <span class="math inline">O(g(n))</span>’, hoặc đơn giản là ‘<span class="math inline">f(n)</span> là <span class="math inline">O(g(n))</span>’, nếu tồn tại các hằng số <span class="math inline">c</span> và <span class="math inline">n_0</span> sao cho với mọi giá trị của <span class="math inline">n</span> lớn hơn <span class="math inline">n_0</span>, ta có <span class="math inline">f(n) \le cg(n)</span>. Tức là, đối với <span class="math inline">n</span> đủ lớn, hàm <span class="math inline">g(n)</span> là một giới hạn trên đối với <span class="math inline">f(n)</span>, bỏ qua một hằng số nhân không quan trọng. Ký hiệu big <span class="math inline">O</span> đặc biệt hữu ích trong việc nghiên cứu hành vi trong trường hợp xấu nhất (worst-case behavior) của các thuật toán cụ thể, nơi mà chúng ta thường hài lòng với một giới hạn trên về lượng tài nguyên mà một thuật toán tiêu thụ.</p>
+<p>Khi nghiên cứu hành vi của một lớp các thuật toán – ví dụ như toàn bộ lớp các thuật toán có thể được sử dụng để nhân hai số – sẽ thật thú vị khi thiết lập các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu. Đối với việc này, ký hiệu <span class="math inline">\Omega</span> (‘big Omega’) được sử dụng. Một hàm <span class="math inline">f(n)</span> được cho là <span class="math inline">\Omega(g(n))</span> nếu tồn tại các hằng số <span class="math inline">c</span> và <span class="math inline">n_0</span> sao cho với mọi <span class="math inline">n</span> lớn hơn <span class="math inline">n_0</span>, ta có <span class="math inline">cg(n) \le f(n)</span>. Tức là, đối với <span class="math inline">n</span> đủ lớn, <span class="math inline">g(n)</span> là một giới hạn dưới đối với <span class="math inline">f(n)</span>, bỏ qua một hằng số nhân không quan trọng.</p>
+<p>Cuối cùng, ký hiệu <span class="math inline">\Theta</span> (‘big Theta’) được sử dụng để chỉ ra rằng <span class="math inline">f(n)</span> có hành vi tiệm cận giống với <span class="math inline">g(n)</span>, bỏ qua các hằng số nhân không quan trọng. Tức là, chúng ta nói <span class="math inline">f(n)</span> là <span class="math inline">\Theta(g(n))</span> nếu nó vừa là <span class="math inline">O(g(n))</span> vừa là <span class="math inline">\Omega(g(n))</span>.</p>
+<section id="asymptotic-notation-examples" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-notation-examples">Asymptotic notation: examples</h2>
+<p>Hãy xem xét một vài ví dụ đơn giản về ký hiệu tiệm cận. Hàm <span class="math inline">2n</span> thuộc lớp <span class="math inline">O(n^2)</span>, vì <span class="math inline">2n \le 2n^2</span> với mọi <span class="math inline">n</span> dương. Hàm <span class="math inline">2^n</span> là <span class="math inline">\Omega(n^3)</span>, vì <span class="math inline">n^3 \le 2^n</span> đối với <span class="math inline">n</span> đủ lớn. Cuối cùng, hàm <span class="math inline">7n^2 + \sqrt{n}\log(n)</span> là <span class="math inline">\Theta(n^2)</span>, vì <span class="math inline">7n^2 \le 7n^2 + \sqrt{n}\log(n) \le 8n^2</span> đối với mọi giá trị đủ lớn của <span class="math inline">n</span>. Trong một vài bài tập tiếp theo, bạn sẽ làm việc thông qua một số tính chất sơ cấp của ký hiệu tiệm cận khiến nó trở thành một công cụ hữu ích trong việc phân tích các thuật toán.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.9:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">f(n)</span> là <span class="math inline">O(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Omega(f(n))</span>. Suy ra rằng <span class="math inline">f(n)</span> là <span class="math inline">\Theta(g(n))</span> khi và chỉ khi <span class="math inline">g(n)</span> là <span class="math inline">\Theta(f(n))</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.10:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">g(n)</span> là một đa thức bậc <span class="math inline">k</span>. Chứng minh rằng <span class="math inline">g(n)</span> là <span class="math inline">O(n^l)</span> với mọi <span class="math inline">l \ge k</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.11:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\log n</span> là <span class="math inline">O(n^k)</span> với mọi <span class="math inline">k &gt; 0</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.12: (<span class="math inline">n^{\log n}</span> là siêu đa thức - super-polynomial)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">n^k</span> là <span class="math inline">O(n^{\log n})</span> với mọi <span class="math inline">k</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">O(n^k)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.13: (<span class="math inline">n^{\log n}</span> là dưới hàm mũ - sub-exponential)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">c^n</span> là <span class="math inline">\Omega(n^{\log n})</span> với mọi <span class="math inline">c &gt; 1</span>, nhưng <span class="math inline">n^{\log n}</span> không bao giờ là <span class="math inline">\Omega(c^n)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.14:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">e(n)</span> là <span class="math inline">O(f(n))</span> và <span class="math inline">g(n)</span> là <span class="math inline">O(h(n))</span>. Chứng minh rằng <span class="math inline">e(n)g(n)</span> là <span class="math inline">O(f(n)h(n))</span>.</p>
+</div>
+</div>
+</div>
+<p>Một ví dụ về việc sử dụng ký hiệu tiệm cận trong việc định lượng tài nguyên là ứng dụng đơn giản sau đây cho bài toán sắp xếp một danh sách gồm <span class="math inline">n</span> phần tử tên theo thứ tự bảng chữ cái. Nhiều thuật toán sắp xếp dựa trên phép toán ‘so sánh-và-đổi-chỗ’ (compare-and-swap): hai phần tử của một danh sách <span class="math inline">n</span> phần tử được so sánh, và đổi chỗ nếu chúng không đúng thứ tự. Nếu phép toán so sánh-và-đổi-chỗ này là phương tiện duy nhất mà qua đó chúng ta có thể truy cập danh sách, thì cần bao nhiêu phép toán như vậy để đảm bảo rằng danh sách đã được sắp xếp chính xác?</p>
+<p>Một thuật toán so sánh-và-đổi-chỗ đơn giản để giải quyết bài toán sắp xếp như sau: (lưu ý rằng compare-and-swap(j,k) so sánh các mục danh sách được đánh số <span class="math inline">j</span> và <span class="math inline">k</span>, và đổi chỗ chúng nếu chúng không đúng thứ tự)</p>
+<pre><code>for j = 1 to n-1
+    for k = j+1 to n
+        compare-and-swap(j,k)
+    end k
+end j</code></pre>
+<p>Rõ ràng là thuật toán này sắp xếp chính xác một danh sách gồm <span class="math inline">n</span> cái tên theo thứ tự bảng chữ cái. Lưu ý rằng số lượng phép toán so sánh-và-đổi-chỗ được thuật toán thực thi là <span class="math inline">(n - 1) + (n - 2) + \dots + 1 = n(n - 1)/2</span>. Do đó, số lượng phép toán so sánh-và-đổi-chỗ mà thuật toán sử dụng là <span class="math inline">\Theta(n^2)</span>. Chúng ta có thể làm tốt hơn thế này không? Hóa ra là chúng ta có thể. Người ta đã biết đến các thuật toán như ‘heapsort’ chạy bằng cách sử dụng <span class="math inline">O(n \log n)</span> phép toán so sánh-và-đổi-chỗ. Hơn nữa, trong Bài tập 3.15, bạn sẽ làm việc thông qua một lập luận đếm đơn giản cho thấy bất kỳ thuật toán nào dựa trên phép toán so sánh-và-đổi-chỗ đều yêu cầu <span class="math inline">\Omega(n \log n)</span> phép toán như vậy. Do đó, bài toán sắp xếp nói chung yêu cầu <span class="math inline">\Theta(n \log n)</span> phép toán so sánh-và-đổi-chỗ.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.15: (Giới hạn dưới cho các thuật toán sắp xếp dựa trên so sánh-và-đổi-chỗ)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử một danh sách <span class="math inline">n</span> phần tử được sắp xếp bằng cách áp dụng một chuỗi các phép toán so sánh-và-đổi-chỗ cho danh sách. Có <span class="math inline">n!</span> cách sắp xếp ban đầu có thể có của danh sách. Chứng minh rằng sau khi <span class="math inline">k</span> phép toán so sánh-và-đổi-chỗ được áp dụng, tối đa <span class="math inline">2^k</span> trong số các cách sắp xếp ban đầu có thể có sẽ được sắp xếp thành thứ tự chính xác. Kết luận rằng cần phải có <span class="math inline">\Omega(n \log n)</span> phép toán so sánh-và-đổi-chỗ để sắp xếp tất cả các cách sắp xếp ban đầu có thể có thành thứ tự chính xác.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="computational-complexity" class="level1">
+<h1>2. Computational complexity</h1>
+<blockquote class="blockquote">
+<p><em>‘The idea that there won’t be an algorithm to solve it – this is something fundamental that won’t ever change – that idea appeals to me’</em> – Stephen Cook</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘Sometimes it is good that some things are impossible. I am happy there are many things that nobody can do to me.’</em> – Leonid Levin</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>‘It should not come as a surprise that our choice of polynomial algorithms as the mathematical concept that is supposed to capture the informal notion of ‘practically efficient computation’ is open to criticism from all sides. [. . . ] Ultimately, our argument for our choice must be this: Adopting polynomial worst-case performance as our criterion of efficiency results in an elegant and useful theory that says something meaningful about practical computation, and would be impossible without this simplification.’</em> – Christos Papadimitriou</p>
+</blockquote>
+<p><strong>Những tài nguyên về thời gian (time) và không gian (space) nào được yêu cầu để thực hiện một phép tính?</strong></p>
+<p>Trong nhiều trường hợp, đây là những câu hỏi quan trọng nhất mà chúng ta có thể đặt ra về một bài toán tính toán. Các bài toán như cộng và nhân các con số được coi là có thể giải quyết một cách hiệu quả bởi vì chúng ta có các thuật toán nhanh để thực hiện phép cộng và phép nhân, vốn tiêu thụ ít không gian khi chạy. Nhiều bài toán khác không có thuật toán nhanh nào được biết đến, và trên thực tế là không thể giải quyết được, không phải vì chúng ta không thể tìm ra thuật toán để giải bài toán đó, mà bởi vì tất cả các thuật toán đã biết đều tiêu thụ một lượng lớn không gian hoặc thời gian đến mức khiến chúng trở nên vô dụng trong thực tế.</p>
+<hr>
+<p>Độ phức tạp tính toán (Computational complexity) là nghiên cứu về các tài nguyên thời gian và không gian cần thiết để giải quyết các bài toán tính toán. <strong>Tác vụ của độ phức tạp tính toán là chứng minh các giới hạn dưới (lower bounds) đối với các tài nguyên được yêu cầu bởi thuật toán tốt nhất có thể để giải quyết một bài toán, ngay cả khi thuật toán đó chưa được biết đến một cách rõ ràng.</strong> Trong phần này và hai phần tiếp theo, chúng tôi đưa ra một cái nhìn tổng quan về độ phức tạp tính toán, các khái niệm chính của nó, và một số kết quả quan trọng nhất của lĩnh vực này. Lưu ý rằng độ phức tạp tính toán theo một khía cạnh nào đó là sự bổ sung cho lĩnh vực thiết kế thuật toán; lý tưởng nhất là các thuật toán hiệu quả nhất mà chúng ta có thể thiết kế sẽ khớp hoàn hảo với các giới hạn dưới được chứng minh bởi độ phức tạp tính toán. Thật không may, điều này thường không xảy ra. Như đã lưu ý, trong cuốn sách này chúng ta sẽ không xem xét thiết kế thuật toán cổ điển ở bất kỳ chiều sâu nào.</p>
+<hr>
+<p>Một khó khăn trong việc xây dựng một lý thuyết về độ phức tạp tính toán là các mô hình tính toán khác nhau có thể yêu cầu các tài nguyên khác nhau để giải quyết cùng một bài toán. Chẳng hạn, các máy Turing nhiều dải băng có thể giải quyết nhiều bài toán nhanh hơn đáng kể so với các máy Turing một dải băng. Khó khăn này được giải quyết theo một cách khá thô sơ (coarse). Giả sử một bài toán được chỉ định bằng cách cung cấp <span class="math inline">n</span> bit làm đầu vào. Ví dụ, chúng ta có thể quan tâm đến việc liệu một số <span class="math inline">n</span>-bit cụ thể có phải là số nguyên tố hay không. Sự phân biệt chính được đưa ra trong độ phức tạp tính toán là giữa các bài toán có thể được giải quyết bằng cách sử dụng các tài nguyên bị giới hạn bởi một đa thức (polynomial) theo <span class="math inline">n</span>, và những bài toán yêu cầu các tài nguyên tăng trưởng nhanh hơn bất kỳ đa thức nào theo <span class="math inline">n</span>. Trong trường hợp sau, chúng ta thường nói rằng các tài nguyên được yêu cầu là có tính hàm mũ (exponential) theo kích thước bài toán, lạm dụng thuật ngữ hàm mũ, vì có những hàm như <span class="math inline">n^{\log n}</span> tăng trưởng nhanh hơn bất kỳ đa thức nào (và do đó là ‘hàm mũ’ theo quy ước này), nhưng lại tăng trưởng chậm hơn bất kỳ hàm mũ thực sự nào. Một bài toán được coi là dễ (easy), dễ xử lý (tractable) hay khả thi (feasible) nếu tồn tại một thuật toán để giải quyết bài toán đó sử dụng tài nguyên đa thức, và được coi là khó (hard), khó xử lý (intractable) hay bất khả thi (infeasible) nếu thuật toán tốt nhất có thể yêu cầu tài nguyên hàm mũ.</p>
+<p>Lấy một ví dụ đơn giản, giả sử chúng ta có hai số với biểu diễn nhị phân <span class="math inline">x_1 \dots x_{m_1}</span> và <span class="math inline">y_1 \dots y_{m_2}</span>, và chúng ta muốn xác định tổng của hai số này. Kích thước tổng cộng của đầu vào là <span class="math inline">n \equiv m_1 + m_2</span>. Rất dễ để thấy rằng hai số này có thể được cộng lại bằng cách sử dụng một số lượng các phép toán sơ cấp tỷ lệ với <span class="math inline">\Theta(n)</span>; thuật toán này sử dụng một số lượng đa thức (thực ra là tuyến tính) các phép toán để thực hiện tác vụ của nó. Ngược lại, người ta tin rằng (mặc dù nó chưa bao giờ được chứng minh!) bài toán phân tích một số nguyên thành các thừa số nguyên tố của nó là khó xử lý. Nghĩa là, người ta tin rằng không có thuật toán nào có thể phân tích một số nguyên <span class="math inline">n</span>-bit tùy ý bằng cách sử dụng <span class="math inline">O(p(n))</span> phép toán, trong đó <span class="math inline">p</span> là một hàm đa thức cố định nào đó của <span class="math inline">n</span>. Sau này, chúng tôi sẽ đưa ra nhiều ví dụ khác về các bài toán được tin là khó xử lý theo nghĩa này.</p>
+<p>Sự phân loại đa thức (polynomial) so với hàm mũ (exponential) là khá thô sơ. Trong thực tế, một thuật toán giải quyết một bài toán sử dụng <span class="math inline">2^{n/1000}</span> phép toán có lẽ hữu ích hơn một thuật toán chạy trong <span class="math inline">n^{1000}</span> phép toán. Chỉ đối với các kích thước đầu vào rất lớn (<span class="math inline">n \approx 10^8</span>) thì thuật toán đa thức ‘hiệu quả’ mới được ưa thích hơn thuật toán hàm mũ ‘kém hiệu quả’, và đối với nhiều mục đích, việc ưu tiên thuật toán ‘kém hiệu quả’ có thể thực tế hơn.</p>
+<p>Mặc dù vậy, có nhiều lý do để đặt cơ sở cho độ phức tạp tính toán chủ yếu dựa trên sự phân loại đa thức so với hàm mũ. Đầu tiên, về mặt lịch sử, với một vài ngoại lệ, các thuật toán tài nguyên đa thức đã nhanh hơn rất nhiều so với các thuật toán hàm mũ. Chúng ta có thể suy đoán rằng lý do cho điều này là sự thiếu trí tưởng tượng: việc nghĩ ra các thuật toán yêu cầu <span class="math inline">n, n^2</span> hoặc một số lượng đa thức bậc thấp các phép toán thường dễ dàng hơn nhiều so với việc tìm ra một thuật toán tự nhiên yêu cầu <span class="math inline">n^{1000}</span> phép toán, mặc dù những ví dụ như trường hợp sau vẫn tồn tại. Do đó, khuynh hướng của tâm trí con người trong việc nghĩ ra các thuật toán tương đối đơn giản đã có nghĩa là trong thực tế, các thuật toán đa thức thường thực hiện hiệu quả hơn nhiều so với những người anh em họ hàm mũ của chúng.</p>
+<p>Một lý do thứ hai và nền tảng hơn cho việc nhấn mạnh sự phân loại đa thức so với hàm mũ được bắt nguồn từ luận đề Church-Turing mạnh (strong Church-Turing thesis). Như đã thảo luận trong Mục 1.1, người ta đã quan sát thấy vào những năm 1960 và 1970 rằng các máy Turing xác suất (probabilistic Turing machines) dường như là mô hình tính toán ‘hợp lý’ mạnh mẽ nhất. Cụ thể hơn, các nhà nghiên cứu liên tục nhận thấy rằng nếu có thể tính toán một hàm bằng cách sử dụng <span class="math inline">k</span> phép toán sơ cấp trong một mô hình nào đó không phải là mô hình tính toán máy Turing xác suất, thì luôn luôn có thể tính toán cùng một hàm đó trong mô hình máy Turing xác suất, sử dụng tối đa <span class="math inline">p(k)</span> phép toán sơ cấp, trong đó <span class="math inline">p(\cdot)</span> là một hàm đa thức nào đó. Phát biểu này được biết đến là luận đề Church-Turing mạnh:</p>
+</section>
+<section id="strong-churchturing-thesis" class="level1 postulates">
+<h1>Strong Church–Turing thesis</h1>
+<p>Any model of computation can be simulated on a probabilistic Turing machine with at most a polynomial increase in the number of elementary operations required.</p>
+</section>
+<p>Luận đề Church-Turing mạnh là một tin tuyệt vời cho lý thuyết về độ phức tạp tính toán, vì nó ngụ ý rằng sự chú ý có thể được giới hạn trong mô hình tính toán máy Turing xác suất. Suy cho cùng, nếu một bài toán không có giải pháp sử dụng tài nguyên đa thức trên một máy Turing xác suất, thì luận đề Church-Turing mạnh ngụ ý rằng nó không có giải pháp hiệu quả trên bất kỳ thiết bị tính toán nào. Do đó, luận đề Church-Turing mạnh ngụ ý rằng toàn bộ lý thuyết về độ phức tạp tính toán sẽ mang một hình thức thanh lịch, độc lập với mô hình (model-independent) nếu khái niệm về sự hiệu quả được đồng nhất với các thuật toán tài nguyên đa thức, và sự thanh lịch này đã cung cấp một động lực mạnh mẽ hướng tới việc chấp nhận sự đồng nhất hóa giữa ‘có thể giải quyết bằng tài nguyên đa thức’ và ‘có thể giải quyết một cách hiệu quả’. Tất nhiên, một trong những lý do chính yếu cho sự quan tâm đến máy tính lượng tử là chúng đặt ra sự hoài nghi đối với luận đề Church-Turing mạnh, bằng cách cho phép giải quyết hiệu quả một bài toán được tin là khó xử lý trên tất cả các máy tính cổ điển, bao gồm cả máy Turing xác suất! Tuy nhiên, việc hiểu và trân trọng vai trò của luận đề Church-Turing mạnh trong công cuộc tìm kiếm một lý thuyết độ phức tạp tính toán độc lập với mô hình vẫn là điều hữu ích.</p>
+<p>Cuối cùng, chúng tôi lưu ý rằng, trong thực tế, các nhà khoa học máy tính không chỉ quan tâm đến việc phân loại bài toán thành đa thức hay hàm mũ. Đây chỉ là cách đầu tiên và thô sơ nhất để hiểu một bài toán tính toán khó đến mức nào. Tuy nhiên, nó là một sự phân biệt cực kỳ quan trọng, và minh họa cho nhiều quan điểm rộng lớn hơn về bản chất của các vấn đề tài nguyên trong khoa học máy tính. Đối với phần lớn cuốn sách này, nó sẽ là mối quan tâm trung tâm của chúng ta trong việc đánh giá hiệu quả của một thuật toán cho trước.</p>
+<p>Sau khi đã xem xét những giá trị của việc phân loại đa thức so với hàm mũ, bây giờ chúng tôi phải thú nhận rằng lý thuyết về độ phức tạp tính toán có một thất bại vô cùng đáng chú ý: có vẻ rất khó để chứng minh rằng tồn tại những lớp bài toán thú vị yêu cầu tài nguyên hàm mũ để giải quyết. Khá dễ dàng để đưa ra các chứng minh phi kiến thiết (non-constructive proofs) rằng hầu hết các bài toán đều yêu cầu tài nguyên hàm mũ (xem Bài tập 3.16 bên dưới), và hơn nữa nhiều bài toán thú vị được suy đoán (conjectured) là yêu cầu tài nguyên hàm mũ cho giải pháp của chúng, nhưng những chứng minh chặt chẽ dường như rất khó để đạt được, ít nhất là với trạng thái kiến thức hiện tại. Thất bại này của độ phức tạp tính toán mang những hàm ý quan trọng đối với tính toán lượng tử, bởi vì hóa ra sức mạnh tính toán của máy tính lượng tử có thể có liên hệ với một số bài toán mở (open problems) lớn trong lý thuyết độ phức tạp tính toán cổ điển. Cho đến khi những bài toán này được giải quyết, không thể tuyên bố một cách chắc chắn rằng một máy tính lượng tử mạnh mẽ về mặt tính toán đến mức nào, hay thậm chí liệu nó có mạnh hơn một máy tính cổ điển hay không!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.16: (Tồn tại các hàm khó tính toán)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tồn tại các hàm Boolean trên <span class="math inline">n</span> đầu vào mà yêu cầu ít nhất <span class="math inline">2^n / \log n</span> cổng logic để tính toán.</p>
+</div>
+</div>
+</div>
+<hr>
+<section id="decision-problems-and-the-complexity-classes-p-and-np" class="level1">
+<h1>3. Decision problems and the complexity classes P and NP</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Decision Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bài toán quyết định, là những bài toán trả lời câu hỏi có hay không, yes or no.</p>
+<p>Những ý tưởng chính của độ phức tạp được hình thành dưới dạng các bài toán quyết định.</p>
+<p>Ví dụ: “Cho một hợp số m nguyên và l &lt; m, liệu m có một thừa số nào nhỏ hơn l hay không?”</p>
+<hr>
+<section id="p---np---conp" class="level1">
+<h1>P - NP - coNP</h1>
+<p>P là một lớp bài toán mà khó có thể quyết trong thời gian đa thức</p>
+<p>NP là một lớp bài toán mà có thể kiểm tra đáp án có đúng hay không.</p>
+<p>coNP là phần bù NP, một lớp bài toán mà có bằng chứng cho các trường hợp trả lời “no”</p>
+<p>Ví dụ: Bài toán quyết định được nêu ở trên/</p>
+<ul>
+<li><p>Nếu có thể giải quyết trong thời gian đa thức, đưa ra witness trong thời gian ngắn, nó là P. Và rõ ràng ở bài trên thì rất khó để có thể đưa ra thừa số trong thời gian nhanh.</p></li>
+<li><p>Vì chúng ta có thể kiểm tra một cách rất nhanh chóng, rằng yes, cái này có thỏa mãn hay không bằng các công cụ nhân chia cơ bản. Vì vậy bài toán trên thuộc NP.</p></li>
+</ul>
+<hr>
+</section>
+<section id="np-complete---np-hard---npi" class="level1">
+<h1>NP Complete - NP Hard - NPI</h1>
+<p><strong>NP Hard</strong></p>
+<p>Là lớp các bài toán <em>ít nhất khó bằng</em> các bài toán khó nhất trong NP.</p>
+<p>Tức là bài toán NP Hard không bắt buộc phải thuộc lớp NP, tức là lời giải của chúng thậm chí không kiểm tra nhanh được trong thời gian đa thức, hoặc thậm chí là không quyết định được.</p>
+<p><strong>NP Complete</strong></p>
+<p>Là lớp bài toán thỏa mãn hai điều kiện:</p>
+<ul>
+<li><p>Thuộc lớp NP.</p></li>
+<li><p>Thuộc lớp NP Hard.</p></li>
+</ul>
+<p>Đây là những bài toán khó nhất nằm trong tập NP. Mọi bài toán NP Complete đều là NP Hard, nhưng ngược lại thì không.</p>
+<p><strong>NP Itermediate</strong></p>
+<p>Là trung gian, thuộc lớp NP, nhưng không thuộc P và cũng không phải là NP Complete.</p>
+<p>Tức là những bài toán đủ khó để trên tầm của P, nhưng cũng chẳng đủ khó để nằm trong NP Complete.</p>
+<blockquote class="blockquote">
+<p>Hiện tại người ta đang tập trung nghiên cứu các bài toán này để phục vụ cho computing computation. Và hiện tại cũng có thể nói là chưa có bài toán nào thuộc lớp NPI cả, người ta chỉ đang nghi ngờ bài toán phân tích số nguyên tố thành thừa số nguyên tố thôi.</p>
+</blockquote>
+</section>
+</div>
+</div>
+<p>Nhiều bài toán tính toán được định hình một cách rõ ràng nhất dưới dạng các bài toán quyết định (decision problems) – những bài toán có câu trả lời là có (yes) hoặc không (no). Ví dụ, một số <span class="math inline">m</span> cho trước có phải là số nguyên tố hay không? Đây là bài toán quyết định tính nguyên tố (primality). Những ý tưởng chính của độ phức tạp tính toán được hình thành một cách dễ dàng nhất và thường xuyên nhất dưới dạng các bài toán quyết định, vì hai lý do: lý thuyết có dạng đơn giản nhất và thanh lịch nhất ở hình thức này, trong khi vẫn có thể khái quát hóa một cách tự nhiên cho các kịch bản phức tạp hơn; và về mặt lịch sử, độ phức tạp tính toán phát sinh chủ yếu từ việc nghiên cứu các bài toán quyết định.</p>
+<p>Mặc dù hầu hết các bài toán quyết định có thể dễ dàng được phát biểu bằng ngôn ngữ đơn giản, quen thuộc, việc thảo luận về các tính chất chung của các bài toán quyết định được hỗ trợ rất nhiều bởi thuật ngữ của các ngôn ngữ hình thức (formal languages). Trong thuật ngữ này, một ngôn ngữ <span class="math inline">L</span> trên bảng chữ cái <span class="math inline">\Sigma</span> là một tập con của tập <span class="math inline">\Sigma^*</span> gồm tất cả các chuỗi ký hiệu (hữu hạn) từ <span class="math inline">\Sigma</span>. Ví dụ, nếu <span class="math inline">\Sigma = \{0, 1\}</span>, thì tập hợp các biểu diễn nhị phân của các số chẵn, <span class="math inline">L = \{0, 10, 100, 110, \dots\}</span> là một ngôn ngữ trên <span class="math inline">\Sigma</span>.</p>
+<p>Các bài toán quyết định có thể được mã hóa một cách hiển nhiên thành các bài toán về ngôn ngữ. Chẳng hạn, bài toán quyết định tính nguyên tố có thể được mã hóa bằng cách sử dụng bảng chữ cái nhị phân <span class="math inline">\Sigma = \{0, 1\}</span>. Các chuỗi từ <span class="math inline">\Sigma^*</span> có thể được diễn giải một cách tự nhiên như các số nguyên không âm. Ví dụ, <span class="math inline">0010</span> có thể được diễn giải là số <span class="math inline">2</span>. Ngôn ngữ <span class="math inline">L</span> được định nghĩa là bao gồm tất cả các chuỗi nhị phân sao cho con số tương ứng là số nguyên tố.</p>
+<p>Để giải bài toán quyết định tính nguyên tố, thứ mà chúng ta muốn là một máy Turing mà khi bắt đầu với một số <span class="math inline">n</span> cho trước trên dải băng đầu vào của nó, cuối cùng sẽ xuất ra một kết quả tương đương với ‘có’ nếu <span class="math inline">n</span> là số nguyên tố, và xuất ra ‘không’ nếu <span class="math inline">n</span> không phải là số nguyên tố. Để làm cho ý tưởng này trở nên chính xác, sẽ thuận tiện nếu ta sửa đổi định nghĩa máy Turing cũ của chúng ta (ở Mục 3.1.1) một chút, thay thế trạng thái dừng <span class="math inline">q_h</span> bằng hai trạng thái <span class="math inline">q_Y</span> và <span class="math inline">q_N</span> để lần lượt biểu diễn các câu trả lời ‘có’ và ‘không’. Trong tất cả các phương diện khác, máy hành xử theo cùng một cách, và nó vẫn dừng lại khi đi vào trạng thái <span class="math inline">q_Y</span> hoặc <span class="math inline">q_N</span>. Tổng quát hơn, một ngôn ngữ <span class="math inline">L</span> được quyết định (decided) bởi một máy Turing nếu máy đó có khả năng quyết định xem một đầu vào <span class="math inline">x</span> trên dải băng của nó có phải là một thành viên của ngôn ngữ <span class="math inline">L</span> hay không, cuối cùng dừng lại ở trạng thái <span class="math inline">q_Y</span> nếu <span class="math inline">x \in L</span>, và cuối cùng dừng lại ở trạng thái <span class="math inline">q_N</span> nếu <span class="math inline">x \notin L</span>. Chúng ta nói rằng máy đã chấp nhận (accepted) hoặc từ chối (rejected) <span class="math inline">x</span> tùy thuộc vào việc trường hợp nào trong hai trường hợp này xảy ra.</p>
+<hr>
+<p><strong>Chúng ta có thể xác định liệu một số có phải là số nguyên tố hay không nhanh đến mức nào?</strong></p>
+<p>Tức là, máy Turing nhanh nhất để quyết định ngôn ngữ biểu diễn bài toán quyết định tính nguyên tố là gì? Chúng ta nói rằng một bài toán thuộc lớp <span class="math inline">\mathbf{TIME}(f(n))</span> nếu tồn tại một máy Turing quyết định liệu một ứng cử viên <span class="math inline">x</span> có thuộc ngôn ngữ đó trong thời gian <span class="math inline">O(f(n))</span> hay không, trong đó <span class="math inline">n</span> là độ dài của <span class="math inline">x</span>. Một bài toán được nói là có thể giải quyết trong thời gian đa thức (polynomial time) nếu nó thuộc <span class="math inline">\mathbf{TIME}(n^k)</span> với một số <span class="math inline">k</span> hữu hạn nào đó. Tập hợp tất cả các ngôn ngữ thuộc <span class="math inline">\mathbf{TIME}(n^k)</span>, với một số <span class="math inline">k</span> nào đó, được ký hiệu là <span class="math inline">\mathbf{P}</span>. <span class="math inline">\mathbf{P}</span> là ví dụ đầu tiên của chúng ta về một lớp độ phức tạp (complexity class). Tổng quát hơn, một lớp độ phức tạp được định nghĩa là một tập hợp các ngôn ngữ. Phần lớn lý thuyết độ phức tạp tính toán liên quan đến việc định nghĩa các lớp độ phức tạp khác nhau, và hiểu được mối quan hệ giữa các lớp độ phức tạp khác nhau.</p>
+<p>Không có gì đáng ngạc nhiên khi có những bài toán không thể được giải quyết trong thời gian đa thức. Thật không may, việc chứng minh rằng bất kỳ bài toán cụ thể nào không thể giải quyết được trong thời gian đa thức dường như rất khó khăn, mặc dù các phỏng đoán thì rất nhiều! Một ví dụ đơn giản về một bài toán quyết định thú vị được tin là không thuộc <span class="math inline">\mathbf{P}</span> là bài toán quyết định phân tích thừa số (factoring decision problem):</p>
+<blockquote class="blockquote">
+<p>PHÂN TÍCH THỪA SỐ: Cho một số nguyên hợp số <span class="math inline">m</span> và <span class="math inline">l &lt; m</span>, liệu <span class="math inline">m</span> có một thừa số không tầm thường nào nhỏ hơn <span class="math inline">l</span> hay không?</p>
+</blockquote>
+<p>Một tính chất thú vị của việc phân tích thừa số là nếu ai đó tuyên bố rằng câu trả lời là ‘có, <span class="math inline">m</span> thực sự có một thừa số không tầm thường nhỏ hơn <span class="math inline">l</span>’ thì họ có thể chứng minh điều này bằng cách đưa ra một thừa số như vậy, thứ mà sau đó có thể được kiểm tra một cách hiệu quả bởi các bên khác, đơn giản bằng cách thực hiện phép chia dài (long-division). Chúng ta gọi một thừa số như vậy là một bằng chứng (witness) cho thực tế rằng <span class="math inline">m</span> có một thừa số nhỏ hơn <span class="math inline">l</span>. Ý tưởng về một bằng chứng có thể kiểm tra dễ dàng này chính là ý tưởng then chốt trong định nghĩa của lớp độ phức tạp <span class="math inline">\mathbf{NP}</span>, ở phần dưới. Chúng ta đã diễn đạt việc phân tích thừa số như một bài toán quyết định, nhưng bạn có thể dễ dàng xác minh rằng bài toán quyết định này tương đương với việc tìm các thừa số của một số:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.17
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng một thuật toán thời gian đa thức để tìm các thừa số của một số <span class="math inline">m</span> tồn tại khi và chỉ khi bài toán quyết định phân tích thừa số thuộc <span class="math inline">\mathbf{P}</span>.</p>
+</div>
+</div>
+</div>
+<p>Phân tích thừa số là một ví dụ về một bài toán nằm trong một lớp độ phức tạp quan trọng được gọi là <span class="math inline">\mathbf{NP}</span>. Điểm phân biệt các bài toán thuộc <span class="math inline">\mathbf{NP}</span> là các trường hợp ‘có’ của một bài toán có thể dễ dàng được kiểm chứng với sự trợ giúp của một bằng chứng (witness) thích hợp. Chặt chẽ hơn, một ngôn ngữ <span class="math inline">L</span> thuộc <span class="math inline">\mathbf{NP}</span> nếu có một máy Turing <span class="math inline">M</span> với các thuộc tính sau:</p>
+<ol type="1">
+<li><p>Nếu <span class="math inline">x \in L</span> thì tồn tại một chuỗi bằng chứng <span class="math inline">w</span> sao cho <span class="math inline">M</span> dừng ở trạng thái <span class="math inline">q_Y</span> sau một thời gian đa thức theo <span class="math inline">\vert{}x\vert{}</span> khi máy được khởi động ở trạng thái <span class="math inline">x</span>-khoảng trống-<span class="math inline">w</span>.</p></li>
+<li><p>Nếu <span class="math inline">x \notin L</span> thì đối với tất cả các chuỗi <span class="math inline">w</span> cố gắng đóng vai trò là một bằng chứng, máy sẽ dừng ở trạng thái <span class="math inline">q_N</span> sau một thời gian đa thức theo <span class="math inline">\vert{}x\vert{}</span> khi <span class="math inline">M</span> được khởi động ở trạng thái <span class="math inline">x</span>-khoảng trống-<span class="math inline">w</span>.</p></li>
+</ol>
+<p>Có một sự bất đối xứng thú vị trong định nghĩa của <span class="math inline">\mathbf{NP}</span>. Mặc dù chúng ta phải có khả năng quyết định nhanh chóng liệu một bằng chứng khả dĩ cho <span class="math inline">x \in L</span> có thực sự là một bằng chứng hay không, không có nhu cầu tương tự đối với việc tạo ra một bằng chứng cho <span class="math inline">x \notin L</span>. Ví dụ, trong bài toán phân tích thừa số, chúng ta có một cách dễ dàng để chứng minh rằng một số cho trước có một thừa số nhỏ hơn <span class="math inline">m</span>, nhưng việc đưa ra một bằng chứng để chứng minh rằng một số không có thừa số nào nhỏ hơn <span class="math inline">m</span> lại khó khăn hơn nhiều. Điều này gợi ý việc định nghĩa <span class="math inline">\mathbf{coNP}</span>, lớp các ngôn ngữ có các bằng chứng cho các trường hợp ‘không’; rõ ràng các ngôn ngữ trong <span class="math inline">\mathbf{coNP}</span> chính là phần bù của các ngôn ngữ trong <span class="math inline">\mathbf{NP}</span>.</p>
+<p><span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span> có mối quan hệ như thế nào? Rõ ràng là <span class="math inline">\mathbf{P}</span> là một tập con của <span class="math inline">\mathbf{NP}</span>. Bài toán mở nổi tiếng nhất trong khoa học máy tính là liệu có tồn tại hay không những bài toán thuộc <span class="math inline">\mathbf{NP}</span> mà không thuộc <span class="math inline">\mathbf{P}</span>, thường được viết tắt là bài toán <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>. Hầu hết các nhà khoa học máy tính đều tin rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, nhưng bất chấp nhiều thập kỷ làm việc, vẫn chưa ai có thể chứng minh được điều này, và khả năng <span class="math inline">\mathbf{P} = \mathbf{NP}</span> vẫn còn bỏ ngỏ.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.18:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng nếu <span class="math inline">\mathbf{coNP} \ne \mathbf{NP}</span> thì <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Trong lần làm quen đầu tiên, người ta thường dễ dàng đi đến kết luận rằng phỏng đoán <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span> hẳn là khá dễ giải quyết. Để thấy tại sao nó thực sự khá tinh tế, sẽ rất hữu ích nếu xem xét một vài ví dụ về các bài toán thuộc <span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span>. Chúng ta sẽ lấy các ví dụ từ lý thuyết đồ thị (graph theory), một nguồn bài toán quyết định phong phú với những ứng dụng thực tế nhiều đến đáng kinh ngạc. Một đồ thị là một tập hợp hữu hạn các đỉnh (vertices) <span class="math inline">\{v_1, \dots, v_n\}</span> được kết nối bởi các cạnh (edges), là các cặp đỉnh <span class="math inline">(v_i, v_j)</span>. Hiện tại, chúng ta chỉ quan tâm đến các đồ thị vô hướng (undirected graphs), trong đó thứ tự của các đỉnh (trong mỗi cặp cạnh) không quan trọng; những ý tưởng tương tự có thể được điều tra đối với các đồ thị có hướng (directed graphs) trong đó thứ tự của các đỉnh lại quan trọng. Một đồ thị điển hình được minh họa trong Hình 3.9.</p>
+<p><img src="../../img/3.9.png" class="img-fluid"></p>
+<p>Một chu trình (cycle) trong một đồ thị là một chuỗi các đỉnh <span class="math inline">v_1, \dots, v_m</span> sao cho mỗi cặp <span class="math inline">(v_j, v_{j+1})</span> là một cạnh, và <span class="math inline">(v_1, v_m)</span> cũng vậy. Một chu trình đơn (simple cycle) là một chu trình trong đó không có đỉnh nào bị lặp lại, ngoại trừ đỉnh đầu tiên và đỉnh cuối cùng. Một chu trình Hamilton (Hamiltonian cycle) là một chu trình đơn đi qua tất cả các đỉnh trong đồ thị. Các ví dụ về đồ thị có và không có chu trình Hamilton được hiển thị trong Hình 3.10.</p>
+<p><img src="../../img/3.10.png" class="img-fluid"></p>
+<p>Bài toán chu trình Hamilton (HC) là xác định xem một đồ thị cho trước có chứa một chu trình Hamilton hay không. HC là một bài toán quyết định thuộc <span class="math inline">\mathbf{NP}</span>, vì nếu một đồ thị cho trước có một chu trình Hamilton, thì chu trình đó có thể được sử dụng như một bằng chứng dễ dàng kiểm chứng. Hơn nữa, HC không có thuật toán thời gian đa thức nào được biết đến. Quả thực, HC là một bài toán thuộc lớp được gọi là các bài toán NP-đầy đủ (NP-complete), có thể được coi là những bài toán ‘khó nhất’ trong <span class="math inline">\mathbf{NP}</span>, theo nghĩa là việc giải quyết HC trong thời gian <span class="math inline">t</span> cho phép bất kỳ bài toán nào khác trong <span class="math inline">\mathbf{NP}</span> được giải quyết trong thời gian <span class="math inline">O(\text{poly}(t))</span>. Điều này cũng có nghĩa là nếu bất kỳ bài toán NP-đầy đủ nào có một giải pháp thời gian đa thức thì nó sẽ dẫn đến kết quả là <span class="math inline">\mathbf{P} = \mathbf{NP}</span>.</p>
+<p>Có một bài toán, bài toán quyết định chu trình Euler, bề ngoài có vẻ tương tự như HC, nhưng lại có những tính chất khác biệt đến kinh ngạc. Một chu trình Euler là một cách sắp xếp thứ tự các cạnh của một đồ thị <span class="math inline">G</span> sao cho mỗi cạnh trong đồ thị được ghé thăm chính xác một lần. Bài toán quyết định chu trình Euler (EC) là xác định xem, cho trước một đồ thị <span class="math inline">G</span> trên <span class="math inline">n</span> đỉnh, đồ thị đó có chứa một chu trình Euler hay không. EC, trên thực tế, chính xác là cùng một bài toán như HC, chỉ khác là đường đi ghé thăm các cạnh, thay vì các đỉnh. Xem xét định lý đáng chú ý sau đây, sẽ được chứng minh trong Bài tập 3.20:</p>
+</section>
+<section id="định-lý-3.1-định-lý-euler" class="level1 postulates">
+<h1>Định lý 3.1: (Định lý Euler)</h1>
+<p>Một đồ thị liên thông chứa một chu trình Euler khi và chỉ khi mọi đỉnh đều có một số chẵn các cạnh liên kết với nó.</p>
+</section>
+<p>Định lý Euler cung cấp cho chúng ta một phương pháp để giải quyết EC một cách hiệu quả. Đầu tiên, hãy kiểm tra xem đồ thị có liên thông hay không; việc này dễ dàng được thực hiện với <span class="math inline">O(n^2)</span> phép toán, như được trình bày trong Bài tập 3.19. Nếu đồ thị không liên thông, thì rõ ràng không tồn tại chu trình Euler nào. Nếu đồ thị liên thông thì đối với mỗi đỉnh, hãy kiểm tra xem có số chẵn các cạnh liên kết với đỉnh đó hay không. Nếu tìm thấy một đỉnh mà trường hợp này không đúng, thì không có chu trình Euler nào, ngược lại một chu trình Euler tồn tại. Vì có <span class="math inline">n</span> đỉnh, và tối đa <span class="math inline">n(n - 1)/2</span> cạnh, thuật toán này yêu cầu <span class="math inline">O(n^3)</span> phép toán sơ cấp. Do đó EC thuộc <span class="math inline">\mathbf{P}</span>! Bằng cách nào đó, có một cấu trúc hiện diện trong bài toán ghé thăm mỗi cạnh, thứ có thể được khai thác để cung cấp một thuật toán hiệu quả cho EC, nhưng cấu trúc này dường như không được phản ánh trong bài toán ghé thăm mỗi đỉnh; hoàn toàn không hiển nhiên tại sao một cấu trúc như vậy lại nên hiện diện trong một trường hợp, nhưng không hiện diện trong trường hợp kia, nếu quả thực nó vắng mặt đối với bài toán HC.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.19: Bài toán REACHABILITY (khả năng tiếp cận)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>là xác định xem có tồn tại một đường đi giữa hai đỉnh được chỉ định trong một đồ thị hay không. Chứng minh rằng REACHABILITY có thể được giải quyết bằng cách sử dụng <span class="math inline">O(n)</span> phép toán nếu đồ thị có <span class="math inline">n</span> đỉnh. Sử dụng giải pháp cho REACHABILITY để chứng minh rằng có thể quyết định xem một đồ thị có liên thông hay không trong <span class="math inline">O(n^2)</span> phép toán.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.20: (Định lý Euler)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh định lý Euler. Cụ thể, nếu mỗi đỉnh có một số chẵn các cạnh liên kết, hãy đưa ra một thủ tục mang tính kiến thiết để tìm một chu trình Euler.</p>
+</div>
+</div>
+</div>
+<p>Sự tương đương giữa bài toán quyết định phân tích thừa số và bài toán phân tích thừa số đúng nghĩa là một trường hợp đặc biệt của một trong những ý tưởng quan trọng nhất trong khoa học máy tính, một ý tưởng được gọi là quy về (reduction). Về mặt trực giác, chúng ta biết rằng một số bài toán có thể được xem như những trường hợp đặc biệt của những bài toán khác. Một ví dụ ít tầm thường hơn về sự quy về là việc quy HC về bài toán quyết định người bán hàng đi dạo (TSP - traveling salesman decision problem). Bài toán quyết định người bán hàng đi dạo như sau: chúng ta được cho <span class="math inline">n</span> thành phố <span class="math inline">1, 2, \dots, n</span> và một khoảng cách nguyên không âm <span class="math inline">d_{ij}</span> giữa mỗi cặp thành phố. Cho trước một khoảng cách <span class="math inline">d</span>, bài toán là xác định xem có tồn tại một chuyến đi qua tất cả các thành phố với khoảng cách nhỏ hơn <span class="math inline">d</span> hay không.</p>
+<p>Việc quy <span class="math inline">\text{HC}</span> về <span class="math inline">\text{TSP}</span> diễn ra như sau. Giả sử chúng ta có một đồ thị chứa <span class="math inline">n</span> đỉnh. Chúng ta biến điều này thành một trường hợp của <span class="math inline">\text{TSP}</span> bằng cách coi mỗi đỉnh của đồ thị như một ‘thành phố’ và định nghĩa khoảng cách <span class="math inline">d_{ij}</span> giữa các thành phố <span class="math inline">i</span> và <span class="math inline">j</span> là <span class="math inline">1</span> nếu các đỉnh <span class="math inline">i</span> và <span class="math inline">j</span> được kết nối với nhau, và khoảng cách là <span class="math inline">2</span> nếu các đỉnh không được kết nối. Khi đó, một chuyến đi qua các thành phố có khoảng cách nhỏ hơn <span class="math inline">n + 1</span> bắt buộc phải có khoảng cách là <span class="math inline">n</span>, và là một chu trình Hamilton cho đồ thị. Ngược lại, nếu tồn tại một chu trình Hamilton thì phải tồn tại một chuyến đi qua các thành phố có khoảng cách nhỏ hơn <span class="math inline">n + 1</span>. Theo cách này, nếu có một thuật toán để giải quyết <span class="math inline">\text{TSP}</span>, chúng ta có thể chuyển đổi nó thành một thuật toán để giải quyết <span class="math inline">\text{HC}</span> mà không tốn nhiều chi phí phụ (overhead). Từ điều này có thể suy ra hai hệ quả. Đầu tiên, nếu <span class="math inline">\text{TSP}</span> là một bài toán dễ xử lý, thì <span class="math inline">\text{HC}</span> cũng dễ xử lý. Thứ hai, nếu <span class="math inline">\text{HC}</span> là khó thì <span class="math inline">\text{TSP}</span> cũng phải khó. Đây là một ví dụ về một kỹ thuật tổng quát được gọi là quy về (reduction): chúng ta đã quy bài toán <span class="math inline">\text{HC}</span> về bài toán <span class="math inline">\text{TSP}</span>. Đây là một kỹ thuật mà chúng ta sẽ sử dụng lặp đi lặp lại trong suốt cuốn sách này.</p>
+<p>Một khái niệm tổng quát hơn về việc quy về được minh họa trong Hình 3.11. Một ngôn ngữ <span class="math inline">B</span> được cho là có thể quy về (reducible) một ngôn ngữ <span class="math inline">A</span> khác nếu tồn tại một máy Turing hoạt động trong thời gian đa thức sao cho khi nhận đầu vào là <span class="math inline">x</span>, nó xuất ra <span class="math inline">R(x)</span>, và <span class="math inline">x \in B</span> khi và chỉ khi <span class="math inline">R(x) \in A</span>. Do đó, nếu chúng ta có một thuật toán để quyết định <span class="math inline">A</span>, thì với một chút chi phí phụ, chúng ta có thể quyết định ngôn ngữ <span class="math inline">B</span>. Theo nghĩa này, ngôn ngữ <span class="math inline">B</span> về bản chất không khó quyết định hơn ngôn ngữ <span class="math inline">A</span>.</p>
+<p><img src="../../img/3.11.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.21: (Tính chất bắc cầu của phép quy về)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng nếu một ngôn ngữ <span class="math inline">L_1</span> có thể quy về ngôn ngữ <span class="math inline">L_2</span> và ngôn ngữ <span class="math inline">L_2</span> có thể quy về <span class="math inline">L_3</span> thì ngôn ngữ <span class="math inline">L_1</span> có thể quy về ngôn ngữ <span class="math inline">L_3</span>.</p>
+</div>
+</div>
+</div>
+<p>Một số lớp độ phức tạp có các bài toán đầy đủ (complete) đối với lớp độ phức tạp đó, nghĩa là có một ngôn ngữ <span class="math inline">L</span> trong lớp độ phức tạp được coi là ‘khó’ nhất để quyết định, theo nghĩa là mọi ngôn ngữ khác trong lớp độ phức tạp đó đều có thể được quy về <span class="math inline">L</span>. Không phải tất cả các lớp độ phức tạp đều có các bài toán đầy đủ, nhưng nhiều lớp độ phức tạp mà chúng ta quan tâm đều có các bài toán đầy đủ. Một ví dụ tầm thường được cung cấp bởi <span class="math inline">\mathbf{P}</span>. Gọi <span class="math inline">L</span> là bất kỳ ngôn ngữ nào thuộc <span class="math inline">\mathbf{P}</span> không rỗng hoặc không bằng tập hợp tất cả các từ. Tức là, tồn tại một chuỗi <span class="math inline">x_1</span> sao cho <span class="math inline">x_1 \notin L</span> và một chuỗi <span class="math inline">x_2</span> sao cho <span class="math inline">x_2 \in L</span>. Khi đó, bất kỳ ngôn ngữ <span class="math inline">L'</span> nào khác thuộc <span class="math inline">\mathbf{P}</span> đều có thể được quy về <span class="math inline">L</span> bằng cách sử dụng phép quy về sau: cho trước một đầu vào <span class="math inline">x</span>, sử dụng thủ tục quyết định thời gian đa thức để xác định xem <span class="math inline">x \in L'</span> hay không. Nếu không, hãy đặt <span class="math inline">R(x) = x_1</span>, ngược lại đặt <span class="math inline">R(x) = x_2</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.22:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">L</span> là đầy đủ đối với một lớp độ phức tạp, và <span class="math inline">L'</span> là một ngôn ngữ khác trong lớp độ phức tạp đó sao cho <span class="math inline">L</span> quy về <span class="math inline">L'</span>. Chứng minh rằng <span class="math inline">L'</span> là đầy đủ đối với lớp độ phức tạp đó.</p>
+</div>
+</div>
+</div>
+<p>Ít tầm thường hơn, <span class="math inline">\mathbf{NP}</span> cũng chứa các bài toán đầy đủ. Một ví dụ quan trọng của một bài toán như vậy và là nguyên mẫu cho tất cả các bài toán NP-đầy đủ khác là bài toán thỏa mãn mạch (circuit satisfiability problem) hay <span class="math inline">\text{CSAT}</span>: cho trước một mạch Boolean được cấu tạo từ các cổng AND, OR và NOT, liệu có tồn tại một phép gán các giá trị cho các đầu vào của mạch dẫn đến việc mạch xuất ra giá trị <span class="math inline">1</span> hay không, tức là, mạch có có thể thỏa mãn được (satisfiable) đối với một đầu vào nào đó hay không? Tính NP-đầy đủ của <span class="math inline">\text{CSAT}</span> được biết đến là Định lý Cook–Levin, mà bây giờ chúng ta sẽ phác thảo một chứng minh cho nó.</p>
+<section id="định-lý-3.2-cook-levin" class="level1 postulates">
+<h1>Định lý 3.2: (Cook-Levin)</h1>
+<p><span class="math inline">\text{CSAT}</span> là bài toán NP-đầy đủ.</p>
+</section>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Chứng minh
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Phần chứng minh gồm có hai phần. Phần đầu tiên của chứng minh là chỉ ra rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>, và phần thứ hai là chỉ ra rằng bất kỳ ngôn ngữ nào trong <span class="math inline">\mathbf{NP}</span> đều có thể quy về <span class="math inline">\text{CSAT}</span>. Cả hai phần của chứng minh đều dựa trên các kỹ thuật mô phỏng: phần đầu tiên của chứng minh chủ yếu chỉ ra rằng một máy Turing có thể mô phỏng một mạch một cách hiệu quả, trong khi phần thứ hai của chứng minh chủ yếu chỉ ra rằng một mạch có thể mô phỏng một máy Turing một cách hiệu quả. Cả hai phần của chứng minh đều khá đơn giản; để minh họa, chúng tôi sẽ trình bày chi tiết hơn một chút về phần thứ hai.</p>
+<p>Phần đầu tiên của chứng minh là chỉ ra rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>. Cho trước một mạch chứa <span class="math inline">n</span> phần tử mạch và một bằng chứng tiềm năng <span class="math inline">w</span>, rõ ràng là rất dễ dàng để kiểm tra trong thời gian đa thức trên một máy Turing xem <span class="math inline">w</span> có thỏa mãn mạch đó hay không, điều này xác nhận rằng <span class="math inline">\text{CSAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>.</p>
+<p>Phần thứ hai của chứng minh là chỉ ra rằng bất kỳ ngôn ngữ <span class="math inline">L \in \mathbf{NP}</span> nào cũng có thể được quy về <span class="math inline">\text{CSAT}</span>. Tức là, chúng ta hướng tới việc chỉ ra rằng tồn tại một phép quy về <span class="math inline">R</span> tính toán được trong thời gian đa thức sao cho <span class="math inline">x \in L</span> khi và chỉ khi <span class="math inline">R(x)</span> là một mạch thỏa mãn được. Ý tưởng của phép quy về là tìm ra một mạch mô phỏng hoạt động của máy <span class="math inline">M</span> — máy được dùng để kiểm tra các cặp trường hợp-bằng chứng <span class="math inline">(x, w)</span> đối với ngôn ngữ <span class="math inline">L</span>. Các biến đầu vào cho mạch sẽ đại diện cho bằng chứng; ý tưởng là việc tìm ra một bằng chứng thỏa mãn mạch tương đương với việc máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span> với một bằng chứng cụ thể <span class="math inline">w</span> nào đó. Không mất tính tổng quát, chúng ta có thể đưa ra các giả định sau đây về <span class="math inline">M</span> để đơn giản hóa việc xây dựng:</p>
+<ol type="1">
+<li><p>Bảng chữ cái dải băng của <span class="math inline">M</span> là <span class="math inline">\triangleright, 0, 1</span> và ký hiệu khoảng trống.</p></li>
+<li><p><span class="math inline">M</span> chạy với thời gian tối đa là <span class="math inline">t(n)</span> và tổng không gian tối đa là <span class="math inline">s(n)</span>, trong đó <span class="math inline">t(n)</span> và <span class="math inline">s(n)</span> là các đa thức theo <span class="math inline">n</span>.</p></li>
+<li><p>Trên thực tế, có thể giả định rằng máy <span class="math inline">M</span> chạy với đúng thời gian <span class="math inline">t(n)</span> cho tất cả các đầu vào có kích thước <span class="math inline">n</span>. Điều này được thực hiện bằng cách thêm các dòng <span class="math inline">\langle q_Y, x, q_Y, x, 0 \rangle</span> và <span class="math inline">\langle q_N, x, q_N, x, 0 \rangle</span> cho mỗi <span class="math inline">x = \triangleright, 0, 1</span> và ký hiệu khoảng trống, qua đó buộc máy dừng lại một cách nhân tạo sau đúng <span class="math inline">t(n)</span> bước.</p></li>
+</ol>
+<p>Ý tưởng cơ bản của việc thiết kế để mô phỏng máy <span class="math inline">M</span> được phác thảo trong Hình 3.12. Mỗi trạng thái nội tại của máy Turing được biểu diễn bằng một bit duy nhất trong mạch. Chúng ta đặt tên cho các bit tương ứng là <span class="math inline">\tilde{q}_s, \tilde{q}_1, \dots, \tilde{q}_m, \tilde{q}_Y, \tilde{q}_N</span>. Ban đầu, <span class="math inline">\tilde{q}_s</span> được thiết lập bằng 1, và tất cả các bit khác biểu diễn trạng thái nội tại được thiết lập bằng 0. Mỗi ô vuông trên dải băng của máy Turing được biểu diễn bằng ba bit: hai bit để biểu diễn chữ cái của bảng chữ cái (<span class="math inline">\triangleright, 0, 1</span> hoặc khoảng trống) hiện đang nằm trên dải băng, và một bit ‘cờ’ (flag) duy nhất được đặt thành 1 nếu đầu đọc-ghi đang trỏ vào ô vuông đó, và được đặt thành 0 nếu ngược lại. Chúng ta biểu thị các bit biểu diễn nội dung dải băng bằng <span class="math inline">(u_1, v_1), \dots, (u_{s(n)}, v_{s(n)})</span> và các bit cờ tương ứng bằng <span class="math inline">f_1, \dots, f_{s(n)}</span>. Ban đầu, các bit <span class="math inline">u_j</span> và <span class="math inline">v_j</span> được thiết lập để đại diện cho các đầu vào <span class="math inline">x</span> và <span class="math inline">w</span> một cách thích hợp, trong khi <span class="math inline">f_1 = 1</span> và tất cả các <span class="math inline">f_j</span> khác bằng 0. Ngoài ra còn có một bit ‘cờ toàn cục’ (global flag) <span class="math inline">F</span> đơn lẻ, chức năng của nó sẽ được giải thích sau. <span class="math inline">F</span> ban đầu được thiết lập bằng 0. Chúng ta coi tất cả các bit đầu vào của mạch là cố định, ngoại trừ những bit biểu diễn bằng chứng <span class="math inline">w</span>, vốn là các bit biến đổi (variable bits) đối với mạch.</p>
+<p>Hành động của <span class="math inline">M</span> đạt được bằng cách lặp lại <span class="math inline">t(n)</span> lần một ‘bước mô phỏng’ (simulation step) mô phỏng việc thực thi một dòng chương trình duy nhất của máy Turing. Mỗi bước mô phỏng có thể được chia nhỏ thành một chuỗi các bước tương ứng lần lượt với các dòng chương trình tương ứng, với một bước cuối cùng để đặt lại cờ toàn cục <span class="math inline">F</span> về 0, như được minh họa trong Hình 3.13.</p>
+<p><img src="../../img/3.12.png" class="img-fluid"></p>
+<p>Để hoàn thành việc mô phỏng, chúng ta chỉ cần mô phỏng một dòng chương trình có dạng <span class="math inline">\langle q_i, x, q_j, x', s \rangle</span>. Để thuận tiện, chúng ta giả định <span class="math inline">q_i \ne q_j</span>, nhưng một cấu trúc tương tự cũng hoạt động trong trường hợp <span class="math inline">q_i = q_j</span>. Thủ tục như sau:</p>
+<ol type="1">
+<li><p>Kiểm tra xem <span class="math inline">\tilde{q}_i = 1</span>, cho biết trạng thái hiện tại của máy là <span class="math inline">q_i</span>.</p></li>
+<li><p>Đối với mỗi ô trên dải băng:</p>
+<ol type="a">
+<li><p>Kiểm tra xem bit cờ toàn cục có được đặt thành 0 hay không, cho biết máy Turing chưa thực hiện hành động nào.</p></li>
+<li><p>Kiểm tra xem bit cờ có được đặt thành 1 hay không, cho biết đầu đọc dải băng đang ở ô này.</p></li>
+<li><p>Kiểm tra xem nội dung dải băng được mô phỏng tại vị trí này có phải là <span class="math inline">x</span> hay không.</p></li>
+<li><p>Nếu tất cả các điều kiện đều thỏa mãn, hãy thực hiện các bước sau:</p>
+<ol type="1">
+<li><p>Đặt <span class="math inline">\tilde{q}_i = 0</span> và <span class="math inline">\tilde{q}_j = 1</span>.</p></li>
+<li><p>Cập nhật nội dung dải băng được mô phỏng tại ô này thành <span class="math inline">x'</span>.</p></li>
+<li><p>Cập nhật bit cờ của ‘ô’ này và các ô lân cận một cách thích hợp, tùy thuộc vào việc <span class="math inline">s = +1, 0, -1</span>, và liệu chúng ta có đang ở đầu tận cùng bên trái của dải băng hay không.</p></li>
+<li><p>Đặt bit cờ toàn cục thành 1, cho biết vòng tính toán này đã hoàn tất.</p></li>
+</ol></li>
+</ol></li>
+</ol>
+<p>Đây là một thủ tục cố định liên quan đến một số lượng bit không đổi, và theo kết quả vạn năng của Mục 3.1.2 có thể được thực hiện bằng cách sử dụng một mạch chứa một số lượng cổng không đổi.</p>
+<p><img src="../../img/3.13.png" class="img-fluid"></p>
+<p>Tổng số lượng cổng trong toàn bộ mạch dễ dàng thấy được là <span class="math inline">O(t(n)(s(n) + n))</span>, có kích thước đa thức. Ở cuối mạch, rõ ràng là <span class="math inline">\tilde{q}_Y = 1</span> khi và chỉ khi máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span>. Do đó, mạch có thể thỏa mãn được khi và chỉ khi tồn tại <span class="math inline">w</span> sao cho máy <span class="math inline">M</span> chấp nhận <span class="math inline">(x, w)</span>, và chúng ta đã tìm thấy phép quy về mong muốn từ <span class="math inline">L</span> sang <span class="math inline">\text{CSAT}</span>. <span class="math inline">\Box</span></p>
+</div>
+</div>
+<p><span class="math inline">\text{CSAT}</span> mở cho chúng ta một bước đệm (a foot in the door) cho phép chúng ta dễ dàng chứng minh rằng nhiều bài toán khác là NP-đầy đủ. Thay vì chứng minh trực tiếp một bài toán là NP-đầy đủ, chúng ta có thể chứng minh nó thuộc <span class="math inline">\mathbf{NP}</span> và <span class="math inline">\text{CSAT}</span> quy về nó, do đó theo Bài tập 3.22 bài toán đó phải là NP-đầy đủ. Một mẫu nhỏ các bài toán NP-đầy đủ được thảo luận trong Hộp 3.3. Một ví dụ về một bài toán NP-đầy đủ khác là bài toán thỏa mãn (<span class="math inline">\text{SAT}</span>), được phát biểu dưới dạng một công thức Boolean. Nhắc lại rằng một công thức Boolean <span class="math inline">\varphi</span> được cấu tạo từ các phần tử sau: một tập hợp các biến Boolean <span class="math inline">x_1, x_2, \dots</span>; các liên kết Boolean, tức là một hàm Boolean với một hoặc hai đầu vào và một đầu ra, chẳng hạn như <span class="math inline">\wedge</span> (AND), <span class="math inline">\vee</span> (OR), và <span class="math inline">\neg</span> (NOT); và các dấu ngoặc đơn. Tính đúng hay sai của một công thức Boolean đối với một tập hợp các biến Boolean cho trước được quyết định theo các quy luật thông thường của đại số Boolean. Ví dụ, công thức <span class="math inline">\varphi = x_1 \vee \neg x_2</span> có phép gán thỏa mãn là <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 0</span>, trong khi <span class="math inline">x_1 = 0</span> và <span class="math inline">x_2 = 1</span> không phải là một phép gán thỏa mãn. Bài toán thỏa mãn là xác định, cho trước một công thức Boolean <span class="math inline">\varphi</span>, liệu nó có thể thỏa mãn được bởi bất kỳ tập hợp đầu vào khả dĩ nào hay không.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.23:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng <span class="math inline">\text{SAT}</span> là NP-đầy đủ bằng cách trước tiên chỉ ra rằng <span class="math inline">\text{SAT}</span> thuộc <span class="math inline">\mathbf{NP}</span>, và sau đó chỉ ra rằng <span class="math inline">\text{CSAT}</span> quy về <span class="math inline">\text{SAT}</span>. (Gợi ý: đối với phép quy về, việc đại diện mỗi dây dẫn riêng biệt trong một trường hợp của <span class="math inline">\text{CSAT}</span> bằng các biến khác nhau trong công thức Boolean có thể sẽ hữu ích.)</p>
+</div>
+</div>
+</div>
+<p>Một trường hợp hạn chế quan trọng của <span class="math inline">\text{SAT}</span> cũng là NP-đầy đủ là bài toán 3-thỏa mãn (<span class="math inline">3\text{SAT}</span>), liên quan đến các công thức ở dạng chuẩn tắc hội 3 (3-conjunctive normal form). Một công thức được gọi là ở dạng chuẩn tắc hội (conjunctive normal form - CNF) nếu nó là phép AND của một tập hợp các mệnh đề (clauses), mỗi mệnh đề trong đó là phép OR của một hoặc nhiều literal (biến đơn dạng <span class="math inline">x</span> hoặc <span class="math inline">\neg x</span>). Ví dụ, công thức <span class="math inline">(x_1 \vee \neg x_2) \wedge (x_2 \vee x_3 \vee \neg x_4)</span> ở dạng chuẩn tắc hội. Một công thức ở dạng 3-chuẩn tắc hội hoặc 3-CNF nếu mỗi mệnh đề có chính xác ba literals. Ví dụ, công thức <span class="math inline">(\neg x_1 \vee x_2 \vee \neg x_2) \wedge (\neg x_1 \vee x_3 \vee \neg x_4) \wedge (x_2 \vee x_3 \vee x_4)</span> ở dạng 3-chuẩn tắc hội. Bài toán 3-thỏa mãn là xác định xem một công thức ở dạng 3-chuẩn tắc hội có thể thỏa mãn được hay không.</p>
+<p>Chứng minh rằng <span class="math inline">3\text{SAT}</span> là NP-đầy đủ khá đơn giản, nhưng hơi quá dài để đưa vào tổng quan này. Thậm chí còn hơn cả <span class="math inline">\text{CSAT}</span> và <span class="math inline">\text{SAT}</span>, <span class="math inline">3\text{SAT}</span> theo một nghĩa nào đó chính là bài toán NP-đầy đủ chuẩn mực, và nó là cơ sở cho vô số chứng minh rằng các bài toán khác là NP-đầy đủ. Chúng ta kết thúc phần thảo luận về tính NP-đầy đủ với một sự thật bất ngờ rằng <span class="math inline">2\text{SAT}</span>, phiên bản tương tự của <span class="math inline">3\text{SAT}</span> trong đó mỗi mệnh đề có hai literals, có thể giải quyết được trong thời gian đa thức:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.24: (2SAT có lời giải hiệu quả)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\varphi</span> là một công thức Boolean ở dạng chuẩn tắc hội, trong đó mỗi mệnh đề chỉ chứa hai literals.</p>
+<ol type="1">
+<li><p>Dựng một đồ thị (có hướng) <span class="math inline">G(\varphi)</span> với các cạnh có hướng theo cách sau: các đỉnh của <span class="math inline">G</span> tương ứng với các biến <span class="math inline">x_j</span> và phủ định <span class="math inline">\neg x_j</span> của chúng trong <span class="math inline">\varphi</span>. Tồn tại một cạnh (có hướng) <span class="math inline">(\alpha, \beta)</span> trong <span class="math inline">G</span> khi và chỉ khi mệnh đề <span class="math inline">(\neg \alpha \vee \beta)</span> hoặc mệnh đề <span class="math inline">(\beta \vee \neg \alpha)</span> xuất hiện trong <span class="math inline">\varphi</span>. Chứng minh rằng <span class="math inline">\varphi</span> không thể thỏa mãn được khi và chỉ khi tồn tại một biến <span class="math inline">x</span> sao cho có các đường đi từ <span class="math inline">x</span> đến <span class="math inline">\neg x</span> và từ <span class="math inline">\neg x</span> đến <span class="math inline">x</span> trong <span class="math inline">G(\varphi)</span>.</p></li>
+<li><p>Chứng minh rằng cho trước một đồ thị có hướng <span class="math inline">G</span> chứa <span class="math inline">n</span> đỉnh, có thể xác định xem liệu hai đỉnh <span class="math inline">v_1</span> và <span class="math inline">v_2</span> có nối với nhau hay không trong thời gian đa thức.</p></li>
+<li><p>Tìm một thuật toán hiệu quả để giải <span class="math inline">2\text{SAT}</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 3.3: Vườn thú các bài toán NP-đầy đủ (A zoo of NP-complete problems)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tầm quan trọng của lớp <span class="math inline">\mathbf{NP}</span> một phần xuất phát từ số lượng khổng lồ các bài toán tính toán đã được biết đến là NP-đầy đủ. Chúng ta không thể hy vọng khảo sát toàn bộ chủ đề này ở đây (xem phần ‘Lịch sử và đọc thêm’), nhưng các ví dụ sau đây, được lấy từ nhiều lĩnh vực toán học khác nhau, sẽ đưa ra một ý tưởng về sự pha trộn phong phú của các bài toán được biết đến là NP-đầy đủ.</p>
+<ul>
+<li><p><span class="math inline">\text{CLIQUE}</span> (lý thuyết đồ thị): Một clique trong một đồ thị vô hướng <span class="math inline">G</span> là một tập con các đỉnh mà mỗi cặp đỉnh trong đó đều được kết nối bởi một cạnh. Kích thước của một clique là số lượng đỉnh mà nó chứa. Cho trước một số nguyên <span class="math inline">m</span> và một đồ thị <span class="math inline">G</span>, liệu <span class="math inline">G</span> có chứa một clique kích thước <span class="math inline">m</span> hay không?</p></li>
+<li><p><span class="math inline">\text{SUBSET-SUM}</span> (số học): Cho trước một tập hợp hữu hạn <span class="math inline">S</span> các số nguyên dương và một số mục tiêu <span class="math inline">t</span>, liệu có tồn tại một tập con bất kỳ của <span class="math inline">S</span> có tổng bằng <span class="math inline">t</span> hay không?</p></li>
+<li><p><span class="math inline">\text{0-1 INTEGER PROGRAMMING}</span> (quy hoạch tuyến tính): Cho trước một ma trận <span class="math inline">m \times n</span> số nguyên <span class="math inline">A</span> và một vectơ <span class="math inline">m</span> chiều <span class="math inline">y</span> với các giá trị nguyên, liệu có tồn tại một vectơ <span class="math inline">n</span> chiều <span class="math inline">x</span> với các phần tử nằm trong tập <span class="math inline">\{0, 1\}</span> sao cho <span class="math inline">Ax \le y</span> hay không?</p></li>
+<li><p><span class="math inline">\text{VERTEX COVER}</span> (lý thuyết đồ thị): Một tập phủ đỉnh (vertex cover) cho một đồ thị vô hướng <span class="math inline">G</span> là một tập hợp các đỉnh <span class="math inline">V'</span> sao cho mọi cạnh trong đồ thị đều có một hoặc cả hai đỉnh nằm trong <span class="math inline">V'</span>. Cho trước một số nguyên <span class="math inline">m</span> và một đồ thị <span class="math inline">G</span>, liệu <span class="math inline">G</span> có một tập phủ đỉnh <span class="math inline">V'</span> chứa <span class="math inline">m</span> đỉnh hay không?<br>
+</p></li>
+</ul>
+</div>
+</div>
+<p>Giả định rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>, người ta có thể chứng minh rằng tồn tại một lớp các bài toán khác rỗng <span class="math inline">\mathbf{NPI}</span> (<span class="math inline">\mathbf{NP}</span> trung gian - NP intermediate), những bài toán vừa không thể giải quyết được bằng các tài nguyên đa thức, vừa không phải là <span class="math inline">\mathbf{NP}</span>-đầy đủ. Rõ ràng, không có bài toán nào được biết chắc chắn là nằm trong <span class="math inline">\mathbf{NPI}</span> (nếu không chúng ta đã biết rằng <span class="math inline">\mathbf{P} \ne \mathbf{NP}</span>), nhưng có một vài bài toán được coi là những ứng cử viên đầy triển vọng. Hai trong số những ứng cử viên sáng giá nhất là bài toán phân tích thừa số (factoring) và bài toán đẳng cấu đồ thị (graph isomorphism):</p>
+<p><span class="math inline">\text{GRAPH ISOMORPHISM}</span>: Giả sử <span class="math inline">G</span> và <span class="math inline">G'</span> là hai đồ thị vô hướng trên tập đỉnh <span class="math inline">V \equiv \{v_1, \dots, v_n\}</span>. Liệu <span class="math inline">G</span> và <span class="math inline">G'</span> có đẳng cấu với nhau hay không? Nghĩa là, có tồn tại một song ánh <span class="math inline">\varphi : V \to V</span> sao cho cạnh <span class="math inline">(v_i, v_j)</span> thuộc <span class="math inline">G</span> khi và chỉ khi cạnh <span class="math inline">(\varphi(v_i), \varphi(v_j))</span> thuộc <span class="math inline">G'</span> hay không?</p>
+<p>Các bài toán trong <span class="math inline">\mathbf{NPI}</span> thu hút sự quan tâm đặc biệt của các nhà nghiên cứu trong lĩnh vực tính toán lượng tử và thông tin lượng tử vì hai lý do. Thứ nhất, việc tìm kiếm các thuật toán lượng tử nhanh để giải quyết các bài toán không thuộc <span class="math inline">\mathbf{P}</span> là một mục tiêu rất đáng khao khát. Thứ hai, nhiều người nghi ngờ rằng máy tính lượng tử sẽ không thể giải quyết hiệu quả tất cả các bài toán trong <span class="math inline">\mathbf{NP}</span>, do đó loại trừ các bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ. Vì vậy, việc tập trung vào lớp <span class="math inline">\mathbf{NPI}</span> là một điều hoàn toàn tự nhiên. Quả thực, một thuật toán lượng tử nhanh cho bài toán phân tích thừa số đã được phát hiện (Chương 5), và điều này đã thúc đẩy việc tìm kiếm các thuật toán lượng tử nhanh cho các bài toán khác được nghi ngờ là thuộc <span class="math inline">\mathbf{NPI}</span>.</p>
+<section id="a-plethora-of-complexity-classes" class="level1">
+<h1>4. A plethora of complexity classes</h1>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>PSPACE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Là các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc.</p>
+<p>Rõ ràng <span class="math inline">P \subset PSPACE</span>, một bài toán giải được trong thời gian đa thức, thì cũng chỉ cần đa thức bit để làm việc, không thể nào yêu cầu nhiều hơn được. Và <span class="math inline">NP \subset PSPACE</span>, rõ ràng muốn kiểm tra thì cũng thì cần từng đó bit thôi, cần gì quá.</p>
+<p>Nhưng liệu PSPACE có chứa những bài toán không thuộc P hay không? Chưa ai biết được, thử tưởng tượng xem, những bài toán chỉ sử dụng đa thức bit làm việc, lại có thể giải được các bài toán mà tốn cả hàm mũ thời gian.</p>
+<p>Và máy tính lượng tử được xây dựng dựa trên giả định <span class="math inline">PSPACE \neq P</span>, vậy nên nếu một mai, giả định này bị bác bỏ thì ngành này đã kết thúc, máy tính lượng tử chẳng mang lợi gì hơn so với máy tính cổ điển.</p>
+</div>
+</div>
+<p>Chúng ta đã điều tra một số tính chất sơ cấp của vài lớp độ phức tạp quan trọng. Một “ngôi đền” (pantheon) thực sự của các lớp độ phức tạp đang tồn tại, và có nhiều mối quan hệ không tầm thường đã được biết đến hoặc bị nghi ngờ giữa các lớp này. Đối với tính toán lượng tử và thông tin lượng tử, không cần thiết phải hiểu tất cả các lớp độ phức tạp khác nhau đã được định nghĩa. Tuy nhiên, sẽ rất hữu ích nếu chúng ta có sự đánh giá nhất định đối với các lớp độ phức tạp quan trọng hơn, nhiều lớp trong số đó có các phiên bản tương tự tự nhiên trong nghiên cứu tính toán lượng tử và thông tin lượng tử. Hơn nữa, nếu chúng ta muốn hiểu máy tính lượng tử mạnh đến mức nào, thì nhiệm vụ của chúng ta là phải hiểu làm thế nào lớp các bài toán giải được trên máy tính lượng tử lại khớp với vườn thú các lớp độ phức tạp có thể được định nghĩa cho máy tính cổ điển.</p>
+<p>Về cơ bản có ba thuộc tính có thể được thay đổi trong định nghĩa của một lớp độ phức tạp: tài nguyên được quan tâm (thời gian, không gian, …), loại bài toán đang được xem xét (bài toán quyết định, bài toán tối ưu hóa, …), và mô hình tính toán nền tảng (máy Turing đơn định, máy Turing xác suất, máy tính lượng tử, …). Không có gì ngạc nhiên khi điều này cung cấp cho chúng ta một phạm vi khổng lồ để định nghĩa các lớp độ phức tạp. Trong phần này, chúng tôi điểm qua ngắn gọn một số lớp độ phức tạp quan trọng hơn và một số tính chất sơ cấp của chúng. Chúng ta bắt đầu với một lớp độ phức tạp được định nghĩa bằng cách thay đổi tài nguyên quan tâm từ thời gian (time) sang không gian (space).</p>
+<p>Lớp độ phức tạp bị giới hạn không gian tự nhiên nhất là lớp PSPACE gồm các bài toán quyết định có thể được giải quyết trên một máy Turing sử dụng một số lượng đa thức các bit làm việc, mà không có giới hạn về lượng thời gian mà máy có thể sử dụng (xem Bài tập 3.25). Rõ ràng, <span class="math inline">\mathbf{P}</span> được bao hàm trong <span class="math inline">\mathbf{PSPACE}</span>, vì một máy Turing dừng sau thời gian đa thức chỉ có thể duyệt qua một số lượng đa thức các ô, nhưng điều đúng đắn nữa là <span class="math inline">\mathbf{NP}</span> là một tập con của <span class="math inline">\mathbf{PSPACE}</span>. Để thấy điều này, giả sử <span class="math inline">L</span> là một ngôn ngữ bất kỳ thuộc <span class="math inline">\mathbf{NP}</span>. Giả sử các bài toán kích thước <span class="math inline">n</span> có các bằng chứng với kích thước tối đa là <span class="math inline">p(n)</span>, trong đó <span class="math inline">p(n)</span> là một đa thức nào đó theo <span class="math inline">n</span>. Để xác định xem bài toán có giải pháp hay không, chúng ta có thể kiểm tra tuần tự tất cả <span class="math inline">2^{p(n)}</span> bằng chứng khả dĩ. Mỗi bài kiểm tra có thể được chạy trong thời gian đa thức, và do đó là không gian đa thức. Nếu chúng ta xóa tất cả các kết quả làm việc trung gian giữa các bài kiểm tra thì chúng ta có thể kiểm tra tất cả các khả năng bằng cách sử dụng không gian đa thức.</p>
+<p>Thật không may, hiện tại người ta thậm chí còn chưa biết liệu <span class="math inline">\mathbf{PSPACE}</span> có chứa những bài toán không thuộc <span class="math inline">\mathbf{P}</span> hay không! Đây là một tình huống khá đáng chú ý — dường như khá hiển nhiên rằng việc có thời gian không giới hạn và tài nguyên không gian đa thức phải mạnh mẽ hơn việc chỉ có một lượng thời gian đa thức. Tuy nhiên, bất chấp những nỗ lực và sự khéo léo đáng kể, điều này vẫn chưa bao giờ được chứng minh. Chúng ta sẽ thấy sau này rằng lớp các bài toán có thể giải quyết trên một máy tính lượng tử trong thời gian đa thức là một tập con của <span class="math inline">\mathbf{PSPACE}</span>, do đó việc chứng minh rằng một bài toán có thể giải quyết hiệu quả trên một máy tính lượng tử mà không thể giải quyết hiệu quả trên một máy tính cổ điển sẽ thiết lập rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>, và từ đó giải quyết một bài toán tồn đọng lớn của khoa học máy tính. Một cách nhìn lạc quan về kết quả này là những ý tưởng từ tính toán lượng tử có thể hữu ích trong việc chứng minh rằng <span class="math inline">\mathbf{P} \neq \mathbf{PSPACE}</span>. Một cách bi quan, người ta có thể kết luận rằng sẽ còn rất lâu nữa mới có ai đó chứng minh một cách chặt chẽ rằng máy tính lượng tử có thể được sử dụng để giải quyết hiệu quả các bài toán khó xử lý trên máy tính cổ điển. Thậm chí còn bi quan hơn, hoàn toàn có khả năng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>, trong trường hợp đó máy tính lượng tử không mang lại lợi thế nào so với máy tính cổ điển! Tuy nhiên, rất hiếm (nếu có) các nhà lý thuyết độ phức tạp tính toán tin rằng <span class="math inline">\mathbf{P} = \mathbf{PSPACE}</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.25: (<span class="math inline">\mathbf{PSPACE} \subseteq \mathbf{EXP}</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Lớp độ phức tạp <span class="math inline">\mathbf{EXP}</span> (đại diện cho thời gian hàm mũ - exponential time) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong thời gian hàm mũ, tức là thời gian <span class="math inline">O(2^{n^k})</span>, trong đó <span class="math inline">k</span> là một hằng số bất kỳ. Chứng minh rằng <span class="math inline">\mathbf{PSPACE} \subseteq \mathbf{EXP}</span>. (Gợi ý: Nếu một máy Turing có <span class="math inline">l</span> trạng thái nội tại, một bảng chữ cái gồm <span class="math inline">m</span> ký tự, và sử dụng không gian <span class="math inline">p(n)</span>, hãy lập luận rằng máy có thể tồn tại trong một trong tối đa <span class="math inline">l m^{p(n)}</span> trạng thái khác nhau, và nếu máy Turing muốn tránh các vòng lặp vô hạn thì nó phải dừng lại trước khi thăm lại một trạng thái nào đó.)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.26: (<span class="math inline">\mathbf{L} \subseteq \mathbf{P}</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Lớp độ phức tạp <span class="math inline">\mathbf{L}</span> (đại diện cho không gian logarit - logarithmic space) chứa tất cả các bài toán quyết định có thể được quyết định bởi một máy Turing chạy trong không gian logarit, tức là, trong không gian <span class="math inline">O(\log(n))</span>. Cụ thể hơn, lớp <span class="math inline">\mathbf{L}</span> được định nghĩa bằng cách sử dụng một máy Turing hai dải băng. Dải băng thứ nhất chứa trường hợp bài toán, có kích thước <span class="math inline">n</span>, và là một dải băng chỉ-đọc (read-only), theo nghĩa là chỉ những dòng chương trình không làm thay đổi nội dung của dải băng thứ nhất mới được phép hoạt động. Dải băng thứ hai là một dải băng làm việc mà ban đầu chỉ chứa các khoảng trống. Yêu cầu về không gian logarit chỉ được áp dụng lên dải băng làm việc thứ hai, duy nhất. Chứng minh rằng <span class="math inline">\mathbf{L} \subseteq \mathbf{P}</span>.</p>
+</div>
+</div>
+</div>
+<p>Việc cho phép nhiều thời gian hoặc không gian hơn có mang lại sức mạnh tính toán lớn hơn không? Câu trả lời cho câu hỏi này là có trong cả hai trường hợp. Nói một cách khái quát, định lý phân cấp thời gian (time hierarchy theorem) phát biểu rằng <span class="math inline">\mathbf{TIME}(f(n))</span> là một tập con thực sự (proper subset) của <span class="math inline">\mathbf{TIME}(f(n)\log^2(f(n)))</span>. Tương tự, định lý phân cấp không gian (space hierarchy theorem) phát biểu rằng <span class="math inline">\mathbf{SPACE}(f(n))</span> là một tập con thực sự của <span class="math inline">\mathbf{SPACE}(f(n)\log(f(n)))</span>, trong đó <span class="math inline">\mathbf{SPACE}(f(n))</span>, tất nhiên, là lớp độ phức tạp bao gồm tất cả các ngôn ngữ có thể được quyết định với tài nguyên không gian <span class="math inline">O(f(n))</span>. Các định lý phân cấp có những hệ ý thú vị liên quan đến sự bằng nhau của các lớp độ phức tạp. Chúng ta biết rằng</p>
+<p><span class="math display">
+\mathbf{L} \subseteq \mathbf{P} \subseteq \mathbf{NP} \subseteq \mathbf{PSPACE} \subseteq \mathbf{EXP} \tag{3.1}
+</span></p>
+<p>Thật không may, mặc dù mỗi sự bao hàm này được tin tưởng rộng rãi là thực sự, chưa có sự bao hàm nào từng được chứng minh là thực sự. Tuy nhiên, định lý phân cấp thời gian ngụ ý rằng <span class="math inline">\mathbf{P}</span> là một tập con thực sự của <span class="math inline">\mathbf{EXP}</span>, và định lý phân cấp không gian ngụ ý rằng <span class="math inline">\mathbf{L}</span> là một tập con thực sự của <span class="math inline">\mathbf{PSPACE}</span>! Vì vậy, chúng ta có thể kết luận rằng ít nhất một trong những sự bao hàm ở (3.1) phải là thực sự, mặc dù chúng ta không biết đó là cái nào.</p>
+<p>Chúng ta nên làm gì với một bài toán một khi chúng ta biết rằng nó là NP-đầy đủ, hoặc một tiêu chí về độ khó nào đó khác được thỏa mãn? Hóa ra đây hoàn toàn chưa phải là sự kết thúc của câu chuyện trong việc phân tích bài toán. Một hướng tấn công khả dĩ là xác định các trường hợp đặc biệt của bài toán có thể dễ bị tấn công giải quyết. Ví dụ, trong Bài tập 3.24, chúng ta đã thấy rằng bài toán <span class="math inline">2\text{SAT}</span> có một giải pháp hiệu quả, bất chấp tính NP-đầy đủ của <span class="math inline">\text{SAT}</span>.</p>
+<p>Một cách tiếp cận khác là thay đổi loại bài toán đang được xem xét, một chiến thuật thường dẫn đến việc định nghĩa các lớp độ phức tạp mới. Ví dụ, thay vì tìm kiếm các giải pháp chính xác cho một bài toán NP-đầy đủ, chúng ta có thể cố gắng tìm các thuật toán tốt để tìm các giải pháp xấp xỉ (approximate) cho một bài toán. Ví dụ, bài toán <span class="math inline">\text{VERTEX COVER}</span> là một bài toán NP-đầy đủ, nhưng trong Bài tập 3.27, chúng ta chỉ ra rằng hoàn toàn có thể tìm ra một cách hiệu quả một xấp xỉ cho tập phủ đỉnh tối thiểu sao cho nó chính xác trong khoảng hệ số là hai! Mặt khác, trong Bài toán 3.6, chúng ta chỉ ra rằng không thể tìm được các xấp xỉ cho các giải pháp của <span class="math inline">\text{TSP}</span> chính xác trong khoảng bất kỳ hệ số nào, trừ khi <span class="math inline">\mathbf{P} = \mathbf{NP}</span>!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.27: (Thuật toán xấp xỉ cho VERTEX COVER)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Cho <span class="math inline">G = (V, E)</span> là một đồ thị vô hướng. Chứng minh rằng thuật toán sau đây tìm được một tập phủ đỉnh cho <span class="math inline">G</span> nằm trong khoảng gấp hai lần kích thước của một tập phủ đỉnh tối thiểu:</p>
+</div>
+</div>
+</div>
+<p><span class="math display">
+\begin{aligned} VC &amp;= \emptyset \\
+E' &amp;= E \\ \text{do } &amp;\text{until } E' = \emptyset \\
+&amp;\text{let } (\alpha, \beta) \text{ be any edge of } E' \\
+&amp;VC = VC \cup \{\alpha, \beta\} \\
+&amp;\text{remove from } E' \text{ every edge incident on } \alpha \text{ or } \beta \\
+\text{return } &amp;VC \end{aligned}
+</span></p>
+<p>Tại sao lại có thể xấp xỉ lời giải của một bài toán <span class="math inline">\mathbf{NP}</span>-đầy đủ này, nhưng lại không thể với một bài toán khác? Rốt cuộc thì chẳng phải ta có thể chuyển đổi một cách hiệu quả từ bài toán này sang bài toán khác hay sao? Điều này hoàn toàn đúng, tuy nhiên việc chuyển đổi này không nhất thiết duy trì khái niệm về một ‘xấp xỉ tốt’ cho một lời giải. Kết quả là, lý thuyết độ phức tạp tính toán của các thuật toán xấp xỉ cho các bài toán trong <span class="math inline">\mathbf{NP}</span> có một cấu trúc vượt ra ngoài cấu trúc của bản thân <span class="math inline">\mathbf{NP}</span>. Tồn tại cả một lý thuyết độ phức tạp của các thuật toán xấp xỉ, nhưng tiếc là nó nằm ngoài phạm vi của cuốn sách này. Tuy nhiên, ý tưởng cơ bản là định nghĩa một khái niệm về sự quy về tương ứng với khả năng quy một bài toán xấp xỉ này về một bài toán khác một cách hiệu quả, sao cho khái niệm xấp xỉ tốt được bảo toàn. Với một khái niệm như vậy, ta có thể định nghĩa các lớp độ phức tạp như MAXSNP tương tự như lớp <span class="math inline">\mathbf{NP}</span>, là tập hợp các bài toán mà ở đó có thể kiểm chứng một cách hiệu quả các lời giải xấp xỉ cho bài toán. Các bài toán đầy đủ cũng tồn tại cho MAXSNP, giống như đối với <span class="math inline">\mathbf{NP}</span>, và việc xác định xem lớp MAXSNP so sánh như thế nào với lớp các bài toán xấp xỉ giải được một cách hiệu quả là một bài toán mở thú vị.</p>
+<p>Chúng ta kết thúc phần thảo luận bằng một lớp độ phức tạp xuất hiện khi bản thân mô hình tính toán nền tảng bị thay đổi. Giả sử một máy Turing được trang bị khả năng tung đồng xu, sử dụng kết quả tung đồng xu để quyết định những hành động cần thực hiện trong quá trình tính toán. Một máy Turing như vậy có thể chỉ chấp nhận hoặc từ chối các đầu vào với một xác suất nhất định. Lớp độ phức tạp BPP (cho thời gian xác suất với lỗi bị chặn - bounded-error probabilistic time) chứa tất cả các ngôn ngữ <span class="math inline">L</span> với thuộc tính là tồn tại một máy Turing xác suất <span class="math inline">M</span> sao cho nếu <span class="math inline">x \in L</span> thì <span class="math inline">M</span> chấp nhận <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">3/4</span>, và nếu <span class="math inline">x \notin L</span> thì <span class="math inline">M</span> từ chối <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">3/4</span>. Bài tập sau đây cho thấy việc lựa chọn hằng số <span class="math inline">3/4</span> về bản chất là tùy ý:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.28: (Tính tùy ý của hằng số trong định nghĩa BPP)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">k</span> là một hằng số cố định, <span class="math inline">1/2 &lt; k \le 1</span>. Giả sử <span class="math inline">L</span> là một ngôn ngữ sao cho tồn tại một máy Turing <span class="math inline">M</span> với thuộc tính là bất cứ khi nào <span class="math inline">x \in L</span>, <span class="math inline">M</span> chấp nhận <span class="math inline">x</span> với xác suất ít nhất <span class="math inline">k</span>, và bất cứ khi nào <span class="math inline">x \notin L</span>, <span class="math inline">M</span> từ chối <span class="math inline">x</span> me với xác suất ít nhất <span class="math inline">k</span>. Chứng minh rằng <span class="math inline">L \in \mathbf{BPP}</span>.</p>
+</div>
+</div>
+</div>
+<p>Thật vậy, bất đẳng thức Chernoff, được thảo luận trong Hộp 3.4, ngụ ý rằng chỉ với một vài lần lặp lại một thuật toán quyết định một ngôn ngữ trong BPP, xác suất thành công có thể được khuếch đại đến mức về bản chất bằng 1 trên mọi khía cạnh thực tế. Vì lý do này, BPP thậm chí còn hơn cả P mới là lớp các bài toán quyết định thường được coi là giải được một cách hiệu quả trên một máy tính cổ điển, và chính bản sao lượng tử của BPP, được gọi là BQP, mới là điều thú vị nhất trong nghiên cứu của chúng ta về các thuật toán lượng tử.</p>
+</section>
+<section id="energy-and-computation" class="level1">
+<h1>5. Energy and computation</h1>
+<p>Độ phức tạp tính toán nghiên cứu lượng thời gian và không gian cần thiết để giải quyết một bài toán tính toán. Một tài nguyên tính toán quan trọng khác là năng lượng. Trong phần này, chúng ta nghiên cứu các yêu cầu về năng lượng cho tính toán. Đáng ngạc nhiên là, hóa ra tính toán, cả cổ điển và lượng tử, về nguyên tắc đều có thể được thực hiện mà không tiêu tốn bất kỳ năng lượng nào! Hóa ra, việc tiêu thụ năng lượng trong tính toán có liên hệ sâu sắc với tính khả nghịch (reversibility) của quá trình tính toán. Xem xét một cổng như cổng <span class="math inline">\text{NAND}</span>, nó nhận hai bit làm đầu vào và tạo ra một bit duy nhất làm đầu ra. Cổng này về bản chất là không khả nghịch (irreversible) bởi vì, nếu chỉ cho biết đầu ra của cổng, đầu vào không thể được xác định duy nhất. Ví dụ, nếu đầu ra của cổng <span class="math inline">\text{NAND}</span> là <span class="math inline">1</span>, thì đầu vào có thể là bất kỳ trường hợp nào trong số <span class="math inline">00, 01</span>, hoặc <span class="math inline">10</span>. Mặt khác, cổng <span class="math inline">\text{NOT}</span> là một ví dụ về cổng logic khả nghịch (reversible) bởi vì, khi có đầu ra của cổng <span class="math inline">\text{NOT}</span>, ta hoàn toàn có thể suy luận ra đầu vào chắc chắn phải là gì.</p>
+<p>Một cách khác để hiểu về tính không khả nghịch là suy nghĩ về nó dưới góc độ việc xóa thông tin (information erasure). Nếu một cổng logic là không khả nghịch, thì một phần thông tin đầu vào của cổng đó sẽ bị mất đi không thể khôi phục được khi cổng hoạt động – tức là, một phần thông tin đã bị cổng xóa đi. Ngược lại, trong một tính toán khả nghịch, không có thông tin nào từng bị xóa đi, bởi vì đầu vào luôn có thể được khôi phục ngược lại từ đầu ra. Do đó, nói rằng một tính toán là khả nghịch tương đương với việc nói rằng không có thông tin nào bị xóa đi trong quá trình tính toán.</p>
+<hr>
+<p><strong>Sự kết nối giữa việc tiêu thụ năng lượng và tính không khả nghịch trong tính toán là gì?</strong></p>
+<p>Nguyên lý Landauer (Landauer’s principle) cung cấp sự kết nối này, phát biểu rằng, để xóa thông tin, hệ thống bắt buộc phải tiêu tán năng lượng. Cụ thể hơn, nguyên lý Landauer có thể được phát biểu như sau:</p>
+</section>
+<section id="nguyên-lý-landauer-dạng-thứ-nhất" class="level1 postulates">
+<h1>Nguyên lý Landauer (dạng thứ nhất)</h1>
+<p>Giả sử một máy tính xóa một bit thông tin duy nhất. Lượng năng lượng tiêu tán ra môi trường ít nhất là <span class="math inline">k_B T \ln 2</span>, trong đó <span class="math inline">k_B</span> là một hằng số phổ quát được gọi là hằng số Boltzmann, và <span class="math inline">T</span> là nhiệt độ môi trường của máy tính.</p>
+</section>
+<p>Theo các định luật nhiệt động lực học, nguyên lý Landauer có thể được đưa ra dưới một dạng thay thế, không được phát biểu dưới dạng tiêu tán năng lượng, mà đúng hơn là dưới dạng entropy:</p>
+<section id="nguyên-lý-landauer-dạng-thứ-hai" class="level1 postulates">
+<h1>Nguyên lý Landauer (dạng thứ hai)</h1>
+<p>Giả sử một máy tính xóa một bit thông tin duy nhất. Entropy của môi trường tăng lên ít nhất <span class="math inline">k_B \ln 2</span>, trong đó <span class="math inline">k_B</span> là hằng số Boltzmann.</p>
+</section>
+<p>Việc biện minh cho nguyên lý Landauer là một bài toán của vật lý học nằm ngoài phạm vi của cuốn sách này – hãy xem phần ‘Lịch sử và đọc thêm’ ở cuối chương nếu bạn muốn hiểu tại sao nguyên lý Landauer lại đúng. Tuy nhiên, nếu chúng ta chấp nhận nguyên lý Landauer như một định đề, thì nó đặt ra một số câu hỏi thú vị. Trước hết, nguyên lý Landauer chỉ cung cấp một cận dưới (lower bound) về lượng năng lượng phải được tiêu tán để xóa thông tin. Các máy tính hiện hành có tiến gần đến cận dưới này không? Câu trả lời hóa ra là không mấy gần – các máy tính vào khoảng năm 2000 tiêu tán khoảng <span class="math inline">500k_B T \ln 2</span> năng lượng cho mỗi phép toán logic cơ bản.</p>
+<p>Mặc dù các máy tính hiện tại còn cách xa giới hạn do nguyên lý Landauer đặt ra, việc hiểu xem mức tiêu thụ năng lượng có thể giảm xuống bao nhiêu vẫn là một vấn đề lý thuyết thú vị. Bên cạnh sự quan tâm nội tại đối với bản thân vấn đề, một lý do thực tế cho sự quan tâm này xuất phát từ định luật Moore: nếu sức mạnh máy tính tiếp tục tăng thì lượng năng lượng tiêu tán cũng phải tăng theo, trừ khi năng lượng tiêu tán trên mỗi phép toán giảm với tốc độ nhanh bằng tốc độ tăng trưởng của sức mạnh tính toán.</p>
+<p>Nếu tất cả các phép tính có thể được thực hiện một cách khả nghịch, thì nguyên lý Landauer sẽ ngụ ý rằng không có cận dưới nào đối với lượng năng lượng do máy tính tiêu tán, vì không có bit nào bị xóa trong quá trình tính toán khả nghịch. Tất nhiên, có khả năng một số nguyên lý vật lý khác có thể yêu cầu năng lượng phải bị tiêu tán trong quá trình tính toán; may mắn thay, điều này hóa ra không đúng. Nhưng liệu có thể thực hiện tính toán vạn năng mà không xóa bất kỳ thông tin nào không? Các nhà vật lý có thể “ăn gian” ở bài toán này để thấy trước rằng câu trả lời cho câu hỏi này chắc chắn là có, bởi vì sự hiểu biết hiện tại của chúng ta về các định luật vật lý là về cơ bản chúng đều khả nghịch. Tức là, nếu chúng ta biết trạng thái cuối cùng của một hệ vật lý khép kín, thì các định luật vật lý cho phép chúng ta tính toán ra trạng thái ban đầu của hệ. Nếu chúng ta tin rằng các định luật đó là đúng, thì chúng ta phải kết luận rằng ẩn bên trong các cổng logic không khả nghịch như <span class="math inline">\text{AND}</span> và <span class="math inline">\text{OR}</span>, phải tồn tại một sự tính toán khả nghịch nền tảng nào đó. Nhưng sự khả nghịch ẩn giấu này nằm ở đâu, và chúng ta có thể sử dụng nó để xây dựng các máy tính khả nghịch một cách hiển nhiên không?</p>
+<hr>
+<p>Chúng ta sẽ sử dụng hai kỹ thuật khác nhau để đưa ra các mô hình dựa trên mạch khả nghịch có khả năng tính toán vạn năng.</p>
+<ul>
+<li><p>Mô hình đầu tiên, một máy tính được chế tạo hoàn toàn bằng các quả bóng bi-a và các tấm gương, mang đến một hiện thực hóa cụ thể và đẹp mắt về các nguyên lý của tính toán khả nghịch.</p></li>
+<li><p>Mô hình thứ hai, dựa trên một cổng logic khả nghịch được gọi là cổng Toffoli (mà chúng ta đã gặp lần đầu trong Mục 1.4.1), là một cái nhìn trừu tượng hơn về tính toán khả nghịch, thứ mà sau này sẽ rất hữu ích trong cuộc thảo luận của chúng ta về tính toán lượng tử.</p></li>
+</ul>
+<p>Người ta cũng có thể chế tạo các máy Turing khả nghịch có tính vạn năng cho tính toán; tuy nhiên, chúng ta sẽ không nghiên cứu chúng ở đây, vì các mô hình mạch khả nghịch hóa ra lại hữu ích hơn nhiều đối với tính toán lượng tử.</p>
+<hr>
+<p><img src="../../img/3.14.png" class="img-fluid"></p>
+<p>Ý tưởng cơ bản của máy tính bóng bi-a được minh họa trong Hình 3.14. Các ‘đầu vào’ bóng bi-a đi vào máy tính từ phía bên trái, bật ra khỏi các tấm gương và bật vào nhau, trước khi thoát ra dưới dạng ‘đầu ra’ ở phía bên phải. Sự hiện diện hay vắng mặt của một quả bóng bi-a tại một vị trí đầu vào khả dĩ được sử dụng để biểu thị một giá trị logic 1 hoặc logic 0, tương ứng. Điều hấp dẫn về mô hình này là nó hiển nhiên khả nghịch (manifestly reversible), ở chỗ hoạt động của nó dựa trên các định luật của cơ học cổ điển. Hơn nữa, mô hình tính toán này hóa ra lại mang tính vạn năng (universal) theo nghĩa là nó có thể được sử dụng để mô phỏng một quá trình tính toán tùy ý trong mô hình tính toán mạch tiêu chuẩn.</p>
+<p>Tất nhiên, nếu một máy tính bóng bi-a từng được chế tạo thì nó sẽ cực kỳ không ổn định. Như bất kỳ người chơi bi-a nào cũng có thể chứng thực, một quả bóng bi-a lăn không ma sát trên một bề mặt nhẵn rất dễ bị chệch hướng bởi những nhiễu loạn nhỏ. Mô hình tính toán bóng bi-a phụ thuộc vào sự vận hành hoàn hảo, và sự vắng mặt của các nhiễu loạn bên ngoài như những nhiễu loạn do nhiễu nhiệt gây ra. Có thể thực hiện các hiệu chỉnh định kỳ, nhưng thông tin thu được từ việc làm này sẽ phải bị xóa đi, đòi hỏi phải thực hiện công. Do đó, việc tiêu hao năng lượng phục vụ cho mục đích làm giảm tính nhạy cảm với nhiễu này, một điều cần thiết cho một cỗ máy tính toán thực tế trong thế giới thực. Vì mục đích của phần giới thiệu này, chúng ta sẽ bỏ qua các tác động của nhiễu lên máy tính bóng bi-a, và tập trung vào việc hiểu các yếu tố cốt lõi của tính toán khả nghịch.</p>
+<hr>
+<p>Máy tính bóng bi-a cung cấp một phương thức thanh lịch để triển khai một cổng logic vạn năng khả nghịch được gọi là cổng Fredkin. Quả thực, các thuộc tính của cổng Fredkin cung cấp một cái nhìn tổng quan đầy đủ thông tin về các nguyên lý chung của các cổng và mạch logic khả nghịch. Cổng Fredkin có ba bit đầu vào và ba bit đầu ra, mà chúng ta lần lượt gọi là <span class="math inline">a, b, c</span> và <span class="math inline">a', b', c'</span>. Bit <span class="math inline">c</span> là một bit kiểm soát (control bit), giá trị của nó không bị thay đổi bởi tác động của cổng Fredkin, tức là, <span class="math inline">c' = c</span>. Lý do <span class="math inline">c</span> được gọi là bit kiểm soát là vì nó kiểm soát những gì xảy ra với hai bit còn lại, <span class="math inline">a</span> và <span class="math inline">b</span>. Nếu <span class="math inline">c</span> được đặt thành 0 thì <span class="math inline">a</span> và <span class="math inline">b</span> được giữ nguyên, <span class="math inline">a' = a, b' = b</span>. Nếu <span class="math inline">c</span> được đặt thành 1, <span class="math inline">a</span> và <span class="math inline">b</span> được hoán đổi cho nhau, <span class="math inline">a' = b, b' = a</span>. Bảng chân lý rõ ràng của cổng Fredkin được thể hiện trong Hình 3.15. Rất dễ để thấy rằng cổng Fredkin là khả nghịch, bởi vì khi biết đầu ra <span class="math inline">a', b', c'</span>, chúng ta có thể xác định được các đầu vào <span class="math inline">a, b, c</span>. Thực tế, để khôi phục lại các đầu vào ban đầu <span class="math inline">a, b</span> và <span class="math inline">c</span> chúng ta chỉ cần áp dụng một cổng Fredkin khác lên <span class="math inline">a', b', c'</span>:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.29: (Cổng Fredkin tự nghịch đảo)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng việc áp dụng hai cổng Fredkin liên tiếp sẽ cho ra các đầu ra giống hệt như các đầu vào.</p>
+</div>
+</div>
+</div>
+<p>Xem xét các đường đi của các quả bóng bi-a trong Hình 3.14, không khó để kiểm chứng rằng máy tính bóng bi-a này triển khai cổng Fredkin:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.30:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Kiểm chứng rằng máy tính bóng bi-a trong Hình 3.14 tính toán cổng Fredkin.</p>
+</div>
+</div>
+</div>
+<p>Ngoài tính khả nghịch, cổng Fredkin còn có một thuộc tính thú vị là số lượng các giá trị 1 được bảo toàn giữa đầu vào và đầu ra. Dưới góc độ của máy tính bóng bi-a, điều này tương ứng với việc số lượng quả bóng bi-a đi vào cổng Fredkin bằng với số lượng quả bóng đi ra. Do đó, đôi khi nó được gọi là một cổng logic khả nghịch bảo toàn (conservative). Các thuộc tính khả nghịch và bảo toàn như vậy thu hút sự quan tâm của một nhà vật lý học bởi vì chúng có thể được giải thích bằng các nguyên lý vật lý cơ bản. Các định luật của Tự nhiên là khả nghịch, với ngoại lệ có thể có là định đề đo lường của cơ học lượng tử, được thảo luận trong Mục 2.2.3 ở trang 84. Thuộc tính bảo toàn có thể được coi là tương tự như các thuộc tính chẳng hạn như bảo toàn khối lượng, hoặc bảo toàn năng lượng. Quả thực, trong mô hình tính toán bóng bi-a, thuộc tính bảo toàn tương ứng chính xác với định luật bảo toàn khối lượng.</p>
+<p><img src="../../img/3.15.png" class="img-fluid"></p>
+<p><img src="../../img/3.16.png" class="img-fluid"></p>
+<p>Cổng Fredkin không chỉ khả nghịch và bảo toàn, nó còn là một cổng logic vạn năng! Như được minh họa trong Hình 3.16, cổng Fredkin có thể được cấu hình để mô phỏng các hàm <span class="math inline">\text{AND}</span>, <span class="math inline">\text{NOT}</span>, <span class="math inline">\text{CROSSOVER}</span> và <span class="math inline">\text{FANOUT}</span>, và do đó có thể được ghép nối tiếp để mô phỏng bất kỳ mạch cổ điển nào.</p>
+<p>Để mô phỏng các cổng không khả nghịch như <span class="math inline">\text{AND}</span> bằng cổng Fredkin, chúng ta đã sử dụng hai ý tưởng. Thứ nhất, chúng ta cho phép đưa vào các bit ‘phụ trợ’ (ancilla) cho cổng Fredkin, ở các trạng thái được chuẩn bị đặc biệt, là 0 hoặc 1. Thứ hai, đầu ra của cổng Fredkin chứa ‘rác’ (garbage) dư thừa không cần thiết cho phần còn lại của quá trình tính toán. Các bit ancilla và bit rác này không trực tiếp quan trọng đối với phép tính. Tầm quan trọng của chúng nằm ở chỗ chúng làm cho quá trình tính toán trở nên khả nghịch. Quả thực, tính không khả nghịch của các cổng như <span class="math inline">\text{AND}</span> và <span class="math inline">\text{OR}</span> có thể được xem như là hệ quả của việc các bit ancilla và rác bị ‘ẩn đi’. Tóm lại, cho trước bất kỳ mạch cổ điển nào tính toán một hàm <span class="math inline">f(x)</span>, chúng ta có thể xây dựng một mạch khả nghịch tạo thành hoàn toàn từ các cổng Fredkin, trong đó với đầu vào là <span class="math inline">x</span>, cùng với một số bit ancilla ở một trạng thái tiêu chuẩn <span class="math inline">a</span>, tính toán ra <span class="math inline">f(x)</span>, cùng với một số đầu ra ‘rác’ phụ thêm, <span class="math inline">g(x)</span>. Do đó, chúng ta biểu diễn tác động của quá trình tính toán là <span class="math inline">(x, a) \rightarrow (f(x), g(x))</span>.</p>
+<hr>
+<p>Bây giờ chúng ta đã biết cách tính toán các hàm một cách khả nghịch. Thật không may, quá trình tính toán này tạo ra các bit rác không mong muốn. Với một số sửa đổi, hóa ra ta có thể thực hiện tính toán sao cho bất kỳ bit rác nào được tạo ra đều ở một trạng thái tiêu chuẩn (standard state). Cấu trúc này mang tính cốt yếu đối với tính toán lượng tử, bởi vì các bit rác có giá trị phụ thuộc vào <span class="math inline">x</span> nhìn chung sẽ phá hủy các đặc tính giao thoa vốn rất quan trọng đối với tính toán lượng tử. Để hiểu cách thức hoạt động của điều này, thật tiện lợi khi giả định rằng cổng <span class="math inline">\text{NOT}</span> có sẵn trong kho các cổng khả nghịch của chúng ta, vì vậy chúng ta cũng có thể giả định rằng tất cả các bit ancilla <span class="math inline">a</span> đều bắt đầu là 0, với các cổng <span class="math inline">\text{NOT}</span> được thêm vào ở những nơi cần thiết để biến các số 0 ancilla thành số 1. Cũng sẽ tiện lợi khi giả định rằng cổng controlled-<span class="math inline">\text{NOT}</span> cổ điển có sẵn, được định nghĩa theo cách tương tự với định nghĩa lượng tử ở Mục 1.3.2, tức là, các đầu vào <span class="math inline">(c, t)</span> được biến thành <span class="math inline">(c, t \oplus c)</span>, trong đó <span class="math inline">\oplus</span> biểu thị phép cộng modulo 2. Lưu ý rằng <span class="math inline">t = 0</span> cho <span class="math inline">(c, 0) \rightarrow (c, c)</span>, vì vậy cổng controlled-<span class="math inline">\text{NOT}</span> có thể được coi là một cổng sao chép khả nghịch hoặc cổng <span class="math inline">\text{FANOUT}</span>, không để lại bit rác ở đầu ra.</p>
+<p>Với các cổng <span class="math inline">\text{NOT}</span> bổ sung được gắn vào đầu mạch, tác động của phép tính có thể được viết là <span class="math inline">(x, 0) \rightarrow (f(x), g(x))</span>. Chúng ta cũng có thể thêm các cổng <span class="math inline">\text{CNOT}</span> vào đầu mạch, nhằm tạo ra một bản sao của <span class="math inline">x</span> mà không bị thay đổi trong quá trình tính toán tiếp theo. Với sửa đổi này, tác động của mạch có thể được viết là</p>
+<p><span class="math display">
+(x, 0, 0) \rightarrow (x, f(x), g(x)). \tag{3.7}
+</span></p>
+<p>Phương trình (3.7) là một cách rất hữu ích để viết tác động của mạch khả nghịch, bởi vì nó cho phép sử dụng một ý tưởng được gọi là tính toán lùi (uncomputation) để loại bỏ các bit rác, với một chi phí nhỏ về thời gian chạy của phép tính. Ý tưởng như sau. Giả sử chúng ta bắt đầu với một máy tính bốn thanh ghi ở trạng thái <span class="math inline">(x, 0, 0, y)</span>. Thanh ghi thứ hai được sử dụng để lưu kết quả của phép tính, và thanh ghi thứ ba được sử dụng để cung cấp không gian làm việc cho phép tính, tức là, chứa các bit rác <span class="math inline">g(x)</span>. Việc sử dụng thanh ghi thứ tư sẽ được mô tả ngay sau đây, và chúng ta giả định nó bắt đầu ở một trạng thái tùy ý <span class="math inline">y</span>.</p>
+<p>Chúng ta bắt đầu như trước, bằng cách áp dụng một mạch khả nghịch để tính <span class="math inline">f</span>, dẫn đến trạng thái <span class="math inline">(x, f(x), g(x), y)</span>. Tiếp theo, chúng ta sử dụng các cổng <span class="math inline">\text{CNOT}</span> để cộng kết quả <span class="math inline">f(x)</span> theo từng bit vào thanh ghi thứ tư, đưa cỗ máy về trạng thái <span class="math inline">(x, f(x), g(x), y \oplus f(x))</span>. Tuy nhiên, tất cả các bước được sử dụng để tính <span class="math inline">f(x)</span> đều khả nghịch và không ảnh hưởng đến thanh ghi thứ tư, vì vậy bằng cách áp dụng chiều đảo ngược của mạch đã dùng để tính <span class="math inline">f</span>, chúng ta đi đến trạng thái <span class="math inline">(x, 0, 0, y \oplus f(x))</span>. Thông thường, chúng ta bỏ qua các số 0 ancilla khỏi phần mô tả quá trình tính giá trị hàm, và chỉ viết tác động của mạch là</p>
+<p><span class="math display">
+(x, y) \rightarrow (x, y \oplus f(x)). \tag{3.8}
+</span></p>
+<p>Nhìn chung chúng ta gọi mạch đã sửa đổi này tính <span class="math inline">f</span> là mạch khả nghịch tính <span class="math inline">f</span> (the reversible circuit computing <span class="math inline">f</span>), mặc dù về nguyên tắc có nhiều mạch khả nghịch khác có thể được sử dụng để tính <span class="math inline">f</span>.</p>
+<p>Có chi phí (overhead) tài nguyên nào liên quan đến việc thực hiện tính toán khả nghịch? Để phân tích câu hỏi này, chúng ta cần đếm số lượng các bit phụ trợ (ancilla bits) bổ sung cần thiết trong một mạch khả nghịch, và so sánh số lượng cổng với các mô hình cổ điển. Rõ ràng là số lượng cổng trong một mạch khả nghịch cũng tương đương như trong một mạch không khả nghịch, chỉ sai khác một hệ số không đổi đại diện cho số lượng cổng Fredkin cần thiết để mô phỏng một phần tử đơn lẻ của mạch không khả nghịch, và thêm một hệ số nhân bằng hai cho quá trình tính toán lùi (uncomputation), cùng với chi phí cho các phép toán <span class="math inline">\text{CNOT}</span> bổ sung được sử dụng trong tính toán khả nghịch tỷ lệ tuyến tính với số lượng bit tham gia vào mạch. Tương tự, số lượng bit phụ trợ (ancilla) được yêu cầu tăng tối đa theo tỷ lệ tuyến tính với số lượng cổng trong mạch không khả nghịch, vì mỗi phần tử trong mạch không khả nghịch có thể được mô phỏng bằng cách sử dụng một số lượng bit ancilla không đổi. Kết quả là, các lớp độ phức tạp tự nhiên như <span class="math inline">\mathbf{P}</span> và <span class="math inline">\mathbf{NP}</span> vẫn giữ nguyên bất kể ta sử dụng mô hình tính toán khả nghịch hay không khả nghịch. Đối với các lớp độ phức tạp phức tạp hơn như <span class="math inline">\mathbf{PSPACE}</span>, tình hình không rõ ràng ngay lập tức như vậy; hãy xem Bài toán 3.9 và phần ‘Lịch sử và đọc thêm’ để có cuộc thảo luận về một số sự tinh tế như vậy.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.31: (Bộ cộng bán phần khả nghịch - Reversible half-adder)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Dựng một mạch khả nghịch mà khi đưa vào hai bit <span class="math inline">x</span> và <span class="math inline">y</span>, nó sẽ trả ra <span class="math inline">(x, y, c, x \oplus y)</span>, trong đó <span class="math inline">c</span> là bit nhớ (carry bit) khi cộng <span class="math inline">x</span> và <span class="math inline">y</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Cổng Fredkin và việc triển khai nó bằng máy tính bóng bi-a mang đến một mô hình tuyệt đẹp cho tính toán khả nghịch. Có một cổng logic khả nghịch khác, cổng Toffoli, cũng mang tính vạn năng cho tính toán cổ điển. Mặc dù cổng Toffoli không có được sự đơn giản về mặt vật lý thanh lịch như việc triển khai cổng Fredkin bằng bóng bi-a, nó sẽ hữu ích hơn trong việc nghiên cứu tính toán lượng tử. Chúng ta đã gặp cổng Toffoli trong Mục 1.4.1, nhưng để thuận tiện, chúng ta sẽ ôn lại các thuộc tính của nó ở đây.</p>
+<p>Cổng Toffoli có ba bit đầu vào, <span class="math inline">a, b</span> và <span class="math inline">c</span>. <span class="math inline">a</span> và <span class="math inline">b</span> được biết đến là các bit kiểm soát (control bits) thứ nhất và thứ hai, trong khi <span class="math inline">c</span> là bit mục tiêu (target bit). Cổng này giữ nguyên cả hai bit kiểm soát, lật bit mục tiêu nếu cả hai bit kiểm soát đều được đặt thành 1, và giữ nguyên bit mục tiêu trong các trường hợp còn lại. Bảng chân lý và biểu diễn mạch của cổng Toffoli được thể hiện trong Hình 3.17.</p>
+<p><img src="../../img/3.17.png" class="img-fluid"></p>
+<p>Làm thế nào cổng Toffoli có thể được sử dụng để thực hiện tính toán vạn năng? Giả sử chúng ta muốn thực hiện phép <span class="math inline">\text{NAND}</span> lên các bit <span class="math inline">a</span> và <span class="math inline">b</span>. Để làm điều này bằng cổng Toffoli, chúng ta đưa <span class="math inline">a</span> và <span class="math inline">b</span> vào làm các bit kiểm soát, và đưa vào một bit phụ trợ (ancilla bit) được đặt thành 1 làm bit mục tiêu, như được thể hiện trong Hình 3.18. Kết quả <span class="math inline">\text{NAND}</span> của <span class="math inline">a</span> và <span class="math inline">b</span> được xuất ra ở bit mục tiêu. Như đã dự đoán từ phần nghiên cứu về cổng Fredkin, việc mô phỏng cổng <span class="math inline">\text{NAND}</span> bằng cổng Toffoli đòi hỏi phải sử dụng một đầu vào ancilla đặc biệt, và một số đầu ra từ mô phỏng là các bit rác (garbage bits).</p>
+<p><img src="../../img/3.18.png" class="img-fluid"></p>
+<p>Cổng Toffoli cũng có thể được sử dụng để triển khai phép toán <span class="math inline">\text{FANOUT}</span> bằng cách đưa một ancilla 1 vào bit kiểm soát thứ nhất, và <span class="math inline">a</span> vào bit kiểm soát thứ hai, tạo ra đầu ra <span class="math inline">1, a, a</span>. Nhắc lại rằng <span class="math inline">\text{NAND}</span> và <span class="math inline">\text{FANOUT}</span> kết hợp với nhau mang tính vạn năng cho tính toán, chúng ta thấy rằng một mạch tùy ý có thể được mô phỏng một cách hiệu quả bằng cách sử dụng một mạch khả nghịch chỉ bao gồm các cổng Toffoli và các bit ancilla, và rằng các kỹ thuật bổ sung hữu ích như tính toán lùi (uncomputation) có thể đạt được bằng cách sử dụng các phương pháp tương tự như đã được áp dụng với cổng Fredkin.</p>
+<hr>
+<p>Sức hút của chúng ta đối với tính toán khả nghịch bắt nguồn từ mong muốn tìm hiểu các yêu cầu về năng lượng cho tính toán. Rõ ràng là mô hình tính toán bóng bi-a không có nhiễu không đòi hỏi năng lượng cho hoạt động của nó; còn các mô hình dựa trên cổng Toffoli thì sao? Điều này chỉ có thể được xác định bằng cách kiểm tra các mô hình cụ thể cho việc tính toán của cổng Toffoli. Trong Chương 7, chúng ta kiểm tra một số triển khai như vậy, và hóa ra là, quả thực, cổng Toffoli có thể được triển khai theo cách không đòi hỏi tiêu hao năng lượng.</p>
+<p>Có một lưu ý quan trọng đi kèm với ý tưởng rằng tính toán có thể được thực hiện mà không tiêu hao năng lượng. Như chúng ta đã lưu ý trước đó, mô hình tính toán bóng bi-a rất nhạy cảm với nhiễu, và điều này cũng đúng với nhiều mô hình tính toán khả nghịch khác. Để vô hiệu hóa các tác động của nhiễu, một hình thức sửa lỗi nào đó cần phải được thực hiện. Việc sửa lỗi như vậy thường bao gồm việc thực hiện các phép đo trên hệ thống để xác định xem hệ thống có đang hoạt động như mong đợi hay không, hoặc nếu một lỗi đã xảy ra. Bởi vì bộ nhớ của máy tính là hữu hạn, các bit được sử dụng để lưu trữ kết quả đo lường được sử dụng trong việc sửa lỗi cuối cùng phải bị xóa đi để nhường chỗ cho các kết quả đo lường mới. Theo nguyên lý Landauer, việc xóa này đi kèm với một chi phí năng lượng liên quan phải được tính đến khi tổng kết chi phí năng lượng toàn phần của quá trình tính toán. Chúng ta phân tích chi phí năng lượng liên quan đến việc sửa lỗi chi tiết hơn ở Mục 12.4.4.</p>
+<hr>
+<p><strong>Chúng ta có thể rút ra kết luận gì từ nghiên cứu về tính toán khả nghịch?</strong> Có ba ý tưởng chính.</p>
+<ul>
+<li><p>Thứ nhất, tính khả nghịch bắt nguồn từ việc theo dõi mọi bit thông tin; tính không khả nghịch chỉ xảy ra khi thông tin bị mất hoặc bị xóa.</p></li>
+<li><p>Thứ hai, bằng cách thực hiện tính toán theo cách khả nghịch, chúng ta loại bỏ nhu cầu tiêu hao năng lượng trong quá trình tính toán. Tất cả các phép tính có thể được thực hiện, về nguyên tắc, với chi phí năng lượng bằng không.</p></li>
+<li><p>Thứ ba, tính toán khả nghịch có thể được thực hiện một cách hiệu quả, mà không tạo ra các bit rác có giá trị phụ thuộc vào đầu vào của phép tính. Tức là, nếu có một mạch không khả nghịch tính toán một hàm <span class="math inline">f</span>, thì sẽ có một mô phỏng hiệu quả của mạch này bằng một mạch khả nghịch với tác động <span class="math inline">(x, y) \rightarrow (x, y \oplus f(x))</span>.</p></li>
+</ul>
+<hr>
+<p><strong>Kết quả của những nghiên cứu này mang lại ý nghĩa gì cho vật lý, khoa học máy tính, và cho tính toán lượng tử cũng như thông tin lượng tử?</strong></p>
+<p>Từ quan điểm của một nhà vật lý hoặc kỹ sư phần cứng lo lắng về việc tiêu tán nhiệt, tin vui là, về nguyên tắc, có thể làm cho tính toán không bị tiêu tán năng lượng bằng cách làm cho nó khả nghịch, mặc dù trong thực tế, việc tiêu tán năng lượng là cần thiết cho sự ổn định của hệ thống và khả năng miễn nhiễm với nhiễu. Ở một cấp độ cơ bản hơn nữa, các ý tưởng dẫn đến tính toán khả nghịch cũng dẫn đến việc giải quyết một bài toán có từ một thế kỷ trước trong các nền tảng của vật lý, bài toán nổi tiếng về con quỷ Maxwell (Maxwell’s demon). Câu chuyện về bài toán này và cách giải quyết của nó được phác thảo trong Hộp 3.5 ở trang 162. Từ quan điểm của một nhà khoa học máy tính, tính toán khả nghịch xác thực việc sử dụng các phần tử không khả nghịch trong các mô hình tính toán như máy Turing (vì sử dụng chúng hay không đều cho ra các mô hình tương đương về mặt đa thức). Hơn nữa, vì thế giới vật lý về cơ bản là khả nghịch, người ta có thể lập luận rằng các lớp độ phức tạp dựa trên các mô hình tính toán khả nghịch là tự nhiên hơn các lớp độ phức tạp dựa trên các mô hình không khả nghịch, một điểm được xem xét lại trong Bài toán 3.9 và phần ‘Lịch sử và đọc thêm’. Từ quan điểm của tính toán lượng tử và thông tin lượng tử, tính toán khả nghịch là cực kỳ quan trọng. Để khai thác toàn bộ sức mạnh của tính toán lượng tử, bất kỳم subroutine cổ điển nào trong một phép tính lượng tử đều phải được thực hiện một cách khả nghịch và không tạo ra các bit rác phụ thuộc vào đầu vào cổ điển.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 3.32: (Từ Fredkin đến Toffoli và quay lại)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Số lượng cổng Fredkin nhỏ nhất ần thiết để mô phỏng một cổng Toffoli là bao nhiêu? Số lượng cổng Toffoli nhỏ nhất cần thiết để mô phỏng một cổng Fredkin là bao nhiêu?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 3.5: Con quỷ của Maxwell (Maxwell’s demon)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Các định luật nhiệt động lực học chi phối lượng công có thể được thực hiện bởi một hệ thống vật lý ở trạng thái cân bằng nhiệt động. Một trong những định luật đó, định luật thứ hai của nhiệt động lực học, phát biểu rằng entropy trong một hệ thống đóng không bao giờ có thể giảm. Vào năm 1871, James Clerk Maxwell đã đề xuất sự tồn tại của một cỗ máy dường như vi phạm định luật này. Ông hình dung ra một “con quỷ” nhỏ bé, giống như con quỷ được hiển thị trong hình vẽ dưới đây, thứ có thể làm giảm entropy của một xilanh khí ban đầu ở trạng thái cân bằng bằng cách tách riêng các phân tử chuyển động nhanh và chuyển động chậm vào hai nửa của xilanh. Con quỷ này sẽ ngồi ở một cánh cửa nhỏ tại vách ngăn ở giữa. Khi một phân tử chuyển động nhanh tiếp cận từ phía bên trái, con quỷ mở cửa giữa các vách ngăn, cho phép phân tử đi qua, và sau đó đóng cửa lại. Bằng cách làm điều này nhiều lần, tổng entropy của xilanh có thể bị giảm đi, làm sụp đổ rõ rệt định luật thứ hai của nhiệt động lực học.</p>
+<p><img src="../../img/maxwelldemon.png" class="img-fluid"></p>
+<p>Cách giải quyết cho nghịch lý con quỷ của Maxwell nằm ở chỗ con quỷ phải thực hiện các phép đo (measurements) lên các phân tử di chuyển giữa các vách ngăn, nhằm xác định vận tốc của chúng. Kết quả của phép đo này phải được lưu trữ trong bộ nhớ của con quỷ. Bởi vì bất kỳ bộ nhớ nào cũng là hữu hạn, con quỷ cuối cùng phải bắt đầu xóa thông tin khỏi bộ nhớ của nó, để có không gian cho các kết quả đo lường mới. Theo nguyên lý Landauer, hành động xóa thông tin này làm tăng tổng entropy của toàn bộ hệ thống kết hợp — gồm con quỷ, xilanh khí và môi trường xung quanh chúng. Thực tế, một phân tích hoàn chỉnh cho thấy nguyên lý Landauer ngụ ý rằng entropy của hệ thống kết hợp tăng lên ít nhất bằng mức mà entropy của hệ thống kết hợp bị giảm đi bởi các hành động của con quỷ, từ đó đảm bảo rằng định luật thứ hai của nhiệt động lực học vẫn được tuân thủ.</p>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
