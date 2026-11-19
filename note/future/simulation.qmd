@@ -1,0 +1,99 @@
+---
+title: "Simulations Quantum"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Phương pháp mô phỏng Hamiltonian là tập hợp các kỹ thuật tính toán sử dụng hàm hoặc toán tử Hamiltonian để mô phỏng sự tiến hóa theo thời gian hoặc lấy mẫu phân bố xác suất của một hệ thống.
+
+Cơ chế: xấp xỉ toán tử tiến hóa thời gian $e^{-iHt}$ (hoặc $e^{-iHt/\hbar}$) thông qua các cổng lượng tử cơ bản.
+
+# 0
+
+Tại sao lại cần xấp xỉ Hamiltonian làm gì?
+
+Hãy đọc chương simulation để có những đáp án chi tiết, nhưng ở đây, chúng ta sẽ nói ngắn gọn rằng:
+
+> "Phải thiết kế công thức Hamiltonian (dùng để mô phỏng sự tiến hóa, tiền đề 2 của Quantum Mechanics), sao cho tối ưu sai số, tối ưu tài nguyên."
+
+Việc dùng phương trình Schrogainder 
+
+## Trotter-Suzuki
+
+# 1
+
+## MPF - Multi-Product Formulas
+
+Đây là một bản nâng cấp trực tiếp của trường phái Trotter-Suzuki.
+
+* **Cách hoạt động:** Thay vì dùng một chuỗi sản phẩn Trotter duy nhất, MPF kết hợp tuyến tính nhiều chuỗi Trotter có độ dài bước khác nhau để triệu tiêu các số hạng sai số bậc cao.
+
+* **Bản chất:** Nó là thuật toán xác định - deterministic, không dùng ancilla qubit, giúp làm mịn sai số của Trotter mà không cần mạch quá sâu như Trotter bậc cao truyền thống.
+
+* Để giảm sai số, thì các Trotter truyền thống phải tăng bậc, dẫn đến mạch lượng tử bị dài ra theo cấp số mũ một cách khủng khiếp. Thay vì dùng Trotter bậc cao, các nhà nghiên cứu hiện tại thích dùng MPF hơn, vì MPF cho độ chính xác tương đương nhưng tổng số lượng cổng thực tế cần chạy lại ít hơn đáng kể.
+
+## LCU / Taylor - Linear Combination of Unitary
+
+LCU là tổ hợp tuyến tính các toán tử Unitary.
+
+# 2
+
+## VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms
+
+VQS là tên gọi tổng quát của trường phái TDVQA (thuật toán biến phân thích nghi theo thời gian).
+
+TDVQA dành riêng cho NISQ khi số cổng lượng tử bị giói hạn do nhiễu.
+
+* **Cách hoạt động:** Thay vì dựng mạch lượng tử lớn mô phỏng chính xác toán tử tiến hóa, phương pháp này dùng một mạch biến phân với các tham số có thể tối ưu hóa. Các tham số này được cập nhật liên tục qua từng bước thời gian bằng máy tính cổ điển dựa trên nguyên lý biến phân McLachlan hoặc Dirac-Frenkel.
+
+## qDRIFT - Quantum Stochastic Drift
+
+* **Cách hoạt động:** Thuật toán không cố gắng mô phỏng tất cả các số hạng trong Hamiltonian ở mỗi bước thời gian. Thay vào đó, nó lấy mẫu ngẫu nhiên một số hạng dựa trên trọng số của số hạng đó.
+
+* **Ưu điểm:** Cực kỳ hiệu quả cho các hệ thống có số lượng tương tác rất lớn nhưng đóng góp năng lượng nhỏ, giúp mạch lượng tử ngắn hơn nhiều trong kỷ nguyên máy tính lượng tử có nhiễu - NISQ.
+
+* $1/\epsilon^2$.
+
+## qFLO - Quantum Stochastic Drift with Flow Extrapolation
+
+Là thuật toán mô phỏng tiến hóa thuoiwf gian dạng ngẫu nhiên hóa.
+
+* **Bối cảnh:** Thuật toán **qDRIFT** truyền thống lấy mẫu ngẫu nhiên các số hạng Hamiltonian để rút ngắn mạch lượng tử, nhưng nó có điểm yếu là sai số giảm rất chậm, theo kiểu lũy thừa ngược.
+
+* **Cách hoạt động:** Được giới thiệu bởi các nhà nghiên cứu vào cuối năm 2024, qFLO bổ sung kỹ thuật nội suy toán học (Richardson extrapolation) vào qDRIFT. Bằng cách thay đổi kích thước bước thời gian, nó tạo ra một dòng chảy - flow hướng về giới hạn bước thời gian bằng 0.
+
+* **Ưu điểm:** Nó giúp độ sâu mạch lượng tử được cải thiện theo hàm mũ đối với sai số $\log(1/\epsilon)$ thay vì tỉ lệ nghịch bậc hai $1/\epsilon^2$ như qDRIFT cũ. Đây là một bước tiến lớn giúp giữ nguyên ưu điểm mạch ngắn của toán ngẫu nhiên nhưng đạt độ chính xác của các thuật toán sửa lỗi dài hạn.
+
+## qFlow - Quantum Flow Algorithms
+
+Trường phái phân rã không gian Hilbert.
+
+* **Cách hoạt động:**  QFlow là một thuật toán lai (hybrid) được thiết kế riêng cho mô phỏng hóa học lượng tử. Thay vì nhồi nhét một bài toán Hamiltonian phân tử khổng lồ (cần hàng trăm qubit) vào máy tính, QFlow sử dụng máy tính cổ điển để chia nhỏ bài toán thành một chuỗi các không gian tương tác nhỏ hơn (gọi là active spaces). Máy tính cổ điển sẽ xây dựng các Hamiltonian hiệu dụng (effective Hamiltonians), sau đó đẩy sang mạch lượng tử siêu ngắn (chỉ cần khoảng 12 qubit) để tối ưu hóa bằng VQE.
+
+* qFlow phối hợp chặt chẽ với VQS/VQE để tối ưu sức mạnh của những máy tính lượng tử nhỏ bé hiện nay.
+
+# 3
+
+## Quantum Walk / Qubitization
+
+Phương pháp này chuyển đổi bài toán mô phỏng tiến hóa thời gian thành bài toán xây dựng một bước đi lượng tử.
+
+* **Cách hoạt động:** Từ toán tử Hamiltonian, người ta thiết kế một bước đi lượng tử (Quantum Walk operator) phản ảnh cẩu trúc ma trận của H. **Qubitization** chính là phiên bản chuẩn hóa tinh vi của phương pháp này, giúp cô lập không gian ma trận lượng tử thành các không gian con 2 chiều (SU(2)) để kiểm soát các eigenvalue.
+
+* **Ưu điểm:** Tiết kiệm số lượng ancilla qubit đáng kể so với LCU thuần túy, trong khi vẫn giữ nguyên độ chính xác cao.
+
+## QSP & QSVT - Quantum Signal Processing & Quantum Singular Value Transformation
+
+Đây là **phương pháp tối ưu nhất xét về mặt lý thuyết**, tức là, đạt giới hạn tiệm cận tốt nhất cho cả thời gian $t$ và sai số $\epsilon$.
+
+* **Cách hoạt động:** QSP/QSVT sử dụng một kỹ thuật gọi là *Block-encoding* (tức là, nhúng toán tử Hamiltonian vào một góc của ma trận Unitary lớn hơn). Sau đó, nó áp dụng các hàm đa thức trực tiếp lên các eigenvalue của khối ma trận đó thông qua các phép quay một qubit.
+
+* **Ưu điểm:** Độ phức tạp số cổng lượng tử tỷ lệ tuyến tính với thời gian $t$, và đạt tỷ lệ tối ưu dạng $\log(1/\epsilon)$ đối với sai số, vượt qua giới hạn của hệ số mũ trong Trotter.
+
+* Cả QSVT và LCU đều có độ chính xác lên tới $\log(1/\epsilon)$, nhưng LCU yêu cầu số lượng qubit phụ rất lớn và mạch rất phức tạp.

@@ -8,7 +8,7 @@
 
 <meta name="author" content="TgX.2">
 
-<title>Lời tựa – TgX.2</title>
+<title>Simulations Quantum – TgX.2</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -86,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/intro/afterword.html">Misc.</a></li><li class="breadcrumb-item"><a href="../../note/intro/preface.html">Lời tựa</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Future</a></li><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Simulations Quantum</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -119,13 +162,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Misc.</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
@@ -134,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lời tựa</span></a>
   </div>
 </li>
@@ -534,6 +577,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Future</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/simulation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -541,12 +601,29 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Mục lục fbài viết</h2>
+    <h2 id="toc-title">Mục lục bài viết</h2>
    
   <ul>
-  <li><a href="#lời-tựa" id="toc-lời-tựa" class="nav-link active" data-scroll-target="#lời-tựa">Lời tựa</a>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">0</a>
   <ul class="collapse">
-  <li><a href="#cấu-trúc-của-note" id="toc-cấu-trúc-của-note" class="nav-link" data-scroll-target="#cấu-trúc-của-note">Cấu trúc của note</a></li>
+  <li><a href="#trotter-suzuki" id="toc-trotter-suzuki" class="nav-link" data-scroll-target="#trotter-suzuki">Trotter-Suzuki</a></li>
+  </ul></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1</a>
+  <ul class="collapse">
+  <li><a href="#mpf---multi-product-formulas" id="toc-mpf---multi-product-formulas" class="nav-link" data-scroll-target="#mpf---multi-product-formulas">MPF - Multi-Product Formulas</a></li>
+  <li><a href="#lcu-taylor---linear-combination-of-unitary" id="toc-lcu-taylor---linear-combination-of-unitary" class="nav-link" data-scroll-target="#lcu-taylor---linear-combination-of-unitary">LCU / Taylor - Linear Combination of Unitary</a></li>
+  </ul></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2</a>
+  <ul class="collapse">
+  <li><a href="#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms" id="toc-vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms" class="nav-link" data-scroll-target="#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms">VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms</a></li>
+  <li><a href="#qdrift---quantum-stochastic-drift" id="toc-qdrift---quantum-stochastic-drift" class="nav-link" data-scroll-target="#qdrift---quantum-stochastic-drift">qDRIFT - Quantum Stochastic Drift</a></li>
+  <li><a href="#qflo---quantum-stochastic-drift-with-flow-extrapolation" id="toc-qflo---quantum-stochastic-drift-with-flow-extrapolation" class="nav-link" data-scroll-target="#qflo---quantum-stochastic-drift-with-flow-extrapolation">qFLO - Quantum Stochastic Drift with Flow Extrapolation</a></li>
+  <li><a href="#qflow---quantum-flow-algorithms" id="toc-qflow---quantum-flow-algorithms" class="nav-link" data-scroll-target="#qflow---quantum-flow-algorithms">qFlow - Quantum Flow Algorithms</a></li>
+  </ul></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">3</a>
+  <ul class="collapse">
+  <li><a href="#quantum-walk-qubitization" id="toc-quantum-walk-qubitization" class="nav-link" data-scroll-target="#quantum-walk-qubitization">Quantum Walk / Qubitization</a></li>
+  <li><a href="#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation" id="toc-qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation" class="nav-link" data-scroll-target="#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation">QSP &amp; QSVT - Quantum Signal Processing &amp; Quantum Singular Value Transformation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -554,9 +631,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/intro/afterword.html">Misc.</a></li><li class="breadcrumb-item"><a href="../../note/intro/preface.html">Lời tựa</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Future</a></li><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Simulations Quantum</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lời tựa</h1>
+<h1 class="title">Simulations Quantum</h1>
 </div>
 
 
@@ -579,17 +656,90 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lời-tựa" class="level1">
-<h1>Lời tựa</h1>
-<p>Cái note này giới thiệu những ý chính và kỹ thuật của lĩnh vực quantum computing. Tốc độ phát triển nhanh chóng trong lĩnh vực này và tính chất liên ngành của nó đã khiến những người mới khó có được cái nhìn tổng quan về các kỹ thuật và kết quả quan trọng nhất trong lĩnh vực này.</p>
-<p>Do đó, mục đích của cuốn sách này được chia làm hai phần.</p>
-<p>Thứ nhất, chúng tôi giới thiệu kiến thức nền tảng về khoa học máy tình, toán học và vật lý cần thiết để hiểu về quantum computation và quantum information. Nội dung này được trình bày ở mức độ dễ hiểu đối với độc giả có trình độ tối thiểu tương đương với một sinh viên cao học mới bắt đầu ở một hay nhiều lĩnh vực trong ba ngành học này, yêu cần quan trọng nhất là một độ giỏi toán nhất định, và khát khao tìm hiểu quantum computation và quantum information.</p>
-<p>Thứ hai, là phát triển chi tiết các kết quả trung tâm của QCQI. Nhờ việc nghiên cứu thấu đáo, người đọc sẽ xây dựng được hiểu biết thực hành về các công cụ và kết quả nền tảng của lĩnh vực đầy thú vị này, dù là một phần trong học vấn đại cương của mình, hay làm bước đệm cho nghiên cứu độc lập trong 2 lĩnh vực này.</p>
-<hr>
-<section id="cấu-trúc-của-note" class="level2">
-<h2 class="anchored" data-anchor-id="cấu-trúc-của-note">Cấu trúc của note</h2>
-<p>Phần I, cung cấp một cái nhìn tổng quan về các ý tưởng và kết quả chính của lĩnh vực QCQI, đồng thời xây dựng các kiến thức nền tảng về khoa học máy tính, toán học, và vật lý cần thiết để hiểu sâu về QCQI.</p>
-<p>Chương I là chương nhập môn, phác thảo sự phát triển lịch sử cùng các khái niệm cơ bản của lĩnh cực này, đồng thời điểm qua một số vấn đề mở quan trọng. Nội dung đã được cấu trúc để người vẫn có thể tiếp cận ngay cả khi không có nền tảng về khoa học máy tính hay vật lý. Các kiến thức nền tảng cần thiết để hiểu chi tiết hơn được phát triển chi tiết ở Chương 2 và Chương 3, lần lượt trình bày sâu về các khái niệm cơ bản của quantum mechanics và computer science.</p>
+<p>Phương pháp mô phỏng Hamiltonian là tập hợp các kỹ thuật tính toán sử dụng hàm hoặc toán tử Hamiltonian để mô phỏng sự tiến hóa theo thời gian hoặc lấy mẫu phân bố xác suất của một hệ thống.</p>
+<p>Cơ chế: xấp xỉ toán tử tiến hóa thời gian <span class="math inline">e^{-iHt}</span> (hoặc <span class="math inline">e^{-iHt/\hbar}</span>) thông qua các cổng lượng tử cơ bản.</p>
+<section id="section" class="level1">
+<h1>0</h1>
+<p>Tại sao lại cần xấp xỉ Hamiltonian làm gì?</p>
+<p>Hãy đọc chương simulation để có những đáp án chi tiết, nhưng ở đây, chúng ta sẽ nói ngắn gọn rằng:</p>
+<blockquote class="blockquote">
+<p>“Phải thiết kế công thức Hamiltonian (dùng để mô phỏng sự tiến hóa, tiền đề 2 của Quantum Mechanics), sao cho tối ưu sai số, tối ưu tài nguyên.”</p>
+</blockquote>
+<p>Việc dùng phương trình Schrogainder</p>
+<section id="trotter-suzuki" class="level2">
+<h2 class="anchored" data-anchor-id="trotter-suzuki">Trotter-Suzuki</h2>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1>1</h1>
+<section id="mpf---multi-product-formulas" class="level2">
+<h2 class="anchored" data-anchor-id="mpf---multi-product-formulas">MPF - Multi-Product Formulas</h2>
+<p>Đây là một bản nâng cấp trực tiếp của trường phái Trotter-Suzuki.</p>
+<ul>
+<li><p><strong>Cách hoạt động:</strong> Thay vì dùng một chuỗi sản phẩn Trotter duy nhất, MPF kết hợp tuyến tính nhiều chuỗi Trotter có độ dài bước khác nhau để triệu tiêu các số hạng sai số bậc cao.</p></li>
+<li><p><strong>Bản chất:</strong> Nó là thuật toán xác định - deterministic, không dùng ancilla qubit, giúp làm mịn sai số của Trotter mà không cần mạch quá sâu như Trotter bậc cao truyền thống.</p></li>
+<li><p>Để giảm sai số, thì các Trotter truyền thống phải tăng bậc, dẫn đến mạch lượng tử bị dài ra theo cấp số mũ một cách khủng khiếp. Thay vì dùng Trotter bậc cao, các nhà nghiên cứu hiện tại thích dùng MPF hơn, vì MPF cho độ chính xác tương đương nhưng tổng số lượng cổng thực tế cần chạy lại ít hơn đáng kể.</p></li>
+</ul>
+</section>
+<section id="lcu-taylor---linear-combination-of-unitary" class="level2">
+<h2 class="anchored" data-anchor-id="lcu-taylor---linear-combination-of-unitary">LCU / Taylor - Linear Combination of Unitary</h2>
+<p>LCU là tổ hợp tuyến tính các toán tử Unitary.</p>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1>2</h1>
+<section id="vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms">VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms</h2>
+<p>VQS là tên gọi tổng quát của trường phái TDVQA (thuật toán biến phân thích nghi theo thời gian).</p>
+<p>TDVQA dành riêng cho NISQ khi số cổng lượng tử bị giói hạn do nhiễu.</p>
+<ul>
+<li><strong>Cách hoạt động:</strong> Thay vì dựng mạch lượng tử lớn mô phỏng chính xác toán tử tiến hóa, phương pháp này dùng một mạch biến phân với các tham số có thể tối ưu hóa. Các tham số này được cập nhật liên tục qua từng bước thời gian bằng máy tính cổ điển dựa trên nguyên lý biến phân McLachlan hoặc Dirac-Frenkel.</li>
+</ul>
+</section>
+<section id="qdrift---quantum-stochastic-drift" class="level2">
+<h2 class="anchored" data-anchor-id="qdrift---quantum-stochastic-drift">qDRIFT - Quantum Stochastic Drift</h2>
+<ul>
+<li><p><strong>Cách hoạt động:</strong> Thuật toán không cố gắng mô phỏng tất cả các số hạng trong Hamiltonian ở mỗi bước thời gian. Thay vào đó, nó lấy mẫu ngẫu nhiên một số hạng dựa trên trọng số của số hạng đó.</p></li>
+<li><p><strong>Ưu điểm:</strong> Cực kỳ hiệu quả cho các hệ thống có số lượng tương tác rất lớn nhưng đóng góp năng lượng nhỏ, giúp mạch lượng tử ngắn hơn nhiều trong kỷ nguyên máy tính lượng tử có nhiễu - NISQ.</p></li>
+<li><p><span class="math inline">1/\epsilon^2</span>.</p></li>
+</ul>
+</section>
+<section id="qflo---quantum-stochastic-drift-with-flow-extrapolation" class="level2">
+<h2 class="anchored" data-anchor-id="qflo---quantum-stochastic-drift-with-flow-extrapolation">qFLO - Quantum Stochastic Drift with Flow Extrapolation</h2>
+<p>Là thuật toán mô phỏng tiến hóa thuoiwf gian dạng ngẫu nhiên hóa.</p>
+<ul>
+<li><p><strong>Bối cảnh:</strong> Thuật toán <strong>qDRIFT</strong> truyền thống lấy mẫu ngẫu nhiên các số hạng Hamiltonian để rút ngắn mạch lượng tử, nhưng nó có điểm yếu là sai số giảm rất chậm, theo kiểu lũy thừa ngược.</p></li>
+<li><p><strong>Cách hoạt động:</strong> Được giới thiệu bởi các nhà nghiên cứu vào cuối năm 2024, qFLO bổ sung kỹ thuật nội suy toán học (Richardson extrapolation) vào qDRIFT. Bằng cách thay đổi kích thước bước thời gian, nó tạo ra một dòng chảy - flow hướng về giới hạn bước thời gian bằng 0.</p></li>
+<li><p><strong>Ưu điểm:</strong> Nó giúp độ sâu mạch lượng tử được cải thiện theo hàm mũ đối với sai số <span class="math inline">\log(1/\epsilon)</span> thay vì tỉ lệ nghịch bậc hai <span class="math inline">1/\epsilon^2</span> như qDRIFT cũ. Đây là một bước tiến lớn giúp giữ nguyên ưu điểm mạch ngắn của toán ngẫu nhiên nhưng đạt độ chính xác của các thuật toán sửa lỗi dài hạn.</p></li>
+</ul>
+</section>
+<section id="qflow---quantum-flow-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="qflow---quantum-flow-algorithms">qFlow - Quantum Flow Algorithms</h2>
+<p>Trường phái phân rã không gian Hilbert.</p>
+<ul>
+<li><p><strong>Cách hoạt động:</strong> QFlow là một thuật toán lai (hybrid) được thiết kế riêng cho mô phỏng hóa học lượng tử. Thay vì nhồi nhét một bài toán Hamiltonian phân tử khổng lồ (cần hàng trăm qubit) vào máy tính, QFlow sử dụng máy tính cổ điển để chia nhỏ bài toán thành một chuỗi các không gian tương tác nhỏ hơn (gọi là active spaces). Máy tính cổ điển sẽ xây dựng các Hamiltonian hiệu dụng (effective Hamiltonians), sau đó đẩy sang mạch lượng tử siêu ngắn (chỉ cần khoảng 12 qubit) để tối ưu hóa bằng VQE.</p></li>
+<li><p>qFlow phối hợp chặt chẽ với VQS/VQE để tối ưu sức mạnh của những máy tính lượng tử nhỏ bé hiện nay.</p></li>
+</ul>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1>3</h1>
+<section id="quantum-walk-qubitization" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-walk-qubitization">Quantum Walk / Qubitization</h2>
+<p>Phương pháp này chuyển đổi bài toán mô phỏng tiến hóa thời gian thành bài toán xây dựng một bước đi lượng tử.</p>
+<ul>
+<li><p><strong>Cách hoạt động:</strong> Từ toán tử Hamiltonian, người ta thiết kế một bước đi lượng tử (Quantum Walk operator) phản ảnh cẩu trúc ma trận của H. <strong>Qubitization</strong> chính là phiên bản chuẩn hóa tinh vi của phương pháp này, giúp cô lập không gian ma trận lượng tử thành các không gian con 2 chiều (SU(2)) để kiểm soát các eigenvalue.</p></li>
+<li><p><strong>Ưu điểm:</strong> Tiết kiệm số lượng ancilla qubit đáng kể so với LCU thuần túy, trong khi vẫn giữ nguyên độ chính xác cao.</p></li>
+</ul>
+</section>
+<section id="qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation">QSP &amp; QSVT - Quantum Signal Processing &amp; Quantum Singular Value Transformation</h2>
+<p>Đây là <strong>phương pháp tối ưu nhất xét về mặt lý thuyết</strong>, tức là, đạt giới hạn tiệm cận tốt nhất cho cả thời gian <span class="math inline">t</span> và sai số <span class="math inline">\epsilon</span>.</p>
+<ul>
+<li><p><strong>Cách hoạt động:</strong> QSP/QSVT sử dụng một kỹ thuật gọi là <em>Block-encoding</em> (tức là, nhúng toán tử Hamiltonian vào một góc của ma trận Unitary lớn hơn). Sau đó, nó áp dụng các hàm đa thức trực tiếp lên các eigenvalue của khối ma trận đó thông qua các phép quay một qubit.</p></li>
+<li><p><strong>Ưu điểm:</strong> Độ phức tạp số cổng lượng tử tỷ lệ tuyến tính với thời gian <span class="math inline">t</span>, và đạt tỷ lệ tối ưu dạng <span class="math inline">\log(1/\epsilon)</span> đối với sai số, vượt qua giới hạn của hệ số mũ trong Trotter.</p></li>
+<li><p>Cả QSVT và LCU đều có độ chính xác lên tới <span class="math inline">\log(1/\epsilon)</span>, nhưng LCU yêu cầu số lượng qubit phụ rất lớn và mạch rất phức tạp.</p></li>
+</ul>
 
 
 </section>

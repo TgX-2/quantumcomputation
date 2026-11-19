@@ -65,7 +65,7 @@ trong đó:
 
 xem thêm ở [Near-integrable Product Formulas](../future/npf.qmd).
 
-**Quantum Stochastic Drift**
+**Quantum Stochastic Drift - qDRIFT**
 
 
 

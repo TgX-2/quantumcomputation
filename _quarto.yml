@@ -94,6 +94,11 @@ website:
           - note/outro/future.qmd
           - note/outro/questions.qmd
 
+      - section : "Future"
+        contents:
+          - note/future/simulation.qmd
+
+
     
 
 format:
