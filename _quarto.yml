@@ -13,6 +13,10 @@ website:
       - href: index.qmd
         text: READMEmd 
 
+      - section: "Bài báo nghiên cứu"
+        contents:
+          - file/index.qmd
+
       - section : "Misc."
         contents:
           - note/intro/afterword.qmd
@@ -106,6 +110,7 @@ website:
 format:
   html:
     theme: cosmo
+    page-navigation: true
     grid:
       body-width: 1000px
       margin-width: 160px

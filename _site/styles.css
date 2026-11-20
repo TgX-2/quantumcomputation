@@ -400,6 +400,146 @@ code {
   margin-bottom: 0;
 }
 
+.papers-hero {
+  position: relative;
+  overflow: hidden;
+  margin: -2rem calc(clamp(1.25rem, 4vw, 3rem) * -1) 2rem;
+  padding: clamp(2.4rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
+  border-radius: 1.2rem 1.2rem 0 0;
+  background:
+    radial-gradient(ellipse at 85% 12%, rgb(229 177 112 / 16%), transparent 34%),
+    linear-gradient(135deg, #402125, #632522 72%, #74352f);
+  color: #fffaf7;
+}
+
+.papers-hero .papers-eyebrow {
+  margin-bottom: 0.75rem;
+  color: #f2c98e;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.papers-hero h1 {
+  margin: 0 0 0.8rem;
+  color: #fff;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+}
+
+.papers-hero p {
+  max-width: 70ch;
+  margin: 0;
+  color: #f2e3dc;
+  font-size: 1.05rem;
+}
+
+.paper-card {
+  margin: 1rem 0;
+  padding: clamp(1.2rem, 3vw, 1.7rem);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background:
+    linear-gradient(115deg, rgb(244 230 226 / 55%), transparent 38%),
+    var(--surface);
+  box-shadow: 0 8px 24px rgb(72 38 32 / 5%);
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.paper-card:hover {
+  transform: translateY(-2px);
+  border-color: #c99a8f;
+  box-shadow: var(--shadow);
+}
+
+.paper-card > :last-child {
+  margin-bottom: 0;
+}
+
+.paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.8rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.paper-tag {
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.paper-year {
+  color: var(--muted);
+}
+
+.paper-card h3 {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.12rem, 2.2vw, 1.35rem);
+  letter-spacing: -0.02em;
+}
+
+.paper-card p {
+  color: var(--muted);
+}
+
+.paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.1rem;
+}
+
+.paper-button {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  color: var(--accent-strong);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.paper-button:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.paper-button.primary {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+  color: #fff;
+}
+
+.paper-button.primary:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.book-card {
+  background:
+    linear-gradient(115deg, rgb(229 177 112 / 16%), transparent 40%),
+    var(--surface);
+}
+
+#refs {
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+#refs div {
+  margin: 0.6rem 0;
+  padding-left: 0.35rem;
+}
+
 @media (max-width: 767px) {
   #quarto-content {
     padding-top: 0.75rem;
@@ -412,6 +552,11 @@ code {
 
   .home-hero {
     margin: -1.25rem -1.25rem 2rem;
+    border-radius: 0.9rem 0.9rem 0 0;
+  }
+
+  .papers-hero {
+    margin: -1.25rem -1.25rem 1.75rem;
     border-radius: 0.9rem 0.9rem 0 0;
   }
 

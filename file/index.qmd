@@ -1,0 +1,97 @@
+---
+title: "Bài báo nghiên cứu"
+subtitle: "Tuyển chọn tài liệu tham khảo về điện toán lượng tử"
+bibliography: references.bib
+csl: ieee.csl
+link-citations: true
+lang: en-US
+---
+
+::: {.papers-hero}
+
+<div class="papers-eyebrow">THƯ VIỆN · QUANTUM COMPUTATION</div>
+
+# Bài báo nghiên cứu
+
+Những công trình nền tảng và bài báo chọn lọc về biến đổi Fourier lượng tử, ước lượng pha và điện toán lượng tử chịu lỗi. Mỗi mục có bản PDF lưu trong thư mục tài liệu, kèm nguồn xuất bản để tiện tra cứu và trích dẫn.
+
+:::
+
+## Biến đổi Fourier lượng tử
+
+::: {.paper-card}
+<div class="paper-meta"><span class="paper-tag">QFT</span><span class="paper-year">1996 · Physical Review Letters</span></div>
+
+### Semiclassical Fourier Transform for Quantum Computation
+
+Robert B. Griffiths và Chi-Sheng Niu trình bày cách thực hiện biến đổi Fourier theo kiểu bán cổ điển, thay các cổng hai qubit bằng phép đo, điều khiển cổ điển và các cổng một qubit. Đây là một ý tưởng quan trọng để đơn giản hóa mạch lượng tử trong các thuật toán như Shor [@griffiths1996].
+
+<div class="paper-actions">
+[Đọc PDF](9511007v1.pdf){.paper-button .primary}
+[DOI ↗](https://doi.org/10.1103/PhysRevLett.76.3228){.paper-button}
+[arXiv ↗](https://arxiv.org/abs/quant-ph/9511007){.paper-button}
+</div>
+:::
+
+::: {.paper-card}
+<div class="paper-meta"><span class="paper-tag">QFT · T GATES</span><span class="paper-year">2020 · npj Quantum Information</span></div>
+
+### Approximate Quantum Fourier Transform with $O(n \log(n))$ T Gates
+
+Yunseong Nam, Yuan Su và Dmitri Maslov đề xuất cách giảm số cổng $T$ của QFT xấp xỉ xuống $O(n \log n)$, sử dụng phép đo, feedforward và trạng thái gradient pha có thể tái sử dụng [@nam2020].
+
+<div class="paper-actions">
+[Đọc PDF](1803.04933v2.pdf){.paper-button .primary}
+[DOI ↗](https://doi.org/10.1038/s41534-020-0257-5){.paper-button}
+[arXiv ↗](https://arxiv.org/abs/1803.04933){.paper-button}
+</div>
+:::
+
+## Ước lượng pha và trị riêng
+
+::: {.paper-card}
+<div class="paper-meta"><span class="paper-tag">QPE · NISQ</span><span class="paper-year">2024 · Physical Review A</span></div>
+
+### An Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm
+
+Junxu Li xây dựng phương pháp QPE lặp với các khoảng thời gian tiến hóa khác nhau để tăng độ chính xác của ước lượng pha, kể cả khi số qubit phụ trợ bị giới hạn [@li2024].
+
+<div class="paper-actions">
+[Đọc PDF](2402.14191v1.pdf){.paper-button .primary}
+[DOI ↗](https://doi.org/10.1103/PhysRevA.109.032606){.paper-button}
+[arXiv ↗](https://arxiv.org/abs/2402.14191){.paper-button}
+</div>
+:::
+
+::: {.paper-card}
+<div class="paper-meta"><span class="paper-tag">QPE · FAULT-TOLERANT</span><span class="paper-year">2023 · Quantum</span></div>
+
+### Simultaneous Estimation of Multiple Eigenvalues with Short-Depth Quantum Circuit on Early Fault-Tolerant Quantum Computers
+
+Zhiyan Ding và Lin Lin giới thiệu phương pháp MM-QCELS để ước lượng đồng thời nhiều trị riêng bằng các mạch lượng tử độ sâu ngắn, hướng tới các máy tính lượng tử chịu lỗi thế hệ đầu [@ding2023].
+
+<div class="paper-actions">
+[Đọc PDF](2303.05714v4.pdf){.paper-button .primary}
+[DOI ↗](https://doi.org/10.22331/q-2023-10-11-1136){.paper-button}
+[arXiv ↗](https://arxiv.org/abs/2303.05714){.paper-button}
+</div>
+:::
+
+## Sách nền tảng
+
+::: {.paper-card .book-card}
+<div class="paper-meta"><span class="paper-tag">SÁCH THAM KHẢO</span><span class="paper-year">2010 · Cambridge University Press</span></div>
+
+### Quantum Computation and Quantum Information
+
+Giáo trình kinh điển của Michael A. Nielsen và Isaac L. Chuang, bản kỷ niệm 10 năm; nền tảng cho các ghi chú về điện toán lượng tử trên trang này [@nielsen2010].
+
+<div class="paper-actions">
+[Đọc PDF](quantum-computation-and-quantum-information-nielsen-chuang.pdf){.paper-button .primary}
+</div>
+:::
+
+## Tài liệu tham khảo
+
+::: {#refs}
+:::

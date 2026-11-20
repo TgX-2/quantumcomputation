@@ -49,19 +49,32 @@ Trong chương này, chúng ta phát triển biến đổi Fourier lượng tử
 
 * Tối ưu chi phí cổng $T$ bằng Phase Gradient State: Trong kiến trúc chịu lỗi (FTQC), các cổng quay góc siêu nhỏ $R_k = R_z(2\pi / 2^k)$ cực kỳ đắt đỏ vì phải tổng hợp xấp xỉ từ hàng chục cổng $T$. Thay vì xoay trực tiếp, các thiết kế hiện đại (Nam và cộng sự; Gidney) chuẩn bị sẵn một thanh ghi xúc tác gradient pha (tái sử dụng được cho toàn bộ thuật toán) và biến phép QFT thành các phép cộng lượng tử thông thường, ép chi phí cổng $T$ xuống mức $O(n \log n)$ hoặc $O(n)$.
 
+[Semiclassical Fourier Transform for Quantum Computation](../../file/9511007v1.pdf)
+
+[Approximate Quantum Fourier Transform with $O(nlog(n))$ T gates](../../file/1803.04933v2.pdf)
+
+
 2. Ước lượng pha lượng tử — QPE (Mục 5.2)
 
 Mạch QPE chuẩn trong sách đòi hỏi duy trì tính kết hợp xuyên suốt chuỗi $C\text{-}U^{2^k}$ rất sâu và kết thúc bằng khối $\text{QFT}^\dagger$ đa qubit:
 
-Iterative QPE (IQPE / Kitaev QPE): Trở thành tiêu chuẩn thực hành nhờ chỉ dùng 1 qubit đếm duy nhất, đo lặp lại từng bit của pha $\varphi$ từ bit có trọng số thấp nhất lên cao nhất và dùng phản hồi cổ điển để trừ phần dư ở mỗi vòng lặp.
+* Iterative QPE (IQPE / Kitaev QPE): Trở thành tiêu chuẩn thực hành nhờ chỉ dùng 1 qubit đếm duy nhất, đo lặp lại từng bit của pha $\varphi$ từ bit có trọng số thấp nhất lên cao nhất và dùng phản hồi cổ điển để trừ phần dư ở mỗi vòng lặp.
 
-Thế hệ Post-QPE cho kỷ nguyên Early Fault-Tolerant (2020–2026): Khi phần cứng chưa đủ chịu lỗi để chạy một mạch $C\text{-}U^{2^k}$ quá dài, các thuật toán mới như QCELS (Quantum Complex Exponential Least Squares), QPE thống kê của Lin–Tong, và lọc phổ dựa trên QSVT chia bài toán thành nhiều mạch tiến hóa thời gian ngắn $e^{-iHt}$ độc lập, sau đó dùng xử lý tín hiệu Fourier cổ điển (khớp hàm mũ phức) để trích xuất trị riêng năng lượng — loại bỏ hoàn toàn khối $\text{QFT}^\dagger$ lượng tử và chịu được nhiễu lớn hơn nhiều.
+* Thế hệ Post-QPE cho kỷ nguyên Early Fault-Tolerant (2020–2026): Khi phần cứng chưa đủ chịu lỗi để chạy một mạch $C\text{-}U^{2^k}$ quá dài, các thuật toán mới như QCELS (Quantum Complex Exponential Least Squares), QPE thống kê của Lin–Tong, và lọc phổ dựa trên QSVT chia bài toán thành nhiều mạch tiến hóa thời gian ngắn $e^{-iHt}$ độc lập, sau đó dùng xử lý tín hiệu Fourier cổ điển (khớp hàm mũ phức) để trích xuất trị riêng năng lượng — loại bỏ hoàn toàn khối $\text{QFT}^\dagger$ lượng tử và chịu được nhiễu lớn hơn nhiều.
+
+[An Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm (pdf)](../../file/2402.14191v1.pdf)
+
+[An Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm (web)](https://arxiv.org/html/2402.14191v1)
+
+[Kitaev’s Phase Estimation — QPE algorithms](https://medium.com/quantum-untangled/kitaevs-phase-estimation-qpe-algorithms-b1cc6a1c9cab)
+
+[Simultaneous estimation of multiple eigenvalues with short-depth quantum circuit on early fault-tolerant quantum computers](../../file/2303.05714v4.pdf)
 
 3. Thuật toán Shor: Tìm bậc, Logarit rời rạc & Phân tích thừa số (Mục 5.3)
 
 Cuốn sách trình bày phép lũy thừa mô-đun $a^x \bmod N$ với chi phí $O(n^3)$ cổng và hậu xử lý bằng thuật toán liên phân số (continued fractions):
 
-Đột phá độ phức tạp của Oded Regev (2023): Sau gần 30 năm, Regev lần đầu tiên phá vỡ rào cản $O(n^2)$ phép nhân của Shor bằng cách sử dụng QFT đa chiều kết hợp với các thuật toán rút gọn mạng (lattice reduction), giảm số phép nhân lượng tử xuống còn $O(n^{3/2})$ (đánh đổi bằng việc tăng số qubit bộ nhớ — sau đó tiếp tục được Ragavan và Vaikuntanathan tối ưu giảm không gian lưu trữ).
+* Đột phá độ phức tạp của Oded Regev (2023): Sau gần 30 năm, Regev lần đầu tiên phá vỡ rào cản $O(n^2)$ phép nhân của Shor bằng cách sử dụng QFT đa chiều kết hợp với các thuật toán rút gọn mạng (lattice reduction), giảm số phép nhân lượng tử xuống còn $O(n^{3/2})$ (đánh đổi bằng việc tăng số qubit bộ nhớ — sau đó tiếp tục được Ragavan và Vaikuntanathan tối ưu giảm không gian lưu trữ).
 
 Tối ưu hóa kiến trúc và hậu xử lý (Ekerå–Håstad & Gidney):
 
@@ -73,9 +86,9 @@ Tối ưu hóa kiến trúc và hậu xử lý (Ekerå–Håstad & Gidney):
 
 Ở cuối Chương 5, nhóm tác giả đặt kỳ vọng lớn vào việc mở rộng QFT cho các nhóm không giao hoán (non-Abelian HSP) để giải hai bài toán trọng tâm là Đẳng cấu đồ thị và Mật mã mạng:
 
-Nhóm đối xứng $S_n$ (Graph Isomorphism): Giới lý thuyết đã chứng minh các định lý giới hạn (Hallgren, Moore, Russell, Schulman) cho thấy phép lấy mẫu Fourier chuẩn trên $S_n$ không thể giải hiệu quả bài toán này; đồng thời thuật toán cổ điển chuẩn đa thức của László Babai (2015) đã giải quyết bài toán đẳng cấu đồ thị trên máy tính thông thường.
+* Nhóm đối xứng $S_n$ (Graph Isomorphism): Giới lý thuyết đã chứng minh các định lý giới hạn (Hallgren, Moore, Russell, Schulman) cho thấy phép lấy mẫu Fourier chuẩn trên $S_n$ không thể giải hiệu quả bài toán này; đồng thời thuật toán cổ điển chuẩn đa thức của László Babai (2015) đã giải quyết bài toán đẳng cấu đồ thị trên máy tính thông thường.
 
-Nhóm nhị diện $D_n$ (Bài toán vectơ ngắn nhất trên mạng — SVP): Thuật toán sàng lượng tử nổi tiếng nhất của Kuperberg chỉ đạt độ phức tạp dưới hàm mũ $2^{O(\sqrt{n})}$ (vẫn không giải được trong thời gian đa thức). Chính sự bế tắc của HSP trên nhóm nhị diện này là cơ sở bảo chứng an toàn để NIST chuẩn hóa Mật mã hậu lượng tử dựa trên mạng (ML-KEM / Kyber, ML-DSA / Dilithium).
+* Nhóm nhị diện $D_n$ (Bài toán vectơ ngắn nhất trên mạng — SVP): Thuật toán sàng lượng tử nổi tiếng nhất của Kuperberg chỉ đạt độ phức tạp dưới hàm mũ $2^{O(\sqrt{n})}$ (vẫn không giải được trong thời gian đa thức). Chính sự bế tắc của HSP trên nhóm nhị diện này là cơ sở bảo chứng an toàn để NIST chuẩn hóa Mật mã hậu lượng tử dựa trên mạng (ML-KEM / Kyber, ML-DSA / Dilithium).
 
 Bảng đối chiếu Chương 5 (2000 vs. Hiện đại)
 

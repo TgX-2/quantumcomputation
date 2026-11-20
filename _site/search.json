@@ -1,126 +1,5 @@
 [
   {
-    "objectID": "note/future/simulation.html",
-    "href": "note/future/simulation.html",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Phương pháp mô phỏng Hamiltonian là tập hợp các kỹ thuật tính toán sử dụng hàm hoặc toán tử Hamiltonian để mô phỏng sự tiến hóa theo thời gian hoặc lấy mẫu phân bố xác suất của một hệ thống.\nCơ chế: xấp xỉ toán tử tiến hóa thời gian e^{-iHt} (hoặc e^{-iHt/\\hbar}) thông qua các cổng lượng tử cơ bản.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#trotter-suzuki",
-    "href": "note/future/simulation.html#trotter-suzuki",
-    "title": "Simulations Quantum",
-    "section": "Trotter-Suzuki",
-    "text": "Trotter-Suzuki",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#mpf---multi-product-formulas",
-    "href": "note/future/simulation.html#mpf---multi-product-formulas",
-    "title": "Simulations Quantum",
-    "section": "MPF - Multi-Product Formulas",
-    "text": "MPF - Multi-Product Formulas\nĐây là một bản nâng cấp trực tiếp của trường phái Trotter-Suzuki.\n\nCách hoạt động: Thay vì dùng một chuỗi sản phẩn Trotter duy nhất, MPF kết hợp tuyến tính nhiều chuỗi Trotter có độ dài bước khác nhau để triệu tiêu các số hạng sai số bậc cao.\nBản chất: Nó là thuật toán xác định - deterministic, không dùng ancilla qubit, giúp làm mịn sai số của Trotter mà không cần mạch quá sâu như Trotter bậc cao truyền thống.\nĐể giảm sai số, thì các Trotter truyền thống phải tăng bậc, dẫn đến mạch lượng tử bị dài ra theo cấp số mũ một cách khủng khiếp. Thay vì dùng Trotter bậc cao, các nhà nghiên cứu hiện tại thích dùng MPF hơn, vì MPF cho độ chính xác tương đương nhưng tổng số lượng cổng thực tế cần chạy lại ít hơn đáng kể.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#lcu-taylor---linear-combination-of-unitary",
-    "href": "note/future/simulation.html#lcu-taylor---linear-combination-of-unitary",
-    "title": "Simulations Quantum",
-    "section": "LCU / Taylor - Linear Combination of Unitary",
-    "text": "LCU / Taylor - Linear Combination of Unitary\nLCU là tổ hợp tuyến tính các toán tử Unitary.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms",
-    "href": "note/future/simulation.html#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms",
-    "title": "Simulations Quantum",
-    "section": "VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms",
-    "text": "VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms\nVQS là tên gọi tổng quát của trường phái TDVQA (thuật toán biến phân thích nghi theo thời gian).\nTDVQA dành riêng cho NISQ khi số cổng lượng tử bị giói hạn do nhiễu.\n\nCách hoạt động: Thay vì dựng mạch lượng tử lớn mô phỏng chính xác toán tử tiến hóa, phương pháp này dùng một mạch biến phân với các tham số có thể tối ưu hóa. Các tham số này được cập nhật liên tục qua từng bước thời gian bằng máy tính cổ điển dựa trên nguyên lý biến phân McLachlan hoặc Dirac-Frenkel.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#qdrift---quantum-stochastic-drift",
-    "href": "note/future/simulation.html#qdrift---quantum-stochastic-drift",
-    "title": "Simulations Quantum",
-    "section": "qDRIFT - Quantum Stochastic Drift",
-    "text": "qDRIFT - Quantum Stochastic Drift\n\nCách hoạt động: Thuật toán không cố gắng mô phỏng tất cả các số hạng trong Hamiltonian ở mỗi bước thời gian. Thay vào đó, nó lấy mẫu ngẫu nhiên một số hạng dựa trên trọng số của số hạng đó.\nƯu điểm: Cực kỳ hiệu quả cho các hệ thống có số lượng tương tác rất lớn nhưng đóng góp năng lượng nhỏ, giúp mạch lượng tử ngắn hơn nhiều trong kỷ nguyên máy tính lượng tử có nhiễu - NISQ.\n1/\\epsilon^2.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#qflo---quantum-stochastic-drift-with-flow-extrapolation",
-    "href": "note/future/simulation.html#qflo---quantum-stochastic-drift-with-flow-extrapolation",
-    "title": "Simulations Quantum",
-    "section": "qFLO - Quantum Stochastic Drift with Flow Extrapolation",
-    "text": "qFLO - Quantum Stochastic Drift with Flow Extrapolation\nLà thuật toán mô phỏng tiến hóa thuoiwf gian dạng ngẫu nhiên hóa.\n\nBối cảnh: Thuật toán qDRIFT truyền thống lấy mẫu ngẫu nhiên các số hạng Hamiltonian để rút ngắn mạch lượng tử, nhưng nó có điểm yếu là sai số giảm rất chậm, theo kiểu lũy thừa ngược.\nCách hoạt động: Được giới thiệu bởi các nhà nghiên cứu vào cuối năm 2024, qFLO bổ sung kỹ thuật nội suy toán học (Richardson extrapolation) vào qDRIFT. Bằng cách thay đổi kích thước bước thời gian, nó tạo ra một dòng chảy - flow hướng về giới hạn bước thời gian bằng 0.\nƯu điểm: Nó giúp độ sâu mạch lượng tử được cải thiện theo hàm mũ đối với sai số \\log(1/\\epsilon) thay vì tỉ lệ nghịch bậc hai 1/\\epsilon^2 như qDRIFT cũ. Đây là một bước tiến lớn giúp giữ nguyên ưu điểm mạch ngắn của toán ngẫu nhiên nhưng đạt độ chính xác của các thuật toán sửa lỗi dài hạn.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#qflow---quantum-flow-algorithms",
-    "href": "note/future/simulation.html#qflow---quantum-flow-algorithms",
-    "title": "Simulations Quantum",
-    "section": "qFlow - Quantum Flow Algorithms",
-    "text": "qFlow - Quantum Flow Algorithms\nTrường phái phân rã không gian Hilbert.\n\nCách hoạt động: QFlow là một thuật toán lai (hybrid) được thiết kế riêng cho mô phỏng hóa học lượng tử. Thay vì nhồi nhét một bài toán Hamiltonian phân tử khổng lồ (cần hàng trăm qubit) vào máy tính, QFlow sử dụng máy tính cổ điển để chia nhỏ bài toán thành một chuỗi các không gian tương tác nhỏ hơn (gọi là active spaces). Máy tính cổ điển sẽ xây dựng các Hamiltonian hiệu dụng (effective Hamiltonians), sau đó đẩy sang mạch lượng tử siêu ngắn (chỉ cần khoảng 12 qubit) để tối ưu hóa bằng VQE.\nqFlow phối hợp chặt chẽ với VQS/VQE để tối ưu sức mạnh của những máy tính lượng tử nhỏ bé hiện nay.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#quantum-walk-qubitization",
-    "href": "note/future/simulation.html#quantum-walk-qubitization",
-    "title": "Simulations Quantum",
-    "section": "Quantum Walk / Qubitization",
-    "text": "Quantum Walk / Qubitization\nPhương pháp này chuyển đổi bài toán mô phỏng tiến hóa thời gian thành bài toán xây dựng một bước đi lượng tử.\n\nCách hoạt động: Từ toán tử Hamiltonian, người ta thiết kế một bước đi lượng tử (Quantum Walk operator) phản ảnh cẩu trúc ma trận của H. Qubitization chính là phiên bản chuẩn hóa tinh vi của phương pháp này, giúp cô lập không gian ma trận lượng tử thành các không gian con 2 chiều (SU(2)) để kiểm soát các eigenvalue.\nƯu điểm: Tiết kiệm số lượng ancilla qubit đáng kể so với LCU thuần túy, trong khi vẫn giữ nguyên độ chính xác cao.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/simulation.html#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation",
-    "href": "note/future/simulation.html#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation",
-    "title": "Simulations Quantum",
-    "section": "QSP & QSVT - Quantum Signal Processing & Quantum Singular Value Transformation",
-    "text": "QSP & QSVT - Quantum Signal Processing & Quantum Singular Value Transformation\nĐây là phương pháp tối ưu nhất xét về mặt lý thuyết, tức là, đạt giới hạn tiệm cận tốt nhất cho cả thời gian t và sai số \\epsilon.\n\nCách hoạt động: QSP/QSVT sử dụng một kỹ thuật gọi là Block-encoding (tức là, nhúng toán tử Hamiltonian vào một góc của ma trận Unitary lớn hơn). Sau đó, nó áp dụng các hàm đa thức trực tiếp lên các eigenvalue của khối ma trận đó thông qua các phép quay một qubit.\nƯu điểm: Độ phức tạp số cổng lượng tử tỷ lệ tuyến tính với thời gian t, và đạt tỷ lệ tối ưu dạng \\log(1/\\epsilon) đối với sai số, vượt qua giới hạn của hệ số mũ trong Trotter.\nCả QSVT và LCU đều có độ chính xác lên tới \\log(1/\\epsilon), nhưng LCU yêu cầu số lượng qubit phụ rất lớn và mạch rất phức tạp.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html",
-    "href": "note/future/directions.html",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Đây là bài toán kinh điển nhất nhưng vẫn chưa có lời giải trọn vẹn do hiện tượng vướng víu lượng tử tầm xa làm vô hiệu hóa các phương pháp cổ điển như DMRG hay Quantum Monte Carlo:\n\nCơ chế siêu dẫn nhiệt độ cao: Mô phỏng mô hình Fermi-Hubbard 2D và 3D với kích thước mạng lớn để kiểm chứng sự hình thành cặp Cooper và các pha cạnh tranh (như pha giả khe - pseudogap hay sọc điện tích).\nChất lỏng spin lượng tử (Quantum Spin Liquids): Khảo sát các mạng hình học bất mãn (như mạng Kagome) nơi thăng giáng lượng tử ngăn cản hệ đóng băng thành trật tự từ ngay cả ở 0\\text{ K}, sinh ra các kích thích chuẩn hạt phân mảnh (anyon).\nĐộng lực học ngoài cân bằng (Non-equilibrium Dynamics): Nghiên cứu sự nhiệt hóa lượng tử (giả thuyết ETH), sự phá vỡ tính ergodic trong Khu trú hóa đa hạt (Many-Body Localization - MBL), vết sẹo lượng tử đa hạt (Quantum Many-Body Scars), và chuyển pha lượng tử động lực học (DQPT) sau cú sốc tham số (quantum quench).\n\n\n\n\nTrên máy tính cổ điển, phương pháp Lattice QCD phải dùng thời gian ảo (Euclidean time) để lấy mẫu Monte Carlo, nhưng cách này thất bại hoàn toàn khi mô phỏng thời gian thực hoặc mật độ baryon cao do bài toán dấu (fermion sign problem). Máy tính lượng tử mở ra hướng tiếp cận trực tiếp:\n\nMô phỏng thời gian thực của QED và QCD: Khảo sát động lực học va chạm hạt nặng, sự sinh cặp hạt – phản hạt (cơ chế Schwinger), sự giam cầm quark (confinement) và đứt gãy dây thông lượng (string breaking) trên các mô hình chuẩn U(1), SU(2), và SU(3).\nBảo vệ đối xứng chuẩn (Gauge Invariance Protection): Khi chạy trên phần cứng có nhiễu hoặc xấp xỉ Trotter, trạng thái hệ dễ bị trôi ra khỏi không gian con vật lý thỏa mãn định luật Gauss (\\hat{G}_x \\vert{}\\psi\\rangle = 0). Các nghiên cứu tập trung vào việc thêm số hạng phạt (penalty terms) hoặc thiết kế các cổng bảo toàn đối xứng tự nhiên.\n\n\n\n\nXúc tác sinh học và vật liệu mới: Tính toán chính xác năng lượng trạng thái cơ bản của các hệ chứa kim loại chuyển tiếp có độ tương quan điện tử cực mạnh — tiêu biểu là cụm FeMo-co (enzyme cố định đạm nitrogenase) hay vật liệu bắt giữ carbon, nơi lý thuyết phiếm hàm mật độ (DFT) cổ điển cho sai số lớn.\nĐộng lực học phi đoạn nhiệt (Non-adiabatic Dynamics): Mô phỏng trực tiếp sự chuyển động đồng thời của cả hạt nhân và electron (vượt ra ngoài xấp xỉ Born-Oppenheimer) quanh các giao điểm nón (conical intersections) để hiểu cơ chế quang hợp, thị giác và phản ứng quang hóa.\n\n\n\nMọi hệ vật lý thực tế đều tương tác với môi trường, không tiến hóa thuần túy theo phương trình Schrödinger mà tuân theo phương trình chủ Lindblad:\n\n\\frac{d\\rho}{dt} = -i[H, \\rho] + \\sum_k \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)\n\nNghiên cứu cách thiết kế thuật toán lượng tử mô phỏng biến đổi không unita (non-unitary evolution) để khảo sát quá trình truyền năng lượng hiệu suất cao trong phức hợp sinh học (như phức hợp FMO), sự chuyển pha tiêu tán, và kỹ thuật dùng chính môi trường để điều khiển trạng thái (dissipative state engineering).\n\n\n\nKhuếch tán thông tin & OTOC: Đo lường tốc độ lan truyền và xáo trộn thông tin lượng tử thông qua hàm tương quan nghịch thời gian (Out-of-Time-Order Correlators — OTOC) và độ phức tạp Krylov (Krylov complexity).\nMô hình SYK & Đối ngẫu AdS/CFT: Mô phỏng mô hình Sachdev-Ye-Kitaev (SYK) (hệ fermion tương tác ngẫu nhiên có tính hỗn loạn cực đại, đối ngẫu toàn ảnh với lỗ đen trong không gian AdS_2) để kiểm chứng các hiệu ứng hấp dẫn lượng tử như giao thức dịch chuyển qua lỗ sâu đục (traversable wormhole teleportation) trong phòng thí nghiệm.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
     "objectID": "note/quantumsearchalgorithms/index.html",
     "href": "note/quantumsearchalgorithms/index.html",
     "title": "0 Quantum search algorithms",
@@ -1067,11 +946,317 @@
     ]
   },
   {
+    "objectID": "note/future/simulation.html",
+    "href": "note/future/simulation.html",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Phương pháp mô phỏng Hamiltonian là tập hợp các kỹ thuật tính toán sử dụng hàm hoặc toán tử Hamiltonian để mô phỏng sự tiến hóa theo thời gian hoặc lấy mẫu phân bố xác suất của một hệ thống.\nCơ chế: xấp xỉ toán tử tiến hóa thời gian e^{-iHt} (hoặc e^{-iHt/\\hbar}) thông qua các cổng lượng tử cơ bản.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#trotter-suzuki",
+    "href": "note/future/simulation.html#trotter-suzuki",
+    "title": "Simulations Quantum",
+    "section": "Trotter-Suzuki",
+    "text": "Trotter-Suzuki",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#mpf---multi-product-formulas",
+    "href": "note/future/simulation.html#mpf---multi-product-formulas",
+    "title": "Simulations Quantum",
+    "section": "MPF - Multi-Product Formulas",
+    "text": "MPF - Multi-Product Formulas\nĐây là một bản nâng cấp trực tiếp của trường phái Trotter-Suzuki.\n\nCách hoạt động: Thay vì dùng một chuỗi sản phẩn Trotter duy nhất, MPF kết hợp tuyến tính nhiều chuỗi Trotter có độ dài bước khác nhau để triệu tiêu các số hạng sai số bậc cao.\nBản chất: Nó là thuật toán xác định - deterministic, không dùng ancilla qubit, giúp làm mịn sai số của Trotter mà không cần mạch quá sâu như Trotter bậc cao truyền thống.\nĐể giảm sai số, thì các Trotter truyền thống phải tăng bậc, dẫn đến mạch lượng tử bị dài ra theo cấp số mũ một cách khủng khiếp. Thay vì dùng Trotter bậc cao, các nhà nghiên cứu hiện tại thích dùng MPF hơn, vì MPF cho độ chính xác tương đương nhưng tổng số lượng cổng thực tế cần chạy lại ít hơn đáng kể.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#lcu-taylor---linear-combination-of-unitary",
+    "href": "note/future/simulation.html#lcu-taylor---linear-combination-of-unitary",
+    "title": "Simulations Quantum",
+    "section": "LCU / Taylor - Linear Combination of Unitary",
+    "text": "LCU / Taylor - Linear Combination of Unitary\nLCU là tổ hợp tuyến tính các toán tử Unitary.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms",
+    "href": "note/future/simulation.html#vqs-tdvqa---variational-quantum-simulation-time-dependent-variational-quantum-algorithms",
+    "title": "Simulations Quantum",
+    "section": "VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms",
+    "text": "VQS / TDVQA - Variational Quantum Simulation / Time-Dependent Variational Quantum Algorithms\nVQS là tên gọi tổng quát của trường phái TDVQA (thuật toán biến phân thích nghi theo thời gian).\nTDVQA dành riêng cho NISQ khi số cổng lượng tử bị giói hạn do nhiễu.\n\nCách hoạt động: Thay vì dựng mạch lượng tử lớn mô phỏng chính xác toán tử tiến hóa, phương pháp này dùng một mạch biến phân với các tham số có thể tối ưu hóa. Các tham số này được cập nhật liên tục qua từng bước thời gian bằng máy tính cổ điển dựa trên nguyên lý biến phân McLachlan hoặc Dirac-Frenkel.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#qdrift---quantum-stochastic-drift",
+    "href": "note/future/simulation.html#qdrift---quantum-stochastic-drift",
+    "title": "Simulations Quantum",
+    "section": "qDRIFT - Quantum Stochastic Drift",
+    "text": "qDRIFT - Quantum Stochastic Drift\n\nCách hoạt động: Thuật toán không cố gắng mô phỏng tất cả các số hạng trong Hamiltonian ở mỗi bước thời gian. Thay vào đó, nó lấy mẫu ngẫu nhiên một số hạng dựa trên trọng số của số hạng đó.\nƯu điểm: Cực kỳ hiệu quả cho các hệ thống có số lượng tương tác rất lớn nhưng đóng góp năng lượng nhỏ, giúp mạch lượng tử ngắn hơn nhiều trong kỷ nguyên máy tính lượng tử có nhiễu - NISQ.\n1/\\epsilon^2.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#qflo---quantum-stochastic-drift-with-flow-extrapolation",
+    "href": "note/future/simulation.html#qflo---quantum-stochastic-drift-with-flow-extrapolation",
+    "title": "Simulations Quantum",
+    "section": "qFLO - Quantum Stochastic Drift with Flow Extrapolation",
+    "text": "qFLO - Quantum Stochastic Drift with Flow Extrapolation\nLà thuật toán mô phỏng tiến hóa thuoiwf gian dạng ngẫu nhiên hóa.\n\nBối cảnh: Thuật toán qDRIFT truyền thống lấy mẫu ngẫu nhiên các số hạng Hamiltonian để rút ngắn mạch lượng tử, nhưng nó có điểm yếu là sai số giảm rất chậm, theo kiểu lũy thừa ngược.\nCách hoạt động: Được giới thiệu bởi các nhà nghiên cứu vào cuối năm 2024, qFLO bổ sung kỹ thuật nội suy toán học (Richardson extrapolation) vào qDRIFT. Bằng cách thay đổi kích thước bước thời gian, nó tạo ra một dòng chảy - flow hướng về giới hạn bước thời gian bằng 0.\nƯu điểm: Nó giúp độ sâu mạch lượng tử được cải thiện theo hàm mũ đối với sai số \\log(1/\\epsilon) thay vì tỉ lệ nghịch bậc hai 1/\\epsilon^2 như qDRIFT cũ. Đây là một bước tiến lớn giúp giữ nguyên ưu điểm mạch ngắn của toán ngẫu nhiên nhưng đạt độ chính xác của các thuật toán sửa lỗi dài hạn.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#qflow---quantum-flow-algorithms",
+    "href": "note/future/simulation.html#qflow---quantum-flow-algorithms",
+    "title": "Simulations Quantum",
+    "section": "qFlow - Quantum Flow Algorithms",
+    "text": "qFlow - Quantum Flow Algorithms\nTrường phái phân rã không gian Hilbert.\n\nCách hoạt động: QFlow là một thuật toán lai (hybrid) được thiết kế riêng cho mô phỏng hóa học lượng tử. Thay vì nhồi nhét một bài toán Hamiltonian phân tử khổng lồ (cần hàng trăm qubit) vào máy tính, QFlow sử dụng máy tính cổ điển để chia nhỏ bài toán thành một chuỗi các không gian tương tác nhỏ hơn (gọi là active spaces). Máy tính cổ điển sẽ xây dựng các Hamiltonian hiệu dụng (effective Hamiltonians), sau đó đẩy sang mạch lượng tử siêu ngắn (chỉ cần khoảng 12 qubit) để tối ưu hóa bằng VQE.\nqFlow phối hợp chặt chẽ với VQS/VQE để tối ưu sức mạnh của những máy tính lượng tử nhỏ bé hiện nay.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#quantum-walk-qubitization",
+    "href": "note/future/simulation.html#quantum-walk-qubitization",
+    "title": "Simulations Quantum",
+    "section": "Quantum Walk / Qubitization",
+    "text": "Quantum Walk / Qubitization\nPhương pháp này chuyển đổi bài toán mô phỏng tiến hóa thời gian thành bài toán xây dựng một bước đi lượng tử.\n\nCách hoạt động: Từ toán tử Hamiltonian, người ta thiết kế một bước đi lượng tử (Quantum Walk operator) phản ảnh cẩu trúc ma trận của H. Qubitization chính là phiên bản chuẩn hóa tinh vi của phương pháp này, giúp cô lập không gian ma trận lượng tử thành các không gian con 2 chiều (SU(2)) để kiểm soát các eigenvalue.\nƯu điểm: Tiết kiệm số lượng ancilla qubit đáng kể so với LCU thuần túy, trong khi vẫn giữ nguyên độ chính xác cao.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/simulation.html#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation",
+    "href": "note/future/simulation.html#qsp-qsvt---quantum-signal-processing-quantum-singular-value-transformation",
+    "title": "Simulations Quantum",
+    "section": "QSP & QSVT - Quantum Signal Processing & Quantum Singular Value Transformation",
+    "text": "QSP & QSVT - Quantum Signal Processing & Quantum Singular Value Transformation\nĐây là phương pháp tối ưu nhất xét về mặt lý thuyết, tức là, đạt giới hạn tiệm cận tốt nhất cho cả thời gian t và sai số \\epsilon.\n\nCách hoạt động: QSP/QSVT sử dụng một kỹ thuật gọi là Block-encoding (tức là, nhúng toán tử Hamiltonian vào một góc của ma trận Unitary lớn hơn). Sau đó, nó áp dụng các hàm đa thức trực tiếp lên các eigenvalue của khối ma trận đó thông qua các phép quay một qubit.\nƯu điểm: Độ phức tạp số cổng lượng tử tỷ lệ tuyến tính với thời gian t, và đạt tỷ lệ tối ưu dạng \\log(1/\\epsilon) đối với sai số, vượt qua giới hạn của hệ số mũ trong Trotter.\nCả QSVT và LCU đều có độ chính xác lên tới \\log(1/\\epsilon), nhưng LCU yêu cầu số lượng qubit phụ rất lớn và mạch rất phức tạp.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "file/index.html",
+    "href": "file/index.html",
+    "title": "Bài báo nghiên cứu",
+    "section": "",
+    "text": "THƯ VIỆN · QUANTUM COMPUTATION\n\n\n\nNhững công trình nền tảng và bài báo chọn lọc về biến đổi Fourier lượng tử, ước lượng pha và điện toán lượng tử chịu lỗi. Mỗi mục có bản PDF lưu trong thư mục tài liệu, kèm nguồn xuất bản để tiện tra cứu và trích dẫn.",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#biến-đổi-fourier-lượng-tử",
+    "href": "file/index.html#biến-đổi-fourier-lượng-tử",
+    "title": "Bài báo nghiên cứu",
+    "section": "Biến đổi Fourier lượng tử",
+    "text": "Biến đổi Fourier lượng tử\n\n\nQFT1996 · Physical Review Letters\n\n\nSemiclassical Fourier Transform for Quantum Computation\nRobert B. Griffiths và Chi-Sheng Niu trình bày cách thực hiện biến đổi Fourier theo kiểu bán cổ điển, thay các cổng hai qubit bằng phép đo, điều khiển cổ điển và các cổng một qubit. Đây là một ý tưởng quan trọng để đơn giản hóa mạch lượng tử trong các thuật toán như Shor [1].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQFT · T GATES2020 · npj Quantum Information\n\n\nApproximate Quantum Fourier Transform with O(n \\log(n)) T Gates\nYunseong Nam, Yuan Su và Dmitri Maslov đề xuất cách giảm số cổng T của QFT xấp xỉ xuống O(n \\log n), sử dụng phép đo, feedforward và trạng thái gradient pha có thể tái sử dụng [2].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#ước-lượng-pha-và-trị-riêng",
+    "href": "file/index.html#ước-lượng-pha-và-trị-riêng",
+    "title": "Bài báo nghiên cứu",
+    "section": "Ước lượng pha và trị riêng",
+    "text": "Ước lượng pha và trị riêng\n\n\nQPE · NISQ2024 · Physical Review A\n\n\nAn Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm\nJunxu Li xây dựng phương pháp QPE lặp với các khoảng thời gian tiến hóa khác nhau để tăng độ chính xác của ước lượng pha, kể cả khi số qubit phụ trợ bị giới hạn [3].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQPE · FAULT-TOLERANT2023 · Quantum\n\n\nSimultaneous Estimation of Multiple Eigenvalues with Short-Depth Quantum Circuit on Early Fault-Tolerant Quantum Computers\nZhiyan Ding và Lin Lin giới thiệu phương pháp MM-QCELS để ước lượng đồng thời nhiều trị riêng bằng các mạch lượng tử độ sâu ngắn, hướng tới các máy tính lượng tử chịu lỗi thế hệ đầu [4].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#sách-nền-tảng",
+    "href": "file/index.html#sách-nền-tảng",
+    "title": "Bài báo nghiên cứu",
+    "section": "Sách nền tảng",
+    "text": "Sách nền tảng\n\n\nSÁCH THAM KHẢO2010 · Cambridge University Press\n\n\nQuantum Computation and Quantum Information\nGiáo trình kinh điển của Michael A. Nielsen và Isaac L. Chuang, bản kỷ niệm 10 năm; nền tảng cho các ghi chú về điện toán lượng tử trên trang này [5].\n\nĐọc PDF",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#tài-liệu-tham-khảo",
+    "href": "file/index.html#tài-liệu-tham-khảo",
+    "title": "Bài báo nghiên cứu",
+    "section": "Tài liệu tham khảo",
+    "text": "Tài liệu tham khảo\n\n\n[1] R. B. Griffiths and C.-S. Niu, “Semiclassical fourier transform for quantum computation,” Physical Review Letters, vol. 76, no. 17, pp. 3228–3231, 1996, doi: 10.1103/PhysRevLett.76.3228.\n\n\n[2] Y. Nam, Y. Su, and D. Maslov, “Approximate quantum fourier transform with O(n \\log(n)) t gates,” npj Quantum Information, vol. 6, p. 26, 2020, doi: 10.1038/s41534-020-0257-5.\n\n\n[3] J. Li, “An iterative method to improve the precision of quantum phase estimation algorithm,” Physical Review A, vol. 109, no. 3, p. 032606, 2024, doi: 10.1103/PhysRevA.109.032606.\n\n\n[4] Z. Ding and L. Lin, “Simultaneous estimation of multiple eigenvalues with short-depth quantum circuit on early fault-tolerant quantum computers,” Quantum, vol. 7, p. 1136, 2023, doi: 10.22331/q-2023-10-11-1136.\n\n\n[5] M. A. Nielsen and I. L. Chuang, Quantum computation and quantum information, 10th Anniversary. Cambridge: Cambridge University Press, 2010.",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "量子計算と量子情報",
+    "section": "",
+    "text": "QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版\n\n\n\n\n量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。\n\n\n\nマイケル・A・ニールセン、アイザック・L・チャン著\n\n\n原文を読む ↗ ウェブ版を見る ↗\n\n\n\n\n\n\n\nただの一匹の猫。生きていると同時に、死んでいる。。",
+    "crumbs": [
+      "READMEmd"
+    ]
+  },
+  {
+    "objectID": "index.html#読みたいところから",
+    "href": "index.html#読みたいところから",
+    "title": "量子計算と量子情報",
+    "section": "読みたいところから",
+    "text": "読みたいところから\n\n量子力学の基礎から量子情報の考え方まで。章やメモを選んで読み進められます。\n\n\n\n本編を読む →\n量子計算と量子情報の導入から読み始める。\n\n\nアイデアと問い →\n読みながら考えたい問いやアイデアをまとめています。\n\n\nまえがきを読む →\n本文に入る前に、翻訳ノートの背景を読む。",
+    "crumbs": [
+      "READMEmd"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html",
+    "href": "note/future/directions.html",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Đây là bài toán kinh điển nhất nhưng vẫn chưa có lời giải trọn vẹn do hiện tượng vướng víu lượng tử tầm xa làm vô hiệu hóa các phương pháp cổ điển như DMRG hay Quantum Monte Carlo:\n\nCơ chế siêu dẫn nhiệt độ cao: Mô phỏng mô hình Fermi-Hubbard 2D và 3D với kích thước mạng lớn để kiểm chứng sự hình thành cặp Cooper và các pha cạnh tranh (như pha giả khe - pseudogap hay sọc điện tích).\nChất lỏng spin lượng tử (Quantum Spin Liquids): Khảo sát các mạng hình học bất mãn (như mạng Kagome) nơi thăng giáng lượng tử ngăn cản hệ đóng băng thành trật tự từ ngay cả ở 0\\text{ K}, sinh ra các kích thích chuẩn hạt phân mảnh (anyon).\nĐộng lực học ngoài cân bằng (Non-equilibrium Dynamics): Nghiên cứu sự nhiệt hóa lượng tử (giả thuyết ETH), sự phá vỡ tính ergodic trong Khu trú hóa đa hạt (Many-Body Localization - MBL), vết sẹo lượng tử đa hạt (Quantum Many-Body Scars), và chuyển pha lượng tử động lực học (DQPT) sau cú sốc tham số (quantum quench).\n\n\n\n\nTrên máy tính cổ điển, phương pháp Lattice QCD phải dùng thời gian ảo (Euclidean time) để lấy mẫu Monte Carlo, nhưng cách này thất bại hoàn toàn khi mô phỏng thời gian thực hoặc mật độ baryon cao do bài toán dấu (fermion sign problem). Máy tính lượng tử mở ra hướng tiếp cận trực tiếp:\n\nMô phỏng thời gian thực của QED và QCD: Khảo sát động lực học va chạm hạt nặng, sự sinh cặp hạt – phản hạt (cơ chế Schwinger), sự giam cầm quark (confinement) và đứt gãy dây thông lượng (string breaking) trên các mô hình chuẩn U(1), SU(2), và SU(3).\nBảo vệ đối xứng chuẩn (Gauge Invariance Protection): Khi chạy trên phần cứng có nhiễu hoặc xấp xỉ Trotter, trạng thái hệ dễ bị trôi ra khỏi không gian con vật lý thỏa mãn định luật Gauss (\\hat{G}_x \\vert{}\\psi\\rangle = 0). Các nghiên cứu tập trung vào việc thêm số hạng phạt (penalty terms) hoặc thiết kế các cổng bảo toàn đối xứng tự nhiên.\n\n\n\n\nXúc tác sinh học và vật liệu mới: Tính toán chính xác năng lượng trạng thái cơ bản của các hệ chứa kim loại chuyển tiếp có độ tương quan điện tử cực mạnh — tiêu biểu là cụm FeMo-co (enzyme cố định đạm nitrogenase) hay vật liệu bắt giữ carbon, nơi lý thuyết phiếm hàm mật độ (DFT) cổ điển cho sai số lớn.\nĐộng lực học phi đoạn nhiệt (Non-adiabatic Dynamics): Mô phỏng trực tiếp sự chuyển động đồng thời của cả hạt nhân và electron (vượt ra ngoài xấp xỉ Born-Oppenheimer) quanh các giao điểm nón (conical intersections) để hiểu cơ chế quang hợp, thị giác và phản ứng quang hóa.\n\n\n\nMọi hệ vật lý thực tế đều tương tác với môi trường, không tiến hóa thuần túy theo phương trình Schrödinger mà tuân theo phương trình chủ Lindblad:\n\n\\frac{d\\rho}{dt} = -i[H, \\rho] + \\sum_k \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)\n\nNghiên cứu cách thiết kế thuật toán lượng tử mô phỏng biến đổi không unita (non-unitary evolution) để khảo sát quá trình truyền năng lượng hiệu suất cao trong phức hợp sinh học (như phức hợp FMO), sự chuyển pha tiêu tán, và kỹ thuật dùng chính môi trường để điều khiển trạng thái (dissipative state engineering).\n\n\n\nKhuếch tán thông tin & OTOC: Đo lường tốc độ lan truyền và xáo trộn thông tin lượng tử thông qua hàm tương quan nghịch thời gian (Out-of-Time-Order Correlators — OTOC) và độ phức tạp Krylov (Krylov complexity).\nMô hình SYK & Đối ngẫu AdS/CFT: Mô phỏng mô hình Sachdev-Ye-Kitaev (SYK) (hệ fermion tương tác ngẫu nhiên có tính hỗn loạn cực đại, đối ngẫu toàn ảnh với lỗ đen trong không gian AdS_2) để kiểm chứng các hiệu ứng hấp dẫn lượng tử như giao thức dịch chuyển qua lỗ sâu đục (traversable wormhole teleportation) trong phòng thí nghiệm.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#vật-lý-vật-chất-ngưng-tụ-tương-quan-mạnh-hệ-ngoài-cân-bằng",
+    "href": "note/future/directions.html#vật-lý-vật-chất-ngưng-tụ-tương-quan-mạnh-hệ-ngoài-cân-bằng",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Đây là bài toán kinh điển nhất nhưng vẫn chưa có lời giải trọn vẹn do hiện tượng vướng víu lượng tử tầm xa làm vô hiệu hóa các phương pháp cổ điển như DMRG hay Quantum Monte Carlo:\n\nCơ chế siêu dẫn nhiệt độ cao: Mô phỏng mô hình Fermi-Hubbard 2D và 3D với kích thước mạng lớn để kiểm chứng sự hình thành cặp Cooper và các pha cạnh tranh (như pha giả khe - pseudogap hay sọc điện tích).\nChất lỏng spin lượng tử (Quantum Spin Liquids): Khảo sát các mạng hình học bất mãn (như mạng Kagome) nơi thăng giáng lượng tử ngăn cản hệ đóng băng thành trật tự từ ngay cả ở 0\\text{ K}, sinh ra các kích thích chuẩn hạt phân mảnh (anyon).\nĐộng lực học ngoài cân bằng (Non-equilibrium Dynamics): Nghiên cứu sự nhiệt hóa lượng tử (giả thuyết ETH), sự phá vỡ tính ergodic trong Khu trú hóa đa hạt (Many-Body Localization - MBL), vết sẹo lượng tử đa hạt (Quantum Many-Body Scars), và chuyển pha lượng tử động lực học (DQPT) sau cú sốc tham số (quantum quench).",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#lý-thuyết-trường-trên-mạng-lattice-gauge-theories---lgt-vật-lý-năng-lượng-cao",
+    "href": "note/future/directions.html#lý-thuyết-trường-trên-mạng-lattice-gauge-theories---lgt-vật-lý-năng-lượng-cao",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Trên máy tính cổ điển, phương pháp Lattice QCD phải dùng thời gian ảo (Euclidean time) để lấy mẫu Monte Carlo, nhưng cách này thất bại hoàn toàn khi mô phỏng thời gian thực hoặc mật độ baryon cao do bài toán dấu (fermion sign problem). Máy tính lượng tử mở ra hướng tiếp cận trực tiếp:\n\nMô phỏng thời gian thực của QED và QCD: Khảo sát động lực học va chạm hạt nặng, sự sinh cặp hạt – phản hạt (cơ chế Schwinger), sự giam cầm quark (confinement) và đứt gãy dây thông lượng (string breaking) trên các mô hình chuẩn U(1), SU(2), và SU(3).\nBảo vệ đối xứng chuẩn (Gauge Invariance Protection): Khi chạy trên phần cứng có nhiễu hoặc xấp xỉ Trotter, trạng thái hệ dễ bị trôi ra khỏi không gian con vật lý thỏa mãn định luật Gauss (\\hat{G}_x \\vert{}\\psi\\rangle = 0). Các nghiên cứu tập trung vào việc thêm số hạng phạt (penalty terms) hoặc thiết kế các cổng bảo toàn đối xứng tự nhiên.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#hóa-học-lượng-tử-tương-quan-mạnh-động-lực-học-phi-đoạn-nhiệt",
+    "href": "note/future/directions.html#hóa-học-lượng-tử-tương-quan-mạnh-động-lực-học-phi-đoạn-nhiệt",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Xúc tác sinh học và vật liệu mới: Tính toán chính xác năng lượng trạng thái cơ bản của các hệ chứa kim loại chuyển tiếp có độ tương quan điện tử cực mạnh — tiêu biểu là cụm FeMo-co (enzyme cố định đạm nitrogenase) hay vật liệu bắt giữ carbon, nơi lý thuyết phiếm hàm mật độ (DFT) cổ điển cho sai số lớn.\nĐộng lực học phi đoạn nhiệt (Non-adiabatic Dynamics): Mô phỏng trực tiếp sự chuyển động đồng thời của cả hạt nhân và electron (vượt ra ngoài xấp xỉ Born-Oppenheimer) quanh các giao điểm nón (conical intersections) để hiểu cơ chế quang hợp, thị giác và phản ứng quang hóa.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#hệ-lượng-tử-mở-open-quantum-systems-nhiệt-động-lực-học-lượng-tử",
+    "href": "note/future/directions.html#hệ-lượng-tử-mở-open-quantum-systems-nhiệt-động-lực-học-lượng-tử",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Mọi hệ vật lý thực tế đều tương tác với môi trường, không tiến hóa thuần túy theo phương trình Schrödinger mà tuân theo phương trình chủ Lindblad:\n\n\\frac{d\\rho}{dt} = -i[H, \\rho] + \\sum_k \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)\n\nNghiên cứu cách thiết kế thuật toán lượng tử mô phỏng biến đổi không unita (non-unitary evolution) để khảo sát quá trình truyền năng lượng hiệu suất cao trong phức hợp sinh học (như phức hợp FMO), sự chuyển pha tiêu tán, và kỹ thuật dùng chính môi trường để điều khiển trạng thái (dissipative state engineering).",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#hỗn-loạn-lượng-tử-quantum-scrambling-hấp-dẫn-lượng-tử-toàn-ảnh",
+    "href": "note/future/directions.html#hỗn-loạn-lượng-tử-quantum-scrambling-hấp-dẫn-lượng-tử-toàn-ảnh",
+    "title": "Simulations Quantum",
+    "section": "",
+    "text": "Khuếch tán thông tin & OTOC: Đo lường tốc độ lan truyền và xáo trộn thông tin lượng tử thông qua hàm tương quan nghịch thời gian (Out-of-Time-Order Correlators — OTOC) và độ phức tạp Krylov (Krylov complexity).\nMô hình SYK & Đối ngẫu AdS/CFT: Mô phỏng mô hình Sachdev-Ye-Kitaev (SYK) (hệ fermion tương tác ngẫu nhiên có tính hỗn loạn cực đại, đối ngẫu toàn ảnh với lỗ đen trong không gian AdS_2) để kiểm chứng các hiệu ứng hấp dẫn lượng tử như giao thức dịch chuyển qua lỗ sâu đục (traversable wormhole teleportation) trong phòng thí nghiệm.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#ánh-xạ-fermion-sang-qubit-cắt-cụt-không-gian-boson",
+    "href": "note/future/directions.html#ánh-xạ-fermion-sang-qubit-cắt-cụt-không-gian-boson",
+    "title": "Simulations Quantum",
+    "section": "1. Ánh xạ Fermion-sang-Qubit & Cắt cụt không gian Boson",
+    "text": "1. Ánh xạ Fermion-sang-Qubit & Cắt cụt không gian Boson\nVượt qua Jordan-Wigner: Biến đổi Jordan-Wigner truyền thống biến các toán tử sinh/hủy fermion cục bộ thành các chuỗi toán tử Pauli dài O(N), làm tăng vọt độ sâu mạch. Các hướng nghiên cứu mới phát triển các phép ánh xạ cục bộ bảo toàn cấu trúc không gian như Bravyi-Kitaev, Verstraete-Cirac, và Derby-Klassen (Compact Fermion Mapping) sử dụng các qubit phụ đặt ở tâm ô mạng để giữ độ dài chuỗi Pauli ở mức O(1).\nXử lý trường Boson: Trường Boson (photon, phonon, trường chuẩn) có không gian Hilbert vô hạn chiều tại mỗi điểm mạng. Nghiên cứu tập trung vào việc tìm ngưỡng cắt cụt (truncation cutoff) tối ưu và mã hóa nhị phân/Gray code để nén biên độ vào ít qubit nhất.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#chuẩn-bị-trạng-thái-cơ-bản-trạng-thái-nhiệt-gibbs",
+    "href": "note/future/directions.html#chuẩn-bị-trạng-thái-cơ-bản-trạng-thái-nhiệt-gibbs",
+    "title": "Simulations Quantum",
+    "section": "2. Chuẩn bị trạng thái cơ bản & Trạng thái nhiệt Gibbs",
+    "text": "2. Chuẩn bị trạng thái cơ bản & Trạng thái nhiệt Gibbs\nThuật toán tiến hóa e^{-iHt} chỉ có ý nghĩa nếu ta đưa vào được trạng thái đầu vào có ý nghĩa vật lý (thường là bài toán khó thuộc lớp QMA-hard trong trường hợp tổng quát):\n\nTiến hóa thời gian ảo lượng tử (QITE — Quantum Imaginary Time Evolution): Mô phỏng toán tử không unita e^{-\\tau H} bằng cách xấp xỉ từng bước bằng một phép biến đổi unita cục bộ tìm được từ dữ liệu đo trên mạng lân cận, giúp dập tắt các trạng thái kích thích để hội tụ về trạng thái cơ bản mà không cần mạch biến phân sâu.\nLọc phổ bằng QSVT: Dùng đa thức Chebyshev để tạo bộ lọc thông thấp (low-pass filter) loại bỏ các thành phần năng lượng cao khỏi một trạng thái thử ban đầu.\nChuẩn bị trạng thái Gibbs (\\rho_\\beta = e^{-\\beta H} / \\mathcal{Z}): Xây dựng các thuật toán lấy mẫu nhiệt động lực học lượng tử (Quantum Metropolis, hoặc thiết kế toán tử Lindblad nhân tạo có trạng thái dừng chính là phân phối Gibbs ở nhiệt độ T = 1/\\beta).",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#khai-thác-cấu-trúc-mạng-tensor-biên-dịch-nhận-thức-vật-lý",
+    "href": "note/future/directions.html#khai-thác-cấu-trúc-mạng-tensor-biên-dịch-nhận-thức-vật-lý",
+    "title": "Simulations Quantum",
+    "section": "3. Khai thác cấu trúc mạng Tensor & Biên dịch nhận thức vật lý",
+    "text": "3. Khai thác cấu trúc mạng Tensor & Biên dịch nhận thức vật lý\nKết hợp các công cụ cổ điển mạnh như MPS (Matrix Product States) và MERA để tiền xử lý (pre-compile): tối ưu hóa phân rã mạch lượng tử trước khi chạy, hoặc dùng mạch lượng tử để mở rộng khả năng biểu diễn của mạng tensor ở những vùng có vướng víu vượt ngưỡng cổ điển (đặc biệt hiệu quả với hệ 2D/3D).",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#kỹ-thuật-đọc-kết-quả-classical-shadows-đo-lường-tối-ưu",
+    "href": "note/future/directions.html#kỹ-thuật-đọc-kết-quả-classical-shadows-đo-lường-tối-ưu",
+    "title": "Simulations Quantum",
+    "section": "4. Kỹ thuật đọc kết quả: Classical Shadows & Đo lường tối ưu",
+    "text": "4. Kỹ thuật đọc kết quả: Classical Shadows & Đo lường tối ưu\nChụp cắt lớp toàn bộ trạng thái lượng tử (Full State Tomography) tốn số lần đo tăng theo hàm mũ O(4^n), làm triệt tiêu mọi lợi thế lượng tử.Classical Shadows (Bóng cổ điển): Thực hiện các phép đo ngẫu nhiên (trong cơ sở Clifford hoặc Pauli) để tạo ra một “bản phác thảo cổ điển” gọn nhẹ của trạng thái lượng tử. Từ chỉ O(\\log M) lần đo, ta có thể dự đoán đồng thời giá trị kỳ vọng của M đại lượng vật lý cục bộ khác nhau (như năng lượng, hàm tương quan spin-spin, mật độ hạt).",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
+  },
+  {
+    "objectID": "note/future/directions.html#mô-phỏng-lai-tương-tự-số-digital-analog-quantum-simulation-daqs",
+    "href": "note/future/directions.html#mô-phỏng-lai-tương-tự-số-digital-analog-quantum-simulation-daqs",
+    "title": "Simulations Quantum",
+    "section": "5. Mô phỏng lai Tương tự – Số (Digital-Analog Quantum Simulation — DAQS)",
+    "text": "5. Mô phỏng lai Tương tự – Số (Digital-Analog Quantum Simulation — DAQS)\nThay vì ép mọi tương tác vật lý phải phân rã thành các cổng CNOT chuẩn (gây tích lũy lỗi rất lớn), kiến trúc DAQS tận dụng chính tương tác tự nhiên vốn có của phần cứng (như tương tác lưỡng cực của nguyên tử Rydberg hoặc tương tác Ising trong ion bẫy) làm khối tiến hóa liên tục, xen kẽ với các cổng số 1-qubit cực nhanh để uốn nắn Hamiltonian đó thành mô hình vật lý mong muốn.",
+    "crumbs": [
+      "Future",
+      "Simulations Quantum"
+    ]
   },
   {
     "objectID": "note/intro/afterword.html",
@@ -1569,6 +1754,28 @@
     ]
   },
   {
+    "objectID": "note/qft/3.html#định-lý-5.2",
+    "href": "note/qft/3.html#định-lý-5.2",
+    "title": "3 Applications: order-finding and factoring",
+    "section": "Định lý 5.2",
+    "text": "Định lý 5.2\nGiả sử N là một hợp số L bit, và x là một nghiệm không tầm thường cho phương trình x^2 \\equiv 1 \\pmod N trong khoảng 1 \\le x \\le N, tức là, không phải x \\equiv 1 \\pmod N cũng không phải x \\equiv N - 1 \\equiv -1 \\pmod N. Khi đó ít nhất một trong hai \\gcd(x - 1, N) và \\gcd(x + 1, N) là một thừa số không tầm thường của N mà có thể được tính toán sử dụng O(L^3) phép toán.",
+    "crumbs": [
+      "5 The quantum Fourier transform and its applications",
+      "3 Applications: order-finding and factoring"
+    ]
+  },
+  {
+    "objectID": "note/qft/3.html#định-lý-5.3",
+    "href": "note/qft/3.html#định-lý-5.3",
+    "title": "3 Applications: order-finding and factoring",
+    "section": "Định lý 5.3",
+    "text": "Định lý 5.3\nGiả sử N = p_1^{\\alpha_1} \\dots p_m^{\\alpha_m} là sự phân tích ra thừa số nguyên tố của một số nguyên dương hợp số lẻ. Cho x là một số nguyên được chọn ngẫu nhiên đồng nhất, tuân theo các yêu cầu là 1 \\le x \\le N - 1 và x nguyên tố cùng nhau với N. Cho r là bậc của x modulo N. Khi đó\n\np(r \\text{ is even and } x^{r/2} \\not\\equiv -1 \\pmod N) \\ge 1 - \\frac{1}{2^m}. \\tag{5.60}",
+    "crumbs": [
+      "5 The quantum Fourier transform and its applications",
+      "3 Applications: order-finding and factoring"
+    ]
+  },
+  {
     "objectID": "note/qft/3.html#algorithm-reduction-of-factoring-to-order-finding",
     "href": "note/qft/3.html#algorithm-reduction-of-factoring-to-order-finding",
     "title": "3 Applications: order-finding and factoring",
@@ -1584,7 +1791,7 @@
     "href": "note/qft/index.html",
     "title": "0 The quantum Fourier transform and its applications",
     "section": "",
-    "text": "Notetl;dr\n\n\n\n\nQFT: Trên N=2^n trạng thái, |j\\rangle\\mapsto N^{-1/2}\\sum_ke^{2\\pi i jk/N}|k\\rangle. Dạng tích theo bit của j cho mạch \\Theta(n^2) cổng Hadamard, quay pha có điều khiển và hoán đổi; ví dụ ba qubit minh họa cấu trúc. QFT không tăng tốc trực tiếp xử lý dữ liệu cổ điển vì khó chuẩn bị trạng thái và không thể đọc trực tiếp mọi biên độ.\nƯớc lượng pha và tìm bậc: Nếu U|u\\rangle=e^{2\\pi i\\varphi}|u\\rangle, các phép controlled-U^{2^j} cùng QFT ngược cho xấp xỉ nhị phân của \\varphi. Các pha s/r của phép nhân modulo giúp tìm bậc r; liên phân số khôi phục mẫu số khi sai số đủ nhỏ.\nPhân tích thừa số và HSP: Bậc của x ngẫu nhiên thường cho nghiệm không tầm thường của x^2\\equiv1\\pmod N, rồi \\gcd(x\\pm1,N) cho ước; thuật toán có thể cần thử lại. HSP tìm K khi hàm oracle hằng trên từng lớp kề và phân biệt giữa các lớp. Nó bao quát tìm chu kỳ, tìm bậc và logarit rời rạc; trường hợp Abel hữu hạn giải được hiệu quả, nhưng HSP phi Abel như đẳng cấu đồ thị chưa có lời giải hiệu quả đã biết.\n\n\n\n\n‘If computers that you build are quantum, Then spies everywhere will all want ’em. Our codes will all fail, And they’ll read our email, Till we get crypto that’s quantum, and daunt ’em.’ – Jennifer and Peter Shor\n\n\n‘To read our E-mail, how mean of the spies and their quantum machine; be comforted though, they do not yet know how to factorize twelve or fifteen.’ – Volker Strassen\n\n\n‘Computer programming is an art form, like the creation of poetry or music.’ – Donald Knuth\n\nKhám phá ngoạn mục nhất trong tính toán lượng tử cho đến nay là máy tính lượng tử có thể thực hiện một cách hiệu quả một số tác vụ vốn không hề khả thi trên một máy tính cổ điển. Ví dụ, việc tìm phân tích tiêu chuẩn ra thừa số nguyên tố của một số nguyên n-bit được cho là đòi hỏi \\exp(\\Theta(n^{1/3} \\log^{2/3} n)) phép toán khi sử dụng thuật toán cổ điển tốt nhất được biết đến tại thời điểm viết sách, thứ được gọi là sàng trường số (number field sieve). Con số này có độ lớn theo hàm mũ so với kích thước của số đang được phân tích, vì vậy việc phân tích thành thừa số nhìn chung được coi là một bài toán không thể giải quyết (intractable) trên máy tính cổ điển: nó nhanh chóng trở nên bất khả thi ngay cả đối với việc phân tích những con số có kích thước khiêm tốn. Ngược lại, một thuật toán lượng tử có thể hoàn thành cùng tác vụ đó bằng cách sử dụng O(n^2 \\log n \\log \\log n) phép toán. Tức là, một máy tính lượng tử có thể phân tích một số thành thừa số nhanh hơn theo hàm mũ so với các thuật toán cổ điển tốt nhất từng được biết đến. Bản thân kết quả này đã rất quan trọng, nhưng có lẽ khía cạnh thú vị nhất chính là câu hỏi mà nó đặt ra: những bài toán nào khác có thể được thực hiện một cách hiệu quả trên máy tính lượng tử mà lại bất khả thi trên máy tính cổ điển?\nTrong chương này, chúng ta phát triển biến đổi Fourier lượng tử (quantum Fourier transform), thành phần then chốt cho việc phân tích thừa số lượng tử và nhiều thuật toán lượng tử thú vị khác. Biến đổi Fourier lượng tử, mà chúng ta bắt đầu ở Mục 5.1, là một thuật toán lượng tử hiệu quả để thực hiện phép biến đổi Fourier lên các biên độ cơ học lượng tử. Nó không làm tăng tốc tác vụ cổ điển là tính toán phép biến đổi Fourier của dữ liệu cổ điển. Nhưng một tác vụ quan trọng mà nó cho phép thực hiện là ước lượng pha (phase estimation), tức là sự xấp xỉ các trị riêng của một toán tử unita trong những hoàn cảnh nhất định, như được mô tả ở Mục 5.2. Điều này cho phép chúng ta giải quyết một vài bài toán thú vị khác, bao gồm bài toán tìm bậc (order-finding problem) và bài toán phân tích thừa số (factoring problem), được đề cập trong Mục 5.3. Ước lượng pha cũng có thể được kết hợp với thuật toán tìm kiếm lượng tử để giải quyết bài toán đếm số lượng nghiệm (counting solutions) cho một bài toán tìm kiếm, như được mô tả trong chương tiếp theo. Mục 5.4 kết thúc chương với một cuộc thảo luận về cách biến đổi Fourier lượng tử có thể được sử dụng để giải quyết bài toán nhóm con ẩn (hidden subgroup problem), một sự tổng quát hóa của các bài toán ước lượng pha và tìm bậc, mà trong số các trường hợp đặc biệt của nó có một thuật toán lượng tử hiệu quả cho bài toán logarit rời rạc (discrete logarithm problem), một bài toán khác được coi là không thể giải quyết (intractable) trên máy tính cổ điển.\n\nNhững câu hỏi ngõ\n\nBiến đổi Fourier lượng tử — QFT (Mục 5.1)\n\nĐịnh nghĩa toán học của QFT ở công thức (5.2) vẫn là nền tảng bất biến, nhưng cách triển khai mạch O(n^2) cổng xoay pha có điều khiển (CR_k) kèm \\lfloor n/2 \\rfloor cổng SWAP ở cuối sách chỉ còn dùng để giảng dạy:\n\nSemiclassical QFT (Griffiths–Niu): Thay vì giữ đồng thời cả n qubit trong suốt quá trình biến đổi, các trình biên dịch hiện đại dùng kỹ thuật đo giữa mạch (mid-circuit measurement) kết hợp điều khiển cổ điển (feedforward). Cách này chỉ tốn đúng 1 qubit phụ, loại bỏ toàn bộ cổng SWAP và giảm mạnh lỗi mất kết hợp.\nTối ưu chi phí cổng T bằng Phase Gradient State: Trong kiến trúc chịu lỗi (FTQC), các cổng quay góc siêu nhỏ R_k = R_z(2\\pi / 2^k) cực kỳ đắt đỏ vì phải tổng hợp xấp xỉ từ hàng chục cổng T. Thay vì xoay trực tiếp, các thiết kế hiện đại (Nam và cộng sự; Gidney) chuẩn bị sẵn một thanh ghi xúc tác gradient pha (tái sử dụng được cho toàn bộ thuật toán) và biến phép QFT thành các phép cộng lượng tử thông thường, ép chi phí cổng T xuống mức O(n \\log n) hoặc O(n).\n\n\nƯớc lượng pha lượng tử — QPE (Mục 5.2)\n\nMạch QPE chuẩn trong sách đòi hỏi duy trì tính kết hợp xuyên suốt chuỗi C\\text{-}U^{2^k} rất sâu và kết thúc bằng khối \\text{QFT}^\\dagger đa qubit:\nIterative QPE (IQPE / Kitaev QPE): Trở thành tiêu chuẩn thực hành nhờ chỉ dùng 1 qubit đếm duy nhất, đo lặp lại từng bit của pha \\varphi từ bit có trọng số thấp nhất lên cao nhất và dùng phản hồi cổ điển để trừ phần dư ở mỗi vòng lặp.\nThế hệ Post-QPE cho kỷ nguyên Early Fault-Tolerant (2020–2026): Khi phần cứng chưa đủ chịu lỗi để chạy một mạch C\\text{-}U^{2^k} quá dài, các thuật toán mới như QCELS (Quantum Complex Exponential Least Squares), QPE thống kê của Lin–Tong, và lọc phổ dựa trên QSVT chia bài toán thành nhiều mạch tiến hóa thời gian ngắn e^{-iHt} độc lập, sau đó dùng xử lý tín hiệu Fourier cổ điển (khớp hàm mũ phức) để trích xuất trị riêng năng lượng — loại bỏ hoàn toàn khối \\text{QFT}^\\dagger lượng tử và chịu được nhiễu lớn hơn nhiều.\n\nThuật toán Shor: Tìm bậc, Logarit rời rạc & Phân tích thừa số (Mục 5.3)\n\nCuốn sách trình bày phép lũy thừa mô-đun a^x \\bmod N với chi phí O(n^3) cổng và hậu xử lý bằng thuật toán liên phân số (continued fractions):\nĐột phá độ phức tạp của Oded Regev (2023): Sau gần 30 năm, Regev lần đầu tiên phá vỡ rào cản O(n^2) phép nhân của Shor bằng cách sử dụng QFT đa chiều kết hợp với các thuật toán rút gọn mạng (lattice reduction), giảm số phép nhân lượng tử xuống còn O(n^{3/2}) (đánh đổi bằng việc tăng số qubit bộ nhớ — sau đó tiếp tục được Ragavan và Vaikuntanathan tối ưu giảm không gian lưu trữ).\nTối ưu hóa kiến trúc và hậu xử lý (Ekerå–Håstad & Gidney):\n\nThay thuật toán liên phân số cổ điển bằng phương pháp lấy mẫu lưới của Ekerå–Håstad (2017), giúp giảm một nửa độ dài số mũ cần tính trong bài toán logarit rời rạc và phân tích thừa số (đạt xác suất thành công &gt;99\\% chỉ sau một lần chạy mạch lượng tử duy nhất).\nÁp dụng số học cửa sổ (windowed arithmetic), bộ nhớ tạm thời (oblivious carry runways) và mã sửa lỗi qLDPC, kéo ước tính tài nguyên vật lý để phá khóa RSA-2048 từ hàng trăm triệu qubit xuống dưới 1 triệu qubit vật lý.\n\n\nBài toán Nhóm con Ẩn — HSP (Mục 5.4)\n\nỞ cuối Chương 5, nhóm tác giả đặt kỳ vọng lớn vào việc mở rộng QFT cho các nhóm không giao hoán (non-Abelian HSP) để giải hai bài toán trọng tâm là Đẳng cấu đồ thị và Mật mã mạng:\nNhóm đối xứng S_n (Graph Isomorphism): Giới lý thuyết đã chứng minh các định lý giới hạn (Hallgren, Moore, Russell, Schulman) cho thấy phép lấy mẫu Fourier chuẩn trên S_n không thể giải hiệu quả bài toán này; đồng thời thuật toán cổ điển chuẩn đa thức của László Babai (2015) đã giải quyết bài toán đẳng cấu đồ thị trên máy tính thông thường.\nNhóm nhị diện D_n (Bài toán vectơ ngắn nhất trên mạng — SVP): Thuật toán sàng lượng tử nổi tiếng nhất của Kuperberg chỉ đạt độ phức tạp dưới hàm mũ 2^{O(\\sqrt{n})} (vẫn không giải được trong thời gian đa thức). Chính sự bế tắc của HSP trên nhóm nhị diện này là cơ sở bảo chứng an toàn để NIST chuẩn hóa Mật mã hậu lượng tử dựa trên mạng (ML-KEM / Kyber, ML-DSA / Dilithium).\nBảng đối chiếu Chương 5 (2000 vs. Hiện đại)\n\n\n\n\n\n\n\n\nNội dung trong Chương 5\nCách tiếp cận năm 2000\nChuẩn mực & Kế thừa hiện đại\n\n\n\n\nMạch QFT (5.1)\nMạch kết hợp n qubit, O(n^2) cổng CR_k + \\lfloor n/2 \\rfloor SWAP.\nSemiclassical QFT (1 qubit phụ + đo giữa mạch); dùng Phase Gradient State để tối ưu cổng T.\n\n\nƯớc lượng pha QPE (5.2)\nThanh ghi đếm t qubit + khối \\text{QFT}^\\dagger lượng tử.\nIterative QPE (IQPE); nhóm thuật toán QCELS / Lin–Tong / QSVT (chạy mạch ngắn + khớp phổ cổ điển).\n\n\nThuật toán Shor (5.3)\nQFT 1 chiều (O(n^3) cổng) + hậu xử lý liên phân số.\nThuật toán Regev (2023) (O(n^{3/2}) phép nhân); hậu xử lý lưới Ekerå–Håstad; giảm tài nguyên RSA-2048 xuống &lt;10^6 qubit vật lý.\n\n\nNhóm con ẩn HSP (5.4)\nKỳ vọng giải Graph Isomorphism (S_n) và bài toán mạng (D_n).\nChứng minh giới hạn trên S_n (cùng thuật toán cổ điển của Babai); sàng Kuperberg trên D_n chỉ đạt 2^{O(\\sqrt{n})}, mở đường cho mật mã hậu lượng tử Lattice.",
+    "text": "Notetl;dr\n\n\n\n\nQFT: Trên N=2^n trạng thái, |j\\rangle\\mapsto N^{-1/2}\\sum_ke^{2\\pi i jk/N}|k\\rangle. Dạng tích theo bit của j cho mạch \\Theta(n^2) cổng Hadamard, quay pha có điều khiển và hoán đổi; ví dụ ba qubit minh họa cấu trúc. QFT không tăng tốc trực tiếp xử lý dữ liệu cổ điển vì khó chuẩn bị trạng thái và không thể đọc trực tiếp mọi biên độ.\nƯớc lượng pha và tìm bậc: Nếu U|u\\rangle=e^{2\\pi i\\varphi}|u\\rangle, các phép controlled-U^{2^j} cùng QFT ngược cho xấp xỉ nhị phân của \\varphi. Các pha s/r của phép nhân modulo giúp tìm bậc r; liên phân số khôi phục mẫu số khi sai số đủ nhỏ.\nPhân tích thừa số và HSP: Bậc của x ngẫu nhiên thường cho nghiệm không tầm thường của x^2\\equiv1\\pmod N, rồi \\gcd(x\\pm1,N) cho ước; thuật toán có thể cần thử lại. HSP tìm K khi hàm oracle hằng trên từng lớp kề và phân biệt giữa các lớp. Nó bao quát tìm chu kỳ, tìm bậc và logarit rời rạc; trường hợp Abel hữu hạn giải được hiệu quả, nhưng HSP phi Abel như đẳng cấu đồ thị chưa có lời giải hiệu quả đã biết.\n\n\n\n\n‘If computers that you build are quantum, Then spies everywhere will all want ’em. Our codes will all fail, And they’ll read our email, Till we get crypto that’s quantum, and daunt ’em.’ – Jennifer and Peter Shor\n\n\n‘To read our E-mail, how mean of the spies and their quantum machine; be comforted though, they do not yet know how to factorize twelve or fifteen.’ – Volker Strassen\n\n\n‘Computer programming is an art form, like the creation of poetry or music.’ – Donald Knuth\n\nKhám phá ngoạn mục nhất trong tính toán lượng tử cho đến nay là máy tính lượng tử có thể thực hiện một cách hiệu quả một số tác vụ vốn không hề khả thi trên một máy tính cổ điển. Ví dụ, việc tìm phân tích tiêu chuẩn ra thừa số nguyên tố của một số nguyên n-bit được cho là đòi hỏi \\exp(\\Theta(n^{1/3} \\log^{2/3} n)) phép toán khi sử dụng thuật toán cổ điển tốt nhất được biết đến tại thời điểm viết sách, thứ được gọi là sàng trường số (number field sieve). Con số này có độ lớn theo hàm mũ so với kích thước của số đang được phân tích, vì vậy việc phân tích thành thừa số nhìn chung được coi là một bài toán không thể giải quyết (intractable) trên máy tính cổ điển: nó nhanh chóng trở nên bất khả thi ngay cả đối với việc phân tích những con số có kích thước khiêm tốn. Ngược lại, một thuật toán lượng tử có thể hoàn thành cùng tác vụ đó bằng cách sử dụng O(n^2 \\log n \\log \\log n) phép toán. Tức là, một máy tính lượng tử có thể phân tích một số thành thừa số nhanh hơn theo hàm mũ so với các thuật toán cổ điển tốt nhất từng được biết đến. Bản thân kết quả này đã rất quan trọng, nhưng có lẽ khía cạnh thú vị nhất chính là câu hỏi mà nó đặt ra: những bài toán nào khác có thể được thực hiện một cách hiệu quả trên máy tính lượng tử mà lại bất khả thi trên máy tính cổ điển?\nTrong chương này, chúng ta phát triển biến đổi Fourier lượng tử (quantum Fourier transform), thành phần then chốt cho việc phân tích thừa số lượng tử và nhiều thuật toán lượng tử thú vị khác. Biến đổi Fourier lượng tử, mà chúng ta bắt đầu ở Mục 5.1, là một thuật toán lượng tử hiệu quả để thực hiện phép biến đổi Fourier lên các biên độ cơ học lượng tử. Nó không làm tăng tốc tác vụ cổ điển là tính toán phép biến đổi Fourier của dữ liệu cổ điển. Nhưng một tác vụ quan trọng mà nó cho phép thực hiện là ước lượng pha (phase estimation), tức là sự xấp xỉ các trị riêng của một toán tử unita trong những hoàn cảnh nhất định, như được mô tả ở Mục 5.2. Điều này cho phép chúng ta giải quyết một vài bài toán thú vị khác, bao gồm bài toán tìm bậc (order-finding problem) và bài toán phân tích thừa số (factoring problem), được đề cập trong Mục 5.3. Ước lượng pha cũng có thể được kết hợp với thuật toán tìm kiếm lượng tử để giải quyết bài toán đếm số lượng nghiệm (counting solutions) cho một bài toán tìm kiếm, như được mô tả trong chương tiếp theo. Mục 5.4 kết thúc chương với một cuộc thảo luận về cách biến đổi Fourier lượng tử có thể được sử dụng để giải quyết bài toán nhóm con ẩn (hidden subgroup problem), một sự tổng quát hóa của các bài toán ước lượng pha và tìm bậc, mà trong số các trường hợp đặc biệt của nó có một thuật toán lượng tử hiệu quả cho bài toán logarit rời rạc (discrete logarithm problem), một bài toán khác được coi là không thể giải quyết (intractable) trên máy tính cổ điển.\n\nNhững câu hỏi ngõ\n\nBiến đổi Fourier lượng tử — QFT (Mục 5.1)\n\nĐịnh nghĩa toán học của QFT ở công thức (5.2) vẫn là nền tảng bất biến, nhưng cách triển khai mạch O(n^2) cổng xoay pha có điều khiển (CR_k) kèm \\lfloor n/2 \\rfloor cổng SWAP ở cuối sách chỉ còn dùng để giảng dạy:\n\nSemiclassical QFT (Griffiths–Niu): Thay vì giữ đồng thời cả n qubit trong suốt quá trình biến đổi, các trình biên dịch hiện đại dùng kỹ thuật đo giữa mạch (mid-circuit measurement) kết hợp điều khiển cổ điển (feedforward). Cách này chỉ tốn đúng 1 qubit phụ, loại bỏ toàn bộ cổng SWAP và giảm mạnh lỗi mất kết hợp.\nTối ưu chi phí cổng T bằng Phase Gradient State: Trong kiến trúc chịu lỗi (FTQC), các cổng quay góc siêu nhỏ R_k = R_z(2\\pi / 2^k) cực kỳ đắt đỏ vì phải tổng hợp xấp xỉ từ hàng chục cổng T. Thay vì xoay trực tiếp, các thiết kế hiện đại (Nam và cộng sự; Gidney) chuẩn bị sẵn một thanh ghi xúc tác gradient pha (tái sử dụng được cho toàn bộ thuật toán) và biến phép QFT thành các phép cộng lượng tử thông thường, ép chi phí cổng T xuống mức O(n \\log n) hoặc O(n).\n\nSemiclassical Fourier Transform for Quantum Computation\nApproximate Quantum Fourier Transform with O(nlog(n)) T gates\n\nƯớc lượng pha lượng tử — QPE (Mục 5.2)\n\nMạch QPE chuẩn trong sách đòi hỏi duy trì tính kết hợp xuyên suốt chuỗi C\\text{-}U^{2^k} rất sâu và kết thúc bằng khối \\text{QFT}^\\dagger đa qubit:\n\nIterative QPE (IQPE / Kitaev QPE): Trở thành tiêu chuẩn thực hành nhờ chỉ dùng 1 qubit đếm duy nhất, đo lặp lại từng bit của pha \\varphi từ bit có trọng số thấp nhất lên cao nhất và dùng phản hồi cổ điển để trừ phần dư ở mỗi vòng lặp.\nThế hệ Post-QPE cho kỷ nguyên Early Fault-Tolerant (2020–2026): Khi phần cứng chưa đủ chịu lỗi để chạy một mạch C\\text{-}U^{2^k} quá dài, các thuật toán mới như QCELS (Quantum Complex Exponential Least Squares), QPE thống kê của Lin–Tong, và lọc phổ dựa trên QSVT chia bài toán thành nhiều mạch tiến hóa thời gian ngắn e^{-iHt} độc lập, sau đó dùng xử lý tín hiệu Fourier cổ điển (khớp hàm mũ phức) để trích xuất trị riêng năng lượng — loại bỏ hoàn toàn khối \\text{QFT}^\\dagger lượng tử và chịu được nhiễu lớn hơn nhiều.\n\nAn Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm (pdf)\nAn Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm (web)\nKitaev’s Phase Estimation — QPE algorithms\nSimultaneous estimation of multiple eigenvalues with short-depth quantum circuit on early fault-tolerant quantum computers\n\nThuật toán Shor: Tìm bậc, Logarit rời rạc & Phân tích thừa số (Mục 5.3)\n\nCuốn sách trình bày phép lũy thừa mô-đun a^x \\bmod N với chi phí O(n^3) cổng và hậu xử lý bằng thuật toán liên phân số (continued fractions):\n\nĐột phá độ phức tạp của Oded Regev (2023): Sau gần 30 năm, Regev lần đầu tiên phá vỡ rào cản O(n^2) phép nhân của Shor bằng cách sử dụng QFT đa chiều kết hợp với các thuật toán rút gọn mạng (lattice reduction), giảm số phép nhân lượng tử xuống còn O(n^{3/2}) (đánh đổi bằng việc tăng số qubit bộ nhớ — sau đó tiếp tục được Ragavan và Vaikuntanathan tối ưu giảm không gian lưu trữ).\n\nTối ưu hóa kiến trúc và hậu xử lý (Ekerå–Håstad & Gidney):\n\nThay thuật toán liên phân số cổ điển bằng phương pháp lấy mẫu lưới của Ekerå–Håstad (2017), giúp giảm một nửa độ dài số mũ cần tính trong bài toán logarit rời rạc và phân tích thừa số (đạt xác suất thành công &gt;99\\% chỉ sau một lần chạy mạch lượng tử duy nhất).\nÁp dụng số học cửa sổ (windowed arithmetic), bộ nhớ tạm thời (oblivious carry runways) và mã sửa lỗi qLDPC, kéo ước tính tài nguyên vật lý để phá khóa RSA-2048 từ hàng trăm triệu qubit xuống dưới 1 triệu qubit vật lý.\n\n\nBài toán Nhóm con Ẩn — HSP (Mục 5.4)\n\nỞ cuối Chương 5, nhóm tác giả đặt kỳ vọng lớn vào việc mở rộng QFT cho các nhóm không giao hoán (non-Abelian HSP) để giải hai bài toán trọng tâm là Đẳng cấu đồ thị và Mật mã mạng:\n\nNhóm đối xứng S_n (Graph Isomorphism): Giới lý thuyết đã chứng minh các định lý giới hạn (Hallgren, Moore, Russell, Schulman) cho thấy phép lấy mẫu Fourier chuẩn trên S_n không thể giải hiệu quả bài toán này; đồng thời thuật toán cổ điển chuẩn đa thức của László Babai (2015) đã giải quyết bài toán đẳng cấu đồ thị trên máy tính thông thường.\nNhóm nhị diện D_n (Bài toán vectơ ngắn nhất trên mạng — SVP): Thuật toán sàng lượng tử nổi tiếng nhất của Kuperberg chỉ đạt độ phức tạp dưới hàm mũ 2^{O(\\sqrt{n})} (vẫn không giải được trong thời gian đa thức). Chính sự bế tắc của HSP trên nhóm nhị diện này là cơ sở bảo chứng an toàn để NIST chuẩn hóa Mật mã hậu lượng tử dựa trên mạng (ML-KEM / Kyber, ML-DSA / Dilithium).\n\nBảng đối chiếu Chương 5 (2000 vs. Hiện đại)\n\n\n\n\n\n\n\n\nNội dung trong Chương 5\nCách tiếp cận năm 2000\nChuẩn mực & Kế thừa hiện đại\n\n\n\n\nMạch QFT (5.1)\nMạch kết hợp n qubit, O(n^2) cổng CR_k + \\lfloor n/2 \\rfloor SWAP.\nSemiclassical QFT (1 qubit phụ + đo giữa mạch); dùng Phase Gradient State để tối ưu cổng T.\n\n\nƯớc lượng pha QPE (5.2)\nThanh ghi đếm t qubit + khối \\text{QFT}^\\dagger lượng tử.\nIterative QPE (IQPE); nhóm thuật toán QCELS / Lin–Tong / QSVT (chạy mạch ngắn + khớp phổ cổ điển).\n\n\nThuật toán Shor (5.3)\nQFT 1 chiều (O(n^3) cổng) + hậu xử lý liên phân số.\nThuật toán Regev (2023) (O(n^{3/2}) phép nhân); hậu xử lý lưới Ekerå–Håstad; giảm tài nguyên RSA-2048 xuống &lt;10^6 qubit vật lý.\n\n\nNhóm con ẩn HSP (5.4)\nKỳ vọng giải Graph Isomorphism (S_n) và bài toán mạng (D_n).\nChứng minh giới hạn trên S_n (cùng thuật toán cổ điển của Babai); sàng Kuperberg trên D_n chỉ đạt 2^{O(\\sqrt{n})}, mở đường cho mật mã hậu lượng tử Lattice.",
     "crumbs": [
       "5 The quantum Fourier transform and its applications",
       "0 The quantum Fourier transform and its applications"
@@ -1973,158 +2180,6 @@
     "crumbs": [
       "6 Quantum search algorithms",
       "7 Black box algorithm limits"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#vật-lý-vật-chất-ngưng-tụ-tương-quan-mạnh-hệ-ngoài-cân-bằng",
-    "href": "note/future/directions.html#vật-lý-vật-chất-ngưng-tụ-tương-quan-mạnh-hệ-ngoài-cân-bằng",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Đây là bài toán kinh điển nhất nhưng vẫn chưa có lời giải trọn vẹn do hiện tượng vướng víu lượng tử tầm xa làm vô hiệu hóa các phương pháp cổ điển như DMRG hay Quantum Monte Carlo:\n\nCơ chế siêu dẫn nhiệt độ cao: Mô phỏng mô hình Fermi-Hubbard 2D và 3D với kích thước mạng lớn để kiểm chứng sự hình thành cặp Cooper và các pha cạnh tranh (như pha giả khe - pseudogap hay sọc điện tích).\nChất lỏng spin lượng tử (Quantum Spin Liquids): Khảo sát các mạng hình học bất mãn (như mạng Kagome) nơi thăng giáng lượng tử ngăn cản hệ đóng băng thành trật tự từ ngay cả ở 0\\text{ K}, sinh ra các kích thích chuẩn hạt phân mảnh (anyon).\nĐộng lực học ngoài cân bằng (Non-equilibrium Dynamics): Nghiên cứu sự nhiệt hóa lượng tử (giả thuyết ETH), sự phá vỡ tính ergodic trong Khu trú hóa đa hạt (Many-Body Localization - MBL), vết sẹo lượng tử đa hạt (Quantum Many-Body Scars), và chuyển pha lượng tử động lực học (DQPT) sau cú sốc tham số (quantum quench).",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#lý-thuyết-trường-trên-mạng-lattice-gauge-theories---lgt-vật-lý-năng-lượng-cao",
-    "href": "note/future/directions.html#lý-thuyết-trường-trên-mạng-lattice-gauge-theories---lgt-vật-lý-năng-lượng-cao",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Trên máy tính cổ điển, phương pháp Lattice QCD phải dùng thời gian ảo (Euclidean time) để lấy mẫu Monte Carlo, nhưng cách này thất bại hoàn toàn khi mô phỏng thời gian thực hoặc mật độ baryon cao do bài toán dấu (fermion sign problem). Máy tính lượng tử mở ra hướng tiếp cận trực tiếp:\n\nMô phỏng thời gian thực của QED và QCD: Khảo sát động lực học va chạm hạt nặng, sự sinh cặp hạt – phản hạt (cơ chế Schwinger), sự giam cầm quark (confinement) và đứt gãy dây thông lượng (string breaking) trên các mô hình chuẩn U(1), SU(2), và SU(3).\nBảo vệ đối xứng chuẩn (Gauge Invariance Protection): Khi chạy trên phần cứng có nhiễu hoặc xấp xỉ Trotter, trạng thái hệ dễ bị trôi ra khỏi không gian con vật lý thỏa mãn định luật Gauss (\\hat{G}_x \\vert{}\\psi\\rangle = 0). Các nghiên cứu tập trung vào việc thêm số hạng phạt (penalty terms) hoặc thiết kế các cổng bảo toàn đối xứng tự nhiên.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#hóa-học-lượng-tử-tương-quan-mạnh-động-lực-học-phi-đoạn-nhiệt",
-    "href": "note/future/directions.html#hóa-học-lượng-tử-tương-quan-mạnh-động-lực-học-phi-đoạn-nhiệt",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Xúc tác sinh học và vật liệu mới: Tính toán chính xác năng lượng trạng thái cơ bản của các hệ chứa kim loại chuyển tiếp có độ tương quan điện tử cực mạnh — tiêu biểu là cụm FeMo-co (enzyme cố định đạm nitrogenase) hay vật liệu bắt giữ carbon, nơi lý thuyết phiếm hàm mật độ (DFT) cổ điển cho sai số lớn.\nĐộng lực học phi đoạn nhiệt (Non-adiabatic Dynamics): Mô phỏng trực tiếp sự chuyển động đồng thời của cả hạt nhân và electron (vượt ra ngoài xấp xỉ Born-Oppenheimer) quanh các giao điểm nón (conical intersections) để hiểu cơ chế quang hợp, thị giác và phản ứng quang hóa.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#hệ-lượng-tử-mở-open-quantum-systems-nhiệt-động-lực-học-lượng-tử",
-    "href": "note/future/directions.html#hệ-lượng-tử-mở-open-quantum-systems-nhiệt-động-lực-học-lượng-tử",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Mọi hệ vật lý thực tế đều tương tác với môi trường, không tiến hóa thuần túy theo phương trình Schrödinger mà tuân theo phương trình chủ Lindblad:\n\n\\frac{d\\rho}{dt} = -i[H, \\rho] + \\sum_k \\left( L_k \\rho L_k^\\dagger - \\frac{1}{2}\\{L_k^\\dagger L_k, \\rho\\} \\right)\n\nNghiên cứu cách thiết kế thuật toán lượng tử mô phỏng biến đổi không unita (non-unitary evolution) để khảo sát quá trình truyền năng lượng hiệu suất cao trong phức hợp sinh học (như phức hợp FMO), sự chuyển pha tiêu tán, và kỹ thuật dùng chính môi trường để điều khiển trạng thái (dissipative state engineering).",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#hỗn-loạn-lượng-tử-quantum-scrambling-hấp-dẫn-lượng-tử-toàn-ảnh",
-    "href": "note/future/directions.html#hỗn-loạn-lượng-tử-quantum-scrambling-hấp-dẫn-lượng-tử-toàn-ảnh",
-    "title": "Simulations Quantum",
-    "section": "",
-    "text": "Khuếch tán thông tin & OTOC: Đo lường tốc độ lan truyền và xáo trộn thông tin lượng tử thông qua hàm tương quan nghịch thời gian (Out-of-Time-Order Correlators — OTOC) và độ phức tạp Krylov (Krylov complexity).\nMô hình SYK & Đối ngẫu AdS/CFT: Mô phỏng mô hình Sachdev-Ye-Kitaev (SYK) (hệ fermion tương tác ngẫu nhiên có tính hỗn loạn cực đại, đối ngẫu toàn ảnh với lỗ đen trong không gian AdS_2) để kiểm chứng các hiệu ứng hấp dẫn lượng tử như giao thức dịch chuyển qua lỗ sâu đục (traversable wormhole teleportation) trong phòng thí nghiệm.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#ánh-xạ-fermion-sang-qubit-cắt-cụt-không-gian-boson",
-    "href": "note/future/directions.html#ánh-xạ-fermion-sang-qubit-cắt-cụt-không-gian-boson",
-    "title": "Simulations Quantum",
-    "section": "1. Ánh xạ Fermion-sang-Qubit & Cắt cụt không gian Boson",
-    "text": "1. Ánh xạ Fermion-sang-Qubit & Cắt cụt không gian Boson\nVượt qua Jordan-Wigner: Biến đổi Jordan-Wigner truyền thống biến các toán tử sinh/hủy fermion cục bộ thành các chuỗi toán tử Pauli dài O(N), làm tăng vọt độ sâu mạch. Các hướng nghiên cứu mới phát triển các phép ánh xạ cục bộ bảo toàn cấu trúc không gian như Bravyi-Kitaev, Verstraete-Cirac, và Derby-Klassen (Compact Fermion Mapping) sử dụng các qubit phụ đặt ở tâm ô mạng để giữ độ dài chuỗi Pauli ở mức O(1).\nXử lý trường Boson: Trường Boson (photon, phonon, trường chuẩn) có không gian Hilbert vô hạn chiều tại mỗi điểm mạng. Nghiên cứu tập trung vào việc tìm ngưỡng cắt cụt (truncation cutoff) tối ưu và mã hóa nhị phân/Gray code để nén biên độ vào ít qubit nhất.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#chuẩn-bị-trạng-thái-cơ-bản-trạng-thái-nhiệt-gibbs",
-    "href": "note/future/directions.html#chuẩn-bị-trạng-thái-cơ-bản-trạng-thái-nhiệt-gibbs",
-    "title": "Simulations Quantum",
-    "section": "2. Chuẩn bị trạng thái cơ bản & Trạng thái nhiệt Gibbs",
-    "text": "2. Chuẩn bị trạng thái cơ bản & Trạng thái nhiệt Gibbs\nThuật toán tiến hóa e^{-iHt} chỉ có ý nghĩa nếu ta đưa vào được trạng thái đầu vào có ý nghĩa vật lý (thường là bài toán khó thuộc lớp QMA-hard trong trường hợp tổng quát):\n\nTiến hóa thời gian ảo lượng tử (QITE — Quantum Imaginary Time Evolution): Mô phỏng toán tử không unita e^{-\\tau H} bằng cách xấp xỉ từng bước bằng một phép biến đổi unita cục bộ tìm được từ dữ liệu đo trên mạng lân cận, giúp dập tắt các trạng thái kích thích để hội tụ về trạng thái cơ bản mà không cần mạch biến phân sâu.\nLọc phổ bằng QSVT: Dùng đa thức Chebyshev để tạo bộ lọc thông thấp (low-pass filter) loại bỏ các thành phần năng lượng cao khỏi một trạng thái thử ban đầu.\nChuẩn bị trạng thái Gibbs (\\rho_\\beta = e^{-\\beta H} / \\mathcal{Z}): Xây dựng các thuật toán lấy mẫu nhiệt động lực học lượng tử (Quantum Metropolis, hoặc thiết kế toán tử Lindblad nhân tạo có trạng thái dừng chính là phân phối Gibbs ở nhiệt độ T = 1/\\beta).",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#khai-thác-cấu-trúc-mạng-tensor-biên-dịch-nhận-thức-vật-lý",
-    "href": "note/future/directions.html#khai-thác-cấu-trúc-mạng-tensor-biên-dịch-nhận-thức-vật-lý",
-    "title": "Simulations Quantum",
-    "section": "3. Khai thác cấu trúc mạng Tensor & Biên dịch nhận thức vật lý",
-    "text": "3. Khai thác cấu trúc mạng Tensor & Biên dịch nhận thức vật lý\nKết hợp các công cụ cổ điển mạnh như MPS (Matrix Product States) và MERA để tiền xử lý (pre-compile): tối ưu hóa phân rã mạch lượng tử trước khi chạy, hoặc dùng mạch lượng tử để mở rộng khả năng biểu diễn của mạng tensor ở những vùng có vướng víu vượt ngưỡng cổ điển (đặc biệt hiệu quả với hệ 2D/3D).",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#kỹ-thuật-đọc-kết-quả-classical-shadows-đo-lường-tối-ưu",
-    "href": "note/future/directions.html#kỹ-thuật-đọc-kết-quả-classical-shadows-đo-lường-tối-ưu",
-    "title": "Simulations Quantum",
-    "section": "4. Kỹ thuật đọc kết quả: Classical Shadows & Đo lường tối ưu",
-    "text": "4. Kỹ thuật đọc kết quả: Classical Shadows & Đo lường tối ưu\nChụp cắt lớp toàn bộ trạng thái lượng tử (Full State Tomography) tốn số lần đo tăng theo hàm mũ O(4^n), làm triệt tiêu mọi lợi thế lượng tử.Classical Shadows (Bóng cổ điển): Thực hiện các phép đo ngẫu nhiên (trong cơ sở Clifford hoặc Pauli) để tạo ra một “bản phác thảo cổ điển” gọn nhẹ của trạng thái lượng tử. Từ chỉ O(\\log M) lần đo, ta có thể dự đoán đồng thời giá trị kỳ vọng của M đại lượng vật lý cục bộ khác nhau (như năng lượng, hàm tương quan spin-spin, mật độ hạt).",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "note/future/directions.html#mô-phỏng-lai-tương-tự-số-digital-analog-quantum-simulation-daqs",
-    "href": "note/future/directions.html#mô-phỏng-lai-tương-tự-số-digital-analog-quantum-simulation-daqs",
-    "title": "Simulations Quantum",
-    "section": "5. Mô phỏng lai Tương tự – Số (Digital-Analog Quantum Simulation — DAQS)",
-    "text": "5. Mô phỏng lai Tương tự – Số (Digital-Analog Quantum Simulation — DAQS)\nThay vì ép mọi tương tác vật lý phải phân rã thành các cổng CNOT chuẩn (gây tích lũy lỗi rất lớn), kiến trúc DAQS tận dụng chính tương tác tự nhiên vốn có của phần cứng (như tương tác lưỡng cực của nguyên tử Rydberg hoặc tương tác Ising trong ion bẫy) làm khối tiến hóa liên tục, xen kẽ với các cổng số 1-qubit cực nhanh để uốn nắn Hamiltonian đó thành mô hình vật lý mong muốn.",
-    "crumbs": [
-      "Future",
-      "Simulations Quantum"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "量子計算と量子情報",
-    "section": "",
-    "text": "QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版\n\n\n\n\n量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。\n\n\n\nマイケル・A・ニールセン、アイザック・L・チャン著\n\n\n原文を読む ↗ ウェブ版を見る ↗\n\n\n\n\n\n\n\nただの一匹の猫。生きていると同時に、死んでいる。。",
-    "crumbs": [
-      "READMEmd"
-    ]
-  },
-  {
-    "objectID": "index.html#読みたいところから",
-    "href": "index.html#読みたいところから",
-    "title": "量子計算と量子情報",
-    "section": "読みたいところから",
-    "text": "読みたいところから\n\n量子力学の基礎から量子情報の考え方まで。章やメモを選んで読み進められます。\n\n\n\n本編を読む →\n量子計算と量子情報の導入から読み始める。\n\n\nアイデアと問い →\n読みながら考えたい問いやアイデアをまとめています。\n\n\nまえがきを読む →\n本文に入る前に、翻訳ノートの背景を読む。",
-    "crumbs": [
-      "READMEmd"
-    ]
-  },
-  {
-    "objectID": "note/qft/3.html#định-lý-5.2",
-    "href": "note/qft/3.html#định-lý-5.2",
-    "title": "3 Applications: order-finding and factoring",
-    "section": "Định lý 5.2",
-    "text": "Định lý 5.2\nGiả sử N là một hợp số L bit, và x là một nghiệm không tầm thường cho phương trình x^2 \\equiv 1 \\pmod N trong khoảng 1 \\le x \\le N, tức là, không phải x \\equiv 1 \\pmod N cũng không phải x \\equiv N - 1 \\equiv -1 \\pmod N. Khi đó ít nhất một trong hai \\gcd(x - 1, N) và \\gcd(x + 1, N) là một thừa số không tầm thường của N mà có thể được tính toán sử dụng O(L^3) phép toán.",
-    "crumbs": [
-      "5 The quantum Fourier transform and its applications",
-      "3 Applications: order-finding and factoring"
-    ]
-  },
-  {
-    "objectID": "note/qft/3.html#định-lý-5.3",
-    "href": "note/qft/3.html#định-lý-5.3",
-    "title": "3 Applications: order-finding and factoring",
-    "section": "Định lý 5.3",
-    "text": "Định lý 5.3\nGiả sử N = p_1^{\\alpha_1} \\dots p_m^{\\alpha_m} là sự phân tích ra thừa số nguyên tố của một số nguyên dương hợp số lẻ. Cho x là một số nguyên được chọn ngẫu nhiên đồng nhất, tuân theo các yêu cầu là 1 \\le x \\le N - 1 và x nguyên tố cùng nhau với N. Cho r là bậc của x modulo N. Khi đó\n\np(r \\text{ is even and } x^{r/2} \\not\\equiv -1 \\pmod N) \\ge 1 - \\frac{1}{2^m}. \\tag{5.60}",
-    "crumbs": [
-      "5 The quantum Fourier transform and its applications",
-      "3 Applications: order-finding and factoring"
     ]
   }
 ]
