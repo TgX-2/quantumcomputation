@@ -341,6 +341,12 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1 Quantum Algorithms</span></a>
   </div>
@@ -592,6 +598,12 @@ window.Quarto = {
  <span class="menu-text">Simulations Quantum</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -599,8 +611,14 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#những-câu-hỏi-ngõ" id="toc-những-câu-hỏi-ngõ" class="nav-link active" data-scroll-target="#những-câu-hỏi-ngõ">Những câu hỏi ngõ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -658,8 +676,78 @@ window.Quarto = {
 </blockquote>
 <p>Khám phá ngoạn mục nhất trong tính toán lượng tử cho đến nay là máy tính lượng tử có thể thực hiện một cách hiệu quả một số tác vụ vốn không hề khả thi trên một máy tính cổ điển. Ví dụ, việc tìm phân tích tiêu chuẩn ra thừa số nguyên tố của một số nguyên <span class="math inline">n</span>-bit được cho là đòi hỏi <span class="math inline">\exp(\Theta(n^{1/3} \log^{2/3} n))</span> phép toán khi sử dụng thuật toán cổ điển tốt nhất được biết đến tại thời điểm viết sách, thứ được gọi là sàng trường số (number field sieve). Con số này có độ lớn theo hàm mũ so với kích thước của số đang được phân tích, vì vậy việc phân tích thành thừa số nhìn chung được coi là một bài toán không thể giải quyết (intractable) trên máy tính cổ điển: nó nhanh chóng trở nên bất khả thi ngay cả đối với việc phân tích những con số có kích thước khiêm tốn. Ngược lại, một thuật toán lượng tử có thể hoàn thành cùng tác vụ đó bằng cách sử dụng <span class="math inline">O(n^2 \log n \log \log n)</span> phép toán. Tức là, một máy tính lượng tử có thể phân tích một số thành thừa số nhanh hơn theo hàm mũ so với các thuật toán cổ điển tốt nhất từng được biết đến. Bản thân kết quả này đã rất quan trọng, nhưng có lẽ khía cạnh thú vị nhất chính là câu hỏi mà nó đặt ra: những bài toán nào khác có thể được thực hiện một cách hiệu quả trên máy tính lượng tử mà lại bất khả thi trên máy tính cổ điển?</p>
 <p>Trong chương này, chúng ta phát triển biến đổi Fourier lượng tử (quantum Fourier transform), thành phần then chốt cho việc phân tích thừa số lượng tử và nhiều thuật toán lượng tử thú vị khác. Biến đổi Fourier lượng tử, mà chúng ta bắt đầu ở Mục 5.1, là một thuật toán lượng tử hiệu quả để thực hiện phép biến đổi Fourier lên các biên độ cơ học lượng tử. Nó không làm tăng tốc tác vụ cổ điển là tính toán phép biến đổi Fourier của dữ liệu cổ điển. Nhưng một tác vụ quan trọng mà nó cho phép thực hiện là ước lượng pha (phase estimation), tức là sự xấp xỉ các trị riêng của một toán tử unita trong những hoàn cảnh nhất định, như được mô tả ở Mục 5.2. Điều này cho phép chúng ta giải quyết một vài bài toán thú vị khác, bao gồm bài toán tìm bậc (order-finding problem) và bài toán phân tích thừa số (factoring problem), được đề cập trong Mục 5.3. Ước lượng pha cũng có thể được kết hợp với thuật toán tìm kiếm lượng tử để giải quyết bài toán đếm số lượng nghiệm (counting solutions) cho một bài toán tìm kiếm, như được mô tả trong chương tiếp theo. Mục 5.4 kết thúc chương với một cuộc thảo luận về cách biến đổi Fourier lượng tử có thể được sử dụng để giải quyết bài toán nhóm con ẩn (hidden subgroup problem), một sự tổng quát hóa của các bài toán ước lượng pha và tìm bậc, mà trong số các trường hợp đặc biệt của nó có một thuật toán lượng tử hiệu quả cho bài toán logarit rời rạc (discrete logarithm problem), một bài toán khác được coi là không thể giải quyết (intractable) trên máy tính cổ điển.</p>
+<section id="những-câu-hỏi-ngõ" class="level1">
+<h1>Những câu hỏi ngõ</h1>
+<ol type="1">
+<li>Biến đổi Fourier lượng tử — QFT (Mục 5.1)</li>
+</ol>
+<p>Định nghĩa toán học của QFT ở công thức (5.2) vẫn là nền tảng bất biến, nhưng cách triển khai mạch <span class="math inline">O(n^2)</span> cổng xoay pha có điều khiển (<span class="math inline">CR_k</span>) kèm <span class="math inline">\lfloor n/2 \rfloor</span> cổng SWAP ở cuối sách chỉ còn dùng để giảng dạy:</p>
+<ul>
+<li><p>Semiclassical QFT (Griffiths–Niu): Thay vì giữ đồng thời cả <span class="math inline">n</span> qubit trong suốt quá trình biến đổi, các trình biên dịch hiện đại dùng kỹ thuật đo giữa mạch (mid-circuit measurement) kết hợp điều khiển cổ điển (feedforward). Cách này chỉ tốn đúng 1 qubit phụ, loại bỏ toàn bộ cổng SWAP và giảm mạnh lỗi mất kết hợp.</p></li>
+<li><p>Tối ưu chi phí cổng <span class="math inline">T</span> bằng Phase Gradient State: Trong kiến trúc chịu lỗi (FTQC), các cổng quay góc siêu nhỏ <span class="math inline">R_k = R_z(2\pi / 2^k)</span> cực kỳ đắt đỏ vì phải tổng hợp xấp xỉ từ hàng chục cổng <span class="math inline">T</span>. Thay vì xoay trực tiếp, các thiết kế hiện đại (Nam và cộng sự; Gidney) chuẩn bị sẵn một thanh ghi xúc tác gradient pha (tái sử dụng được cho toàn bộ thuật toán) và biến phép QFT thành các phép cộng lượng tử thông thường, ép chi phí cổng <span class="math inline">T</span> xuống mức <span class="math inline">O(n \log n)</span> hoặc <span class="math inline">O(n)</span>.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Ước lượng pha lượng tử — QPE (Mục 5.2)</li>
+</ol>
+<p>Mạch QPE chuẩn trong sách đòi hỏi duy trì tính kết hợp xuyên suốt chuỗi <span class="math inline">C\text{-}U^{2^k}</span> rất sâu và kết thúc bằng khối <span class="math inline">\text{QFT}^\dagger</span> đa qubit:</p>
+<p>Iterative QPE (IQPE / Kitaev QPE): Trở thành tiêu chuẩn thực hành nhờ chỉ dùng 1 qubit đếm duy nhất, đo lặp lại từng bit của pha <span class="math inline">\varphi</span> từ bit có trọng số thấp nhất lên cao nhất và dùng phản hồi cổ điển để trừ phần dư ở mỗi vòng lặp.</p>
+<p>Thế hệ Post-QPE cho kỷ nguyên Early Fault-Tolerant (2020–2026): Khi phần cứng chưa đủ chịu lỗi để chạy một mạch <span class="math inline">C\text{-}U^{2^k}</span> quá dài, các thuật toán mới như QCELS (Quantum Complex Exponential Least Squares), QPE thống kê của Lin–Tong, và lọc phổ dựa trên QSVT chia bài toán thành nhiều mạch tiến hóa thời gian ngắn <span class="math inline">e^{-iHt}</span> độc lập, sau đó dùng xử lý tín hiệu Fourier cổ điển (khớp hàm mũ phức) để trích xuất trị riêng năng lượng — loại bỏ hoàn toàn khối <span class="math inline">\text{QFT}^\dagger</span> lượng tử và chịu được nhiễu lớn hơn nhiều.</p>
+<ol start="3" type="1">
+<li>Thuật toán Shor: Tìm bậc, Logarit rời rạc &amp; Phân tích thừa số (Mục 5.3)</li>
+</ol>
+<p>Cuốn sách trình bày phép lũy thừa mô-đun <span class="math inline">a^x \bmod N</span> với chi phí <span class="math inline">O(n^3)</span> cổng và hậu xử lý bằng thuật toán liên phân số (continued fractions):</p>
+<p>Đột phá độ phức tạp của Oded Regev (2023): Sau gần 30 năm, Regev lần đầu tiên phá vỡ rào cản <span class="math inline">O(n^2)</span> phép nhân của Shor bằng cách sử dụng QFT đa chiều kết hợp với các thuật toán rút gọn mạng (lattice reduction), giảm số phép nhân lượng tử xuống còn <span class="math inline">O(n^{3/2})</span> (đánh đổi bằng việc tăng số qubit bộ nhớ — sau đó tiếp tục được Ragavan và Vaikuntanathan tối ưu giảm không gian lưu trữ).</p>
+<p>Tối ưu hóa kiến trúc và hậu xử lý (Ekerå–Håstad &amp; Gidney):</p>
+<ul>
+<li><p>Thay thuật toán liên phân số cổ điển bằng phương pháp lấy mẫu lưới của Ekerå–Håstad (2017), giúp giảm một nửa độ dài số mũ cần tính trong bài toán logarit rời rạc và phân tích thừa số (đạt xác suất thành công <span class="math inline">&gt;99\%</span> chỉ sau một lần chạy mạch lượng tử duy nhất).</p></li>
+<li><p>Áp dụng số học cửa sổ (windowed arithmetic), bộ nhớ tạm thời (oblivious carry runways) và mã sửa lỗi qLDPC, kéo ước tính tài nguyên vật lý để phá khóa RSA-2048 từ hàng trăm triệu qubit xuống dưới 1 triệu qubit vật lý.</p></li>
+</ul>
+<ol start="4" type="1">
+<li>Bài toán Nhóm con Ẩn — HSP (Mục 5.4)</li>
+</ol>
+<p>Ở cuối Chương 5, nhóm tác giả đặt kỳ vọng lớn vào việc mở rộng QFT cho các nhóm không giao hoán (non-Abelian HSP) để giải hai bài toán trọng tâm là Đẳng cấu đồ thị và Mật mã mạng:</p>
+<p>Nhóm đối xứng <span class="math inline">S_n</span> (Graph Isomorphism): Giới lý thuyết đã chứng minh các định lý giới hạn (Hallgren, Moore, Russell, Schulman) cho thấy phép lấy mẫu Fourier chuẩn trên <span class="math inline">S_n</span> không thể giải hiệu quả bài toán này; đồng thời thuật toán cổ điển chuẩn đa thức của László Babai (2015) đã giải quyết bài toán đẳng cấu đồ thị trên máy tính thông thường.</p>
+<p>Nhóm nhị diện <span class="math inline">D_n</span> (Bài toán vectơ ngắn nhất trên mạng — SVP): Thuật toán sàng lượng tử nổi tiếng nhất của Kuperberg chỉ đạt độ phức tạp dưới hàm mũ <span class="math inline">2^{O(\sqrt{n})}</span> (vẫn không giải được trong thời gian đa thức). Chính sự bế tắc của HSP trên nhóm nhị diện này là cơ sở bảo chứng an toàn để NIST chuẩn hóa Mật mã hậu lượng tử dựa trên mạng (ML-KEM / Kyber, ML-DSA / Dilithium).</p>
+<p>Bảng đối chiếu Chương 5 (2000 vs.&nbsp;Hiện đại)</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nội dung trong Chương 5</th>
+<th style="text-align: left;">Cách tiếp cận năm 2000</th>
+<th style="text-align: left;">Chuẩn mực &amp; Kế thừa hiện đại</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mạch QFT (5.1)</td>
+<td style="text-align: left;">Mạch kết hợp <span class="math inline">n</span> qubit, <span class="math inline">O(n^2)</span> cổng <span class="math inline">CR_k</span> + <span class="math inline">\lfloor n/2 \rfloor</span> SWAP.</td>
+<td style="text-align: left;">Semiclassical QFT (1 qubit phụ + đo giữa mạch); dùng Phase Gradient State để tối ưu cổng <span class="math inline">T</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ước lượng pha QPE (5.2)</td>
+<td style="text-align: left;">Thanh ghi đếm <span class="math inline">t</span> qubit + khối <span class="math inline">\text{QFT}^\dagger</span> lượng tử.</td>
+<td style="text-align: left;">Iterative QPE (IQPE); nhóm thuật toán QCELS / Lin–Tong / QSVT (chạy mạch ngắn + khớp phổ cổ điển).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thuật toán Shor (5.3)</td>
+<td style="text-align: left;">QFT 1 chiều (<span class="math inline">O(n^3)</span> cổng) + hậu xử lý liên phân số.</td>
+<td style="text-align: left;">Thuật toán Regev (2023) (<span class="math inline">O(n^{3/2})</span> phép nhân); hậu xử lý lưới Ekerå–Håstad; giảm tài nguyên RSA-2048 xuống <span class="math inline">&lt;10^6</span> qubit vật lý.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nhóm con ẩn HSP (5.4)</td>
+<td style="text-align: left;">Kỳ vọng giải Graph Isomorphism (<span class="math inline">S_n</span>) và bài toán mạng (<span class="math inline">D_n</span>).</td>
+<td style="text-align: left;">Chứng minh giới hạn trên <span class="math inline">S_n</span> (cùng thuật toán cổ điển của Babai); sàng Kuperberg trên <span class="math inline">D_n</span> chỉ đạt <span class="math inline">2^{O(\sqrt{n})}</span>, mở đường cho mật mã hậu lượng tử Lattice.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

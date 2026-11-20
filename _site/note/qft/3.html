@@ -592,6 +592,12 @@ window.Quarto = {
  <span class="menu-text">Simulations Quantum</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -610,10 +616,12 @@ window.Quarto = {
   <li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance">Performance</a></li>
   <li><a href="#algorithm-quantum-order-finding" id="toc-algorithm-quantum-order-finding" class="nav-link" data-scroll-target="#algorithm-quantum-order-finding">Algorithm: Quantum order-finding</a></li>
   </ul></li>
-  <li><a href="#application-factoring" id="toc-application-factoring" class="nav-link" data-scroll-target="#application-factoring">Application: factoring</a></li>
+  <li><a href="#application-factoring" id="toc-application-factoring" class="nav-link" data-scroll-target="#application-factoring">Application: factoring</a>
+  <ul class="collapse">
   <li><a href="#định-lý-5.2" id="toc-định-lý-5.2" class="nav-link" data-scroll-target="#định-lý-5.2">Định lý 5.2</a></li>
   <li><a href="#định-lý-5.3" id="toc-định-lý-5.3" class="nav-link" data-scroll-target="#định-lý-5.3">Định lý 5.3</a></li>
   <li><a href="#algorithm-reduction-of-factoring-to-order-finding" id="toc-algorithm-reduction-of-factoring-to-order-finding" class="nav-link" data-scroll-target="#algorithm-reduction-of-factoring-to-order-finding">Algorithm: Reduction of factoring to order-finding</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -924,11 +932,16 @@ V\vert{}j\rangle\vert{}k\rangle = \vert{}j\rangle \vert{}k + x^j \pmod N\rangle,
 </section>
 <section id="algorithm-quantum-order-finding" class="level2">
 <h2 class="anchored" data-anchor-id="algorithm-quantum-order-finding">Algorithm: Quantum order-finding</h2>
-<p>Thuật toán: Tìm bậc lượng tử (Quantum order-finding)</p>
-<p>Các đầu vào: (1) Một hộp đen <span class="math inline">U_{x,N}</span> thực hiện phép biến đổi <span class="math inline">\vert{}j\rangle\vert{}k\rangle \to \vert{}j\rangle \vert{}k + x^j \pmod N\rangle</span>, đối với <span class="math inline">x</span> nguyên tố cùng nhau với số <span class="math inline">L</span>-bit <span class="math inline">N</span>. (2) <span class="math inline">t = 2L + 1 + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}0\rangle</span>. (3) <span class="math inline">L</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}1\rangle</span>.</p>
-<p>Đầu ra: Số nguyên dương nhỏ nhất <span class="math inline">r &gt; 0</span> sao cho <span class="math inline">x^r \equiv 1 \pmod N</span>.</p>
-<p>Thời gian chạy (Runtime): <span class="math inline">O(L^3)</span> phép toán. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
-<p>Quy trình:</p>
+<p><strong>Thuật toán:</strong> Tìm bậc lượng tử (Quantum order-finding)</p>
+<p><strong>Các đầu vào:</strong></p>
+<ol type="1">
+<li>Một hộp đen <span class="math inline">U_{x,N}</span> thực hiện phép biến đổi <span class="math inline">\vert{}j\rangle\vert{}k\rangle \to \vert{}j\rangle \vert{}k + x^j \pmod N\rangle</span>, đối với <span class="math inline">x</span> nguyên tố cùng nhau với số <span class="math inline">L</span>-bit <span class="math inline">N</span>.</li>
+<li><span class="math inline">t = 2L + 1 + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}0\rangle</span>.</li>
+<li><span class="math inline">L</span> qubit được khởi tạo ở trạng thái <span class="math inline">\vert{}1\rangle</span>.</li>
+</ol>
+<p><strong>Đầu ra:</strong> Số nguyên dương nhỏ nhất <span class="math inline">r &gt; 0</span> sao cho <span class="math inline">x^r \equiv 1 \pmod N</span>.</p>
+<p><strong>Thời gian chạy:</strong> <span class="math inline">O(L^3)</span> phép toán. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
+<p><strong>Quy trình:</strong></p>
 <ol type="1">
 <li><span class="math inline">\vert{}0\rangle\vert{}1\rangle</span> (trạng thái ban đầu)<br>
 </li>
@@ -951,26 +964,25 @@ V\vert{}j\rangle\vert{}k\rangle = \vert{}j\rangle \vert{}k + x^j \pmod N\rangle,
 </blockquote>
 <p>Cho một số nguyên dương hợp số <span class="math inline">N</span>, những số nguyên tố nào khi nhân lại với nhau thì bằng nó? Bài toán phân tích thừa số này hóa ra lại tương đương với bài toán tìm bậc mà chúng ta vừa nghiên cứu, theo nghĩa là một thuật toán nhanh cho việc tìm bậc có thể dễ dàng được biến đổi thành một thuật toán nhanh cho việc phân tích thừa số. Trong phần này, chúng tôi giải thích phương pháp được sử dụng để giản lược bài toán phân tích thừa số về bài toán tìm bậc, và đưa ra một ví dụ đơn giản về sự giản lược này.</p>
 <p>Việc giản lược bài toán phân tích thừa số về bài toán tìm bậc diễn ra theo hai bước cơ bản. Bước đầu tiên là chỉ ra rằng chúng ta có thể tính toán một thừa số của <span class="math inline">N</span> nếu chúng ta có thể tìm thấy một nghiệm không tầm thường (non-trivial solution) <span class="math inline">x \not\equiv \pm 1 \pmod N</span> cho phương trình <span class="math inline">x^2 \equiv 1 \pmod N</span>. Bước thứ hai là chỉ ra rằng một số <span class="math inline">y</span> được chọn ngẫu nhiên nguyên tố cùng nhau với <span class="math inline">N</span> có khả năng khá cao sẽ có một bậc <span class="math inline">r</span> là số chẵn, và sao cho <span class="math inline">y^{r/2} \not\equiv \pm 1 \pmod N</span>, và do đó <span class="math inline">x \equiv y^{r/2} \pmod N</span> là một nghiệm không tầm thường cho <span class="math inline">x^2 \equiv 1 \pmod N</span>. Hai bước này được hiện thân trong các định lý sau đây, mà chứng minh của chúng có thể được tìm thấy trong Mục A4.3 của Phụ lục 4.</p>
-</section>
-<section id="định-lý-5.2" class="level1 postulates">
-<h1>Định lý 5.2</h1>
+<section id="định-lý-5.2" class="level2 postulates">
+<h2 class="anchored" data-anchor-id="định-lý-5.2">Định lý 5.2</h2>
 <p>Giả sử <span class="math inline">N</span> là một hợp số <span class="math inline">L</span> bit, và <span class="math inline">x</span> là một nghiệm không tầm thường cho phương trình <span class="math inline">x^2 \equiv 1 \pmod N</span> trong khoảng <span class="math inline">1 \le x \le N</span>, tức là, không phải <span class="math inline">x \equiv 1 \pmod N</span> cũng không phải <span class="math inline">x \equiv N - 1 \equiv -1 \pmod N</span>. Khi đó ít nhất một trong hai <span class="math inline">\gcd(x - 1, N)</span> và <span class="math inline">\gcd(x + 1, N)</span> là một thừa số không tầm thường của <span class="math inline">N</span> mà có thể được tính toán sử dụng <span class="math inline">O(L^3)</span> phép toán.</p>
 </section>
-<section id="định-lý-5.3" class="level1 postulates">
-<h1>Định lý 5.3</h1>
+<section id="định-lý-5.3" class="level2 postulates">
+<h2 class="anchored" data-anchor-id="định-lý-5.3">Định lý 5.3</h2>
 <p>Giả sử <span class="math inline">N = p_1^{\alpha_1} \dots p_m^{\alpha_m}</span> là sự phân tích ra thừa số nguyên tố của một số nguyên dương hợp số lẻ. Cho <span class="math inline">x</span> là một số nguyên được chọn ngẫu nhiên đồng nhất, tuân theo các yêu cầu là <span class="math inline">1 \le x \le N - 1</span> và <span class="math inline">x</span> nguyên tố cùng nhau với <span class="math inline">N</span>. Cho <span class="math inline">r</span> là bậc của <span class="math inline">x</span> modulo <span class="math inline">N</span>. Khi đó</p>
 <p><span class="math display">
-p(r \text{ là số chẵn và } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}{2^m}. \tag{5.60}
+p(r \text{ is even and } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}{2^m}. \tag{5.60}
 </span></p>
 </section>
 <p>Các định lý 5.2 và 5.3 có thể được kết hợp để tạo ra một thuật toán mà với xác suất cao, sẽ trả về một ước số không tầm thường của bất kỳ hợp số N nào. Tất cả các bước trong thuật toán này đều có thể được thực hiện một cách hiệu quả trên máy tính cổ điển, ngoại trừ một “subroutine” dùng để tìm bậc (order-finding) – vốn là thành phần mà cho đến nay, người ta vẫn chưa biết cách thực hiện hiệu quả trên máy tính cổ điển. Bằng cách lặp lại quy trình này, ta có thể tìm được phân tích thừa số nguyên tố đầy đủ của N. Thuật toán được tóm tắt dưới đây.</p>
 <section id="algorithm-reduction-of-factoring-to-order-finding" class="level2">
 <h2 class="anchored" data-anchor-id="algorithm-reduction-of-factoring-to-order-finding">Algorithm: Reduction of factoring to order-finding</h2>
-<p>Thuật toán: Rút gọn bài toán phân tích thừa số về tìm bậc</p>
-<p>Các đầu vào: Một hợp số <span class="math inline">N</span></p>
-<p>Đầu ra: Một thừa số không tầm thường của <span class="math inline">N</span>.</p>
-<p>Thời gian chạy: Các phép toán <span class="math inline">O((\log N)^3)</span>. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
-<p>Quy trình:</p>
+<p><strong>Thuật toán:</strong> Rút gọn bài toán phân tích thừa số về tìm bậc</p>
+<p><strong>Các đầu vào:</strong> Một hợp số <span class="math inline">N</span></p>
+<p><strong>Đầu ra:</strong> Một thừa số không tầm thường của <span class="math inline">N</span>.</p>
+<p><strong>Thời gian chạy:</strong> Các phép toán <span class="math inline">O((\log N)^3)</span>. Thành công với xác suất <span class="math inline">O(1)</span>.</p>
+<p><strong>Quy trình:</strong></p>
 <ol type="1">
 <li>Nếu <span class="math inline">N</span> là số chẵn, trả về thừa số 2.<br>
 </li>
@@ -1067,6 +1079,7 @@ p(r \text{ là số chẵn và } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

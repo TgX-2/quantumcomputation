@@ -259,15 +259,19 @@ Phép biến đổi Hadamard đòi hỏi $O(L)$ cổng, và biến đổi Fourie
 
 ## Algorithm: Quantum order-finding
 
-Thuật toán: Tìm bậc lượng tử (Quantum order-finding)   
+**Thuật toán:** Tìm bậc lượng tử (Quantum order-finding)   
 
-Các đầu vào: (1) Một hộp đen $U_{x,N}$ thực hiện phép biến đổi $\vert{}j\rangle\vert{}k\rangle \to \vert{}j\rangle \vert{}k + x^j \pmod N\rangle$, đối với $x$ nguyên tố cùng nhau với số $L$-bit $N$. (2) $t = 2L + 1 + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil$ qubit được khởi tạo ở trạng thái $\vert{}0\rangle$. (3) $L$ qubit được khởi tạo ở trạng thái $\vert{}1\rangle$.   
+**Các đầu vào:**
 
-Đầu ra: Số nguyên dương nhỏ nhất $r > 0$ sao cho $x^r \equiv 1 \pmod N$.   
+(1) Một hộp đen $U_{x,N}$ thực hiện phép biến đổi $\vert{}j\rangle\vert{}k\rangle \to \vert{}j\rangle \vert{}k + x^j \pmod N\rangle$, đối với $x$ nguyên tố cùng nhau với số $L$-bit $N$. 
+(2) $t = 2L + 1 + \left\lceil \log \left( 2 + \frac{1}{2\epsilon} \right) \right\rceil$ qubit được khởi tạo ở trạng thái $\vert{}0\rangle$. 
+(3) $L$ qubit được khởi tạo ở trạng thái $\vert{}1\rangle$.   
 
-Thời gian chạy (Runtime): $O(L^3)$ phép toán. Thành công với xác suất $O(1)$.   
+**Đầu ra:** Số nguyên dương nhỏ nhất $r > 0$ sao cho $x^r \equiv 1 \pmod N$.   
 
-Quy trình:   
+**Thời gian chạy:** $O(L^3)$ phép toán. Thành công với xác suất $O(1)$.   
+
+**Quy trình:**   
 
 (1) $\vert{}0\rangle\vert{}1\rangle$ (trạng thái ban đầu)   
 (2) $\to \frac{1}{\sqrt{2^t}} \sum_{j=0}^{2^t-1} \vert{}j\rangle\vert{}1\rangle$ (tạo chồng chập)   
@@ -286,16 +290,16 @@ Cho một số nguyên dương hợp số $N$, những số nguyên tố nào kh
 Việc giản lược bài toán phân tích thừa số về bài toán tìm bậc diễn ra theo hai bước cơ bản. Bước đầu tiên là chỉ ra rằng chúng ta có thể tính toán một thừa số của $N$ nếu chúng ta có thể tìm thấy một nghiệm không tầm thường (non-trivial solution) $x \not\equiv \pm 1 \pmod N$ cho phương trình $x^2 \equiv 1 \pmod N$. Bước thứ hai là chỉ ra rằng một số $y$ được chọn ngẫu nhiên nguyên tố cùng nhau với $N$ có khả năng khá cao sẽ có một bậc $r$ là số chẵn, và sao cho $y^{r/2} \not\equiv \pm 1 \pmod N$, và do đó $x \equiv y^{r/2} \pmod N$ là một nghiệm không tầm thường cho $x^2 \equiv 1 \pmod N$. Hai bước này được hiện thân trong các định lý sau đây, mà chứng minh của chúng có thể được tìm thấy trong Mục A4.3 của Phụ lục 4.
 
 :::{.postulates}
-# Định lý 5.2
+## Định lý 5.2
 Giả sử $N$ là một hợp số $L$ bit, và $x$ là một nghiệm không tầm thường cho phương trình $x^2 \equiv 1 \pmod N$ trong khoảng $1 \le x \le N$, tức là, không phải $x \equiv 1 \pmod N$ cũng không phải $x \equiv N - 1 \equiv -1 \pmod N$. Khi đó ít nhất một trong hai $\gcd(x - 1, N)$ và $\gcd(x + 1, N)$ là một thừa số không tầm thường của $N$ mà có thể được tính toán sử dụng $O(L^3)$ phép toán.
 :::
 
 :::{.postulates}
-# Định lý 5.3
+## Định lý 5.3
 Giả sử $N = p_1^{\alpha_1} \dots p_m^{\alpha_m}$ là sự phân tích ra thừa số nguyên tố của một số nguyên dương hợp số lẻ. Cho $x$ là một số nguyên được chọn ngẫu nhiên đồng nhất, tuân theo các yêu cầu là $1 \le x \le N - 1$ và $x$ nguyên tố cùng nhau với $N$. Cho $r$ là bậc của $x$ modulo $N$. Khi đó
 
 $$
-p(r \text{ là số chẵn và } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}{2^m}. \tag{5.60}
+p(r \text{ is even and } x^{r/2} \not\equiv -1 \pmod N) \ge 1 - \frac{1}{2^m}. \tag{5.60}
 $$
 :::
 
@@ -303,15 +307,15 @@ Các định lý 5.2 và 5.3 có thể được kết hợp để tạo ra một
 
 ## Algorithm: Reduction of factoring to order-finding
 
-Thuật toán: Rút gọn bài toán phân tích thừa số về tìm bậc   
+**Thuật toán:** Rút gọn bài toán phân tích thừa số về tìm bậc   
 
-Các đầu vào: Một hợp số $N$   
+**Các đầu vào:** Một hợp số $N$   
 
-Đầu ra: Một thừa số không tầm thường của $N$.   
+**Đầu ra:** Một thừa số không tầm thường của $N$.   
 
-Thời gian chạy: Các phép toán $O((\log N)^3)$. Thành công với xác suất $O(1)$.   
+**Thời gian chạy:** Các phép toán $O((\log N)^3)$. Thành công với xác suất $O(1)$.   
 
-Quy trình:   
+**Quy trình:**
 
 (1) Nếu $N$ là số chẵn, trả về thừa số 2.   
 (2) Xác định xem liệu $N = a^b$ cho các số nguyên $a \ge 1$ và $b \ge 2$, và nếu vậy trả về thừa số $a$ (sử dụng thuật toán cổ điển của Bài tập 5.17).   

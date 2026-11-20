@@ -49,6 +49,7 @@ website:
 
       - section : "4 Quantum circuits"
         contents:
+          - note/quantumcircuits/index.qmd
           - note/quantumcircuits/1.qmd
           - note/quantumcircuits/2.qmd
           - note/quantumcircuits/3.qmd

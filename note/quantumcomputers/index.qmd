@@ -88,3 +88,52 @@ Nếu nhìn từ góc độ nghiên cứu năm 2026, có 4 di sản lý thuyết
 
 # Những câu hỏi ngỏ
 
+1. Tiêu chuẩn DiVincenzo (Mục 7.1) $\to$ Tiêu chuẩn kiến trúc chịu lỗi (FTQC)
+
+Danh sách kiểm tra 5+2 tiêu chuẩn của DiVincenzo trong sách vẫn đúng cho một bộ xử lý lượng tử nguyên mẫu, nhưng chưa đủ để xây dựng máy tính lượng tử quy mô lớn. Thực nghiệm hiện đại bổ sung thêm 4 yêu cầu kiến trúc bắt buộc cho sửa lỗi lượng tử:
+
+* Tỷ lệ lỗi dưới ngưỡng (Below-threshold error rates): Lỗi cổng 2-qubit và lỗi đọc trạng thái phải nằm dưới ngưỡng chịu lỗi (thường $< 10^{-3}$) để việc tăng số lượng qubit vật lý làm giảm thay vì làm tăng lỗi logic.
+
+* Đo giữa mạch không nhiễu xuyên âm (Crosstalk-free mid-circuit measurement): Khả năng đo một tập qubit phụ trong khi các qubit dữ liệu lân cận vẫn duy trì tính kết hợp lượng tử, kèm thời gian phản hồi cổ điển (feedforward) nhanh hơn nhiều lần thời gian sống của qubit.
+
+* Kết nối phi cục bộ (Non-local connectivity): Khả năng tương tác vượt ra ngoài các qubit hàng xóm gần nhất trên mặt phẳng 2D để giảm chi phí số lượng qubit vật lý thông qua các mã sửa lỗi hiện đại (như qLDPC).
+
+2. Bộ dao động điều hòa & Quang học lượng tử (Mục 7.3–7.4)
+
+Cuốn sách khẳng định máy tính lượng tử quang học cần môi trường phi tuyến Kerr ($\chi^{(3)}$) cực mạnh ở mức đơn photon để tạo cổng 2-qubit — điều bất khả thi về mặt vật liệu vì suy hao tán xạ quá lớn.
+
+Lời giải cho tính phi tuyến (Giao thức KLM & FBQC): Năm 2001, Knill, Laflamme và Milburn chứng minh rằng chỉ cần quang học tuyến tính (bộ chia chùm tia, dịch pha), nguồn đơn photon và bộ đếm photon kết hợp đo chọn lọc (post-selection) là đủ tạo ra tính phi tuyến hiệu dụng và tính vạn năng. Kiến trúc này hiện tiến hóa thành Fusion-Based Quantum Computing (FBQC): tạo sẵn các trạng thái vướng víu nhỏ (resource states) rồi nối chúng lại bằng các phép đo hợp nhất quang học (fusion measurements).
+
+Sự hồi sinh của Bộ dao động điều hòa (Mục 7.3): Không gian vô hạn chiều của dao động tử điều hòa từng bị xem là khó điều khiển nay trở thành lõi của Bosonic Qubits (mã GKP, Cat qubits, Binomial codes). Thay vì dùng nhiều hệ 2 mức rời rạc, người ta mã hóa thông tin vào các trạng thái chồng chập của mode dao động vi sóng hoặc quang học để tự triệt tiêu lỗi mất photon ngay ở cấp độ phần cứng.
+
+3. Cavity QED & Bẫy Ion (Mục 7.5–7.6)
+
+Từ Optical Cavity QED sang Circuit QED: Việc giữ nguyên tử trung hòa bay qua hốc gương quang học rất khó mở rộng thành vi mạch. Tuy nhiên, toàn bộ mô hình tương tác ánh sáng – vật chất Jaynes–Cummings của Mục 7.5 đã được chuyển sang miền tần số vi sóng trên chip rắn, khai sinh ra Circuit QED (2004). Kỹ thuật này dùng đọc trạng thái tán sắc (dispersive readout) và bộ lọc Purcell để đo trạng thái qubit siêu dẫn nhanh và chính xác mà không làm mất trạng thái lượng tử, trong khi Optical Cavity QED chuyển sang làm giao diện chuyển đổi photon cho mạng lượng tử.
+
+Nâng cấp Bẫy Ion (Cổng Mølmer–Sørensen & QCCD): Cổng Cirac–Zoller trong sách đòi hỏi phải làm lạnh mode dao động chung của chuỗi ion về đúng trạng thái cơ bản ($n = 0$), khiến mạch dễ sụp đổ do nhiễu nhiệt và tắc nghẽn tần số khi chuỗi ion dài ra. Thực nghiệm đã thay thế bằng cổng Mølmer–Sørensen (dùng laser hai sắc tạo lực phụ thuộc spin qua dao động ảo, miễn nhiễm với nhiệt độ dao động bậc nhất) và kiến trúc QCCD — chia chip thành nhiều vùng bẫy nhỏ và di chuyển vật lý từng ion qua lại giữa vùng lưu trữ và vùng tương tác.
+
+4. NMR chất lỏng (Mục 7.7) $\to$ Ngã ngũ tranh luận và chuyển giao công nghệ
+
+Năm 2000, cộng hưởng từ hạt nhân chất lỏng (Liquid-state NMR) là nền tảng dẫn đầu về số lượng qubit thực nghiệm. Ngày nay, hướng đi này đã khép lại hoàn toàn:
+
+* Đáp án cho tranh luận về tính vướng víu: Sách từng đặt câu hỏi liệu các "trạng thái giả thuần" (pseudo-pure states) ở nhiệt độ phòng có chứa vướng víu thực sự hay không. Lý thuyết thông tin lượng tử đã chứng minh các trạng thái này nằm hoàn toàn trong vùng tách được (zero entanglement) và có thể mô phỏng hiệu quả trên máy tính cổ điển; đồng thời tín hiệu đo suy giảm theo hàm mũ $n/2^n$ là rào cản nhiệt động lực học không thể vượt qua.
+
+* Di sản kế thừa: Kỹ thuật điều khiển xung động học (dynamical decoupling và pulse shaping) của NMR được kế thừa trực tiếp sang hệ spin chất rắn — tiêu biểu là tâm khuyết tật Nitơ-lỗ trống (NV-center) trong kim cương (ứng dụng làm cảm biến lượng tử siêu nhạy và nút lặp mạng lượng tử) và qubit spin chấm lượng tử trên Silic đồng vị tinh khiết $^{28}\text{Si}$ (loại bỏ nhiễu từ trường hạt nhân).
+
+5. Các đề xuất sơ khai cuối chương (Mục 7.8) $\to$ Trụ cột phần cứng hiện đạiNhững ý tưởng mới chỉ được nhắc qua ở Mục 7.8 lại chính là các kiến trúc dẫn đầu hiện nay sau khi giải quyết được nút thắt vật liệu:
+
+Mạch siêu dẫn: Qubit hộp cặp Cooper (Cooper-pair box) trong sách có thời gian sống chỉ vài nano-giây do nhiễu điện tích $1/f$ cực lớn. Phát minh ra Transmon (2007 — mắc song song tụ điện lớn để làm phẳng dải năng lượng theo điện tích) và thế hệ kế nhiệm Fluxonium (dùng chuỗi tiếp giáp Josephson tạo độ tự cảm lớn để kháng cả nhiễu điện tích lẫn từ thông) đã nâng thời gian kết hợp lên mức mili-giây và độ trung thực cổng 2-qubit vượt $99.9\%$.
+
+Mảng nguyên tử trung hòa (Neutral Atoms): Kết hợp nhíp quang học (optical tweezers) và hiệu ứng phong tỏa Rydberg (Rydberg blockade) cho phép bẫy hàng nghìn nguyên tử và di chuyển vật lý các qubit đang mang trạng thái vướng víu xuyên không gian trên chip để tái cấu trúc kết nối động theo từng bước thuật toán.
+
+Bán dẫn Silic: Từ bỏ hướng cấy từng nguyên tử tạp chất Photpho của mô hình Kane (vốn quá khó kiểm soát độ chính xác cấp nguyên tử) để chuyển sang chấm lượng tử định nghĩa bằng cổng điện cực trên dị thể Si/SiGe, tận dụng trực tiếp dây chuyền vi chế tạo bán dẫn CMOS.
+
+Bảng đối chiếu tổng hợp Chương 7 (2000 vs. Hiện đại)
+
+| Mục trong Chương 7 | Thực trạng & Tranh luận năm 2000 | Đáp án & Kiến trúc kế thừa hiện đại | 
+| :--- | :--- | :--- |
+| Tiêu chuẩn DiVincenzo (7.1) | 5 tiêu chuẩn phần cứng cơ bản + 2 tiêu chuẩn truyền thông. | Mở rộng thêm tiêu chuẩn FTQC: lỗi dưới ngưỡng, đo giữa mạch nhanh, kết nối phi cục bộ. | 
+| Dao động điều hòa & Quang học (7.3–7.4) | Cần phi tuyến Kerr đơn photon cực mạnh (bế tắc vật liệu). | Giao thức KLM & FBQC (quang học tuyến tính + đo lường); Bosonic Qubits (GKP, Cat). | 
+| Cavity QED & Bẫy Ion (7.5–7.6) | Hốc quang học khó mở rộng; cổng Cirac–Zoller nhạy nhiễu nhiệt ($n=0$). | Circuit QED (vi sóng trên chip siêu dẫn); cổng Mølmer–Sørensen & kiến trúc di chuyển ion QCCD. | 
+| Liquid-state NMR (7.7) | Dẫn đầu thực nghiệm nhưng tranh cãi về vướng víu và tín hiệu $n/2^n$. | Xác nhận không có vướng víu thực sự; dừng phát triển, chuyển giao kỹ thuật xung sang NV-center và $^{28}\text{Si}$. | 
+| Đề xuất sơ khai (7.8) | Cooper-pair box nhiễu nặng; mô hình Kane khó chế tạo. | Transmon / Fluxonium, Mảng nguyên tử trung hòa Rydberg, và Chấm lượng tử Si/SiGe (CMOS). |

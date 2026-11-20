@@ -73,6 +73,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -86,9 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      TgX.2
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">4 Quantum circuits</a></li><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">0 Quantum circuits</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -291,13 +332,19 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">4 Quantum circuits</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">0 Quantum circuits</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
@@ -551,6 +598,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Simulations Quantum</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -558,13 +611,19 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#những-câu-hỏi-ngõ" id="toc-những-câu-hỏi-ngõ" class="nav-link active" data-scroll-target="#những-câu-hỏi-ngõ">Những câu hỏi ngõ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">4 Quantum circuits</a></li><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">0 Quantum circuits</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">0 Quantum circuits</h1>
 </div>
@@ -623,8 +682,96 @@ ul.task-list li input[type="checkbox"] {
 <p>Dọc theo quá trình này, chúng tôi cũng có dịp mô tả nhiều kết quả cơ bản khác của tính toán lượng tử. Mục 4.1 mở đầu chương với một cái nhìn tổng quan về các thuật toán lượng tử, tập trung vào những thuật toán nào đã được biết đến, và các kỹ thuật thống nhất làm nền tảng cho việc xây dựng chúng. Mục 4.2 là một nghiên cứu chi tiết về các phép toán trên một qubit (single qubit operations). Bất chấp sự đơn giản của chúng, các phép toán một qubit mang đến một sân chơi phong phú để xây dựng các ví dụ và kỹ thuật, và việc hiểu chúng một cách chi tiết là điều cốt yếu. Mục 4.3 chỉ ra cách thực hiện các phép toán unita có điều khiển (controlled unitary operations) trên nhiều qubit, và Mục 4.4 thảo luận về sự mô tả của phép đo lường trong mô hình mạch lượng tử. Những yếu tố này sau đó được tập hợp lại trong Mục 4.5 cho việc phát biểu và chứng minh định lý vạn năng. Chúng tôi tóm tắt tất cả các yếu tố cơ bản của tính toán lượng tử trong Mục 4.6, và thảo luận về các biến thể khả dĩ của mô hình, cũng như câu hỏi quan trọng về mối quan hệ sức mạnh tính toán giữa máy tính cổ điển và máy tính lượng tử. Mục 4.7 kết thúc chương với một ứng dụng quan trọng và đầy tính hướng dẫn của tính toán lượng tử trong việc mô phỏng (simulation) các hệ lượng tử thực tế.</p>
 <hr>
 <p>Chương này có lẽ là chương đòi hỏi người đọc làm việc nhiều nhất (reader-intensive) trong tất cả các chương của cuốn sách, với mật độ bài tập cao để bạn hoàn thành, và việc giải thích lý do cho cường độ này là điều đáng giá. Đạt được sự thuần thục với các yếu tố cơ bản của mô hình tính toán mạch lượng tử là khá dễ dàng, nhưng đòi hỏi phải thấm nhuần một số lượng lớn các kết quả và kỹ thuật đơn giản, những thứ phải trở thành bản năng (second nature) nếu người ta muốn tiến tới bài toán khó khăn hơn là thiết kế các thuật toán lượng tử. Vì lý do này, chúng tôi áp dụng một cách tiếp cận định hướng theo ví dụ (example-oriented) trong chương này, và yêu cầu bạn điền vào nhiều chi tiết, nhằm đạt được sự thuần thục như vậy. Có thể có được một cái nhìn tổng quan ít chuyên sâu hơn, nhưng phần nào hời hợt về các yếu tố cơ bản của tính toán lượng tử bằng cách nhảy cóc sang Mục 4.6</p>
+<section id="những-câu-hỏi-ngõ" class="level1">
+<h1>Những câu hỏi ngõ</h1>
+<ol type="1">
+<li>Mạch động (Dynamic Circuits) — Đảo ngược “Nguyên lý trì hoãn phép đo” (Mục 4.4)</li>
+</ol>
+<p>Trong Mục 4.4, cuốn sách giới thiệu Nguyên lý trì hoãn phép đo (Principle of Deferred Measurement): mọi phép đo nằm giữa mạch đều có thể đẩy lùi hết về cuối cùng bằng cách thay các nhánh điều khiển cổ điển thành cổng điều khiển lượng tử. Năm 2000, điều này được coi là tiện lợi để phân tích lý thuyết.</p>
+<p>Thực tế hiện đại (2022–2026): Trên phần cứng thực tế, việc trì hoãn phép đo là một thảm họa vì nó làm phình to số lượng qubit và kéo dài độ sâu mạch (khiến hệ chết vì mất kết hợp trước khi tính xong). Ngành công nghiệp hiện nay vận hành theo chiều ngược lại hoàn toàn thông qua kiến trúc Mạch động (Dynamic Circuits):</p>
+<ul>
+<li><p>Đo qubit phụ ngay giữa mạch (mid-circuit measurement), dùng bộ giải mã FPGA cổ điển tốc độ cao xử lý kết quả trong vài trăm nano-giây (feedforward) để quyết định cổng lượng tử tiếp theo, sau đó tái khởi tạo (reset) qubit phụ đó để dùng lại.</p></li>
+<li><p>Đột phá vật lý: Nhờ đo giữa mạch và phản hồi cổ điển, các mạch động có thể tạo ra các trạng thái vướng víu tầm xa phức tạp (như trạng thái GHZ <span class="math inline">N</span>-qubit, mã bề mặt Surface Code, hoặc các pha tô-pô phi Abel) chỉ với độ sâu mạch hằng số <span class="math inline">O(1)</span> — điều mà các mạch unita thuần túy trong Chương 4 bắt buộc phải tốn độ sâu tuyến tính <span class="math inline">O(N)</span> hoặc <span class="math inline">O(\log N)</span>.</p></li>
+<li><p>Ngoài ra, Tính toán lượng tử dựa trên đo lường (MBQC / One-way quantum computer) của Raussendorf và Briegel (2001) còn loại bỏ hoàn toàn mô hình cổng tuần tự: chuẩn bị sẵn một trạng thái cụm (cluster state) vướng víu lớn rồi thực hiện toàn bộ tính toán chỉ bằng các phép đo 1-qubit thích nghi.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Vượt qua Định lý Solovay-Kitaev bằng Lý thuyết số đại số (Mục 4.5.3)</li>
+</ol>
+<p>Định lý Solovay-Kitaev ở cuối Mục 4.5 chứng minh rằng mọi cổng 1-qubit đều xấp xỉ được với sai số <span class="math inline">\epsilon</span> bằng chuỗi cổng dài <span class="math inline">O(\log^c(1/\epsilon))</span> với <span class="math inline">c \approx 3.97</span>. Dù mang tính lịch sử, thuật toán Solovay-Kitaev gốc cực kỳ kém hiệu quả trong thực tế vì số mũ <span class="math inline">c \approx 4</span> tạo ra hàng chục nghìn cổng <span class="math inline">T</span> cho một phép quay đơn giản.</p>
+<p>Đột phá kế thừa (2012–2016):</p>
+<ul>
+<li>Tổng hợp chính xác trên vành đại số &amp; Thuật toán Ross–Selinger (gridsynth): Thay vì tìm kiếm hình học mù quáng trong nhóm Lie <span class="math inline">SU(2)</span> như Solovay-Kitaev, Kliuchnikov–Maslov–Mosca (2012) và Ross–Selinger (2014) đã ánh xạ bài toán phân rã mạch <span class="math inline">\{H, S, T\}</span> sang vành số nguyên đại số <span class="math inline">\mathbb{Z}[1/\sqrt{2}, i]</span>. Bằng cách giải bài toán tìm điểm lưới nguyên trong không gian phức, họ đạt được độ dài chuỗi cổng <span class="math inline">T</span> tối ưu tuyệt đối theo lý thuyết thông tin:</li>
+</ul>
+<p><span class="math display">
+\text{T-count} = 3\log_2(1/\epsilon) + O(\log\log(1/\epsilon)) \quad (\text{tức } c = 1)
+</span></p>
+<ul>
+<li>Mạch lặp cho đến khi thành công (Repeat-Until-Success — RUS) &amp; Trộn ngẫu nhiên: Bằng cách dùng thêm 1 qubit phụ đo giữa mạch (Bocharov, Roetteler, Svore 2015) hoặc trộn xác suất các phép xấp xỉ (Hastings, Campbell), chi phí cổng <span class="math inline">T</span> tiếp tục giảm thêm một nửa xuống còn khoảng <span class="math inline">1.5 \log_2(1/\epsilon)</span> đến <span class="math inline">\log_2(1/\epsilon)</span>.</li>
+</ul>
+<ol start="3" type="1">
+<li>Tổng hợp mạch Unita &amp; Cổng đa điều khiển <span class="math inline">C^n\text{-}U</span> (Mục 4.2, 4.3 &amp; 4.5.1–4.5.2)</li>
+</ol>
+<p>Thay thế Gray code + Two-level unitaries: Phương pháp dùng ma trận hai mức và mã Gray trong sách tiêu tốn tới <span class="math inline">O(n^2 4^n)</span> cổng CNOT để tổng hợp một ma trận unita <span class="math inline">n</span>-qubit bất kỳ. Kỹ thuật chuẩn mực hiện nay là Quantum Shannon Decomposition (QSD) (Shende, Bullock, Markov, 2006) dựa trên phân rã Cosine-Sine, ép số lượng cổng CNOT xuống còn <span class="math inline">\frac{23}{48} 4^n - \frac{3}{2} 2^n + \frac{4}{3}</span> — tiệm cận sát ngưỡng dưới lý thuyết <span class="math inline">\frac{1}{4}(4^n - 3n - 1)</span>.</p>
+<p>Cách mạng trong phân rã cổng đa điều khiển (<span class="math inline">C^n\text{-}X</span> / Toffoli mở rộng): Trong Mục 4.3, phép phân rã của Barenco và cộng sự tốn <span class="math inline">O(n^2)</span> cổng cơ bản nếu không có qubit phụ, hoặc cần <span class="math inline">n-2</span> qubit phụ sạch (khởi tạo ở <span class="math inline">\vert{}0\rangle</span>). Các kỹ thuật hiện đại đã tối ưu triệt để phần này:</p>
+<ul>
+<li><p>Qubit phụ “bẩn” (Dirty Ancillas — Gidney, 2015): Có thể mượn tạm các qubit đang chứa dữ liệu lượng tử bất kỳ của phần mạch khác làm qubit phụ để phân rã cổng <span class="math inline">C^n\text{-}X</span> với độ phức tạp tuyến tính <span class="math inline">O(n)</span> cổng <span class="math inline">T</span>, sau đó hoàn trả nguyên vẹn trạng thái ban đầu cho chúng mà không làm mất thông tin.</p></li>
+<li><p>Cổng Toffoli pha tương đối (Relative-phase Toffoli / Margolus gate): Khi xây dựng các bộ cộng hoặc bộ chọn SELECT, người ta thay cổng Toffoli chuẩn (tốn 7 cổng <span class="math inline">T</span>) bằng cổng Toffoli sai lệch pha (chỉ tốn 4 cổng <span class="math inline">T</span>) ở lượt đi, rồi tự động triệt tiêu phần pha dư đó ở lượt tính toán ngược (uncomputation). Nhờ vậy, chi phí cổng <span class="math inline">T</span> cho phép tính thuận nghịch giảm gần một nửa.</p></li>
+</ul>
+<ol start="4" type="1">
+<li>ZX-Calculus &amp; Đa thức pha thay thế biến đổi mạch thủ công (Mục 4.6)</li>
+</ol>
+<p>Trong sách, việc rút gọn mạch dựa trên các đồng nhất thức cục bộ từng cổng một (ví dụ <span class="math inline">HZH = X</span>, đẩy cổng CNOT qua cổng <span class="math inline">Z</span>). Khi mạch lên tới hàng triệu cổng, cách làm này hoàn toàn bế tắc.</p>
+<p>ZX-Calculus (Coecke &amp; Duncan, 2008–nay): Đây là ngôn ngữ đồ họa dựa trên mạng tensor (biểu diễn mạch thành đồ thị gồm các “nhện” xanh lá và đỏ) với một bộ quy tắc biến đổi hoàn chỉnh (complete). Trình biên dịch hiện đại (như PyZX) chuyển toàn bộ mạch lượng tử thành đồ thị ZX, xóa bỏ cấu trúc ranh giới từng cổng để rút gọn các nút giao thoa pha từ xa, sau đó mới trích xuất ngược lại thành mạch cổng — giảm số lượng cổng <span class="math inline">T</span> và độ sâu mạch vượt xa mọi kỹ thuật tối ưu cục bộ truyền thống.</p>
+<p>Đa thức pha (Phase Polynomials — Amy, Maslov, Mosca): Biểu diễn toàn bộ các khối mạch gồm <span class="math inline">\{\text{CNOT}, T, S\}</span> dưới dạng một đa thức trên trường hữu hạn <span class="math inline">\mathbb{F}_2</span>, giúp gom nhóm và triệt tiêu các góc xoay pha trùng nhau trên toàn cục của mạch.</p>
+<ol start="5" type="1">
+<li>Mô phỏng hệ lượng tử (Mục 4.7)</li>
+</ol>
+<p>Phần này gói gọn công thức Lie-Trotter-Suzuki cơ bản. Như chúng ta đã phân tích chi tiết ở các lượt trước, mảng này đã tiến hóa vượt bậc từ cận trên bi quan năm 2000 sang lý thuyết sai số giao hoán tử (Commutator Scaling), ngẫu nhiên hóa qDRIFT, và các thuật toán hậu Trotter đạt ngưỡng tối ưu tiệm cận như Qubitization / QSVT.</p>
+<p>Bảng đối chiếu Chương 4 (2000 vs.&nbsp;Hiện đại)</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nội dung trong Chương 4</th>
+<th style="text-align: left;">Cách tiếp cận năm 2000</th>
+<th style="text-align: left;">Chuẩn mực &amp; Kế thừa hiện đại</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Nguyên lý trì hoãn phép đo (4.4)</td>
+<td style="text-align: left;">Đẩy toàn bộ phép đo về cuối mạch để giữ mạch unita thuần túy.</td>
+<td style="text-align: left;">Dynamic Circuits &amp; MBQC: Đo giữa mạch + phản hồi FPGA tốc độ cao để nén độ sâu mạch xuống <span class="math inline">O(1)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Định lý Solovay-Kitaev (4.5.3)</td>
+<td style="text-align: left;">Xấp xỉ cổng 1-qubit với độ dài <span class="math inline">O(\log^{3.97}(1/\epsilon))</span>.</td>
+<td style="text-align: left;">Thuật toán Ross–Selinger (gridsynth) &amp; RUS: Dùng vành số nguyên đại số, đạt ngưỡng tối ưu <span class="math inline">O(\log(1/\epsilon))</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tổng hợp Unita &amp; <span class="math inline">C^n\text{-}U</span> (4.3, 4.5)</td>
+<td style="text-align: left;">Ma trận 2 mức + Gray code (<span class="math inline">O(n^2 4^n)</span>); Barenco Toffoli.</td>
+<td style="text-align: left;">Quantum Shannon Decomposition (QSD); Dirty Ancillas và Relative-phase Toffoli (giảm gần 50% cổng <span class="math inline">T</span>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rút gọn &amp; Biến đổi mạch (4.6)</td>
+<td style="text-align: left;">Đồng nhất thức đại số ma trận cục bộ từng cổng.</td>
+<td style="text-align: left;">ZX-Calculus (biến đổi đồ thị tensor hoàn chỉnh) và tối ưu hóa Phase Polynomials.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mô phỏng lượng tử (4.7)</td>
+<td style="text-align: left;">Công thức tích Lie-Trotter-Suzuki cơ bản.</td>
+<td style="text-align: left;">Commutator Scaling, qDRIFT, LCU, và QSVT / Qubitization.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

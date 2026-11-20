@@ -10,6 +10,14 @@ format:
     toc-location: right
 ---
 
+:::{.callout}
+
+## QFT
+
+Căn bản của việc
+
+:::
+
 :::{.callout-note}
 # tl;dr
 
@@ -53,6 +61,8 @@ trong đó các biên độ $y_k$ là biến đổi Fourier rời rạc của c�
 Tính toán tường minh biến đổi Fourier của trạng thái $n$ qubit $\vert{}00\dots 0\rangle$.   
 
 :::
+
+---
 
 Trong phần sau đây, chúng ta chọn $N = 2^n$, trong đó $n$ là một số nguyên nào đó, và cơ sở $\vert{}0\rangle, \dots, \vert{}2^n - 1\rangle$ là cơ sở tính toán cho một máy tính lượng tử $n$ qubit. Rất hữu ích khi viết trạng thái $\vert{}j\rangle$ sử dụng biểu diễn nhị phân $j = j_1 j_2 \dots j_n$. Một cách trang trọng hơn, $j = j_1 2^{n-1} + j_2 2^{n-2} + \dots + j_n 2^0$. Cũng rất thuận tiện khi áp dụng ký hiệu $0.j_l j_{l+1} \dots j_m$ để biểu diễn phân số nhị phân $j_l/2 + j_{l+1}/4 + \dots + j_m/2^{m-l+1}$.   
 
@@ -156,7 +166,11 @@ $$
 $$
 :::
 
-Mạch này sử dụng bao nhiêu cổng? Chúng ta bắt đầu bằng việc thực hiện một cổng Hadamard và $n-1$ phép quay có điều kiện (conditional rotations) lên qubit đầu tiên — tổng cộng là $n$ cổng. Tiếp theo là một cổng Hadamard và $n-2$ phép quay có điều kiện lên qubit thứ hai, tổng cộng là $n + (n-1)$ cổng. Tiếp tục theo cách này, chúng ta thấy rằng cần $n + (n-1) + \dots + 1 = n(n+1)/2$ cổng, cộng thêm các cổng tham gia vào các phép hoán đổi (swaps). Cần tối đa $n/2$ phép hoán đổi, và mỗi phép hoán đổi có thể được hoàn thành bằng cách sử dụng ba cổng controlled-NOT. Do đó, mạch này cung cấp một thuật toán $\Theta(n^2)$ để thực hiện biến đổi Fourier lượng tử.   
+---
+
+**Mạch này sử dụng bao nhiêu cổng?**
+
+Chúng ta bắt đầu bằng việc thực hiện một cổng Hadamard và $n-1$ phép quay có điều kiện (conditional rotations) lên qubit đầu tiên — tổng cộng là $n$ cổng. Tiếp theo là một cổng Hadamard và $n-2$ phép quay có điều kiện lên qubit thứ hai, tổng cộng là $n + (n-1)$ cổng. Tiếp tục theo cách này, chúng ta thấy rằng cần $n + (n-1) + \dots + 1 = n(n+1)/2$ cổng, cộng thêm các cổng tham gia vào các phép hoán đổi (swaps). Cần tối đa $n/2$ phép hoán đổi, và mỗi phép hoán đổi có thể được hoàn thành bằng cách sử dụng ba cổng controlled-NOT. Do đó, mạch này cung cấp một thuật toán $\Theta(n^2)$ để thực hiện biến đổi Fourier lượng tử.   
 
 Ngược lại, các thuật toán cổ điển tốt nhất để tính toán biến đổi Fourier rời rạc trên $2^n$ phần tử là các thuật toán như Biến đổi Fourier Nhanh (Fast Fourier Transform - FFT), tính toán biến đổi Fourier rời rạc bằng cách sử dụng $\Theta(n2^n)$ cổng. Tức là, nó đòi hỏi nhiều phép toán hơn theo hàm mũ để tính toán biến đổi Fourier trên một máy tính cổ điển so với việc triển khai biến đổi Fourier lượng tử trên một máy tính lượng tử.   
 

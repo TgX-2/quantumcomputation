@@ -21,3 +21,47 @@ Tóm tắt Chương 6: Các thuật toán tìm kiếm lượng tử
 * Thuật toán đếm lượng tử: Giả sử một bài toán tìm kiếm có số lượng nghiệm $M$ chưa biết trước. Toán tử $G$ có các trị riêng $\exp(\pm i\theta)$ với $\sin^2(\theta/2) = M/N$. Quy trình ước lượng pha dựa trên biến đổi Fourier cho phép chúng ta ước lượng $M$ với độ chính xác cao chỉ bằng $O(\sqrt{N})$ lần áp dụng oracle. Đổi lại, thuật toán đếm lượng tử cho phép chúng ta xác định xem một bài toán tìm kiếm cho trước có nghiệm nào hay không, và tìm ra một nghiệm nếu có, ngay cả khi số lượng nghiệm không được biết trước.   
 
 * Các cận đa thức: Đối với các bài toán được mô tả dưới dạng tính giá trị của các hàm toàn phần $F$ (trái ngược với các hàm bộ phận, hay các bài toán 'có lời hứa' – 'promise' problems), các thuật toán lượng tử không thể mang lại mức tăng tốc nào vượt quá bậc đa thức so với các thuật toán cổ điển. Cụ thể, $Q_2(F) \ge \left[D(F)/13\,824\right]^{1/6}$. Hơn nữa, hiệu năng của thuật toán tìm kiếm lượng tử là tối ưu: độ phức tạp của nó là $\Theta(\sqrt{N})$.   
+
+# Những câu hỏi ngõ
+
+1. Từ Grover nguyên bản đến Fixed-Point Search và QSVT (Mục 6.1)
+
+Giải quyết "bài toán bánh soufflé" (Over-rotation): Trong cuốn sách, thuật toán Grover giống như nướng bánh soufflé — nếu không biết trước chính xác số nghiệm $M$ để dừng đúng lúc sau $\approx \frac{\pi}{4}\sqrt{N/M}$ bước, việc lặp thêm sẽ làm trạng thái quay lố qua mục tiêu và xác suất đo trúng bị tụt giảm. Năm 2014, Yoder, Low và Chuang phát minh ra Fixed-Point Quantum Search (tìm kiếm điểm bất động), đảm bảo xác suất tìm thấy nghiệm hội tụ đơn điệu về $1$ mà không bao giờ bị giảm dù chạy dư bao nhiêu bước.
+
+Hợp nhất dưới khung QSVT: Về bản chất hình học, toán tử Grover chỉ là một phép quay trong không gian con 2 chiều. Lý thuyết hiện đại chứng minh rằng thuật toán Grover chính là bộ lọc đa thức Chebyshev bậc tối ưu — một trường hợp con của Quantum Signal Processing (QSP) và QSVT. Ngoài ra, kỹ thuật Oblivious Amplitude Amplification (Berry và cộng sự, 2014) đã mở rộng khả năng khuếch đại biên độ cho cả trường hợp không hề biết trước trạng thái đầu vào (trở thành xương sống của thuật toán mô phỏng Hamiltonian LCU).
+
+2. Bùng nổ Đi bộ ngẫu nhiên lượng tử — Quantum Walks (Mục 6.2)
+
+Mục 6.2 của sách mới chỉ chạm nhẹ vào tìm kiếm Hamiltonian thời gian liên tục (Farhi–Gutmann). Từ năm 2004, mảng này đã bùng nổ thành một trụ cột thuật toán riêng biệt là Quantum Walks (Szegedy, Ambainis, Childs–Goldstone):
+
+Thay vì tìm kiếm trong một không gian phi cấu trúc (nơi mọi phần tử kết nối trực tiếp với nhau), Quantum Walks tổng quát hóa toán tử khuếch tán của Grover lên các đồ thị có cấu trúc không gian (như mạng lưới 2D, 3D).
+
+Từ đó sinh ra hàng loạt thuật toán vượt trội cổ điển cho các bài toán tổ hợp trên đồ thị như Element Distinctness ($O(N^{2/3})$ truy vấn so với $O(N)$ cổ điển), tìm tam giác trong đồ thị (Triangle Finding), và đánh giá cây trò chơi NAND.
+
+3. Đếm lượng tử (Quantum Counting) loại bỏ hoàn toàn QFT (Mục 6.3)
+
+Trong Mục 6.3, tác giả ghép nối toán tử Grover vào mạch ước lượng pha (QPE + $\text{QFT}^\dagger$) để đếm số lượng nghiệm $M$.
+
+Chuẩn mực hiện đại (2019–2024): Các thuật toán Iterative Quantum Amplitude Estimation (IQAE) và Maximum Likelihood Amplitude Estimation đã loại bỏ hoàn toàn khối $\text{QFT}^\dagger$ đắt đỏ, chỉ dùng chuỗi phép lặp Grover với độ dài tăng dần kết hợp hậu xử lý thống kê cổ điển. Đây hiện là công cụ tiêu chuẩn cho Quantum Monte Carlo (ứng dụng trong định giá phái sinh tài chính và tính tích phân đa chiều) để đạt mức tăng tốc bậc hai so với Monte Carlo cổ điển.
+
+4. Cú "vỡ mộng" về Cơ sở dữ liệu & Giới hạn của tăng tốc bậc hai $O(\sqrt{N})$ (Mục 6.4 & 6.5)
+
+Tìm kiếm cơ sở dữ liệu phi cấu trúc (Mục 6.5) đã khép lại: Ngay trong sách, tác giả đã bày tỏ sự hoài nghi ở mục này, và giới nghiên cứu hiện nay đã ngã ngũ: dùng Grover để tìm kiếm cơ sở dữ liệu cổ điển là vô nghĩa. Việc nạp $N$ bản ghi cổ điển vào bộ nhớ lượng tử (QRAM) tiêu tốn chi phí $O(N)$, làm triệt tiêu hoàn toàn mức tăng tốc $O(\sqrt{N})$ (chưa kể kiến trúc QRAM chịu lỗi đòi hỏi số lượng qubit vật lý khổng lồ cho mỗi lần truy vấn). Grover chỉ có giá trị khi hàm kiểm tra $f(x)$ được tính toán trực tiếp bằng một mạch logic nhỏ gọn (ví dụ: giải bài toán thỏa mãn công thức logic SAT hoặc vét cạn khóa mật mã).
+
+Thực tế khắc nghiệt trong kỷ nguyên chịu lỗi (Mục 6.4): Các phân tích tài nguyên quy mô lớn (tiêu biểu là công trình của Babbush và cộng sự, 2021) chỉ ra rằng do chi phí sửa lỗi Surface Code và sự chênh lệch tốc độ xung nhịp giữa chip cổ điển (GHz) với cổng lượng tử chịu lỗi (kHz–MHz), mức tăng tốc bậc hai $O(\sqrt{N})$ gần như không mang lại lợi thế thực tế trừ khi kích thước bài toán cực kỳ khổng lồ và không thể chia nhỏ. Tương tự, NIST đánh giá mức đe dọa thực tế của Grover lên mã hóa đối xứng (như AES-128) thấp hơn nhiều so với con số lý thuyết $2^{64}$ vì Grover không thể song song hóa tuyến tính (chia cho $K$ máy tính lượng tử chỉ rút ngắn thời gian đi $\sqrt{K}$ lần).
+
+5. Bài toán mở về cận dưới truy vấn đã có đáp án trọn vẹn (Mục 6.6 & 6.7)
+
+Ở cuối Chương 6, cuốn sách giới thiệu Phương pháp đối kháng (Adversary method) của Ambainis như một công cụ mới để chứng minh cận dưới truy vấn, nhưng khi đó nó chưa phải là công cụ tối ưu cho mọi bài toán
+
+Đáp án trọn vẹn (2007–2011): Bằng cách mở rộng sang Phương pháp đối kháng trọng số âm (Negative-Weight Adversary Method) và liên kết với mô hình Span Programs (Høyer, Lee, Špalek; Reichardt), giới khoa học máy tính lý thuyết đã chứng minh được rằng phương pháp này là chặt tuyệt đối (tight) — nó xác định chính xác độ phức tạp truy vấn lượng tử của mọi hàm Boolean, khép lại hoàn toàn bài toán lý thuyết bỏ ngỏ ở Mục 6.7.
+
+Bảng đối chiếu Chương 6 (2000 vs. Hiện đại)
+
+| Nội dung trong Chương 6  | Trạng thái năm 2000 | Cập nhật & Kế thừa hiện đại | 
+| :--- | :--- | :--- |
+| Thuật toán Grover (6.1) | Dễ bị quay lố (over-rotation) nếu không biết trước số nghiệm $M$. | Fixed-Point Search (hội tụ đơn điệu); hợp nhất thành trường hợp con của QSP / QSVT. |
+| Tìm kiếm liên tục (6.2) | Mới dừng ở mô hình Hamiltonian trên không gian đầy đủ. | Phát triển thành Quantum Walks trên đồ thị có cấu trúc và giải bài toán tổ hợp.
+| Quantum Counting (6.3) | Phụ thuộc vào mạch QPE và biến đổi ngược $\text{QFT}^\dagger$. | Thay thế bằng IQAE / ML-QAE (không cần QFT) làm lõi cho Quantum Monte Carlo. | 
+| Tăng tốc NP & Cơ sở dữ liệu (6.4–6.5) | Kỳ vọng vào tra cứu cơ sở dữ liệu QRAM và tăng tốc bậc hai $O(\sqrt{N})$. | Tra cứu cơ sở dữ liệu bị loại bỏ; tăng tốc bậc hai được chứng minh là kém hiệu quả khi gánh chi phí sửa lỗi FTQC. | 
+| Cận dưới truy vấn (6.6–6.7) | Phương pháp đối kháng mới chỉ cho cận dưới trong một số trường hợp. | Negative-Weight Adversary & Span Programs giải quyết trọn vẹn độ phức tạp truy vấn cho mọi hàm Boolean. | 
