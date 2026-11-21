@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>5 Universal quantum gates – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../note/quantumcircuits/6.html" rel="next">
+<link href="../../note/quantumcircuits/4.html" rel="prev">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">4 Quantum circuits</a></li><li class="breadcrumb-item"><a href="../../note/quantumcircuits/5.html">5 Universal quantum gates</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bài báo nghiên cứu</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../file/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bài báo nghiên cứu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 The analysis of computational problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Perspectives on computer science</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">4 Quantum circuits</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Quantum Algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Single qubit operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Controlled operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Measurement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">5 Universal quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Summary of the quantum circuit model of computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Simulation of quantum systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 The quantum Fourier transform and its applications</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 The quantum Fourier transform and its applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum Fourier transform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Applications: order-finding and factoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum search as a quantum simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum counting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Speeding up the solution of NP-complete problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Quantum search of an unstructured database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Optimality of the search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Black box algorithm limits</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">7 Quantum computers: Physical realization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum computers: Physical realization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Guiding principles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Conditions for quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Harmonic oscillator quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Optical photon quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Optical cavity quantum electrodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Ion traps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Nuclear magnetic resonance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8 Other implementation schemes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Questions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Future</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#two-level-unitary-gates-are-universal" id="toc-two-level-unitary-gates-are-universal" class="nav-link active" data-scroll-target="#two-level-unitary-gates-are-universal">1. Two-level unitary gates are universal</a></li>
+  <li><a href="#single-qubit-and-cnot-gates-are-universal" id="toc-single-qubit-and-cnot-gates-are-universal" class="nav-link" data-scroll-target="#single-qubit-and-cnot-gates-are-universal">2. Single qubit and CNOT gates are universal</a></li>
+  <li><a href="#a-discrete-set-of-universal-operations" id="toc-a-discrete-set-of-universal-operations" class="nav-link" data-scroll-target="#a-discrete-set-of-universal-operations">3. A discrete set of universal operations</a>
+  <ul class="collapse">
+  <li><a href="#approximating-unitary-operators" id="toc-approximating-unitary-operators" class="nav-link" data-scroll-target="#approximating-unitary-operators">Approximating unitary operators</a></li>
+  <li><a href="#universality-of-hadamard-phase-cnot-π8-gates" id="toc-universality-of-hadamard-phase-cnot-π8-gates" class="nav-link" data-scroll-target="#universality-of-hadamard-phase-cnot-π8-gates">Universality of Hadamard + phase + CNOT + π/8 gates</a></li>
+  </ul></li>
+  <li><a href="#approximating-arbitrary-unitary-gates-is-generically-hard" id="toc-approximating-arbitrary-unitary-gates-is-generically-hard" class="nav-link" data-scroll-target="#approximating-arbitrary-unitary-gates-is-generically-hard">4. Approximating arbitrary unitary gates is generically hard</a></li>
+  <li><a href="#quantum-computational-complexity" id="toc-quantum-computational-complexity" class="nav-link" data-scroll-target="#quantum-computational-complexity">5. Quantum computational complexity</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/quantumcircuits/index.html">4 Quantum circuits</a></li><li class="breadcrumb-item"><a href="../../note/quantumcircuits/5.html">5 Universal quantum gates</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">5 Universal quantum gates</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Mọi cổng 2x2 đều có thể phân rã Euler được, nhưng với những cái lớn hơn <span class="math inline">2^n \times 2^n</span>, cần một số kỹ thuật khác.</p>
+<section id="các-bước-thực-hiện" class="level2">
+<h2 class="anchored" data-anchor-id="các-bước-thực-hiện">Các bước thực hiện</h2>
+<p><strong>Bước 1:</strong> Khử Gauss, tức là phân tích nó thành ma trận hai mức.</p>
+<p><strong>Bước 2:</strong> Dùng Graycode để đi từ s đến t.</p>
+<p><strong>Bước 3:</strong> Phân rã Euler.</p>
+</section>
+<section id="future" class="level2">
+<h2 class="anchored" data-anchor-id="future">Future</h2>
+<p>Nhưng, phương pháp dùng ma trận hai mức + gray code có độ phức tạp tăng theo hàm mũ <span class="math inline">O(n^24^n)</span>, vì thế hiện đại người ta dùng <a href="../../note/future/csd.html">Cosine-Sine decomposition</a> hoặc <a href="../../note/future/qsd.html">Quantum Shannon Decomposition</a>.</p>
+</section>
+<section id="tính-vạn-năng-của-h-s-t-cnot" class="level2">
+<h2 class="anchored" data-anchor-id="tính-vạn-năng-của-h-s-t-cnot">Tính vạn năng của H + S + T + CNOT</h2>
+<p>Là một tập cổng Clifford, có khả năng vạn năng xấp xỉ.</p>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>tl;dr
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mục này chứng minh tính vạn năng ở ba tầng. Trước hết, phép unita trên không gian (d) chiều phân rã thành tối đa (d(d-1)/2) phép unita hai mức, mỗi phép chỉ trộn hai trạng thái cơ sở. Tiếp theo, mã Gray đưa hai trạng thái bất kỳ về những trạng thái chỉ khác một bit để mô phỏng phép hai mức bằng cổng một qubit và CNOT; kết quả cho mạch tổng quát có chi phí (O(n^2 4^n)), đúng về nguyên tắc nhưng thường không hiệu quả. Cuối cùng, tập rời rạc (H,S,,T) xấp xỉ unita tùy ý: sai số đo bằng chuẩn toán tử (E(U,V)), sai số mạch cộng tối đa theo từng cổng, còn định lý Solovay–Kitaev cho overhead đa logarit theo độ chính xác. Chương cũng chỉ ra bằng lập luận đếm rằng phần lớn unita cần số cổng tăng theo hàm mũ, nên vạn năng không đồng nghĩa hiệu quả. Phần độ phức tạp định nghĩa BQP qua họ mạch đa thức, đồng nhất và xác suất lỗi bị chặn, rồi phác thảo (); hiện chưa biết BQP khác BPP.</p>
+</div>
+</div>
+<p>Một tập hợp nhỏ các cổng (ví dụ: <span class="math inline">\text{AND}, \text{OR}, \text{NOT}</span>) có thể được sử dụng để tính toán một hàm cổ điển tùy ý, như chúng ta đã thấy ở Mục 3.1.2. Chúng ta nói rằng một tập hợp cổng như vậy là vạn năng (universal) đối với tính toán cổ điển. Trên thực tế, vì cổng Toffoli là vạn năng đối với tính toán cổ điển, nên các mạch lượng tử bao hàm (subsume) các mạch cổ điển. Một kết quả vạn năng tương tự cũng đúng đối với tính toán lượng tử, trong đó một tập hợp các cổng được cho là vạn năng đối với tính toán lượng tử nếu bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bởi một mạch lượng tử chỉ bao gồm các cổng đó.</p>
+<p>Bây giờ chúng tôi mô tả ba cấu trúc vạn năng đối với tính toán lượng tử. Các cấu trúc này xây dựng dựa trên nhau, và đạt đến đỉnh điểm ở một chứng minh rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, <span class="math inline">\text{CNOT}</span>, và <span class="math inline">\pi/8</span>. Bạn có thể tự hỏi tại sao cổng phase lại xuất hiện trong danh sách này, vì nó có thể được xây dựng từ hai cổng <span class="math inline">\pi/8</span>; nó được đưa vào vì vai trò tự nhiên của nó trong các cấu trúc chống chịu lỗi (fault-tolerant constructions) được mô tả trong Chương 10.</p>
+<ul>
+<li>Cấu trúc thứ nhất chứng minh rằng một toán tử unita tùy ý có thể được biểu diễn một cách chính xác (exactly) dưới dạng tích của các toán tử unita mà mỗi toán tử chỉ tác động không tầm thường (non-trivially) lên một không gian con (subspace) được nối bởi hai trạng thái cơ sở tính toán.</li>
+<li>Cấu trúc thứ hai kết hợp cấu trúc thứ nhất với các kết quả của phần trước để chứng minh rằng một toán tử unita tùy ý có thể được biểu diễn một cách chính xác bằng cách sử dụng cổng một qubit và cổng <span class="math inline">\text{CNOT}</span>.</li>
+<li>Cấu trúc thứ ba kết hợp cấu trúc thứ hai với một chứng minh rằng phép toán một qubit có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, và <span class="math inline">\pi/8</span>. Đến lượt nó, điều này ngụ ý rằng bất kỳ phép toán unita nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard, phase, <span class="math inline">\text{CNOT}</span>, và <span class="math inline">\pi/8</span>.</li>
+</ul>
+<p>Các cấu trúc của chúng tôi nói rất ít về tính hiệu quả (efficiency) — bao nhiêu cổng (nhiều theo đa thức hay hàm mũ) phải được kết hợp để tạo ra một phép biến đổi unita cho trước. Trong Mục 4.5.4, chúng tôi chứng minh rằng tồn tại các phép biến đổi unita đòi hỏi một số lượng cổng nhiều theo hàm mũ để xấp xỉ. Tất nhiên, mục tiêu của tính toán lượng tử là tìm ra các họ phép biến đổi unita thú vị có thể được thực hiện một cách hiệu quả.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.36:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Xây dựng một mạch lượng tử để cộng hai số hai bit <span class="math inline">x</span> và <span class="math inline">y</span> theo modulo 4. Tức là, mạch phải thực hiện phép biến đổi <span class="math inline">\vert{}x, y\rangle \rightarrow \vert{}x, x + y \pmod 4\rangle</span>.</p>
+</div>
+</div>
+</div>
+<section id="two-level-unitary-gates-are-universal" class="level1">
+<h1>1. Two-level unitary gates are universal</h1>
+<p>Xem xét một ma trận unita <span class="math inline">U</span> tác động lên một không gian Hilbert <span class="math inline">d</span> chiều. Trong phần này, chúng tôi giải thích cách <span class="math inline">U</span> có thể được phân rã thành một tích của các ma trận unita hai mức (two-level unitary matrices); tức là, các ma trận unita chỉ tác động không tầm thường (non-trivially) lên hai hoặc ít hơn các thành phần vector. Ý tưởng cốt lõi đằng sau sự phân rã này có thể được hiểu bằng cách xem xét trường hợp khi <span class="math inline">U</span> là ma trận <span class="math inline">3 \times 3</span>, vì vậy giả sử rằng <span class="math inline">U</span> có dạng</p>
+<p><span class="math display">
+U = \begin{bmatrix} a &amp; d &amp; g \\ b &amp; e &amp; h \\ c &amp; f &amp; j \end{bmatrix}. \tag{4.41}
+</span></p>
+<p>Chúng ta sẽ tìm các ma trận unita hai mức <span class="math inline">U_1, \dots, U_3</span> sao cho</p>
+<p><span class="math display">
+U_3 U_2 U_1 U = I. \tag{4.42}
+</span></p>
+<p>Từ đó suy ra</p>
+<p><span class="math display">
+U = U_1^\dagger U_2^\dagger U_3^\dagger. \tag{4.43}
+</span></p>
+<p><span class="math inline">U_1, U_2</span> và <span class="math inline">U_3</span> đều là các ma trận unita hai mức, và thật dễ dàng để thấy rằng các nghịch đảo của chúng, <span class="math inline">U_1^\dagger, U_2^\dagger</span> và <span class="math inline">U_3^\dagger</span> cũng là các ma trận unita hai mức. Do đó, nếu chúng ta có thể chứng minh được phương trình (4.42), thì chúng ta sẽ chỉ ra được cách chia nhỏ <span class="math inline">U</span> thành một tích của các ma trận unita hai mức.</p>
+<p>Sử dụng quy trình sau để xây dựng <span class="math inline">U_1</span>: nếu <span class="math inline">b = 0</span> thì đặt</p>
+<p><span class="math display">
+U_1 \equiv \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}. \tag{4.44}
+</span></p>
+<p>Nếu <span class="math inline">b \neq 0</span> thì đặt</p>
+<p><span class="math display">
+U_1 \equiv \begin{bmatrix} \frac{a^*}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; \frac{b^*}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; 0 \\ \frac{b}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; \frac{-a}{\sqrt{\vert{}a\vert{}^2+\vert{}b\vert{}^2}} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}. \tag{4.45}
+</span></p>
+<p>Lưu ý rằng trong cả hai trường hợp <span class="math inline">U_1</span> đều là một ma trận unita hai mức, và khi chúng ta nhân các ma trận ra, ta được</p>
+<p><span class="math display">
+U_1 U = \begin{bmatrix} a' &amp; d' &amp; g' \\ 0 &amp; e' &amp; h' \\ c' &amp; f' &amp; j' \end{bmatrix}. \tag{4.46}
+</span></p>
+<p>Điểm then chốt cần lưu ý là phần tử ở giữa trong cột ngoài cùng bên trái bằng không. Chúng ta ký hiệu các phần tử khác trong ma trận bằng một dấu phẩy generic <span class="math inline">'</span> ; giá trị thực tế của chúng không quan trọng.</p>
+<p>Bây giờ áp dụng một quy trình tương tự để tìm một ma trận hai mức <span class="math inline">U_2</span> sao cho <span class="math inline">U_2 U_1 U</span> không có phần tử nào ở góc dưới cùng bên trái. Tức là, nếu <span class="math inline">c' = 0</span> thì ta đặt</p>
+<p><span class="math display">
+U_2 \equiv \begin{bmatrix} a^{\prime *} &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}, \tag{4.47}
+</span></p>
+<p>trong khi nếu <span class="math inline">c' \neq 0</span> thì ta đặt</p>
+<p><span class="math display">
+U_2 \equiv \begin{bmatrix} \frac{a^{\prime *}}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} &amp; 0 &amp; \frac{c^{\prime *}}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} \\ 0 &amp; 1 &amp; 0 \\ \frac{c'}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} &amp; 0 &amp; \frac{-a'}{\sqrt{\vert{}a'\vert{}^2+\vert{}c'\vert{}^2}} \end{bmatrix}. \tag{4.48}
+</span></p>
+<p>Trong cả hai trường hợp, khi chúng ta thực hiện phép nhân ma trận, ta thấy rằng</p>
+<p><span class="math display">
+U_2 U_1 U = \begin{bmatrix} 1 &amp; d'' &amp; g'' \\ 0 &amp; e'' &amp; h'' \\ 0 &amp; f'' &amp; j'' \end{bmatrix}. \tag{4.49}
+</span></p>
+<p>Vì <span class="math inline">U, U_1</span> và <span class="math inline">U_2</span> đều là các ma trận unita, nên suy ra <span class="math inline">U_2 U_1 U</span> cũng là ma trận unita, và do đó <span class="math inline">d'' = g'' = 0</span>, vì hàng đầu tiên của <span class="math inline">U_2 U_1 U</span> phải có chuẩn (norm) bằng 1. Cuối cùng, đặt</p>
+<p><span class="math display">
+U_3 \equiv \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; e^{\prime \prime *} &amp; f^{\prime \prime *} \\ 0 &amp; h^{\prime \prime *} &amp; j^{\prime \prime *} \end{bmatrix}. \tag{4.50}
+</span></p>
+<p>Giờ đây thật dễ dàng để kiểm chứng rằng <span class="math inline">U_3 U_2 U_1 U = I</span>, và do đó <span class="math inline">U = U_1^\dagger U_2^\dagger U_3^\dagger</span>, đây chính là sự phân rã của <span class="math inline">U</span> thành các ma trận unita hai mức.</p>
+<p>Tổng quát hơn, giả sử <span class="math inline">U</span> tác động lên một không gian <span class="math inline">d</span> chiều. Khi đó, theo một cách thức tương tự như trường hợp <span class="math inline">3 \times 3</span>, chúng ta có thể tìm được các ma trận unita hai mức <span class="math inline">U_1, \dots, U_{d-1}</span> sao cho ma trận <span class="math inline">U_{d-1} U_{d-2} \dots U_1 U</span> có một số 1 ở góc trên cùng bên trái, và tất cả các vị trí khác trong hàng đầu tiên và cột đầu tiên đều là số 0. Sau đó, chúng ta lặp lại quy trình này cho ma trận con unita <span class="math inline">(d-1) \times (d-1)</span> ở góc dưới cùng bên phải của <span class="math inline">U_{d-1} U_{d-2} \dots U_1 U</span>, và cứ tiếp tục như vậy, với kết quả cuối cùng là một ma trận unita <span class="math inline">d \times d</span> tùy ý có thể được viết dưới dạng</p>
+<p><span class="math display">
+U = V_1 \dots V_k, \tag{4.51}
+</span></p>
+<p>trong đó các ma trận <span class="math inline">V_i</span> là các ma trận unita hai mức, và <span class="math inline">k \le (d-1) + (d-2) + \dots + 1 = d(d-1)/2</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.37:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Đưa ra sự phân rã của phép biến đổi</p>
+<p><span class="math display">
+\frac{1}{2} \begin{bmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; i &amp; -1 &amp; -i \\ 1 &amp; -1 &amp; 1 &amp; -1 \\ 1 &amp; -i &amp; -1 &amp; i \end{bmatrix} \tag{4.52}
+</span></p>
+<p>thành một tích của các ma trận unita hai mức. Đây là một trường hợp đặc biệt của phép biến đổi Fourier lượng tử, thứ mà chúng ta sẽ nghiên cứu chi tiết hơn trong chương tiếp theo.</p>
+</div>
+</div>
+</div>
+<p>Một hệ quả của kết quả trên là một ma trận unita tùy ý trên một hệ <span class="math inline">n</span> qubit có thể được viết dưới dạng một tích của nhiều nhất <span class="math inline">2^{n-1}(2^n - 1)</span> ma trận unita hai mức. Đối với các ma trận unita cụ thể, có thể tìm được những cách phân rã hiệu quả hơn nhiều, nhưng như bạn sẽ chứng minh ngay bây giờ, tồn tại những ma trận không thể bị phân rã thành một tích của ít hơn <span class="math inline">d - 1</span> ma trận unita hai mức!</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>note thêm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="ý-tưởng-của-thuật-toán" class="level2">
+<h2 class="anchored" data-anchor-id="ý-tưởng-của-thuật-toán">Ý tưởng của thuật toán</h2>
+<p>Thay vì cố gắng nhân các ma trận nhỏ với nhau để ra được U, tác giả làm ngược lại, bắt đầu từ U, tìm các nhân nó với các ma trận U1, U2, U3, để biến nó thành ma trận I. (4.42)</p>
+<p>Một khi đã tìm được U1, U2, U3 thỏa mãn = I, chỉ cần lấy liên hợp phức, ta đã có công thức phân rã của U (4.43).</p>
+</section>
+<section id="ma-trận-unita-2-mức-là-gì" class="level2">
+<h2 class="anchored" data-anchor-id="ma-trận-unita-2-mức-là-gì">Ma trận Unita 2 mức là gì?</h2>
+<p>Nhìn vào phương trình (4.45), U1 là ma trận 3x3, nhưng thật ra nó chỉ hành động trên không gian 2 chiều, cột cuối cùng, hàng cuối cùng của nó giống hệ ma trận đơn vị.</p>
+<p>Vì vậy, trong vật lý lượng tử, điều này có nghĩa là U1 chỉ tác động lên 2 trạng thái cơ sở 00 và 01, hoàn toàn không chạm vào trạng thái thứ 3 - 10.</p>
+<p>Khái niệm “2-level” này bắt nguồn từ vật lý nguyên tử, nơi tia laser chỉ kích thích electron nhảy giữa đúng 2 mức năng lượng, bỏ qua các mức năng lượng khác.</p>
+</section>
+<section id="tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45" class="level2">
+<h2 class="anchored" data-anchor-id="tại-sao-cấu-trúc-của-u1-lại-trong-kỳ-lạ-4.45">Tại sao cấu trúc của U1 lại trong kỳ lạ (4.45)</h2>
+<p>Thật nó chính là Khử Gauss, nhưng thay vì dùng biến đổi hàng cơ bản, nó dùng phép quay Givens <strong>Givens rotations</strong> để duy trì tính Unita trong suốt quá trình biến đổi.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.38:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chứng minh rằng tồn tại một ma trận unita <span class="math inline">d \times d</span> <span class="math inline">U</span> không thể bị phân rã thành một tích của ít hơn <span class="math inline">d - 1</span> ma trận unita hai mức.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="single-qubit-and-cnot-gates-are-universal" class="level1">
+<h1>2. Single qubit and CNOT gates are universal</h1>
+<p>Chúng ta vừa chỉ ra rằng một ma trận unita tùy ý trên một không gian Hilbert <span class="math inline">d</span> chiều có thể được viết dưới dạng một tích của các ma trận unita hai mức. Bây giờ chúng ta sẽ chứng minh rằng các cổng một qubit và cổng <span class="math inline">\text{CNOT}</span> cùng nhau có thể được sử dụng để triển khai một phép toán unita hai mức tùy ý trên không gian trạng thái của <span class="math inline">n</span> qubit. Kết hợp các kết quả này, chúng ta thấy rằng các cổng một qubit và <span class="math inline">\text{CNOT}</span> có thể được sử dụng để triển khai một phép toán unita tùy ý trên <span class="math inline">n</span> qubit, và do đó chúng là vạn năng đối với tính toán lượng tử.</p>
+<p>Giả sử <span class="math inline">U</span> là một ma trận unita hai mức trên một máy tính lượng tử <span class="math inline">n</span> qubit. Giả sử cụ thể rằng <span class="math inline">U</span> tác động không tầm thường lên không gian được giăng bởi các trạng thái cơ sở tính toán <span class="math inline">\vert{}s\rangle</span> và <span class="math inline">\vert{}t\rangle</span>, trong đó <span class="math inline">s = s_1 \dots s_n</span> và <span class="math inline">t = t_1 \dots t_n</span> là các khai triển nhị phân cho <span class="math inline">s</span> và <span class="math inline">t</span>. Gọi <span class="math inline">\tilde{U}</span> là ma trận con unita <span class="math inline">2 \times 2</span> không tầm thường của <span class="math inline">U</span>; <span class="math inline">\tilde{U}</span> có thể được coi như một toán tử unita trên một qubit đơn lẻ.</p>
+<p>Mục tiêu trước mắt của chúng ta là xây dựng một mạch triển khai <span class="math inline">U</span>, được xây dựng từ các cổng một qubit và cổng <span class="math inline">\text{CNOT}</span>. Để làm điều này, chúng ta cần sử dụng mã Gray (Gray codes). Giả sử chúng ta có các số nhị phân phân biệt, <span class="math inline">s</span> và <span class="math inline">t</span>. Một mã Gray kết nối <span class="math inline">s</span> và <span class="math inline">t</span> là một chuỗi các số nhị phân, bắt đầu bằng <span class="math inline">s</span> và kết thúc bằng <span class="math inline">t</span>, sao cho các thành viên kề nhau trong danh sách khác biệt nhau chính xác một bit. Ví dụ, với <span class="math inline">s = 101001</span> và <span class="math inline">t = 110011</span>, chúng ta có mã Gray</p>
+<p><span class="math display">
+\begin{matrix} 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \end{matrix} \tag{4.53}
+</span></p>
+<p>Gọi <span class="math inline">g_1</span> đến <span class="math inline">g_m</span> là các phần tử của một mã Gray kết nối <span class="math inline">s</span> và <span class="math inline">t</span>, với <span class="math inline">g_1 = s</span> và <span class="math inline">g_m = t</span>. Lưu ý rằng chúng ta luôn có thể tìm được một mã Gray sao cho <span class="math inline">m \le n + 1</span> vì <span class="math inline">s</span> và <span class="math inline">t</span> có thể khác nhau ở nhiều nhất <span class="math inline">n</span> vị trí.</p>
+<p>Ý tưởng cơ bản của mạch lượng tử triển khai <span class="math inline">U</span> là thực hiện một chuỗi các cổng tạo ra các sự thay đổi trạng thái <span class="math inline">\vert{}g_1\rangle \rightarrow \vert{}g_2\rangle \rightarrow \dots \rightarrow \vert{}g_{m-1}\rangle</span>, sau đó thực hiện một phép toán controlled-<span class="math inline">\tilde{U}</span>, với qubit mục tiêu nằm ở bit duy nhất mà <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span> khác nhau, và cuối cùng là hoàn tác (undo) giai đoạn đầu tiên, biến đổi <span class="math inline">\vert{}g_{m-1}\rangle \rightarrow \vert{}g_{m-2}\rangle \dots \rightarrow \vert{}g_1\rangle</span>. Mỗi bước này đều có thể dễ dàng triển khai bằng cách sử dụng các phép toán đã được phát triển trước đó trong chương này, và kết quả cuối cùng là sự triển khai của <span class="math inline">U</span>.</p>
+<p>Một mô tả chính xác hơn về việc triển khai như sau. Bước đầu tiên là hoán đổi các trạng thái <span class="math inline">\vert{}g_1\rangle</span> và <span class="math inline">\vert{}g_2\rangle</span>. Giả sử <span class="math inline">g_1</span> và <span class="math inline">g_2</span> khác nhau ở chữ số thứ <span class="math inline">i</span>. Khi đó chúng ta hoàn thành việc hoán đổi bằng cách thực hiện một phép lật bit có điều khiển (controlled bit flip) trên qubit thứ <span class="math inline">i</span>, với điều kiện là giá trị của các qubit khác phải giống hệt như các giá trị xuất hiện trong cả <span class="math inline">g_1</span> và <span class="math inline">g_2</span>. Tiếp theo, chúng ta sử dụng một phép toán có điều khiển để hoán đổi <span class="math inline">\vert{}g_2\rangle</span> và <span class="math inline">\vert{}g_3\rangle</span>. Chúng ta tiếp tục theo cách này cho đến khi hoán đổi <span class="math inline">\vert{}g_{m-2}\rangle</span> với <span class="math inline">\vert{}g_{m-1}\rangle</span>. Tác động của chuỗi <span class="math inline">m - 2</span> phép toán này là đạt được phép biến đổi:</p>
+<p><span class="math display">
+\vert{}g_1\rangle \rightarrow \vert{}g_{m-1}\rangle \tag{4.54}
+</span></p>
+<p><span class="math display">
+\vert{}g_2\rangle \rightarrow \vert{}g_1\rangle \tag{4.55}
+</span></p>
+<p><span class="math display">
+\vert{}g_3\rangle \rightarrow \vert{}g_2\rangle \tag{4.56}
+</span></p>
+<p><span class="math display">
+\dots \dots \dots
+</span></p>
+<p><span class="math display">
+\vert{}g_{m-1}\rangle \rightarrow \vert{}g_{m-2}\rangle. \tag{4.57}
+</span></p>
+<p>Tất cả các trạng thái cơ sở tính toán khác đều được giữ nguyên bởi chuỗi phép toán này. Tiếp theo, giả sử <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span> khác nhau ở bit thứ <span class="math inline">j</span>. Chúng ta áp dụng một phép toán controlled-<span class="math inline">\tilde{U}</span> với qubit thứ <span class="math inline">j</span> làm mục tiêu, có điều kiện là các qubit khác có cùng giá trị như chúng xuất hiện trong cả <span class="math inline">g_{m-1}</span> và <span class="math inline">g_m</span>. Cuối cùng, chúng ta hoàn thành phép toán <span class="math inline">U</span> bằng cách hoàn tác các phép toán hoán đổi: chúng ta hoán đổi <span class="math inline">\vert{}g_{m-1}\rangle</span> với <span class="math inline">\vert{}g_{m-2}\rangle</span>, sau đó <span class="math inline">\vert{}g_{m-2}\rangle</span> với <span class="math inline">\vert{}g_{m-3}\rangle</span> và cứ thế, cho đến khi chúng ta hoán đổi <span class="math inline">\vert{}g_2\rangle</span> với <span class="math inline">\vert{}g_1\rangle</span>.</p>
+<p>Một ví dụ đơn giản sẽ làm sáng tỏ thêm quy trình này. Giả sử chúng ta mong muốn triển khai phép biến đổi unita hai mức:</p>
+<p><span class="math display">
+U = \begin{bmatrix} a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ b &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; d \end{bmatrix}. \tag{4.58}
+</span></p>
+<p>Ở đây, <span class="math inline">a, b, c</span> và <span class="math inline">d</span> là các số phức bất kỳ sao cho <span class="math inline">\tilde{U} \equiv \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}</span> là một ma trận unita. Chú ý rằng <span class="math inline">U</span> chỉ tác động không tầm thường lên các trạng thái <span class="math inline">\vert{}000\rangle</span> và <span class="math inline">\vert{}111\rangle</span>. Chúng ta viết một mã Gray kết nối 000 và 111:</p>
+<p><span class="math display">
+\begin{matrix} A &amp; B &amp; C \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{matrix} \tag{4.59}
+</span></p>
+<p>Từ đây chúng ta đọc ra được mạch điện cần thiết, hiển thị trong Hình 4.16. Hai cổng đầu tiên xáo trộn các trạng thái sao cho <span class="math inline">\vert{}000\rangle</span> được hoán đổi với <span class="math inline">\vert{}011\rangle</span>. Tiếp theo, phép toán <span class="math inline">\tilde{U}</span> được áp dụng lên qubit đầu tiên của các trạng thái <span class="math inline">\vert{}011\rangle</span> và <span class="math inline">\vert{}111\rangle</span>, với điều kiện là qubit thứ hai và thứ ba đang ở trạng thái <span class="math inline">\vert{}11\rangle</span>. Cuối cùng, chúng ta xáo trộn ngược lại các trạng thái (unshuffle), đảm bảo rằng <span class="math inline">\vert{}011\rangle</span> được hoán đổi trở lại với trạng thái <span class="math inline">\vert{}000\rangle</span>.</p>
+<p><img src="../../img/4.16.png" class="img-fluid"></p>
+<p>Quay trở lại trường hợp tổng quát, chúng ta thấy rằng việc triển khai phép toán unita hai mức <span class="math inline">U</span> đòi hỏi nhiều nhất <span class="math inline">2(n - 1)</span> phép toán có điều khiển để hoán đổi <span class="math inline">\vert{}g_1\rangle</span> với <span class="math inline">\vert{}g_{m-1}\rangle</span> và sau đó hoán đổi ngược lại. Mỗi phép toán có điều khiển này có thể được thực hiện bằng cách sử dụng <span class="math inline">O(n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>; phép toán controlled-<span class="math inline">\tilde{U}</span> cũng đòi hỏi <span class="math inline">O(n)</span> cổng. Do đó, việc triển khai <span class="math inline">U</span> đòi hỏi <span class="math inline">O(n^2)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Chúng ta đã thấy ở phần trước rằng một ma trận unita tùy ý trên không gian trạng thái <span class="math inline">2^n</span> chiều của <span class="math inline">n</span> qubit có thể được viết dưới dạng một tích của <span class="math inline">O(2^{2n}) = O(4^n)</span> phép toán unita hai mức. Kết hợp các kết quả này, chúng ta thấy rằng một phép toán unita tùy ý trên <span class="math inline">n</span> qubit có thể được triển khai bằng cách sử dụng một mạch chứa <span class="math inline">O(n^2 4^n)</span> cổng một qubit và <span class="math inline">\text{CNOT}</span>. Rõ ràng, cấu trúc này không cung cấp các mạch lượng tử hiệu quả cho lắm! Tuy nhiên, chúng tôi sẽ chỉ ra ở Mục 4.5.4 rằng cấu trúc này gần như tối ưu theo nghĩa là tồn tại các phép toán unita đòi hỏi số lượng cổng theo hàm mũ để triển khai. Do đó, để tìm ra các thuật toán lượng tử nhanh, chúng ta rõ ràng sẽ cần một cách tiếp cận khác với cách được thực hiện trong cấu trúc vạn năng.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.39:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tìm một mạch lượng tử sử dụng các phép toán một qubit và <span class="math inline">\text{CNOT}</span> để triển khai phép biến đổi<br>
+<span class="math display">
+\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; a &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; c \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; b &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; d \end{bmatrix}, \tag{4.60}
+</span></p>
+<p>trong đó <span class="math inline">\tilde{U} = \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}</span> là một ma trận unita <span class="math inline">2 \times 2</span> tùy ý.</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Một ma trận Unita U -&gt; tích các ma trận hai mức.</p>
+<p>Ma trận hai mức -&gt; cổng một qubit + cổng CNOT</p>
+<p>Vậy suy ra bất kỳ ma trận Unita U nào cũng có thể tạo bởi các cổng qubit và CNOT.</p>
+<hr>
+<section id="gray-code" class="level2">
+<h2 class="anchored" data-anchor-id="gray-code">Gray code</h2>
+<p>Nhưng lỡ U có thể tác động từ <span class="math inline">\vert s \rangle</span> tới <span class="math inline">\vert t \rangle</span> ví dụ như <span class="math inline">\vert 000 \rangle</span> đến <span class="math inline">\vert 111 \rangle</span> thì sao?</p>
+<p>Ta biết rằng cổng một qubit chỉ có thể tác động lên qubit đó, còn cổng CNOT chỉ chạm tối đa 2 qubit cùng lúc.</p>
+<p>Đáp án là dùng Gray code, khoảng cách hamming giữa chúng = 1, vì vậy ý tưởng là sẽ nhích từng tí một, 000 -&gt; 001 -&gt; 011 -&gt; 111.</p>
+<hr>
+</section>
+<section id="thế" class="level2">
+<h2 class="anchored" data-anchor-id="thế">Thế</h2>
+<p>cuối cùng nó để làm gì?</p>
+<p>Nhìn phương trình (4.58) ta thấy tằng tất cả các chỉ số trên đường chéo chính đều bằng 1, chỉ trừ cột 0 và cột 7, từ đó suy ra ma trận unitary U này chỉ tác động lên hai trạng thái 000 và 111. Nhưng mà một ma trận U ngã hai mức, chỉ tác động lên tối đa 2 qubit, vì thế chúng ta phải dịch chuyển địa chỉ của 000 đến 011 (bằng Gray code) từ đó mới có thể áp dụng được U hai mức.</p>
+<p>Mà chắc chắn ma trận U không đơn giản như vậy rồi, vậy nên chúng ta có thể áp dụng cái đầu tiên đã nói, một ma trận U có thể tách thành tích các ma trận U ngã hai mức.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="a-discrete-set-of-universal-operations" class="level1">
+<h1>3. A discrete set of universal operations</h1>
+<p>Trong phần trước, chúng ta đã chứng minh rằng <span class="math inline">\text{CNOT}</span> và các ma trận unita một qubit cùng nhau tạo thành một tập hợp vạn năng cho tính toán lượng tử. Thật không may, không có phương pháp đơn giản nào được biết đến để triển khai tất cả các cổng này theo cách có khả năng chống chịu lại lỗi (resistant to errors). May mắn thay, trong phần này chúng ta sẽ tìm thấy một tập hợp rời rạc các cổng có thể được sử dụng để thực hiện tính toán lượng tử vạn năng, và trong Chương 10, chúng ta sẽ chỉ ra cách thực hiện các cổng này theo cách chống lại lỗi, sử dụng các mã sửa lỗi lượng tử.</p>
+<section id="approximating-unitary-operators" class="level2">
+<h2 class="anchored" data-anchor-id="approximating-unitary-operators">Approximating unitary operators</h2>
+<p>Rõ ràng, một tập hợp rời rạc các cổng không thể được sử dụng để triển khai một phép toán unita tùy ý một cách chính xác, vì tập hợp các phép toán unita là liên tục. Thay vào đó, hóa ra một tập hợp rời rạc có thể được sử dụng để xấp xỉ bất kỳ phép toán unita nào. Để hiểu điều này hoạt động như thế nào, trước tiên chúng ta cần nghiên cứu xem việc xấp xỉ một phép toán unita có nghĩa là gì. Giả sử <span class="math inline">U</span> và <span class="math inline">V</span> là hai toán tử unita trên cùng một không gian trạng thái. <span class="math inline">U</span> là toán tử unita mục tiêu mà chúng ta muốn triển khai, và <span class="math inline">V</span> là toán tử unita thực sự được triển khai trong thực tế. Chúng ta định nghĩa sai số (error) khi <span class="math inline">V</span> được triển khai thay vì <span class="math inline">U</span> là:</p>
+<p><span class="math display">
+E(U, V) \equiv \max_{\vert{}\psi\rangle} \vert{}\vert{}(U - V)\vert{}\psi\rangle\vert{}\vert{}, \tag{4.61}
+</span></p>
+<p>trong đó giá trị lớn nhất được lấy trên tất cả các trạng thái lượng tử chuẩn hóa <span class="math inline">\vert{}\psi\rangle</span> trong không gian trạng thái. Trong Hộp 4.1 ở trang 195, chúng tôi chỉ ra rằng độ đo sai số này có một cách diễn giải là nếu <span class="math inline">E(U, V)</span> nhỏ, thì bất kỳ phép đo lường nào được thực hiện trên trạng thái <span class="math inline">V\vert{}\psi\rangle</span> sẽ cho ra các thống kê đo lường xấp xỉ giống như một phép đo lường trên <span class="math inline">U\vert{}\psi\rangle</span>, đối với bất kỳ trạng thái ban đầu <span class="math inline">\vert{}\psi\rangle</span> nào. Cụ thể hơn, chúng tôi chỉ ra rằng nếu <span class="math inline">M</span> là một phần tử POVM trong một POVM tùy ý, và <span class="math inline">P_U</span> (hoặc <span class="math inline">P_V</span>) là xác suất thu được kết quả này nếu <span class="math inline">U</span> (hoặc <span class="math inline">V</span>) được thực hiện với trạng thái bắt đầu <span class="math inline">\vert{}\psi\rangle</span>, thì:</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} \le 2E(U, V). \tag{4.62}
+</span></p>
+<p>Do đó, nếu <span class="math inline">E(U, V)</span> nhỏ, thì các kết quả đo lường xảy ra với các xác suất tương tự nhau, bất kể <span class="math inline">U</span> hay <span class="math inline">V</span> được thực hiện. Cũng được chỉ ra trong Hộp 4.1 là nếu chúng ta thực hiện một chuỗi các cổng <span class="math inline">V_1, \dots, V_m</span> nhằm mục đích xấp xỉ một chuỗi các cổng khác <span class="math inline">U_1, \dots, U_m</span>, thì các sai số cộng dồn nhiều nhất là tuyến tính:</p>
+<p><span class="math display">
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.63}
+</span></p>
+<p>Các kết quả xấp xỉ (4.62) và (4.63) cực kỳ hữu ích. Giả sử chúng ta muốn thực hiện một mạch lượng tử chứa <span class="math inline">m</span> cổng, từ <span class="math inline">U_1</span> đến <span class="math inline">U_m</span>. Thật không may, chúng ta chỉ có thể xấp xỉ cổng <span class="math inline">U_j</span> bằng cổng <span class="math inline">V_j</span>. Để xác suất của các kết quả đo lường khác nhau thu được từ mạch xấp xỉ nằm trong khoảng dung sai <span class="math inline">\Delta &gt; 0</span> so với các xác suất chính xác, thì chỉ cần <span class="math inline">E(U_j, V_j) \le \Delta / (2m)</span>, theo các kết quả (4.62) và (4.63).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hộp 4.1: Xấp xỉ các mạch lượng tử
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giả sử một hệ lượng tử bắt đầu ở trạng thái <span class="math inline">\vert{}\psi\rangle</span>, và chúng ta thực hiện phép toán unita <span class="math inline">U</span> hoặc phép toán unita <span class="math inline">V</span>. Tiếp theo đó, chúng ta thực hiện một phép đo lường. Gọi <span class="math inline">M</span> là một phần tử POVM gắn liền với phép đo lường, và gọi <span class="math inline">P_U</span> (hoặc <span class="math inline">P_V</span>) là xác suất thu được kết quả đo lường tương ứng nếu phép toán <span class="math inline">U</span> (hoặc <span class="math inline">V</span>) được thực hiện. Khi đó</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M U\vert{}\psi\rangle - \langle\psi\vert{}V^\dagger M V\vert{}\psi\rangle\vert{}. \tag{4.64}
+</span></p>
+<p>Gọi <span class="math inline">\vert{}\Delta\rangle \equiv (U - V)\vert{}\psi\rangle</span>. Một chút đại số đơn giản và bất đẳng thức Cauchy–Schwarz cho thấy rằng</p>
+<p><span class="math display">
+\vert{}P_U - P_V\vert{} = \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle + \langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.65}
+</span></p>
+<p><span class="math display">
+\le \vert{}\langle\psi\vert{}U^\dagger M\vert{}\Delta\rangle\vert{} + \vert{}\langle\Delta\vert{}M V\vert{}\psi\rangle\vert{} \tag{4.66}
+</span></p>
+<p><span class="math display">
+\le \vert{}\vert{}\Delta\vert{}\vert{} + \vert{}\vert{}\Delta\vert{}\vert{} \tag{4.67}
+</span></p>
+<p><span class="math display">
+\le 2E(U, V). \tag{4.68}
+</span></p>
+<p>Bất đẳng thức <span class="math inline">\vert{}P_U - P_V\vert{} \le 2E(U, V)</span> đưa ra biểu thức định lượng cho ý tưởng rằng khi sai số <span class="math inline">E(U, V)</span> nhỏ, thì sự khác biệt về xác suất giữa các kết quả đo lường cũng nhỏ.</p>
+<p>Giả sử chúng ta thực hiện một chuỗi các cổng <span class="math inline">V_1, V_2, \dots, V_m</span> nhằm mục đích xấp xỉ một chuỗi các cổng khác, <span class="math inline">U_1, U_2, \dots, U_m</span>. Hóa ra sai số gây ra bởi toàn bộ chuỗi các cổng không hoàn hảo này lớn nhất cũng chỉ bằng tổng các sai số trong từng cổng riêng lẻ,</p>
+<p><span class="math display">
+E(U_m U_{m-1} \dots U_1, V_m V_{m-1} \dots V_1) \le \sum_{j=1}^m E(U_j, V_j). \tag{4.69}
+</span></p>
+<p>Để chứng minh điều này, chúng ta bắt đầu với trường hợp <span class="math inline">m = 2</span>. Lưu ý rằng đối với một trạng thái <span class="math inline">\vert{}\psi\rangle</span> nào đó, chúng ta có</p>
+<p><span class="math display">
+E(U_2 U_1, V_2 V_1) = \vert{}\vert{}(U_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.70}
+</span></p>
+<p><span class="math display">
+= \vert{}\vert{}(U_2 U_1 - V_2 U_1)\vert{}\psi\rangle + (V_2 U_1 - V_2 V_1)\vert{}\psi\rangle\vert{}\vert{}. \tag{4.71}
+</span></p>
+<p>Sử dụng bất đẳng thức tam giác <span class="math inline">\vert{}\vert{}\vert{}a\rangle + \vert{}b\rangle\vert{}\vert{} \le \vert{}\vert{}\vert{}a\rangle\vert{}\vert{} + \vert{}\vert{}\vert{}b\rangle\vert{}\vert{}</span>, chúng ta thu được</p>
+<p><span class="math display">
+E(U_2 U_1, V_2 V_1) \le \vert{}\vert{}(U_2 - V_2)U_1\vert{}\psi\rangle\vert{}\vert{} + \vert{}\vert{}V_2(U_1 - V_1)\vert{}\psi\rangle\vert{}\vert{} \tag{4.72}
+</span></p>
+<p><span class="math display">
+\le E(U_2, V_2) + E(U_1, V_1), \tag{4.73}
+</span></p>
+<p>đây chính là kết quả mong muốn. Kết quả cho số <span class="math inline">m</span> tổng quát được suy ra bằng phương pháp quy nạp.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Tại sao lại xuất hiện xấp xỉ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rõ ràng là <strong>mọi ma trận Unita U luôn luôn biểu diễn chính xác tuyệt đối</strong> thành tích của các ma trận hai mức, và các ma trận hai mức này lại biểu diễn chính xác tuyệt đối thành các cổng CNOT và cổng xoay 1-qubit.</p>
+<p>Nhưng rõ ràng các R_x, R_y, R_z, có các tham số theta, phi, là tham số thực trong đó, vì vậy không có cách nào biểu diễn một cách chính xác hoàn toàn.</p>
+<p>Tóm lại thì:</p>
+<p>Gray code + CNOT + Các phép xoay liên tục <span class="math inline">R_z(\theta), R_y(\theta)</span> -&gt; Chính xác 100%.</p>
+<p>Gray code + CNOT + Tập hợp cổng rời rạc <span class="math inline">\{H, S, T\}</span> -&gt; Xấp xỉ đúng với độ chính xác epsilon tùy ý.</p>
+<section id="phép-màu-của-sự-cộng-dồn-tuyến-tính-4.63" class="level2">
+<h2 class="anchored" data-anchor-id="phép-màu-của-sự-cộng-dồn-tuyến-tính-4.63">Phép màu của sự Cộng dồn tuyến tính (4.63)</h2>
+<p>Trong khi các hệ thống analog, sai số nhỏ ở đầu mạch có thể bị khuếch đại theo hàm mũ (hiệu ứng cánh bướm) khiến kết quả cuối cùng hoàn toàn vô nghìa.</p>
+<p>Thì trong hệ lượng tử, các sai số không bao giờ bị khuếch đại. Sai số tổng cộng của một mạch điện dài chỉ bằng tổng các sai số của từng tổng cộng lại.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="universality-of-hadamard-phase-cnot-π8-gates" class="level2">
+<h2 class="anchored" data-anchor-id="universality-of-hadamard-phase-cnot-π8-gates">Universality of Hadamard + phase + CNOT + π/8 gates</h2>
+<p>Giờ đây chúng ta đang ở một vị thế tốt để nghiên cứu việc xấp xỉ các phép toán unita tùy ý bằng các tập hợp cổng rời rạc. Chúng ta sẽ xem xét hai tập hợp cổng rời rạc khác nhau, cả hai đều là vạn năng. Tập hợp đầu tiên, tập hợp chuẩn (standard set) của các cổng vạn năng, bao gồm các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và <span class="math inline">\pi/8</span>. Chúng tôi cung cấp các cấu trúc chống chịu lỗi cho các cổng này ở Chương 10; chúng cũng cung cấp một cấu trúc vạn năng đặc biệt đơn giản. Tập hợp cổng thứ hai mà chúng ta xem xét bao gồm cổng Hadamard, cổng phase, cổng controlled-<span class="math inline">\text{NOT}</span>, và cổng Toffoli. Các cổng này cũng đều có thể được thực hiện một cách chống chịu lỗi; tuy nhiên, chứng minh tính vạn năng và cấu trúc chống chịu lỗi cho các cổng này kém hấp dẫn hơn một chút.</p>
+<p>Chúng ta bắt đầu chứng minh tính vạn năng bằng cách chỉ ra rằng các cổng Hadamard và <span class="math inline">\pi/8</span> có thể được sử dụng để xấp xỉ bất kỳ phép toán unita một qubit nào với độ chính xác tùy ý. Xem xét các cổng <span class="math inline">T</span> và <span class="math inline">HTH</span>. <span class="math inline">T</span> là, bỏ qua một pha toàn cục không quan trọng, một phép quay <span class="math inline">\pi/4</span> radian quanh trục <span class="math inline">\hat{z}</span> trên mặt cầu Bloch, trong khi <span class="math inline">HTH</span> là một phép quay <span class="math inline">\pi/4</span> radian quanh trục <span class="math inline">\hat{x}</span> trên mặt cầu Bloch (Bài tập 4.14). Kết hợp hai phép toán này cho ta, bỏ qua một pha toàn cục,</p>
+<p><span class="math display">
+\exp\left(-i \frac{\pi}{8} Z\right) \exp\left(-i \frac{\pi}{8} X\right) = \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} Z \right] \left[ \cos\frac{\pi}{8} I - i \sin\frac{\pi}{8} X \right] \tag{4.74}
+</span></p>
+<p><span class="math display">
+= \cos^2\frac{\pi}{8} I - i \left[ \cos\frac{\pi}{8} (X + Z) + \sin\frac{\pi}{8} Y \right] \sin\frac{\pi}{8}. \tag{4.75}
+</span></p>
+<p>Đây là một phép quay của mặt cầu Bloch quanh một trục dọc theo <span class="math inline">\vec{n} = (\cos\frac{\pi}{8}, \sin\frac{\pi}{8}, \cos\frac{\pi}{8})</span> với vector đơn vị tương ứng <span class="math inline">\hat{n}</span>, và quay một góc <span class="math inline">\theta</span> được định nghĩa bởi <span class="math inline">\cos(\theta/2) \equiv \cos^2\frac{\pi}{8}</span>. Tức là, chỉ sử dụng các cổng Hadamard và <span class="math inline">\pi/8</span>, chúng ta có thể xây dựng được <span class="math inline">R_{\hat{n}}(\theta)</span>. Hơn nữa, góc <span class="math inline">\theta</span> này có thể được chứng minh là một bội số vô tỉ của <span class="math inline">2\pi</span>. Việc chứng minh sự thật sau cùng này hơi vượt quá phạm vi của chúng ta; xem phần cuối chương ‘Lịch sử và đọc thêm’.</p>
+<p>Tiếp theo, chúng ta chỉ ra rằng việc lặp lại nhiều lần <span class="math inline">R_{\hat{n}}(\theta)</span> có thể được sử dụng để xấp xỉ với độ chính xác tùy ý bất kỳ phép quay <span class="math inline">R_{\hat{n}}(\alpha)</span> nào. Để thấy điều này, gọi <span class="math inline">\delta &gt; 0</span> là độ chính xác mong muốn, và gọi <span class="math inline">N</span> là một số nguyên lớn hơn <span class="math inline">2\pi/\delta</span>. Định nghĩa <span class="math inline">\theta_k</span> sao cho <span class="math inline">\theta_k \in [0, 2\pi)</span> và <span class="math inline">\theta_k = (k\theta)\pmod{2\pi}</span>. Khi đó, nguyên lý chuồng bồ câu (pigeonhole principle) ngụ ý rằng có các số <span class="math inline">j</span> và <span class="math inline">k</span> phân biệt trong khoảng từ <span class="math inline">1, \dots, N</span> sao cho <span class="math inline">\vert{}\theta_k - \theta_j\vert{} \le 2\pi/N &lt; \delta</span>. Không mất tính tổng quát, giả sử rằng <span class="math inline">k &gt; j</span>, vì vậy chúng ta có <span class="math inline">\vert{}\theta_{k-j}\vert{} &lt; \delta</span>. Vì <span class="math inline">j \neq k</span> và <span class="math inline">\theta</span> là một bội số vô tỉ của <span class="math inline">2\pi</span>, chúng ta phải có <span class="math inline">\theta_{k-j} \neq 0</span>. Suy ra chuỗi <span class="math inline">\theta_{l(k-j)}</span> lấp đầy khoảng <span class="math inline">[0, 2\pi)</span> khi <span class="math inline">l</span> thay đổi, sao cho các thành viên kề nhau của chuỗi cách nhau không quá <span class="math inline">\delta</span>. Suy ra đối với bất kỳ <span class="math inline">\epsilon &gt; 0</span> nào, tồn tại một số <span class="math inline">n</span> sao cho</p>
+<p><span class="math display">
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\theta)^n) &lt; \frac{\epsilon}{3}. \tag{4.76}
+</span></p>
+<p>Bài tập 4.40: Với <span class="math inline">\alpha</span> và <span class="math inline">\beta</span> tùy ý, hãy chứng minh rằng</p>
+<p><span class="math display">
+E(R_{\hat{n}}(\alpha), R_{\hat{n}}(\alpha + \beta)) = \vert{}1 - \exp(i\beta/2)\vert{}, \tag{4.77}
+</span></p>
+<p>và sử dụng điều này để biện minh cho (4.76).</p>
+<p>Giờ đây chúng ta đã ở vị thế có thể kiểm chứng rằng bất kỳ phép toán một qubit nào cũng có thể được xấp xỉ với độ chính xác tùy ý bằng cách sử dụng các cổng Hadamard và <span class="math inline">\pi/8</span>. Đại số đơn giản ngụ ý rằng với mọi <span class="math inline">\alpha</span>,</p>
+<p><span class="math display">
+HR_{\hat{n}}(\alpha)H = R_{\hat{m}}(\alpha), \tag{4.78}
+</span></p>
+<p>trong đó <span class="math inline">\hat{m}</span> là một vector đơn vị theo hướng <span class="math inline">(\cos\frac{\pi}{8}, -\sin\frac{\pi}{8}, \cos\frac{\pi}{8})</span>, từ đó suy ra <span class="math display">
+E(R_{\hat{m}}(\alpha), R_{\hat{m}}(\theta)^n) &lt; \frac{\epsilon}{3}. \tag{4.79}
+</span></p>
+<p>Nhưng theo Bài tập 4.11, một ma trận unita <span class="math inline">U</span> tùy ý trên một qubit có thể được viết thành <span class="math display">
+U = R_{\hat{n}}(\beta) R_{\hat{m}}(\gamma) R_{\hat{n}}(\delta), \tag{4.80}
+</span></p>
+<p>nếu bỏ qua một dịch chuyển pha toàn cục không quan trọng. Các kết quả (4.76) và (4.79), cùng với bất đẳng thức chuỗi (4.63) do đó ngụ ý rằng đối với các số nguyên dương phù hợp <span class="math inline">n_1, n_2, n_3</span>, <span class="math display">
+E(U, R_{\hat{n}}(\theta)^{n_1} H R_{\hat{n}}(\theta)^{n_2} H R_{\hat{n}}(\theta)^{n_3}) &lt; \epsilon. \tag{4.81}
+</span></p>
+<p>Tức là, cho trước bất kỳ toán tử unita một qubit <span class="math inline">U</span> nào và bất kỳ <span class="math inline">\epsilon &gt; 0</span> nào, ta hoàn toàn có thể xấp xỉ <span class="math inline">U</span> trong khoảng sai số <span class="math inline">\epsilon</span> bằng cách sử dụng một mạch chỉ bao gồm các cổng Hadamard và cổng <span class="math inline">\pi/8</span>.</p>
+<p>Vì các cổng <span class="math inline">\pi/8</span> và Hadamard cho phép chúng ta xấp xỉ bất kỳ toán tử unita một qubit nào, từ các lập luận ở Mục 4.5.2 suy ra rằng chúng ta có thể xấp xỉ bất kỳ mạch lượng tử <span class="math inline">m</span> cổng nào, như sau. Cho một mạch lượng tử chứa <span class="math inline">m</span> cổng, có thể là các cổng CNOT hoặc các cổng unita một qubit, chúng ta có thể xấp xỉ nó bằng cách sử dụng các cổng Hadamard, controlled-NOT và <span class="math inline">\pi/8</span> (sau này, chúng ta sẽ thấy rằng các cổng phase làm cho việc xấp xỉ có khả năng chống chịu lỗi, nhưng đối với lập luận vạn năng hiện tại thì chúng không hoàn toàn cần thiết). Nếu chúng ta mong muốn độ chính xác <span class="math inline">\epsilon</span> cho toàn bộ mạch, thì điều này có thể đạt được bằng cách xấp xỉ mỗi cổng unita một qubit bằng quy trình trên trong khoảng sai số <span class="math inline">\epsilon/m</span> và áp dụng bất đẳng thức chuỗi (4.63) để thu được độ chính xác <span class="math inline">\epsilon</span> cho toàn bộ mạch.</p>
+<p>Quy trình xấp xỉ các mạch lượng tử bằng một tập hợp cổng rời rạc này hiệu quả đến mức nào? Đây là một câu hỏi quan trọng. Ví dụ, giả sử rằng việc xấp xỉ một cổng unita một qubit tùy ý trong khoảng cách <span class="math inline">\epsilon</span> đòi hỏi <span class="math inline">\Omega(2^{1/\epsilon})</span> cổng từ tập hợp rời rạc. Khi đó, để xấp xỉ mạch lượng tử <span class="math inline">m</span> cổng được xem xét ở đoạn trước sẽ đòi hỏi <span class="math inline">\Omega(m 2^{m/\epsilon})</span> cổng, một sự gia tăng theo hàm mũ so với kích thước mạch ban đầu!. May mắn thay, tốc độ hội tụ tốt hơn thế này rất nhiều. Về mặt trực giác, có vẻ hợp lý khi chuỗi các góc <span class="math inline">\theta_k</span> ‘lấp đầy’ khoảng <span class="math inline">[0, 2\pi)</span> theo một cách ít nhiều đồng đều, do đó để xấp xỉ một cổng một qubit tùy ý hẳn sẽ cần khoảng <span class="math inline">\Theta(1/\epsilon)</span> cổng từ tập hợp rời rạc. Nếu chúng ta sử dụng ước tính này cho số lượng cổng cần thiết để xấp xỉ một cổng một qubit tùy ý, thì số lượng cần thiết để xấp xỉ một mạch <span class="math inline">m</span> cổng với độ chính xác <span class="math inline">\epsilon</span> trở thành <span class="math inline">\Theta(m^2/\epsilon)</span>. Đây là sự gia tăng bậc hai so với kích thước ban đầu của mạch, <span class="math inline">m</span>, điều này đối với nhiều ứng dụng có thể là đủ.</p>
+<p>Tuy nhiên, thật đáng chú ý, một tốc độ hội tụ nhanh hơn nhiều có thể được chứng minh. Định lý Solovay-Kitaev, được chứng minh ở Phụ lục 3, ngụ ý rằng một cổng unita một qubit tùy ý có thể được xấp xỉ với độ chính xác <span class="math inline">\epsilon</span> bằng cách sử dụng <span class="math inline">O(\log^c(1/\epsilon))</span> cổng từ tập hợp rời rạc của chúng ta, trong đó <span class="math inline">c</span> là một hằng số xấp xỉ bằng <span class="math inline">2</span>. Do đó, định lý Solovay-Kitaev ngụ ý rằng để xấp xỉ một mạch chứa <span class="math inline">m</span> cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tới độ chính xác <span class="math inline">\epsilon</span> thì đòi hỏi <span class="math inline">O(m \log^c(m/\epsilon))</span> cổng từ tập hợp rời rạc, một sự gia tăng đa logarit (polylogarithmic) so với kích thước của mạch ban đầu, điều này có khả năng được chấp nhận cho gần như tất cả các ứng dụng.</p>
+<p>Tóm lại, chúng ta đã chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và <span class="math inline">\pi/8</span> là vạn năng cho tính toán lượng tử theo nghĩa là cho trước một mạch chứa các cổng <span class="math inline">\text{CNOT}</span> và các cổng unita một qubit tùy ý, hoàn toàn có thể mô phỏng mạch này với độ chính xác tốt bằng cách chỉ sử dụng tập hợp cổng rời rạc này. Hơn nữa, quá trình mô phỏng có thể được thực hiện một cách hiệu quả, theo nghĩa là chi phí hoạt động (overhead) cần thiết để thực hiện mô phỏng là đa thức theo <span class="math inline">\log(m/\epsilon)</span>, trong đó <span class="math inline">m</span> là số lượng cổng trong mạch ban đầu, và <span class="math inline">\epsilon</span> là độ chính xác mong muốn của phép mô phỏng.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.41:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Bài tập này và hai bài tập tiếp theo phát triển một cấu trúc chỉ ra rằng các cổng Hadamard, phase, controlled-<span class="math inline">\text{NOT}</span> và Toffoli là vạn năng.</p>
+<p><img src="../../img/4.17.png" class="img-fluid"></p>
+<p>Chứng minh rằng mạch ở Hình 4.17 áp dụng phép toán <span class="math inline">R_z(\theta)</span> lên qubit thứ ba (mục tiêu) nếu các kết quả đo lường đều là <span class="math inline">0</span>, trong đó <span class="math inline">\cos\theta = 3/5</span>, và nếu không thì áp dụng <span class="math inline">Z</span> lên qubit mục tiêu. Chứng minh rằng xác suất để cả hai kết quả đo lường đều là <span class="math inline">0</span> là <span class="math inline">5/8</span>, và giải thích làm thế nào việc sử dụng lặp đi lặp lại mạch này và các cổng <span class="math inline">Z = S^2</span> có thể được dùng để áp dụng một cổng <span class="math inline">R_z(\theta)</span> với xác suất tiến tới 1.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.42: (Tính vô tỉ của <span class="math inline">\theta</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Giả sử <span class="math inline">\cos\theta = 3/5</span>. Chúng ta đưa ra một chứng minh bằng phản chứng rằng <span class="math inline">\theta</span> là một bội số vô tỉ của <span class="math inline">2\pi</span>.</p>
+<ol type="1">
+<li>Sử dụng thực tế rằng <span class="math inline">e^{i\theta} = (3 + 4i)/5</span>, chứng minh rằng nếu <span class="math inline">\theta</span> là số hữu tỉ, thì phải tồn tại một số nguyên dương <span class="math inline">m</span> sao cho <span class="math inline">(3 + 4i)^m = 5^m</span>.</li>
+<li>Chứng minh rằng <span class="math inline">(3 + 4i)^m = 3 + 4i \pmod 5</span> với mọi <span class="math inline">m &gt; 0</span>, và kết luận rằng không thể tồn tại <span class="math inline">m</span> nào sao cho <span class="math inline">(3 + 4i)^m = 5^m</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bài tập 4.44:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Conf mấy bai nx luoi go</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="approximating-arbitrary-unitary-gates-is-generically-hard" class="level1">
+<h1>4. Approximating arbitrary unitary gates is generically hard</h1>
+<p>Chúng ta đã thấy rằng bất kỳ phép biến đổi unita nào trên <span class="math inline">n</span> qubit đều có thể được xây dựng từ một tập hợp nhỏ các cổng cơ bản. Có phải lúc nào cũng có thể làm điều này một cách hiệu quả không? Tức là, cho trước một phép biến đổi unita <span class="math inline">U</span> trên <span class="math inline">n</span> qubit, liệu có luôn tồn tại một mạch có kích thước đa thức theo <span class="math inline">n</span> để xấp xỉ <span class="math inline">U</span> hay không? Câu trả lời cho câu hỏi này hóa ra lại là một chữ không vang dội: trên thực tế, hầu hết các phép biến đổi unita chỉ có thể được triển khai một cách rất kém hiệu quả. Một cách để thấy điều này là xem xét câu hỏi: cần bao nhiêu cổng để tạo ra một trạng thái tùy ý của <span class="math inline">n</span> qubit? Một lập luận đếm đơn giản cho thấy rằng điều này đòi hỏi một số lượng phép toán theo hàm mũ, một cách tổng quát; từ đó suy ra ngay lập tức rằng có những phép toán unita đòi hỏi số lượng phép toán theo hàm mũ. Để thấy điều này, giả sử chúng ta có sẵn <span class="math inline">g</span> loại cổng khác nhau, và mỗi cổng hoạt động trên nhiều nhất <span class="math inline">f</span> qubit đầu vào. Những con số này, <span class="math inline">f</span> và <span class="math inline">g</span>, được cố định bởi phần cứng máy tính mà chúng ta có sẵn, và có thể được coi là các hằng số. Giả sử chúng ta có một mạch lượng tử chứa <span class="math inline">m</span> cổng, bắt đầu từ trạng thái cơ sở tính toán <span class="math inline">\vert{}0\rangle^{\otimes n}</span>. Đối với bất kỳ cổng cụ thể nào trong mạch, do đó có nhiều nhất <span class="math inline">\left[ \binom{n}{f} \right]^g = O(n^{fg})</span> lựa chọn khả dĩ. Từ đó suy ra rằng có nhiều nhất <span class="math inline">O(n^{fgm})</span> trạng thái khác nhau có thể được tính toán bằng cách sử dụng <span class="math inline">m</span> cổng.</p>
+<p><img src="../../img/4.18.png" class="img-fluid"></p>
+<p>Giả sử chúng ta mong muốn xấp xỉ một trạng thái cụ thể, <span class="math inline">\vert{}\psi\rangle</span>, trong phạm vi khoảng cách <span class="math inline">\epsilon</span>. Ý tưởng của chứng minh là bao phủ tập hợp tất cả các trạng thái khả dĩ bằng một tập hợp các ‘mảng’ (‘patches’), mỗi mảng có bán kính <span class="math inline">\epsilon</span> (Hình 4.18), và sau đó chứng minh rằng số lượng mảng cần thiết tăng gấp đôi theo hàm mũ (doubly exponentially) đối với <span class="math inline">n</span>; việc so sánh với số lượng hàm mũ các trạng thái khác nhau có thể được tính toán bằng cách sử dụng <span class="math inline">m</span> cổng sẽ ngụ ý kết quả.</p>
+<p>Quan sát đầu tiên chúng ta cần là không gian của các vector trạng thái của <span class="math inline">n</span> qubit có thể được coi chính là mặt cầu đơn vị <span class="math inline">(2^{n+1}-1)</span> chiều. Để thấy điều này, giả sử trạng thái <span class="math inline">n</span> qubit có các biên độ <span class="math inline">\psi_j = X_j + iY_j</span>, trong đó <span class="math inline">X_j</span> và <span class="math inline">Y_j</span> lần lượt là phần thực và phần ảo của biên độ thứ <span class="math inline">j</span>. Điều kiện chuẩn hóa cho các trạng thái lượng tử có thể được viết là <span class="math inline">\sum_j (X_j^2 + Y_j^2) = 1</span>, đây chính là điều kiện để một điểm nằm trên mặt cầu đơn vị trong <span class="math inline">2^{n+1}</span> chiều thực, tức là, mặt cầu đơn vị <span class="math inline">(2^{n+1}-1)</span> chiều. Tương tự, diện tích bề mặt có bán kính <span class="math inline">\epsilon</span> ở gần <span class="math inline">\vert{}\psi\rangle</span> xấp xỉ bằng thể tích của một hình cầu <span class="math inline">(2^{n+1}-2)</span> chiều có bán kính <span class="math inline">\epsilon</span>. Sử dụng công thức <span class="math inline">S_k(r) = 2\pi^{(k+1)/2}r^k / \Gamma((k+1)/2)</span> cho diện tích bề mặt của một mặt cầu <span class="math inline">k</span>-chiều có bán kính <span class="math inline">r</span>, và <span class="math inline">V_k(r) = 2\pi^{(k+1)/2}r^{k+1} / [(k+1)\Gamma((k+1)/2)]</span> cho thể tích của một hình cầu <span class="math inline">k</span>-chiều có bán kính <span class="math inline">r</span>, chúng ta thấy rằng số lượng mảng cần thiết để bao phủ không gian trạng thái sẽ xấp xỉ bằng</p>
+<p><span class="math display">
+\frac{S_{2^{n+1}-1}(1)}{V_{2^{n+1}-2}(\epsilon)} = \frac{\sqrt{\pi} \Gamma(2^n - \frac{1}{2}) (2^{n+1}-1)}{\Gamma(2^n) \epsilon^{2^{n+1}-1}}, \tag{4.82}
+</span></p>
+<p>trong đó <span class="math inline">\Gamma</span> là dạng tổng quát hóa thông thường của hàm giai thừa. Nhưng <span class="math inline">\Gamma(2^n - 1/2) \ge \Gamma(2^n) / 2^n</span>, do đó số lượng mảng cần thiết để bao phủ không gian ít nhất là</p>
+<p><span class="math display">
+\Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right). \tag{4.83}
+</span></p>
+<p>Nhớ lại rằng số lượng mảng có thể đạt tới bằng <span class="math inline">m</span> cổng là <span class="math inline">O(n^{fgm})</span>, vì vậy để đạt tới tất cả các mảng <span class="math inline">\epsilon</span>, chúng ta phải có</p>
+<p><span class="math display">
+O(n^{fgm}) \ge \Omega\left( \frac{1}{\epsilon^{2^{n+1}-1}} \right), \tag{4.84}
+</span></p>
+<p>điều này cho chúng ta</p>
+<p><span class="math display">
+m = \Omega\left( \frac{2^n \log(1/\epsilon)}{\log(n)} \right). \tag{4.85}
+</span></p>
+<p>Tức là, có những trạng thái của <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon)/\log(n))</span> phép toán để xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span>. Con số này phụ thuộc theo hàm mũ vào <span class="math inline">n</span>, và do đó là ‘khó’ (difficult), theo ý nghĩa của độ phức tạp tính toán đã được giới thiệu trong Chương 3. Hơn nữa, điều này ngay lập tức ngụ ý rằng có những phép biến đổi unita <span class="math inline">U</span> trên <span class="math inline">n</span> qubit đòi hỏi <span class="math inline">\Omega(2^n \log(1/\epsilon)/\log(n))</span> phép toán để xấp xỉ bằng một mạch lượng tử thực hiện một phép toán <span class="math inline">V</span> sao cho <span class="math inline">E(U, V) \le \epsilon</span>.</p>
+<p>Ngược lại, bằng cách sử dụng các cấu trúc vạn năng của chúng ta và định lý Solovay-Kitaev, ta suy ra rằng một phép toán unita <span class="math inline">U</span> tùy ý trên <span class="math inline">n</span> qubit có thể được xấp xỉ trong phạm vi khoảng cách <span class="math inline">\epsilon</span> bằng cách sử dụng <span class="math inline">O(n^2 4^n \log^c(n^2 4^n / \epsilon))</span> cổng. Do đó, cấu trúc cho tính vạn năng mà chúng tôi đã đưa ra là tối ưu (nếu bỏ qua một hệ số đa thức); thật không may, nó không giải quyết được vấn đề xác định những họ phép toán unita nào có thể được tính toán một cách hiệu quả trong mô hình mạch lượng tử.</p>
+</section>
+<section id="quantum-computational-complexity" class="level1">
+<h1>5. Quantum computational complexity</h1>
+<p>Trong Chương 3, chúng tôi đã mô tả một lý thuyết về ‘độ phức tạp tính toán’ cho các máy tính cổ điển nhằm phân loại các yêu cầu về tài nguyên để giải quyết các bài toán tính toán trên các máy tính cổ điển. Không có gì ngạc nhiên khi có một sự quan tâm đáng kể đến việc phát triển một lý thuyết về độ phức tạp tính toán lượng tử, và liên hệ nó với lý thuyết độ phức tạp tính toán cổ điển. Mặc dù mới chỉ có những bước đi đầu tiên được thực hiện theo hướng này, nhưng chắc chắn đây sẽ là một hướng đi vô cùng hiệu quả cho các nhà nghiên cứu trong tương lai. Chúng tôi hài lòng với việc trình bày một kết quả về các lớp độ phức tạp lượng tử, liên hệ lớp độ phức tạp lượng tử BQP với lớp độ phức tạp cổ điển PSPACE. Cuộc thảo luận của chúng tôi về kết quả này khá phi hình thức (informal); để biết thêm chi tiết, bạn được khuyên tham khảo bài báo của Bernstein và Vazirani được trích dẫn ở phần cuối chương ‘Lịch sử và đọc thêm’.</p>
+<p>Hãy nhớ lại rằng PSPACE đã được định nghĩa trong Chương 3 là lớp các bài toán quyết định (decision problems) có thể được giải quyết trên một máy Turing bằng cách sử dụng bộ nhớ (không gian) đa thức theo kích thước bài toán và một khoảng thời gian tùy ý. BQP là một lớp độ phức tạp mang tính bản chất lượng tử bao gồm các bài toán quyết định có thể được giải quyết với xác suất lỗi bị chặn (bounded probability of error) bằng cách sử dụng một mạch lượng tử có kích thước đa thức. Trịnh trọng hơn một chút, chúng ta nói một ngôn ngữ <span class="math inline">L</span> thuộc BQP nếu có một họ các mạch lượng tử kích thước đa thức quyết định ngôn ngữ đó, chấp nhận (accept) các chuỗi thuộc ngôn ngữ với xác suất ít nhất là <span class="math inline">3/4</span>, và từ chối (reject) các chuỗi không thuộc ngôn ngữ với xác suất ít nhất là <span class="math inline">3/4</span>. Trong thực tế, điều này có nghĩa là mạch lượng tử nhận đầu vào là các chuỗi nhị phân, và cố gắng xác định xem chúng có phải là các phần tử của ngôn ngữ hay không. Ở phần kết thúc của mạch, một qubit được đo lường, với <span class="math inline">0</span> chỉ ra rằng chuỗi đã được chấp nhận, và <span class="math inline">1</span> chỉ ra sự từ chối. Bằng cách kiểm tra chuỗi vài lần để xác định xem nó có thuộc <span class="math inline">L</span> hay không, chúng ta có thể xác định với xác suất rất cao xem một chuỗi cho trước có nằm trong <span class="math inline">L</span> hay không.</p>
+<p>Tất nhiên, một mạch lượng tử là một thực thể cố định, và bất kỳ mạch lượng tử cho trước nào cũng chỉ có thể quyết định xem các chuỗi có độ dài hữu hạn nào đó có thuộc <span class="math inline">L</span> hay không. Vì lý do này, chúng ta sử dụng toàn bộ một họ các mạch trong định nghĩa của BQP; đối với mỗi độ dài đầu vào khả dĩ, sẽ có một mạch khác nhau trong họ này. Chúng tôi đặt thêm hai ràng buộc lên mạch ngoài tiêu chí chấp nhận / từ chối đã được mô tả. Thứ nhất, kích thước của các mạch chỉ được phép tăng theo đa thức với kích thước của chuỗi đầu vào <span class="math inline">x</span> mà chúng ta đang cố gắng xác định xem <span class="math inline">x \in L</span> hay không. Thứ hai, chúng tôi yêu cầu các mạch phải được tạo ra một cách đồng nhất (uniformly generated), theo một nghĩa tương tự như điều đã được mô tả ở Mục 3.1.2. Yêu cầu về tính đồng nhất này phát sinh bởi vì, trong thực tế, khi được cho một chuỗi <span class="math inline">x</span> có độ dài <span class="math inline">n</span> nào đó, ai đó sẽ phải xây dựng một mạch lượng tử có khả năng quyết định xem <span class="math inline">x</span> có thuộc <span class="math inline">L</span> hay không. Để làm như vậy, họ sẽ cần phải có một tập hợp rõ ràng các hướng dẫn — một thuật toán — để xây dựng mạch. Vì lý do này, chúng tôi yêu cầu các mạch lượng tử của chúng ta phải được tạo ra một cách đồng nhất, tức là, có một máy Turing có khả năng xuất ra một cách hiệu quả bản mô tả của mạch lượng tử. Ràng buộc này có vẻ khá nặng tính kỹ thuật, và trong thực tế thì gần như luôn được thỏa mãn một cách hiển nhiên, nhưng nó giúp chúng ta tránh được những ví dụ bệnh hoạn (pathological examples) như ví dụ đã được mô tả ở Mục 3.1.2. (Bạn cũng có thể tự hỏi liệu máy Turing được sử dụng trong yêu cầu tính đồng nhất là máy Turing lượng tử hay cổ điển thì có quan trọng hay không; hóa ra là điều đó không quan trọng — xem ‘Lịch sử và đọc thêm’.)</p>
+<p>Một trong những kết quả quan trọng nhất trong độ phức tạp tính toán lượng tử là <span class="math inline">\text{BQP} \subseteq \text{PSPACE}</span>. Rõ ràng là <span class="math inline">\text{BPP} \subseteq \text{BQP}</span>, trong đó <span class="math inline">\text{BPP}</span> là lớp độ phức tạp cổ điển của các bài toán quyết định có thể được giải quyết với xác suất lỗi bị chặn bằng cách sử dụng thời gian đa thức trên một máy Turing cổ điển. Do đó chúng ta có chuỗi bao hàm <span class="math inline">\text{BPP} \subseteq \text{BQP} \subseteq \text{PSPACE}</span>. Việc chứng minh rằng <span class="math inline">\text{BQP} \neq \text{BPP}</span> – về mặt trực giác là phát biểu cho rằng máy tính lượng tử mạnh hơn máy tính cổ điển – do đó sẽ ngụ ý rằng <span class="math inline">\text{BPP} \neq \text{PSPACE}</span>. Tuy nhiên, hiện tại người ta chưa biết liệu <span class="math inline">\text{BPP} \neq \text{PSPACE}</span> hay không, và việc chứng minh điều này sẽ đại diện cho một bước đột phá lớn trong khoa học máy tính cổ điển! Vì vậy, việc chứng minh máy tính lượng tử mạnh hơn máy tính cổ điển sẽ có một số hệ ý vô cùng thú vị đối với độ phức tạp tính toán cổ điển! Thật không may, điều đó cũng có nghĩa là việc đưa ra một chứng minh như vậy có thể khá khó khăn.</p>
+<p>Tại sao lại có <span class="math inline">\text{BQP} \subseteq \text{PSPACE}</span>? Đây là một phác thảo trực giác của chứng minh (chứng minh chặt chẽ được để lại cho các tài liệu tham khảo trong phần ‘Lịch sử và đọc thêm’). Giả sử chúng ta có một máy tính lượng tử <span class="math inline">n</span> qubit, và thực hiện một phép tính liên quan đến một chuỗi <span class="math inline">p(n)</span> cổng, trong đó <span class="math inline">p(n)</span> là một đa thức theo <span class="math inline">n</span>. Giả sử mạch lượng tử bắt đầu ở trạng thái <span class="math inline">\vert{}0\rangle</span>, chúng tôi sẽ giải thích cách đánh giá trong không gian đa thức trên một máy tính cổ điển xác suất mà nó kết thúc ở trạng thái <span class="math inline">\vert{}y\rangle</span>. Giả sử các cổng được thực thi trên máy tính lượng tử, theo thứ tự, là <span class="math inline">U_1, U_2, \dots, U_{p(n)}</span>. Khi đó xác suất để kết thúc ở trạng thái <span class="math inline">\vert{}y\rangle</span> là bình phương mô-đun của <span class="math display">\langle y \vert{} U_{p(n)} \dots U_2 U_1 \vert{} 0 \rangle. \tag{4.86}</span> Đại lượng này có thể được ước lượng trong không gian đa thức trên một máy tính cổ điển. Ý tưởng cơ bản là chèn hệ thức đầy đủ <span class="math inline">\sum_x \vert{}x\rangle\langle x\vert{} = I</span> vào giữa mỗi số hạng trong (4.86), thu được</p>
+<p><span class="math display">
+\langle y \vert{} U_{p(n)} \dots U_2 U_1 \vert{} 0 \rangle = \sum_{x_1, \dots, x_{p(n)-1}} \langle y \vert{} U_{p(n)} \vert{} x_{p(n)-1} \rangle \langle x_{p(n)-1} \vert{} U_{p(n)-1} \dots U_2 \vert{} x_1 \rangle \langle x_1 \vert{} U_1 \vert{} 0 \rangle. \tag{4.87}
+</span></p>
+<p>Bởi vì các cổng unita riêng lẻ xuất hiện trong tổng này là các phép toán như cổng Hadamard, <span class="math inline">\text{CNOT}</span>, vân vân, rõ ràng là mỗi số hạng trong tổng có thể được tính toán với độ chính xác cao bằng cách chỉ sử dụng không gian đa thức trên một máy tính cổ điển, và do đó toàn bộ tổng nói chung có thể được tính toán bằng cách sử dụng không gian đa thức, vì các số hạng riêng lẻ trong tổng có thể được xóa đi sau khi được cộng vào tổng đang chạy (running total). Tất nhiên, thuật toán này khá chậm, vì có số lượng số hạng theo hàm mũ trong tổng cần được tính toán và cộng vào tổng; tuy nhiên, chỉ tốn một lượng không gian đa thức, và do đó <span class="math inline">\text{BQP} \subseteq \text{PSPACE}</span>, như chúng ta đã đặt ra để chứng minh.</p>
+<p>Một quy trình tương tự có thể được sử dụng để mô phỏng một tính toán lượng tử tùy ý trên một máy tính cổ điển, bất kể độ dài của phép tính lượng tử đó là bao nhiêu. Do đó, lớp các bài toán có thể giải quyết được trên một máy tính lượng tử với tài nguyên thời gian và không gian không giới hạn không lớn hơn lớp các bài toán có thể giải quyết được trên một máy tính cổ điển. Nói cách khác, điều này có nghĩa là máy tính lượng tử không vi phạm luận đề Church–Turing rằng bất kỳ quá trình thuật toán nào cũng có thể được mô phỏng một cách hiệu quả (mô phỏng được) bằng cách sử dụng một máy Turing. Tất nhiên, máy tính lượng tử có thể hiệu quả hơn (efficient) nhiều so với các đối tác cổ điển của chúng, qua đó thách thức luận đề Church–Turing mạnh rằng bất kỳ quá trình thuật toán nào cũng có thể được mô phỏng một cách hiệu quả bằng cách sử dụng một máy Turing xác suất.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../note/quantumcircuits/4.html" class="pagination-link" aria-label="4 Measurement">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4 Measurement</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../note/quantumcircuits/6.html" class="pagination-link" aria-label="6 Summary of the quantum circuit model of computation">
+        <span class="nav-page-text">6 Summary of the quantum circuit model of computation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
