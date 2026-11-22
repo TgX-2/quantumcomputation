@@ -63,13 +63,25 @@ $$
 
 Sau này, chúng ta sẽ thấy rất thuận tiện khi biểu diễn các tương tác với một dao động tử điều hòa đơn giản bằng cách đưa vào các số hạng bổ sung liên quan đến $a$ và $a^\dagger$, và các tương tác giữa các dao động tử với nhau bằng các số hạng chẳng hạn như $a_1^\dagger a_2 + a_1 a_2^\dagger$. Tuy nhiên, hiện tại chúng ta chỉ giới hạn sự chú ý của mình vào một dao động tử đơn lẻ.   
 
-Bài tập 7.1: Sử dụng thực tế rằng $x$ và $p$ không giao hoán, và trên thực tế $[x, p] = i\hbar$, hãy chỉ ra một cách tường minh rằng $a^\dagger a = H/\hbar\omega - 1/2$.   
+:::{.callout-note collapse="true"}
+# Bài tập 7.1: 
+Sử dụng thực tế rằng $x$ và $p$ không giao hoán, và trên thực tế $[x, p] = i\hbar$, hãy chỉ ra một cách tường minh rằng $a^\dagger a = H/\hbar\omega - 1/2$.   
+:::
 
-Bài tập 7.2: Cho biết $[x, p] = i\hbar$, hãy tính $[a, a^\dagger]$.   
+:::{.callout-note collapse="true"}
+# Bài tập 7.2: 
+Cho biết $[x, p] = i\hbar$, hãy tính $[a, a^\dagger]$.   
+:::
 
-Bài tập 7.3: Hãy tính $[H, a]$ và sử dụng kết quả đó để chỉ ra rằng nếu $\vert{}\psi\rangle$ là một trạng thái riêng của $H$ với năng lượng $E \ge n\hbar\omega$, thì $a^n\vert{}\psi\rangle$ là một trạng thái riêng với năng lượng $E - n\hbar\omega$.   
+:::{.callout-note collapse="true"}
+# Bài tập 7.3: 
+Hãy tính $[H, a]$ và sử dụng kết quả đó để chỉ ra rằng nếu $\vert{}\psi\rangle$ là một trạng thái riêng của $H$ với năng lượng $E \ge n\hbar\omega$, thì $a^n\vert{}\psi\rangle$ là một trạng thái riêng với năng lượng $E - n\hbar\omega$.   
+:::
 
-Bài tập 7.4: Hãy chỉ ra rằng $\vert{}n\rangle = \frac{(a^\dagger)^n}{\sqrt{n!}} \vert{}0\rangle$.   Bài tập 7.5: Hãy kiểm chứng rằng Các phương trình (7.11) và (7.12) nhất quán với (7.10) và điều kiện chuẩn hóa $\langle n\vert{}n\rangle = 1$.   
+:::{.callout-note collapse="true"}
+# Bài tập 7.4: 
+Hãy chỉ ra rằng $\vert{}n\rangle = \frac{(a^\dagger)^n}{\sqrt{n!}} \vert{}0\rangle$.   Bài tập 7.5: Hãy kiểm chứng rằng Các phương trình (7.11) và (7.12) nhất quán với (7.10) và điều kiện chuẩn hóa $\langle n\vert{}n\rangle = 1$.   
+:::
 
 Sự tiến hóa theo thời gian của các trạng thái riêng được cho bởi việc giải phương trình Schrödinger, (2.86), từ đó chúng ta tìm thấy rằng trạng thái $\vert{}\psi(0)\rangle = \sum_n c_n(0)\vert{}n\rangle$ tiến hóa theo thời gian để trở thành   
 
