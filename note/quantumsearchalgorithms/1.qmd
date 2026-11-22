@@ -45,7 +45,9 @@ $$
 
 :::
 
-Giả sử chúng ta muốn tìm kiếm qua một không gian tìm kiếm có $N$ phần tử. Thay vì tìm kiếm trực tiếp trên các phần tử, chúng ta tập trung vào chỉ số (index) của các phần tử đó, vốn chỉ là một con số nằm trong khoảng từ $0$ đến $N - 1$. Để thuận tiện, chúng ta giả sử $N = 2^n$, vì vậy chỉ số có thể được lưu trữ trong $n$ bit, và bài toán tìm kiếm có chính xác $M$ giải pháp, với $1 \le M \le N$. Một trường hợp cụ thể của bài toán tìm kiếm có thể được biểu diễn một cách thuận tiện bằng một hàm $f$, lấy đầu vào là một số nguyên $x$, trong khoảng từ $0$ đến $N - 1$. Theo định nghĩa, $f(x) = 1$ nếu $x$ là một giải pháp cho bài toán tìm kiếm, và $f(x) = 0$ nếu $x$ không phải là một giải pháp cho bài toán tìm kiếm.Giả sử chúng ta được cung cấp một oracle lượng tử – một hộp đen mà hoạt động bên trong của nó chúng ta sẽ thảo luận sau, nhưng không quan trọng ở giai đoạn này – với khả năng nhận ra các giải pháp cho bài toán tìm kiếm. Sự nhận ra này được báo hiệu bằng cách sử dụng một qubit oracle. Chính xác hơn, oracle là một toán tử unita, $O$, được định nghĩa bởi hành động của nó trên cơ sở tính toán:
+Giả sử chúng ta muốn tìm kiếm qua một không gian tìm kiếm có $N$ phần tử. Thay vì tìm kiếm trực tiếp trên các phần tử, chúng ta tập trung vào chỉ số (index) của các phần tử đó, vốn chỉ là một con số nằm trong khoảng từ $0$ đến $N - 1$. Để thuận tiện, chúng ta giả sử $N = 2^n$, vì vậy chỉ số có thể được lưu trữ trong $n$ bit, và bài toán tìm kiếm có chính xác $M$ giải pháp, với $1 \le M \le N$. Một trường hợp cụ thể của bài toán tìm kiếm có thể được biểu diễn một cách thuận tiện bằng một hàm $f$, lấy đầu vào là một số nguyên $x$, trong khoảng từ $0$ đến $N - 1$. Theo định nghĩa, $f(x) = 1$ nếu $x$ là một giải pháp cho bài toán tìm kiếm, và $f(x) = 0$ nếu $x$ không phải là một giải pháp cho bài toán tìm kiếm.
+
+Giả sử chúng ta được cung cấp một oracle lượng tử – một hộp đen mà hoạt động bên trong của nó chúng ta sẽ thảo luận sau, nhưng không quan trọng ở giai đoạn này – với khả năng nhận ra các giải pháp cho bài toán tìm kiếm. Sự nhận ra này được báo hiệu bằng cách sử dụng một qubit oracle. Chính xác hơn, oracle là một toán tử unita, $O$, được định nghĩa bởi hành động của nó trên cơ sở tính toán:
 
 $$
 \vert{}x\rangle\vert{}q\rangle \xrightarrow{O} \vert{}x\rangle\vert{}q \oplus f(x)\rangle, \tag{6.1}
@@ -102,7 +104,7 @@ Về mặt sơ đồ, thuật toán tìm kiếm hoạt động như được th�
 Thuật toán bắt đầu với máy tính ở trạng thái $\vert{}0\rangle^{\otimes n}$. Biến đổi Hadamard được sử dụng để đưa máy tính vào trạng thái chồng chập đều,
 
 $$
-vert{}\psi\rangle = \frac{1}{N^{1/2}} \sum_{x=0}^{N-1} \vert{}x\rangle. \tag{6.4}
+\vert{}\psi\rangle = \frac{1}{N^{1/2}} \sum_{x=0}^{N-1} \vert{}x\rangle. \tag{6.4}
 $$
 
 Sau đó, thuật toán tìm kiếm lượng tử bao gồm việc áp dụng lặp đi lặp lại một chương trình con lượng tử, được gọi là vòng lặp Grover (Grover iteration) hoặc toán tử Grover, mà chúng tôi ký hiệu là $G$. Vòng lặp Grover, có mạch lượng tử được minh họa trong Hình 6.2, có thể được chia thành bốn bước:
