@@ -104,3 +104,27 @@ Có thể hình dung ra rất nhiều khó khăn đối với việc đo lườn
 Tuy nhiên, thật đáng ngạc nhiên là các phép đo mạnh không nhất thiết phải có; các phép đo yếu được thực hiện liên tục và không bao giờ ngắt đi vẫn có thể sử dụng được cho tính toán lượng tử. Điều này trở nên khả thi bằng cách hoàn thành phép tính trong một khoảng thời gian ngắn so với sự ghép cặp đo lường, và bằng cách sử dụng các tập hợp (ensembles) lớn gồm nhiều máy tính lượng tử. Các tập hợp này cùng nhau tạo ra một tín hiệu tổng hợp có thể quan sát được ở quy mô vĩ mô và biểu thị cho trạng thái lượng tử. Việc sử dụng một tập hợp cũng kéo theo những vấn đề bổ sung. Ví dụ, trong thuật toán phân tích thừa số, nếu đầu ra của phép đo là $q\langle c\rangle/r$, thuật toán sẽ thất bại bởi vì $\langle c\rangle$, giá trị trung bình của $c$, không nhất thiết phải là một số nguyên (và do đó không thể thực hiện khai triển liên phân số). May mắn thay, người ta có thể sửa đổi các thuật toán lượng tử để hoạt động được với các kết quả đọc trung bình trên tập hợp. Điều này sẽ được thảo luận sâu hơn trong Mục 7.7.   
 
 Một hệ số phẩm chất (figure of merit) tốt cho khả năng đo lường là tỷ số tín hiệu trên nhiễu (SNR). Đại lượng này tính đến sự kém hiệu quả của phép đo cũng như độ mạnh tín hiệu nội tại thu được từ việc ghép cặp một thiết bị đo với hệ lượng tử.  
+
+# Những câu hỏi nhỏ
+
+## $T_1$ và $T_2$ là cái gì?
+
+* **Thời gian hồi phục dọc $T_1$ - Energy Relaxation**
+
+Quy ước rằng $\vert 0 \rangle$ là mức năng lượng thấp, $\vert 1 \rangle$ là mức năng lượng cao.
+
+Khi bơm năng lượng, $\vert 0 \rangle$ sẽ biến sang $\vert 1 \rangle$, và nó luôn có xu hướng trao đổi năng lượng với môi trường lạnh xung quanh (phát xạ tự phát photon hoặc truyền nhiệt vào mạng tinh thể) để trở về trạng thái cân bằng nhiệt $\vert 0\rangle$.
+
+Thế $T_1$ là gì? Giống như trong định luật phân rã phóng xạ, từng hạt đơn lẻ không có một thời gian cố định để tự nhảy bậc, mà nó phải là trung bình. Trên một tập hợp lớn các lần đo lặp lại, **xác suất tìm tháy qubit còn ở mức năng lượng cao $\vert 1 \rangle$** là:
+
+$$
+P(t) = e^{-t / T_1}
+$$
+
+* **Thời gian hồi phục ngang $T_2$ - Dephasing**
+
+Khi qubit ở trạng thái chồng chập $\vert + \rangle = \frac 1 {\sqrt 2} (\vert 0 \rangle + \vert 1 \rangle)$, mũi tên Bloch nằm ngang trên mặt phẳng quỹ đạo XY.
+
+Quá trình hồi phục ngang không để mũi tên trên quả cầu lên $\vert 1 \rangle$ hay $\vert 0 \rangle$ (đó là việc của $T_1$, vì nó có tốn năng lượng), thay vào đó, nó vẫn giữ tính xác suất 50-50, nhưng độ dài mũi tên bị rút ngang lại.
+
+Sau khi rút lại, nó ở trạng thái $\rho = \frac 1 2 I$, trạng thái chồng chập hỗn hợp cổ điển - giống như là việc một đồng xu được tung lên, rồi được úp vào hai lòng bàn tay vậy (tuy chúng ta không biết rằng nó là ngửa hay xấp, nhưng nó cũng mất khả năng lượng tử).
