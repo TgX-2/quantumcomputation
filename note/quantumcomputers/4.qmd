@@ -503,3 +503,7 @@ Bất chấp những nhược điểm mà việc hiện thực hóa máy tính l
 **Đọc kết quả (Readout):** Phát hiện các photon đơn lẻ (ví dụ sử dụng ống nhân quang điện).   
 
 **Nhược điểm:** Khó hiện thực hóa được các môi trường phi tuyến Kerr có tỷ số giữa độ mạnh điều biến pha chéo trên tổn hao hấp thụ đủ lớn.
+
+# KLM
+
+Xem thêm ở đây: [](../future/klm.qmd)

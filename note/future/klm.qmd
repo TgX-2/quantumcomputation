@@ -1,0 +1,30 @@
+---
+title: "KLM protocol"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+Như đã nói ở phía trên, chúng ta đã có phaseshifter đóng vai trò là $R_z$ và beamsplitter là $R_y$, chỉ từ 2 cổng quay này, kết hợp với CNOT cho ra các tổ hợp các cổng có thể xảy ra. Nhưng việc môi trường Kerr lại quá khiến photon a tác động lên photon b một lượng quá nhỏ, không đủ, muốn nó thật sự quay một góc tuỳ ý, phải cần tới một tinh thể cả vài km.
+
+Từ đó, chúng ta sinh ra giao thức KLM - Emanuel Knill - Raymond Laflamme - Gerard J. Milburn.
+
+# Hiệu ứng Hong-Ou-Mandel
+
+Khi cho hai dòng photon đi qua BS50:50, lúc đó thì nó sẽ tự chia ra là $\vert 0, 2 \rangle$ hoặc $\vert 2, 0 \rangle$, trường hợp $\vert 1, 1 \rangle$ đã bị biến mất!
+
+Toán tử sinh của hai đường truyền biến đổi tuyến tính như sau:
+
+$$
+\hat{a_1}^\dagger \to \frac 1 {\sqrt 2} \hat{a_3}^\dagger + \frac 1 {\sqrt 2} \hat{a_4}^\dagger, \qquad 
+\hat{a_2}^\dagger \to \frac 1 {\sqrt 2} \hat{a_3}^\dagger - \frac 1 {\sqrt 2} \hat{a_4}^\dagger
+$$
+
+$$
+\vert 1, 1 \rangle \to \frac 1 2 \left( \right) \left( \right) \vert 0, 0 \rangle = \frac 1 2 \left( \right) \vert 0, 0 \rangle = \frac {} {\sqrt 2}
+$$
