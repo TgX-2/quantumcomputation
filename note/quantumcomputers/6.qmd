@@ -295,3 +295,7 @@ Hãy chứng minh rằng mạch lượng tử trong Hình 7.14 tương đương 
 **Đọc kết quả:** Đo mật độ chiếm giữ (xác suất) của các trạng thái siêu tinh tế.   
 
 **Hạn chế:** Thời gian sống của phonon ngắn, và các ion rất khó được chuẩn bị ở trạng thái cơ bản của chuyển động.  
+
+# sketch
+
+Cổng Mølmer–Sørensen, đọc ở đây : [](../future/msgate.qmd)

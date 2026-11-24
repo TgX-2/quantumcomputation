@@ -655,7 +655,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Simulations Quantum</span></a>
+ <span class="menu-text">Direction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/klm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">KLM protocol</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/msgate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mølmer–Sørensen gate</span></a>
   </div>
 </li>
       </ul>
@@ -679,6 +691,10 @@ window.Quarto = {
   <li><a href="#single-photon-single-atom-absorption-and-refraction" id="toc-single-photon-single-atom-absorption-and-refraction" class="nav-link" data-scroll-target="#single-photon-single-atom-absorption-and-refraction">3. Single-photon single-atom absorption and refraction</a></li>
   <li><a href="#quantum-computation" id="toc-quantum-computation" class="nav-link" data-scroll-target="#quantum-computation">4. Quantum computation</a></li>
   <li><a href="#optical-cavity-quantum-electrodynamics" id="toc-optical-cavity-quantum-electrodynamics" class="nav-link" data-scroll-target="#optical-cavity-quantum-electrodynamics">Optical cavity quantum electrodynamics</a></li>
+  <li><a href="#sketch" id="toc-sketch" class="nav-link" data-scroll-target="#sketch">sketch</a>
+  <ul class="collapse">
+  <li><a href="#cách-tạo-ra-cổng-cnot" id="toc-cách-tạo-ra-cổng-cnot" class="nav-link" data-scroll-target="#cách-tạo-ra-cổng-cnot">Cách tạo ra cổng CNOT</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -771,7 +787,7 @@ E_{\text{cav}} = \sum_k E_k = \frac{\sqrt{1-R_1} E_{\text{in}}}{1 + e^{i\varphi}
 <p>Hãy vẽ đồ thị của phương trình (7.55) dưới dạng một hàm theo độ lệch cộng hưởng trường (field detuning) <span class="math inline">\varphi</span>, với <span class="math inline">R_1 = R_2 = 0.9</span>.</p>
 <hr>
 <p>Chỉ cần thay <span class="math inline">R_1</span> và <span class="math inline">R_2</span> vào phương trình (7.55) là được:</p>
-<div id="3a805f92" class="cell" data-execution_count="1">
+<div id="26c15a51" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -796,7 +812,7 @@ E_{\text{cav}} = \sum_k E_k = \frac{\sqrt{1-R_1} E_{\text{in}}}{1 + e^{i\varphi}
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5_files/figure-html/cell-2-output-1.png" width="757" height="421" class="figure-img"></p>
+<p><img src="5_files/figure-html/cell-2-output-1.png" width="759" height="422" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -853,10 +869,11 @@ H_{\text{atom}} = \frac{\hbar\omega_0}{2} Z , \tag{7.66}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Hộp 7.6: Các mức năng lượng của một nguyên tử Các electron của một nguyên tử hành xử giống như các hạt nằm trong một chiếc hộp ba chiều, với Hamiltonian có dạng
+<span class="screen-reader-only">Important</span>Hộp 7.6: Các mức năng lượng của một nguyên tử
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Các electron của một nguyên tử hành xử giống như các hạt nằm trong một chiếc hộp ba chiều, với Hamiltonian có dạng</p>
 <p><span class="math display">
 H_{\text{A}} = \sum_k \frac{\vert{}\vec{p}_k\vert{}^2}{2m} - \frac{Z e^2}{r_k} + H_{\text{rel}} + H_{\text{ee}} + H_{\text{so}} + H_{\text{hf}} , \tag{7.61}
 </span></p>
@@ -1129,8 +1146,30 @@ H_2 = \begin{bmatrix} -\delta &amp; g_a &amp; g_b \\ g_a &amp; \delta &amp; 0 \\
 <p><strong>Chuẩn bị trạng thái ban đầu</strong>: Tạo ra các trạng thái đơn photon (ví dụ: bằng cách làm suy giảm cường độ ánh sáng laser).</p>
 <p><strong>Đọc kết quả</strong>: Phát hiện các photon đơn lẻ (ví dụ: sử dụng ống nhân quang điện - photomultiplier tube).</p>
 <p><strong>Hạn chế</strong>: Sự ghép nối (tương tác) giữa hai photon được trung gian thông qua một nguyên tử, do đó việc tăng cường sự ghép nối giữa nguyên tử và trường sáng là điều mong muốn. Tuy nhiên, khi đó việc đưa photon đi vào và đi ra khỏi hốc cộng hưởng lại trở nên khó khăn, làm hạn chế khả năng mắc nối tiếp nhiều cổng (cascadability).</p>
+<p><span class="math display">
+\mathcal{L}_{\text{QED}} = \bar{\psi}(i\gamma^\mu D_\mu - m)\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+</span></p>
+</section>
+<section id="sketch" class="level1">
+<h1>sketch</h1>
+<p>set up trong đầu:</p>
+<p>có hai gương ( ) ở hai bên, ở bên trong có n atoams, chúng ta sẽ bắn một số photon có tần số cộng hưởng omega vào trong hốc cộng hưởng.</p>
+<p>Sẽ có hai kịch bản xảy ra:</p>
+<p>Nếu mà omega của cav = omega photon = omega atom thì hệ rơi vào chế độ <strong>strong coupuling</strong>.</p>
+<p>atom vs photon đó sẽ lai hóa với nhau tạo ra trạng thái dresssed state. (thay vì là atom hấp thụ photon đó, rồi phát xạ ngẫu nhiên ra ngoài). lúc này sẽ xảy ra dao động rabi, tức là từ <span class="math inline">\vert 1, g \rangle \to \vert 0, e \rangle \to \vert 1, g \rangle \to ...</span> vào tiếp tục (với tần số đặc trưng g).</p>
+<p>lúc này thang năng lượng bị mất tính điều hòa.</p>
+<p>Nếu hốc quang học không tồn tại trạng thái liên kết mạnh bên trong, thì nó sẽ trông giống hệt một dao dộng tử điều hòa, tức là các Delta E sẽ bằng nhau, = hbar omega.</p>
+<p>Nhưng khi có một nguyên tử liên kết mạnh bên trong, sự lai hóa làm các mức năng lượng bị tách đôi - vacuum Rabi splitting với độ tách tỉ lệ với sqrt n:</p>
+<p><span class="math display">
+E_{n, \pm} = n\hbar\omega \pm \hbar g \sqrt n
+</span></p>
+<p>vì vậy nên khoảng năng lượng để nhảy từ 0 lên 1 không còn bằng 1 lên 2 nữa. Ngay khi photon 1 đi vào, tần số cộng hưởng omega của hệ lập tức bị dịch chuyển khiến cho photon 2 ban đầu dù có tần số omega ban đầu bị lệch cộng hưởng và bị bật ra ngoài - photon blockade.</p>
+<section id="cách-tạo-ra-cổng-cnot" class="level2">
+<h2 class="anchored" data-anchor-id="cách-tạo-ra-cổng-cnot">Cách tạo ra cổng CNOT</h2>
+<p>hãy tham khảo và nghiên cứu thêm về duan-kimble.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -506,4 +506,4 @@ Bất chấp những nhược điểm mà việc hiện thực hóa máy tính l
 
 # KLM
 
-Xem thêm ở đây: [](../future/klm.qmd)
+Xem thêm ở đây: [KLM protocol](../future/klm.qmd)

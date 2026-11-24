@@ -151,7 +151,9 @@ $$
 trong đó $\hbar\omega_0$ là hiệu năng lượng của hai mức, bởi vì hai trạng thái này là các trạng thái riêng năng lượng.
 
 :::{.callout-important}
-# Hộp 7.6: Các mức năng lượng của một nguyên tử   Các electron của một nguyên tử hành xử giống như các hạt nằm trong một chiếc hộp ba chiều, với Hamiltonian có dạng   
+# Hộp 7.6: Các mức năng lượng của một nguyên tử   
+
+Các electron của một nguyên tử hành xử giống như các hạt nằm trong một chiếc hộp ba chiều, với Hamiltonian có dạng   
 
 $$
 H_{\text{A}} = \sum_k \frac{\vert{}\vec{p}_k\vert{}^2}{2m} - \frac{Z e^2}{r_k} + H_{\text{rel}} + H_{\text{ee}} + H_{\text{so}} + H_{\text{hf}} , \tag{7.61}
@@ -412,3 +414,37 @@ Hãy chứng minh rằng cổng hai qubit của (7.87) có thể được dùng 
 **Đọc kết quả**: Phát hiện các photon đơn lẻ (ví dụ: sử dụng ống nhân quang điện - photomultiplier tube).
 
 **Hạn chế**: Sự ghép nối (tương tác) giữa hai photon được trung gian thông qua một nguyên tử, do đó việc tăng cường sự ghép nối giữa nguyên tử và trường sáng là điều mong muốn. Tuy nhiên, khi đó việc đưa photon đi vào và đi ra khỏi hốc cộng hưởng lại trở nên khó khăn, làm hạn chế khả năng mắc nối tiếp nhiều cổng (cascadability).
+
+$$
+\mathcal{L}_{\text{QED}} = \bar{\psi}(i\gamma^\mu D_\mu - m)\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+$$
+
+# sketch
+
+set up trong đầu:
+
+có hai gương ( ) ở hai bên, ở bên trong có n atoams, chúng ta sẽ bắn một số photon có tần số cộng hưởng omega vào trong hốc cộng hưởng.
+
+Sẽ có hai kịch bản xảy ra:
+
+Nếu mà omega của cav = omega photon = omega atom thì hệ rơi vào chế độ **strong coupuling**.
+
+atom vs photon đó sẽ lai hóa với nhau tạo ra trạng thái dresssed state. (thay vì là atom hấp thụ photon đó, rồi phát xạ ngẫu nhiên ra ngoài).
+lúc này sẽ xảy ra dao động rabi, tức là từ $\vert 1, g \rangle \to \vert 0, e \rangle \to \vert 1, g \rangle \to ...$ vào tiếp tục (với tần số đặc trưng g).
+
+lúc này thang năng lượng bị mất tính điều hòa.
+
+Nếu hốc quang học không tồn tại trạng thái liên kết mạnh bên trong, thì nó sẽ trông giống hệt một dao dộng tử điều hòa, tức là các Delta E sẽ bằng nhau, = hbar omega.
+
+Nhưng khi có một nguyên tử liên kết mạnh bên trong, sự lai hóa làm các mức năng lượng bị tách đôi - vacuum Rabi splitting với độ tách tỉ lệ với sqrt n:
+
+$$
+E_{n, \pm} = n\hbar\omega \pm \hbar g \sqrt n
+$$
+
+vì vậy nên khoảng năng lượng để nhảy từ 0 lên 1 không còn bằng 1 lên 2 nữa. Ngay khi photon 1 đi vào, tần số cộng hưởng omega của hệ lập tức bị dịch chuyển khiến cho photon 2 ban đầu dù có tần số omega ban đầu bị lệch cộng hưởng và bị bật ra ngoài - photon blockade.
+
+## Cách tạo ra cổng CNOT
+
+hãy tham khảo và nghiên cứu thêm về duan-kimble.
+

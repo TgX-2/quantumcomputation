@@ -103,6 +103,8 @@ website:
         contents:
           - note/future/simulation.qmd
           - note/future/directions.qmd
+          - note/future/klm.qmd
+          - note/future/msgate.qmd
 
 
     

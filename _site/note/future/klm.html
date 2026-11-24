@@ -34,6 +34,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../note/future/msgate.html" rel="next">
+<link href="../../note/future/directions.html" rel="prev">
 <link href="../../img/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -129,9 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      TgX.2
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Future</a></li><li class="breadcrumb-item"><a href="../../note/future/klm.html">KLM protocol</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -604,13 +604,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
  <span class="menu-text">Future</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/future/simulation.html" class="sidebar-item-text sidebar-link">
@@ -620,7 +620,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Simulations Quantum</span></a>
+ <span class="menu-text">Direction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/klm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">KLM protocol</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/msgate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mølmer–Sørensen gate</span></a>
   </div>
 </li>
       </ul>
@@ -636,13 +648,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#hiệu-ứng-hong-ou-mandel" id="toc-hiệu-ứng-hong-ou-mandel" class="nav-link active" data-scroll-target="#hiệu-ứng-hong-ou-mandel">Hiệu ứng Hong-Ou-Mandel</a></li>
+  <li><a href="#ns-gate" id="toc-ns-gate" class="nav-link" data-scroll-target="#ns-gate">NS Gate</a></li>
+  <li><a href="#controlled-z" id="toc-controlled-z" class="nav-link" data-scroll-target="#controlled-z">Controlled-Z</a></li>
+  <li><a href="#controlled-not" id="toc-controlled-not" class="nav-link" data-scroll-target="#controlled-not">Controlled-NOT</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/future/simulation.html">Future</a></li><li class="breadcrumb-item"><a href="../../note/future/klm.html">KLM protocol</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">KLM protocol</h1>
 </div>
@@ -667,18 +682,61 @@ window.Quarto = {
 </header>
 
 
-<p>Như đã nói ở phía trên, chúng ta đã có phaseshifter đóng vai trò là <span class="math inline">R_z</span> và beamsplitter là <span class="math inline">R_y</span>, chỉ từ 2 cổng quay này, kết hợp với CNOT cho ra các tổ hợp các cổng có thể xảy ra. Nhưng việc môi trường Kerr lại quá khiến photon a tác động lên photon b một lượng quá nhỏ, không đủ, muốn nó thật sự quay một góc tuỳ ý, phải cần tới một tinh thể cả vài km.</p>
+<p>Như đã nói ở phía trên, chúng ta đã có phaseshifter đóng vai trò là <span class="math inline">R_z</span> và beamsplitter là <span class="math inline">R_y</span>, chỉ từ 2 cổng quay này, kết hợp với CNOT cho ra các tổ hợp các cổng có thể xảy ra. Nhưng việc môi trường Kerr lại quá yếu, khiến photon a tác động lên photon b một lượng quá nhỏ, không đủ, muốn nó thật sự quay một góc tuỳ ý, phải cần tới một tinh thể cả vài km.</p>
 <p>Từ đó, chúng ta sinh ra giao thức KLM - Emanuel Knill - Raymond Laflamme - Gerard J. Milburn.</p>
 <section id="hiệu-ứng-hong-ou-mandel" class="level1">
 <h1>Hiệu ứng Hong-Ou-Mandel</h1>
 <p>Khi cho hai dòng photon đi qua BS50:50, lúc đó thì nó sẽ tự chia ra là <span class="math inline">\vert 0, 2 \rangle</span> hoặc <span class="math inline">\vert 2, 0 \rangle</span>, trường hợp <span class="math inline">\vert 1, 1 \rangle</span> đã bị biến mất!</p>
+<p>Trạng thái đầu vào:</p>
+<p><span class="math display">
+\vert 1, 1 \rangle = \hat{a_1}^\dagger \hat{a_2}^\dagger \vert 0, 0 \rangle
+</span></p>
 <p>Toán tử sinh của hai đường truyền biến đổi tuyến tính như sau:</p>
 <p><span class="math display">
 \hat{a_1}^\dagger \to \frac 1 {\sqrt 2} \hat{a_3}^\dagger + \frac 1 {\sqrt 2} \hat{a_4}^\dagger, \qquad
 \hat{a_2}^\dagger \to \frac 1 {\sqrt 2} \hat{a_3}^\dagger - \frac 1 {\sqrt 2} \hat{a_4}^\dagger
 </span></p>
 <p><span class="math display">
-\vert 1, 1 \rangle \to \frac 1 2 \left( \right) \left( \right) \vert 0, 0 \rangle = \frac 1 2 \left( \right) \vert 0, 0 \rangle = \frac {} {\sqrt 2}
+\vert 1, 1 \rangle \to
+\frac 1 2 \left(\hat{a_3}^\dagger + \hat{a_4}^\dagger \right) \left(\hat{a_3}^\dagger - \hat{a_4}^\dagger  \right) \vert 0, 0 \rangle
+= \frac 1 2 \left((\hat{a_3}^\dagger)^2 - (\hat{a_4}^\dagger )^2 \right) \vert 0, 0 \rangle
+= \frac {\vert 0, 2\rangle - \vert 2, 0 \rangle} {\sqrt 2}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/klm_1.png" class="img-fluid figure-img"></p>
+<figcaption>Hình KLM.1: Mô tả hai photon cùng đập một beamsplitter</figcaption>
+</figure>
+</div>
+<p>Ý nghĩa: Từ đó sẽ chỉ có hai trường hợp chồng chập xảy ra, là <span class="math inline">\vert 2, 0 \rangle</span> (2 photon cùng đi đường trên, 0 photon ở đường dưới), hoặc là <span class="math inline">\vert 0, 2 \rangle</span> (0 photon ở đường trên, 2 photon ở đường dưới), trường hợp cùng phản xạ hoặc cùng đi thẳng đã bị biến mất.</p>
+<p>Note: Trong sơ đồ mạch ngang (dual-rail), ta quy ước đường trên ứng với mode 1 (<span class="math inline">\hat{a}_1^\dagger</span>) và đường dưới ứng với mode 2 (<span class="math inline">\hat{a}_2^\dagger</span>).</p>
+</section>
+<section id="ns-gate" class="level1">
+<h1>NS Gate</h1>
+<p>Việc của cổng NS là phải điều chỉnh t và r ở cả 3 gương bán mạ BS1, BS2 và BS3, sao cho có thể đảo pha của <span class="math inline">\vert 2 \rangle \to - \vert 2 \rangle</span>, việc này thành công khi và chỉ khi kết quả đo ra ở ancilla ket 1 là 1 và kết quả đo ancilla ket 0 là 0 (tỉ lệ 1/4):</p>
+<p><span class="math display">
+NS(\alpha \vert 0 \rangle + \beta \vert 1 \rangle + \gamma \vert 2 \rangle)
+\to
+\alpha \vert 0 \rangle + \beta \vert 1 \rangle - \gamma \vert 2 \rangle
+\qquad (25\%)
+</span></p>
+<p><img src="../../img/klm_2.png" class="img-fluid"></p>
+</section>
+<section id="controlled-z" class="level1">
+<h1>Controlled-Z</h1>
+<p>Và giờ chúng ta sẽ ghép thành một mạch CZ hoàn chỉnh:</p>
+<p><span class="math display">
+input \to BS50:50 \to NS \to NS \to BS50:50 \to output
+</span></p>
+<p><span class="math display">
+\vert{}1,1\rangle \xrightarrow{\text{BS}_{50:50}} \frac{\vert{}2,0\rangle - \vert{}0,2\rangle}{\sqrt{2}} \xrightarrow{\text{NS} \otimes \text{NS}} \frac{-\vert{}2,0\rangle - (-\vert{}0,2\rangle)}{\sqrt{2}} = -\frac{\vert{}2,0\rangle - \vert{}0,2\rangle}{\sqrt{2}} \xrightarrow{\text{BS}_{50:50}} -\vert{}1,1\rangle
+</span></p>
+</section>
+<section id="controlled-not" class="level1">
+<h1>Controlled-NOT</h1>
+<p>Một cách hiển nhiên, chúng ta biết rằng <span class="math inline">HZH = X</span>, vậy là chỉ cần kẹp cổng CZ ở giữa hai cổng Hadamard là được, mà ở trong này Hadamard chính là gương bán mạ BS50:50.</p>
+<p><span class="math display">
+CNOT = (I \otimes H) CZ (I \otimes H)
 </span></p>
 
 
@@ -1085,6 +1143,18 @@ window.Quarto = {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../note/future/directions.html" class="pagination-link" aria-label="Direction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Direction</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../note/future/msgate.html" class="pagination-link" aria-label="Mølmer–Sørensen gate">
+        <span class="nav-page-text">Mølmer–Sørensen gate</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
