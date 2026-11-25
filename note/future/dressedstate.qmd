@@ -1,0 +1,37 @@
+---
+title: "Dressed State"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# Tần số cộng hưởng - $\omega$
+
+# Trạng thái "mặc áo"
+
+Tại sao lại có tên này? Trong quantum mechanics, một nguyên tử cô lập đứng một mình trong chân không được gọi là bare atom - nguyên tử "trần truồng".
+
+* Khi chiếu một trường laser mạnh (hoặc đặt nguyên tử vào buồng cộng hưởng), nguyên tử sẽ được bao bọc bởi một đám mây gồm các photon bao quanh nó.
+
+* Hệ thống lúc này là $[atom + photon field]$, và giống như việc atom mặc áo. Trạng thái năng lượng mới của cả hệ này chính là **Dressed state**.
+
+## Sự tách mức Rabi
+
+Khi chưa liên kết mạnh, bạn có hai bare state:
+
+* $\vert g, n + 1\rangle$ : atom đang ở ground state, và có n + 1 photon xung quanh.
+* $\vert e, n \rangle$ : atom đang ở excited state, và có n photon xung quanh.
+
+---
+
+Nhưng khi strong coupling xảy ra, sự tương tác mạnh mẽ buộc hai trạng thái này phải trộn lẫn vào nhau. Theo nguyên lý quantum mechanics, hai mức năng lượng này bằng nhau khi tương tác sẽ đẩy nhau ra. Kết quả là chúng bị tách đôi thành hai mức năng lượng mới tinh:
+
+* 
+* 
+
+Khoảng cách năng lượng của hai mức mới này chính là $h\Omega$ ($\Omega$ là tần số Rabi).

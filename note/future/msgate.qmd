@@ -35,6 +35,13 @@ Ví dụ:
 
 ---
 
+$$
+\omega_r = \omega_0 - \omega_z \\ 
+\omega_r = \omega_0 + \omega_z
+$$
+
+---
+
 ## Bước 1: Chiếu red sideband vào ion C
 
 Bởi vì setup ban đầu của ion trap là mọi thứ đều không còn phonon, tức là chỉ có 1 trong 2 trường hợp sau đây khả dĩ:
@@ -89,7 +96,29 @@ $$
 | $\vert 00 \rangle$ | $(0, 0)^0$ | $(0, 0)^0$ | $(0, 0)^0$ | $\vert 00 \rangle$ |  
 | $\vert 01 \rangle$ | $(0, 1)^0$ | $(0, 1)^0$ | $(0, 1)^0$ | $\vert 01 \rangle$ |  
 | $\vert 10 \rangle$ | $(0, 0)^1$ | $(0, 0)^1$ | $(1, 0)^0$ | $\vert 10 \rangle$ |  
-| $\vert 11 \rangle$ | $(0, 1)^1$ | $(0, 2)^0 \to -(0,1)^1$ | $(1, 1)^0$ | -$\vert 11 \rangle$ |  
+| $\vert 11 \rangle$ | $(0, 1)^1$ | $(0, 2)^0 \to -(0,1)^1$ | $-(1, 1)^0$ | -$\vert 11 \rangle$ |  
 
 # Cổng Mølmer–Sørensen
 
+Lý do nhiễu nhiệt khiến cho cổng Cirac-Zoller không hoạt động tốt là rất nhiều, nhưng tôi bị hạn chế, vậy nên tôi chỉ đơn thuần suy nghĩ và diễn giải lý do rằng:
+
+Cổng Cirac-Zoller xây dựng trên giả định rằng $\vert 0, 0 \rangle$ (hay $\vert 0, n \rangle$), khi chiếu laser red thì nó không thể lên $\vert 1, n - 1 \rangle$ được. Cổng CZ hoàn toàn phụ thuộc vào hiệu ứng biên $n = 0$  $(\text{phonon} = 0)$, vì vậy yêu cầu rằng hệ phải làm lạnh lại về cực hạn sau mỗi lần tính toán.
+
+Cổng Molmer-Sorensen có cho phép hệ đi tới các mức đệm, như là $\vert 00, n - 1 \rangle, \vert 11, n + 1 \rangle, ...$, miễn sao lần chiếu thứ hai hệ có thể quay đúng trạng thái cần thiết là được.
+
+![](../../img/msgate_2.png)
+
+Cổng Molmer-Sorensen có tác dụng là $XX(\pi/2)$.
+
+---
+
+$$
+\omega_r = \omega_0 - \omega_z + \delta \\ 
+\omega_b = \omega_0 + \omega_z - \delta
+$$
+
+---
+
+Chiếu đồng thời tia laser mang hai màu red và blue vào hệ trong một khoảng thời gian $T_{ms}$. 
+
+Theo tôi thì hệ phải luôn đảm bảo việc bảo toàn năng lượng, nếu 

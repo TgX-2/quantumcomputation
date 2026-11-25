@@ -10,6 +10,23 @@ format:
     toc-location: right
 ---
 
+:::{.callout-important}
+# tl;dr
+
+## Lấy Hamiltonian phù hợp với hệ lượng tử sẽ sử dụng
+
+## Chọn giao thức, thứ tự cổng phù hợp
+
+## Tính toán
+
+$\omega, \phi, t$
+
+
+
+:::
+
+---
+
 > *'Computers in the future may weigh no more than 1.5 tons.'*
 > – Popular Mechanics, forecasting the relentless march of science, 1949
 

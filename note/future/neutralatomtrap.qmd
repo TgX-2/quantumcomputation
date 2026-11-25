@@ -1,0 +1,112 @@
+---
+title: "Neutral Atom Trap"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+So với ion trap, dùng điện trường để giam giữ các hạt mang điện, nguyên tử trung hòa (thường là kim loại kiềm như $^{87}\text{Rb}$, $^{133}\text{Cs}$, hoặc kiềm thổ như $^{88}\text{Sr}$, $^{171}\text{Yb}$) có tổng điện tích bằng 0 nên không chịu lực tĩnh điện Coulomb. Nhờ đó, chúng hầu như miễn nhiễm với nhiễu điện trường từ bề mặt điện cực và có thể xếp sắp nhau ở khoảng cách vài micromet mà không đẩy nhau.
+
+## Optical Tweezers
+
+Nhíp quang học. Chiếu một chùm laser hội tự cực mạnh có tần số $\omega_L$ lệch đỏ xa tần số cộng hưởng quang học $\omega_0$ của nguyên tử ($\Delta = \omega_L - \omega_0 < 0$). Điện trường của tia laser cảm ứng một moment lưỡng cực điện lên đám mây electron, tạo ra **thế năng dịch chuyển AC Stark** hút nguyên tử về đúng tâm tiêu điểm có cường độ ánh sáng cực đại:
+
+$$
+U_{\text{dip}}(\mathbf{r}) = -\frac{1}{2}\alpha(\omega_L)\vert{}\mathbf{E}(\mathbf{r})\vert{}^2 \propto \frac{I(\mathbf{r})}{\Delta}
+$$
+
+## Structure
+
+Kiến trúc phần cứng. 
+
+:::{.callout-important}
+# SLM - Bộ điều biến ánh sáng không gian
+
+:::
+
+:::{.callout-important}
+# AOD - Bộ làm lệch âm quang
+:::
+
+Mục tiêu là tách một tia laser thành mảng 2D hoặc mảng 3D gồm hàng trăm đến hàng nghìn optical tweezers độc lập đặt trong buồng chân không siêu cao ở nhiệt độ phòng, mỗi nhíp giam giữ đúng 1 nguyên tử đơn lẻ.
+
+# 2. The Hamiltonian
+
+## Qubit logic - $\vert 0 \rangle, \vert 1 \rangle$
+
+Được mã hóa trên hai trạng thái cơ bản siêu tinh tế (hyperfine ground states) có thời gian sống cực dài (lên tới hàng chục giây).
+
+## Rydberg - $\vert r \rangle$
+
+Vì hai nguyên tử trạng thái cơ bản gần như không tương tác với nhau, hệ sử dụng thêm một mức kích thích bậc cao gọi là **trạng thái Rydberg $\vert r \rangle$** có số lượng tử chính rất lớn ($n \approx 50-100$), tạo ra moment lưỡng cực điện khổng lồ gấp hàng nghìn trạng thái thường.
+
+## Hamiltonian
+
+Với mảng $N$ nguyên tử đặt tại tọa độ $\mathbf{R}_i$ dưới tác dụng của các tia laser điều khiển bước chuyển $\vert{}1\rangle \leftrightarrow \vert{}r\rangle$ (tần số Rabi $\Omega_i$, độ lệch cộng hưởng $\Delta_i$), Hamiltonian của hệ có dạng:
+
+$$
+H = \underbrace{\sum_{i=1}^{N} \frac{\hbar}{2}\left(\Omega_i(t) e^{i\phi_i(t)} \vert{}r\rangle_i\langle 1\vert{} + \text{h.c.}\right) - \hbar\Delta_i(t) \vert{}r\rangle_i\langle r\vert{}}_{\text{Điều khiển đơn nguyên tử bằng laser}} + \underbrace{\sum_{i < j} V_{ij} \vert{}r\rangle_i\langle r\vert{} \otimes \vert{}r\rangle_j\langle r\vert{}}_{\text{Tương tác lưỡng cực Rydberg}}
+$$
+
+Trong đó, thế năng tương tác van der Waals $V_{ij}$ chỉ bật lên khi cả hai nguyên tử $i$ và $j$ cùng nằm ở trạng thái Rydberg $\vert{}r\rangle$:
+
+$$
+V_{ij} = \frac{C_6}{\vert{}\mathbf{R}_i - \mathbf{R}_j\vert{}^6}, \qquad C_6 \propto n^{11}
+$$
+
+# 3. Quantum Computation
+
+## Inital states - $\vert 0 \rangle^{\otimes N}$
+
+1. **Làm lạnh và nạp bẫy ngẫu nhiên:** Đám mâm nguyên tử được làm lạnh bằng bẫy từ-quang (MOT) xuống nhiệt độ vào micro-Kelvin rồi nạp vào mảng nhíp quang học. Nhờ cơ chế va chạm hỗ trợ ánh sáng (light-assisted collisions), nếu có 2 nguyên tử rơi và cùng 1 một nhíp, cả hai sẽ bị đẩy văng ra ngoài, đảm bảo mỗi bẫy chỉ chứa 0 hoặc 1 nguyên tử (xác suất đầy khoảng 50%).
+
+2. **Sắp xếp loại bỏ khuyết tật:** Chụp ảnh nhanh để biết ô trap nào trống, sau đó dùng một tia laser di động gắp các nguyên tử từ vùng dự trữ lấp đầy các ô trống, tạo thành một mảng qubit hoàn chỉnh không khuyết tật.
+
+3. **Optical Pumping:** Chiếu xung laser phân cực chuẩn để dồn toàn bộ dân số nguyên tử về đúng trạng thái cơ bản $\vert 0\rangle^{\otimes N}$.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+vì $\vert 0 \rangle$ và $\vert 1 \rangle$ đều thuộc lớp bỏ cơ bản nên chuyển mức lưỡng cực điện trực tiếp bị cấm. Người ta thực hiện các phép quay đơn qubit bằng **chuyển mức Raman hai photon**, tức là, chiếu đồng thời hai tia laser lệch cộng hưởng qua một mức trung gian ảo $\vert e \rangle$ sao chao hiệu hai tần số của hai tia đúng bằng $\omega_{hf}$.
+
+* Điều chỉnh độ rộng xung Raman cho ra các cổng quay $R_x(\theta)$ và $R_y(\theta)$ trên từng nguyên tử riêng lẻ.
+* Chiếu thêm một tia laser lệch cộng hưởng cục bộ gây dịch mức AC Stark lên riêng trạng thái $\vert 1 \rangle$ (hoặc dịch pha sóng mang của xung Raman) để thực hiện cổng $R_z(\phi)$.
+
+## 2-qubit gate - Rydberg blockade - Jaksch protocol
+
+Nếu ion trap dùng **bus phonon** (mục 7.6), và optical cavity QED dùng **photon trong hốc** (mục 7.5) làm cầu nối, thì nguyên tử trung hòa dùng **hiệu ứng Phong tỏa Rydberg - Rydberg blockade** trực tiếp trong không gian tự do:
+
+* **Nguyên lý phong tỏa:** Xác định bán kính phong tỏa $R_b = (C_6 / \hbar\Omega)^{1/6}$ sao cho khi hai nguyên tử điều khiển ($C$) và mục tiêu ($T$) nằm ở khoảng cách $R < R_b$, năng lượng tương tác $V_{ij} \gg \hbar\Omega$. Khi đó, mức năng lượng đôi $\vert{}rr\rangle$ bị đẩy vọt lên cao, hoàn toàn lệch khỏi tần số cộng hưởng của laser. Hệ quả: **nếu nguyên tử $C$ đã ở trạng thái $\vert{}r\rangle$, nguyên tử $T$ không thể hấp thụ photon để nhảy lên $\vert{}r\rangle$ được nữa.**
+
+* **Chuỗi 3 xung $\pi - 2\pi - \pi$:** Chiếu các xung laser cộng hưởng trên bước chuyển $\vert{}1\rangle \leftrightarrow \vert{}r\rangle$ (tạo phép quay $U(\theta) = \cos\frac{\theta}{2}I - i\sin\frac{\theta}{2}\sigma_x$, còn trạng thái $\vert{}0\rangle$ hoàn toàn đứng ngoài cuộc do lệch tần số siêu tinh tế):Xung $\pi$ lên Control ($C$): Chuyển $\vert{}1\rangle_C \to -i\vert{}r\rangle_C$.
+
+  (1). Xung $2\pi$ lên Target ($T$): Nếu $C$ ở $\vert{}0\rangle_C$, $T$ thực hiện trọn vẹn một vòng quay $2\pi$ ($\vert{}1\rangle_T \to -i\vert{}r\rangle_T \to -\vert{}1\rangle_T$) và nhận thêm dấu trừ. Ngược lại, nếu $C$ đang ở $\vert{}r\rangle_C$, hiệu ứng phong tỏa Rydberg khóa chặt $T$, khiến xung $2\pi$ không có tác dụng gì.
+  (2). Xung $\pi$ lên Control ($C$): Đưa trạng thái Rydberg của $C$ quay về mức cơ bản ($-i\vert{}r\rangle_C \to (-i)(-i)\vert{}1\rangle_C = -\vert{}1\rangle_C$).
+
+Toàn bộ 4 trạng thái cơ sở biến đổi qua 3 bước như sau:
+
+$$
+\begin{aligned} \vert{}00\rangle &\xrightarrow{\pi_C} \vert{}00\rangle \xrightarrow{2\pi_T} \vert{}00\rangle \xrightarrow{\pi_C} +\vert{}00\rangle \\ \vert{}01\rangle &\xrightarrow{\pi_C} \vert{}01\rangle \xrightarrow{2\pi_T} -\vert{}01\rangle \xrightarrow{\pi_C} -\vert{}01\rangle \\ \vert{}10\rangle &\xrightarrow{\pi_C} -i\vert{}r0\rangle \xrightarrow{2\pi_T} -i\vert{}r0\rangle \xrightarrow{\pi_C} -\vert{}10\rangle \\ \vert{}11\rangle &\xrightarrow{\pi_C} -i\vert{}r1\rangle \xrightarrow{2\pi_T \text{ (bị phong tỏa)}} -i\vert{}r1\rangle \xrightarrow{\pi_C} -\vert{}11\rangle \end{aligned}
+$$
+
+Phép biến đổi thu được là ma trận đường chéo $\text{diag}(1, -1, -1, -1)$; chỉ cần áp thêm cổng quay pha đơn qubit $Z \otimes Z$ là thu được chính xác cổng CZ (và kẹp giữa hai cổng Hadamard trên $T$ để thành CNOT). Đặc biệt, nhờ khả năng di chuyển nhíp quang học (coherent atom transport), hai qubit ở xa nhau trên mảng có thể được kéo lại gần nhau trong bán kính $R_b$ để chạy cổng rồi tách ra, tạo ra kết nối động (all-to-all dynamic connectivity).
+
+## Measurement
+
+* **Xung đẩy chọn lọc trạng thái (Push-out pulse):** Chiếu một xung laser cộng hưởng mạnh chỉ tác động lên mức $\vert{}1\rangle$ (không làm lạnh) để truyền động lượng và thổi bay các nguyên tử đang ở trạng thái $\vert{}1\rangle$ ra khỏi nhíp quang học, trong khi các nguyên tử ở $\vert{}0\rangle$ vẫn nằm yên trong bẫy.
+
+* **Chụp ảnh huỳnh quang (Fluorescence imaging):** Bật chùm tia làm lạnh chụp ảnh mảng bẫy bằng camera EMCCD/sCMOS. Ô bẫy nào còn đốm sáng tương ứng với kết quả $\vert{}0\rangle$, ô nào tối tương ứng với $\vert{}1\rangle$. (Các hệ thống thế hệ mới dùng đọc không phá hủy — non-destructive state-selective fluorescence — để giữ lại nguyên tử cho các chu kỳ tính toán tiếp theo).
+
+# 4. Drawbacks
+
+* **Thời gian sống hữu hạn của trạng thái Rydberg ($\tau_r \sim 100\text{ }\mu\text{s}$):** Dù sống lâu hơn nhiều so với mức kích thích thường, trạng thái $\vert{}r\rangle$ vẫn chịu phát xạ tự phát và đặc biệt nhạy cảm với bức xạ nhiệt đen (blackbody radiation) ở nhiệt độ phòng (gây chuyển mức ký sinh sang các trạng thái Rydberg lân cận và phá vỡ điều kiện phong tỏa).
+
+* **Lực đẩy ngược (Anti-trapping) và Thất thoát nguyên tử:** Tia laser của nhíp quang học hút nguyên tử ở trạng thái cơ bản $\vert{}0\rangle, \vert{}1\rangle$, nhưng lại đẩy nguyên tử khi nó ở trạng thái Rydberg $\vert{}r\rangle$. Do đó, người ta thường phải tắt tạm nhíp quang học trong vài trăm nano-giây thực hiện cổng 2-qubit; kết hợp với va chạm phân tử khí nền còn sót lại trong buồng chân không, tỉ lệ mất nguyên tử là một nguồn lỗi đặc thù của kiến trúc này.
+
+* **Mở rộng Doppler và Nhiễu pha laser:** Dao động nhiệt còn sót lại của nguyên tử trong bẫy gây ra hiệu ứng dịch tần số Doppler ($\Delta\omega_D = \mathbf{k} \cdot \mathbf{v}$) khi hấp thụ photon kích thích Rydberg, làm sai lệch góc quay của các xung $\pi$ và $2\pi$.
