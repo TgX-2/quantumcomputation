@@ -1,0 +1,83 @@
+---
+title: "Superconducting Qubits"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Khác với bẫy ion hay nguyên tử trung hòa dùng chân không và laser để cô lập từng nguyên tử tự nhiên, **máy tính lượng tử mạch siêu dẫn** khắc các **mạch điện dao động vi sóng** lên đế silicon hoặc sapphire bằng công nghệ quang khắc bán dẫn (kiến trúc **Circuit QED**).
+
+* **Cơ chế triệt tiêu tiêu tán (Trạng thái siêu dẫn):** Các dây dẫn được làm từ kim loại siêu dẫn (như Nhôm $\text{Al}$, Niobi $\text{Nb}$, hoặc Tantalum $\text{Ta}$) và đặt trong **tủ lạnh pha loãng (dilution refrigerator)** làm lạnh xuống nhiệt độ **$10\text{--}20\text{ mK}$** (thấp hơn rất nhiều so với nhiệt độ tới hạn siêu dẫn $T_c \sim 1.2\text{ K}$ của Nhôm). Tại đây, các electron kết cặp thành **cặp Cooper (Cooper pairs)** ngưng tụ vào cùng một hàm sóng lượng tử vĩ mô, cho phép dòng điện chạy không điện trở và không sinh nhiệt.
+* **Linh kiện cốt lõi — Tiếp giáp Josephson (Josephson Junction):** Một mạch dao động $LC$ tuyến tính thông thường có các mức năng lượng cách đều nhau ($\hbar\omega_r$), khiến ta không thể kích thích riêng $|0\rangle \leftrightarrow |1\rangle$ mà không vô tình đẩy hệ lên $|2\rangle, |3\rangle$. Để tạo ra **tính phi điều hòa (anharmonicity)** như nguyên tử thật, người ta thay cuộn cảm tuyến tính bằng một **tiếp giáp Josephson**: hai lớp kim loại siêu dẫn kẹp giữa một lớp cách điện oxit mỏng cỡ $1\text{--}2\text{ nm}$ ($\text{Al}/\text{AlO}_x/\text{Al}$). Hiệu ứng xuyên hầm lượng tử của các cặp Cooper biến tiếp giáp này thành một **cuộn cảm phi tuyến không tổn hao ($L_J$)**.
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|0\rangle, |1\rangle$
+
+Kiến trúc chuẩn mực nhất hiện nay là **Transmon Qubit** (biến thể cải tiến của hộp cặp Cooper — *Cooper-pair box*): một tiếp giáp Josephson mắc song song với một tụ điện lớn $C$ nhằm triệt tiêu độ nhạy với nhiễu điện tích môi trường ($E_J / E_C \gg 1$).
+
+Qubit logic $|0\rangle, |1\rangle$ là **hai trạng thái riêng năng lượng thấp nhất** của mạch dao động phi điều hòa này, với tần số chuyển mức nằm trong vùng vi sóng $\omega_{01}/2\pi \approx 4\text{--}6\text{ GHz}$. Nhờ tính phi tuyến của tiếp giáp Josephson, khoảng cách lên mức thứ hai bị lệch đi một lượng **độ phi điều hòa** $\alpha/2\pi = (\omega_{12} - \omega_{01})/2\pi \approx -200\text{ đến }-300\text{ MHz}$, đủ để cô lập không gian tính toán 2 chiều $\{|0\rangle, |1\rangle\}$.
+
+## Hamiltonian
+
+Với một qubit Transmon, biến số lượng tử hóa là số cặp Cooper dư thừa $\hat{n}$ trên đảo siêu dẫn và hiệu pha hàm sóng siêu dẫn $\hat{\varphi}$ qua tiếp giáp ($[\hat{\varphi}, \hat{n}] = i$):
+
+$$
+H_{\text{Transmon}} = 4E_C(\hat{n} - n_g)^2 - E_J\cos\hat{\varphi}
+$$
+
+*(trong đó $E_C = \frac{e^2}{2C_\Sigma}$ là năng lượng tích điện và $E_J = \frac{\hbar I_c}{2e}$ là năng lượng liên kết Josephson)*.
+
+Khai triển số hạng phi tuyến $\cos\hat{\varphi} \approx 1 - \frac{\hat{\varphi}^2}{2} + \frac{\hat{\varphi}^4}{24}$ trong chế độ $E_J \gg E_C$, hệ quy về **dao động tử Duffing** (tương tự thang năng lượng phi điều hòa trong Cavity QED):
+
+$$
+H_{\text{Transmon}} \approx \hbar\omega_{01}\hat{b}^\dagger\hat{b} + \frac{\hbar\alpha}{2}\hat{b}^\dagger\hat{b}^\dagger\hat{b}\hat{b}, \qquad \alpha \approx -\frac{E_C}{\hbar}
+$$
+
+Khi ghép nhiều qubit với các đường truyền cộng hưởng vi sóng (resonator bus), toàn bộ chip được mô tả bởi **Hamiltonian Jaynes–Cummings** với các photon vi sóng trên chip.
+
+# 3. Quantum Computation
+
+## Initial states - $|0\rangle^{\otimes N}$
+
+* **Làm lạnh thụ động (Thermalization):** Ở tần số $\omega_{01}/2\pi \approx 5\text{ GHz}$, năng lượng chuyển mức tương đương nhiệt độ $\hbar\omega_{01}/k_B \approx 240\text{ mK}$. Khi tủ lạnh pha loãng giữ chip ở $15\text{ mK}$, xác suất kích thích nhiệt tuân theo phân bố Boltzmann $e^{-\hbar\omega_{01}/k_B T} \sim 10^{-7}$, nghĩa là các qubit tự động rơi về trạng thái cơ bản $|0\rangle^{\otimes N}$.
+* **Khởi tạo chủ động (Active Reset):** Để tăng tốc độ lặp giữa các lần chạy mà không phải chờ thời gian hồi phục tự nhiên $T_1$, hệ thống dùng xung vi sóng đẩy trạng thái dư $|1\rangle$ sang bộ cộng hưởng đọc (readout resonator) có tốc độ thoát năng lượng nhanh để xả thẳng xuống $|0\rangle$.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+* **$R_x(\theta)$ và $R_y(\theta)$ — Xung vi sóng định hình (DRAG pulses):** Một đường truyền đồng trục dẫn xung vi sóng có tần số sóng mang đúng bằng $\omega_{01}$ ghép điện dung vào qubit. Biên độ và độ rộng xung quyết định góc quay $\theta$, trong khi pha của sóng mang vi sóng quyết định trục quay nằm trên mặt phẳng $XY$. Để tránh xung ngắn làm rò rỉ dân số lên mức $|2\rangle$, người ta dùng kỹ thuật điều chế xung **DRAG** (*Derivative Removal by Adiabatic Gate*).
+* **$R_z(\phi)$ — Cổng Z ảo (Virtual Z-gate) hoặc Xung từ thông:** Với các qubit tần số cố định, cổng $R_z(\phi)$ được thực hiện bằng cách dịch pha tham chiếu của bộ tạo xung vi sóng cho tất cả các cổng theo sau — tốn $0\text{ ns}$ và có độ chính xác tuyệt đối. Với qubit dùng vòng **DC SQUID** (hai tiếp giáp mắc song song), có thể chiếu thêm xung dòng điện tạo từ trường cục bộ làm dịch tạm tần số $\omega_{01}(t)$ để tích lũy pha $\phi$.
+
+## 2-qubit gate - Flux-Tunable CZ & Cross-Resonance Gate
+
+Các qubit siêu dẫn trên chip thường xếp thành lưới 2D phẳng (kết nối lân cận gần) và thực hiện cổng 2-qubit trong khoảng **$20\text{--}100\text{ ns}$** qua một trong hai kiến trúc:
+
+1. **Cổng CZ kích hoạt bằng từ thông (Flux-tunable CZ — kiến trúc Google):** Dùng xung từ thông nhanh chỉnh tần số của một qubit sao cho trạng thái $|11\rangle$ cộng hưởng với trạng thái kích thích bậc hai $|20\rangle$ (hoặc $|02\rangle$). Hai trạng thái lai hóa và đẩy mức nhau (*avoided crossing*); sau một chu kỳ dao động trọn vẹn, hệ quay về $|11\rangle$ nhưng nhận thêm pha $\pi$ ($|11\rangle \to -|11\rangle$), tạo thành cổng **CZ** trực tiếp.
+2. **Cổng cộng hưởng chéo (Cross-Resonance Gate — kiến trúc IBM):** Dùng cho các qubit tần số cố định ghép điện dung với nhau. Người ta chiếu một xung vi sóng vào **qubit điều khiển ($C$)** nhưng chỉnh tần số sóng mang bằng đúng **tần số cộng hưởng của qubit mục tiêu ($T$)** ($\omega_d = \omega_T$). Nhờ liên kết tĩnh và tính phi điều hòa của Transmon, qubit $T$ chịu một Hamiltonian hiệu dụng dạng:
+   $$H_{\text{CR}} \propto Z_C \otimes X_T$$
+   tạo thẳng cổng **CNOT** (sau khi bù thêm các cổng quay 1-qubit) mà không cần mạch điều khiển từ thông.
+
+## Measurement
+
+Cơ chế này giống hệt phép đọc không phá hủy trong Cavity QED (**Đọc tán sắc Circuit QED**):
+
+* Mỗi qubit được ghép lệch cộng hưởng xa ($|\Delta| = |\omega_{01} - \omega_r| \gg g$) với một **bộ cộng hưởng đọc vi sóng** riêng biệt có tần số $\omega_r$.
+* Trong chế độ tán sắc (*dispersive regime*), trạng thái $|0\rangle$ hay $|1\rangle$ của qubit kéo tần số cộng hưởng của resonator lệch đi một lượng $\pm\chi$ ($\chi \approx g^2/\Delta$).
+* Hệ thống gửi một xung thăm dò vi sóng yếu ở tần số $\omega_r$ và đo độ lệch pha của tín hiệu phản xạ/truyền qua bằng các bộ khuếch đại siêu dẫn nhiễu cực thấp (TWPA / HEMT), phân biệt được trạng thái $|0\rangle$ và $|1\rangle$ trong vài trăm nano-giây.
+
+# 4. Drawbacks
+
+* **Thời gian kết hợp ngắn hơn nguyên tử tự nhiên ($T_1, T_2 \sim 100\text{--}500\text{ }\mu\text{s}$):** Vì là mạch điện vĩ mô chế tạo trên chất rắn chứ không phải nguyên tử cô lập trong chân không, qubit siêu dẫn chịu tổn hao điện môi từ các **khuyết tật hai mức vi mô (Two-Level Systems — TLS)** nằm ở bề mặt tiếp xúc kim loại–oxit–đế (gây suy giảm năng lượng $T_1$), cùng nhiễu từ thông $1/f$ và giả hạt đơn lẻ (*quasiparticle poisoning*) gây mất pha $T_2$.
+* **Nhiễu xuyên âm và Trùng lặp tần số (Frequency Crowding):** Sai số nanomet khi quang khắc khiến tần số $\omega_{01}$ của các qubit trên cùng một chip không đồng nhất tuyệt đối, dễ dẫn đến va chạm phổ tần số và tương tác ký sinh $ZZ$ luôn bật giữa các qubit lân cận (được khắc phục bằng các **bộ ghép có thể điều chỉnh — tunable couplers**).
+* **Nút thắt dây dẫn và Công suất làm lạnh:** Mỗi qubit cần các đường dây đồng trục vi sóng và từ thông chạy từ thiết bị điện tử ở nhiệt độ phòng ($300\text{ K}$) xuống tầng $15\text{ mK}$ của tủ lạnh pha loãng. Khi mở rộng lên hàng chục nghìn hay hàng triệu qubit, tải nhiệt truyền qua bó cáp và không gian vật lý bên trong tủ lạnh trở thành rào cản kỹ thuật lớn nhất.
+
+# Misc.
+
+So sánh xuyên suốt các nền tảng phần cứng, mạch siêu dẫn đánh đổi **thời gian lưu trữ ngắn và hạ tầng làm lạnh sâu cồng kềnh** để lấy **tốc độ xung nhịp nano-giây nhanh nhất, khả năng chế tạo hàng loạt bằng dây chuyền bán dẫn, và tính linh hoạt trong thiết kế tham số mạch** (các thế hệ mới như *Fluxonium* đang kéo thời gian kết hợp lên trên $1\text{ ms}$). Nhờ sự trưởng thành của kỹ thuật điều khiển vi sóng và kiến trúc lưới 2D tương thích tự nhiên với **mã bề mặt (Surface Code)**, mạch siêu dẫn đang dẫn đầu trong cuộc đua hiện thực hóa các bộ xử lý sửa lỗi lượng tử quy mô lớn hiện nay.

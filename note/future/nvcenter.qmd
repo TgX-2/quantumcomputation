@@ -1,0 +1,78 @@
+---
+title: "Diamond NV Center"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Tâm khuyết tật trong kim cương chính là **hậu duệ trạng thái rắn của Cộng hưởng từ hạt nhân (NMR — Mục 7.7 trong Nielsen & Chuang)**: thay vì dùng hàng tỉ phân tử trong ống nghiệm lỏng như NMR cổ điển, người ta cô lập **một spin electron đơn lẻ** làm đầu đọc và điều khiển một cụm **spin hạt nhân $^{13}\text{C}$** xung quanh ngay trong mạng tinh thể kim cương.
+
+* **Cơ chế tạo bẫy nguyên tử (Khuyết tật điểm):** Mạng tinh thể kim cương siêu tinh khiết (làm giàu đồng vị $^{12}\text{C}$ có spin hạt nhân bằng $0$) đóng vai trò như một "buồng chân không trạng thái rắn" tự nhiên với khe năng lượng vùng cấm cực rộng ($5.5\text{ eV}$). Thay thế một nguyên tử Carbon bằng một nguyên tử Nitơ ($\text{N}$) nằm ngay cạnh một nút mạng trống (*Vacancy* — $\text{V}$), tạo thành **tâm Nitơ-lỗ trống tích điện âm ($\text{NV}^-$)** (hoặc dùng nguyên tử Silic/Thiếc kẹp giữa hai lỗ trống để tạo tâm **$\text{SiV}^- / \text{SnV}^-$**). Khuyết tật này bẫy chặt một đám mây electron cục bộ ở quy mô hạ nanomet.
+* **Môi trường vận hành đặc biệt:** Nhờ độ cứng cực cao của mạng tinh thể kim cương (nhiệt độ Debye $\sim 2200\text{ K}$), spin của tâm NV cô lập rất tốt với dao động nhiệt (phonon), cho phép **vận hành và thực hiện cổng lượng tử ngay ở nhiệt độ phòng ($300\text{ K}$)** — một lợi thế độc nhất cho các thiết bị NISQ nhỏ gọn *(dù để kết nối quang học tầm xa giữa nhiều chip vẫn cần làm lạnh xuống $\sim 4\text{ K}$)*.
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|m_s = 0\rangle, |m_s = -1\rangle$ & $^{13}\text{C}$
+
+Kiến trúc này sử dụng **thanh ghi lai (hybrid spin register)** gồm hai loại qubit bổ trợ cho nhau trong cùng một tâm khuyết tật:
+
+* **Qubit giao tiếp/điều khiển (Spin electron NV):** Trạng thái cơ bản của $\text{NV}^-$ là một bộ ba spin ($S = 1$) gồm mức $|m_s = 0\rangle$ và cặp mức $|m_s = \pm 1\rangle$ tách nhau một khoảng năng lượng trường không $D/2\pi \approx 2.87\text{ GHz}$. Đặt thêm một từ trường tĩnh ngoài $\mathbf{B}_0$ để tách hai mức $\pm 1$ qua hiệu ứng Zeeman, ta cô lập không gian tính toán 2 chiều:
+
+$$
+|0\rangle_e \equiv |m_s = 0\rangle, \qquad |1\rangle_e \equiv |m_s = -1\rangle
+$$
+
+* **Qubit bộ nhớ NISQ (Spin hạt nhân $^{13}\text{C}$):** Xung quanh tâm NV luôn có ngẫu nhiên vài nguyên tử đồng vị $^{13}\text{C}$ (chiếm $1.1\%$ tự nhiên, mang spin hạt nhân $I = 1/2$). Vì mômen từ hạt nhân nhỏ hơn electron gần $2000$ lần, các spin $^{13}\text{C}$ này gần như miễn nhiễm với nhiễu môi trường, đạt **thời gian kết hợp lên tới hàng giây ngay ở nhiệt độ phòng**.
+
+## Hamiltonian
+
+Hamiltonian toàn phần của một nút thanh ghi tâm NV bao gồm spin electron trung tâm, các spin hạt nhân $^{13}\text{C}$ xung quanh và tương tác siêu tinh tế giữa chúng:
+
+$$
+H = \underbrace{D S_z^2 + \gamma_e \mathbf{B}_0 \cdot \mathbf{S}}_{\text{NV electron spin}} + \underbrace{\sum_{k} \gamma_n \mathbf{B}_0 \cdot \mathbf{I}_k}_{^{13}\text{C nuclear spins}} + \underbrace{\sum_{k} \mathbf{S} \cdot \mathbf{A}_k \cdot \mathbf{I}_k}_{\text{Hyperfine interaction}}
+$$
+
+*(trong đó $\mathbf{A}_k$ là tenxơ tương tác lưỡng cực từ phụ thuộc vào vị trí chính xác của hạt nhân $^{13}\text{C}$ thứ $k$ so với tâm NV)*.
+
+# 3. Quantum Computation
+
+## Initial states - $|0\rangle_e \otimes |0\rangle_n^{\otimes K}$
+
+* **Bơm quang học ở nhiệt độ phòng:** Chiếu một chùm laser màu xanh lục ($532\text{ nm}$) vào tâm NV. Electron bị kích thích lên mức trên; trong khi trạng thái $|m_s = 0\rangle$ phát huỳnh quang đỏ rơi thẳng về lại $|m_s = 0\rangle$, thì trạng thái $|m_s = \pm 1\rangle$ có xác suất cao đi vòng qua một **trạng thái đơn tuyến tối (dark singlet state)** không bức xạ rồi đổ dồn về $|m_s = 0\rangle$. Chỉ sau vài micro-giây chiếu laser, $>90\%$ dân số tự động dồn về $|0\rangle_e$ mà không cần tủ lạnh pha loãng.
+* Sau đó, thực hiện một cổng hoán đổi (SWAP) để chuyển độ phân cực sạch từ electron sang từng hạt nhân $^{13}\text{C}$ lân cận và lặp lại chu trình bơm quang học để khởi tạo toàn bộ thanh ghi.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+* **Trên spin electron:** Dùng một dây dẫn vi mạch (stripline) đặt trên bề mặt kim cương phát **xung vi sóng (microwave)** cộng hưởng ở tần số $\sim 2.87\text{ GHz}$ để quay trực tiếp spin electron ($R_x, R_y$) trong vài chục nano-giây (kết hợp dịch pha sóng mang cho $R_z$).
+* **Trên spin hạt nhân $^{13}\text{C}$:** Áp dụng đúng kỹ thuật của **Mục 7.7 (NMR)** — phát **xung sóng vô tuyến (RF)** cộng hưởng với tần số Larmor của từng hạt nhân $^{13}\text{C}$ (khoảng vài trăm kHz đến vài MHz) để quay độc lập từng qubit bộ nhớ.
+
+## 2-qubit gate - Dynamical Decoupling & Barrett–Kok Protocol
+
+Hệ vận hành theo **hai tầng kết nối** (cục bộ trong tinh thể và tầm xa bằng quang học):
+
+1. **Cổng 2-qubit cục bộ trong một thanh ghi (Electron $\leftrightarrow$ Hạt nhân $^{13}\text{C}$):** Tương tác siêu tinh tế $A_{zz}^{(k)} S_z I_{z,k}$ làm tần số cộng hưởng của mỗi hạt nhân $^{13}\text{C}$ bị dịch đi một lượng riêng biệt tùy thuộc vào việc electron NV đang ở $|0\rangle_e$ hay $|1\rangle_e$. Bằng cách chiếu chuỗi xung vi sóng **tách động lực học (Dynamical Decoupling — như chuỗi CPMG)** lên electron với chu kỳ trùng khớp với tần số Larmor của riêng hạt nhân thứ $k$, ta thực hiện được cổng quay có điều kiện **$CR_x(\pm\theta)$** (tương đương **CNOT / CZ**) giữa electron và đúng hạt nhân $k$ đó, trong khi cô lập hoàn toàn các hạt nhân khác. Một tâm NV đơn lẻ có thể điều khiển một thanh ghi cục bộ khoảng **$10\text{--}20$ qubit**.
+2. **Cổng 2-qubit tầm xa giữa hai tâm NV (Giao thức Barrett–Kok):** Để nối nhiều thanh ghi NV lại với nhau (làm lạnh về $4\text{ K}$), người ta kích thích đồng thời hai tâm NV phát ra hai photon đơn lẻ có tần số khớp nhau và cho giao thoa tại một gương bán mạ 50:50 (tương tự hiệu ứng Hong–Ou–Mandel). Phép đo trùng phùng tại hai đầu thu photon lập tức chiếu hai spin electron NV ở cách xa nhau vào trạng thái vướng víu Bell, từ đó thực hiện cổng **CNOT viễn tải** giữa hai nút mạng.
+
+## Measurement
+
+* Chiếu lại xung laser xanh $532\text{ nm}$ và đếm số photon huỳnh quang đỏ ($637\text{--}800\text{ nm}$) phát ra:
+  * **Nếu electron ở $|0\rangle_e$:** Phát sáng huỳnh quang mạnh.
+  * **Nếu electron ở $|1\rangle_e$:** Bị mắc kẹt tạm thời ở trạng thái đơn tuyến tối nên cường độ huỳnh quang giảm khoảng **$30\%$**.
+* Để đọc trạng thái một qubit hạt nhân $^{13}\text{C}$, ta dùng cổng CNOT chuyển trạng thái hạt nhân đó sang spin electron rồi mới đọc huỳnh quang (cho phép thực hiện **phép đọc không phá hủy lặp lại nhiều lần — repetitive readout**).
+
+# 4. Drawbacks
+
+* **Vị trí khuyết tật ngẫu nhiên (Vấn đề chế tạo):** Việc bắn ion Nitơ vào kim cương tạo ra các tâm NV ở vị trí ngẫu nhiên, và vị trí của các hạt nhân $^{13}\text{C}$ xung quanh mỗi tâm NV cũng hoàn toàn khác nhau. Do đó, mỗi nút qubit trên chip có một tập tham số tương tác $\mathbf{A}_k$ riêng biệt, đòi hỏi phải đo đạc hiệu chuẩn từng nút một — gây khó khăn khi sản xuất đồng loạt hàng nghìn nút giống hệt nhau.
+* **Tỉ lệ phát xạ không phonon (Zero-Phonon Line — ZPL) thấp:** Ở tâm NV, chỉ có khoảng $3\%$ số photon phát ra nằm ở vạch phổ sắc nét dùng được cho giao thoa lượng tử tầm xa ($97\%$ còn lại đi kèm rung động mạng tinh thể làm mất tính đồng nhất), khiến tốc độ tạo vướng víu giữa hai chip chậm.
+* **Độ trung thực đọc đơn phát ở nhiệt độ phòng:** Ở $300\text{ K}$, sự chênh lệch độ sáng $30\%$ giữa $|0\rangle_e$ và $|1\rangle_e$ không đủ lớn để phân biệt chính xác chỉ trong một lần bắn laser, buộc hệ thống phải lặp lại phép đo hàng nghìn lần để lấy thống kê trung bình.
+
+# Misc.
+
+Tâm khuyết tật kim cương hiện giữ vị thế độc tôn trong **mạng lượng tử phân tán (quantum networks)** và **cảm biến lượng tử ở nhiệt độ phòng**. Để khắc phục điểm yếu ZPL thấp của tâm NV, các hệ thống hiện nay kết hợp nó với các **tâm khuyết tật nhóm IV ($\text{SiV}^-$, $\text{SnV}^-$)** — vốn có đối xứng nghịch đảo giúp đẩy tỉ lệ phát xạ ZPL lên tới **$70\text{--}80\%$** và dễ dàng tích hợp vào các **hốc tinh thể quang tử nanomet (Nanophotonic Cavity QED)** — tạo nên kiến trúc nút mạng lượng tử lai tối ưu cho kỷ nguyên NISQ phân tán.

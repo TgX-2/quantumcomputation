@@ -968,6 +968,83 @@
     ]
   },
   {
+    "objectID": "note/future/topologicalqubit.html",
+    "href": "note/future/topologicalqubit.html",
+    "title": "Topological Qubits",
+    "section": "",
+    "text": "Tất cả các qubit vật lý thông thường (ion, nguyên tử trung hòa, transmon) đều lưu thông tin cục bộ tại một hạt hoặc một nút mạch, nên bất kỳ nhiễu điện từ cục bộ nào chạm vào đều gây lật bit hoặc mất pha. Máy tính lượng tử tôpô khắc phục tận gốc vấn đề này bằng cách mã hóa thông tin phi cục bộ (non-local) vào các tính chất hình học toàn cục của những giả hạt đặc biệt trong không gian 2 chiều gọi là anyon phi Abel (non-Abelian anyons).\n\nCơ chế tạo ra Anyon (Dây nano lai Siêu dẫn – Bán dẫn): Nền tảng thực nghiệm chủ đạo hiện nay sử dụng các sợi dây nano bán dẫn 1 chiều có tương tác spin–quỹ đạo mạnh (như \\text{InAs} hoặc \\text{InSb}) đặt tiếp xúc trực tiếp với một lớp kim loại siêu dẫn sóng s (như Nhôm \\text{Al}), làm lạnh xuống 10\\text{--}20\\text{ mK} trong tủ lạnh pha loãng và đặt dưới một từ trường ngoài dọc trục dây.\nTrạng thái siêu dẫn tôpô (Mô hình chuỗi Kitaev): Khi vượt qua ngưỡng từ trường tới hạn, dây nano chuyển sang pha siêu dẫn tôpô. Tại hai đầu mút đối diện của sợi dây xuất hiện hai trạng thái kích thích ràng buộc có năng lượng bằng 0 gọi là Mode không Majorana (Majorana Zero Modes — MZMs) (\\gamma_1 và \\gamma_2). (Một hướng vật lý thứ hai là dùng khí electron 2 chiều siêu sạch trong hiệu ứng Hall lượng tử phân số ở mức lấp đầy \\nu = 5/2 hoặc \\nu = 12/5).",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#qubit-logic---0_lrangle-1_lrangle",
+    "href": "note/future/topologicalqubit.html#qubit-logic---0_lrangle-1_lrangle",
+    "title": "Topological Qubits",
+    "section": "Qubit logic - |0_L\\rangle, |1_L\\rangle",
+    "text": "Qubit logic - |0_L\\rangle, |1_L\\rangle\nVề bản chất toán học, một electron (fermion Dirac thông thường) có thể được tách đôi thành hai “nửa hạt” Majorana tách rời nhau trong không gian trên một đoạn dây dài L:\n\n\\hat{c} = \\frac{1}{2}(\\gamma_1 + i\\gamma_2), \\qquad \\hat{c}^\\dagger = \\frac{1}{2}(\\gamma_1 - i\\gamma_2)\n\ntrong đó các toán tử Majorana tự liên hợp (\\gamma_i^\\dagger = \\gamma_i) và thỏa mãn đại số Clifford \\{\\gamma_i, \\gamma_j\\} = 2\\delta_{ij}. Trạng thái chiếm giữ của fermion này (|0\\rangle trống hoặc |1\\rangle có 1 electron) được xác định bởi toán tử tính chẵn lẻ fermion (fermion parity) phi cục bộ:\n\n\\hat{P} = i\\gamma_1\\gamma_2 = 1 - 2\\hat{c}^\\dagger\\hat{c} \\in \\{+1, -1\\}\n\nDo định luật siêu chọn lọc tính chẵn lẻ fermion (fermion parity superselection), không thể tạo chồng chập giữa trạng thái số hạt chẵn và lẻ trên cùng một cặp Majorana. Vì vậy, 1 qubit tôpô đòi hỏi 4 mode Majorana (\\gamma_1, \\gamma_2, \\gamma_3, \\gamma_4, tức 2 sợi dây nano nối qua một cầu siêu dẫn tạo thành kiến trúc Tetron) với tổng tính chẵn lẻ cố định (ví dụ chẵn: \\gamma_1\\gamma_2\\gamma_3\\gamma_4 = -1):\n\n|0_L\\rangle \\equiv |0\\rangle_{12}|0\\rangle_{34}, \\qquad |1_L\\rangle \\equiv |1\\rangle_{12}|1\\rangle_{34}",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#hamiltonian",
+    "href": "note/future/topologicalqubit.html#hamiltonian",
+    "title": "Topological Qubits",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nMô hình lý tưởng của chuỗi Kitaev 1 chiều gồm N nút mạng (với biên độ nhảy nút t, thế hóa \\mu và cặp siêu dẫn \\Delta) có dạng:\n\nH_{\\text{Kitaev}} = -t \\sum_{j=1}^{N-1} (\\hat{c}_j^\\dagger \\hat{c}_{j+1} + \\text{h.c.}) - \\mu \\sum_{j=1}^{N} \\hat{c}_j^\\dagger \\hat{c}_j + \\sum_{j=1}^{N-1} (\\Delta \\hat{c}_j \\hat{c}_{j+1} + \\text{h.c.})\n\nTại điểm tôpô (\\mu = 0, \\Delta = t), khi viết lại qua các toán tử Majorana \\hat{c}_j = \\frac{1}{2}(\\gamma_{2j-1} + i\\gamma_{2j}), hai mode biên \\gamma_1 và \\gamma_{2N} biến mất hoàn toàn khỏi Hamiltonian, tạo ra không gian trạng thái cơ bản suy biến tại đúng mức năng lượng E = 0.\nVới chiều dài dây hữu hạn L, sự chồng lấn hàm sóng giữa hai đầu mút tạo ra Hamiltonian hiệu dụng dư:\n\nH_{\\text{eff}} \\propto i e^{-L/\\xi}\\,\\gamma_1\\gamma_2\n\n(trong đó \\xi là độ dài kết hợp siêu dẫn). Mọi nhiễu cục bộ tác động lên một đầu dây đều không thể phân biệt hay làm lệch năng lượng giữa |0_L\\rangle và |1_L\\rangle với sai số giảm theo hàm mũ e^{-L/\\xi} — đây chính là bảo vệ tôpô (topological protection).",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#initial-states---0_lrangleotimes-n",
+    "href": "note/future/topologicalqubit.html#initial-states---0_lrangleotimes-n",
+    "title": "Topological Qubits",
+    "section": "Initial states - |0_L\\rangle^{\\otimes N}",
+    "text": "Initial states - |0_L\\rangle^{\\otimes N}\n\nLàm lạnh chip xuống vùng nhiệt độ milikelvin (k_B T \\ll \\Delta_{\\text{top}}, với \\Delta_{\\text{top}} là khe năng lượng siêu dẫn tôpô) để hệ rơi về đa tạp trạng thái cơ bản suy biến.\nThực hiện phép đo tính chẵn lẻ ban đầu lên từng cặp (\\gamma_1, \\gamma_2) và (\\gamma_3, \\gamma_4) (thông qua ghép điện dung với chấm lượng tử) để chiếu hệ về trạng thái khởi tạo chuẩn |0_L\\rangle^{\\otimes N}.",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/topologicalqubit.html#single-qubit---r_x-r_y-r_z",
+    "title": "Topological Qubits",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\nThay vì chiếu xung laser hay vi sóng căn chỉnh thời gian liên tục (vốn luôn mang sai số tương tự), các cổng lượng tử tôpô được thực hiện bằng cách hoán đổi vị trí vật lý của hai anyon trong không gian 2D — gọi là phép tết bím (braiding) (hoặc mô phỏng tương đương thông qua chuỗi phép đo tính chẵn lẻ trên các nhánh chữ T — measurement-only braiding):\n\nKhi đưa \\gamma_i và \\gamma_{i+1} đi vòng qua nhau để đổi chỗ một cách đoạn nhiệt, trạng thái toàn cục của hệ biến đổi theo toán tử tết bím:\n\n\nB_{i,i+1} = \\exp\\left(\\frac{\\pi}{4}\\gamma_i\\gamma_{i+1}\\right) = \\frac{1 + \\gamma_i\\gamma_{i+1}}{\\sqrt{2}}\n\n\nCổng pha S = R_z(\\pi/2): Thu được khi hoán đổi cặp (\\gamma_1, \\gamma_2).\nCổng \\sqrt{X} = R_x(\\pi/2): Thu được khi hoán đổi cặp (\\gamma_2, \\gamma_3) (tổ hợp các phép quay quanh trục X và Z cho ra cổng Hadamard H).\nTính bất biến hình học: Vì góc quay \\pi/2 chỉ phụ thuộc vào số lần hai đường thế giới (worldlines) thắt nút quanh nhau trong không-thời gian (2+1) chiều chứ không phụ thuộc vào vận tốc hay đường đi chi tiết, các rung động nhỏ trên quỹ đạo di chuyển không gây ra bất kỳ sai số cổng nào.",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#qubit-gate---non-abelian-braiding-joint-parity-measurement",
+    "href": "note/future/topologicalqubit.html#qubit-gate---non-abelian-braiding-joint-parity-measurement",
+    "title": "Topological Qubits",
+    "section": "2-qubit gate - Non-Abelian Braiding & Joint Parity Measurement",
+    "text": "2-qubit gate - Non-Abelian Braiding & Joint Parity Measurement\n\nCổng CNOT / CZ: Được thực hiện bằng cách ghép 2 qubit Tetron thành một cụm Hexon (6 hoặc 8 mode Majorana) và thực hiện chuỗi phép tết bím / đo tính chẵn lẻ chung giữa các mode Majorana thuộc hai qubit khác nhau.\nĐiểm nút lý thuyết (Ising anyons vs. Fibonacci anyons): Phép tết bím các mode Majorana (thuộc lớp Ising anyons) chỉ sinh ra được nhóm Clifford (H, S, \\text{CNOT}) — chưa đủ để tính toán lượng tử phổ quát (có thể mô phỏng hiệu quả bằng máy tính cổ điển theo định lý Gottesman–Knill). Để có cổng T = R_z(\\pi/4) nhằm đạt tính phổ quát, kiến trúc Majorana buộc phải đưa hai mode Majorana lại gần nhau trong thời gian ngắn để phá vỡ bảo vệ tôpô (tạo pha động lực học) kết hợp chưng cất trạng thái ma thuật (magic state distillation). Ngược lại, Fibonacci anyons (dự đoán xuất hiện ở trạng thái Hall lượng tử phân số \\nu = 12/5) có khả năng thực hiện tập cổng phổ quát thuần túy chỉ bằng phép tết bím.",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/topologicalqubit.html#measurement",
+    "href": "note/future/topologicalqubit.html#measurement",
+    "title": "Topological Qubits",
+    "section": "Measurement",
+    "text": "Measurement\n\nĐưa hai mode Majorana của một cặp lại gần nhau để hợp nhất (fuse) chúng, đưa mức năng lượng tách khỏi 0 và bộc lộ kênh hợp nhất:\n\n\n\\gamma \\times \\gamma = I + \\psi\n\n\nKênh chân không (I): Tính chẵn lẻ chẵn (|0\\rangle), không xuất hiện thêm điện tích.\nKênh fermion (\\psi): Tính chẵn lẻ lẻ (|1\\rangle), xuất hiện thêm đúng 1 điện tích electron tự do.\nDùng một chấm lượng tử (quantum dot) ghép sát đầu dây và đọc độ dịch điện dung lượng tử bằng phản xạ vi sóng (tương tự Circuit QED) để phân biệt trạng thái có hay không có electron dư này.",
+    "crumbs": [
+      "Quantum Computer",
+      "Topological Qubits"
+    ]
+  },
+  {
     "objectID": "note/future/simulation.html",
     "href": "note/future/simulation.html",
     "title": "Simulations Quantum",
@@ -1078,147 +1155,190 @@
     ]
   },
   {
-    "objectID": "note/future/msgate.html",
-    "href": "note/future/msgate.html",
-    "title": "Mølmer–Sørensen gate",
+    "objectID": "note/future/nvcenter.html",
+    "href": "note/future/nvcenter.html",
+    "title": "Diamond NV Center",
     "section": "",
-    "text": "Tại sao có thể nói là cổng Cirac-Zoller quá lỗi thời? Vì trong chính công thức của nó, tồn tại n, và với điều kiện n = 0 xuyên suốt quá trình (tức là chỉ cần một giao động nhiễu nhiệt nhỏ của môi trường cũng có thể khiến hệ bị hủy).",
+    "text": "Tâm khuyết tật trong kim cương chính là hậu duệ trạng thái rắn của Cộng hưởng từ hạt nhân (NMR — Mục 7.7 trong Nielsen & Chuang): thay vì dùng hàng tỉ phân tử trong ống nghiệm lỏng như NMR cổ điển, người ta cô lập một spin electron đơn lẻ làm đầu đọc và điều khiển một cụm spin hạt nhân ^{13}\\text{C} xung quanh ngay trong mạng tinh thể kim cương.\n\nCơ chế tạo bẫy nguyên tử (Khuyết tật điểm): Mạng tinh thể kim cương siêu tinh khiết (làm giàu đồng vị ^{12}\\text{C} có spin hạt nhân bằng 0) đóng vai trò như một “buồng chân không trạng thái rắn” tự nhiên với khe năng lượng vùng cấm cực rộng (5.5\\text{ eV}). Thay thế một nguyên tử Carbon bằng một nguyên tử Nitơ (\\text{N}) nằm ngay cạnh một nút mạng trống (Vacancy — \\text{V}), tạo thành tâm Nitơ-lỗ trống tích điện âm (\\text{NV}^-) (hoặc dùng nguyên tử Silic/Thiếc kẹp giữa hai lỗ trống để tạo tâm \\text{SiV}^- / \\text{SnV}^-). Khuyết tật này bẫy chặt một đám mây electron cục bộ ở quy mô hạ nanomet.\nMôi trường vận hành đặc biệt: Nhờ độ cứng cực cao của mạng tinh thể kim cương (nhiệt độ Debye \\sim 2200\\text{ K}), spin của tâm NV cô lập rất tốt với dao động nhiệt (phonon), cho phép vận hành và thực hiện cổng lượng tử ngay ở nhiệt độ phòng (300\\text{ K}) — một lợi thế độc nhất cho các thiết bị NISQ nhỏ gọn (dù để kết nối quang học tầm xa giữa nhiều chip vẫn cần làm lạnh xuống \\sim 4\\text{ K}).",
     "crumbs": [
-      "Future",
-      "Mølmer–Sørensen gate"
+      "Quantum Computer",
+      "Diamond NV Center"
     ]
   },
   {
-    "objectID": "note/future/msgate.html#bước-1-chiếu-red-sideband-vào-ion-c",
-    "href": "note/future/msgate.html#bước-1-chiếu-red-sideband-vào-ion-c",
-    "title": "Mølmer–Sørensen gate",
-    "section": "Bước 1: Chiếu red sideband vào ion C",
-    "text": "Bước 1: Chiếu red sideband vào ion C\nBởi vì setup ban đầu của ion trap là mọi thứ đều không còn phonon, tức là chỉ có 1 trong 2 trường hợp sau đây khả dĩ:\n\nC = \\vert 00\\rangle \\to \\vert 00 \\rangle : laser đỏ không đủ để chiếu nó lên bất kỳ một mức năng lượng nào khác cả, bản thân nó cũng không có phonon nên không mượn được.\nC = \\vert 10\\rangle \\to \\vert 01 \\rangle : laser đỏ chiếu vào, nhưng mà thiếu năng lượng nên mượn tí năng lượng của phonon.\n\nHay cách biểu diễn theo tôi là:\n\n(0, T)^0 \\to (0, T)^0 \\\\\n(1, T)^0 \\to (0, T)^1",
+    "objectID": "note/future/nvcenter.html#qubit-logic---m_s-0rangle-m_s--1rangle-13textc",
+    "href": "note/future/nvcenter.html#qubit-logic---m_s-0rangle-m_s--1rangle-13textc",
+    "title": "Diamond NV Center",
+    "section": "Qubit logic - |m_s = 0\\rangle, |m_s = -1\\rangle & ^{13}\\text{C}",
+    "text": "Qubit logic - |m_s = 0\\rangle, |m_s = -1\\rangle & ^{13}\\text{C}\nKiến trúc này sử dụng thanh ghi lai (hybrid spin register) gồm hai loại qubit bổ trợ cho nhau trong cùng một tâm khuyết tật:\n\nQubit giao tiếp/điều khiển (Spin electron NV): Trạng thái cơ bản của \\text{NV}^- là một bộ ba spin (S = 1) gồm mức |m_s = 0\\rangle và cặp mức |m_s = \\pm 1\\rangle tách nhau một khoảng năng lượng trường không D/2\\pi \\approx 2.87\\text{ GHz}. Đặt thêm một từ trường tĩnh ngoài \\mathbf{B}_0 để tách hai mức \\pm 1 qua hiệu ứng Zeeman, ta cô lập không gian tính toán 2 chiều:\n\n\n|0\\rangle_e \\equiv |m_s = 0\\rangle, \\qquad |1\\rangle_e \\equiv |m_s = -1\\rangle\n\n\nQubit bộ nhớ NISQ (Spin hạt nhân ^{13}\\text{C}): Xung quanh tâm NV luôn có ngẫu nhiên vài nguyên tử đồng vị ^{13}\\text{C} (chiếm 1.1\\% tự nhiên, mang spin hạt nhân I = 1/2). Vì mômen từ hạt nhân nhỏ hơn electron gần 2000 lần, các spin ^{13}\\text{C} này gần như miễn nhiễm với nhiễu môi trường, đạt thời gian kết hợp lên tới hàng giây ngay ở nhiệt độ phòng.",
     "crumbs": [
-      "Future",
-      "Mølmer–Sørensen gate"
+      "Quantum Computer",
+      "Diamond NV Center"
     ]
   },
   {
-    "objectID": "note/future/msgate.html#bước-2-chiếu-laser-omega_aux-omega_z-vào-ion-t",
-    "href": "note/future/msgate.html#bước-2-chiếu-laser-omega_aux-omega_z-vào-ion-t",
-    "title": "Mølmer–Sørensen gate",
-    "section": "Bước 2: Chiếu laser \\omega_{aux} + \\omega_Z vào ion T",
-    "text": "Bước 2: Chiếu laser \\omega_{aux} + \\omega_Z vào ion T\n4 trạng khả dĩ của ion T.\n\nT = \\vert 00 \\rangle \\to \\vert 00\\rangle : không có gì xảy ra.\nT = \\vert 01 \\rangle \\to \\vert 01\\rangle : không có gì xảy ra.\nT = \\vert 10 \\rangle \\to \\vert 10\\rangle : không có gì xảy ra.\nT = \\vert 11 \\rangle \\to \\vert 20\\rangle : do đủ năng lượng yêu cầu, nên hệ nhảy sang.\n\nHay biểu diễn theo cách của tôi là:\n\n(0, 0)^0 \\to (0, 0)^0 \\to (0, 0)^0 \\\\\n(1, 0)^0 \\to (0, 0)^1 \\to (0, 0)^1 \\\\\n(0, 1)^0 \\to (0, 0)^0 \\to (0, 0)^0 \\\\\n(1, 1)^0 \\to (0, 1)^1 \\to (0, 2)^0\n\nMà khi chiếu laser một thời gian đủ lâu, ion T sẽ đi hết một vòng và đảo pha:\n\n\\vert 11 \\rangle \\to \\vert 20 \\rangle \\to -\\vert 11 \\rangle",
+    "objectID": "note/future/nvcenter.html#hamiltonian",
+    "href": "note/future/nvcenter.html#hamiltonian",
+    "title": "Diamond NV Center",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nHamiltonian toàn phần của một nút thanh ghi tâm NV bao gồm spin electron trung tâm, các spin hạt nhân ^{13}\\text{C} xung quanh và tương tác siêu tinh tế giữa chúng:\n\nH = \\underbrace{D S_z^2 + \\gamma_e \\mathbf{B}_0 \\cdot \\mathbf{S}}_{\\text{NV electron spin}} + \\underbrace{\\sum_{k} \\gamma_n \\mathbf{B}_0 \\cdot \\mathbf{I}_k}_{^{13}\\text{C nuclear spins}} + \\underbrace{\\sum_{k} \\mathbf{S} \\cdot \\mathbf{A}_k \\cdot \\mathbf{I}_k}_{\\text{Hyperfine interaction}}\n\n(trong đó \\mathbf{A}_k là tenxơ tương tác lưỡng cực từ phụ thuộc vào vị trí chính xác của hạt nhân ^{13}\\text{C} thứ k so với tâm NV).",
     "crumbs": [
-      "Future",
-      "Mølmer–Sørensen gate"
+      "Quantum Computer",
+      "Diamond NV Center"
     ]
   },
   {
-    "objectID": "note/future/msgate.html#bước-3-chiếu-laser-ngược-lại-ion-c-trả-về-như-cũ.",
-    "href": "note/future/msgate.html#bước-3-chiếu-laser-ngược-lại-ion-c-trả-về-như-cũ.",
-    "title": "Mølmer–Sørensen gate",
-    "section": "Bước 3: Chiếu laser ngược lại ion C, trả về như cũ.",
-    "text": "Bước 3: Chiếu laser ngược lại ion C, trả về như cũ.\n\n(0, 0)^0 \\to (0, 0)^0 \\\\\n(0, 0)^1 \\to (1, 0)^0 \\\\\n(0, 0)^0 \\to (0, 0)^0 \\\\\n-(0, 1)^1 \\to -(1, 1)^0",
+    "objectID": "note/future/nvcenter.html#initial-states---0rangle_e-otimes-0rangle_notimes-k",
+    "href": "note/future/nvcenter.html#initial-states---0rangle_e-otimes-0rangle_notimes-k",
+    "title": "Diamond NV Center",
+    "section": "Initial states - |0\\rangle_e \\otimes |0\\rangle_n^{\\otimes K}",
+    "text": "Initial states - |0\\rangle_e \\otimes |0\\rangle_n^{\\otimes K}\n\nBơm quang học ở nhiệt độ phòng: Chiếu một chùm laser màu xanh lục (532\\text{ nm}) vào tâm NV. Electron bị kích thích lên mức trên; trong khi trạng thái |m_s = 0\\rangle phát huỳnh quang đỏ rơi thẳng về lại |m_s = 0\\rangle, thì trạng thái |m_s = \\pm 1\\rangle có xác suất cao đi vòng qua một trạng thái đơn tuyến tối (dark singlet state) không bức xạ rồi đổ dồn về |m_s = 0\\rangle. Chỉ sau vài micro-giây chiếu laser, &gt;90\\% dân số tự động dồn về |0\\rangle_e mà không cần tủ lạnh pha loãng.\nSau đó, thực hiện một cổng hoán đổi (SWAP) để chuyển độ phân cực sạch từ electron sang từng hạt nhân ^{13}\\text{C} lân cận và lặp lại chu trình bơm quang học để khởi tạo toàn bộ thanh ghi.",
     "crumbs": [
-      "Future",
-      "Mølmer–Sørensen gate"
+      "Quantum Computer",
+      "Diamond NV Center"
     ]
   },
   {
-    "objectID": "note/future/msgate.html#truth-table",
-    "href": "note/future/msgate.html#truth-table",
-    "title": "Mølmer–Sørensen gate",
-    "section": "Truth table",
-    "text": "Truth table\n\n\n\n\n\n\n\n\n\n\nTrạng thái ban đầu \\vert CT \\rangle\nBước 1 - Bắn C\nBước 2 - Bắn T\nBước 3 - Bắn C\nTrạng thái cuối cùng\n\n\n\n\n\\vert 00 \\rangle\n(0, 0)^0\n(0, 0)^0\n(0, 0)^0\n\\vert 00 \\rangle\n\n\n\\vert 01 \\rangle\n(0, 1)^0\n(0, 1)^0\n(0, 1)^0\n\\vert 01 \\rangle\n\n\n\\vert 10 \\rangle\n(0, 0)^1\n(0, 0)^1\n(1, 0)^0\n\\vert 10 \\rangle\n\n\n\\vert 11 \\rangle\n(0, 1)^1\n(0, 2)^0 \\to -(0,1)^1\n-(1, 1)^0\n-\\vert 11 \\rangle",
+    "objectID": "note/future/nvcenter.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/nvcenter.html#single-qubit---r_x-r_y-r_z",
+    "title": "Diamond NV Center",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\n\nTrên spin electron: Dùng một dây dẫn vi mạch (stripline) đặt trên bề mặt kim cương phát xung vi sóng (microwave) cộng hưởng ở tần số \\sim 2.87\\text{ GHz} để quay trực tiếp spin electron (R_x, R_y) trong vài chục nano-giây (kết hợp dịch pha sóng mang cho R_z).\nTrên spin hạt nhân ^{13}\\text{C}: Áp dụng đúng kỹ thuật của Mục 7.7 (NMR) — phát xung sóng vô tuyến (RF) cộng hưởng với tần số Larmor của từng hạt nhân ^{13}\\text{C} (khoảng vài trăm kHz đến vài MHz) để quay độc lập từng qubit bộ nhớ.",
     "crumbs": [
-      "Future",
-      "Mølmer–Sørensen gate"
+      "Quantum Computer",
+      "Diamond NV Center"
     ]
   },
   {
-    "objectID": "note/future/dressedstate.html#sự-tách-mức-rabi",
-    "href": "note/future/dressedstate.html#sự-tách-mức-rabi",
-    "title": "Dressed State",
-    "section": "Sự tách mức Rabi",
-    "text": "Sự tách mức Rabi\nKhi chưa liên kết mạnh, bạn có hai bare state:\n\n\\vert g, n + 1\\rangle : atom đang ở ground state, và có n + 1 photon xung quanh.\n\\vert e, n \\rangle : atom đang ở excited state, và có n photon xung quanh.\n\n\nNhưng khi strong coupling xảy ra, sự tương tác mạnh mẽ buộc hai trạng thái này phải trộn lẫn vào nhau. Theo nguyên lý quantum mechanics, hai mức năng lượng này bằng nhau khi tương tác sẽ đẩy nhau ra. Kết quả là chúng bị tách đôi thành hai mức năng lượng mới tinh:\n\n\n\n\nKhoảng cách năng lượng của hai mức mới này chính là h\\Omega (\\Omega là tần số Rabi)."
+    "objectID": "note/future/nvcenter.html#qubit-gate---dynamical-decoupling-barrettkok-protocol",
+    "href": "note/future/nvcenter.html#qubit-gate---dynamical-decoupling-barrettkok-protocol",
+    "title": "Diamond NV Center",
+    "section": "2-qubit gate - Dynamical Decoupling & Barrett–Kok Protocol",
+    "text": "2-qubit gate - Dynamical Decoupling & Barrett–Kok Protocol\nHệ vận hành theo hai tầng kết nối (cục bộ trong tinh thể và tầm xa bằng quang học):\n\nCổng 2-qubit cục bộ trong một thanh ghi (Electron \\leftrightarrow Hạt nhân ^{13}\\text{C}): Tương tác siêu tinh tế A_{zz}^{(k)} S_z I_{z,k} làm tần số cộng hưởng của mỗi hạt nhân ^{13}\\text{C} bị dịch đi một lượng riêng biệt tùy thuộc vào việc electron NV đang ở |0\\rangle_e hay |1\\rangle_e. Bằng cách chiếu chuỗi xung vi sóng tách động lực học (Dynamical Decoupling — như chuỗi CPMG) lên electron với chu kỳ trùng khớp với tần số Larmor của riêng hạt nhân thứ k, ta thực hiện được cổng quay có điều kiện CR_x(\\pm\\theta) (tương đương CNOT / CZ) giữa electron và đúng hạt nhân k đó, trong khi cô lập hoàn toàn các hạt nhân khác. Một tâm NV đơn lẻ có thể điều khiển một thanh ghi cục bộ khoảng 10\\text{--}20 qubit.\nCổng 2-qubit tầm xa giữa hai tâm NV (Giao thức Barrett–Kok): Để nối nhiều thanh ghi NV lại với nhau (làm lạnh về 4\\text{ K}), người ta kích thích đồng thời hai tâm NV phát ra hai photon đơn lẻ có tần số khớp nhau và cho giao thoa tại một gương bán mạ 50:50 (tương tự hiệu ứng Hong–Ou–Mandel). Phép đo trùng phùng tại hai đầu thu photon lập tức chiếu hai spin electron NV ở cách xa nhau vào trạng thái vướng víu Bell, từ đó thực hiện cổng CNOT viễn tải giữa hai nút mạng.",
+    "crumbs": [
+      "Quantum Computer",
+      "Diamond NV Center"
+    ]
   },
   {
-    "objectID": "file/index.html",
-    "href": "file/index.html",
-    "title": "Bài báo nghiên cứu",
+    "objectID": "note/future/nvcenter.html#measurement",
+    "href": "note/future/nvcenter.html#measurement",
+    "title": "Diamond NV Center",
+    "section": "Measurement",
+    "text": "Measurement\n\nChiếu lại xung laser xanh 532\\text{ nm} và đếm số photon huỳnh quang đỏ (637\\text{--}800\\text{ nm}) phát ra:\n\nNếu electron ở |0\\rangle_e: Phát sáng huỳnh quang mạnh.\nNếu electron ở |1\\rangle_e: Bị mắc kẹt tạm thời ở trạng thái đơn tuyến tối nên cường độ huỳnh quang giảm khoảng 30\\%.\n\nĐể đọc trạng thái một qubit hạt nhân ^{13}\\text{C}, ta dùng cổng CNOT chuyển trạng thái hạt nhân đó sang spin electron rồi mới đọc huỳnh quang (cho phép thực hiện phép đọc không phá hủy lặp lại nhiều lần — repetitive readout).",
+    "crumbs": [
+      "Quantum Computer",
+      "Diamond NV Center"
+    ]
+  },
+  {
+    "objectID": "note/future/neutralatomtrap.html",
+    "href": "note/future/neutralatomtrap.html",
+    "title": "Neutral Atom Trap",
     "section": "",
-    "text": "THƯ VIỆN · QUANTUM COMPUTATION\n\n\n\nNhững công trình nền tảng và bài báo chọn lọc về biến đổi Fourier lượng tử, ước lượng pha và điện toán lượng tử chịu lỗi. Mỗi mục có bản PDF lưu trong thư mục tài liệu, kèm nguồn xuất bản để tiện tra cứu và trích dẫn.",
+    "text": "Khác với bẫy ion dùng điện trường để giam giữ các hạt mang điện, nguyên tử trung hòa (thường là kim loại kiềm như ^{87}\\text{Rb}, ^{133}\\text{Cs} hoặc kiềm thổ như ^{88}\\text{Sr}, ^{171}\\text{Yb}) có tổng điện tích bằng 0 nên không chịu lực tĩnh điện Coulomb. Nhờ đó, chúng hầu như miễn nhiễm với nhiễu điện trường từ bề mặt điện cực và có thể xếp sát nhau ở khoảng cách vài micromet mà không đẩy nhau.\n\nCơ chế giam giữ (Nhíp quang học — Optical Tweezers): Chiếu một chùm laser hội tụ cực mạnh có tần số \\omega_L lệch đỏ xa tần số cộng hưởng quang học \\omega_0 của nguyên tử (\\Delta = \\omega_L - \\omega_0 &lt; 0). Điện trường của tia laser cảm ứng một mômen lưỡng cực điện lên đám mây electron, tạo ra thế năng dịch chuyển AC Stark hút nguyên tử về đúng tâm tiêu điểm có cường độ sáng cực đại:\n\n\nU_{\\text{dip}}(\\mathbf{r}) = -\\frac{1}{2}\\alpha(\\omega_L)|\\mathbf{E}(\\mathbf{r})|^2 \\propto \\frac{I(\\mathbf{r})}{\\Delta}\n\n\nKiến trúc phần cứng: Dùng bộ điều biến ánh sáng không gian (SLM) hoặc bộ làm lệch âm-quang (AOD) để tách một tia laser thành mảng 2D hoặc 3D gồm hàng trăm đến hàng nghìn “nhíp quang học” độc lập đặt trong buồng chân không siêu cao ở nhiệt độ phòng, mỗi nhíp giam giữ đúng 1 nguyên tử đơn lẻ.",
     "crumbs": [
-      "Bài báo nghiên cứu",
-      "Bài báo nghiên cứu"
+      "Quantum Computer",
+      "Neutral Atom Trap"
     ]
   },
   {
-    "objectID": "file/index.html#biến-đổi-fourier-lượng-tử",
-    "href": "file/index.html#biến-đổi-fourier-lượng-tử",
-    "title": "Bài báo nghiên cứu",
-    "section": "Biến đổi Fourier lượng tử",
-    "text": "Biến đổi Fourier lượng tử\n\n\nQFT1996 · Physical Review Letters\n\n\nSemiclassical Fourier Transform for Quantum Computation\nRobert B. Griffiths và Chi-Sheng Niu trình bày cách thực hiện biến đổi Fourier theo kiểu bán cổ điển, thay các cổng hai qubit bằng phép đo, điều khiển cổ điển và các cổng một qubit. Đây là một ý tưởng quan trọng để đơn giản hóa mạch lượng tử trong các thuật toán như Shor [1].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQFT · T GATES2020 · npj Quantum Information\n\n\nApproximate Quantum Fourier Transform with O(n \\log(n)) T Gates\nYunseong Nam, Yuan Su và Dmitri Maslov đề xuất cách giảm số cổng T của QFT xấp xỉ xuống O(n \\log n), sử dụng phép đo, feedforward và trạng thái gradient pha có thể tái sử dụng [2].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "objectID": "note/future/neutralatomtrap.html#qubit-logic---0rangle-1rangle",
+    "href": "note/future/neutralatomtrap.html#qubit-logic---0rangle-1rangle",
+    "title": "Neutral Atom Trap",
+    "section": "Qubit logic - |0\\rangle, |1\\rangle",
+    "text": "Qubit logic - |0\\rangle, |1\\rangle\nQubit logic được mã hóa trên hai trạng thái cơ bản siêu tinh tế (hyperfine ground states) có thời gian sống cực dài (lên tới hàng chục giây). Ví dụ với nguyên tử ^{87}\\text{Rb}:\n\n|0\\rangle \\equiv |5S_{1/2}, F=1, m_F=0\\rangle, \\qquad |1\\rangle \\equiv |5S_{1/2}, F=2, m_F=0\\rangle\n\nhai mức này cách nhau một tần số vi sóng \\omega_{\\text{hf}}/2\\pi \\approx 6.835\\text{ GHz}.",
     "crumbs": [
-      "Bài báo nghiên cứu",
-      "Bài báo nghiên cứu"
+      "Quantum Computer",
+      "Neutral Atom Trap"
     ]
   },
   {
-    "objectID": "file/index.html#ước-lượng-pha-và-trị-riêng",
-    "href": "file/index.html#ước-lượng-pha-và-trị-riêng",
-    "title": "Bài báo nghiên cứu",
-    "section": "Ước lượng pha và trị riêng",
-    "text": "Ước lượng pha và trị riêng\n\n\nQPE · NISQ2024 · Physical Review A\n\n\nAn Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm\nJunxu Li xây dựng phương pháp QPE lặp với các khoảng thời gian tiến hóa khác nhau để tăng độ chính xác của ước lượng pha, kể cả khi số qubit phụ trợ bị giới hạn [3].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQPE · FAULT-TOLERANT2023 · Quantum\n\n\nSimultaneous Estimation of Multiple Eigenvalues with Short-Depth Quantum Circuit on Early Fault-Tolerant Quantum Computers\nZhiyan Ding và Lin Lin giới thiệu phương pháp MM-QCELS để ước lượng đồng thời nhiều trị riêng bằng các mạch lượng tử độ sâu ngắn, hướng tới các máy tính lượng tử chịu lỗi thế hệ đầu [4].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "objectID": "note/future/neutralatomtrap.html#auxiliary-rydberg-state---rrangle",
+    "href": "note/future/neutralatomtrap.html#auxiliary-rydberg-state---rrangle",
+    "title": "Neutral Atom Trap",
+    "section": "Auxiliary Rydberg State - |r\\rangle",
+    "text": "Auxiliary Rydberg State - |r\\rangle\nVì hai nguyên tử ở trạng thái cơ bản gần như không tương tác với nhau, hệ sử dụng thêm một mức kích thích bậc cao gọi là trạng thái Rydberg |r\\rangle có số lượng tử chính rất lớn (n \\approx 50\\text{--}100). Ở mức này, bán kính quỹ đạo electron phình to theo n^2 (đạt tới \\sim 100\\text{ nm}), tạo ra mômen lưỡng cực điện khổng lồ gấp hàng nghìn lần trạng thái thường.",
     "crumbs": [
-      "Bài báo nghiên cứu",
-      "Bài báo nghiên cứu"
+      "Quantum Computer",
+      "Neutral Atom Trap"
     ]
   },
   {
-    "objectID": "file/index.html#sách-nền-tảng",
-    "href": "file/index.html#sách-nền-tảng",
-    "title": "Bài báo nghiên cứu",
-    "section": "Sách nền tảng",
-    "text": "Sách nền tảng\n\n\nSÁCH THAM KHẢO2010 · Cambridge University Press\n\n\nQuantum Computation and Quantum Information\nGiáo trình kinh điển của Michael A. Nielsen và Isaac L. Chuang, bản kỷ niệm 10 năm; nền tảng cho các ghi chú về điện toán lượng tử trên trang này [5].\n\nĐọc PDF",
+    "objectID": "note/future/neutralatomtrap.html#hamiltonian",
+    "href": "note/future/neutralatomtrap.html#hamiltonian",
+    "title": "Neutral Atom Trap",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nVới mảng N nguyên tử đặt tại tọa độ \\mathbf{R}_i dưới tác dụng của các tia laser điều khiển bước chuyển |1\\rangle \\leftrightarrow |r\\rangle (tần số Rabi \\Omega_i, độ lệch cộng hưởng \\Delta_i), Hamiltonian toàn phần của hệ có dạng:\n\nH = \\underbrace{\\sum_{i=1}^{N} \\frac{\\hbar}{2}\\left(\\Omega_i(t) e^{i\\phi_i(t)} |r\\rangle_i\\langle 1| + \\text{h.c.}\\right) - \\hbar\\Delta_i(t) |r\\rangle_i\\langle r|}_{\\text{Single-atom laser control}} + \\underbrace{\\sum_{i &lt; j} V_{ij} |r\\rangle_i\\langle r| \\otimes |r\\rangle_j\\langle r|}_{\\text{Rydberg dipole interaction}}\n\nTrong đó, thế năng tương tác van der Waals V_{ij} chỉ bật lên khi cả hai nguyên tử i và j cùng nằm ở trạng thái Rydberg |r\\rangle:\n\nV_{ij} = \\frac{C_6}{|\\mathbf{R}_i - \\mathbf{R}_j|^6}, \\qquad C_6 \\propto n^{11}",
     "crumbs": [
-      "Bài báo nghiên cứu",
-      "Bài báo nghiên cứu"
+      "Quantum Computer",
+      "Neutral Atom Trap"
     ]
   },
   {
-    "objectID": "file/index.html#tài-liệu-tham-khảo",
-    "href": "file/index.html#tài-liệu-tham-khảo",
-    "title": "Bài báo nghiên cứu",
-    "section": "Tài liệu tham khảo",
-    "text": "Tài liệu tham khảo\n\n\n[1] R. B. Griffiths and C.-S. Niu, “Semiclassical fourier transform for quantum computation,” Physical Review Letters, vol. 76, no. 17, pp. 3228–3231, 1996, doi: 10.1103/PhysRevLett.76.3228.\n\n\n[2] Y. Nam, Y. Su, and D. Maslov, “Approximate quantum fourier transform with O(n \\log(n)) t gates,” npj Quantum Information, vol. 6, p. 26, 2020, doi: 10.1038/s41534-020-0257-5.\n\n\n[3] J. Li, “An iterative method to improve the precision of quantum phase estimation algorithm,” Physical Review A, vol. 109, no. 3, p. 032606, 2024, doi: 10.1103/PhysRevA.109.032606.\n\n\n[4] Z. Ding and L. Lin, “Simultaneous estimation of multiple eigenvalues with short-depth quantum circuit on early fault-tolerant quantum computers,” Quantum, vol. 7, p. 1136, 2023, doi: 10.22331/q-2023-10-11-1136.\n\n\n[5] M. A. Nielsen and I. L. Chuang, Quantum computation and quantum information, 10th Anniversary. Cambridge: Cambridge University Press, 2010.",
+    "objectID": "note/future/neutralatomtrap.html#initial-states---0rangleotimes-n",
+    "href": "note/future/neutralatomtrap.html#initial-states---0rangleotimes-n",
+    "title": "Neutral Atom Trap",
+    "section": "Initial states - |0\\rangle^{\\otimes N}",
+    "text": "Initial states - |0\\rangle^{\\otimes N}\n\nLàm lạnh và nạp bẫy ngẫu nhiên: Đám mây nguyên tử được làm lạnh bằng bẫy từ-quang (MOT) xuống nhiệt độ vài micro-Kelvin rồi nạp vào mảng nhíp quang học. Nhờ cơ chế va chạm hỗ trợ ánh sáng (light-assisted collisions), nếu có 2 nguyên tử rơi vào cùng một nhíp, cả hai sẽ bị đẩy văng ra ngoài, đảm bảo mỗi bẫy chỉ chứa 0 hoặc 1 nguyên tử (xác suất đầy khoảng 50\\%).\nSắp xếp loại bỏ khuyết tật (Atom Rearrangement): Chụp ảnh huỳnh quang nhanh để xác định ô bẫy nào trống, sau đó dùng một tia laser di động gắp các nguyên tử từ vùng dự trữ lấp đầy các ô trống, tạo thành một mảng qubit hoàn chỉnh không khuyết tật.\nBơm quang học (Optical Pumping): Chiếu xung laser phân cực chuẩn để dồn toàn bộ dân số nguyên tử về đúng trạng thái cơ bản |0\\rangle^{\\otimes N}.",
     "crumbs": [
-      "Bài báo nghiên cứu",
-      "Bài báo nghiên cứu"
+      "Quantum Computer",
+      "Neutral Atom Trap"
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "note/future/neutralatomtrap.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/neutralatomtrap.html#single-qubit---r_x-r_y-r_z",
+    "title": "Neutral Atom Trap",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\nVì |0\\rangle và |1\\rangle đều thuộc lớp vỏ cơ bản nên chuyển mức lưỡng cực điện trực tiếp bị cấm. Các phép quay đơn qubit được thực hiện bằng chuyển mức Raman hai photon: chiếu đồng thời hai tia laser lệch cộng hưởng qua một mức trung gian ảo |e\\rangle sao cho hiệu tần số của hai tia đúng bằng \\omega_{\\text{hf}}.\n\nR_x(\\theta) và R_y(\\theta): Điều chỉnh độ rộng xung và pha tương đối của cặp tia Raman cho phép quay độc lập từng nguyên tử quanh các trục trên mặt phẳng XY.\nR_z(\\phi): Chiếu thêm một tia laser lệch cộng hưởng cục bộ gây dịch mức AC Stark lên riêng trạng thái |1\\rangle (hoặc dịch pha tham chiếu của sóng mang xung Raman — virtual Z-gate).",
+    "crumbs": [
+      "Quantum Computer",
+      "Neutral Atom Trap"
+    ]
+  },
+  {
+    "objectID": "note/future/neutralatomtrap.html#qubit-gate---rydberg-blockade-jaksch-protocol",
+    "href": "note/future/neutralatomtrap.html#qubit-gate---rydberg-blockade-jaksch-protocol",
+    "title": "Neutral Atom Trap",
+    "section": "2-qubit gate - Rydberg Blockade (Jaksch Protocol)",
+    "text": "2-qubit gate - Rydberg Blockade (Jaksch Protocol)\nNếu bẫy ion dùng bus phonon và hốc quang học dùng photon trong hốc làm cầu nối, thì nguyên tử trung hòa dùng hiệu ứng Phong tỏa Rydberg (Rydberg Blockade) trực tiếp trong không gian tự do:\n\nNguyên lý phong tỏa: Xác định bán kính phong tỏa R_b = (C_6 / \\hbar\\Omega)^{1/6} sao cho khi hai nguyên tử điều khiển (C) và mục tiêu (T) nằm ở khoảng cách R &lt; R_b, năng lượng tương tác V_{ij} \\gg \\hbar\\Omega. Khi đó, mức năng lượng đôi |rr\\rangle bị đẩy vọt lên cao, hoàn toàn lệch khỏi tần số cộng hưởng của laser. Hệ quả: nếu nguyên tử C đã ở trạng thái |r\\rangle, nguyên tử T không thể hấp thụ photon để nhảy lên |r\\rangle được nữa.\nChuỗi 3 xung \\pi - 2\\pi - \\pi: Chiếu các xung laser cộng hưởng trên bước chuyển |1\\rangle \\leftrightarrow |r\\rangle (tạo phép quay U(\\theta) = \\cos\\frac{\\theta}{2}I - i\\sin\\frac{\\theta}{2}\\sigma_x, còn trạng thái |0\\rangle hoàn toàn đứng ngoài cuộc do lệch tần số siêu tinh tế):\n\nXung \\pi lên Control (C): Chuyển |1\\rangle_C \\to -i|r\\rangle_C.\nXung 2\\pi lên Target (T): Nếu C ở |0\\rangle_C, T thực hiện trọn vẹn một vòng quay 2\\pi (|1\\rangle_T \\to -i|r\\rangle_T \\to -|1\\rangle_T) và nhận thêm dấu trừ. Ngược lại, nếu C đang ở |r\\rangle_C, hiệu ứng phong tỏa Rydberg khóa chặt T, khiến xung 2\\pi không có tác dụng gì.\nXung \\pi lên Control (C): Đưa trạng thái Rydberg của C quay về mức cơ bản (-i|r\\rangle_C \\to (-i)(-i)|1\\rangle_C = -|1\\rangle_C).\n\n\nToàn bộ 4 trạng thái cơ sở biến đổi qua 3 bước như sau:\n\n\\begin{aligned}\n|00\\rangle &\\xrightarrow{\\pi_C} |00\\rangle \\xrightarrow{2\\pi_T} |00\\rangle \\xrightarrow{\\pi_C} +|00\\rangle \\\\\n|01\\rangle &\\xrightarrow{\\pi_C} |01\\rangle \\xrightarrow{2\\pi_T} -|01\\rangle \\xrightarrow{\\pi_C} -|01\\rangle \\\\\n|10\\rangle &\\xrightarrow{\\pi_C} -i|r0\\rangle \\xrightarrow{2\\pi_T} -i|r0\\rangle \\xrightarrow{\\pi_C} -|10\\rangle \\\\\n|11\\rangle &\\xrightarrow{\\pi_C} -i|r1\\rangle \\xrightarrow{2\\pi_T \\text{ (blockaded)}} -i|r1\\rangle \\xrightarrow{\\pi_C} -|11\\rangle\n\\end{aligned}\n\nPhép biến đổi thu được là ma trận đường chéo \\text{diag}(1, -1, -1, -1); chỉ cần áp thêm cổng quay pha đơn qubit Z \\otimes Z là thu được chính xác cổng CZ (và kẹp giữa hai cổng Hadamard trên T để thành CNOT).",
+    "crumbs": [
+      "Quantum Computer",
+      "Neutral Atom Trap"
+    ]
+  },
+  {
+    "objectID": "note/future/neutralatomtrap.html#measurement",
+    "href": "note/future/neutralatomtrap.html#measurement",
+    "title": "Neutral Atom Trap",
+    "section": "Measurement",
+    "text": "Measurement\n\nXung đẩy chọn lọc trạng thái (Push-out pulse): Chiếu một xung laser cộng hưởng mạnh chỉ tác động lên mức |1\\rangle (không làm lạnh) để truyền động lượng và thổi bay các nguyên tử đang ở trạng thái |1\\rangle ra khỏi nhíp quang học, trong khi các nguyên tử ở |0\\rangle vẫn nằm yên trong bẫy.\nChụp ảnh huỳnh quang (Fluorescence imaging): Bật chùm tia làm lạnh chụp ảnh mảng bẫy bằng camera EMCCD/sCMOS. Ô bẫy nào còn đốm sáng tương ứng với kết quả |0\\rangle, ô nào tối tương ứng với |1\\rangle. (Các hệ thống thế hệ mới dùng đọc không phá hủy — non-destructive state-selective fluorescence — để giữ lại nguyên tử cho các chu kỳ tính toán tiếp theo).",
+    "crumbs": [
+      "Quantum Computer",
+      "Neutral Atom Trap"
+    ]
+  },
+  {
+    "objectID": "note/future/klm.html",
+    "href": "note/future/klm.html",
+    "title": "KLM protocol",
     "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "量子計算と量子情報",
-    "section": "",
-    "text": "QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版\n\n\n\n\n量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。\n\n\n\nマイケル・A・ニールセン、アイザック・L・チャン著\n\n\n原文を読む ↗ ウェブ版を見る ↗\n\n\n\n\n\n\n\nただの一匹の猫。生きていると同時に、死んでいる。。",
+    "text": "Như đã nói ở phía trên, chúng ta đã có phaseshifter đóng vai trò là R_z và beamsplitter là R_y, chỉ từ 2 cổng quay này, kết hợp với CNOT cho ra các tổ hợp các cổng có thể xảy ra. Nhưng việc môi trường Kerr lại quá yếu, khiến photon a tác động lên photon b một lượng quá nhỏ, không đủ, muốn nó thật sự quay một góc tuỳ ý, phải cần tới một tinh thể cả vài km.\nTừ đó, chúng ta sinh ra giao thức KLM - Emanuel Knill - Raymond Laflamme - Gerard J. Milburn.\n\nHiệu ứng Hong-Ou-Mandel\nKhi cho hai dòng photon đi qua BS50:50, lúc đó thì nó sẽ tự chia ra là \\vert 0, 2 \\rangle hoặc \\vert 2, 0 \\rangle, trường hợp \\vert 1, 1 \\rangle đã bị biến mất!\nTrạng thái đầu vào:\n\n\\vert 1, 1 \\rangle = \\hat{a_1}^\\dagger \\hat{a_2}^\\dagger \\vert 0, 0 \\rangle\n\nToán tử sinh của hai đường truyền biến đổi tuyến tính như sau:\n\n\\hat{a_1}^\\dagger \\to \\frac 1 {\\sqrt 2} \\hat{a_3}^\\dagger + \\frac 1 {\\sqrt 2} \\hat{a_4}^\\dagger, \\qquad\n\\hat{a_2}^\\dagger \\to \\frac 1 {\\sqrt 2} \\hat{a_3}^\\dagger - \\frac 1 {\\sqrt 2} \\hat{a_4}^\\dagger\n\n\n\\vert 1, 1 \\rangle \\to\n\\frac 1 2 \\left(\\hat{a_3}^\\dagger + \\hat{a_4}^\\dagger \\right) \\left(\\hat{a_3}^\\dagger - \\hat{a_4}^\\dagger  \\right) \\vert 0, 0 \\rangle\n= \\frac 1 2 \\left((\\hat{a_3}^\\dagger)^2 - (\\hat{a_4}^\\dagger )^2 \\right) \\vert 0, 0 \\rangle\n= \\frac {\\vert 0, 2\\rangle - \\vert 2, 0 \\rangle} {\\sqrt 2}\n\n\n\n\nHình KLM.1: Mô tả hai photon cùng đập một beamsplitter\n\n\nÝ nghĩa: Từ đó sẽ chỉ có hai trường hợp chồng chập xảy ra, là \\vert 2, 0 \\rangle (2 photon cùng đi đường trên, 0 photon ở đường dưới), hoặc là \\vert 0, 2 \\rangle (0 photon ở đường trên, 2 photon ở đường dưới), trường hợp cùng phản xạ hoặc cùng đi thẳng đã bị biến mất.\nNote: Trong sơ đồ mạch ngang (dual-rail), ta quy ước đường trên ứng với mode 1 (\\hat{a}_1^\\dagger) và đường dưới ứng với mode 2 (\\hat{a}_2^\\dagger).\n\n\nNS Gate\nViệc của cổng NS là phải điều chỉnh t và r ở cả 3 gương bán mạ BS1, BS2 và BS3, sao cho có thể đảo pha của \\vert 2 \\rangle \\to - \\vert 2 \\rangle, việc này thành công khi và chỉ khi kết quả đo ra ở ancilla ket 1 là 1 và kết quả đo ancilla ket 0 là 0 (tỉ lệ 1/4):\n\nNS(\\alpha \\vert 0 \\rangle + \\beta \\vert 1 \\rangle + \\gamma \\vert 2 \\rangle)\n\\to\n\\alpha \\vert 0 \\rangle + \\beta \\vert 1 \\rangle - \\gamma \\vert 2 \\rangle\n\\qquad (25\\%)\n\n\n\n\nControlled-Z\nVà giờ chúng ta sẽ ghép thành một mạch CZ hoàn chỉnh:\n\ninput \\to BS50:50 \\to NS \\to NS \\to BS50:50 \\to output\n\n\n\\vert{}1,1\\rangle \\xrightarrow{\\text{BS}_{50:50}} \\frac{\\vert{}2,0\\rangle - \\vert{}0,2\\rangle}{\\sqrt{2}} \\xrightarrow{\\text{NS} \\otimes \\text{NS}} \\frac{-\\vert{}2,0\\rangle - (-\\vert{}0,2\\rangle)}{\\sqrt{2}} = -\\frac{\\vert{}2,0\\rangle - \\vert{}0,2\\rangle}{\\sqrt{2}} \\xrightarrow{\\text{BS}_{50:50}} -\\vert{}1,1\\rangle\n\n\n\nControlled-NOT\nMột cách hiển nhiên, chúng ta biết rằng HZH = X, vậy là chỉ cần kẹp cổng CZ ở giữa hai cổng Hadamard là được, mà ở trong này Hadamard chính là gương bán mạ BS50:50.\n\nCNOT = (I \\otimes H) CZ (I \\otimes H)",
     "crumbs": [
-      "READMEmd"
+      "Future",
+      "KLM protocol"
     ]
   },
   {
-    "objectID": "index.html#読みたいところから",
-    "href": "index.html#読みたいところから",
-    "title": "量子計算と量子情報",
-    "section": "読みたいところから",
-    "text": "読みたいところから\n\n量子力学の基礎から量子情報の考え方まで。章やメモを選んで読み進められます。\n\n\n\n本編を読む →\n量子計算と量子情報の導入から読み始める。\n\n\nアイデアと問い →\n読みながら考えたい問いやアイデアをまとめています。\n\n\nまえがきを読む →\n本文に入る前に、翻訳ノートの背景を読む。",
+    "objectID": "note/future/index.html",
+    "href": "note/future/index.html",
+    "title": "Quantum Computer",
+    "section": "",
+    "text": "Nền tảng phần cứng\nBộ xử lý / Hệ vật lý\nQuy mô\nNội dung được mô phỏng\n\n\n\n\nSuperconducting\nGoogle Sycamore\n9 qubit\nĐộng lực học lỗ sâu đục \\text{AdS}_2 qua mô hình SYK nén\n\n\nIon trap\nChuỗi ion ^{171}\\text{Yb}^+\n7 qubit\nXáo trộn thông tin lỗ đen (Hayden–Preskill & OTOC)\n\n\nNeutral atom\nMảng nhíp quang học ^{87}\\text{Rb}\n20-51 qubit\nLý thuyết trường bảo giác (CFT) tới hạn & Entropy vướng víu\n\n\n\n\nNeutral Atom Trap (Nhíp quang học & Phong tỏa Rydberg\nIon Trap (Bẫy Paul tuyến tính & Cổng Cirac–Zoller / Mølmer–Sørensen)\nOptical Cavity QED (Mô hình Jaynes–Cummings & Giao thức phản xạ Duan–Kimble)\nSuperconducting Qubits (Transmon, Circuit QED, Flux-Tunable CZ & Cross-Resonance)\nTopological Qubits (Chuỗi Kitaev, Mode không Majorana & Phép tết bím phi Abel)\nSemiconductor Quantum Dots (Spin electron Loss–DiVincenzo & Tương tác trao đổi Heisenberg)\nDiamond NV Center (Thanh ghi lai Electron–^{13}\\text{C}, Tách động lực học & Giao thức Barrett–Kok)",
     "crumbs": [
-      "READMEmd"
+      "Quantum Computer",
+      "Quantum Computer"
     ]
   },
   {
@@ -1343,124 +1463,477 @@
     ]
   },
   {
-    "objectID": "note/future/klm.html",
-    "href": "note/future/klm.html",
-    "title": "KLM protocol",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "量子計算と量子情報",
     "section": "",
-    "text": "Như đã nói ở phía trên, chúng ta đã có phaseshifter đóng vai trò là R_z và beamsplitter là R_y, chỉ từ 2 cổng quay này, kết hợp với CNOT cho ra các tổ hợp các cổng có thể xảy ra. Nhưng việc môi trường Kerr lại quá yếu, khiến photon a tác động lên photon b một lượng quá nhỏ, không đủ, muốn nó thật sự quay một góc tuỳ ý, phải cần tới một tinh thể cả vài km.\nTừ đó, chúng ta sinh ra giao thức KLM - Emanuel Knill - Raymond Laflamme - Gerard J. Milburn.\n\nHiệu ứng Hong-Ou-Mandel\nKhi cho hai dòng photon đi qua BS50:50, lúc đó thì nó sẽ tự chia ra là \\vert 0, 2 \\rangle hoặc \\vert 2, 0 \\rangle, trường hợp \\vert 1, 1 \\rangle đã bị biến mất!\nTrạng thái đầu vào:\n\n\\vert 1, 1 \\rangle = \\hat{a_1}^\\dagger \\hat{a_2}^\\dagger \\vert 0, 0 \\rangle\n\nToán tử sinh của hai đường truyền biến đổi tuyến tính như sau:\n\n\\hat{a_1}^\\dagger \\to \\frac 1 {\\sqrt 2} \\hat{a_3}^\\dagger + \\frac 1 {\\sqrt 2} \\hat{a_4}^\\dagger, \\qquad\n\\hat{a_2}^\\dagger \\to \\frac 1 {\\sqrt 2} \\hat{a_3}^\\dagger - \\frac 1 {\\sqrt 2} \\hat{a_4}^\\dagger\n\n\n\\vert 1, 1 \\rangle \\to\n\\frac 1 2 \\left(\\hat{a_3}^\\dagger + \\hat{a_4}^\\dagger \\right) \\left(\\hat{a_3}^\\dagger - \\hat{a_4}^\\dagger  \\right) \\vert 0, 0 \\rangle\n= \\frac 1 2 \\left((\\hat{a_3}^\\dagger)^2 - (\\hat{a_4}^\\dagger )^2 \\right) \\vert 0, 0 \\rangle\n= \\frac {\\vert 0, 2\\rangle - \\vert 2, 0 \\rangle} {\\sqrt 2}\n\n\n\n\nHình KLM.1: Mô tả hai photon cùng đập một beamsplitter\n\n\nÝ nghĩa: Từ đó sẽ chỉ có hai trường hợp chồng chập xảy ra, là \\vert 2, 0 \\rangle (2 photon cùng đi đường trên, 0 photon ở đường dưới), hoặc là \\vert 0, 2 \\rangle (0 photon ở đường trên, 2 photon ở đường dưới), trường hợp cùng phản xạ hoặc cùng đi thẳng đã bị biến mất.\nNote: Trong sơ đồ mạch ngang (dual-rail), ta quy ước đường trên ứng với mode 1 (\\hat{a}_1^\\dagger) và đường dưới ứng với mode 2 (\\hat{a}_2^\\dagger).\n\n\nNS Gate\nViệc của cổng NS là phải điều chỉnh t và r ở cả 3 gương bán mạ BS1, BS2 và BS3, sao cho có thể đảo pha của \\vert 2 \\rangle \\to - \\vert 2 \\rangle, việc này thành công khi và chỉ khi kết quả đo ra ở ancilla ket 1 là 1 và kết quả đo ancilla ket 0 là 0 (tỉ lệ 1/4):\n\nNS(\\alpha \\vert 0 \\rangle + \\beta \\vert 1 \\rangle + \\gamma \\vert 2 \\rangle)\n\\to\n\\alpha \\vert 0 \\rangle + \\beta \\vert 1 \\rangle - \\gamma \\vert 2 \\rangle\n\\qquad (25\\%)\n\n\n\n\nControlled-Z\nVà giờ chúng ta sẽ ghép thành một mạch CZ hoàn chỉnh:\n\ninput \\to BS50:50 \\to NS \\to NS \\to BS50:50 \\to output\n\n\n\\vert{}1,1\\rangle \\xrightarrow{\\text{BS}_{50:50}} \\frac{\\vert{}2,0\\rangle - \\vert{}0,2\\rangle}{\\sqrt{2}} \\xrightarrow{\\text{NS} \\otimes \\text{NS}} \\frac{-\\vert{}2,0\\rangle - (-\\vert{}0,2\\rangle)}{\\sqrt{2}} = -\\frac{\\vert{}2,0\\rangle - \\vert{}0,2\\rangle}{\\sqrt{2}} \\xrightarrow{\\text{BS}_{50:50}} -\\vert{}1,1\\rangle\n\n\n\nControlled-NOT\nMột cách hiển nhiên, chúng ta biết rằng HZH = X, vậy là chỉ cần kẹp cổng CZ ở giữa hai cổng Hadamard là được, mà ở trong này Hadamard chính là gương bán mạ BS50:50.\n\nCNOT = (I \\otimes H) CZ (I \\otimes H)",
+    "text": "QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版\n\n\n\n\n量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。\n\n\n\nマイケル・A・ニールセン、アイザック・L・チャン著\n\n\n原文を読む ↗ ウェブ版を見る ↗\n\n\n\n\n\n\n\nただの一匹の猫。生きていると同時に、死んでいる。。",
     "crumbs": [
-      "Future",
-      "KLM protocol"
+      "READMEmd"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html",
-    "href": "note/future/neutralatomtrap.html",
-    "title": "Neutral Atom Trap",
+    "objectID": "index.html#読みたいところから",
+    "href": "index.html#読みたいところから",
+    "title": "量子計算と量子情報",
+    "section": "読みたいところから",
+    "text": "読みたいところから\n\n量子力学の基礎から量子情報の考え方まで。章やメモを選んで読み進められます。\n\n\n\n本編を読む →\n量子計算と量子情報の導入から読み始める。\n\n\nアイデアと問い →\n読みながら考えたい問いやアイデアをまとめています。\n\n\nまえがきを読む →\n本文に入る前に、翻訳ノートの背景を読む。",
+    "crumbs": [
+      "READMEmd"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "So với ion trap, dùng điện trường để giam giữ các hạt mang điện, nguyên tử trung hòa (thường là kim loại kiềm như ^{87}\\text{Rb}, ^{133}\\text{Cs}, hoặc kiềm thổ như ^{88}\\text{Sr}, ^{171}\\text{Yb}) có tổng điện tích bằng 0 nên không chịu lực tĩnh điện Coulomb. Nhờ đó, chúng hầu như miễn nhiễm với nhiễu điện trường từ bề mặt điện cực và có thể xếp sắp nhau ở khoảng cách vài micromet mà không đẩy nhau.\n\n\nNhíp quang học. Chiếu một chùm laser hội tự cực mạnh có tần số \\omega_L lệch đỏ xa tần số cộng hưởng quang học \\omega_0 của nguyên tử (\\Delta = \\omega_L - \\omega_0 &lt; 0). Điện trường của tia laser cảm ứng một moment lưỡng cực điện lên đám mây electron, tạo ra thế năng dịch chuyển AC Stark hút nguyên tử về đúng tâm tiêu điểm có cường độ ánh sáng cực đại:\n\nU_{\\text{dip}}(\\mathbf{r}) = -\\frac{1}{2}\\alpha(\\omega_L)\\vert{}\\mathbf{E}(\\mathbf{r})\\vert{}^2 \\propto \\frac{I(\\mathbf{r})}{\\Delta}\n\n\n\n\nKiến trúc phần cứng.\n\n\n\n\n\n\nImportantSLM - Bộ điều biến ánh sáng không gian\n\n\n\n\n\n\n\n\n\n\n\n\nImportantAOD - Bộ làm lệch âm quang\n\n\n\n\n\n\nMục tiêu là tách một tia laser thành mảng 2D hoặc mảng 3D gồm hàng trăm đến hàng nghìn optical tweezers độc lập đặt trong buồng chân không siêu cao ở nhiệt độ phòng, mỗi nhíp giam giữ đúng 1 nguyên tử đơn lẻ.",
-    "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
-    ]
+    "text": "About this site"
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#optical-tweezers",
-    "href": "note/future/neutralatomtrap.html#optical-tweezers",
-    "title": "Neutral Atom Trap",
+    "objectID": "file/index.html",
+    "href": "file/index.html",
+    "title": "Bài báo nghiên cứu",
     "section": "",
-    "text": "Nhíp quang học. Chiếu một chùm laser hội tự cực mạnh có tần số \\omega_L lệch đỏ xa tần số cộng hưởng quang học \\omega_0 của nguyên tử (\\Delta = \\omega_L - \\omega_0 &lt; 0). Điện trường của tia laser cảm ứng một moment lưỡng cực điện lên đám mây electron, tạo ra thế năng dịch chuyển AC Stark hút nguyên tử về đúng tâm tiêu điểm có cường độ ánh sáng cực đại:\n\nU_{\\text{dip}}(\\mathbf{r}) = -\\frac{1}{2}\\alpha(\\omega_L)\\vert{}\\mathbf{E}(\\mathbf{r})\\vert{}^2 \\propto \\frac{I(\\mathbf{r})}{\\Delta}",
+    "text": "THƯ VIỆN · QUANTUM COMPUTATION\n\n\n\nNhững công trình nền tảng và bài báo chọn lọc về biến đổi Fourier lượng tử, ước lượng pha và điện toán lượng tử chịu lỗi. Mỗi mục có bản PDF lưu trong thư mục tài liệu, kèm nguồn xuất bản để tiện tra cứu và trích dẫn.",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#structure",
-    "href": "note/future/neutralatomtrap.html#structure",
-    "title": "Neutral Atom Trap",
+    "objectID": "file/index.html#biến-đổi-fourier-lượng-tử",
+    "href": "file/index.html#biến-đổi-fourier-lượng-tử",
+    "title": "Bài báo nghiên cứu",
+    "section": "Biến đổi Fourier lượng tử",
+    "text": "Biến đổi Fourier lượng tử\n\n\nQFT1996 · Physical Review Letters\n\n\nSemiclassical Fourier Transform for Quantum Computation\nRobert B. Griffiths và Chi-Sheng Niu trình bày cách thực hiện biến đổi Fourier theo kiểu bán cổ điển, thay các cổng hai qubit bằng phép đo, điều khiển cổ điển và các cổng một qubit. Đây là một ý tưởng quan trọng để đơn giản hóa mạch lượng tử trong các thuật toán như Shor [1].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQFT · T GATES2020 · npj Quantum Information\n\n\nApproximate Quantum Fourier Transform with O(n \\log(n)) T Gates\nYunseong Nam, Yuan Su và Dmitri Maslov đề xuất cách giảm số cổng T của QFT xấp xỉ xuống O(n \\log n), sử dụng phép đo, feedforward và trạng thái gradient pha có thể tái sử dụng [2].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#ước-lượng-pha-và-trị-riêng",
+    "href": "file/index.html#ước-lượng-pha-và-trị-riêng",
+    "title": "Bài báo nghiên cứu",
+    "section": "Ước lượng pha và trị riêng",
+    "text": "Ước lượng pha và trị riêng\n\n\nQPE · NISQ2024 · Physical Review A\n\n\nAn Iterative Method to Improve the Precision of Quantum Phase Estimation Algorithm\nJunxu Li xây dựng phương pháp QPE lặp với các khoảng thời gian tiến hóa khác nhau để tăng độ chính xác của ước lượng pha, kể cả khi số qubit phụ trợ bị giới hạn [3].\n\nĐọc PDF DOI ↗ arXiv ↗\n\n\n\n\n\nQPE · FAULT-TOLERANT2023 · Quantum\n\n\nSimultaneous Estimation of Multiple Eigenvalues with Short-Depth Quantum Circuit on Early Fault-Tolerant Quantum Computers\nZhiyan Ding và Lin Lin giới thiệu phương pháp MM-QCELS để ước lượng đồng thời nhiều trị riêng bằng các mạch lượng tử độ sâu ngắn, hướng tới các máy tính lượng tử chịu lỗi thế hệ đầu [4].\n\nĐọc PDF DOI ↗ arXiv ↗",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#sách-nền-tảng",
+    "href": "file/index.html#sách-nền-tảng",
+    "title": "Bài báo nghiên cứu",
+    "section": "Sách nền tảng",
+    "text": "Sách nền tảng\n\n\nSÁCH THAM KHẢO2010 · Cambridge University Press\n\n\nQuantum Computation and Quantum Information\nGiáo trình kinh điển của Michael A. Nielsen và Isaac L. Chuang, bản kỷ niệm 10 năm; nền tảng cho các ghi chú về điện toán lượng tử trên trang này [5].\n\nĐọc PDF",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "file/index.html#tài-liệu-tham-khảo",
+    "href": "file/index.html#tài-liệu-tham-khảo",
+    "title": "Bài báo nghiên cứu",
+    "section": "Tài liệu tham khảo",
+    "text": "Tài liệu tham khảo\n\n\n[1] R. B. Griffiths and C.-S. Niu, “Semiclassical fourier transform for quantum computation,” Physical Review Letters, vol. 76, no. 17, pp. 3228–3231, 1996, doi: 10.1103/PhysRevLett.76.3228.\n\n\n[2] Y. Nam, Y. Su, and D. Maslov, “Approximate quantum fourier transform with O(n \\log(n)) t gates,” npj Quantum Information, vol. 6, p. 26, 2020, doi: 10.1038/s41534-020-0257-5.\n\n\n[3] J. Li, “An iterative method to improve the precision of quantum phase estimation algorithm,” Physical Review A, vol. 109, no. 3, p. 032606, 2024, doi: 10.1103/PhysRevA.109.032606.\n\n\n[4] Z. Ding and L. Lin, “Simultaneous estimation of multiple eigenvalues with short-depth quantum circuit on early fault-tolerant quantum computers,” Quantum, vol. 7, p. 1136, 2023, doi: 10.22331/q-2023-10-11-1136.\n\n\n[5] M. A. Nielsen and I. L. Chuang, Quantum computation and quantum information, 10th Anniversary. Cambridge: Cambridge University Press, 2010.",
+    "crumbs": [
+      "Bài báo nghiên cứu",
+      "Bài báo nghiên cứu"
+    ]
+  },
+  {
+    "objectID": "note/future/dressedstate.html#sự-tách-mức-rabi",
+    "href": "note/future/dressedstate.html#sự-tách-mức-rabi",
+    "title": "Dressed State",
+    "section": "Sự tách mức Rabi",
+    "text": "Sự tách mức Rabi\nKhi chưa liên kết mạnh, bạn có hai bare state:\n\n\\vert g, n + 1\\rangle : atom đang ở ground state, và có n + 1 photon xung quanh.\n\\vert e, n \\rangle : atom đang ở excited state, và có n photon xung quanh.\n\n\nNhưng khi strong coupling xảy ra, sự tương tác mạnh mẽ buộc hai trạng thái này phải trộn lẫn vào nhau. Theo nguyên lý quantum mechanics, hai mức năng lượng này bằng nhau khi tương tác sẽ đẩy nhau ra. Kết quả là chúng bị tách đôi thành hai mức năng lượng mới tinh:\n\n\n\n\nKhoảng cách năng lượng của hai mức mới này chính là h\\Omega (\\Omega là tần số Rabi)."
+  },
+  {
+    "objectID": "note/future/iontrap.html",
+    "href": "note/future/iontrap.html",
+    "title": "Ion Trap",
     "section": "",
-    "text": "Kiến trúc phần cứng.\n\n\n\n\n\n\nImportantSLM - Bộ điều biến ánh sáng không gian\n\n\n\n\n\n\n\n\n\n\n\n\nImportantAOD - Bộ làm lệch âm quang\n\n\n\n\n\n\nMục tiêu là tách một tia laser thành mảng 2D hoặc mảng 3D gồm hàng trăm đến hàng nghìn optical tweezers độc lập đặt trong buồng chân không siêu cao ở nhiệt độ phòng, mỗi nhíp giam giữ đúng 1 nguyên tử đơn lẻ.",
+    "text": "Khác với nguyên tử trung hòa dùng tia laser làm nhíp, ion mang điện tích dương (+e) nên chịu tác dụng trực tiếp của lực điện từ. Tuy nhiên, theo định lý Earnshaw, không thể giam giữ một hạt mang điện đứng yên trong không gian 3 chiều chỉ bằng điện trường tĩnh.\n\nCơ chế giam giữ (Bẫy Paul tuyến tính — Linear Paul Trap): Kết hợp hai loại điện trường trong buồng chân không siêu cao:\n\nĐiện trường cao tần RF (giữ theo phương ngang x, y): Đặt điện áp xoay chiều tần số vô tuyến V_0\\cos(\\Omega_{\\text{rf}} t) lên 4 thanh điện cực song song tạo ra một “thế giả” (pseudopotential) hình yên ngựa quay liên tục, ép các ion nằm dọc theo trục tâm không có trường.\nĐiện trường một chiều DC (giữ theo phương dọc z): Đặt điện áp dương tĩnh U_0 lên hai điện cực nắp ở hai đầu (endcaps) để chặn ion thoát ra theo chiều dọc.\n\nKiến trúc phần cứng: Vì các ion cùng mang điện tích dương nên lực đẩy tĩnh điện Coulomb buộc chúng tự sắp xếp thành một chuỗi tinh thể 1 chiều (1D ion crystal) thẳng hàng, cách nhau khoảng vài micromet. Các loại ion phổ biến gồm ^{40}\\text{Ca}^+, ^{171}\\text{Yb}^+, ^{9}\\text{Be}^+.",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#qubit-logic---vert-0-rangle-vert-1-rangle",
-    "href": "note/future/neutralatomtrap.html#qubit-logic---vert-0-rangle-vert-1-rangle",
-    "title": "Neutral Atom Trap",
-    "section": "Qubit logic - \\vert 0 \\rangle, \\vert 1 \\rangle",
-    "text": "Qubit logic - \\vert 0 \\rangle, \\vert 1 \\rangle\nĐược mã hóa trên hai trạng thái cơ bản siêu tinh tế (hyperfine ground states) có thời gian sống cực dài (lên tới hàng chục giây).",
+    "objectID": "note/future/iontrap.html#qubit-logic---0rangle-1rangle",
+    "href": "note/future/iontrap.html#qubit-logic---0rangle-1rangle",
+    "title": "Ion Trap",
+    "section": "Qubit logic - |0\\rangle, |1\\rangle",
+    "text": "Qubit logic - |0\\rangle, |1\\rangle\nQubit logic được lưu trên hai mức năng lượng điện tử nội tại có thời gian sống rất dài của mỗi ion. Có hai cách chọn chính:\n\nHyperfine qubit (như ^{171}\\text{Yb}^+): Hai mức siêu tinh tế ở lớp vỏ cơ bản cách nhau vài GHz (thời gian kết hợp lên tới hàng chục giây đến hàng phút).\nOptical qubit (như ^{40}\\text{Ca}^+): Một mức cơ bản và một mức kích thích giả bền (metastable) cách nhau tần số ánh sáng quang học (sống khoảng 1\\text{ s}).",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#rydberg---vert-r-rangle",
-    "href": "note/future/neutralatomtrap.html#rydberg---vert-r-rangle",
-    "title": "Neutral Atom Trap",
-    "section": "Rydberg - \\vert r \\rangle",
-    "text": "Rydberg - \\vert r \\rangle\nVì hai nguyên tử trạng thái cơ bản gần như không tương tác với nhau, hệ sử dụng thêm một mức kích thích bậc cao gọi là trạng thái Rydberg \\vert r \\rangle có số lượng tử chính rất lớn (n \\approx 50-100), tạo ra moment lưỡng cực điện khổng lồ gấp hàng nghìn trạng thái thường.",
+    "objectID": "note/future/iontrap.html#collective-phonon-bus---nrangle_textbus",
+    "href": "note/future/iontrap.html#collective-phonon-bus---nrangle_textbus",
+    "title": "Ion Trap",
+    "section": "Collective Phonon Bus - |n\\rangle_{\\text{bus}}",
+    "text": "Collective Phonon Bus - |n\\rangle_{\\text{bus}}\nVì các ion liên kết với nhau bằng lực đẩy Coulomb như các quả cầu nối bằng lò xo, toàn bộ chuỗi N ion có các mode dao động tập thể lượng tử hóa. Mode có tần số thấp nhất — mode khối tâm (Center-of-Mass, COM), nơi cả chuỗi dao động qua lại như một khối cứng với tần số \\nu_z — được dùng làm bus truyền thông tin với các trạng thái Fock |n\\rangle_{\\text{bus}} (n = 0, 1, 2, \\dots).",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#hamiltonian",
-    "href": "note/future/neutralatomtrap.html#hamiltonian",
-    "title": "Neutral Atom Trap",
+    "objectID": "note/future/iontrap.html#hamiltonian",
+    "href": "note/future/iontrap.html#hamiltonian",
+    "title": "Ion Trap",
     "section": "Hamiltonian",
-    "text": "Hamiltonian\nVới mảng N nguyên tử đặt tại tọa độ \\mathbf{R}_i dưới tác dụng của các tia laser điều khiển bước chuyển \\vert{}1\\rangle \\leftrightarrow \\vert{}r\\rangle (tần số Rabi \\Omega_i, độ lệch cộng hưởng \\Delta_i), Hamiltonian của hệ có dạng:\n\nH = \\underbrace{\\sum_{i=1}^{N} \\frac{\\hbar}{2}\\left(\\Omega_i(t) e^{i\\phi_i(t)} \\vert{}r\\rangle_i\\langle 1\\vert{} + \\text{h.c.}\\right) - \\hbar\\Delta_i(t) \\vert{}r\\rangle_i\\langle r\\vert{}}_{\\text{Điều khiển đơn nguyên tử bằng laser}} + \\underbrace{\\sum_{i &lt; j} V_{ij} \\vert{}r\\rangle_i\\langle r\\vert{} \\otimes \\vert{}r\\rangle_j\\langle r\\vert{}}_{\\text{Tương tác lưỡng cực Rydberg}}\n\nTrong đó, thế năng tương tác van der Waals V_{ij} chỉ bật lên khi cả hai nguyên tử i và j cùng nằm ở trạng thái Rydberg \\vert{}r\\rangle:\n\nV_{ij} = \\frac{C_6}{\\vert{}\\mathbf{R}_i - \\mathbf{R}_j\\vert{}^6}, \\qquad C_6 \\propto n^{11}",
+    "text": "Hamiltonian\nVới chuỗi N ion chịu tác dụng của các tia laser điều khiển tần số \\omega_L, pha \\phi_i và tần số Rabi \\Omega_i, trong giới hạn Lamb–Dicke (\\eta = k_z z_0 \\ll 1, biên độ dao động của ion nhỏ hơn nhiều so với bước sóng laser), Hamiltonian toàn phần có dạng:\n\nH = \\underbrace{\\sum_{i=1}^{N} \\frac{\\hbar\\omega_0}{2}\\sigma_z^{(i)} + \\hbar\\nu_z \\hat{a}^\\dagger \\hat{a}}_{\\text{Internal energy \\& COM oscillation}} + \\underbrace{\\sum_{i=1}^{N} \\frac{\\hbar\\Omega_i}{2}\\left(\\sigma_+^{(i)} e^{i[\\eta(\\hat{a}+\\hat{a}^\\dagger) - (\\omega_L - \\omega_0)t + \\phi_i]} + \\text{h.c.}\\right)}_{\\text{Laser--ion interaction}}\n\nKhai triển số hạng mũ theo tham số nhỏ \\eta cho ra 3 tần số cộng hưởng cốt lõi:\n\nSóng mang (Carrier — \\omega_L = \\omega_0): Chỉ lật trạng thái điện tử của ion, giữ nguyên số phonon: H_{\\text{car}} = \\frac{\\hbar\\Omega}{2}\\left(\\sigma_+ e^{i\\phi} + \\sigma_- e^{-i\\phi}\\right)\nDải biên đỏ (Red sideband — \\omega_L = \\omega_0 - \\nu_z): Hấp thụ photon đi kèm hủy 1 phonon — chính là Hamiltonian Jaynes–Cummings: H_{\\text{red}} = \\frac{\\hbar\\eta\\Omega}{2}\\left(\\hat{a}\\sigma_+ e^{i\\phi} + \\hat{a}^\\dagger\\sigma_- e^{-i\\phi}\\right)\nDải biên xanh (Blue sideband — \\omega_L = \\omega_0 + \\nu_z): Hấp thụ photon đi kèm sinh 1 phonon — Anti-Jaynes–Cummings: H_{\\text{blue}} = \\frac{\\hbar\\eta\\Omega}{2}\\left(\\hat{a}^\\dagger\\sigma_+ e^{i\\phi} + \\hat{a}\\sigma_- e^{-i\\phi}\\right)",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#inital-states---vert-0-rangleotimes-n",
-    "href": "note/future/neutralatomtrap.html#inital-states---vert-0-rangleotimes-n",
-    "title": "Neutral Atom Trap",
-    "section": "Inital states - \\vert 0 \\rangle^{\\otimes N}",
-    "text": "Inital states - \\vert 0 \\rangle^{\\otimes N}\n\nLàm lạnh và nạp bẫy ngẫu nhiên: Đám mâm nguyên tử được làm lạnh bằng bẫy từ-quang (MOT) xuống nhiệt độ vào micro-Kelvin rồi nạp vào mảng nhíp quang học. Nhờ cơ chế va chạm hỗ trợ ánh sáng (light-assisted collisions), nếu có 2 nguyên tử rơi và cùng 1 một nhíp, cả hai sẽ bị đẩy văng ra ngoài, đảm bảo mỗi bẫy chỉ chứa 0 hoặc 1 nguyên tử (xác suất đầy khoảng 50%).\nSắp xếp loại bỏ khuyết tật: Chụp ảnh nhanh để biết ô trap nào trống, sau đó dùng một tia laser di động gắp các nguyên tử từ vùng dự trữ lấp đầy các ô trống, tạo thành một mảng qubit hoàn chỉnh không khuyết tật.\nOptical Pumping: Chiếu xung laser phân cực chuẩn để dồn toàn bộ dân số nguyên tử về đúng trạng thái cơ bản \\vert 0\\rangle^{\\otimes N}.",
+    "objectID": "note/future/iontrap.html#initial-states---0rangleotimes-n-otimes-0rangle_textbus",
+    "href": "note/future/iontrap.html#initial-states---0rangleotimes-n-otimes-0rangle_textbus",
+    "title": "Ion Trap",
+    "section": "Initial states - |0\\rangle^{\\otimes N} \\otimes |0\\rangle_{\\text{bus}}",
+    "text": "Initial states - |0\\rangle^{\\otimes N} \\otimes |0\\rangle_{\\text{bus}}\n\nLàm lạnh Doppler & Làm lạnh dải biên (Sideband Cooling): Đầu tiên dùng laser làm lạnh Doppler để giảm nhiệt độ chuỗi ion xuống mức mili-Kelvin. Sau đó chiếu liên tục laser vào dải biên đỏ (\\omega_0 - \\nu_z): mỗi lần ion hấp thụ photon sẽ mất đi 1 phonon rồi phát xạ tự phát về lại mức cơ bản, rút cạn năng lượng dao động đưa cả chuỗi ion về đúng trạng thái cơ bản |0\\rangle_{\\text{bus}} (&gt;99\\% xác suất không còn phonon).\nBơm quang học (Optical Pumping): Chiếu xung laser phân cực chuẩn để dồn toàn bộ trạng thái điện tử của từng ion về mức |0\\rangle^{\\otimes N}.",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#single-qubit---r_x-r_y-r_z",
-    "href": "note/future/neutralatomtrap.html#single-qubit---r_x-r_y-r_z",
-    "title": "Neutral Atom Trap",
+    "objectID": "note/future/iontrap.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/iontrap.html#single-qubit---r_x-r_y-r_z",
+    "title": "Ion Trap",
     "section": "Single Qubit - R_x, R_y, R_z",
-    "text": "Single Qubit - R_x, R_y, R_z\nvì \\vert 0 \\rangle và \\vert 1 \\rangle đều thuộc lớp bỏ cơ bản nên chuyển mức lưỡng cực điện trực tiếp bị cấm. Người ta thực hiện các phép quay đơn qubit bằng chuyển mức Raman hai photon, tức là, chiếu đồng thời hai tia laser lệch cộng hưởng qua một mức trung gian ảo \\vert e \\rangle sao chao hiệu hai tần số của hai tia đúng bằng \\omega_{hf}.\n\nĐiều chỉnh độ rộng xung Raman cho ra các cổng quay R_x(\\theta) và R_y(\\theta) trên từng nguyên tử riêng lẻ.\nChiếu thêm một tia laser lệch cộng hưởng cục bộ gây dịch mức AC Stark lên riêng trạng thái \\vert 1 \\rangle (hoặc dịch pha sóng mang của xung Raman) để thực hiện cổng R_z(\\phi).",
+    "text": "Single Qubit - R_x, R_y, R_z\n\nR_x(\\theta) và R_y(\\theta): Hội tụ một tia laser (hoặc cặp tia Raman) vào riêng một ion thứ i và chỉnh tần số đúng bằng sóng mang (\\omega_L = \\omega_0). Điều khiển độ rộng xung t và pha quang học \\phi cho phép thực hiện trực tiếp các phép quay R_x(\\theta) và R_y(\\theta) trên ion đó mà hoàn toàn không làm rung chuỗi ion.\nR_z(\\phi): Thực hiện bằng dịch chuyển AC Stark cục bộ hoặc dịch pha tham chiếu của bộ điều khiển laser (virtual Z-gate).",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#qubit-gate---rydberg-blockade---jaksch-protocol",
-    "href": "note/future/neutralatomtrap.html#qubit-gate---rydberg-blockade---jaksch-protocol",
-    "title": "Neutral Atom Trap",
-    "section": "2-qubit gate - Rydberg blockade - Jaksch protocol",
-    "text": "2-qubit gate - Rydberg blockade - Jaksch protocol\nNếu ion trap dùng bus phonon (mục 7.6), và optical cavity QED dùng photon trong hốc (mục 7.5) làm cầu nối, thì nguyên tử trung hòa dùng hiệu ứng Phong tỏa Rydberg - Rydberg blockade trực tiếp trong không gian tự do:\n\nNguyên lý phong tỏa: Xác định bán kính phong tỏa R_b = (C_6 / \\hbar\\Omega)^{1/6} sao cho khi hai nguyên tử điều khiển (C) và mục tiêu (T) nằm ở khoảng cách R &lt; R_b, năng lượng tương tác V_{ij} \\gg \\hbar\\Omega. Khi đó, mức năng lượng đôi \\vert{}rr\\rangle bị đẩy vọt lên cao, hoàn toàn lệch khỏi tần số cộng hưởng của laser. Hệ quả: nếu nguyên tử C đã ở trạng thái \\vert{}r\\rangle, nguyên tử T không thể hấp thụ photon để nhảy lên \\vert{}r\\rangle được nữa.\nChuỗi 3 xung \\pi - 2\\pi - \\pi: Chiếu các xung laser cộng hưởng trên bước chuyển \\vert{}1\\rangle \\leftrightarrow \\vert{}r\\rangle (tạo phép quay U(\\theta) = \\cos\\frac{\\theta}{2}I - i\\sin\\frac{\\theta}{2}\\sigma_x, còn trạng thái \\vert{}0\\rangle hoàn toàn đứng ngoài cuộc do lệch tần số siêu tinh tế):Xung \\pi lên Control (C): Chuyển \\vert{}1\\rangle_C \\to -i\\vert{}r\\rangle_C.\n(1). Xung 2\\pi lên Target (T): Nếu C ở \\vert{}0\\rangle_C, T thực hiện trọn vẹn một vòng quay 2\\pi (\\vert{}1\\rangle_T \\to -i\\vert{}r\\rangle_T \\to -\\vert{}1\\rangle_T) và nhận thêm dấu trừ. Ngược lại, nếu C đang ở \\vert{}r\\rangle_C, hiệu ứng phong tỏa Rydberg khóa chặt T, khiến xung 2\\pi không có tác dụng gì. (2). Xung \\pi lên Control (C): Đưa trạng thái Rydberg của C quay về mức cơ bản (-i\\vert{}r\\rangle_C \\to (-i)(-i)\\vert{}1\\rangle_C = -\\vert{}1\\rangle_C).\n\nToàn bộ 4 trạng thái cơ sở biến đổi qua 3 bước như sau:\n\n\\begin{aligned} \\vert{}00\\rangle &\\xrightarrow{\\pi_C} \\vert{}00\\rangle \\xrightarrow{2\\pi_T} \\vert{}00\\rangle \\xrightarrow{\\pi_C} +\\vert{}00\\rangle \\\\ \\vert{}01\\rangle &\\xrightarrow{\\pi_C} \\vert{}01\\rangle \\xrightarrow{2\\pi_T} -\\vert{}01\\rangle \\xrightarrow{\\pi_C} -\\vert{}01\\rangle \\\\ \\vert{}10\\rangle &\\xrightarrow{\\pi_C} -i\\vert{}r0\\rangle \\xrightarrow{2\\pi_T} -i\\vert{}r0\\rangle \\xrightarrow{\\pi_C} -\\vert{}10\\rangle \\\\ \\vert{}11\\rangle &\\xrightarrow{\\pi_C} -i\\vert{}r1\\rangle \\xrightarrow{2\\pi_T \\text{ (bị phong tỏa)}} -i\\vert{}r1\\rangle \\xrightarrow{\\pi_C} -\\vert{}11\\rangle \\end{aligned}\n\nPhép biến đổi thu được là ma trận đường chéo \\text{diag}(1, -1, -1, -1); chỉ cần áp thêm cổng quay pha đơn qubit Z \\otimes Z là thu được chính xác cổng CZ (và kẹp giữa hai cổng Hadamard trên T để thành CNOT). Đặc biệt, nhờ khả năng di chuyển nhíp quang học (coherent atom transport), hai qubit ở xa nhau trên mảng có thể được kéo lại gần nhau trong bán kính R_b để chạy cổng rồi tách ra, tạo ra kết nối động (all-to-all dynamic connectivity).",
+    "objectID": "note/future/iontrap.html#qubit-gate---ciraczoller-mølmersørensen-gates",
+    "href": "note/future/iontrap.html#qubit-gate---ciraczoller-mølmersørensen-gates",
+    "title": "Ion Trap",
+    "section": "2-qubit gate - Cirac–Zoller & Mølmer–Sørensen Gates",
+    "text": "2-qubit gate - Cirac–Zoller & Mølmer–Sørensen Gates\nNếu nguyên tử trung hòa dùng tương tác lưỡng cực trực tiếp trong không gian, thì bẫy ion dùng phonon trong mode COM làm cầu nối trung gian:\n\nCơ chế Cirac–Zoller (1995 — chuỗi 3 xung dải biên đỏ): Cần sử dụng thêm một mức năng lượng phụ trợ |\\text{aux}\\rangle trên ion mục tiêu (T) với tần số chuyển mức |1\\rangle_T \\leftrightarrow |\\text{aux}\\rangle_T bằng \\omega_{\\text{aux}}:\n\nXung \\pi dải biên đỏ (\\omega_0 - \\nu_z) lên Control (C): Chuyển trạng thái kích thích điện tử của C thành 1 phonon trong bus dao động (|1\\rangle_C |0\\rangle_{\\text{bus}} \\to -i|0\\rangle_C |1\\rangle_{\\text{bus}}).\nXung 2\\pi dải biên đỏ (\\omega_{\\text{aux}} - \\nu_z) lên Target (T): Xung này chỉ kích hoạt chuyển mức |1\\rangle_T |1\\rangle_{\\text{bus}} \\to |\\text{aux}\\rangle_T |0\\rangle_{\\text{bus}} \\to -|1\\rangle_T |1\\rangle_{\\text{bus}} nếu cả hai điều kiện cùng thỏa mãn: T ở mức |1\\rangle_T và bus đang có 1 phonon.\nXung \\pi dải biên đỏ (\\omega_0 - \\nu_z) lên Control (C): Thu hồi phonon từ bus quay trở lại thành trạng thái điện tử của C.\n\n\nToàn bộ 4 trạng thái cơ sở biến đổi qua 3 bước như sau:\n\n\\begin{aligned}\n|00\\rangle|0\\rangle_{\\text{bus}} &\\xrightarrow{\\pi_C} |00\\rangle|0\\rangle_{\\text{bus}} \\xrightarrow{2\\pi_T} |00\\rangle|0\\rangle_{\\text{bus}} \\xrightarrow{\\pi_C} +|00\\rangle|0\\rangle_{\\text{bus}} \\\\\n|01\\rangle|0\\rangle_{\\text{bus}} &\\xrightarrow{\\pi_C} |01\\rangle|0\\rangle_{\\text{bus}} \\xrightarrow{2\\pi_T \\text{ (no phonon)}} |01\\rangle|0\\rangle_{\\text{bus}} \\xrightarrow{\\pi_C} +|01\\rangle|0\\rangle_{\\text{bus}} \\\\\n|10\\rangle|0\\rangle_{\\text{bus}} &\\xrightarrow{\\pi_C} -i|00\\rangle|1\\rangle_{\\text{bus}} \\xrightarrow{2\\pi_T \\text{ (off-resonant with } |0\\rangle_T\\text{)}} -i|00\\rangle|1\\rangle_{\\text{bus}} \\xrightarrow{\\pi_C} -|10\\rangle|0\\rangle_{\\text{bus}} \\\\\n|11\\rangle|0\\rangle_{\\text{bus}} &\\xrightarrow{\\pi_C} -i|01\\rangle|1\\rangle_{\\text{bus}} \\xrightarrow{2\\pi_T} +i|01\\rangle|1\\rangle_{\\text{bus}} \\xrightarrow{\\pi_C} +|11\\rangle|0\\rangle_{\\text{bus}}\n\\end{aligned}\n\nKết quả thu được là \\text{diag}(1, 1, -1, 1), chính là cổng CZ sau khi áp thêm một cổng Z đơn qubit lên C (và kẹp giữa hai cổng Hadamard trên T để thành CNOT).\n\nCải tiến hiện đại — Cổng Mølmer–Sørensen (1999): Chiếu đồng thời cả hai laser dải biên đỏ và dải biên xanh (\\omega_0 \\pm \\nu_z) lên hai ion bất kỳ. Hai đường dịch chuyển giao thoa tạo ra tương tác hiệu dụng dạng Ising \\sigma_x^{(i)}\\sigma_x^{(j)} qua các phonon ảo mà không đòi hỏi chuỗi ion phải được làm lạnh tuyệt đối về |0\\rangle_{\\text{bus}}.",
     "crumbs": [
-      "Future",
-      "Neutral Atom Trap"
+      "Quantum Computer",
+      "Ion Trap"
     ]
   },
   {
-    "objectID": "note/future/neutralatomtrap.html#measurement",
-    "href": "note/future/neutralatomtrap.html#measurement",
-    "title": "Neutral Atom Trap",
+    "objectID": "note/future/iontrap.html#measurement",
+    "href": "note/future/iontrap.html#measurement",
+    "title": "Ion Trap",
     "section": "Measurement",
-    "text": "Measurement\n\nXung đẩy chọn lọc trạng thái (Push-out pulse): Chiếu một xung laser cộng hưởng mạnh chỉ tác động lên mức \\vert{}1\\rangle (không làm lạnh) để truyền động lượng và thổi bay các nguyên tử đang ở trạng thái \\vert{}1\\rangle ra khỏi nhíp quang học, trong khi các nguyên tử ở \\vert{}0\\rangle vẫn nằm yên trong bẫy.\nChụp ảnh huỳnh quang (Fluorescence imaging): Bật chùm tia làm lạnh chụp ảnh mảng bẫy bằng camera EMCCD/sCMOS. Ô bẫy nào còn đốm sáng tương ứng với kết quả \\vert{}0\\rangle, ô nào tối tương ứng với \\vert{}1\\rangle. (Các hệ thống thế hệ mới dùng đọc không phá hủy — non-destructive state-selective fluorescence — để giữ lại nguyên tử cho các chu kỳ tính toán tiếp theo).",
+    "text": "Measurement\nSử dụng kỹ thuật bỏ giá electron (Electron Shelving):\n\nChiếu một tia laser cộng hưởng với một chuyển mức tuần hoàn (cycling transition) nối riêng mức |0\\rangle với một mức kích thích ngắn hạn |e\\rangle (mức |1\\rangle bị lệch cộng hưởng rất xa nên “nằm yên trên giá”).\nNếu ion ở |0\\rangle, nó hấp thụ và phát xạ hàng triệu photon huỳnh quang mỗi giây; nếu ở |1\\rangle, nó hoàn toàn tối đen. Camera thu hình ảnh chuỗi ion cho phép đọc kết quả với độ trung thực &gt; 99.99\\% (cao nhất trong mọi nền tảng phần cứng lượng tử hiện nay).",
+    "crumbs": [
+      "Quantum Computer",
+      "Ion Trap"
+    ]
+  },
+  {
+    "objectID": "note/future/msgate.html",
+    "href": "note/future/msgate.html",
+    "title": "Mølmer–Sørensen gate",
+    "section": "",
+    "text": "Tại sao có thể nói là cổng Cirac-Zoller quá lỗi thời? Vì trong chính công thức của nó, tồn tại n, và với điều kiện n = 0 xuyên suốt quá trình (tức là chỉ cần một giao động nhiễu nhiệt nhỏ của môi trường cũng có thể khiến hệ bị hủy).",
     "crumbs": [
       "Future",
-      "Neutral Atom Trap"
+      "Mølmer–Sørensen gate"
+    ]
+  },
+  {
+    "objectID": "note/future/msgate.html#bước-1-chiếu-red-sideband-vào-ion-c",
+    "href": "note/future/msgate.html#bước-1-chiếu-red-sideband-vào-ion-c",
+    "title": "Mølmer–Sørensen gate",
+    "section": "Bước 1: Chiếu red sideband vào ion C",
+    "text": "Bước 1: Chiếu red sideband vào ion C\nBởi vì setup ban đầu của ion trap là mọi thứ đều không còn phonon, tức là chỉ có 1 trong 2 trường hợp sau đây khả dĩ:\n\nC = \\vert 00\\rangle \\to \\vert 00 \\rangle : laser đỏ không đủ để chiếu nó lên bất kỳ một mức năng lượng nào khác cả, bản thân nó cũng không có phonon nên không mượn được.\nC = \\vert 10\\rangle \\to \\vert 01 \\rangle : laser đỏ chiếu vào, nhưng mà thiếu năng lượng nên mượn tí năng lượng của phonon.\n\nHay cách biểu diễn theo tôi là:\n\n(0, T)^0 \\to (0, T)^0 \\\\\n(1, T)^0 \\to (0, T)^1",
+    "crumbs": [
+      "Future",
+      "Mølmer–Sørensen gate"
+    ]
+  },
+  {
+    "objectID": "note/future/msgate.html#bước-2-chiếu-laser-omega_aux-omega_z-vào-ion-t",
+    "href": "note/future/msgate.html#bước-2-chiếu-laser-omega_aux-omega_z-vào-ion-t",
+    "title": "Mølmer–Sørensen gate",
+    "section": "Bước 2: Chiếu laser \\omega_{aux} + \\omega_Z vào ion T",
+    "text": "Bước 2: Chiếu laser \\omega_{aux} + \\omega_Z vào ion T\n4 trạng khả dĩ của ion T.\n\nT = \\vert 00 \\rangle \\to \\vert 00\\rangle : không có gì xảy ra.\nT = \\vert 01 \\rangle \\to \\vert 01\\rangle : không có gì xảy ra.\nT = \\vert 10 \\rangle \\to \\vert 10\\rangle : không có gì xảy ra.\nT = \\vert 11 \\rangle \\to \\vert 20\\rangle : do đủ năng lượng yêu cầu, nên hệ nhảy sang.\n\nHay biểu diễn theo cách của tôi là:\n\n(0, 0)^0 \\to (0, 0)^0 \\to (0, 0)^0 \\\\\n(1, 0)^0 \\to (0, 0)^1 \\to (0, 0)^1 \\\\\n(0, 1)^0 \\to (0, 0)^0 \\to (0, 0)^0 \\\\\n(1, 1)^0 \\to (0, 1)^1 \\to (0, 2)^0\n\nMà khi chiếu laser một thời gian đủ lâu, ion T sẽ đi hết một vòng và đảo pha:\n\n\\vert 11 \\rangle \\to \\vert 20 \\rangle \\to -\\vert 11 \\rangle",
+    "crumbs": [
+      "Future",
+      "Mølmer–Sørensen gate"
+    ]
+  },
+  {
+    "objectID": "note/future/msgate.html#bước-3-chiếu-laser-ngược-lại-ion-c-trả-về-như-cũ.",
+    "href": "note/future/msgate.html#bước-3-chiếu-laser-ngược-lại-ion-c-trả-về-như-cũ.",
+    "title": "Mølmer–Sørensen gate",
+    "section": "Bước 3: Chiếu laser ngược lại ion C, trả về như cũ.",
+    "text": "Bước 3: Chiếu laser ngược lại ion C, trả về như cũ.\n\n(0, 0)^0 \\to (0, 0)^0 \\\\\n(0, 0)^1 \\to (1, 0)^0 \\\\\n(0, 0)^0 \\to (0, 0)^0 \\\\\n-(0, 1)^1 \\to -(1, 1)^0",
+    "crumbs": [
+      "Future",
+      "Mølmer–Sørensen gate"
+    ]
+  },
+  {
+    "objectID": "note/future/msgate.html#truth-table",
+    "href": "note/future/msgate.html#truth-table",
+    "title": "Mølmer–Sørensen gate",
+    "section": "Truth table",
+    "text": "Truth table\n\n\n\n\n\n\n\n\n\n\nTrạng thái ban đầu \\vert CT \\rangle\nBước 1 - Bắn C\nBước 2 - Bắn T\nBước 3 - Bắn C\nTrạng thái cuối cùng\n\n\n\n\n\\vert 00 \\rangle\n(0, 0)^0\n(0, 0)^0\n(0, 0)^0\n\\vert 00 \\rangle\n\n\n\\vert 01 \\rangle\n(0, 1)^0\n(0, 1)^0\n(0, 1)^0\n\\vert 01 \\rangle\n\n\n\\vert 10 \\rangle\n(0, 0)^1\n(0, 0)^1\n(1, 0)^0\n\\vert 10 \\rangle\n\n\n\\vert 11 \\rangle\n(0, 1)^1\n(0, 2)^0 \\to -(0,1)^1\n-(1, 1)^0\n-\\vert 11 \\rangle",
+    "crumbs": [
+      "Future",
+      "Mølmer–Sørensen gate"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html",
+    "href": "note/future/opticalcavityQED.html",
+    "title": "Optical Cavity QED",
+    "section": "",
+    "text": "Trong không gian tự do, tiết diện tán xạ giữa một photon đơn lẻ và một nguyên tử đơn lẻ quá nhỏ để chúng tương tác hiệu quả. Giải pháp của Optical Cavity QED là ép ánh sáng và vật chất vào chung một không gian cực hẹp để photon dội qua lại hàng chục nghìn lần xuyên qua nguyên tử trước khi thoát ra ngoài.\n\nCơ chế giam giữ ánh sáng (Hốc cộng hưởng Fabry–Pérot): Đặt hai chiếc gương lõm siêu phản xạ (R &gt; 99.999\\%) đối diện nhau ở khoảng cách L (từ vài chục micromet đến vài milimet). Khoảng không gian giữa hai gương tạo thành một hốc quang học chỉ cho phép các sóng dừng điện từ có tần số cộng hưởng rời rạc \\omega_c = m\\frac{\\pi c}{L} tồn tại, với thể tích mode hiệu dụng V_{\\text{mode}} cực nhỏ.\nCơ chế giam giữ nguyên tử: Một nguyên tử trung hòa đơn lẻ (như ^{133}\\text{Cs} hoặc ^{85}\\text{Rb}) được làm lạnh và giữ cố định tại bụng sóng của trường đứng bên trong hốc bằng một chùm tia bẫy lưỡng cực quang học (optical dipole trap) chiếu ngang qua khe hở giữa hai gương. (Trong các hệ thống trạng thái rắn hiện đại, hốc gương được thay bằng hốc tinh thể quang tử nanomet khắc trên kim cương chứa tâm khuyết tật \\text{SiV}/\\text{SnV}).\nChế độ liên kết mạnh (Strong Coupling): Vì điện trường chân không của một photon tỉ lệ nghịch với căn bậc hai thể tích mode (E_0 = \\sqrt{\\frac{\\hbar\\omega_c}{2\\epsilon_0 V_{\\text{mode}}}}), thể tích V_{\\text{mode}} siêu nhỏ đẩy hằng số tương tác lưỡng cực nguyên tử–photon g = \\frac{\\mathbf{d}\\cdot\\mathbf{E}_0}{\\hbar} vượt qua cả tốc độ rò photon khỏi gương (\\kappa) lẫn tốc độ phát xạ tự phát của nguyên tử (\\gamma), đạt độ hợp tác (cooperativity) cao:\n\n\nC = \\frac{2g^2}{\\kappa\\gamma} \\gg 1",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#qubit-logic---hrangle-vrangle-0rangle_a-1rangle_a",
+    "href": "note/future/opticalcavityQED.html#qubit-logic---hrangle-vrangle-0rangle_a-1rangle_a",
+    "title": "Optical Cavity QED",
+    "section": "Qubit logic - |H\\rangle, |V\\rangle & |0\\rangle_a, |1\\rangle_a",
+    "text": "Qubit logic - |H\\rangle, |V\\rangle & |0\\rangle_a, |1\\rangle_a\nKhác với bẫy ion hay nguyên tử trung hòa chỉ lưu qubit trên vật chất, Cavity QED có tính đối ngẫu tự nhiên cho phép dùng một trong hai thành phần làm qubit và thành phần còn lại làm môi trường trung gian:\n\nMã hóa trên Photon (cách tiếp cận chính trong Mục 7.5 của Nielsen & Chuang): Qubit là các photon đơn lẻ (mã hóa bằng phân cực ngang/dọc |H\\rangle \\equiv |0\\rangle_p,\\; |V\\rangle \\equiv |1\\rangle_p hoặc trạng thái số hạt), còn nguyên tử trong hốc đóng vai trò môi trường phi tuyến nhân tạo.\nMã hóa trên Nguyên tử (kiến trúc mạng lượng tử): Qubit lưu trên hai mức cơ bản siêu tinh tế của nguyên tử (|0\\rangle_a, |1\\rangle_a), còn trường photon trong hốc đóng vai trò bus truyền tương tác.",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#dressed-states-anharmonicity",
+    "href": "note/future/opticalcavityQED.html#dressed-states-anharmonicity",
+    "title": "Optical Cavity QED",
+    "section": "Dressed States & Anharmonicity",
+    "text": "Dressed States & Anharmonicity\nTại điều kiện cộng hưởng (\\omega_c = \\omega_a = \\omega), sự lai hóa giữa nguyên tử và trường điện từ hốc tạo ra các trạng thái mặc áo (dressed states / polariton) |n, \\pm\\rangle = \\frac{|n, g\\rangle \\pm |n-1, e\\rangle}{\\sqrt{2}} với phổ năng lượng phi điều hòa:\n\nE_0 = 0, \\qquad E_{n,\\pm} = n\\hbar\\omega \\pm \\hbar g\\sqrt{n} \\quad (n = 1, 2, \\dots)\n\nSự xuất hiện của thừa số \\sqrt{n} phá vỡ tính cách đều của thang năng lượng dao động tử điều hòa, tạo ra tính phi tuyến ở cấp độ 1 photon (tách đỉnh Rabi chân không \\omega \\pm g và hiệu ứng phong tỏa photon).",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#hamiltonian",
+    "href": "note/future/opticalcavityQED.html#hamiltonian",
+    "title": "Optical Cavity QED",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nXét một bước chuyển mức điện tử |g\\rangle \\leftrightarrow |e\\rangle (tần số \\omega_a) của nguyên tử tương tác với một mode đơn lẻ \\hat{a} của hốc (tần số \\omega_c). Trong phép gần đúng sóng quay (RWA), hệ được mô tả bởi Hamiltonian Jaynes–Cummings:\n\nH_{\\text{JC}} = \\underbrace{\\hbar\\omega_c \\hat{a}^\\dagger \\hat{a} + \\hbar\\omega_a |e\\rangle\\langle e|}_{\\text{Free cavity \\& atom energy}} + \\underbrace{\\hbar g\\left(\\hat{a}|e\\rangle\\langle g| + \\hat{a}^\\dagger |g\\rangle\\langle e|\\right)}_{\\text{Atom--cavity quantum exchange}}",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#initial-states---0rangle_textcav-otimes-0rangle_a",
+    "href": "note/future/opticalcavityQED.html#initial-states---0rangle_textcav-otimes-0rangle_a",
+    "title": "Optical Cavity QED",
+    "section": "Initial states - |0\\rangle_{\\text{cav}} \\otimes |0\\rangle_a",
+    "text": "Initial states - |0\\rangle_{\\text{cav}} \\otimes |0\\rangle_a\n\nKhởi tạo hốc chân không (|0\\rangle_{\\text{cav}}): Ở tần số quang học (\\omega_c/2\\pi \\sim 10^{14}\\text{ Hz}), năng lượng một photon lớn hơn nhiều lần nhiễu nhiệt (\\hbar\\omega_c \\gg k_B T), nên hốc tự động nằm sẵn ở trạng thái chân không |0\\rangle_{\\text{cav}} ngay cả ở nhiệt độ phòng.\nKhởi tạo nguyên tử và photon: Nguyên tử bên trong hốc được bơm quang học về trạng thái cơ bản |g\\rangle (hoặc |0\\rangle_a). Các qubit photon đầu vào được tạo ra từ các nguồn phát đơn photon định hướng hoặc chuyển đổi trực tiếp từ một nguyên tử khác bằng kỹ thuật đoạn nhiệt vSTIRAP.",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/opticalcavityQED.html#single-qubit---r_x-r_y-r_z",
+    "title": "Optical Cavity QED",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\n\nTrên qubit photon:\n\nR_z(\\phi): Dùng bản trễ pha lưỡng chiết (bản phần tư sóng QWP hoặc tế bào quang điện Pockels cell) làm trễ pha thành phần |V\\rangle so với |H\\rangle.\nR_x(\\theta), R_y(\\theta): Ghép hai bản nửa sóng (HWPs) liên tiếp đặt nghiêng hai góc \\alpha_1, \\alpha_2 để thực hiện phép quay thuần túy R_y(-4(\\alpha_2-\\alpha_1)) trên mặt phẳng phân cực.\n\nTrên qubit nguyên tử: Chiếu các xung laser Raman hai photon hoặc xung vi sóng từ phía hông hốc để thực hiện R_x(\\theta), R_y(\\theta) trên hai mức siêu tinh tế, kết hợp dịch chuyển AC Stark (hoặc cổng Z ảo) cho R_z(\\phi).",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#qubit-gate---conditional-phase-shift-duankimble-protocol",
+    "href": "note/future/opticalcavityQED.html#qubit-gate---conditional-phase-shift-duankimble-protocol",
+    "title": "Optical Cavity QED",
+    "section": "2-qubit gate - Conditional Phase Shift & Duan–Kimble Protocol",
+    "text": "2-qubit gate - Conditional Phase Shift & Duan–Kimble Protocol\nTùy theo cách mã hóa qubit, cổng 2-qubit trong Cavity QED vận hành theo một trong hai cơ chế kinh điển:\n\nCổng CZ giữa 2 photon (Thí nghiệm Turchette 1995 — Mục 7.5): Hai xung photon (điều khiển và mục tiêu) được dẫn vào hốc chứa sẵn một nguyên tử. Sự có mặt của photon điều khiển làm dịch chuyển AC Stark / bão hòa bước chuyển mức của nguyên tử, khiến chiết suất hiệu dụng (tần số cộng hưởng) của hốc bị lệch đi; hệ quả là photon mục tiêu nhận một góc dịch pha có điều kiện chỉ khi photon điều khiển có mặt.\nCổng CZ nguyên tử–photon (Giao thức phản xạ Duan–Kimble, 2004): Sử dụng hốc một phía (gương sau phản xạ 100\\%, gương trước phản xạ một phần với tốc độ thoát \\kappa) cùng bộ tách chùm tia phân cực (PBS) điều hướng thành phần |0\\rangle_p (|H\\rangle) đi vòng ra gương phụ bên ngoài và dẫn |1\\rangle_p (|V\\rangle) thẳng vào hốc. Nguyên tử có mức |0\\rangle_a \\leftrightarrow |e\\rangle cộng hưởng với hốc (\\omega_c) và mức |1\\rangle_a lệch cộng hưởng xa. Hệ số phản xạ phức tại tần số \\omega_p = \\omega_c = \\omega_{0e} là:\n\n\nr(\\omega_c) = \\frac{-\\frac{\\kappa}{2} + \\frac{2g^2}{\\gamma}}{+\\frac{\\kappa}{2} + \\frac{2g^2}{\\gamma}} = \\frac{2C - 1}{2C + 1}\n\n\nNếu nguyên tử ở |0\\rangle_a (C \\gg 1): Tần số hốc bị tách đôi sẵn thành \\omega_c \\pm g. Photon |1\\rangle_p tần số \\omega_c bị lệch cộng hưởng nên bật ngược ngay từ mặt gương ngoài: r(\\omega_c) \\to +1 (pha 0).\nNếu nguyên tử ở |1\\rangle_a (g_{\\text{eff}} = 0): Nguyên tử tách rời khỏi hốc. Photon |1\\rangle_p khớp đúng tần số hốc trống \\omega_c, chui vào trong hốc cộng hưởng rồi thoát ra với độ trễ pha \\pi: r(\\omega_c) = \\frac{-\\kappa/2}{+\\kappa/2} = -1.\n\nPhép phản xạ này thực hiện trực tiếp cổng CZ giữa nguyên tử và photon (kẹp giữa hai cổng Hadamard — bản nửa sóng HWP 22.5^\\circ trên photon hoặc xung laser \\pi/2 trên nguyên tử — để thành CNOT). Nếu cho cùng một photon phản xạ lần lượt qua hai hốc chứa hai nguyên tử A và B, photon đóng vai trò “sứ giả” thực hiện cổng CZ giữa hai nguyên tử ở xa nhau.",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/opticalcavityQED.html#measurement",
+    "href": "note/future/opticalcavityQED.html#measurement",
+    "title": "Optical Cavity QED",
+    "section": "Measurement",
+    "text": "Measurement\n\nĐo qubit photon: Các photon thoát ra khỏi hốc đi qua bộ tách chùm tia phân cực (PBS) và kích hoạt các đầu thu đơn photon hiệu suất cao (APD hoặc siêu dẫn SNSPD).\nĐo qubit nguyên tử (Cavity-assisted non-destructive readout): Chiếu một chùm laser thăm dò yếu cộng hưởng với hốc và đo tỉ lệ ánh sáng truyền qua/phản xạ. Vì trạng thái |0\\rangle_a làm tách đỉnh cộng hưởng của hốc (chặn ánh sáng truyền qua) còn |1\\rangle_a giữ nguyên đỉnh cộng hưởng (cho ánh sáng đi qua), ta đọc được trạng thái của nguyên tử với độ trung thực cao mà không làm nóng hay đẩy nguyên tử khỏi bẫy.",
+    "crumbs": [
+      "Quantum Computer",
+      "Optical Cavity QED"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html",
+    "href": "note/future/quantumdots.html",
+    "title": "Semiconductor Quantum Dots",
+    "section": "",
+    "text": "Thay vì dùng bẫy chân không cồng kềnh, chấm lượng tử bán dẫn (được phác thảo ở Mục 7.8 trong Nielsen & Chuang qua đề xuất Loss–DiVincenzo) tận dụng công nghệ chế tạo vi mạch bán dẫn (như \\text{GaAs}/\\text{AlGaAs} hoặc Silicon đồng vị tinh khiết ^{28}\\text{Si}/\\text{SiGe}, \\text{SiMOS}) để nhốt từng electron đơn lẻ vào các “nguyên tử nhân tạo” có kích thước vài chục nanomet.\n\nCơ chế giam giữ 3 chiều:\n\nGiam giữ theo phương thẳng đứng (z): Tại mặt phân cách giữa hai lớp bán dẫn khác nhau hình thành một giếng thế năng lượng tử mỏng, ép các electron chỉ được chuyển động trong một mặt phẳng gọi là khí electron 2 chiều (2DEG).\nGiam giữ trong mặt phẳng (x, y): Phủ lên bề mặt chip các điện cực cổng kim loại siêu nhỏ (gate electrodes) và đặt điện áp âm để đẩy bớt các electron xung quanh, cô lập đúng 1 electron đơn lẻ nằm gọn trong mỗi chấm lượng tử.\n\nMôi trường vận hành: Chip được đặt trong tủ lạnh pha loãng ở nhiệt độ 10\\text{--}100\\text{ mK} (riêng qubit spin trên silicon có thể vận hành ổn định ở mức “nóng” tới \\sim 1\\text{ K}) và đặt trong một từ trường tĩnh ngoài \\mathbf{B}_0 (\\sim 0.5\\text{--}2\\text{ T}) để tách rõ hai mức năng lượng spin qua hiệu ứng Zeeman.",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#qubit-logic---downarrowrangle-uparrowrangle",
+    "href": "note/future/quantumdots.html#qubit-logic---downarrowrangle-uparrowrangle",
+    "title": "Semiconductor Quantum Dots",
+    "section": "Qubit logic - |\\downarrow\\rangle, |\\uparrow\\rangle",
+    "text": "Qubit logic - |\\downarrow\\rangle, |\\uparrow\\rangle\nTheo mã hóa Loss–DiVincenzo, qubit được lưu trực tiếp trên spin nội tại (S = 1/2) của một electron đơn lẻ trong mỗi chấm lượng tử:\n\n|0\\rangle \\equiv |\\downarrow\\rangle, \\qquad |1\\rangle \\equiv |\\uparrow\\rangle\n\nHai trạng thái này cách nhau một năng lượng Zeeman \\hbar\\omega_Z = g^*\\mu_B B_0, tương ứng với tần số cộng hưởng Larmor nằm trong vùng vi sóng (\\omega_Z/2\\pi \\approx 10\\text{--}40\\text{ GHz}).",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#hamiltonian",
+    "href": "note/future/quantumdots.html#hamiltonian",
+    "title": "Semiconductor Quantum Dots",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nXét một mảng các chấm lượng tử lân cận chứa các electron đơn lẻ có năng lượng đẩy Coulomb tại chỗ U rất lớn và biên độ xuyên hầm t_{ij}(t) giữa hai chấm i, j. Trong giới hạn năng lượng thấp (t_{ij} \\ll U), biến đổi Schrieffer–Wolff đưa hệ về Hamiltonian trao đổi Heisenberg:\n\nH = \\underbrace{\\sum_{i} \\frac{1}{2} g_i^* \\mu_B \\mathbf{B}_i(t) \\cdot \\boldsymbol{\\sigma}_i}_{\\text{Single-spin Zeeman interaction}} + \\underbrace{\\sum_{\\langle i,j \\rangle} J_{ij}(t)\\, \\mathbf{S}_i \\cdot \\mathbf{S}_j}_{\\text{Inter-dot exchange interaction}}\n\nTrong đó \\mathbf{S}_i = \\frac{\\hbar}{2}\\boldsymbol{\\sigma}_i, còn hằng số tương tác trao đổi (exchange coupling) có dạng:\n\nJ_{ij}(t) \\approx \\frac{4\\,t_{ij}^2(t)}{U}\n\nĐiểm mấu chốt của kiến trúc này là chỉ cần thay đổi điện áp một chiều trên điện cực rào cản (barrier gate) nằm giữa hai chấm, ta có thể bật hoặc tắt tương tác J_{ij}(t) hoàn toàn bằng tín hiệu điện.",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#initial-states---0rangleotimes-n",
+    "href": "note/future/quantumdots.html#initial-states---0rangleotimes-n",
+    "title": "Semiconductor Quantum Dots",
+    "section": "Initial states - |0\\rangle^{\\otimes N}",
+    "text": "Initial states - |0\\rangle^{\\otimes N}\n\nLàm lạnh thụ động: Khi nhiệt độ đủ thấp (k_B T \\ll \\hbar\\omega_Z), các electron tự động hồi phục về trạng thái năng lượng thấp nhất |0\\rangle \\equiv |\\downarrow\\rangle.\nKhởi tạo bằng xuyên hầm chọn lọc spin (Elzerman initialization): Để khởi tạo nhanh và chính xác hơn, người ta chỉnh điện áp sao cho mức năng lượng Fermi của một bể electron (reservoir) đặt ngay bên cạnh nằm lọt vào giữa hai mức |0\\rangle và |1\\rangle của chấm lượng tử; khi đó chỉ có electron mang spin |0\\rangle mới được phép xuyên hầm đi vào chấm.",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/quantumdots.html#single-qubit---r_x-r_y-r_z",
+    "title": "Semiconductor Quantum Dots",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\n\nR_x(\\theta) và R_y(\\theta) — Cộng hưởng spin lưỡng cực điện (EDSR): Vì từ trường vi sóng rất khó hội tụ xuống kích thước vài chục nanomet để điều khiển từng spin riêng lẻ, các chip hiện đại đặt một vi nam châm (micromagnet) ngay trên bề mặt để tạo ra một gradien từ trường tĩnh mạnh. Khi chiếu xung điện áp vi sóng dao động lên điện cực cổng của một chấm, electron bên trong dao động nhẹ qua lại trong vùng gradien từ trường đó và cảm nhận một từ trường xoay chiều cục bộ ở tần số \\omega_Z, thực hiện các phép quay R_x(\\theta), R_y(\\theta) độc lập.\nR_z(\\phi): Đặt một xung điện áp một chiều ngắn để dịch nhẹ vị trí electron trong gradien từ trường, làm thay đổi tạm thời tần số Larmor \\omega_Z và tích lũy pha \\phi (hoặc dùng cổng Z ảo).",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#qubit-gate---heisenberg-exchange-sqrttextswap-cz",
+    "href": "note/future/quantumdots.html#qubit-gate---heisenberg-exchange-sqrttextswap-cz",
+    "title": "Semiconductor Quantum Dots",
+    "section": "2-qubit gate - Heisenberg Exchange (\\sqrt{\\text{SWAP}} & CZ)",
+    "text": "2-qubit gate - Heisenberg Exchange (\\sqrt{\\text{SWAP}} & CZ)\nHạ thấp điện áp rào cản giữa hai chấm i, j trong thời gian ngắn \\tau (\\sim 10\\text{--}50\\text{ ns}) để hàm sóng của hai electron chồng lấn lên nhau và bật tương tác trao đổi H_{\\text{ex}} = J(t)\\,\\mathbf{S}_i \\cdot \\mathbf{S}_j:\n\nCổng \\sqrt{\\text{SWAP}} (Đề xuất Loss–DiVincenzo gốc, 1998): Khi hai chấm có tần số Zeeman bằng nhau, toán tử tiến hóa U(\\tau) = \\exp\\left(-\\frac{i}{\\hbar}\\int_0^\\tau J(t)\\,dt\\,\\mathbf{S}_i\\cdot\\mathbf{S}_j\\right) tại diện tích xung \\int_0^\\tau J(t)\\,dt = \\frac{\\pi\\hbar}{2} tạo ra chính xác cổng \\sqrt{\\text{SWAP}} (hoán đổi một nửa trạng thái giữa hai spin). Kết hợp hai cổng \\sqrt{\\text{SWAP}} với các phép quay 1-qubit cho ra cổng CNOT:\n\n\n\\text{CNOT} = (I \\otimes H)\\, e^{i\\frac{\\pi}{2} Z_1} e^{-i\\frac{\\pi}{2} Z_2} \\sqrt{\\text{SWAP}}\\, e^{i\\pi Z_1} \\sqrt{\\text{SWAP}}\\, (I \\otimes H)\n\n\nCổng CZ trực tiếp: Khi hai chấm có độ lệch tần số Zeeman lớn (\\Delta E_Z \\gg J, nhờ từ trường vi nam châm), số hạng lật spin ngang của \\mathbf{S}_i \\cdot \\mathbf{S}_j bị triệt tiêu, chỉ còn lại tương tác Ising dọc J(t) S_z^{(i)} S_z^{(j)} đẩy lệch năng lượng các trạng thái đối song (|01\\rangle, |10\\rangle) so với song song (|00\\rangle, |11\\rangle), thực hiện thẳng cổng CZ.",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/quantumdots.html#measurement",
+    "href": "note/future/quantumdots.html#measurement",
+    "title": "Semiconductor Quantum Dots",
+    "section": "Measurement",
+    "text": "Measurement\nMômen từ của một electron đơn lẻ quá yếu để đo trực tiếp, nên hệ thống dùng kỹ thuật chuyển đổi spin sang điện tích (spin-to-charge conversion):\n\nĐọc Elzerman hoặc Phong tỏa spin Pauli (Pauli Spin Blockade):\n\nỞ cách đọc Elzerman, điện áp chấm được nâng lên để mức Fermi của bể điện tử nằm giữa |0\\rangle và |1\\rangle: nếu electron ở trạng thái kích thích |1\\rangle, nó lập tức xuyên hầm thoát ra bể (làm chấm mất đi 1 điện tích -e); nếu ở |0\\rangle, nó nằm yên trong chấm.\nỞ cơ chế phong tỏa Pauli, người ta ép electron từ chấm 1 nhảy sang chấm 2 đã có sẵn 1 electron: theo nguyên lý loại trừ Pauli, phép nhảy chỉ xảy ra nếu hai spin đối song (trạng thái singlet) và bị chặn đứng nếu hai spin song song (triplet).\n\nSự thay đổi điện tích dù chỉ 1 electron được phát hiện tức thì với độ nhạy cao thông qua độ dẫn điện của một transistor đơn electron (SET) đặt ngay sát bên cạnh.",
+    "crumbs": [
+      "Quantum Computer",
+      "Semiconductor Quantum Dots"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html",
+    "href": "note/future/superconducting.html",
+    "title": "Superconducting Qubits",
+    "section": "",
+    "text": "Khác với bẫy ion hay nguyên tử trung hòa dùng chân không và laser để cô lập từng nguyên tử tự nhiên, máy tính lượng tử mạch siêu dẫn khắc các mạch điện dao động vi sóng lên đế silicon hoặc sapphire bằng công nghệ quang khắc bán dẫn (kiến trúc Circuit QED).\n\nCơ chế triệt tiêu tiêu tán (Trạng thái siêu dẫn): Các dây dẫn được làm từ kim loại siêu dẫn (như Nhôm \\text{Al}, Niobi \\text{Nb}, hoặc Tantalum \\text{Ta}) và đặt trong tủ lạnh pha loãng (dilution refrigerator) làm lạnh xuống nhiệt độ 10\\text{--}20\\text{ mK} (thấp hơn rất nhiều so với nhiệt độ tới hạn siêu dẫn T_c \\sim 1.2\\text{ K} của Nhôm). Tại đây, các electron kết cặp thành cặp Cooper (Cooper pairs) ngưng tụ vào cùng một hàm sóng lượng tử vĩ mô, cho phép dòng điện chạy không điện trở và không sinh nhiệt.\nLinh kiện cốt lõi — Tiếp giáp Josephson (Josephson Junction): Một mạch dao động LC tuyến tính thông thường có các mức năng lượng cách đều nhau (\\hbar\\omega_r), khiến ta không thể kích thích riêng |0\\rangle \\leftrightarrow |1\\rangle mà không vô tình đẩy hệ lên |2\\rangle, |3\\rangle. Để tạo ra tính phi điều hòa (anharmonicity) như nguyên tử thật, người ta thay cuộn cảm tuyến tính bằng một tiếp giáp Josephson: hai lớp kim loại siêu dẫn kẹp giữa một lớp cách điện oxit mỏng cỡ 1\\text{--}2\\text{ nm} (\\text{Al}/\\text{AlO}_x/\\text{Al}). Hiệu ứng xuyên hầm lượng tử của các cặp Cooper biến tiếp giáp này thành một cuộn cảm phi tuyến không tổn hao (L_J).",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#qubit-logic---0rangle-1rangle",
+    "href": "note/future/superconducting.html#qubit-logic---0rangle-1rangle",
+    "title": "Superconducting Qubits",
+    "section": "Qubit logic - |0\\rangle, |1\\rangle",
+    "text": "Qubit logic - |0\\rangle, |1\\rangle\nKiến trúc chuẩn mực nhất hiện nay là Transmon Qubit (biến thể cải tiến của hộp cặp Cooper — Cooper-pair box): một tiếp giáp Josephson mắc song song với một tụ điện lớn C nhằm triệt tiêu độ nhạy với nhiễu điện tích môi trường (E_J / E_C \\gg 1).\nQubit logic |0\\rangle, |1\\rangle là hai trạng thái riêng năng lượng thấp nhất của mạch dao động phi điều hòa này, với tần số chuyển mức nằm trong vùng vi sóng \\omega_{01}/2\\pi \\approx 4\\text{--}6\\text{ GHz}. Nhờ tính phi tuyến của tiếp giáp Josephson, khoảng cách lên mức thứ hai bị lệch đi một lượng độ phi điều hòa \\alpha/2\\pi = (\\omega_{12} - \\omega_{01})/2\\pi \\approx -200\\text{ đến }-300\\text{ MHz}, đủ để cô lập không gian tính toán 2 chiều \\{|0\\rangle, |1\\rangle\\}.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#hamiltonian",
+    "href": "note/future/superconducting.html#hamiltonian",
+    "title": "Superconducting Qubits",
+    "section": "Hamiltonian",
+    "text": "Hamiltonian\nVới một qubit Transmon, biến số lượng tử hóa là số cặp Cooper dư thừa \\hat{n} trên đảo siêu dẫn và hiệu pha hàm sóng siêu dẫn \\hat{\\varphi} qua tiếp giáp ([\\hat{\\varphi}, \\hat{n}] = i):\n\nH_{\\text{Transmon}} = 4E_C(\\hat{n} - n_g)^2 - E_J\\cos\\hat{\\varphi}\n\n(trong đó E_C = \\frac{e^2}{2C_\\Sigma} là năng lượng tích điện và E_J = \\frac{\\hbar I_c}{2e} là năng lượng liên kết Josephson).\nKhai triển số hạng phi tuyến \\cos\\hat{\\varphi} \\approx 1 - \\frac{\\hat{\\varphi}^2}{2} + \\frac{\\hat{\\varphi}^4}{24} trong chế độ E_J \\gg E_C, hệ quy về dao động tử Duffing (tương tự thang năng lượng phi điều hòa trong Cavity QED):\n\nH_{\\text{Transmon}} \\approx \\hbar\\omega_{01}\\hat{b}^\\dagger\\hat{b} + \\frac{\\hbar\\alpha}{2}\\hat{b}^\\dagger\\hat{b}^\\dagger\\hat{b}\\hat{b}, \\qquad \\alpha \\approx -\\frac{E_C}{\\hbar}\n\nKhi ghép nhiều qubit với các đường truyền cộng hưởng vi sóng (resonator bus), toàn bộ chip được mô tả bởi Hamiltonian Jaynes–Cummings với các photon vi sóng trên chip.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#initial-states---0rangleotimes-n",
+    "href": "note/future/superconducting.html#initial-states---0rangleotimes-n",
+    "title": "Superconducting Qubits",
+    "section": "Initial states - |0\\rangle^{\\otimes N}",
+    "text": "Initial states - |0\\rangle^{\\otimes N}\n\nLàm lạnh thụ động (Thermalization): Ở tần số \\omega_{01}/2\\pi \\approx 5\\text{ GHz}, năng lượng chuyển mức tương đương nhiệt độ \\hbar\\omega_{01}/k_B \\approx 240\\text{ mK}. Khi tủ lạnh pha loãng giữ chip ở 15\\text{ mK}, xác suất kích thích nhiệt tuân theo phân bố Boltzmann e^{-\\hbar\\omega_{01}/k_B T} \\sim 10^{-7}, nghĩa là các qubit tự động rơi về trạng thái cơ bản |0\\rangle^{\\otimes N}.\nKhởi tạo chủ động (Active Reset): Để tăng tốc độ lặp giữa các lần chạy mà không phải chờ thời gian hồi phục tự nhiên T_1, hệ thống dùng xung vi sóng đẩy trạng thái dư |1\\rangle sang bộ cộng hưởng đọc (readout resonator) có tốc độ thoát năng lượng nhanh để xả thẳng xuống |0\\rangle.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#single-qubit---r_x-r_y-r_z",
+    "href": "note/future/superconducting.html#single-qubit---r_x-r_y-r_z",
+    "title": "Superconducting Qubits",
+    "section": "Single Qubit - R_x, R_y, R_z",
+    "text": "Single Qubit - R_x, R_y, R_z\n\nR_x(\\theta) và R_y(\\theta) — Xung vi sóng định hình (DRAG pulses): Một đường truyền đồng trục dẫn xung vi sóng có tần số sóng mang đúng bằng \\omega_{01} ghép điện dung vào qubit. Biên độ và độ rộng xung quyết định góc quay \\theta, trong khi pha của sóng mang vi sóng quyết định trục quay nằm trên mặt phẳng XY. Để tránh xung ngắn làm rò rỉ dân số lên mức |2\\rangle, người ta dùng kỹ thuật điều chế xung DRAG (Derivative Removal by Adiabatic Gate).\nR_z(\\phi) — Cổng Z ảo (Virtual Z-gate) hoặc Xung từ thông: Với các qubit tần số cố định, cổng R_z(\\phi) được thực hiện bằng cách dịch pha tham chiếu của bộ tạo xung vi sóng cho tất cả các cổng theo sau — tốn 0\\text{ ns} và có độ chính xác tuyệt đối. Với qubit dùng vòng DC SQUID (hai tiếp giáp mắc song song), có thể chiếu thêm xung dòng điện tạo từ trường cục bộ làm dịch tạm tần số \\omega_{01}(t) để tích lũy pha \\phi.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#qubit-gate---flux-tunable-cz-cross-resonance-gate",
+    "href": "note/future/superconducting.html#qubit-gate---flux-tunable-cz-cross-resonance-gate",
+    "title": "Superconducting Qubits",
+    "section": "2-qubit gate - Flux-Tunable CZ & Cross-Resonance Gate",
+    "text": "2-qubit gate - Flux-Tunable CZ & Cross-Resonance Gate\nCác qubit siêu dẫn trên chip thường xếp thành lưới 2D phẳng (kết nối lân cận gần) và thực hiện cổng 2-qubit trong khoảng 20\\text{--}100\\text{ ns} qua một trong hai kiến trúc:\n\nCổng CZ kích hoạt bằng từ thông (Flux-tunable CZ — kiến trúc Google): Dùng xung từ thông nhanh chỉnh tần số của một qubit sao cho trạng thái |11\\rangle cộng hưởng với trạng thái kích thích bậc hai |20\\rangle (hoặc |02\\rangle). Hai trạng thái lai hóa và đẩy mức nhau (avoided crossing); sau một chu kỳ dao động trọn vẹn, hệ quay về |11\\rangle nhưng nhận thêm pha \\pi (|11\\rangle \\to -|11\\rangle), tạo thành cổng CZ trực tiếp.\nCổng cộng hưởng chéo (Cross-Resonance Gate — kiến trúc IBM): Dùng cho các qubit tần số cố định ghép điện dung với nhau. Người ta chiếu một xung vi sóng vào qubit điều khiển (C) nhưng chỉnh tần số sóng mang bằng đúng tần số cộng hưởng của qubit mục tiêu (T) (\\omega_d = \\omega_T). Nhờ liên kết tĩnh và tính phi điều hòa của Transmon, qubit T chịu một Hamiltonian hiệu dụng dạng: H_{\\text{CR}} \\propto Z_C \\otimes X_T tạo thẳng cổng CNOT (sau khi bù thêm các cổng quay 1-qubit) mà không cần mạch điều khiển từ thông.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
+    ]
+  },
+  {
+    "objectID": "note/future/superconducting.html#measurement",
+    "href": "note/future/superconducting.html#measurement",
+    "title": "Superconducting Qubits",
+    "section": "Measurement",
+    "text": "Measurement\nCơ chế này giống hệt phép đọc không phá hủy trong Cavity QED (Đọc tán sắc Circuit QED):\n\nMỗi qubit được ghép lệch cộng hưởng xa (|\\Delta| = |\\omega_{01} - \\omega_r| \\gg g) với một bộ cộng hưởng đọc vi sóng riêng biệt có tần số \\omega_r.\nTrong chế độ tán sắc (dispersive regime), trạng thái |0\\rangle hay |1\\rangle của qubit kéo tần số cộng hưởng của resonator lệch đi một lượng \\pm\\chi (\\chi \\approx g^2/\\Delta).\nHệ thống gửi một xung thăm dò vi sóng yếu ở tần số \\omega_r và đo độ lệch pha của tín hiệu phản xạ/truyền qua bằng các bộ khuếch đại siêu dẫn nhiễu cực thấp (TWPA / HEMT), phân biệt được trạng thái |0\\rangle và |1\\rangle trong vài trăm nano-giây.",
+    "crumbs": [
+      "Quantum Computer",
+      "Superconducting Qubits"
     ]
   },
   {

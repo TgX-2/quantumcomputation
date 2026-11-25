@@ -1,0 +1,106 @@
+---
+title: "Topological Qubits"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Tất cả các qubit vật lý thông thường (ion, nguyên tử trung hòa, transmon) đều lưu thông tin **cục bộ** tại một hạt hoặc một nút mạch, nên bất kỳ nhiễu điện từ cục bộ nào chạm vào đều gây lật bit hoặc mất pha. **Máy tính lượng tử tôpô** khắc phục tận gốc vấn đề này bằng cách mã hóa thông tin **phi cục bộ (non-local)** vào các tính chất hình học toàn cục của những giả hạt đặc biệt trong không gian 2 chiều gọi là **anyon phi Abel (non-Abelian anyons)**.
+
+* **Cơ chế tạo ra Anyon (Dây nano lai Siêu dẫn – Bán dẫn):** Nền tảng thực nghiệm chủ đạo hiện nay sử dụng các sợi dây nano bán dẫn 1 chiều có tương tác spin–quỹ đạo mạnh (như $\text{InAs}$ hoặc $\text{InSb}$) đặt tiếp xúc trực tiếp với một lớp kim loại siêu dẫn sóng $s$ (như Nhôm $\text{Al}$), làm lạnh xuống **$10\text{--}20\text{ mK}$** trong tủ lạnh pha loãng và đặt dưới một từ trường ngoài dọc trục dây.
+* **Trạng thái siêu dẫn tôpô (Mô hình chuỗi Kitaev):** Khi vượt qua ngưỡng từ trường tới hạn, dây nano chuyển sang pha siêu dẫn tôpô. Tại hai đầu mút đối diện của sợi dây xuất hiện hai trạng thái kích thích ràng buộc có năng lượng bằng $0$ gọi là **Mode không Majorana (Majorana Zero Modes — MZMs)** ($\gamma_1$ và $\gamma_2$). *(Một hướng vật lý thứ hai là dùng khí electron 2 chiều siêu sạch trong hiệu ứng Hall lượng tử phân số ở mức lấp đầy $\nu = 5/2$ hoặc $\nu = 12/5$).*
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|0_L\rangle, |1_L\rangle$
+
+Về bản chất toán học, một electron (fermion Dirac thông thường) có thể được tách đôi thành hai "nửa hạt" Majorana tách rời nhau trong không gian trên một đoạn dây dài $L$:
+
+$$
+\hat{c} = \frac{1}{2}(\gamma_1 + i\gamma_2), \qquad \hat{c}^\dagger = \frac{1}{2}(\gamma_1 - i\gamma_2)
+$$
+
+trong đó các toán tử Majorana tự liên hợp ($\gamma_i^\dagger = \gamma_i$) và thỏa mãn đại số Clifford $\{\gamma_i, \gamma_j\} = 2\delta_{ij}$. Trạng thái chiếm giữ của fermion này ($|0\rangle$ trống hoặc $|1\rangle$ có 1 electron) được xác định bởi toán tử **tính chẵn lẻ fermion (fermion parity)** phi cục bộ:
+
+$$
+\hat{P} = i\gamma_1\gamma_2 = 1 - 2\hat{c}^\dagger\hat{c} \in \{+1, -1\}
+$$
+
+Do **định luật siêu chọn lọc tính chẵn lẻ fermion (fermion parity superselection)**, không thể tạo chồng chập giữa trạng thái số hạt chẵn và lẻ trên cùng một cặp Majorana. Vì vậy, **1 qubit tôpô đòi hỏi 4 mode Majorana** ($\gamma_1, \gamma_2, \gamma_3, \gamma_4$, tức 2 sợi dây nano nối qua một cầu siêu dẫn tạo thành kiến trúc **Tetron**) với tổng tính chẵn lẻ cố định (ví dụ chẵn: $\gamma_1\gamma_2\gamma_3\gamma_4 = -1$):
+
+$$
+|0_L\rangle \equiv |0\rangle_{12}|0\rangle_{34}, \qquad |1_L\rangle \equiv |1\rangle_{12}|1\rangle_{34}
+$$
+
+## Hamiltonian
+
+Mô hình lý tưởng của **chuỗi Kitaev 1 chiều** gồm $N$ nút mạng (với biên độ nhảy nút $t$, thế hóa $\mu$ và cặp siêu dẫn $\Delta$) có dạng:
+
+$$
+H_{\text{Kitaev}} = -t \sum_{j=1}^{N-1} (\hat{c}_j^\dagger \hat{c}_{j+1} + \text{h.c.}) - \mu \sum_{j=1}^{N} \hat{c}_j^\dagger \hat{c}_j + \sum_{j=1}^{N-1} (\Delta \hat{c}_j \hat{c}_{j+1} + \text{h.c.})
+$$
+
+Tại điểm tôpô ($\mu = 0, \Delta = t$), khi viết lại qua các toán tử Majorana $\hat{c}_j = \frac{1}{2}(\gamma_{2j-1} + i\gamma_{2j})$, hai mode biên $\gamma_1$ và $\gamma_{2N}$ **biến mất hoàn toàn khỏi Hamiltonian**, tạo ra không gian trạng thái cơ bản suy biến tại đúng mức năng lượng $E = 0$.
+
+Với chiều dài dây hữu hạn $L$, sự chồng lấn hàm sóng giữa hai đầu mút tạo ra Hamiltonian hiệu dụng dư:
+
+$$
+H_{\text{eff}} \propto i e^{-L/\xi}\,\gamma_1\gamma_2
+$$
+
+*(trong đó $\xi$ là độ dài kết hợp siêu dẫn)*. Mọi nhiễu cục bộ tác động lên một đầu dây đều không thể phân biệt hay làm lệch năng lượng giữa $|0_L\rangle$ và $|1_L\rangle$ với sai số giảm **theo hàm mũ $e^{-L/\xi}$** — đây chính là **bảo vệ tôpô (topological protection)**.
+
+# 3. Quantum Computation
+
+## Initial states - $|0_L\rangle^{\otimes N}$
+
+* Làm lạnh chip xuống vùng nhiệt độ milikelvin ($k_B T \ll \Delta_{\text{top}}$, với $\Delta_{\text{top}}$ là khe năng lượng siêu dẫn tôpô) để hệ rơi về đa tạp trạng thái cơ bản suy biến.
+* Thực hiện phép đo tính chẵn lẻ ban đầu lên từng cặp $(\gamma_1, \gamma_2)$ và $(\gamma_3, \gamma_4)$ (thông qua ghép điện dung với chấm lượng tử) để chiếu hệ về trạng thái khởi tạo chuẩn $|0_L\rangle^{\otimes N}$.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+Thay vì chiếu xung laser hay vi sóng căn chỉnh thời gian liên tục (vốn luôn mang sai số tương tự), các cổng lượng tử tôpô được thực hiện bằng cách **hoán đổi vị trí vật lý của hai anyon trong không gian 2D** — gọi là **phép tết bím (braiding)** (hoặc mô phỏng tương đương thông qua chuỗi phép đo tính chẵn lẻ trên các nhánh chữ T — *measurement-only braiding*):
+
+* Khi đưa $\gamma_i$ và $\gamma_{i+1}$ đi vòng qua nhau để đổi chỗ một cách đoạn nhiệt, trạng thái toàn cục của hệ biến đổi theo toán tử tết bím:
+
+$$
+B_{i,i+1} = \exp\left(\frac{\pi}{4}\gamma_i\gamma_{i+1}\right) = \frac{1 + \gamma_i\gamma_{i+1}}{\sqrt{2}}
+$$
+
+* **Cổng pha $S = R_z(\pi/2)$:** Thu được khi hoán đổi cặp $(\gamma_1, \gamma_2)$.
+* **Cổng $\sqrt{X} = R_x(\pi/2)$:** Thu được khi hoán đổi cặp $(\gamma_2, \gamma_3)$ (tổ hợp các phép quay quanh trục $X$ và $Z$ cho ra cổng Hadamard $H$).
+* **Tính bất biến hình học:** Vì góc quay $\pi/2$ chỉ phụ thuộc vào **số lần hai đường thế giới (worldlines) thắt nút quanh nhau** trong không-thời gian $(2+1)$ chiều chứ không phụ thuộc vào vận tốc hay đường đi chi tiết, các rung động nhỏ trên quỹ đạo di chuyển không gây ra bất kỳ sai số cổng nào.
+
+## 2-qubit gate - Non-Abelian Braiding & Joint Parity Measurement
+
+* **Cổng CNOT / CZ:** Được thực hiện bằng cách ghép 2 qubit Tetron thành một cụm **Hexon** (6 hoặc 8 mode Majorana) và thực hiện chuỗi phép tết bím / đo tính chẵn lẻ chung giữa các mode Majorana thuộc hai qubit khác nhau.
+* **Điểm nút lý thuyết (Ising anyons vs. Fibonacci anyons):** Phép tết bím các mode Majorana (thuộc lớp *Ising anyons*) chỉ sinh ra được **nhóm Clifford** ($H, S, \text{CNOT}$) — chưa đủ để tính toán lượng tử phổ quát (có thể mô phỏng hiệu quả bằng máy tính cổ điển theo định lý Gottesman–Knill). Để có cổng $T = R_z(\pi/4)$ nhằm đạt tính phổ quát, kiến trúc Majorana buộc phải đưa hai mode Majorana lại gần nhau trong thời gian ngắn để phá vỡ bảo vệ tôpô (tạo pha động lực học) kết hợp **chưng cất trạng thái ma thuật (magic state distillation)**. Ngược lại, **Fibonacci anyons** (dự đoán xuất hiện ở trạng thái Hall lượng tử phân số $\nu = 12/5$) có khả năng thực hiện tập cổng phổ quát thuần túy chỉ bằng phép tết bím.
+
+## Measurement
+
+* Đưa hai mode Majorana của một cặp lại gần nhau để **hợp nhất (fuse)** chúng, đưa mức năng lượng tách khỏi $0$ và bộc lộ kênh hợp nhất:
+
+$$
+\gamma \times \gamma = I + \psi
+$$
+
+  * **Kênh chân không ($I$):** Tính chẵn lẻ chẵn ($|0\rangle$), không xuất hiện thêm điện tích.
+  * **Kênh fermion ($\psi$):** Tính chẵn lẻ lẻ ($|1\rangle$), xuất hiện thêm đúng $1$ điện tích electron tự do.
+* Dùng một **chấm lượng tử (quantum dot)** ghép sát đầu dây và đọc độ dịch điện dung lượng tử bằng phản xạ vi sóng (tương tự Circuit QED) để phân biệt trạng thái có hay không có electron dư này.
+
+# 4. Drawbacks
+
+* **Nhiễm độc giả hạt (Quasiparticle Poisoning):** Đây là kẻ thù số một của qubit Majorana. Nếu một electron đơn lẻ không bắt cặp từ môi trường bên ngoài xuyên hầm nhảy vào sợi dây nano, nó lập tức đảo ngược tính chẵn lẻ fermion ($\hat{P} \to -\hat{P}$), biến $|0_L\rangle$ thành $|1_L\rangle$ và phá vỡ hoàn toàn lớp bảo vệ tôpô.
+* **Khe năng lượng tôpô nhỏ và Nhiễu tạp chất tinh thể:** Khe năng lượng bảo vệ pha tôpô $\Delta_{\text{top}}$ trong các dây nano lai rất nhỏ ($\sim 50\text{--}100\text{ }\mu\text{eV}$, tương đương $\sim 0.5\text{--}1\text{ K}$), đòi hỏi nhiệt độ vận hành cực thấp và vật liệu siêu tinh khiết. Các khuyết tật nguyên tử ngẫu nhiên trong dây bán dẫn dễ tạo ra các **trạng thái ràng buộc Andreev tầm thường (trivial Andreev bound states)** có tín hiệu dẫn điện giống hệt Majorana nhưng không có thống kê tết bím phi Abel.
+* **Độ chín công nghệ thực nghiệm:** Trong khi nguyên tử trung hòa, bẫy ion và mạch siêu dẫn đã vận hành các bộ xử lý từ hàng chục đến hàng nghìn qubit thực tế, qubit tôpô vẫn đang ở giai đoạn chứng minh vật lý nền tảng (kiểm chứng phép đo tính chẵn lẻ đơn lẻ và chưa thực hiện được phép tết bím đa qubit hoàn chỉnh).
+
+# Misc.
+
+Máy tính lượng tử tôpô đại diện cho một hướng tiếp cận đối nghịch về mặt triết lý với toàn bộ các kiến trúc phần cứng còn lại: thay vì chấp nhận qubit vật lý nhiễu và dùng các mã sửa lỗi lượng tử chủ động đắt đỏ (tốn hàng nghìn qubit vật lý cho một qubit logic) ở tầng phần mềm, nó đẩy cơ chế bảo vệ thông tin xuống ngay **tầng vật lý vật liệu và hình học tôpô**. Dù hành trình chế tạo phần cứng tôpô còn dài, các ý tưởng toán học của nó (như **mã bề mặt Kitaev — Toric/Surface Code**) đã trở thành nền tảng cốt lõi cho lý thuyết sửa lỗi lượng tử trên mọi nền tảng khác.

@@ -1,0 +1,95 @@
+---
+title: "Optical Cavity QED"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Trong không gian tự do, tiết diện tán xạ giữa một photon đơn lẻ và một nguyên tử đơn lẻ quá nhỏ để chúng tương tác hiệu quả. Giải pháp của **Optical Cavity QED** là **ép ánh sáng và vật chất vào chung một không gian cực hẹp** để photon dội qua lại hàng chục nghìn lần xuyên qua nguyên tử trước khi thoát ra ngoài.
+
+* **Cơ chế giam giữ ánh sáng (Hốc cộng hưởng Fabry–Pérot):** Đặt hai chiếc gương lõm siêu phản xạ ($R > 99.999\%$) đối diện nhau ở khoảng cách $L$ (từ vài chục micromet đến vài milimet). Khoảng không gian giữa hai gương tạo thành một hốc quang học chỉ cho phép các sóng dừng điện từ có tần số cộng hưởng rời rạc $\omega_c = m\frac{\pi c}{L}$ tồn tại, với thể tích mode hiệu dụng $V_{\text{mode}}$ cực nhỏ.
+* **Cơ chế giam giữ nguyên tử:** Một nguyên tử trung hòa đơn lẻ (như $^{133}\text{Cs}$ hoặc $^{85}\text{Rb}$) được làm lạnh và giữ cố định tại bụng sóng của trường đứng bên trong hốc bằng một chùm tia bẫy lưỡng cực quang học (*optical dipole trap*) chiếu ngang qua khe hở giữa hai gương. *(Trong các hệ thống trạng thái rắn hiện đại, hốc gương được thay bằng **hốc tinh thể quang tử nanomet** khắc trên kim cương chứa tâm khuyết tật $\text{SiV}/\text{SnV}$).*
+* **Chế độ liên kết mạnh (Strong Coupling):** Vì điện trường chân không của một photon tỉ lệ nghịch với căn bậc hai thể tích mode ($E_0 = \sqrt{\frac{\hbar\omega_c}{2\epsilon_0 V_{\text{mode}}}}$), thể tích $V_{\text{mode}}$ siêu nhỏ đẩy hằng số tương tác lưỡng cực nguyên tử–photon $g = \frac{\mathbf{d}\cdot\mathbf{E}_0}{\hbar}$ vượt qua cả tốc độ rò photon khỏi gương ($\kappa$) lẫn tốc độ phát xạ tự phát của nguyên tử ($\gamma$), đạt **độ hợp tác (cooperativity)** cao:
+
+$$
+C = \frac{2g^2}{\kappa\gamma} \gg 1
+$$
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|H\rangle, |V\rangle$ & $|0\rangle_a, |1\rangle_a$
+
+Khác với bẫy ion hay nguyên tử trung hòa chỉ lưu qubit trên vật chất, Cavity QED có tính đối ngẫu tự nhiên cho phép dùng một trong hai thành phần làm qubit và thành phần còn lại làm môi trường trung gian:
+
+* **Mã hóa trên Photon (cách tiếp cận chính trong Mục 7.5 của Nielsen & Chuang):** Qubit là các photon đơn lẻ (mã hóa bằng phân cực ngang/dọc $|H\rangle \equiv |0\rangle_p,\; |V\rangle \equiv |1\rangle_p$ hoặc trạng thái số hạt), còn nguyên tử trong hốc đóng vai trò **môi trường phi tuyến nhân tạo**.
+* **Mã hóa trên Nguyên tử (kiến trúc mạng lượng tử):** Qubit lưu trên hai mức cơ bản siêu tinh tế của nguyên tử ($|0\rangle_a, |1\rangle_a$), còn trường photon trong hốc đóng vai trò **bus truyền tương tác**.
+
+## Dressed States & Anharmonicity
+
+Tại điều kiện cộng hưởng ($\omega_c = \omega_a = \omega$), sự lai hóa giữa nguyên tử và trường điện từ hốc tạo ra các **trạng thái mặc áo (dressed states / polariton)** $|n, \pm\rangle = \frac{|n, g\rangle \pm |n-1, e\rangle}{\sqrt{2}}$ với phổ năng lượng phi điều hòa:
+
+$$
+E_0 = 0, \qquad E_{n,\pm} = n\hbar\omega \pm \hbar g\sqrt{n} \quad (n = 1, 2, \dots)
+$$
+
+Sự xuất hiện của thừa số $\sqrt{n}$ phá vỡ tính cách đều của thang năng lượng dao động tử điều hòa, tạo ra **tính phi tuyến ở cấp độ 1 photon** (tách đỉnh Rabi chân không $\omega \pm g$ và hiệu ứng phong tỏa photon).
+
+## Hamiltonian
+
+Xét một bước chuyển mức điện tử $|g\rangle \leftrightarrow |e\rangle$ (tần số $\omega_a$) của nguyên tử tương tác với một mode đơn lẻ $\hat{a}$ của hốc (tần số $\omega_c$). Trong phép gần đúng sóng quay (RWA), hệ được mô tả bởi **Hamiltonian Jaynes–Cummings**:
+
+$$
+H_{\text{JC}} = \underbrace{\hbar\omega_c \hat{a}^\dagger \hat{a} + \hbar\omega_a |e\rangle\langle e|}_{\text{Free cavity \& atom energy}} + \underbrace{\hbar g\left(\hat{a}|e\rangle\langle g| + \hat{a}^\dagger |g\rangle\langle e|\right)}_{\text{Atom--cavity quantum exchange}}
+$$
+
+# 3. Quantum Computation
+
+## Initial states - $|0\rangle_{\text{cav}} \otimes |0\rangle_a$
+
+* **Khởi tạo hốc chân không ($|0\rangle_{\text{cav}}$):** Ở tần số quang học ($\omega_c/2\pi \sim 10^{14}\text{ Hz}$), năng lượng một photon lớn hơn nhiều lần nhiễu nhiệt ($\hbar\omega_c \gg k_B T$), nên hốc tự động nằm sẵn ở trạng thái chân không $|0\rangle_{\text{cav}}$ ngay cả ở nhiệt độ phòng.
+* **Khởi tạo nguyên tử và photon:** Nguyên tử bên trong hốc được bơm quang học về trạng thái cơ bản $|g\rangle$ (hoặc $|0\rangle_a$). Các qubit photon đầu vào được tạo ra từ các nguồn phát đơn photon định hướng hoặc chuyển đổi trực tiếp từ một nguyên tử khác bằng kỹ thuật đoạn nhiệt **vSTIRAP**.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+* **Trên qubit photon:**
+  * **$R_z(\phi)$:** Dùng **bản trễ pha lưỡng chiết** (bản phần tư sóng QWP hoặc tế bào quang điện Pockels cell) làm trễ pha thành phần $|V\rangle$ so với $|H\rangle$.
+  * **$R_x(\theta), R_y(\theta)$:** Ghép **hai bản nửa sóng (HWPs)** liên tiếp đặt nghiêng hai góc $\alpha_1, \alpha_2$ để thực hiện phép quay thuần túy $R_y(-4(\alpha_2-\alpha_1))$ trên mặt phẳng phân cực.
+* **Trên qubit nguyên tử:** Chiếu các xung laser Raman hai photon hoặc xung vi sóng từ phía hông hốc để thực hiện $R_x(\theta), R_y(\theta)$ trên hai mức siêu tinh tế, kết hợp dịch chuyển AC Stark (hoặc cổng $Z$ ảo) cho $R_z(\phi)$.
+
+## 2-qubit gate - Conditional Phase Shift & Duan–Kimble Protocol
+
+Tùy theo cách mã hóa qubit, cổng 2-qubit trong Cavity QED vận hành theo một trong hai cơ chế kinh điển:
+
+* **Cổng CZ giữa 2 photon (Thí nghiệm Turchette 1995 — Mục 7.5):** Hai xung photon (điều khiển và mục tiêu) được dẫn vào hốc chứa sẵn một nguyên tử. Sự có mặt của photon điều khiển làm dịch chuyển AC Stark / bão hòa bước chuyển mức của nguyên tử, khiến chiết suất hiệu dụng (tần số cộng hưởng) của hốc bị lệch đi; hệ quả là photon mục tiêu nhận một góc dịch pha có điều kiện chỉ khi photon điều khiển có mặt.
+* **Cổng CZ nguyên tử–photon (Giao thức phản xạ Duan–Kimble, 2004):** Sử dụng hốc một phía (gương sau phản xạ $100\%$, gương trước phản xạ một phần với tốc độ thoát $\kappa$) cùng bộ tách chùm tia phân cực (PBS) điều hướng thành phần $|0\rangle_p$ ($|H\rangle$) đi vòng ra gương phụ bên ngoài và dẫn $|1\rangle_p$ ($|V\rangle$) thẳng vào hốc. Nguyên tử có mức $|0\rangle_a \leftrightarrow |e\rangle$ cộng hưởng với hốc ($\omega_c$) và mức $|1\rangle_a$ lệch cộng hưởng xa. Hệ số phản xạ phức tại tần số $\omega_p = \omega_c = \omega_{0e}$ là:
+
+$$
+r(\omega_c) = \frac{-\frac{\kappa}{2} + \frac{2g^2}{\gamma}}{+\frac{\kappa}{2} + \frac{2g^2}{\gamma}} = \frac{2C - 1}{2C + 1}
+$$
+
+  * **Nếu nguyên tử ở $|0\rangle_a$ ($C \gg 1$):** Tần số hốc bị tách đôi sẵn thành $\omega_c \pm g$. Photon $|1\rangle_p$ tần số $\omega_c$ bị lệch cộng hưởng nên bật ngược ngay từ mặt gương ngoài: $r(\omega_c) \to +1$ (pha $0$).
+  * **Nếu nguyên tử ở $|1\rangle_a$ ($g_{\text{eff}} = 0$):** Nguyên tử tách rời khỏi hốc. Photon $|1\rangle_p$ khớp đúng tần số hốc trống $\omega_c$, chui vào trong hốc cộng hưởng rồi thoát ra với độ trễ pha $\pi$: $r(\omega_c) = \frac{-\kappa/2}{+\kappa/2} = -1$.
+
+Phép phản xạ này thực hiện trực tiếp cổng **CZ** giữa nguyên tử và photon (kẹp giữa hai cổng Hadamard — bản nửa sóng HWP $22.5^\circ$ trên photon hoặc xung laser $\pi/2$ trên nguyên tử — để thành **CNOT**). Nếu cho cùng một photon phản xạ lần lượt qua hai hốc chứa hai nguyên tử $A$ và $B$, photon đóng vai trò "sứ giả" thực hiện cổng **CZ giữa hai nguyên tử ở xa nhau**.
+
+## Measurement
+
+* **Đo qubit photon:** Các photon thoát ra khỏi hốc đi qua bộ tách chùm tia phân cực (PBS) và kích hoạt các đầu thu đơn photon hiệu suất cao (APD hoặc siêu dẫn SNSPD).
+* **Đo qubit nguyên tử (Cavity-assisted non-destructive readout):** Chiếu một chùm laser thăm dò yếu cộng hưởng với hốc và đo tỉ lệ ánh sáng truyền qua/phản xạ. Vì trạng thái $|0\rangle_a$ làm tách đỉnh cộng hưởng của hốc (chặn ánh sáng truyền qua) còn $|1\rangle_a$ giữ nguyên đỉnh cộng hưởng (cho ánh sáng đi qua), ta đọc được trạng thái của nguyên tử với độ trung thực cao mà không làm nóng hay đẩy nguyên tử khỏi bẫy.
+
+# 4. Drawbacks
+
+* **Hai kênh mất mát cạnh tranh ($\kappa$ và $\gamma$):** Trong quá trình tương tác, photon có thể rò rỉ sớm qua gương trước với tốc độ $\kappa$, hoặc nguyên tử phát xạ tự phát một photon ra không gian tự do bên hông hốc (thoát hoàn toàn khỏi mode tính toán) với tốc độ $\gamma$. Mọi sai số cổng đều tỉ lệ nghịch với độ hợp tác $C = \frac{2g^2}{\kappa\gamma}$.
+* **Thăng giáng vị trí nguyên tử trong trường đứng:** Vì biên độ điện trường trong hốc biến thiên tuần hoàn theo $\cos(kz)$ dọc theo trục hốc, bất kỳ dao động nhiệt nào của nguyên tử trong bẫy đều làm giá trị $g(\mathbf{r})$ thăng giáng mạnh, gây nhiễu pha trực tiếp lên các phép biến đổi cổng.
+* **Khó mở rộng quy mô trên một hốc đơn lẻ:** Không thể nhồi hàng trăm nguyên tử vào cùng một thể tích mode siêu nhỏ mà vẫn chiếu laser điều khiển riêng lẻ từng nguyên tử mà không vướng vào hai gương.
+
+# Misc.
+
+Một điểm tinh tế của giao thức phản xạ Duan–Kimble là nó không nhất thiết đòi hỏi chế độ liên kết mạnh ($g \gg \kappa, \gamma$), mà vẫn hoạt động tốt ở **chế độ Purcell / hốc xấu ($\kappa \gg g \gg \gamma$)** miễn là độ hợp tác $C = \frac{2g^2}{\kappa\gamma} \gg 1$, giúp giảm bớt độ khó trong chế tạo gương siêu phản xạ. Trong kiến trúc máy tính lượng tử hiện nay, vai trò chiến lược của Cavity QED không phải là bộ xử lý nguyên khối, mà là **bộ chuyển đổi giao diện quang – vật chất (quantum interconnect)** kết nối các mô-đun nguyên tử trung hòa hoặc bẫy ion ở xa nhau thành một mạng lượng tử phân tán.

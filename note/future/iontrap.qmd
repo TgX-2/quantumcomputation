@@ -1,0 +1,103 @@
+---
+title: "Ion Trap"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Khác với nguyên tử trung hòa dùng tia laser làm nhíp, **ion** mang điện tích dương ($+e$) nên chịu tác dụng trực tiếp của lực điện từ. Tuy nhiên, theo **định lý Earnshaw**, không thể giam giữ một hạt mang điện đứng yên trong không gian 3 chiều chỉ bằng điện trường tĩnh.
+
+* **Cơ chế giam giữ (Bẫy Paul tuyến tính — Linear Paul Trap):** Kết hợp hai loại điện trường trong buồng chân không siêu cao:
+  * **Điện trường cao tần RF (giữ theo phương ngang $x, y$):** Đặt điện áp xoay chiều tần số vô tuyến $V_0\cos(\Omega_{\text{rf}} t)$ lên 4 thanh điện cực song song tạo ra một "thế giả" (*pseudopotential*) hình yên ngựa quay liên tục, ép các ion nằm dọc theo trục tâm không có trường.
+  * **Điện trường một chiều DC (giữ theo phương dọc $z$):** Đặt điện áp dương tĩnh $U_0$ lên hai điện cực nắp ở hai đầu (*endcaps*) để chặn ion thoát ra theo chiều dọc.
+* **Kiến trúc phần cứng:** Vì các ion cùng mang điện tích dương nên lực đẩy tĩnh điện Coulomb buộc chúng tự sắp xếp thành một **chuỗi tinh thể 1 chiều (1D ion crystal)** thẳng hàng, cách nhau khoảng vài micromet. Các loại ion phổ biến gồm $^{40}\text{Ca}^+$, $^{171}\text{Yb}^+$, $^{9}\text{Be}^+$.
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|0\rangle, |1\rangle$
+
+Qubit logic được lưu trên **hai mức năng lượng điện tử nội tại** có thời gian sống rất dài của mỗi ion. Có hai cách chọn chính:
+
+* **Hyperfine qubit** (như $^{171}\text{Yb}^+$): Hai mức siêu tinh tế ở lớp vỏ cơ bản cách nhau vài GHz (thời gian kết hợp lên tới hàng chục giây đến hàng phút).
+* **Optical qubit** (như $^{40}\text{Ca}^+$): Một mức cơ bản và một mức kích thích giả bền (metastable) cách nhau tần số ánh sáng quang học (sống khoảng $1\text{ s}$).
+
+## Collective Phonon Bus - $|n\rangle_{\text{bus}}$
+
+Vì các ion liên kết với nhau bằng lực đẩy Coulomb như các quả cầu nối bằng lò xo, toàn bộ chuỗi $N$ ion có các **mode dao động tập thể lượng tử hóa**. Mode có tần số thấp nhất — **mode khối tâm (Center-of-Mass, COM)**, nơi cả chuỗi dao động qua lại như một khối cứng với tần số $\nu_z$ — được dùng làm bus truyền thông tin với các trạng thái Fock $|n\rangle_{\text{bus}}$ ($n = 0, 1, 2, \dots$).
+
+## Hamiltonian
+
+Với chuỗi $N$ ion chịu tác dụng của các tia laser điều khiển tần số $\omega_L$, pha $\phi_i$ và tần số Rabi $\Omega_i$, trong giới hạn **Lamb–Dicke** ($\eta = k_z z_0 \ll 1$, biên độ dao động của ion nhỏ hơn nhiều so với bước sóng laser), Hamiltonian toàn phần có dạng:
+
+$$
+H = \underbrace{\sum_{i=1}^{N} \frac{\hbar\omega_0}{2}\sigma_z^{(i)} + \hbar\nu_z \hat{a}^\dagger \hat{a}}_{\text{Internal energy \& COM oscillation}} + \underbrace{\sum_{i=1}^{N} \frac{\hbar\Omega_i}{2}\left(\sigma_+^{(i)} e^{i[\eta(\hat{a}+\hat{a}^\dagger) - (\omega_L - \omega_0)t + \phi_i]} + \text{h.c.}\right)}_{\text{Laser--ion interaction}}
+$$
+
+Khai triển số hạng mũ theo tham số nhỏ $\eta$ cho ra **3 tần số cộng hưởng cốt lõi**:
+
+* **Sóng mang (Carrier — $\omega_L = \omega_0$):** Chỉ lật trạng thái điện tử của ion, giữ nguyên số phonon:
+  $$H_{\text{car}} = \frac{\hbar\Omega}{2}\left(\sigma_+ e^{i\phi} + \sigma_- e^{-i\phi}\right)$$
+* **Dải biên đỏ (Red sideband — $\omega_L = \omega_0 - \nu_z$):** Hấp thụ photon đi kèm hủy 1 phonon — chính là **Hamiltonian Jaynes–Cummings**:
+  $$H_{\text{red}} = \frac{\hbar\eta\Omega}{2}\left(\hat{a}\sigma_+ e^{i\phi} + \hat{a}^\dagger\sigma_- e^{-i\phi}\right)$$
+* **Dải biên xanh (Blue sideband — $\omega_L = \omega_0 + \nu_z$):** Hấp thụ photon đi kèm sinh 1 phonon — **Anti-Jaynes–Cummings**:
+  $$H_{\text{blue}} = \frac{\hbar\eta\Omega}{2}\left(\hat{a}^\dagger\sigma_+ e^{i\phi} + \hat{a}\sigma_- e^{-i\phi}\right)$$
+
+# 3. Quantum Computation
+
+## Initial states - $|0\rangle^{\otimes N} \otimes |0\rangle_{\text{bus}}$
+
+1. **Làm lạnh Doppler & Làm lạnh dải biên (Sideband Cooling):** Đầu tiên dùng laser làm lạnh Doppler để giảm nhiệt độ chuỗi ion xuống mức mili-Kelvin. Sau đó chiếu liên tục laser vào **dải biên đỏ** ($\omega_0 - \nu_z$): mỗi lần ion hấp thụ photon sẽ mất đi 1 phonon rồi phát xạ tự phát về lại mức cơ bản, rút cạn năng lượng dao động đưa cả chuỗi ion về đúng trạng thái cơ bản $|0\rangle_{\text{bus}}$ ($>99\%$ xác suất không còn phonon).
+2. **Bơm quang học (Optical Pumping):** Chiếu xung laser phân cực chuẩn để dồn toàn bộ trạng thái điện tử của từng ion về mức $|0\rangle^{\otimes N}$.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+* **$R_x(\theta)$ và $R_y(\theta)$:** Hội tụ một tia laser (hoặc cặp tia Raman) vào **riêng một ion thứ $i$** và chỉnh tần số đúng bằng **sóng mang** ($\omega_L = \omega_0$). Điều khiển độ rộng xung $t$ và pha quang học $\phi$ cho phép thực hiện trực tiếp các phép quay $R_x(\theta)$ và $R_y(\theta)$ trên ion đó mà hoàn toàn không làm rung chuỗi ion.
+* **$R_z(\phi)$:** Thực hiện bằng **dịch chuyển AC Stark** cục bộ hoặc dịch pha tham chiếu của bộ điều khiển laser (*virtual Z-gate*).
+
+## 2-qubit gate - Cirac–Zoller & Mølmer–Sørensen Gates
+
+Nếu nguyên tử trung hòa dùng tương tác lưỡng cực trực tiếp trong không gian, thì bẫy ion dùng **phonon trong mode COM** làm cầu nối trung gian:
+
+* **Cơ chế Cirac–Zoller (1995 — chuỗi 3 xung dải biên đỏ):** Cần sử dụng thêm một mức năng lượng phụ trợ $|\text{aux}\rangle$ trên ion mục tiêu ($T$) với tần số chuyển mức $|1\rangle_T \leftrightarrow |\text{aux}\rangle_T$ bằng $\omega_{\text{aux}}$:
+  1. **Xung $\pi$ dải biên đỏ ($\omega_0 - \nu_z$) lên Control ($C$):** Chuyển trạng thái kích thích điện tử của $C$ thành 1 phonon trong bus dao động ($|1\rangle_C |0\rangle_{\text{bus}} \to -i|0\rangle_C |1\rangle_{\text{bus}}$).
+  2. **Xung $2\pi$ dải biên đỏ ($\omega_{\text{aux}} - \nu_z$) lên Target ($T$):** Xung này chỉ kích hoạt chuyển mức $|1\rangle_T |1\rangle_{\text{bus}} \to |\text{aux}\rangle_T |0\rangle_{\text{bus}} \to -|1\rangle_T |1\rangle_{\text{bus}}$ nếu **cả hai điều kiện** cùng thỏa mãn: $T$ ở mức $|1\rangle_T$ **và** bus đang có 1 phonon.
+  3. **Xung $\pi$ dải biên đỏ ($\omega_0 - \nu_z$) lên Control ($C$):** Thu hồi phonon từ bus quay trở lại thành trạng thái điện tử của $C$.
+
+Toàn bộ 4 trạng thái cơ sở biến đổi qua 3 bước như sau:
+
+$$
+\begin{aligned}
+|00\rangle|0\rangle_{\text{bus}} &\xrightarrow{\pi_C} |00\rangle|0\rangle_{\text{bus}} \xrightarrow{2\pi_T} |00\rangle|0\rangle_{\text{bus}} \xrightarrow{\pi_C} +|00\rangle|0\rangle_{\text{bus}} \\
+|01\rangle|0\rangle_{\text{bus}} &\xrightarrow{\pi_C} |01\rangle|0\rangle_{\text{bus}} \xrightarrow{2\pi_T \text{ (no phonon)}} |01\rangle|0\rangle_{\text{bus}} \xrightarrow{\pi_C} +|01\rangle|0\rangle_{\text{bus}} \\
+|10\rangle|0\rangle_{\text{bus}} &\xrightarrow{\pi_C} -i|00\rangle|1\rangle_{\text{bus}} \xrightarrow{2\pi_T \text{ (off-resonant with } |0\rangle_T\text{)}} -i|00\rangle|1\rangle_{\text{bus}} \xrightarrow{\pi_C} -|10\rangle|0\rangle_{\text{bus}} \\
+|11\rangle|0\rangle_{\text{bus}} &\xrightarrow{\pi_C} -i|01\rangle|1\rangle_{\text{bus}} \xrightarrow{2\pi_T} +i|01\rangle|1\rangle_{\text{bus}} \xrightarrow{\pi_C} +|11\rangle|0\rangle_{\text{bus}}
+\end{aligned}
+$$
+
+Kết quả thu được là $\text{diag}(1, 1, -1, 1)$, chính là cổng **CZ** sau khi áp thêm một cổng $Z$ đơn qubit lên $C$ (và kẹp giữa hai cổng Hadamard trên $T$ để thành **CNOT**).
+
+* **Cải tiến hiện đại — Cổng Mølmer–Sørensen (1999):** Chiếu **đồng thời cả hai laser dải biên đỏ và dải biên xanh** ($\omega_0 \pm \nu_z$) lên hai ion bất kỳ. Hai đường dịch chuyển giao thoa tạo ra tương tác hiệu dụng dạng Ising $\sigma_x^{(i)}\sigma_x^{(j)}$ qua các phonon ảo mà **không đòi hỏi chuỗi ion phải được làm lạnh tuyệt đối về $|0\rangle_{\text{bus}}$**.
+
+## Measurement
+
+Sử dụng kỹ thuật **bỏ giá electron (Electron Shelving)**:
+
+* Chiếu một tia laser cộng hưởng với một **chuyển mức tuần hoàn (cycling transition)** nối riêng mức $|0\rangle$ với một mức kích thích ngắn hạn $|e\rangle$ (mức $|1\rangle$ bị lệch cộng hưởng rất xa nên "nằm yên trên giá").
+* Nếu ion ở $|0\rangle$, nó hấp thụ và phát xạ hàng triệu photon huỳnh quang mỗi giây; nếu ở $|1\rangle$, nó hoàn toàn tối đen. Camera thu hình ảnh chuỗi ion cho phép đọc kết quả với **độ trung thực $> 99.99\%$** (cao nhất trong mọi nền tảng phần cứng lượng tử hiện nay).
+
+# 4. Drawbacks
+
+* **Nóng lên dị thường của dao động (Anomalous Heating):** Nhiễu nhiệt và biến thiên điện tích ngẫu nhiên trên bề mặt các điện cực kim loại tạo ra nhiễu điện trường, bơm thêm phonon rác vào mode COM và làm hỏng các cổng 2-qubit. Đây là lý do các bẫy ion chip hiện đại phải làm lạnh sâu (cryogenic) để giảm nhiễu bề mặt.
+* **Tốc độ cổng chậm ($\sim 10\text{--}100\text{ }\mu\text{s}$):** Tần số dao động trục $\nu_z$ chỉ nằm ở mức vài MHz. Để xung laser phân giải chính xác dải biên đỏ/xanh mà không kích hoạt nhầm sóng mang, độ rộng xung phải lớn hơn $1/\nu_z$, khiến cổng 2-qubit của bẫy ion chậm hơn mạch siêu dẫn hay nguyên tử trung hòa từ $100$ đến $1000$ lần.
+* **Nghẽn cổ chai khi mở rộng quy mô (Mode Crowding):** Khi nhồi quá nhiều ion ($N > 30\text{--}50$) vào cùng một chuỗi 1D, số mode dao động tăng lên $3N$, các tần số dải biên dày đặc và chồng lấn lên nhau khiến việc chọn đúng mode COM trở nên bất khả thi.
+
+# Misc.
+
+Bẫy ion là nền tảng có **độ trung thực cổng (gate fidelity) và chất lượng qubit cao nhất** hiện nay, đồng thời sở hữu **kết nối toàn phần (all-to-all connectivity)** bên trong mỗi chuỗi vì mode COM trải dài trên toàn bộ các ion. Để vượt qua giới hạn *mode crowding* của một chuỗi 1D đơn lẻ, các kiến trúc bẫy ion hiện đại chuyển sang mô hình **QCCD (Quantum Charge-Coupled Device)**: chia chip bẫy thành nhiều vùng nhỏ (mỗi vùng chỉ giữ vài ion) và dùng điện trường **di chuyển vật lý các ion (ion shuttling)** qua lại giữa vùng nhớ và vùng tính toán, kết hợp kết nối quang học tầm xa giữa các buồng bẫy.

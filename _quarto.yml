@@ -105,10 +105,17 @@ website:
           - note/future/directions.qmd
           - note/future/klm.qmd
           - note/future/msgate.qmd
+
+      - section : "Quantum Computer"
+        contents:
+          - note/future/index.qmd
           - note/future/neutralatomtrap.qmd
-
-
-    
+          - note/future/iontrap.qmd
+          - note/future/opticalcavityQED.qmd
+          - note/future/superconducting.qmd
+          - note/future/topologicalqubit.qmd
+          - note/future/quantumdots.qmd
+          - note/future/nvcenter.qmd
 
 format:
   html:

@@ -1,0 +1,92 @@
+---
+title: "Semiconductor Quantum Dots"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+# 1. Physical apparatus
+
+Thay vì dùng bẫy chân không cồng kềnh, **chấm lượng tử bán dẫn** (được phác thảo ở Mục 7.8 trong *Nielsen & Chuang* qua đề xuất **Loss–DiVincenzo**) tận dụng công nghệ chế tạo vi mạch bán dẫn (như $\text{GaAs}/\text{AlGaAs}$ hoặc **Silicon đồng vị tinh khiết $^{28}\text{Si}/\text{SiGe}$, $\text{SiMOS}$**) để nhốt từng electron đơn lẻ vào các "nguyên tử nhân tạo" có kích thước vài chục nanomet.
+
+* **Cơ chế giam giữ 3 chiều:**
+  * *Giam giữ theo phương thẳng đứng ($z$):* Tại mặt phân cách giữa hai lớp bán dẫn khác nhau hình thành một giếng thế năng lượng tử mỏng, ép các electron chỉ được chuyển động trong một mặt phẳng gọi là **khí electron 2 chiều (2DEG)**.
+  * *Giam giữ trong mặt phẳng ($x, y$):* Phủ lên bề mặt chip các điện cực cổng kim loại siêu nhỏ (gate electrodes) và đặt điện áp âm để đẩy bớt các electron xung quanh, cô lập **đúng 1 electron đơn lẻ** nằm gọn trong mỗi chấm lượng tử.
+* **Môi trường vận hành:** Chip được đặt trong tủ lạnh pha loãng ở nhiệt độ **$10\text{--}100\text{ mK}$** (riêng qubit spin trên silicon có thể vận hành ổn định ở mức "nóng" tới $\sim 1\text{ K}$) và đặt trong một **từ trường tĩnh ngoài $\mathbf{B}_0$** ($\sim 0.5\text{--}2\text{ T}$) để tách rõ hai mức năng lượng spin qua hiệu ứng Zeeman.
+
+# 2. The Hamiltonian
+
+## Qubit logic - $|\downarrow\rangle, |\uparrow\rangle$
+
+Theo mã hóa **Loss–DiVincenzo**, qubit được lưu trực tiếp trên **spin nội tại ($S = 1/2$)** của một electron đơn lẻ trong mỗi chấm lượng tử:
+
+$$
+|0\rangle \equiv |\downarrow\rangle, \qquad |1\rangle \equiv |\uparrow\rangle
+$$
+
+Hai trạng thái này cách nhau một năng lượng Zeeman $\hbar\omega_Z = g^*\mu_B B_0$, tương ứng với tần số cộng hưởng Larmor nằm trong vùng vi sóng ($\omega_Z/2\pi \approx 10\text{--}40\text{ GHz}$).
+
+## Hamiltonian
+
+Xét một mảng các chấm lượng tử lân cận chứa các electron đơn lẻ có năng lượng đẩy Coulomb tại chỗ $U$ rất lớn và biên độ xuyên hầm $t_{ij}(t)$ giữa hai chấm $i, j$. Trong giới hạn năng lượng thấp ($t_{ij} \ll U$), biến đổi Schrieffer–Wolff đưa hệ về **Hamiltonian trao đổi Heisenberg**:
+
+$$
+H = \underbrace{\sum_{i} \frac{1}{2} g_i^* \mu_B \mathbf{B}_i(t) \cdot \boldsymbol{\sigma}_i}_{\text{Single-spin Zeeman interaction}} + \underbrace{\sum_{\langle i,j \rangle} J_{ij}(t)\, \mathbf{S}_i \cdot \mathbf{S}_j}_{\text{Inter-dot exchange interaction}}
+$$
+
+Trong đó $\mathbf{S}_i = \frac{\hbar}{2}\boldsymbol{\sigma}_i$, còn hằng số **tương tác trao đổi (exchange coupling)** có dạng:
+
+$$
+J_{ij}(t) \approx \frac{4\,t_{ij}^2(t)}{U}
+$$
+
+Điểm mấu chốt của kiến trúc này là **chỉ cần thay đổi điện áp một chiều trên điện cực rào cản (barrier gate) nằm giữa hai chấm, ta có thể bật hoặc tắt tương tác $J_{ij}(t)$ hoàn toàn bằng tín hiệu điện**.
+
+# 3. Quantum Computation
+
+## Initial states - $|0\rangle^{\otimes N}$
+
+* **Làm lạnh thụ động:** Khi nhiệt độ đủ thấp ($k_B T \ll \hbar\omega_Z$), các electron tự động hồi phục về trạng thái năng lượng thấp nhất $|0\rangle \equiv |\downarrow\rangle$.
+* **Khởi tạo bằng xuyên hầm chọn lọc spin (Elzerman initialization):** Để khởi tạo nhanh và chính xác hơn, người ta chỉnh điện áp sao cho mức năng lượng Fermi của một bể electron (reservoir) đặt ngay bên cạnh nằm lọt vào giữa hai mức $|0\rangle$ và $|1\rangle$ của chấm lượng tử; khi đó chỉ có electron mang spin $|0\rangle$ mới được phép xuyên hầm đi vào chấm.
+
+## Single Qubit - $R_x, R_y, R_z$
+
+* **$R_x(\theta)$ và $R_y(\theta)$ — Cộng hưởng spin lưỡng cực điện (EDSR):** Vì từ trường vi sóng rất khó hội tụ xuống kích thước vài chục nanomet để điều khiển từng spin riêng lẻ, các chip hiện đại đặt một **vi nam châm (micromagnet)** ngay trên bề mặt để tạo ra một gradien từ trường tĩnh mạnh. Khi chiếu xung điện áp vi sóng dao động lên điện cực cổng của một chấm, electron bên trong dao động nhẹ qua lại trong vùng gradien từ trường đó và cảm nhận một từ trường xoay chiều cục bộ ở tần số $\omega_Z$, thực hiện các phép quay $R_x(\theta), R_y(\theta)$ độc lập.
+* **$R_z(\phi)$:** Đặt một xung điện áp một chiều ngắn để dịch nhẹ vị trí electron trong gradien từ trường, làm thay đổi tạm thời tần số Larmor $\omega_Z$ và tích lũy pha $\phi$ (hoặc dùng cổng $Z$ ảo).
+
+## 2-qubit gate - Heisenberg Exchange ($\sqrt{\text{SWAP}}$ & CZ)
+
+Hạ thấp điện áp rào cản giữa hai chấm $i, j$ trong thời gian ngắn $\tau$ ($\sim 10\text{--}50\text{ ns}$) để hàm sóng của hai electron chồng lấn lên nhau và bật tương tác trao đổi $H_{\text{ex}} = J(t)\,\mathbf{S}_i \cdot \mathbf{S}_j$:
+
+1. **Cổng $\sqrt{\text{SWAP}}$ (Đề xuất Loss–DiVincenzo gốc, 1998):** Khi hai chấm có tần số Zeeman bằng nhau, toán tử tiến hóa $U(\tau) = \exp\left(-\frac{i}{\hbar}\int_0^\tau J(t)\,dt\,\mathbf{S}_i\cdot\mathbf{S}_j\right)$ tại diện tích xung $\int_0^\tau J(t)\,dt = \frac{\pi\hbar}{2}$ tạo ra chính xác cổng **$\sqrt{\text{SWAP}}$** (hoán đổi một nửa trạng thái giữa hai spin). Kết hợp hai cổng $\sqrt{\text{SWAP}}$ với các phép quay 1-qubit cho ra cổng **CNOT**:
+
+$$
+\text{CNOT} = (I \otimes H)\, e^{i\frac{\pi}{2} Z_1} e^{-i\frac{\pi}{2} Z_2} \sqrt{\text{SWAP}}\, e^{i\pi Z_1} \sqrt{\text{SWAP}}\, (I \otimes H)
+$$
+
+2. **Cổng CZ trực tiếp:** Khi hai chấm có độ lệch tần số Zeeman lớn ($\Delta E_Z \gg J$, nhờ từ trường vi nam châm), số hạng lật spin ngang của $\mathbf{S}_i \cdot \mathbf{S}_j$ bị triệt tiêu, chỉ còn lại tương tác Ising dọc $J(t) S_z^{(i)} S_z^{(j)}$ đẩy lệch năng lượng các trạng thái đối song ($|01\rangle, |10\rangle$) so với song song ($|00\rangle, |11\rangle$), thực hiện thẳng cổng **CZ**.
+
+## Measurement
+
+Mômen từ của một electron đơn lẻ quá yếu để đo trực tiếp, nên hệ thống dùng kỹ thuật **chuyển đổi spin sang điện tích (spin-to-charge conversion)**:
+
+* **Đọc Elzerman hoặc Phong tỏa spin Pauli (Pauli Spin Blockade):**
+  * Ở cách đọc **Elzerman**, điện áp chấm được nâng lên để mức Fermi của bể điện tử nằm giữa $|0\rangle$ và $|1\rangle$: nếu electron ở trạng thái kích thích $|1\rangle$, nó lập tức xuyên hầm thoát ra bể (làm chấm mất đi 1 điện tích $-e$); nếu ở $|0\rangle$, nó nằm yên trong chấm.
+  * Ở cơ chế **phong tỏa Pauli**, người ta ép electron từ chấm $1$ nhảy sang chấm $2$ đã có sẵn $1$ electron: theo nguyên lý loại trừ Pauli, phép nhảy chỉ xảy ra nếu hai spin đối song (trạng thái singlet) và bị chặn đứng nếu hai spin song song (triplet).
+* Sự thay đổi điện tích dù chỉ $1$ electron được phát hiện tức thì với độ nhạy cao thông qua độ dẫn điện của một **transistor đơn electron (SET)** đặt ngay sát bên cạnh.
+
+# 4. Drawbacks
+
+* **Tương tác siêu tinh tế với spin hạt nhân (Hyperfine Interaction):** Trong các bán dẫn nhóm III–V như $\text{GaAs}$, $100\%$ hạt nhân nguyên tử tinh thể đều có spin khác $0$, tạo ra một "bể spin hạt nhân" với từ trường thăng giáng ngẫu nhiên làm electron mất pha chỉ sau $T_2^* \sim 10\text{ ns}$. Việc chuyển sang vật liệu **Silicon đồng vị tinh khiết $^{28}\text{Si}$** (hạt nhân có spin bằng $0$) đã loại bỏ gần như hoàn toàn nguồn nhiễu này, kéo dài thời gian kết hợp $T_2$ lên tới hàng mili-giây.
+* **Nhiễu điện tích (Charge Noise):** Các điện tích khuyết tật thăng giáng ngẫu nhiên tại lớp tiếp xúc bán dẫn–oxit làm rung nhẹ hàng rào thế năng và vị trí electron trong gradien từ trường, gây sai số cho cả hằng số trao đổi $J(t)$ lẫn tần số cộng hưởng $\omega_Z$.
+* **Suy biến thung lũng trong Silicon (Valley Degeneracy):** Vùng dẫn của tinh thể Silicon có nhiều cực tiểu năng lượng tương đương ("thung lũng"). Nếu độ tách năng lượng giữa các thung lũng ($\Delta_v$) quá nhỏ do độ nhám bề mặt ở cấp độ nguyên tử, electron dễ rò rỉ lên trạng thái thung lũng kích thích và phá vỡ không gian tính toán 2 chiều.
+* **Kết nối lân cận gần và Mật độ đi dây nanomet:** Vì tương tác trao đổi đòi hỏi hàm sóng hai electron chồng lấn trực tiếp, cổng 2-qubit chỉ hoạt động giữa hai chấm nằm cách nhau $\sim 50\text{--}100\text{ nm}$.
+
+# Misc.
+
+Chấm lượng tử bán dẫn đứng ở giao điểm độc đáo giữa **vật lý nguyên tử** và **công nghệ vi mạch**: kích thước siêu nhỏ ($< 100\text{ nm}$) cho phép nhồi hàng triệu qubit trên một diện tích vài milimet vuông bằng chính **dây chuyền sản xuất bán dẫn CMOS công nghiệp**, đồng thời có khả năng vận hành ở nhiệt độ $\sim 1\text{ K}$ (nơi công suất làm lạnh lớn hơn hàng trăm lần so với $15\text{ mK}$ của mạch siêu dẫn). Để giải quyết bài toán đi dây dày đặc và kết nối lân cận gần, các kiến trúc hiện đại đang phát triển kỹ thuật **di chuyển spin kết hợp (coherent spin shuttling)** và kiến trúc điều khiển mảng chéo (*crossbar addressing*).

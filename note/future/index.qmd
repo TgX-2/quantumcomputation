@@ -1,0 +1,33 @@
+---
+title: "Quantum Computer"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+| Nền tảng phần cứng | Bộ xử lý / Hệ vật lý | Quy mô | Nội dung được mô phỏng |
+| :--- | :--- | :--- | :--- |
+| Superconducting | Google Sycamore | 9 qubit | Động lực học lỗ sâu đục $\text{AdS}_2$ qua mô hình SYK nén | 
+| Ion trap | Chuỗi ion $^{171}\text{Yb}^+$ | 7 qubit | Xáo trộn thông tin lỗ đen (Hayden–Preskill & OTOC) | 
+| Neutral atom | Mảng nhíp quang học $^{87}\text{Rb}$ | 20-51 qubit | Lý thuyết trường bảo giác (CFT) tới hạn & Entropy vướng víu | 
+
+---
+
+[Neutral Atom Trap (Nhíp quang học & Phong tỏa Rydberg](neutralatomtrap.qmd)
+
+[Ion Trap (Bẫy Paul tuyến tính & Cổng Cirac–Zoller / Mølmer–Sørensen)](iontrap.qmd)
+
+[Optical Cavity QED (Mô hình Jaynes–Cummings & Giao thức phản xạ Duan–Kimble)](opticalcavityQED.qmd)
+
+[Superconducting Qubits (Transmon, Circuit QED, Flux-Tunable CZ & Cross-Resonance)](superconducting.qmd)
+
+[Topological Qubits (Chuỗi Kitaev, Mode không Majorana & Phép tết bím phi Abel)](topologicalqubit.qmd)
+
+[Semiconductor Quantum Dots (Spin electron Loss–DiVincenzo & Tương tác trao đổi Heisenberg)](quantumdots.qmd)
+
+[Diamond NV Center (Thanh ghi lai Electron–$^{13}\text{C}$, Tách động lực học & Giao thức Barrett–Kok)](nvcenter.qmd) 
