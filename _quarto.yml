@@ -116,6 +116,24 @@ website:
           - note/future/topologicalqubit.qmd
           - note/future/quantumdots.qmd
           - note/future/nvcenter.qmd
+          
+      - section : "Simulations"
+        contents:
+          - note/simulation/index.qmd
+          - note/simulation/lie-trotter-suzuki.qmd
+          - note/simulation/mpf.qmd
+          - note/simulation/qdrift.qmd
+          - note/simulation/qflo.qmd
+          - note/simulation/taylor.qmd
+          - note/simulation/lcu.qmd
+          - note/simulation/qubitization.qmd
+          - note/simulation/qsp.qmd
+          - note/simulation/qsvt.qmd
+          - note/simulation/vqs.qmd
+          - note/simulation/tdvqa.qmd
+          - note/simulation/qflow.qmd
+          - note/simulation/quantum_walk.qmd
+          
 
 format:
   html:

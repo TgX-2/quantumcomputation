@@ -1,0 +1,104 @@
+---
+title: "Quantum Singular Value Transformation (QSVT)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Biến đổi giá trị suy biến lượng tử (Quantum Singular Value Transformation — QSVT)** do Gilyén, Su, Low và Wiebe công bố (STOC 2019) được xem là **"Lý thuyết thống nhất lớn" (Grand Unification)** của các thuật toán lượng tử hiện đại.
+
+Nếu như QSP yêu cầu ma trận đầu vào phải là **ma trận vuông và Hermite** (để có phổ trị riêng thực $\lambda \in [-1, 1]$), thì QSVT gỡ bỏ hoàn toàn ràng buộc đó: nó hoạt động trên **bất kỳ ma trận chữ nhật hay phi Hermite nào $\hat{A}$** được nhúng trong một mạch đơn vị $\hat{U}_A$, biến đổi trực tiếp từng **giá trị suy biến $\sigma_k \mapsto P^{(SV)}(\sigma_k)$** trong khi vẫn bảo toàn các vector suy biến trái và phải! Nhờ vậy, chỉ với **một khuôn mẫu mạch lượng tử duy nhất**, QSVT bao trùm toàn bộ các thuật toán lượng tử lớn: mô phỏng Hamiltonian ($e^{-itx}$), giải hệ phương trình tuyến tính HHL ($x^{-1}$), khuếch đại biên độ Grover, và lọc trạng thái cơ bản ($\text{sgn}(x)$).
+
+| Thuộc tính | Đặc trưng của QSVT |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (khuôn mẫu mạch thống nhất cho đại số tuyến tính & mô phỏng lượng tử) |
+| **Lớp ma trận hỗ trợ** | **Bất kỳ ma trận $\hat{A}$ nào** (vuông, chữ nhật, phi Hermite, suy biến) |
+| **Số qubit phụ thêm vào** | Chỉ **1 qubit** (ngoài số qubit của Block-Encoding $\hat{U}_A$) |
+| **Độ phức tạp truy vấn** | $O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ cho mô phỏng Hamiltonian |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+QSVT là bước mở rộng hình học tự nhiên từ **một bộ chiếu (QSP)** sang **hai bộ chiếu (SVD)** thông qua định lý Jordan:
+
+### Bước 1: Nhận diện nút thắt cổ chai của QSP
+Trong QSP/Qubitization, ta chỉ có một bộ chiếu $\hat{\Pi} = |0\rangle\langle 0|_a \otimes \hat{I}_s$ và yêu cầu $\hat{\Pi}\hat{U}_H\hat{\Pi}$ phải biểu diễn một ma trận Hermite. Nếu $\hat{A}$ không phải Hermite (ví dụ toán tử nhảy của hệ mở Lindblad, toán tử bước tiến thời gian ảo, hoặc ma trận chữ nhật $M \times N$), ma trận $\hat{A}$ ánh xạ vector từ một không gian nguồn $\mathcal{H}_R$ sang một không gian đích khác $\mathcal{H}_L$, nên một bộ chiếu duy nhất không thể đóng kín quỹ đạo!
+
+### Bước 2: Ẩn dụ hình học — Khai triển giá trị suy biến (SVD) & Cặp bộ chiếu $(\hat{\Pi}, \hat{\tilde{\Pi}})$
+Mọi ma trận $\hat{A}$ bất kỳ đều có khai triển giá trị suy biến (Singular Value Decomposition):
+
+$$\hat{A} = \sum_{k=1}^{r} \sigma_k \, |\tilde{\psi}_k\rangle\langle\psi_k|, \quad \sigma_k \in [0, 1]$$
+
+trong đó $\{|\psi_k\rangle\}$ là các vector suy biến phải trực chuẩn và $\{|\tilde{\psi}_k\rangle\}$ là các vector suy biến trái trực chuẩn.
+
+Hãy nhìn tác động của cặp toán tử $\hat{U}_A$ và $\hat{U}_A^\dagger$ giữa hai không gian chiếu $\hat{\Pi}$ (không gian phải) và $\hat{\tilde{\Pi}}$ (không gian trái):
+* $\hat{U}_A$ đưa $|\psi_k\rangle$ từ không gian $\hat{\Pi}$ sang tổ hợp của $|\tilde{\psi}_k\rangle$ (trong $\hat{\tilde{\Pi}}$) và một vector trực giao $|\tilde{\perp}_k\rangle$.
+* Sau đó, $\hat{U}_A^\dagger$ đưa tổ hợp đó **quay trở lại đúng mặt phẳng 2 chiều** $\text{span}\{|\psi_k\rangle, |\perp_k\rangle\}$ trong không gian phải!
+
+Nói cách khác, cặp phép phản xạ qua $\hat{\Pi}$ và $\hat{\tilde{\Pi}}$ kết hợp với cặp $\hat{U}_A, \hat{U}_A^\dagger$ chia toàn bộ không gian thành các cặp mặt phẳng 2 chiều liên hợp ứng với từng giá trị suy biến $\sigma_k$!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Cho một $(\alpha, a, \epsilon)$-Block-Encoding $\hat{U}_A$ sao cho $\hat{\tilde{\Pi}}\hat{U}_A\hat{\Pi} = \hat{A}/\alpha$. Định nghĩa hai toán tử quay pha điều khiển bởi bộ chiếu:
+
+$$\hat{\Pi}_{\phi} = e^{i\phi(2\hat{\Pi} - \hat{I})}, \qquad \hat{\tilde{\Pi}}_{\phi} = e^{i\phi(2\hat{\tilde{\Pi}} - \hat{I})}$$
+
+Bằng cách xen kẽ $\hat{U}_A$ (đi từ phải sang trái) với $\hat{U}_A^\dagger$ (đi từ trái về phải) và chèn các phép quay pha $\hat{\Pi}_{\phi_k}, \hat{\tilde{\Pi}}_{\phi_k}$ ở mỗi đầu cầu, ta đặt Ansatz cho chuỗi QSVT bậc $d$:
+
+$$\hat{U}_{\boldsymbol{\Phi}} = \begin{cases} \hat{\tilde{\Pi}}_{\phi_1} \hat{U}_A \displaystyle\prod_{k=1}^{(d-1)/2} \left(\hat{\Pi}_{\phi_{2k}} \hat{U}_A^\dagger \, \hat{\tilde{\Pi}}_{\phi_{2k+1}} \hat{U}_A\right), & \text{if } d \text{ is odd} \\[12pt] \displaystyle\prod_{k=1}^{d/2} \left(\hat{\Pi}_{\phi_{2k-1}} \hat{U}_A^\dagger \, \hat{\tilde{\Pi}}_{\phi_{2k}} \hat{U}_A\right), & \text{if } d \text{ is even} \end{cases}$$
+
+### Bước 4: Khớp hệ số — Định lý biến đổi giá trị suy biến
+Phân tích tác động của $\hat{U}_{\boldsymbol{\Phi}}$ trên từng cặp không gian con bất biến $\{|\psi_k\rangle, |\perp_k\rangle\}$ và $\{|\tilde{\psi}_k\rangle, |\tilde{\perp}_k\rangle\}$ của giá trị suy biến $\sigma_k$: trên mỗi cặp không gian con này, $\hat{U}_A$ đóng vai trò giống hệt ma trận quay $\hat{W}(\sigma_k)$ của QSP!
+
+Áp dụng trực tiếp định lý QSP trên từng giá trị suy biến $\sigma_k$, phép chiếu đầu ra thu được một **đa thức giá trị suy biến $P^{(SV)}(\hat{A}/\alpha)$** hoàn toàn tổng quát:
+
+$$\begin{cases} \hat{\tilde{\Pi}} \, \hat{U}_{\boldsymbol{\Phi}} \, \hat{\Pi} = \displaystyle\sum_{k=1}^{r} P\left(\frac{\sigma_k}{\alpha}\right) |\tilde{\psi}_k\rangle\langle\psi_k|, & \text{if } d \text{ is odd (maps right to left singular space)} \\[12pt] \hat{\Pi} \, \hat{U}_{\boldsymbol{\Phi}} \, \hat{\Pi} = \displaystyle\sum_{k=1}^{r} P\left(\frac{\sigma_k}{\alpha}\right) |\psi_k\rangle\langle\psi_k|, & \text{if } d \text{ is even (preserves right singular space)} \end{cases}$$
+
+Với bài toán mô phỏng tiến hóa Hamiltonian $\hat{H}$ (trường hợp riêng khi $\hat{A} = \hat{H}$ Hermite nên $|\tilde{\psi}_k\rangle = |\psi_k\rangle$ và $\sigma_k = |\lambda_k|$), ta chỉ cần:
+1. Tổng hợp đa thức chẵn $P_{\text{even}}(x) \approx \frac{1}{2}\cos(\alpha t x)$ (dùng chuỗi QSVT bậc chẵn) và đa thức lẻ $P_{\text{odd}}(x) \approx -\frac{i}{2}\sin(\alpha t x)$ (dùng chuỗi QSVT bậc lẻ).
+2. Kết hợp hai mạch này bằng **1 qubit phụ LCU** để thu được $\frac{1}{2}e^{-i\hat{H}t}$ (hoặc dùng QSVT đa thức phức tổng quát mà không cần cộng hai mạch nếu điều chỉnh pha)!
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho QSVT
+
+### Giai đoạn 1: Mô hình hóa vật lý và Xây dựng Block-Encoding
+* **Định nghĩa cặp bộ chiếu $(\hat{\Pi}, \hat{\tilde{\Pi}})$:** Trong hầu hết các bài toán mô phỏng Hamiltonian vuông, $\hat{\Pi} = \hat{\tilde{\Pi}} = |0\rangle^{\otimes a}\langle 0|^{\otimes a} \otimes \hat{I}_s$. Với các bài toán tiến hóa thời gian ảo hoặc hệ mở, $\hat{A}$ có thể là toán tử Kraus phi Hermite hoặc ma trận chuyển đổi giữa hai không gian.
+* **Nén hệ số chuẩn hóa $\alpha$:** Áp dụng các kỹ thuật tiền xử lý Hamiltonian (như Double Factorization, Tensor Hypercontraction, hoặc phân rã Pauli gom nhóm) sao cho $\|\hat{A}\| \le \alpha$ với $\alpha$ nhỏ nhất có thể.
+
+### Giai đoạn 2: Thiết kế mạch $\hat{\Pi}_{\phi}$ và Tổng hợp chuỗi góc pha
+* **Cài đặt cổng quay điều khiển bộ chiếu $\hat{\Pi}_\phi$:** Chỉ cần **1 qubit ancilla phụ** $|\cdot\rangle_q$: dùng cổng đa điều khiển Toffoli kiểm tra xem thanh ghi phụ của Block-Encoding có ở trạng thái $|0\rangle^{\otimes a}$ hay không; nếu đúng, lật qubit $|\cdot\rangle_q$, áp dụng cổng quay đơn qubit $R_Z(2\phi)$ lên $|\cdot\rangle_q$, rồi giải tính toán cổng Toffoli!
+* **Tìm chuỗi góc pha $\boldsymbol{\Phi}$:** Dùng thuật toán tối ưu hóa cổ điển đối xứng (Symmetric QSP phase finding) để tính bộ góc $\boldsymbol{\Phi} = (\phi_1, \dots, \phi_d)$ cho đa thức Chebyshev–Jacobi–Anger của $\cos(\alpha t x)$ và $\sin(\alpha t x)$.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Cận sai số đồng nhất cho mọi giá trị suy biến:** Vì mọi giá trị suy biến $\sigma_k / \alpha$ đều nằm trong $[0, 1] \subset [-1, 1]$, sai số chuẩn phổ của toàn bộ ma trận sau QSVT bị chặn chặt bởi sai số cực đại của đa thức vô hướng:
+  $$\left\| \hat{\Pi}\,\hat{U}_{\boldsymbol{\Phi}}\,\hat{\Pi} - P^{(SV)}\left(\frac{\hat{A}}{\alpha}\right) \right\| \le \max_{x \in [-1, 1]} \left| P_{\text{QSP}}(x) - P_{\text{target}}(x) \right|$$
+* **Độ phức tạp truy vấn tối ưu:** Tổng số lần gọi $\hat{U}_A$ và $\hat{U}_A^\dagger$ là $d = O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$, đạt cận dưới lý thuyết về cả thời gian $t$ và độ chính xác $1/\epsilon$.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Đối chiếu từng giá trị suy biến:** Xây dựng ma trận $\hat{U}_{\boldsymbol{\Phi}}$ trên hệ nhỏ, chiếu khối $\hat{\Pi}\hat{U}_{\boldsymbol{\Phi}}\hat{\Pi}$ và kiểm tra rằng các vector suy biến phải/trái không bị trộn lẫn chéo, đồng thời từng giá trị suy biến đầu ra khớp với $P(\sigma_k/\alpha)$ đến $10^{-13}$.
+* **Benchmark thống nhất đa tác vụ:** Sử dụng cùng một bộ mã nguồn QSVT để kiểm chứng đồng thời mô phỏng thời gian thực ($e^{-i\hat{H}t}$), lọc trạng thái cơ bản ($\text{sgn}(\hat{H} - \mu\hat{I})$), và tính hàm Green ($(\hat{H} - \omega\hat{I})^{-1}$) chỉ bằng cách thay đổi tệp góc pha $\boldsymbol{\Phi}$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Chiến lược chuyển giao FTQC
+* **Khả năng chịu lỗi của QSVT:** Trong chế độ FTQC, QSVT có cấu trúc mạch cực kỳ đều đặn (lặp đi lặp lại một khối $\hat{U}_A$ cố định), giúp trình biên dịch sửa lỗi bề mặt (Surface Code Compiler) tái sử dụng cùng một bố cục vật lý qua tất cả $d$ chu kỳ mà không cần tái định tuyến (re-routing) qubit.
+* **Khử biên độ suy giảm $1/2$:** Áp dụng 1 bước Khuếch đại biên độ quên lãng (OAA) lên kết quả cuối cùng của tổ hợp $\frac{1}{2}(\cos(\hat{H}t) - i\sin(\hat{H}t))$ để nâng xác suất thành công từ $25\%$ lên gần $100\%$.
+
+### Giai đoạn 6: Thực thi và Tái lập nghiên cứu
+* **Chuẩn hóa mô-đun phần mềm:** Tách biệt hoàn toàn hai tầng trong mã nguồn công bố: (1) Tầng cổ điển sinh đa thức và tìm góc pha $\boldsymbol{\Phi}$ (độc lập với phần cứng), và (2) Tầng mạch lượng tử ghép nối Block-Encoding $\hat{U}_A$ với các cổng $\hat{\Pi}_{\phi_k}$.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Khuôn mẫu thống nhất bậc nhất trong tính toán lượng tử: xử lý được ma trận chữ nhật, phi Hermite, mô phỏng thời gian thực, thời gian ảo, giải hệ tuyến tính và lọc phổ chỉ bằng cách thay đổi dãy góc pha $\boldsymbol{\Phi}$. |
+| **Giới hạn & Rủi ro** | Yêu cầu máy tính lượng tử chịu lỗi (FTQC) với cổng đa điều khiển $\hat{\Pi}_\phi$ và Block-Encoding $\hat{U}_A$; hiệu suất giảm nếu chuẩn hóa $\alpha$ lớn hơn nhiều so với chuẩn phổ $\|\hat{A}\|$. |
+| **Điều kiện thất bại** | Khi ma trận $\hat{A}$ có số điều kiện cực lớn trong bài toán nghịch đảo, hoặc khi không thể xây dựng Block-Encoding $\hat{U}_A$ hiệu quả cho cấu trúc Hamiltonian đầu vào. |

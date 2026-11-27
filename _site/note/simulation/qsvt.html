@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="TgX.2">
+
+<title>Quantum Singular Value Transformation (QSVT) – TgX.2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../note/simulation/vqs.html" rel="next">
+<link href="../../note/simulation/qsp.html" rel="prev">
+<link href="../../img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7402f27faa1197b4d40cd1fb4e5cc03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/simulation/index.html">Simulations</a></li><li class="breadcrumb-item"><a href="../../note/simulation/qsvt.html">Quantum Singular Value Transformation (QSVT)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TgX.2</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">READMEmd</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bài báo nghiên cứu</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../file/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bài báo nghiên cứu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Misc.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời bạt</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lời tựa</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/intro/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Danh pháp và ký hiệu</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 Introduction and overview</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Global perspectives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum bits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Quantum algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/4.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.5 Quantum algorithms summarized</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Experimental quantum information processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introandoverview/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Quantum information</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Introduction to Quantum Mechanics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Linear algebra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 The postulates of Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Application: superdense coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 The density operator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 The Schmidt decomposition and purifications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontoquantummechanics/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 EPR and the Bell inequality</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 Introduction to Computer Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Introduction to Computer Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Models for computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 The analysis of computational problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/introductiontocomputerscience/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Perspectives on computer science</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">4 Quantum circuits</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum circuits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Quantum Algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Single qubit operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Controlled operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Measurement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Universal quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Summary of the quantum circuit model of computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcircuits/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Simulation of quantum systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 The quantum Fourier transform and its applications</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 The quantum Fourier transform and its applications</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum Fourier transform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Phase estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Applications: order-finding and factoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/qft/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 General applications of the quantum Fourier transform</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">6 Quantum search algorithms</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum search algorithms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 The quantum search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Quantum search as a quantum simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Quantum counting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Speeding up the solution of NP-complete problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Quantum search of an unstructured database</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Optimality of the search algorithm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumsearchalgorithms/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Black box algorithm limits</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">7 Quantum computers: Physical realization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Quantum computers: Physical realization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 Guiding principles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 Conditions for quantum computation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 Harmonic oscillator quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 Optical photon quantum computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 Optical cavity quantum electrodynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6 Ion traps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7 Nuclear magnetic resonance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/quantumcomputers/8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8 Other implementation schemes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/future.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Future</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/outro/questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Questions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Future</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulations Quantum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Direction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/klm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">KLM protocol</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/msgate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mølmer–Sørensen gate</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Quantum Computer</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Computer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/neutralatomtrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Neutral Atom Trap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/iontrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ion Trap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/opticalcavityQED.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optical Cavity QED</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/superconducting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Superconducting Qubits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/topologicalqubit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topological Qubits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/quantumdots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semiconductor Quantum Dots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/future/nvcenter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diamond NV Center</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Simulations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/lie-trotter-suzuki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Công thức Tích Lie–Trotter–Suzuki (Lie–Trotter–Suzuki Product Formulas)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/mpf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multi-Product Formulas (MPF)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qdrift.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Stochastic Drift Protocol (qDRIFT)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qflo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Floquet Simulation (qFLO)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/taylor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Truncated Taylor Series Hamiltonian Simulation (Taylor)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/lcu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Combination of Unitaries (LCU)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qubitization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qubitization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qsp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Signal Processing (QSP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qsvt.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quantum Singular Value Transformation (QSVT)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/vqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Quantum Simulation (VQS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/tdvqa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time-Dependent Variational Quantum Algorithms (TDVQA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/qflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Unitary &amp; Subspace Flow (qFlow)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../note/simulation/quantum_walk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Walk Hamiltonian Simulation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Mục lục bài viết</h2>
+   
+  <ul>
+  <li><a href="#tổng-quan-bối-cảnh-vật-lý" id="toc-tổng-quan-bối-cảnh-vật-lý" class="nav-link active" data-scroll-target="#tổng-quan-bối-cảnh-vật-lý">1. Tổng quan &amp; Bối cảnh vật lý</a></li>
+  <li><a href="#tư-duy-kiến-tạo-công-thức-từ-nguyên-lý-gốc" id="toc-tư-duy-kiến-tạo-công-thức-từ-nguyên-lý-gốc" class="nav-link" data-scroll-target="#tư-duy-kiến-tạo-công-thức-từ-nguyên-lý-gốc">2. Tư duy kiến tạo công thức từ nguyên lý gốc</a>
+  <ul class="collapse">
+  <li><a href="#bước-1-nhận-diện-nút-thắt-cổ-chai-của-qsp" id="toc-bước-1-nhận-diện-nút-thắt-cổ-chai-của-qsp" class="nav-link" data-scroll-target="#bước-1-nhận-diện-nút-thắt-cổ-chai-của-qsp">Bước 1: Nhận diện nút thắt cổ chai của QSP</a></li>
+  <li><a href="#bước-2-ẩn-dụ-hình-học-khai-triển-giá-trị-suy-biến-svd-cặp-bộ-chiếu-hatpi-hattildepi" id="toc-bước-2-ẩn-dụ-hình-học-khai-triển-giá-trị-suy-biến-svd-cặp-bộ-chiếu-hatpi-hattildepi" class="nav-link" data-scroll-target="#bước-2-ẩn-dụ-hình-học-khai-triển-giá-trị-suy-biến-svd-cặp-bộ-chiếu-hatpi-hattildepi">Bước 2: Ẩn dụ hình học — Khai triển giá trị suy biến (SVD) &amp; Cặp bộ chiếu <span class="math inline">(\hat{\Pi}, \hat{\tilde{\Pi}})</span></a></li>
+  <li><a href="#bước-3-thiết-kế-dạng-thử-sơ-khởi-ansatz" id="toc-bước-3-thiết-kế-dạng-thử-sơ-khởi-ansatz" class="nav-link" data-scroll-target="#bước-3-thiết-kế-dạng-thử-sơ-khởi-ansatz">Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)</a></li>
+  <li><a href="#bước-4-khớp-hệ-số-định-lý-biến-đổi-giá-trị-suy-biến" id="toc-bước-4-khớp-hệ-số-định-lý-biến-đổi-giá-trị-suy-biến" class="nav-link" data-scroll-target="#bước-4-khớp-hệ-số-định-lý-biến-đổi-giá-trị-suy-biến">Bước 4: Khớp hệ số — Định lý biến đổi giá trị suy biến</a></li>
+  </ul></li>
+  <li><a href="#quy-trình-nghiên-cứu-6-giai-đoạn-cho-qsvt" id="toc-quy-trình-nghiên-cứu-6-giai-đoạn-cho-qsvt" class="nav-link" data-scroll-target="#quy-trình-nghiên-cứu-6-giai-đoạn-cho-qsvt">3. Quy trình nghiên cứu 6 giai đoạn cho QSVT</a>
+  <ul class="collapse">
+  <li><a href="#giai-đoạn-1-mô-hình-hóa-vật-lý-và-xây-dựng-block-encoding" id="toc-giai-đoạn-1-mô-hình-hóa-vật-lý-và-xây-dựng-block-encoding" class="nav-link" data-scroll-target="#giai-đoạn-1-mô-hình-hóa-vật-lý-và-xây-dựng-block-encoding">Giai đoạn 1: Mô hình hóa vật lý và Xây dựng Block-Encoding</a></li>
+  <li><a href="#giai-đoạn-2-thiết-kế-mạch-hatpi_phi-và-tổng-hợp-chuỗi-góc-pha" id="toc-giai-đoạn-2-thiết-kế-mạch-hatpi_phi-và-tổng-hợp-chuỗi-góc-pha" class="nav-link" data-scroll-target="#giai-đoạn-2-thiết-kế-mạch-hatpi_phi-và-tổng-hợp-chuỗi-góc-pha">Giai đoạn 2: Thiết kế mạch <span class="math inline">\hat{\Pi}_{\phi}</span> và Tổng hợp chuỗi góc pha</a></li>
+  <li><a href="#giai-đoạn-3-phân-tích-lý-thuyết-về-sai-số-và-ước-lượng-tài-nguyên" id="toc-giai-đoạn-3-phân-tích-lý-thuyết-về-sai-số-và-ước-lượng-tài-nguyên" class="nav-link" data-scroll-target="#giai-đoạn-3-phân-tích-lý-thuyết-về-sai-số-và-ước-lượng-tài-nguyên">Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên</a></li>
+  <li><a href="#giai-đoạn-4-kiểm-chứng-bằng-mô-phỏng-cổ-điển-chuẩn" id="toc-giai-đoạn-4-kiểm-chứng-bằng-mô-phỏng-cổ-điển-chuẩn" class="nav-link" data-scroll-target="#giai-đoạn-4-kiểm-chứng-bằng-mô-phỏng-cổ-điển-chuẩn">Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn</a></li>
+  <li><a href="#giai-đoạn-5-mô-hình-hóa-nhiễu-và-chiến-lược-chuyển-giao-ftqc" id="toc-giai-đoạn-5-mô-hình-hóa-nhiễu-và-chiến-lược-chuyển-giao-ftqc" class="nav-link" data-scroll-target="#giai-đoạn-5-mô-hình-hóa-nhiễu-và-chiến-lược-chuyển-giao-ftqc">Giai đoạn 5: Mô hình hóa nhiễu và Chiến lược chuyển giao FTQC</a></li>
+  <li><a href="#giai-đoạn-6-thực-thi-và-tái-lập-nghiên-cứu" id="toc-giai-đoạn-6-thực-thi-và-tái-lập-nghiên-cứu" class="nav-link" data-scroll-target="#giai-đoạn-6-thực-thi-và-tái-lập-nghiên-cứu">Giai đoạn 6: Thực thi và Tái lập nghiên cứu</a></li>
+  </ul></li>
+  <li><a href="#tổng-kết-đặc-tính-giới-hạn-áp-dụng" id="toc-tổng-kết-đặc-tính-giới-hạn-áp-dụng" class="nav-link" data-scroll-target="#tổng-kết-đặc-tính-giới-hạn-áp-dụng">4. Tổng kết đặc tính &amp; Giới hạn áp dụng</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../note/simulation/index.html">Simulations</a></li><li class="breadcrumb-item"><a href="../../note/simulation/qsvt.html">Quantum Singular Value Transformation (QSVT)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Quantum Singular Value Transformation (QSVT)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>TgX.2 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="tổng-quan-bối-cảnh-vật-lý" class="level2">
+<h2 class="anchored" data-anchor-id="tổng-quan-bối-cảnh-vật-lý">1. Tổng quan &amp; Bối cảnh vật lý</h2>
+<p><strong>Biến đổi giá trị suy biến lượng tử (Quantum Singular Value Transformation — QSVT)</strong> do Gilyén, Su, Low và Wiebe công bố (STOC 2019) được xem là <strong>“Lý thuyết thống nhất lớn” (Grand Unification)</strong> của các thuật toán lượng tử hiện đại.</p>
+<p>Nếu như QSP yêu cầu ma trận đầu vào phải là <strong>ma trận vuông và Hermite</strong> (để có phổ trị riêng thực <span class="math inline">\lambda \in [-1, 1]</span>), thì QSVT gỡ bỏ hoàn toàn ràng buộc đó: nó hoạt động trên <strong>bất kỳ ma trận chữ nhật hay phi Hermite nào <span class="math inline">\hat{A}</span></strong> được nhúng trong một mạch đơn vị <span class="math inline">\hat{U}_A</span>, biến đổi trực tiếp từng <strong>giá trị suy biến <span class="math inline">\sigma_k \mapsto P^{(SV)}(\sigma_k)</span></strong> trong khi vẫn bảo toàn các vector suy biến trái và phải! Nhờ vậy, chỉ với <strong>một khuôn mẫu mạch lượng tử duy nhất</strong>, QSVT bao trùm toàn bộ các thuật toán lượng tử lớn: mô phỏng Hamiltonian (<span class="math inline">e^{-itx}</span>), giải hệ phương trình tuyến tính HHL (<span class="math inline">x^{-1}</span>), khuếch đại biên độ Grover, và lọc trạng thái cơ bản (<span class="math inline">\text{sgn}(x)</span>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Thuộc tính</th>
+<th style="text-align: left;">Đặc trưng của QSVT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Chế độ phần cứng</strong></td>
+<td style="text-align: left;"><strong>FTQC</strong> (khuôn mẫu mạch thống nhất cho đại số tuyến tính &amp; mô phỏng lượng tử)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Lớp ma trận hỗ trợ</strong></td>
+<td style="text-align: left;"><strong>Bất kỳ ma trận <span class="math inline">\hat{A}</span> nào</strong> (vuông, chữ nhật, phi Hermite, suy biến)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Số qubit phụ thêm vào</strong></td>
+<td style="text-align: left;">Chỉ <strong>1 qubit</strong> (ngoài số qubit của Block-Encoding <span class="math inline">\hat{U}_A</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Độ phức tạp truy vấn</strong></td>
+<td style="text-align: left;"><span class="math inline">O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)</span> cho mô phỏng Hamiltonian</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="tư-duy-kiến-tạo-công-thức-từ-nguyên-lý-gốc" class="level2">
+<h2 class="anchored" data-anchor-id="tư-duy-kiến-tạo-công-thức-từ-nguyên-lý-gốc">2. Tư duy kiến tạo công thức từ nguyên lý gốc</h2>
+<p>QSVT là bước mở rộng hình học tự nhiên từ <strong>một bộ chiếu (QSP)</strong> sang <strong>hai bộ chiếu (SVD)</strong> thông qua định lý Jordan:</p>
+<section id="bước-1-nhận-diện-nút-thắt-cổ-chai-của-qsp" class="level3">
+<h3 class="anchored" data-anchor-id="bước-1-nhận-diện-nút-thắt-cổ-chai-của-qsp">Bước 1: Nhận diện nút thắt cổ chai của QSP</h3>
+<p>Trong QSP/Qubitization, ta chỉ có một bộ chiếu <span class="math inline">\hat{\Pi} = |0\rangle\langle 0|_a \otimes \hat{I}_s</span> và yêu cầu <span class="math inline">\hat{\Pi}\hat{U}_H\hat{\Pi}</span> phải biểu diễn một ma trận Hermite. Nếu <span class="math inline">\hat{A}</span> không phải Hermite (ví dụ toán tử nhảy của hệ mở Lindblad, toán tử bước tiến thời gian ảo, hoặc ma trận chữ nhật <span class="math inline">M \times N</span>), ma trận <span class="math inline">\hat{A}</span> ánh xạ vector từ một không gian nguồn <span class="math inline">\mathcal{H}_R</span> sang một không gian đích khác <span class="math inline">\mathcal{H}_L</span>, nên một bộ chiếu duy nhất không thể đóng kín quỹ đạo!</p>
+</section>
+<section id="bước-2-ẩn-dụ-hình-học-khai-triển-giá-trị-suy-biến-svd-cặp-bộ-chiếu-hatpi-hattildepi" class="level3">
+<h3 class="anchored" data-anchor-id="bước-2-ẩn-dụ-hình-học-khai-triển-giá-trị-suy-biến-svd-cặp-bộ-chiếu-hatpi-hattildepi">Bước 2: Ẩn dụ hình học — Khai triển giá trị suy biến (SVD) &amp; Cặp bộ chiếu <span class="math inline">(\hat{\Pi}, \hat{\tilde{\Pi}})</span></h3>
+<p>Mọi ma trận <span class="math inline">\hat{A}</span> bất kỳ đều có khai triển giá trị suy biến (Singular Value Decomposition):</p>
+<p><span class="math display">\hat{A} = \sum_{k=1}^{r} \sigma_k \, |\tilde{\psi}_k\rangle\langle\psi_k|, \quad \sigma_k \in [0, 1]</span></p>
+<p>trong đó <span class="math inline">\{|\psi_k\rangle\}</span> là các vector suy biến phải trực chuẩn và <span class="math inline">\{|\tilde{\psi}_k\rangle\}</span> là các vector suy biến trái trực chuẩn.</p>
+<p>Hãy nhìn tác động của cặp toán tử <span class="math inline">\hat{U}_A</span> và <span class="math inline">\hat{U}_A^\dagger</span> giữa hai không gian chiếu <span class="math inline">\hat{\Pi}</span> (không gian phải) và <span class="math inline">\hat{\tilde{\Pi}}</span> (không gian trái): * <span class="math inline">\hat{U}_A</span> đưa <span class="math inline">|\psi_k\rangle</span> từ không gian <span class="math inline">\hat{\Pi}</span> sang tổ hợp của <span class="math inline">|\tilde{\psi}_k\rangle</span> (trong <span class="math inline">\hat{\tilde{\Pi}}</span>) và một vector trực giao <span class="math inline">|\tilde{\perp}_k\rangle</span>. * Sau đó, <span class="math inline">\hat{U}_A^\dagger</span> đưa tổ hợp đó <strong>quay trở lại đúng mặt phẳng 2 chiều</strong> <span class="math inline">\text{span}\{|\psi_k\rangle, |\perp_k\rangle\}</span> trong không gian phải!</p>
+<p>Nói cách khác, cặp phép phản xạ qua <span class="math inline">\hat{\Pi}</span> và <span class="math inline">\hat{\tilde{\Pi}}</span> kết hợp với cặp <span class="math inline">\hat{U}_A, \hat{U}_A^\dagger</span> chia toàn bộ không gian thành các cặp mặt phẳng 2 chiều liên hợp ứng với từng giá trị suy biến <span class="math inline">\sigma_k</span>!</p>
+</section>
+<section id="bước-3-thiết-kế-dạng-thử-sơ-khởi-ansatz" class="level3">
+<h3 class="anchored" data-anchor-id="bước-3-thiết-kế-dạng-thử-sơ-khởi-ansatz">Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)</h3>
+<p>Cho một <span class="math inline">(\alpha, a, \epsilon)</span>-Block-Encoding <span class="math inline">\hat{U}_A</span> sao cho <span class="math inline">\hat{\tilde{\Pi}}\hat{U}_A\hat{\Pi} = \hat{A}/\alpha</span>. Định nghĩa hai toán tử quay pha điều khiển bởi bộ chiếu:</p>
+<p><span class="math display">\hat{\Pi}_{\phi} = e^{i\phi(2\hat{\Pi} - \hat{I})}, \qquad \hat{\tilde{\Pi}}_{\phi} = e^{i\phi(2\hat{\tilde{\Pi}} - \hat{I})}</span></p>
+<p>Bằng cách xen kẽ <span class="math inline">\hat{U}_A</span> (đi từ phải sang trái) với <span class="math inline">\hat{U}_A^\dagger</span> (đi từ trái về phải) và chèn các phép quay pha <span class="math inline">\hat{\Pi}_{\phi_k}, \hat{\tilde{\Pi}}_{\phi_k}</span> ở mỗi đầu cầu, ta đặt Ansatz cho chuỗi QSVT bậc <span class="math inline">d</span>:</p>
+<p><span class="math display">\hat{U}_{\boldsymbol{\Phi}} = \begin{cases} \hat{\tilde{\Pi}}_{\phi_1} \hat{U}_A \displaystyle\prod_{k=1}^{(d-1)/2} \left(\hat{\Pi}_{\phi_{2k}} \hat{U}_A^\dagger \, \hat{\tilde{\Pi}}_{\phi_{2k+1}} \hat{U}_A\right), &amp; \text{if } d \text{ is odd} \\[12pt] \displaystyle\prod_{k=1}^{d/2} \left(\hat{\Pi}_{\phi_{2k-1}} \hat{U}_A^\dagger \, \hat{\tilde{\Pi}}_{\phi_{2k}} \hat{U}_A\right), &amp; \text{if } d \text{ is even} \end{cases}</span></p>
+</section>
+<section id="bước-4-khớp-hệ-số-định-lý-biến-đổi-giá-trị-suy-biến" class="level3">
+<h3 class="anchored" data-anchor-id="bước-4-khớp-hệ-số-định-lý-biến-đổi-giá-trị-suy-biến">Bước 4: Khớp hệ số — Định lý biến đổi giá trị suy biến</h3>
+<p>Phân tích tác động của <span class="math inline">\hat{U}_{\boldsymbol{\Phi}}</span> trên từng cặp không gian con bất biến <span class="math inline">\{|\psi_k\rangle, |\perp_k\rangle\}</span> và <span class="math inline">\{|\tilde{\psi}_k\rangle, |\tilde{\perp}_k\rangle\}</span> của giá trị suy biến <span class="math inline">\sigma_k</span>: trên mỗi cặp không gian con này, <span class="math inline">\hat{U}_A</span> đóng vai trò giống hệt ma trận quay <span class="math inline">\hat{W}(\sigma_k)</span> của QSP!</p>
+<p>Áp dụng trực tiếp định lý QSP trên từng giá trị suy biến <span class="math inline">\sigma_k</span>, phép chiếu đầu ra thu được một <strong>đa thức giá trị suy biến <span class="math inline">P^{(SV)}(\hat{A}/\alpha)</span></strong> hoàn toàn tổng quát:</p>
+<p><span class="math display">\begin{cases} \hat{\tilde{\Pi}} \, \hat{U}_{\boldsymbol{\Phi}} \, \hat{\Pi} = \displaystyle\sum_{k=1}^{r} P\left(\frac{\sigma_k}{\alpha}\right) |\tilde{\psi}_k\rangle\langle\psi_k|, &amp; \text{if } d \text{ is odd (maps right to left singular space)} \\[12pt] \hat{\Pi} \, \hat{U}_{\boldsymbol{\Phi}} \, \hat{\Pi} = \displaystyle\sum_{k=1}^{r} P\left(\frac{\sigma_k}{\alpha}\right) |\psi_k\rangle\langle\psi_k|, &amp; \text{if } d \text{ is even (preserves right singular space)} \end{cases}</span></p>
+<p>Với bài toán mô phỏng tiến hóa Hamiltonian <span class="math inline">\hat{H}</span> (trường hợp riêng khi <span class="math inline">\hat{A} = \hat{H}</span> Hermite nên <span class="math inline">|\tilde{\psi}_k\rangle = |\psi_k\rangle</span> và <span class="math inline">\sigma_k = |\lambda_k|</span>), ta chỉ cần: 1. Tổng hợp đa thức chẵn <span class="math inline">P_{\text{even}}(x) \approx \frac{1}{2}\cos(\alpha t x)</span> (dùng chuỗi QSVT bậc chẵn) và đa thức lẻ <span class="math inline">P_{\text{odd}}(x) \approx -\frac{i}{2}\sin(\alpha t x)</span> (dùng chuỗi QSVT bậc lẻ). 2. Kết hợp hai mạch này bằng <strong>1 qubit phụ LCU</strong> để thu được <span class="math inline">\frac{1}{2}e^{-i\hat{H}t}</span> (hoặc dùng QSVT đa thức phức tổng quát mà không cần cộng hai mạch nếu điều chỉnh pha)!</p>
+<hr>
+</section>
+</section>
+<section id="quy-trình-nghiên-cứu-6-giai-đoạn-cho-qsvt" class="level2">
+<h2 class="anchored" data-anchor-id="quy-trình-nghiên-cứu-6-giai-đoạn-cho-qsvt">3. Quy trình nghiên cứu 6 giai đoạn cho QSVT</h2>
+<section id="giai-đoạn-1-mô-hình-hóa-vật-lý-và-xây-dựng-block-encoding" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-1-mô-hình-hóa-vật-lý-và-xây-dựng-block-encoding">Giai đoạn 1: Mô hình hóa vật lý và Xây dựng Block-Encoding</h3>
+<ul>
+<li><strong>Định nghĩa cặp bộ chiếu <span class="math inline">(\hat{\Pi}, \hat{\tilde{\Pi}})</span>:</strong> Trong hầu hết các bài toán mô phỏng Hamiltonian vuông, <span class="math inline">\hat{\Pi} = \hat{\tilde{\Pi}} = |0\rangle^{\otimes a}\langle 0|^{\otimes a} \otimes \hat{I}_s</span>. Với các bài toán tiến hóa thời gian ảo hoặc hệ mở, <span class="math inline">\hat{A}</span> có thể là toán tử Kraus phi Hermite hoặc ma trận chuyển đổi giữa hai không gian.</li>
+<li><strong>Nén hệ số chuẩn hóa <span class="math inline">\alpha</span>:</strong> Áp dụng các kỹ thuật tiền xử lý Hamiltonian (như Double Factorization, Tensor Hypercontraction, hoặc phân rã Pauli gom nhóm) sao cho <span class="math inline">\|\hat{A}\| \le \alpha</span> với <span class="math inline">\alpha</span> nhỏ nhất có thể.</li>
+</ul>
+</section>
+<section id="giai-đoạn-2-thiết-kế-mạch-hatpi_phi-và-tổng-hợp-chuỗi-góc-pha" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-2-thiết-kế-mạch-hatpi_phi-và-tổng-hợp-chuỗi-góc-pha">Giai đoạn 2: Thiết kế mạch <span class="math inline">\hat{\Pi}_{\phi}</span> và Tổng hợp chuỗi góc pha</h3>
+<ul>
+<li><strong>Cài đặt cổng quay điều khiển bộ chiếu <span class="math inline">\hat{\Pi}_\phi</span>:</strong> Chỉ cần <strong>1 qubit ancilla phụ</strong> <span class="math inline">|\cdot\rangle_q</span>: dùng cổng đa điều khiển Toffoli kiểm tra xem thanh ghi phụ của Block-Encoding có ở trạng thái <span class="math inline">|0\rangle^{\otimes a}</span> hay không; nếu đúng, lật qubit <span class="math inline">|\cdot\rangle_q</span>, áp dụng cổng quay đơn qubit <span class="math inline">R_Z(2\phi)</span> lên <span class="math inline">|\cdot\rangle_q</span>, rồi giải tính toán cổng Toffoli!</li>
+<li><strong>Tìm chuỗi góc pha <span class="math inline">\boldsymbol{\Phi}</span>:</strong> Dùng thuật toán tối ưu hóa cổ điển đối xứng (Symmetric QSP phase finding) để tính bộ góc <span class="math inline">\boldsymbol{\Phi} = (\phi_1, \dots, \phi_d)</span> cho đa thức Chebyshev–Jacobi–Anger của <span class="math inline">\cos(\alpha t x)</span> và <span class="math inline">\sin(\alpha t x)</span>.</li>
+</ul>
+</section>
+<section id="giai-đoạn-3-phân-tích-lý-thuyết-về-sai-số-và-ước-lượng-tài-nguyên" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-3-phân-tích-lý-thuyết-về-sai-số-và-ước-lượng-tài-nguyên">Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên</h3>
+<ul>
+<li><strong>Cận sai số đồng nhất cho mọi giá trị suy biến:</strong> Vì mọi giá trị suy biến <span class="math inline">\sigma_k / \alpha</span> đều nằm trong <span class="math inline">[0, 1] \subset [-1, 1]</span>, sai số chuẩn phổ của toàn bộ ma trận sau QSVT bị chặn chặt bởi sai số cực đại của đa thức vô hướng: <span class="math display">\left\| \hat{\Pi}\,\hat{U}_{\boldsymbol{\Phi}}\,\hat{\Pi} - P^{(SV)}\left(\frac{\hat{A}}{\alpha}\right) \right\| \le \max_{x \in [-1, 1]} \left| P_{\text{QSP}}(x) - P_{\text{target}}(x) \right|</span></li>
+<li><strong>Độ phức tạp truy vấn tối ưu:</strong> Tổng số lần gọi <span class="math inline">\hat{U}_A</span> và <span class="math inline">\hat{U}_A^\dagger</span> là <span class="math inline">d = O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)</span>, đạt cận dưới lý thuyết về cả thời gian <span class="math inline">t</span> và độ chính xác <span class="math inline">1/\epsilon</span>.</li>
+</ul>
+</section>
+<section id="giai-đoạn-4-kiểm-chứng-bằng-mô-phỏng-cổ-điển-chuẩn" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-4-kiểm-chứng-bằng-mô-phỏng-cổ-điển-chuẩn">Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn</h3>
+<ul>
+<li><strong>Đối chiếu từng giá trị suy biến:</strong> Xây dựng ma trận <span class="math inline">\hat{U}_{\boldsymbol{\Phi}}</span> trên hệ nhỏ, chiếu khối <span class="math inline">\hat{\Pi}\hat{U}_{\boldsymbol{\Phi}}\hat{\Pi}</span> và kiểm tra rằng các vector suy biến phải/trái không bị trộn lẫn chéo, đồng thời từng giá trị suy biến đầu ra khớp với <span class="math inline">P(\sigma_k/\alpha)</span> đến <span class="math inline">10^{-13}</span>.</li>
+<li><strong>Benchmark thống nhất đa tác vụ:</strong> Sử dụng cùng một bộ mã nguồn QSVT để kiểm chứng đồng thời mô phỏng thời gian thực (<span class="math inline">e^{-i\hat{H}t}</span>), lọc trạng thái cơ bản (<span class="math inline">\text{sgn}(\hat{H} - \mu\hat{I})</span>), và tính hàm Green (<span class="math inline">(\hat{H} - \omega\hat{I})^{-1}</span>) chỉ bằng cách thay đổi tệp góc pha <span class="math inline">\boldsymbol{\Phi}</span>.</li>
+</ul>
+</section>
+<section id="giai-đoạn-5-mô-hình-hóa-nhiễu-và-chiến-lược-chuyển-giao-ftqc" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-5-mô-hình-hóa-nhiễu-và-chiến-lược-chuyển-giao-ftqc">Giai đoạn 5: Mô hình hóa nhiễu và Chiến lược chuyển giao FTQC</h3>
+<ul>
+<li><strong>Khả năng chịu lỗi của QSVT:</strong> Trong chế độ FTQC, QSVT có cấu trúc mạch cực kỳ đều đặn (lặp đi lặp lại một khối <span class="math inline">\hat{U}_A</span> cố định), giúp trình biên dịch sửa lỗi bề mặt (Surface Code Compiler) tái sử dụng cùng một bố cục vật lý qua tất cả <span class="math inline">d</span> chu kỳ mà không cần tái định tuyến (re-routing) qubit.</li>
+<li><strong>Khử biên độ suy giảm <span class="math inline">1/2</span>:</strong> Áp dụng 1 bước Khuếch đại biên độ quên lãng (OAA) lên kết quả cuối cùng của tổ hợp <span class="math inline">\frac{1}{2}(\cos(\hat{H}t) - i\sin(\hat{H}t))</span> để nâng xác suất thành công từ <span class="math inline">25\%</span> lên gần <span class="math inline">100\%</span>.</li>
+</ul>
+</section>
+<section id="giai-đoạn-6-thực-thi-và-tái-lập-nghiên-cứu" class="level3">
+<h3 class="anchored" data-anchor-id="giai-đoạn-6-thực-thi-và-tái-lập-nghiên-cứu">Giai đoạn 6: Thực thi và Tái lập nghiên cứu</h3>
+<ul>
+<li><strong>Chuẩn hóa mô-đun phần mềm:</strong> Tách biệt hoàn toàn hai tầng trong mã nguồn công bố: (1) Tầng cổ điển sinh đa thức và tìm góc pha <span class="math inline">\boldsymbol{\Phi}</span> (độc lập với phần cứng), và (2) Tầng mạch lượng tử ghép nối Block-Encoding <span class="math inline">\hat{U}_A</span> với các cổng <span class="math inline">\hat{\Pi}_{\phi_k}</span>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="tổng-kết-đặc-tính-giới-hạn-áp-dụng" class="level2">
+<h2 class="anchored" data-anchor-id="tổng-kết-đặc-tính-giới-hạn-áp-dụng">4. Tổng kết đặc tính &amp; Giới hạn áp dụng</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tiêu chí</th>
+<th style="text-align: left;">Đánh giá chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Điểm mạnh vượt trội</strong></td>
+<td style="text-align: left;">Khuôn mẫu thống nhất bậc nhất trong tính toán lượng tử: xử lý được ma trận chữ nhật, phi Hermite, mô phỏng thời gian thực, thời gian ảo, giải hệ tuyến tính và lọc phổ chỉ bằng cách thay đổi dãy góc pha <span class="math inline">\boldsymbol{\Phi}</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Giới hạn &amp; Rủi ro</strong></td>
+<td style="text-align: left;">Yêu cầu máy tính lượng tử chịu lỗi (FTQC) với cổng đa điều khiển <span class="math inline">\hat{\Pi}_\phi</span> và Block-Encoding <span class="math inline">\hat{U}_A</span>; hiệu suất giảm nếu chuẩn hóa <span class="math inline">\alpha</span> lớn hơn nhiều so với chuẩn phổ <span class="math inline">\|\hat{A}\|</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Điều kiện thất bại</strong></td>
+<td style="text-align: left;">Khi ma trận <span class="math inline">\hat{A}</span> có số điều kiện cực lớn trong bài toán nghịch đảo, hoặc khi không thể xây dựng Block-Encoding <span class="math inline">\hat{U}_A</span> hiệu quả cho cấu trúc Hamiltonian đầu vào.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tgx-2\.github\.io\/note");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../note/simulation/qsp.html" class="pagination-link" aria-label="Quantum Signal Processing (QSP)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quantum Signal Processing (QSP)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../note/simulation/vqs.html" class="pagination-link" aria-label="Variational Quantum Simulation (VQS)">
+        <span class="nav-page-text">Variational Quantum Simulation (VQS)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

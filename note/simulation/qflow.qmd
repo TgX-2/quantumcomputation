@@ -1,0 +1,105 @@
+---
+title: "Quantum Unitary & Subspace Flow (qFlow)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Dòng chảy đơn vị và không gian con lượng tử (Quantum Flow — qFlow)** đại diện cho một nhánh tiếp cận mang tính cấu trúc trong mô phỏng hệ lượng tử tương quan mạnh: thay vì cố gắng mô phỏng trực tiếp một Hamiltonian phức tạp với các bậc tự do năng lượng cao–thấp trộn lẫn nhau, ta áp dụng một **dòng biến đổi đơn vị liên tục (hoặc tự hợp lặp)** $\hat{U}(s)$ để đưa Hamiltonian về dạng **đường chéo khối (block-diagonal)** hoặc **tách rời thang năng lượng (downfolded effective Hamiltonian)** trước khi tính toán động lực học hay trạng thái cơ bản.
+
+Trong văn liệu mô phỏng lượng tử hiện đại, qFlow hội tụ hai dòng chảy tư tưởng lớn:
+1. **Dòng chảy tái chuẩn hóa đơn vị / Thuật toán lượng tử ngoặc kép (Wegner–Wilson Flow & Double-Bracket Quantum Algorithms — DBQA):** Tiến hóa liên tục $\frac{d\hat{H}(s)}{ds} = [\hat{\eta}(s), \hat{H}(s)]$ nhằm triệt tiêu các phần tử ngoài đường chéo bằng các bước giao hoán tử đơn vị đệ quy.
+2. **Dòng chảy thu gọn không gian hoạt động (Active-Space Downfolding Flow — QFlow của Kowalski & Bauman):** Phân rã một hệ fermion khổng lồ thành nhiều không gian hoạt động (active spaces) nhỏ liên kết với nhau qua phép biến đổi tương tự Double Unitary Coupled Cluster (DUCC), giải tuần tự từng mảnh trên QPU và cập nhật tự hợp cho đến khi hội tụ.
+
+| Thuộc tính | Đặc trưng của qFlow |
+| :--- | :--- |
+| **Chế độ phần cứng** | Cả **NISQ** (thu nhỏ số qubit cần thiết qua downfolding, hoặc mạch DBQA không ancilla) và **FTQC** |
+| **Phương trình chủ đạo** | Phương trình dòng Lax–Heisenberg $\frac{d\hat{H}(s)}{ds} = [\hat{\eta}(s), \hat{H}(s)]$ |
+| **Bộ sinh chuẩn (Canonical Generator)** | $\hat{\eta}(s) = [\hat{D}, \hat{H}(s)]$ (dòng Brockett / Wegner) |
+| **Mục tiêu vật lý** | Tách thang năng lượng (renormalization), chéo hóa hóa Hamiltonian, nén kích thước bài toán |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+qFlow bắt nguồn từ trực giác vật lý về **nhóm tái chuẩn hóa (Renormalization Group)** trong vật lý vật chất ngưng tụ và lý thuyết trường lượng tử:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Khi mô phỏng các vật liệu tương quan mạnh hoặc phân tử lớn (như các phức chất xúc tác kim loại chuyển tiếp), không gian Hilbert quá lớn so với số qubit khả dụng. Nếu cắt bỏ thô bạo các orbital năng lượng cao (frozen-core approximation), ta làm mất toàn bộ tương quan động lực học (dynamical correlation) và thu được năng lượng sai lệch nghiêm trọng. Ngược lại, giữ lại toàn bộ orbital thì vượt quá khả năng phần cứng.
+
+### Bước 2: Ẩn dụ vật lý — Dòng chảy mượt mà làm phẳng địa hình năng lượng
+Hãy tưởng tượng ma trận Hamiltonian $\hat{H}$ là một bức tranh địa hình: đường chéo chính là các dãy núi năng lượng riêng, còn các phần tử ngoài đường chéo là những cây cầu nối chằng chịt làm trộn lẫn các trạng thái năng lượng cao và thấp.
+
+Thay vì tìm một phép biến đổi đơn vị khổng lồ một lần để phá hủy toàn bộ các cây cầu (tức giải chính xác bài toán), Franz Wegner và Kenneth Wilson đề xuất cho ma trận **chảy liên tục** theo một tham số ảo $s \ge 0$ qua họ biến đổi đơn vị $\hat{H}(s) = \hat{U}(s)\hat{H}(0)\hat{U}^\dagger(s)$. Lấy đạo hàm hai vế theo $s$ và đặt $\hat{\eta}(s) = \frac{d\hat{U}(s)}{ds}\hat{U}^\dagger(s)$ (một toán tử phản Hermite $\hat{\eta}^\dagger = -\hat{\eta}$), ta thu được **phương trình dòng Lax–Heisenberg**:
+
+$$\frac{d\hat{H}(s)}{ds} = [\hat{\eta}(s), \hat{H}(s)]$$
+
+Nếu chọn bộ sinh $\hat{\eta}(s)$ khéo léo, dòng chảy này sẽ tự động bào mòn mọi phần tử ngoài đường chéo một cách đơn điệu!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Để biến phương trình vi phân ma trận trên thành cổng lượng tử khả thi, ta xét hai thiết kế Ansatz tương ứng với hai nhánh của qFlow:
+
+1. **Ansatz dòng ngoặc kép (Brockett / Wegner Flow):** Chọn $\hat{\eta}(s) = [\hat{D}, \hat{H}(s)]$, trong đó $\hat{D}$ là một toán tử đường chéo cố định (ví dụ $\hat{D} = \sum_i d_i \hat{Z}_i$) hoặc chính phần đường chéo $\hat{H}_{\text{diag}}(s)$. Khi rời rạc hóa theo bước nhỏ $\delta s$, mỗi bước cập nhật đơn vị có dạng hàm mũ của một giao hoán tử:
+   $$\hat{H}(s + \delta s) = e^{\delta s [\hat{D}, \hat{H}(s)]} \, \hat{H}(s) \, e^{-\delta s [\hat{D}, \hat{H}(s)]}$$
+2. **Ansatz dòng không gian con (Active-Space QFlow):** Chia toàn bộ tập spin-orbital thành $M$ không gian hoạt động con $\mathcal{A}_1, \mathcal{A}_2, \dots, \mathcal{A}_M$ có kích thước nhỏ (vừa đủ cho một chip lượng tử $n_{\text{sub}}$ qubit). Biểu diễn phép biến đổi đơn vị toàn cục dưới dạng tích các toán tử cụm liên kết đơn vị (UCC) trên từng không gian con:
+   $$\hat{H}^{\text{eff}}_k = e^{-\hat{\sigma}_{\text{ext}, k}} \hat{H} e^{\hat{\sigma}_{\text{ext}, k}}$$
+
+### Bước 4: Khớp hệ số và Rút trích công thức cốt lõi
+* **Chứng minh tính hội tụ đơn điệu của dòng Wegner–Brockett:** Lấy đạo hàm theo $s$ của tổng bình phương các phần tử ngoài đường chéo $O(s) = \sum_{i \neq j} |H_{ij}(s)|^2$ dưới bộ sinh $\hat{\eta}(s) = [\hat{D}, \hat{H}(s)]$:
+  $$\frac{d}{ds} \sum_{i \neq j} |H_{ij}(s)|^2 = -2 \sum_{i \neq j} (D_i - D_j)^2 |H_{ij}(s)|^2 \le 0$$
+  Bất đẳng thức này chứng minh rằng mọi phần tử ngoài đường chéo nối hai mức có $D_i \neq D_j$ đều **tắt dần theo hàm mũ** $H_{ij}(s) \sim H_{ij}(0) e^{-(D_i - D_j)^2 s}$!
+
+* **Công thức mạch lượng tử ngoặc kép (DBQA):** Làm sao thực hiện cổng đơn vị $e^{\delta s [\hat{D}, \hat{H}]}$ trên QPU khi $\hat{H}$ chỉ cho dưới dạng hộp đen tiến hóa thời gian $e^{-i\hat{H}t}$? Áp dụng **đồng nhất thức giao hoán tử nhóm (Group Commutator Identity)**:
+  $$e^{i\sqrt{\delta s}\,\hat{D}} \, e^{i\sqrt{\delta s}\,\hat{H}} \, e^{-i\sqrt{\delta s}\,\hat{D}} \, e^{-i\sqrt{\delta s}\,\hat{H}} = e^{\delta s [\hat{D}, \hat{H}]} + O(\delta s^{3/2})$$
+  Công thức này cho phép chéo hóa hoặc làm nguội $\hat{H}$ hoàn toàn bằng các cổng tiến hóa thời gian thông thường **mà không cần bất kỳ qubit phụ hay tối ưu hóa biến phân nào**!
+
+* **Điều kiện dừng tự hợp của Active-Space QFlow:** Các biên độ kích thích $\boldsymbol{\theta}^{(k)}$ trên từng không gian con $\mathcal{A}_k$ được cập nhật luân phiên qua các bài toán VQE/QPE cục bộ cho đến khi thỏa mãn điều kiện chiếu Brillouin tổng quát:
+  $$\langle \Phi_0 | \hat{Q}_k \, e^{-\hat{\sigma}_{\text{total}}} \hat{H} e^{\hat{\sigma}_{\text{total}}} | \Phi_0 \rangle = 0, \quad \forall k = 1, \dots, M$$
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho qFlow
+
+### Giai đoạn 1: Mô hình hóa vật lý và Phân hoạch thang năng lượng
+* **Với DBQA (Wegner–Brockett Flow):** Chọn toán tử dẫn đường $\hat{D}$ phù hợp với cấu trúc bài toán — ví dụ chọn $\hat{D} = \hat{H}_0$ (phần không tương tác giải được chính xác) để tách rời các dải năng lượng Hubbard, hoặc chọn $\hat{D} = \sum_i 2^i \hat{Z}_i$ để phá vỡ mọi suy biến phổ.
+* **Với Active-Space QFlow:** Dùng phân tích entropy orbital đơn/đôi (từ tính toán DMRG cổ điển thô) để gom nhóm các orbital có tương quan mạnh nhất vào cùng một không gian con $\mathcal{A}_k$.
+
+### Giai đoạn 2: Thiết kế mạch đệ quy ngoặc kép hoặc Vòng lặp Subspace
+* **Biên dịch đệ quy của DBQA:** Tại bước dòng chảy thứ $m$, toán tử đơn vị tích lũy là $\hat{U}_{m+1} = \hat{W}_m \hat{U}_m$, trong đó:
+  $$\hat{W}_m = e^{i\sqrt{\delta s_m}\,\hat{D}} \, \hat{U}_m e^{i\sqrt{\delta s_m}\,\hat{H}} \hat{U}_m^\dagger \, e^{-i\sqrt{\delta s_m}\,\hat{D}} \, \hat{U}_m e^{-i\sqrt{\delta s_m}\,\hat{H}} \hat{U}_m^\dagger$$
+  Mỗi bước tận dụng chính các khối tiến hóa thời gian $e^{\pm i\sqrt{\delta s_m}\hat{H}}$ (cài đặt bằng Trotter bậc 2) và phép quay đường chéo $e^{\pm i\sqrt{\delta s_m}\hat{D}}$.
+* **Biên dịch Active-Space QFlow:** Xây dựng Hamiltonian hiệu dụng thu gọn bậc 2 (rank-2 downfolded Hamiltonian) $\hat{H}^{\text{eff}}_k$ cho không gian con $\mathcal{A}_k$ bằng phép rút gọn Wick trên máy tính cổ điển, sau đó gửi mạch $n_{\text{sub}}$ qubit lên QPU.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Tốc độ giảm phương sai năng lượng (Energy Fluctuation Decay):** Với DBQA, phương sai năng lượng $\Delta E^2(s) = \langle\psi(s)|\hat{H}^2|\psi(s)\rangle - \langle\psi(s)|\hat{H}|\psi(s)\rangle^2$ giảm đơn điệu theo quy luật:
+  $$\frac{d}{ds}\Delta E^2(s) = -2\langle\psi(s)| [\hat{H}, [\hat{D}, \hat{H}]] \hat{H} |\psi(s)\rangle$$
+  giúp định lượng chính xác số bước dòng chảy $M_{\text{flow}}$ cần thiết để đưa trạng thái về gần trạng thái riêng.
+* **Đánh đổi độ sâu mạch vs. số qubit:** DBQA có độ sâu tăng theo hàm mũ nếu thực hiện đệ quy thuần túy nên phù hợp nhất cho vài bước làm sạch đầu tiên (pre-conditioning cho QPE), trong khi Active-Space QFlow giữ số qubit cố định ở mức $n_{\text{sub}} \ll N_{\text{total}}$ với chi phí tăng số vòng lặp tự hợp cổ điển.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Theo dõi độ tắt của phần tử ngoài đường chéo:** Trên hệ spin hoặc mô hình Anderson/Hubbard 6–12 qubit, vẽ đồ thị chuẩn Frobenius của phần ngoài đường chéo $\|\hat{H}_{\text{off-diag}}(s)\|_F$ theo tham số dòng chảy $s$ để kiểm chứng đường cong suy giảm mũ lý thuyết.
+* **Kiểm tra tính nhất quán kích thước (Size-Consistency):** Với Active-Space QFlow, kiểm tra xem năng lượng tổng có cộng tính chính xác khi tách đôi hai phân tử không tương tác hay không.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Chiến lược lai hóa
+* **Tối ưu lịch trình bước dòng chảy $\{\delta s_m\}$:** Áp dụng công thức bước tối ưu động (riemannian step-size optimization) bằng cách đo kỳ vọng giao hoán tử bậc hai trên QPU để chọn $\delta s_m$ lớn nhất mà không làm bật ngược phương sai năng lượng.
+* **Tận dụng tính kháng nhiễu của downfolding:** Trong Active-Space QFlow, vì mạch trên QPU chỉ chạy trên $n_{\text{sub}}$ qubit (ví dụ 8–12 qubit thay vì 100 qubit), tỷ lệ lỗi cổng tích lũy giảm đi hàng chục lần.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Quy trình thực thi lai:** Kết hợp 1–2 bước làm mượt DBQA ở đầu mạch với ước lượng pha lượng tử (QPE) hoặc VQE trên không gian con đã thu gọn để thu được năng lượng trạng thái cơ bản đạt độ chính xác hóa học ($1.6\text{ mHa}$).
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Không cần tối ưu hóa tham số mù quáng (trong DBQA) vì phương trình dòng chảy tự dẫn đường theo gradient Riemannian; cho phép mô phỏng phân tử/vật liệu khổng lồ trên chip ít qubit (trong Active-Space QFlow). |
+| **Giới hạn & Rủi ro** | Đệ quy ngoặc kép thuần túy của DBQA làm tăng số lần gọi $e^{-i\hat{H}t}$ theo cấp số nhân nếu chạy quá nhiều bước; Active-Space QFlow có thể hội tụ chậm nếu các không gian con chồng lấp mạnh. |
+| **Điều kiện thất bại** | Chọn toán tử dẫn đường $\hat{D}$ giao hoán hoàn toàn với $\hat{H}$ ($[\hat{D}, \hat{H}] = 0$), khiến dòng chảy đứng yên ngay từ bước đầu tiên ($\hat{\eta}(0) = 0$). |

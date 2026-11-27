@@ -1,0 +1,114 @@
+---
+title: "Linear Combination of Unitaries (LCU)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Tổ hợp tuyến tính các toán tử đơn vị (Linear Combination of Unitaries — LCU)** là nguyên lý kiến trúc trung tâm của kỷ nguyên thuật toán lượng tử hậu-Trotter. Nếu như công thức tích chỉ biết **nhân** các ma trận đơn vị ($U_1 U_2 \cdots U_L$), thì LCU cung cấp một cơ chế phần cứng chuẩn xác để **cộng** trực tiếp các ma trận đơn vị:
+
+$$\hat{A} = \sum_{l=0}^{L-1} \alpha_l \hat{U}_l$$
+
+Bản thân tổng $\hat{A}$ nói chung **không phải là toán tử đơn vị** ($\hat{A}^\dagger \hat{A} \neq \hat{I}$). LCU giải quyết nghịch lý này bằng cách nhúng $\hat{A}$ vào một không gian Hilbert mở rộng có thêm thanh ghi qubit phụ (ancilla), biến phép cộng không bảo toàn chuẩn thành hiện tượng giao thoa lượng tử đa khe.
+
+| Thuộc tính | Đặc trưng của LCU |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (đòi hỏi cổng điều khiển đa qubit `SELECT` và khuếch đại biên độ OAA) |
+| **Số qubit phụ (Ancilla)** | $n_a = \lceil \log_2 L \rceil$ qubit |
+| **Xác suất thành công thô** | $P_{\text{success}} = \|\hat{A}|\psi\rangle\|^2 / \lambda^2$ với $\lambda = \sum_l \alpha_l$ |
+| **Vai trò nền tảng** | Bộ khung hạ tầng cho Taylor Series, Qubitization, QSVT và giải hệ tuyến tính |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+Quá trình hình thành LCU của Childs và Wiebe (2012) xuất phát từ việc dịch trực giác quang học sang đại số tuyến tính:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Mọi định lý tiến hóa lượng tử đều đòi hỏi phép biến đổi trên thanh ghi chính phải là đơn vị để bảo toàn xác suất. Tuy nhiên, hầu hết các hàm toán tử tự nhiên — từ chuỗi Taylor $e^{-i\hat{H}t} \approx \sum_k \frac{(-it)^k}{k!}\hat{H}^k$, hàm Green $(\hat{H} - E)^{-1}$, đến toán tử lọc trạng thái cơ bản $e^{-\beta \hat{H}}$ — đều là **tổng tuyến tính** chứ không phải tích.
+
+### Bước 2: Ẩn dụ vật lý — Giao thoa kế nhiều khe & Định lý giãn nở Naimark
+Hãy hình dung một thí nghiệm giao thoa kế quang học có $L$ khe truyền qua:
+1. Một bộ tách chùm tia (beam splitter) chia biên độ của một hạt điều khiển thành chồng chập của $L$ đường đi $|l\rangle_a$ với biên độ tỷ lệ với $\sqrt{\alpha_l}$.
+2. Trên mỗi đường đi $l$, hệ vật lý chính chịu một tác động đơn vị riêng biệt $\hat{U}_l$.
+3. Một bộ tái hợp chùm tia (bộ tách chùm tia đảo ngược) gộp tất cả các đường đi lại về trạng thái đầu $|0\rangle_a$. Tại lối ra $|0\rangle_a$, các nhánh sóng giao thoa cộng hưởng để tạo ra đúng tổng $\sum_l \alpha_l \hat{U}_l |\psi\rangle$!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Trước hết, chuẩn hóa toàn bộ hệ số sao cho $\alpha_l > 0$ (bằng cách hấp thụ pha $e^{i\theta_l}$ vào toán tử đơn vị $\hat{U}_l$), và đặt chuẩn $\ell_1$:
+
+$$\lambda = \sum_{l=0}^{L-1} \alpha_l$$
+
+Ta định nghĩa hai khối toán tử đơn vị cơ bản trên không gian tích $\mathcal{H}_a \otimes \mathcal{H}_s$:
+* **Oracle chuẩn bị trạng thái ($\text{PREPARE}$):**
+  $$\text{PREPARE}\,|0\rangle_a = \sum_{l=0}^{L-1} \sqrt{\frac{\alpha_l}{\lambda}}\,|l\rangle_a$$
+* **Oracle chọn toán tử điều khiển ($\text{SELECT}$):**
+  $$\text{SELECT} = \sum_{l=0}^{L-1} |l\rangle\langle l|_a \otimes \hat{U}_l$$
+
+### Bước 4: Khớp hệ số và Rút trích công thức cốt lõi
+Xây dựng mạch giao thoa đối xứng $\hat{W} = (\text{PREPARE}^\dagger \otimes \hat{I}_s)\,\text{SELECT}\,(\text{PREPARE} \otimes \hat{I}_s)$ và cho tác động lên trạng thái khởi tạo $|0\rangle_a |\psi\rangle_s$:
+
+$$\begin{aligned}
+\hat{W}|0\rangle_a|\psi\rangle_s &= (\text{PREPARE}^\dagger \otimes \hat{I}_s)\,\text{SELECT} \left(\sum_{l=0}^{L-1} \sqrt{\frac{\alpha_l}{\lambda}}\,|l\rangle_a \otimes |\psi\rangle_s\right) \\
+&= (\text{PREPARE}^\dagger \otimes \hat{I}_s) \left(\sum_{l=0}^{L-1} \sqrt{\frac{\alpha_l}{\lambda}}\,|l\rangle_a \otimes \hat{U}_l|\psi\rangle_s\right)
+\end{aligned}$$
+
+Bây giờ, chiếu kết quả lên trạng thái $|0\rangle_a$ của thanh ghi phụ. Vì $\langle 0|_a \text{PREPARE}^\dagger = (\text{PREPARE}|0\rangle_a)^\dagger = \sum_{m=0}^{L-1} \sqrt{\frac{\alpha_m}{\lambda}}\langle m|_a$, ta thu được:
+
+$$(\langle 0|_a \otimes \hat{I}_s)\hat{W}|0\rangle_a|\psi\rangle_s = \sum_{m,l=0}^{L-1} \frac{\sqrt{\alpha_m \alpha_l}}{\lambda} \langle m | l \rangle_a \hat{U}_l |\psi\rangle_s = \frac{1}{\lambda} \left(\sum_{l=0}^{L-1} \alpha_l \hat{U}_l\right)|\psi\rangle_s = \frac{\hat{A}}{\lambda}|\psi\rangle_s$$
+
+Toàn bộ trạng thái đầu ra của hệ thống mang cấu trúc trực giao chuẩn xác:
+
+$$\hat{W}|0\rangle_a|\psi\rangle_s = \frac{1}{\lambda}|0\rangle_a \hat{A}|\psi\rangle_s + \sqrt{1 - \frac{\|\hat{A}|\psi\rangle\|^2}{\lambda^2}}\,|\Phi^\perp\rangle_{as}$$
+
+trong đó $(\langle 0|_a \otimes \hat{I}_s)|\Phi^\perp\rangle_{as} = 0$.
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho LCU
+
+### Giai đoạn 1: Mô hình hóa vật lý và Phân rã đơn vị
+* **Phân rã Hamiltonian thành các toán tử đơn vị:** Biểu diễn $\hat{H} = \sum_{l=0}^{L-1} \alpha_l \hat{U}_l$ với $\hat{U}_l^\dagger \hat{U}_l = \hat{I}$. Phổ biến nhất là phân rã chuỗi Pauli ($\hat{U}_l \in \{\hat{I}, \hat{X}, \hat{Y}, \hat{Z}\}^{\otimes n}$), phân rã Majorana, hoặc phân rã Tensor Hypercontraction (THC) trong hóa học lượng tử để giảm mạnh chuẩn $\lambda = \sum_l \alpha_l$.
+* **Sắp xếp chỉ số (Index Ordering):** Sắp xếp các số hạng theo mã Gray (Gray code) để giảm số lượng cổng X cần bật/tắt giữa các nhánh điều khiển liên tiếp trong cổng `SELECT`.
+
+### Giai đoạn 2: Thiết kế mạch `PREPARE`, `SELECT` và OAA
+* **Biên dịch `PREPARE`:** Sử dụng cây quay điều khiển (Mottonen state preparation) hoặc kỹ thuật **QROM (Quantum Read-Only Memory)** kết hợp lấy mẫu alias lượng tử (Quantum Alias Sampling) để giảm độ sâu chuẩn bị phân phối $\{\sqrt{\alpha_l/\lambda}\}$ từ $O(L)$ xuống $O(\log L)$ với chi phí qubit phụ bổ sung.
+* **Biên dịch `SELECT`:** Xây dựng mạng điều khiển nhị phân (unary iteration) để áp dụng $\hat{U}_l$ chỉ với $O(L)$ cổng Toffoli thay vì $O(L \log L)$.
+* **Khuếch đại biên độ quên lãng (Oblivious Amplitude Amplification — OAA):** Khi $\hat{A}$ gần đơn vị ($\hat{A}^\dagger \hat{A} \approx \hat{I}$), thay vì đo hậu chọn (post-selection) có xác suất thất bại $1 - 1/\lambda^2$, ta định nghĩa phép phản xạ trên thanh ghi phụ $\hat{R} = (2|0\rangle\langle 0|_a - \hat{I}_a) \otimes \hat{I}_s$ và lặp toán tử Grover quên lãng:
+  $$\hat{G} = -\hat{W}\hat{R}\hat{W}^\dagger\hat{R}$$
+  Sau $k \approx \frac{\pi \lambda}{4}$ lần lặp, xác suất đo được $|0\rangle_a$ tiến tới $1$ **mà không cần biết trạng thái đầu vào $|\psi\rangle_s$**.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Phân tích truyền sai số:** Nếu `PREPARE` có sai số $\epsilon_P$ và `SELECT` có sai số $\epsilon_S$, sai số tổng trên khối mã hóa bị chặn bởi $\|\hat{W}_{\text{noisy}} - \hat{W}_{\text{ideal}}\| \le 2\epsilon_P + \epsilon_S$.
+* **Ước lượng tài nguyên FTQC:**
+  * Số qubit logic: $n_{\text{sys}} + \lceil \log_2 L \rceil + n_{\text{QROM}}$.
+  * Độ phức tạp cổng Toffoli / T-gate cho mỗi lần gọi $\hat{W}$: $O(L)$ cổng T nếu dùng QROM tối ưu.
+  * Chi phí OAA nhân thêm hệ số $O(\lambda)$ lần gọi $\hat{W}$ nếu không chia nhỏ bước thời gian.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Kiểm tra tính trực giao của phần dư:** Trên trình mô phỏng vector trạng thái (`Statevector`), chiếu trạng thái sau mạch $\hat{W}|0\rangle_a|\psi\rangle_s$ lên không gian con $\langle 0|_a$ và kiểm tra chuẩn sai lệch:
+  $$\left\| (\langle 0|_a \otimes \hat{I}_s)\hat{W}|0\rangle_a|\psi\rangle_s - \frac{\hat{A}}{\lambda}|\psi\rangle_s \right\|_2 < 10^{-12}$$
+* **Xác minh OAA:** Vẽ đồ thị xác suất đo được $|0\rangle_a$ theo số bước lặp OAA $k = 0, 1, 2, \dots$ trên nhiều trạng thái ngẫu nhiên $|\psi\rangle_s$ khác nhau để chứng minh tính độc lập trạng thái (obliviousness).
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Tương thích phần cứng
+* **Độ nhạy với lỗi điều khiển đa qubit:** Cổng `SELECT` chứa nhiều cổng điều khiển Toffoli (CCX), rất nhạy cảm với nhiễu khử cực hai qubit trên thiết bị NISQ.
+* **Khắc phục trên phần cứng thực:** Áp dụng phân rã cổng Toffoli thành 6 cổng CNOT tối ưu, tận dụng kết nối toàn phần (all-to-all connectivity) của kiến trúc bẫy ion để tránh chi phí hoán đổi SWAP.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Chế độ đo:** Nếu không dùng OAA, chỉ giữ lại các lần bắn (shots) cho kết quả đo thanh ghi phụ bằng $00\dots 0$, sau đó nhân kết quả kỳ vọng đo được trên thanh ghi chính với hệ số hiệu chỉnh $\lambda^2 / P_{\text{measured}}(0)$.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Cho phép thực hiện trực tiếp các phép toán phi đơn vị (cộng ma trận, đa thức của $\hat{H}$, nghịch đảo ma trận) một cách chính xác về mặt giải tích. |
+| **Giới hạn & Rủi ro** | Xác suất thành công gốc giảm theo $1/\lambda^2$; OAA chỉ áp dụng được khi toán tử mục tiêu $\hat{A}$ gần với một toán tử đơn vị. |
+| **Điều kiện thất bại** | Hệ số $\lambda = \sum_l |\alpha_l|$ quá lớn do phân rã Hamiltonian kém tối ưu (ví dụ phân rã Pauli thô cho phân tử lớn mà không dùng Tensor Hypercontraction). |

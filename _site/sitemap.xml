@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/vqs.html</loc>
+    <lastmod>2026-11-26T10:13:52.603Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/taylor.html</loc>
+    <lastmod>2026-11-26T10:13:52.588Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/quantum_walk.html</loc>
+    <lastmod>2026-11-26T10:13:52.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qsp.html</loc>
+    <lastmod>2026-11-26T10:13:52.664Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qflo.html</loc>
+    <lastmod>2026-11-26T10:13:52.629Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/mpf.html</loc>
+    <lastmod>2026-11-26T10:13:52.564Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/lcu.html</loc>
+    <lastmod>2026-11-26T10:13:52.581Z</lastmod>
+  </url>
+  <url>
     <loc>https://tgx-2.github.io/note/note/quantumsearchalgorithms/index.html</loc>
     <lastmod>2026-11-20T12:40:56.329Z</lastmod>
   </url>
@@ -113,72 +141,76 @@
     <lastmod>2026-11-25T17:35:46.913Z</lastmod>
   </url>
   <url>
-    <loc>https://tgx-2.github.io/note/note/future/simulation.html</loc>
-    <lastmod>2026-11-19T10:39:17.773Z</lastmod>
+    <loc>https://tgx-2.github.io/note/note/future/srs.html</loc>
+    <lastmod>2026-11-26T08:38:09.847Z</lastmod>
   </url>
   <url>
-    <loc>https://tgx-2.github.io/note/note/future/qsd.html</loc>
-    <lastmod>2026-11-18T13:28:05.680Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/nvcenter.html</loc>
-    <lastmod>2026-11-25T17:35:46.802Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/neutralatomtrap.html</loc>
-    <lastmod>2026-11-25T17:35:46.778Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/klm.html</loc>
-    <lastmod>2026-11-23T03:16:02.366Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/index.html</loc>
-    <lastmod>2026-11-25T17:49:11.177Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/directions.html</loc>
-    <lastmod>2026-11-24T03:39:06.605Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/index.html</loc>
-    <lastmod>2026-11-17T08:50:07.767Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/about.html</loc>
-    <lastmod>2026-10-15T01:53:17.216Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/file/index.html</loc>
-    <lastmod>2026-11-20T16:52:12.987Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/csd.html</loc>
-    <lastmod>2026-11-18T13:28:06.495Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/dressedstate.html</loc>
-    <lastmod>2026-11-25T13:01:19.135Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/iontrap.html</loc>
-    <lastmod>2026-11-25T17:36:04.553Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/msgate.html</loc>
-    <lastmod>2026-11-25T15:22:55.370Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tgx-2.github.io/note/note/future/npf.html</loc>
-    <lastmod>2026-11-18T14:09:00.283Z</lastmod>
+    <loc>https://tgx-2.github.io/note/note/future/quantumdots.html</loc>
+    <lastmod>2026-11-25T17:35:46.861Z</lastmod>
   </url>
   <url>
     <loc>https://tgx-2.github.io/note/note/future/opticalcavityQED.html</loc>
     <lastmod>2026-11-25T17:35:46.833Z</lastmod>
   </url>
   <url>
-    <loc>https://tgx-2.github.io/note/note/future/quantumdots.html</loc>
-    <lastmod>2026-11-25T17:35:46.861Z</lastmod>
+    <loc>https://tgx-2.github.io/note/note/future/npf.html</loc>
+    <lastmod>2026-11-18T14:09:00.283Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/msgate.html</loc>
+    <lastmod>2026-11-25T15:22:55.370Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/iontrap.html</loc>
+    <lastmod>2026-11-25T17:36:04.553Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/dressedstate.html</loc>
+    <lastmod>2026-11-25T13:01:19.135Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/csd.html</loc>
+    <lastmod>2026-11-18T13:28:06.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/file/index.html</loc>
+    <lastmod>2026-11-20T16:52:12.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/about.html</loc>
+    <lastmod>2026-10-15T01:53:17.216Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/index.html</loc>
+    <lastmod>2026-11-26T08:39:49.148Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/directions.html</loc>
+    <lastmod>2026-11-24T03:39:06.605Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/index.html</loc>
+    <lastmod>2026-11-25T17:49:11.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/klm.html</loc>
+    <lastmod>2026-11-23T03:16:02.366Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/neutralatomtrap.html</loc>
+    <lastmod>2026-11-25T17:35:46.778Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/nvcenter.html</loc>
+    <lastmod>2026-11-25T17:35:46.802Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/qsd.html</loc>
+    <lastmod>2026-11-18T13:28:05.680Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/future/simulation.html</loc>
+    <lastmod>2026-11-19T10:39:17.773Z</lastmod>
   </url>
   <url>
     <loc>https://tgx-2.github.io/note/note/future/superconducting.html</loc>
@@ -291,5 +323,33 @@
   <url>
     <loc>https://tgx-2.github.io/note/note/quantumsearchalgorithms/7.html</loc>
     <lastmod>2026-11-13T16:52:56.333Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/index.html</loc>
+    <lastmod>2026-11-27T12:58:11.258Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/lie-trotter-suzuki.html</loc>
+    <lastmod>2026-11-27T11:40:57.187Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qdrift.html</loc>
+    <lastmod>2026-11-26T10:13:52.618Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qflow.html</loc>
+    <lastmod>2026-11-26T10:13:52.639Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qsvt.html</loc>
+    <lastmod>2026-11-26T10:13:52.673Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/qubitization.html</loc>
+    <lastmod>2026-11-26T10:13:52.653Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tgx-2.github.io/note/note/simulation/tdvqa.html</loc>
+    <lastmod>2026-11-26T10:13:52.611Z</lastmod>
   </url>
 </urlset>

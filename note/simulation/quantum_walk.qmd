@@ -1,0 +1,111 @@
+---
+title: "Quantum Walk Hamiltonian Simulation"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Mô phỏng Hamiltonian bằng bước đi lượng tử (Quantum Walk Hamiltonian Simulation)** do Andrew Childs (Commun. Math. Phys. 2010) và Berry, Childs, Kothari (FOCS 2015) phát triển là thuật toán đột phá đạt được **độ phức tạp tuyến tính tối ưu theo thời gian $O(d \|\hat{H}\|_{\max} t)$** cho các Hamiltonian thưa (sparse Hamiltonians).
+
+Khác với Trotter hay Taylor vốn đòi hỏi phải viết tường minh $\hat{H}$ thành tổng của các chuỗi Pauli đơn giản, thuật toán Quantum Walk chỉ cần biết **quy tắc tìm các phần tử khác không trên mỗi hàng** của ma trận $\hat{H}$ (mô hình truy cập thưa — sparse oracle access). Bằng cách biến ma trận $\hat{H}$ thành một đồ thị có trọng số và cho một hạt lượng tử "bước đi" trên đồ thị đó qua hai phép phản xạ đối xứng, giá trị riêng của toán tử bước đi mã hóa trực tiếp phổ năng lượng của $\hat{H}$.
+
+| Thuộc tính | Đặc trưng của Quantum Walk Simulation |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (đòi hỏi oracle truy cập ma trận thưa $\mathcal{O}_F, \mathcal{O}_H$ và ước lượng pha QPE) |
+| **Mô hình đầu vào** | Hamiltonian $d$-thưa ($d$-sparse) với phần tử lớn nhất $\|\hat{H}\|_{\max}$ |
+| **Độ phức tạp truy vấn** | $O\left(d \|\hat{H}\|_{\max} t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ — đạt cận dưới lý thuyết theo $t$ |
+| **Vai trò lịch sử** | Tiền thân trực tiếp của Qubitization (nâng cấp từ mô hình thưa sang Block-Encoding tổng quát) |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+Cách Childs biến một bài toán tiến hóa thời gian liên tục thành một bước đi lượng tử rời rạc trên đồ thị đôi là một trong những sáng tạo đẹp nhất của khoa học máy tính lượng tử:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Nhiều Hamiltonian vật lý quan trọng — chẳng hạn như mạng tinh thể bất quy tắc, đồ thị mạng nơ-ron, hoặc ma trận Laplacian của các miền hình học phức tạp — rất thưa (mỗi trạng thái cơ sở $|x\rangle$ chỉ nối với tối đa $d$ trạng thái $|y\rangle$ khác), nhưng lại không thể phân rã gọn gàng thành ít chuỗi Pauli. Ta cần một cách biến trực tiếp các phần tử ma trận $H_{xy}$ thành một toán tử đơn vị mà không cần phân rã Pauli.
+
+### Bước 2: Ẩn dụ hình học — Bước đi Szegedy trên đồ thị lưỡng phân & Hai tấm gương phản xạ
+Trong lý thuyết chuỗi Markov lượng tử (Szegedy 2004), để mô phỏng một bước chuyển trạng thái trên đồ thị có $N = 2^n$ đỉnh, ta nhân đôi không gian Hilbert thành hai thanh ghi $|x\rangle |y\rangle$ (đại diện cho cạnh nối từ đỉnh $x$ sang đỉnh $y$).
+
+Tại mỗi đỉnh $x$, ta chuẩn bị một trạng thái chồng chập cục bộ $|\psi_x\rangle$ chứa trọng số của tất cả các cạnh đi ra từ $x$. Khi ta thực hiện **phép phản xạ qua không gian các trạng thái cạnh** kết hợp với **phép hoán đổi hai đầu mút cạnh** $\hat{S}|x\rangle|y\rangle = |y\rangle|x\rangle$, định lý cổ điển của Jordan về hai phép chiếu đảm bảo rằng toàn bộ không gian $N^2$ chiều vỡ vụn thành các mặt phẳng 2 chiều độc lập, trong đó góc quay trên mỗi mặt phẳng chính là $\arccos(\lambda_k)$!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Cho Hamiltonian Hermite $d$-thưa $\hat{H}$ kích thước $2^n \times 2^n$ với các phần tử thỏa mãn $|H_{xy}| \le \|\hat{H}\|_{\max}$. Chuẩn hóa $\Lambda = d \|\hat{H}\|_{\max}$. Với mỗi chỉ số hàng $x \in \{0, \dots, 2^n - 1\}$, định nghĩa trạng thái cạnh chuẩn hóa trên thanh ghi phụ gồm $n$ qubit chỉ số cột và $1$ qubit rác $|\text{gar}\rangle$:
+
+$$|\psi_x\rangle = |x\rangle \otimes \frac{1}{\sqrt{d}} \sum_{y \in \mathcal{N}(x)} \left(\sqrt{\frac{H_{xy}^*}{\|\hat{H}\|_{\max}}}\,|y\rangle|0\rangle + \sqrt{1 - \frac{|H_{xy}|}{\|\hat{H}\|_{\max}}}\,|y\rangle|1\rangle\right)$$
+
+trong đó $\mathcal{N}(x)$ là tập tối đa $d$ cột khác không của hàng $x$. Định nghĩa toán tử đẳng cự $\hat{T} = \sum_x |\psi_x\rangle \langle x|$ ánh xạ trạng thái đỉnh $|x\rangle$ thành trạng thái cạnh $|\psi_x\rangle$, và xây dựng toán tử bước đi lượng tử $\hat{W}$:
+
+$$\hat{W} = \hat{S} \left(2\hat{T}\hat{T}^\dagger - \hat{I}\right)$$
+
+với $\hat{S}$ là cổng hoán đổi hai thanh ghi đỉnh $|x\rangle|y\rangle \leftrightarrow |y\rangle|x\rangle$ (và giữ nguyên qubit rác).
+
+### Bước 4: Khớp hệ số và Rút trích phổ trị riêng
+Xét một vector riêng $|\lambda\rangle = \sum_x v_x |x\rangle$ của $\hat{H}$ với trị riêng $\lambda$, và đặt trạng thái nâng lên không gian cạnh là $\hat{T}|\lambda\rangle = \sum_x v_x |\psi_x\rangle$. Tính tích vô hướng giữa $\hat{T}|\lambda\rangle$ và trạng thái bị hoán đổi cạnh $\hat{S}\hat{T}|\lambda\rangle$:
+
+$$\begin{aligned}
+\langle\lambda|\hat{T}^\dagger \hat{S} \hat{T}|\lambda\rangle &= \sum_{x, x'} v_{x'}^* v_x \langle\psi_{x'}|\hat{S}|\psi_x\rangle \\
+&= \sum_{x, x'} v_{x'}^* v_x \frac{1}{d} \frac{\sqrt{H_{xx'} H_{x'x}^*}}{\|\hat{H}\|_{\max}} = \frac{1}{d\|\hat{H}\|_{\max}} \sum_{x, x'} v_{x'}^* H_{x'x} v_x = \frac{\lambda}{\Lambda}
+\end{aligned}$$
+
+(vì $\hat{H}$ Hermite nên $H_{x'x} = H_{xx'}^*$, suy ra $\sqrt{H_{xx'}H_{x'x}^*} = H_{x'x}$).
+
+Do $\hat{T}^\dagger \hat{T} = \hat{I}$ và $\hat{S}^2 = \hat{I}$, mặt phẳng 2 chiều $\mathcal{B}_\lambda = \text{span}\{\hat{T}|\lambda\rangle, \hat{S}\hat{T}|\lambda\rangle\}$ là **bất biến dưới cả hai phép phản xạ** $\hat{R}_1 = 2\hat{T}\hat{T}^\dagger - \hat{I}$ và $\hat{R}_2 = \hat{S}$. Tích của hai phép phản xạ tạo thành một phép quay trong mặt phẳng $\mathcal{B}_\lambda$ với góc quay $2\theta_\lambda$, trong đó $\cos\theta_\lambda = \langle\lambda|\hat{T}^\dagger\hat{S}\hat{T}|\lambda\rangle = \lambda/\Lambda$!
+
+Do đó, toán tử bước đi lượng tử $\hat{W}$ có đúng hai vector riêng $|\mu_\pm\rangle \in \mathcal{B}_\lambda$ ứng với cặp trị riêng liên hợp:
+
+$$\hat{W}|\mu_\pm\rangle = e^{\pm i \arccos(\lambda/\Lambda)} |\mu_\pm\rangle$$
+
+Để biến đổi pha $e^{\pm i\arccos(\lambda/\Lambda)}$ thành pha tiến hóa tuyến tính $e^{-i\lambda t}$, ta dùng Ước lượng pha lượng tử (QPE) để đọc xấp xỉ góc $\theta_\lambda = \arccos(\lambda/\Lambda)$ vào thanh ghi phụ, áp dụng cổng quay pha có điều khiển $\exp(-i t \Lambda \cos\theta_\lambda) = e^{-i\lambda t}$, rồi giải tính toán (uncompute) QPE (hoặc dùng tổ hợp tuyến tính các lũy thừa $\hat{W}^k$ với hệ số hàm Bessel $J_k(\Lambda t)$ để đạt độ phức tạp $O(\log(1/\epsilon))$).
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho Quantum Walk
+
+### Giai đoạn 1: Mô hình hóa vật lý và Thiết kế Oracle ma trận thưa
+* **Xây dựng hai Oracle chuẩn:**
+  1. *Oracle chỉ số vị trí ($\mathcal{O}_F$):* $\mathcal{O}_F |x\rangle |j\rangle = |x\rangle |y(x, j)\rangle$, trả về chỉ số cột của phần tử khác không thứ $j \in \{1, \dots, d\}$ trên hàng $x$.
+  2. *Oracle giá trị phần tử ($\mathcal{O}_H$):* $\mathcal{O}_H |x\rangle |y\rangle |0\rangle = |x\rangle |y\rangle |H_{xy}\rangle$, xuất biểu diễn nhị phân $b$-bit của giá trị $H_{xy}$.
+* **Khai thác tính đối xứng Hermite:** Đảm bảo $H_{xy} = H_{yx}^*$ chính xác đến từng bit để mặt phẳng $\mathcal{B}_\lambda$ không bị rò rỉ.
+
+### Giai đoạn 2: Thiết kế mạch toán tử $\hat{T}$ và Bước đi $\hat{W}$
+* **Cài đặt toán tử đẳng cự $\hat{T}$:**
+  1. Dùng cổng Hadamard / quay đều tạo chồng chập $\frac{1}{\sqrt{d}}\sum_{j=1}^d |j\rangle$.
+  2. Gọi $\mathcal{O}_F$ để biến $|j\rangle$ thành chỉ số cột $|y\rangle$, sau đó giải tính toán $|j\rangle$ bằng $\mathcal{O}_F^{-1}$ (tính được vì $\hat{H}$ thưa nên tìm ngược thứ tự $j$ tốn tối đa $d$ phép so sánh).
+  3. Gọi $\mathcal{O}_H$ để đọc $|H_{xy}\rangle$, dùng bộ tính toán thuận nghịch tính góc $\alpha_{xy} = \arcsin\sqrt{|H_{xy}|/\|\hat{H}\|_{\max}}$ và pha $\phi_{xy} = \arg(H_{xy})$, quay qubit rác $|\text{gar}\rangle$, rồi gọi $\mathcal{O}_H^\dagger$ để xóa thanh ghi giá trị.
+* **Cài đặt phản xạ $2\hat{T}\hat{T}^\dagger - \hat{I}$:** Thực hiện $\hat{T}^\dagger$, phản xạ quanh trạng thái $|0\rangle$ trên các thanh ghi phụ, rồi thực hiện lại $\hat{T}$.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Chặn trên sai số lượng tử hóa giá trị ma trận ($b$-bit):** Nếu giá trị $H_{xy}$ được biểu diễn bằng $b$ bit, sai số chuẩn phổ của $\hat{H}$ bị chặn bởi $\|\hat{H} - \hat{H}_{\text{quant}}\| \le d \cdot 2^{-b} \|\hat{H}\|_{\max}$, đòi hỏi $b = O(\log(d \|\hat{H}\|_{\max} t / \epsilon))$ qubit tính toán số học.
+* **Độ phức tạp truy vấn:**
+  * Dùng QPE + phase kickback: $O\left(\frac{d \|\hat{H}\|_{\max} t}{\sqrt{\epsilon}}\right)$ truy vấn oracle.
+  * Dùng LCU trên các bước đi lượng tử $\hat{W}^k$ (Berry, Childs, Kothari 2015): $O\left(d \|\hat{H}\|_{\max} t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ truy vấn — đạt **cận dưới lý thuyết chặt chẽ (No-Fast-Forwarding Theorem)**.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Kiểm tra phổ trị riêng của $\hat{W}$:** Trên ma trận thưa $4 \times 4$ hoặc $8 \times 8$ (ví dụ ma trận kề đồ thị hypercube), xây dựng tường minh ma trận $\hat{W}$ và đối chiếu các trị riêng $e^{\pm i\theta_k}$ của $\hat{W}$ với $\cos\theta_k = \lambda_k / (d\|\hat{H}\|_{\max})$ đến độ chính xác $10^{-14}$.
+* **Xác minh bất biến không gian con:** Kiểm tra chuẩn của hình chiếu $\hat{W}\hat{T}|\lambda\rangle$ ra ngoài mặt phẳng $\text{span}\{\hat{T}|\lambda\rangle, \hat{S}\hat{T}|\lambda\rangle\}$ bằng $0$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Thách thức phần cứng
+* **Chi phí số học thuận nghịch (Reversible Arithmetic):** Điểm nghẽn lớn nhất của Quantum Walk trong thực tế không nằm ở số lần gọi oracle mà nằm ở mạch tính hàm $\arcsin\sqrt{\cdot}$ bằng chuỗi Taylor/CORDIC thuận nghịch, tiêu tốn hàng trăm qubit phụ và cổng Toffoli.
+* **Hướng cải tiến:** Thay thế mạch tính $\arcsin$ trực tuyến bằng bảng tra QROM (Quantum Read-Only Memory) hoặc chuyển sang kiến trúc Qubitization khi $\hat{H}$ có cấu trúc đại số rõ ràng.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Tái sử dụng qubit phụ tính toán:** Đảm bảo mọi thanh ghi trung gian lưu giá trị $|H_{xy}\rangle$ và bit nhớ của bộ cộng/nhân thuận nghịch đều được giải tính toán sạch về $|0\rangle$ trong mỗi bước $\hat{W}$ để duy trì giao thoa lượng tử.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Đạt độ phức tạp tiệm cận tối ưu theo cả thời gian $t$ và độ thưa $d$; không cần phân rã Hamiltonian thành các chuỗi Pauli; xử lý tự nhiên các đồ thị và mạng bất quy tắc. |
+| **Giới hạn & Rủi ro** | Cần phần cứng chịu lỗi toàn phần (FTQC) do chi phí mạch số học thuận nghịch $\arcsin\sqrt{H_{xy}}$ và cổng hoán đổi hai thanh ghi $n$-qubit. |
+| **Điều kiện thất bại** | Hamiltonian dày đặc ($d \sim 2^n$) hoặc có vài phần tử đột biến cực lớn khiến $\|\hat{H}\|_{\max}$ lớn hơn nhiều so với chuẩn phổ thực $\|\hat{H}\|$, làm phình tham số chuẩn hóa $\Lambda = d\|\hat{H}\|_{\max}$. |

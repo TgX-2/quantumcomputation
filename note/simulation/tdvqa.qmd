@@ -1,0 +1,100 @@
+---
+title: "Time-Dependent Variational Quantum Algorithms (TDVQA)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Thuật toán lượng tử biến phân phụ thuộc thời gian (Time-Dependent Variational Quantum Algorithms — TDVQA)** là thế hệ mở rộng toàn diện của VQS nhằm giải quyết ba bài toán hóc búa của mô phỏng động lực học cận biên:
+1. **Loại bỏ phép đo ma trận metric $O(P^2)$ đắt đỏ** bằng cách chiếu trực tiếp độ trung thực toàn cục qua từng bước thời gian rời rạc (tiêu biểu là **p-VQD** — Projected Variational Quantum Dynamics của Barison, Vicentini, Carleo 2021).
+2. **Tự động mở rộng cấu trúc mạch (Ansatz)** khi độ vướng víu của hệ tăng lên theo thời gian (tiêu biểu là **AVQDS** — Adaptive Variational Quantum Dynamics Simulation của Yao et al. 2021).
+3. **Mô phỏng trực tiếp các Hamiltonian phụ thuộc thời gian tường minh $\hat{H}(t)$** (như xung laser điều khiển, quét đoạn nhiệt, hoặc điều biến Floquet) mà không cần thêm qubit đồng hồ.
+
+| Thuộc tính | Đặc trưng của TDVQA |
+| :--- | :--- |
+| **Chế độ phần cứng** | **NISQ** (không cần ancilla Hadamard test trong biến thể p-VQD) |
+| **Cơ chế cập nhật** | Tối ưu độ chồng lấp $\max_{\boldsymbol{\theta}'} |\langle\phi(\boldsymbol{\theta}')|e^{-i\hat{H}(t)\Delta t}|\phi(\boldsymbol{\theta}(t))\rangle|^2$ hoặc mở rộng thích nghi |
+| **Độ sâu mạch** | Nông và **tự điều chỉnh linh hoạt** theo mức độ vướng víu thực tế |
+| **Hỗ trợ $\hat{H}(t)$** | Xử lý tự nhiên các Hamiltonian biến thiên theo thời gian $\hat{H}(t) = \hat{H}_0 + \sum_\alpha f_\alpha(t)\hat{H}_\alpha$ |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+TDVQA ra đời từ việc khắc phục trực tiếp những điểm yếu chết người của VQS vi phân trên phần cứng thực tế:
+
+### Bước 1: Nhận diện nút thắt cổ chai của VQS cổ điển
+Trong VQS truyền thống (Li & Benjamin), việc giải phương trình $M\dot{\boldsymbol{\theta}} = V$ gặp ba rào cản lớn:
+* Phải đo $O(P^2)$ phần tử của ma trận $M_{kj}$ bằng mạch Hadamard test có cổng điều khiển toàn cục rất sâu.
+* Khi ansatz có các hướng suy biến, ma trận $M$ gần suy biến ($\det M \approx 0$), khiến phép nghịch đảo $M^{-1}$ làm nổ tung sai số thống kê.
+* Một mạch ansatz cố định trước sẽ bị "mắc kẹt" ngay khi trạng thái vật lý tiến hóa ra khỏi đa tạp ban đầu.
+
+### Bước 2: Ẩn dụ vật lý — Bước nhảy chiếu toàn cục & Tiến hóa thích nghi
+Thay vì tính **đạo hàm tức thời** trên mặt phẳng tiếp tuyến (vốn đòi hỏi ma trận metric $M$), hãy nhìn quá trình tiến hóa dưới dạng **chuỗi các bước nhảy hữu hạn nhỏ $\Delta t$**:
+* Tại thời điểm $t$, trạng thái hiện tại là $|\phi(\boldsymbol{\theta}(t))\rangle$. Sau một bước nhỏ $\Delta t$, trạng thái đúng là $e^{-i\hat{H}(t)\Delta t}|\phi(\boldsymbol{\theta}(t))\rangle$.
+* Thay vì giải hệ phương trình tuyến tính $M\dot{\boldsymbol{\theta}} = V$, ta chỉ cần tìm bộ tham số mới $\boldsymbol{\theta}(t+\Delta t)$ sao cho trạng thái ansatz $|\phi(\boldsymbol{\theta}(t+\Delta t))\rangle$ **chồng lấp tối đa** với trạng thái vừa tiến hóa một bước Trotter ngắn!
+* Đồng thời, nếu sau khi tối ưu mà độ chồng lấp vẫn chưa đạt ngưỡng $\epsilon_{\text{tol}}$, thuật toán sẽ "mọc thêm" một cổng lượng tử mới từ bể toán tử vật lý để mở rộng chiều của đa tạp đúng vào hướng mà hệ đang cần.
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Cho Hamiltonian phụ thuộc thời gian $\hat{H}(t) = \sum_{l=1}^L c_l(t)\hat{P}_l$. Trên một bước thời gian nhỏ $\Delta t$, toán tử tiến hóa ngắn hạn được xấp xỉ bởi một bước Trotter bậc nhất hoặc bậc hai tại điểm giữa $t + \Delta t/2$:
+
+$$\hat{U}_{\Delta t}(t) = \exp\left(-i\hat{H}\left(t + \frac{\Delta t}{2}\right)\Delta t\right) \approx S_2\left(t + \frac{\Delta t}{2}, \Delta t\right)$$
+
+Với mạch ansatz tham số hóa $|\phi(\boldsymbol{\theta})\rangle = \hat{U}(\boldsymbol{\theta})|0\rangle$, ta định nghĩa hàm mất mát khoảng cách Fubini–Study cục bộ (local infidelity):
+
+$$\mathcal{L}(\boldsymbol{\theta}') = 1 - \left| \langle 0 | \hat{U}^\dagger(\boldsymbol{\theta}') \, S_2\left(t + \frac{\Delta t}{2}, \Delta t\right) \, \hat{U}(\boldsymbol{\theta}(t)) | 0 \rangle \right|^2$$
+
+### Bước 4: Khớp hệ số và Rút trích quy tắc cập nhật
+1. **Cập nhật tham số bằng p-VQD:** Khởi tạo điểm tìm kiếm $\boldsymbol{\theta}'^{(0)} = \boldsymbol{\theta}(t) + \Delta\boldsymbol{\theta}_{\text{init}}$ (dùng ngoại suy tuyến tính từ bước trước để tăng tốc hội tụ). Vì $\mathcal{L}(\boldsymbol{\theta}')$ chỉ là một hàm vô hướng đo bằng phép kiểm tra tính toán–nghịch đảo (compute–uncompute test: đo xác suất ra trạng thái $|0\rangle^{\otimes n}$), gradient của nó được tính chính xác bằng **quy tắc dịch tham số (parameter-shift rule)**:
+   $$\frac{\partial \mathcal{L}(\boldsymbol{\theta}')}{\partial \theta'_k} = \frac{1}{2}\left[\mathcal{L}\left(\boldsymbol{\theta}' + \frac{\pi}{2}\mathbf{e}_k\right) - \mathcal{L}\left(\boldsymbol{\theta}' - \frac{\pi}{2}\mathbf{e}_k\right)\right]$$
+   Bộ tối ưu hóa cổ điển (như Adam hoặc Natural Gradient) cập nhật $\boldsymbol{\theta}(t+\Delta t) = \arg\min_{\boldsymbol{\theta}'} \mathcal{L}(\boldsymbol{\theta}')$ mà **không bao giờ cần nghịch đảo ma trận $M$ hay dùng ancilla**.
+
+2. **Mở rộng thích nghi bằng AVQDS:** Nếu tại bước $t$, khoảng cách McLachlan $L^2(t) > L_{\text{cut}}^2$ (hoặc $\min \mathcal{L}(\boldsymbol{\theta}') > \epsilon_{\text{cut}}$), ta duyệt qua bể toán tử Hermite $\mathcal{P} = \{\hat{A}_\mu\}$ (ví dụ các chuỗi Pauli 1-qubit và 2-qubit) và chọn toán tử $\hat{A}_{\mu^*}$ làm giảm mạnh nhất sai số chiếu:
+   $$|\phi(\boldsymbol{\theta})\rangle \longrightarrow e^{-i\theta_{P+1}\hat{A}_{\mu^*}} |\phi(\boldsymbol{\theta})\rangle, \quad \theta_{P+1}(t) = 0$$
+   Việc khởi tạo $\theta_{P+1}(t) = 0$ đảm bảo tính liên tục tuyệt đối của trạng thái lượng tử tại thời điểm chèn cổng mới, trong khi đạo hàm $\frac{\partial |\phi\rangle}{\partial \theta_{P+1}} = -i\hat{A}_{\mu^*}|\phi\rangle$ lập tức mở ra một chiều vận tốc mới triệt tiêu sai số!
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho TDVQA
+
+### Giai đoạn 1: Mô hình hóa vật lý và Xây dựng bể toán tử (Operator Pool)
+* **Tham số hóa tín hiệu phụ thuộc thời gian:** Rời rạc hóa hàm điều khiển $f_\alpha(t)$ theo quy tắc điểm giữa (midpoint rule) hoặc khai triển Magnus bậc 2 trên mỗi bước $\Delta t$ để khử sai số rời rạc hóa thời gian $O(\Delta t^3)$.
+* **Thiết kế bể toán tử vật lý:** Với hệ spin/fermion, chọn bể toán tử bảo toàn đối xứng (ví dụ tổng spin $S_z$ hoặc số hạt) để giữ quỹ đạo biến phân nằm gọn trong phân khu đối xứng vật lý, giảm mạnh số tham số cần thiết.
+
+### Giai đoạn 2: Thiết kế mạch Compute–Uncompute và Tối ưu độ sâu
+* **Mạch đo độ trung thực $\mathcal{L}(\boldsymbol{\theta}')$:** Thực thi lần lượt $\hat{U}(\boldsymbol{\theta}(t))$, một bước ngắn $S_2(\Delta t)$, và $\hat{U}^\dagger(\boldsymbol{\theta}')$, sau đó đo toàn bộ $n$ qubit trên cơ sở tính toán. Xác suất thu được chuỗi bit `00...0` chính là $1 - \mathcal{L}(\boldsymbol{\theta}')$.
+* **Nén mạch biến phân:** Vì $\hat{U}(\boldsymbol{\theta}(t))$ và $\hat{U}^\dagger(\boldsymbol{\theta}')$ có cùng cấu trúc cổng với tham số gần nhau, các cổng ở cuối $\hat{U}(\boldsymbol{\theta}(t))$ và đầu $\hat{U}^\dagger(\boldsymbol{\theta}')$ gần như triệt tiêu lẫn nhau khi $\Delta t$ nhỏ, giúp giảm nhiễu thực tế.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Phân tách hai nguồn sai số độc lập:**
+  1. *Sai số Trotter một bước:* $\epsilon_{\text{Trotter}} = O(\alpha_{\text{comm}} \Delta t^3)$ (chỉ của 1 bước $\Delta t$ duy nhất, không tích lũy độ sâu mạch theo $t$).
+  2. *Sai số chiếu biến phân tích lũy:* $\epsilon_{\text{proj}}(T) \le \sum_{n=1}^{T/\Delta t} \sqrt{\mathcal{L}(\boldsymbol{\theta}(t_n))}$.
+* **Ước lượng tài nguyên:** Độ sâu mạch tối đa là $2 D_{\text{ansatz}} + D_{S_2(\Delta t)}$, hoàn toàn không cần qubit phụ Hadamard test.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Đối chiếu với ODE solver thời gian thực:** Dùng `scipy.integrate.solve_ivp` (phương pháp RK45 với dung sai $10^{-10}$) giải trực tiếp phương trình Schrödinger $i\partial_t|\psi\rangle = \hat{H}(t)|\psi\rangle$ làm chân lý nền.
+* **Khảo sát quá trình tăng trưởng cổng của AVQDS:** Vẽ đồ thị số lượng cổng CNOT theo thời gian $t$ song song với đường cong entropy vướng víu Von Neumann $S_{\text{vN}}(t)$ của hệ. Đường cong số cổng CNOT của AVQDS sẽ tự động bám sát hình dạng của entropy vướng víu — phẳng ra khi hệ bão hòa vướng víu.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Giảm thiểu lỗi
+* **Hiện tượng Barren Plateaus cục bộ được triệt tiêu:** Vì $\boldsymbol{\theta}'$ khởi tạo rất gần $\boldsymbol{\theta}(t)$ ($\|\boldsymbol{\theta}' - \boldsymbol{\theta}(t)\| = O(\Delta t)$), bài toán tối ưu ở mỗi bước luôn nằm trong vùng lồi địa phương quanh điểm xuất phát, tránh hoàn toàn bẫy cực tiểu địa phương và vùng phẳng gradient.
+* **Khử nhiễu đo xác suất `00...0`:** Áp dụng hiệu chỉnh lỗi đọc (Measurement Error Mitigation) và ZNE lên xác suất $P(00\dots 0)$ để tránh sai lệch hệ thống trong bước tối ưu hóa.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Chiến lược khởi tạo nóng (Warm-Start):** Dùng phép ngoại suy bậc hai $\boldsymbol{\theta}'^{(0)} = 2\boldsymbol{\theta}(t_n) - \boldsymbol{\theta}(t_{n-1})$ để giảm số vòng lặp tối ưu hóa cổ điển xuống chỉ còn $3 - 5$ bước gradient mỗi bước thời gian $\Delta t$.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Loại bỏ hoàn toàn ancilla Hadamard test và phép nghịch đảo ma trận $M^{-1}$ kém ổn định của VQS; tự động thích nghi độ sâu mạch theo độ vướng víu; mô phỏng tự nhiên $\hat{H}(t)$. |
+| **Giới hạn & Rủi ro** | Cần chạy vòng lặp tối ưu hóa cổ điển ở mỗi bước thời gian $\Delta t$, làm tăng tổng số lần gọi QPU (wall-clock time) nếu $\Delta t$ quá nhỏ. |
+| **Điều kiện thất bại** | Xác suất đo chuỗi `00...0` bị suy giảm do nhiễu đọc khi số qubit $n$ lớn mà chưa áp dụng hiệu chỉnh lỗi đọc hoặc hàm mất mát cục bộ (local cost function). |

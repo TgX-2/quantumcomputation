@@ -1,0 +1,106 @@
+---
+title: "Quantum Signal Processing (QSP)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Xử lý tín hiệu lượng tử (Quantum Signal Processing — QSP)** do Low, Yoder và Chuang phát triển (PRX 2016; PRL 2017) là thuật toán biến một qubit đơn lẻ thành một **bộ tổng hợp đa thức lượng tử tùy ý (universal polynomial synthesizer)**.
+
+Khi kết hợp với Qubitization (vốn cô lập từng trị riêng $\lambda/\alpha$ của Hamiltonian thành một phép quay đơn qubit), QSP cho phép ta **biến đổi trực tiếp trị riêng $x = \lambda/\alpha \mapsto P(x)$** thành gần như bất kỳ hàm giải tích nào — hàm tiến hóa thời gian $e^{-i\tau x}$, hàm nghịch đảo $1/x$, hàm lọc bước nhảy $\text{sgn}(x)$, hay hàm nhiệt động $e^{-\beta x}$ — chỉ bằng cách xen kẽ các cổng quay pha đơn qubit có góc $\boldsymbol{\Phi} = (\phi_0, \phi_1, \dots, \phi_d)$ mà **không cần bất kỳ thanh ghi ancilla khổng lồ nào** như LCU!
+
+| Thuộc tính | Đặc trưng của QSP |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (tối thiểu hóa số qubit phụ xuống chỉ còn **1 qubit tín hiệu**) |
+| **Đầu vào cơ bản** | Toán tử tín hiệu đơn qubit $\hat{W}(x) = e^{i\arccos(x)\hat{X}}$ với $x \in [-1, 1]$ |
+| **Độ phức tạp truy vấn** | $d = O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ lần gọi $\hat{W}(x)$ |
+| **Ưu thế so với LCU** | Cắt giảm toàn bộ thanh ghi ancilla đếm bậc $O(\log d)$ của LCU xuống đúng **1 qubit** |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+QSP là ví dụ kinh điển của việc mượn trực giác từ **kỹ thuật điện tử và xử lý tín hiệu số (DSP)** để giải bài toán đại số lượng tử:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Trong Qubitization, mỗi lần gọi toán tử bước đi $\hat{W}$ thực hiện một phép quay góc $\theta_\lambda = \arccos(\lambda/\alpha)$ trên mặt phẳng 2 chiều $\mathcal{H}_\lambda$. Nếu dùng LCU để cộng chuỗi đa thức Chebyshev $\sum_{k=0}^d c_k \hat{W}^k$, ta lại phải tốn thêm một thanh ghi ancilla phụ để chuẩn bị các hệ số $c_k$, làm phức tạp mạch điều khiển và giảm xác suất thành công xuống $1/\|c\|_1^2$. Câu hỏi đặt ra là: *Liệu có thể thực hiện phép biến đổi đa thức $x \mapsto P(x)$ ngay trên chính không gian 2 chiều đó chỉ bằng các phép quay nối tiếp không?*
+
+### Bước 2: Ẩn dụ kỹ thuật — Bộ lọc đáp ứng xung hữu hạn (FIR Filter) & Chuỗi xung NMR
+Trong xử lý tín hiệu số cổ điển, một bộ lọc FIR bậc $d$ biến đổi tín hiệu đầu vào thành một đa thức bậc $d$ bằng cách cho tín hiệu đi qua một chuỗi các phần tử trễ và bộ dịch pha liên tiếp. Tương tự, trong vật lý Cộng hưởng từ hạt nhân (NMR), chuỗi xung composite pulses (như chuỗi BB1 hoặc CORPSE) xen kẽ các xung quay quanh trục $X$ với các góc pha điều khiển quanh trục $Z$ để tổng hợp nên một đáp ứng tần số phẳng tuyệt đối.
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Viết lại phép quay Qubitization theo quy ước trục $X$ (quy ước Wx của QSP):
+
+$$\hat{W}(x) = \begin{pmatrix} x & i\sqrt{1 - x^2} \\ i\sqrt{1 - x^2} & x \end{pmatrix} = e^{i\arccos(x)\hat{X}}, \quad x \in [-1, 1]$$
+
+Ta không biết giá trị của tín hiệu $x$, nhưng ta có toàn quyền chèn các cổng quay pha đơn qubit quanh trục $Z$, ký hiệu $\hat{S}(\phi_k) = e^{i\phi_k \hat{Z}}$, vào giữa các lần gọi $\hat{W}(x)$. Do đó, ta đặt Ansatz cho chuỗi QSP bậc $d$ là tích xen kẽ:
+
+$$\hat{U}_{\boldsymbol{\Phi}}(x) = e^{i\phi_0 \hat{Z}} \, \hat{W}(x) \, e^{i\phi_1 \hat{Z}} \, \hat{W}(x) \cdots \hat{W}(x) \, e^{i\phi_d \hat{Z}}$$
+
+### Bước 4: Khớp hệ số — Định lý QSP & Khai triển Jacobi–Anger
+Nhân trực tiếp các ma trận $2 \times 2$ trên và quy nạp theo bậc $d$, ta nhận thấy mọi phần tử của ma trận $\hat{U}_{\boldsymbol{\Phi}}(x)$ đều là các đa thức theo $x$ và $\sqrt{1-x^2}$:
+
+$$\hat{U}_{\boldsymbol{\Phi}}(x) = \begin{pmatrix} P(x) & i Q(x)\sqrt{1 - x^2} \\ i Q^*(x)\sqrt{1 - x^2} & P^*(x) \end{pmatrix}$$
+
+**Định lý QSP (Low, Yoder, Chuang 2016):** Tồn tại một bộ góc pha $\boldsymbol{\Phi} = (\phi_0, \dots, \phi_d) \in \mathbb{R}^{d+1}$ tạo ra cặp đa thức $(P(x), Q(x))$ **khi và chỉ khi** ba điều kiện sau thỏa mãn đồng thời:
+1. $\deg(P) \le d$ và $\deg(Q) \le d - 1$.
+2. $P(x)$ có tính chẵn lẻ cùng bậc với $d$ ($P(-x) = (-1)^d P(x)$), và $Q(x)$ có tính chẵn lẻ ngược lại ($Q(-x) = (-1)^{d-1} Q(x)$).
+3. Điều kiện bảo toàn tính đơn vị: $|P(x)|^2 + (1 - x^2)|Q(x)|^2 = 1, \quad \forall x \in [-1, 1]$.
+
+Đặc biệt, nếu chỉ quan tâm đến phần thực của $P(x)$ (chiếu trên cơ sở $|+\rangle$), **mọi đa thức thực $P_{\text{Re}}(x)$ có tính chẵn lẻ xác định và thỏa mãn $|P_{\text{Re}}(x)| \le 1$ trên $[-1, 1]$ đều có thể tổng hợp chính xác**!
+
+Để thực hiện hàm tiến hóa thời gian $e^{-i\tau x} = \cos(\tau x) - i\sin(\tau x)$ (với $\tau = \alpha t$), ta dùng **khai triển Jacobi–Anger** tách riêng phần chẵn $\cos(\tau x)$ và phần lẻ $\sin(\tau x)$ thành tổ hợp các đa thức Chebyshev:
+
+$$\cos(\tau x) = J_0(\tau) + 2\sum_{k=1}^{d/2} (-1)^k J_{2k}(\tau)\,T_{2k}(x)$$
+
+$$\sin(\tau x) = 2\sum_{k=0}^{(d-1)/2} (-1)^k J_{2k+1}(\tau)\,T_{2k+1}(x)$$
+
+Tìm bộ góc pha $\boldsymbol{\Phi}_{\cos}$ cho $\frac{1}{2}\cos(\tau x)$ và $\boldsymbol{\Phi}_{\sin}$ cho $\frac{1}{2}\sin(\tau x)$ (nhân hệ số $1/2$ để đảm bảo $|P_{\text{Re}}(x)| \le 1$), sau đó dùng **đúng 1 qubit phụ** kết hợp hai mạch này theo LCU để thu được $\frac{1}{2}e^{-i\tau x}$!
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho QSP
+
+### Giai đoạn 1: Mô hình hóa vật lý và Xấp xỉ đa thức mục tiêu
+* **Biến đổi hàm vật lý thành đa thức bị chặn:** Chuẩn hóa phổ Hamiltonian vào $[-1, 1]$ qua $x = \lambda/\alpha$. Chọn đa thức xấp xỉ $P_{\text{approx}}(x)$ trên $[-1, 1]$ (dùng khai triển Chebyshev–Jacobi–Anger hoặc thuật toán Remez) sao cho:
+  $$\max_{x \in [-1, 1]} \left| P_{\text{approx}}(x) - \frac{1}{2}e^{-i\alpha t x} \right| \le \frac{\epsilon}{2}$$
+  và co giãn biên độ thêm một lượng nhỏ $(1 - \delta)$ để đảm bảo $|P_{\text{approx}}(x)| < 1$ chặt trên toàn đoạn $[-1, 1]$ (giúp tìm nghiệm pha ổn định số học).
+
+### Giai đoạn 2: Tìm chuỗi góc pha cổ điển (Phase Factor Finding) & Biên dịch mạch
+* **Thuật toán tìm góc pha cổ điển (Classical Phase Synthesis):** Đây là bước tính toán trước trên CPU. Với bậc $d$ nhỏ ($d \le 100$), dùng phân rã nghiệm đa thức (root-finding của Gilyén et al.). Với bậc $d$ rất lớn ($d \sim 10^4 - 10^5$), sử dụng các thuật toán tối ưu hóa đối xứng hiện đại như **L-BFGS đối xứng (Dong et al. 2021)** hoặc **tích phân Weiss / điểm bất động** có độ phức tạp cổ điển chỉ $O(d^2)$ và ổn định số học ở độ chính xác máy!
+* **Nâng cấp Qubitization lên QSP:** Chèn cổng quay điều khiển bởi qubit phụ của Block-Encoding:
+  $$\hat{\Pi}_{\phi_k} = e^{i\phi_k (2|0\rangle\langle 0|_a - \hat{I}_a) \otimes \hat{I}_s}$$
+  giữa các lần gọi toán tử Qubitization $\hat{W}$. Cổng $\hat{\Pi}_{\phi_k}$ chỉ là một cổng quay $R_Z(2\phi_k)$ được điều khiển bởi trạng thái $|0\rangle_a$ của thanh ghi phụ!
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Phân tích độ nhạy sai số góc pha:** Nếu mỗi góc pha $\phi_k$ có sai số làm tròn hoặc nhiễu hiệu chuẩn $\delta\phi$, sai số tổng trên ma trận đơn vị đầu ra bị chặn tuyến tính bởi:
+  $$\left\| \hat{U}_{\boldsymbol{\Phi} + \delta\boldsymbol{\Phi}}(x) - \hat{U}_{\boldsymbol{\Phi}}(x) \right\| \le 2 \sum_{k=0}^{d} |\delta\phi_k| \le 2(d+1)\|\delta\boldsymbol{\Phi}\|_\infty$$
+  Điều này chứng minh QSP không bị bùng nổ sai số theo hàm mũ ngay cả khi bậc đa thức $d$ lên tới hàng chục nghìn!
+* **Ước lượng tài nguyên:** Bậc $d = O\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$, chỉ tốn thêm đúng **1 qubit tín hiệu** và $d$ cổng quay $R_Z$ điều khiển.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Xác minh bộ góc pha $\boldsymbol{\Phi}$ bằng Python (`pyqsp`):** Nhân chuỗi $d$ ma trận $2 \times 2$ trên lưới Chebyshev $x_j = \cos\left(\frac{j\pi}{N_{\text{grid}}}\right)$ và kiểm tra sai số $\max_j |[\hat{U}_{\boldsymbol{\Phi}}(x_j)]_{00} - P_{\text{approx}}(x_j)| < 10^{-13}$.
+* **Kiểm chứng trên hệ đa qubit:** Ghép chuỗi góc pha $\boldsymbol{\Phi}$ vào mạch Qubitization trên hệ 4–8 qubit, chiếu lên $|0\rangle_a$ và đối chiếu với $e^{-i\hat{H}t}|\psi_0\rangle$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Tổng hợp cổng quay $R_Z$
+* **Chi phí T-count của cổng quay góc tùy ý $R_Z(\phi_k)$:** Trong kiến trúc chịu lỗi (FTQC), mỗi góc pha thực $\phi_k$ không phải bội số của $\pi/4$ cần được tổng hợp xấp xỉ bằng các cổng Clifford+T (qua thuật toán Ross–Selinger `gridsynth`), tiêu tốn khoảng $3\log_2(1/\epsilon_{\text{synth}})$ cổng T cho mỗi góc $\phi_k$. Vì chi phí này nhỏ hơn nhiều so với chi phí của bản thân Block-Encoding $\hat{U}_H$, QSP hầu như không làm tăng tổng T-count của Qubitization.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Lưu trữ và công bố chuỗi góc pha:** Công bố kèm tệp dữ liệu JSON/CSV chứa mảng góc pha $\boldsymbol{\Phi} = (\phi_0, \dots, \phi_d)$ cùng thông số bậc $d$ và chuẩn sai số đạt được để cộng đồng có thể tái sử dụng trực tiếp mà không cần giải lại bài toán tối ưu hóa pha.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Tối ưu tuyệt đối cả về độ phức tạp truy vấn lẫn số lượng qubit phụ (chỉ cần đúng 1 qubit tín hiệu); ổn định số học cao ngay cả ở bậc đa thức $d > 10^4$. |
+| **Giới hạn & Rủi ro** | Bị ràng buộc bởi điều kiện chuẩn hóa $|P(x)| \le 1$ trên toàn đoạn $[-1, 1]$ và tính chẵn/lẻ cố định của đa thức theo bậc $d$; đòi hỏi bước tính toán cổ điển trước để tìm dãy góc pha $\boldsymbol{\Phi}$. |
+| **Điều kiện thất bại** | Khi ma trận đầu vào không vuông hoặc không Hermite (khi đó các không gian con 2 chiều không tự khép kín nếu chỉ dùng một bộ chiếu duy nhất — cần nâng cấp lên QSVT). |

@@ -1,0 +1,109 @@
+---
+title: "Qubitization"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Qubitization** do Guang Hao Low và Isaac Chuang đề xuất (Quantum 2019) là viên gạch nền tảng định hình toàn bộ kỷ nguyên thuật toán lượng tử hiện đại. Nếu như Quantum Walk chỉ hoạt động trên mô hình oracle ma trận thưa, thì Qubitization tổng quát hóa cơ chế phân rã không gian 2 chiều cho **bất kỳ Hamiltonian nào được mã hóa khối (Block-Encoded)** — bao gồm cả LCU phân rã Pauli, Tensor Hypercontraction, lẫn ma trận thưa.
+
+Ý tưởng cốt lõi của Qubitization được gói gọn ngay trong tên gọi của nó: biến toàn bộ không gian Hilbert $2^n$ chiều của một Hamiltonian phức tạp thành hàng loạt **qubit ảo độc lập (các không gian con bất biến $\text{SU}(2)$)**, sao cho trên mỗi vector riêng $|\lambda\rangle$ của $\hat{H}$, toán tử bước đi lượng tử hoạt động giống hệt một phép quay qubit đơn lẻ với góc quay $\theta_\lambda = \arccos(\lambda/\alpha)$.
+
+| Thuộc tính | Đặc trưng của Qubitization |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (tiêu chuẩn vàng cho ước lượng tài nguyên hóa học & vật liệu lượng tử) |
+| **Đầu vào chuẩn** | Một $(\alpha, a, \epsilon)$-Block-Encoding $\hat{U}_H$ của Hamiltonian $\hat{H}$ |
+| **Độ phức tạp truy vấn** | $\Theta\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ — tối ưu tuyệt đối theo cả $t$ và $\epsilon$ |
+| **Ưu thế so với Taylor** | Không nhân chéo hai đại lượng $\alpha t$ và $\log(1/\epsilon)$ (cộng tính thay vì nhân tính!) |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+Low và Chuang đã đi từ một bài toán đại số trừu tượng đến một cấu trúc hình học tinh khiết qua 4 bước tư duy sau:
+
+### Bước 1: Nhận diện nút thắt cổ chai của Block-Encoding thô
+Giả sử ta có một mạch đơn vị $\hat{U}_H$ mã hóa khối Hamiltonian $\hat{H}/\alpha$ ở góc trên bên trái:
+
+$$\hat{U}_H = \begin{pmatrix} \hat{H}/\alpha & * \\ * & * \end{pmatrix} \iff (\langle 0|_a \otimes \hat{I}_s)\hat{U}_H(|0\rangle_a \otimes \hat{I}_s) = \frac{\hat{H}}{\alpha}$$
+
+Khi cho $\hat{U}_H$ tác động lên trạng thái $|0\rangle_a |\lambda\rangle_s$ (với $\hat{H}|\lambda\rangle = \lambda|\lambda\rangle$), ta thu được:
+
+$$\hat{U}_H |0\rangle_a |\lambda\rangle_s = \frac{\lambda}{\alpha}|0\rangle_a |\lambda\rangle_s + \sqrt{1 - \left(\frac{\lambda}{\alpha}\right)^2}\,|\perp_\lambda\rangle_{as}$$
+
+Vấn đề nghiêm trọng là: khi tác động $\hat{U}_H$ lần thứ hai lên $|\perp_\lambda\rangle_{as}$, nó có thể đá trạng thái sang một không gian trực giao thứ ba, thứ tư..., làm rò rỉ biên độ khắp không gian Hilbert! Ta không thể kiểm soát các lũy thừa $\hat{U}_H^k$ nếu không đóng kín được mặt phẳng 2 chiều $\mathcal{H}_\lambda = \text{span}\{|0\rangle_a|\lambda\rangle_s, |\perp_\lambda\rangle_{as}\}$.
+
+### Bước 2: Ẩn dụ hình học — Định lý hai phép chiếu của Jordan (1875)
+Low và Chuang nhớ đến một định lý hình học cổ điển thế kỷ 19: **tích của hai phép phản xạ bất kỳ $\hat{R}_A \hat{R}_B$ trong không gian Hilbert luôn phân rã toàn bộ không gian thành tổng trực giao của các không gian con 1 chiều và 2 chiều bất biến**!
+
+Nói cách khác, nếu ta biến $\hat{U}_H$ thành một **phép phản xạ** ($\hat{U}_H^2 = \hat{I}$) và ghép nó với phép phản xạ qua trạng thái ancilla $\hat{R}_0 = 2|0\rangle\langle 0|_a - \hat{I}_a$, thì mọi hiện tượng rò rỉ không gian sẽ biến mất tuyệt đối bằng định lý hình học!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+* **Trường hợp 1 ($\hat{U}_H$ vốn đã là phép phản xạ, ví dụ LCU với các toán tử Pauli $\hat{P}_l^2 = \hat{I}$):** Khi đó $\hat{U}_H = (\text{PREPARE}^\dagger)\,\text{SELECT}\,(\text{PREPARE})$ thỏa mãn $\hat{U}_H^\dagger = \hat{U}_H$ và $\hat{U}_H^2 = \hat{I}$. Ta đặt trực tiếp toán tử bước đi Qubitization (Qubitized Walk Iterate):
+  $$\hat{W} = \left((2|0\rangle\langle 0|_a - \hat{I}_a) \otimes \hat{I}_s\right) \hat{U}_H$$
+* **Trường hợp 2 ($\hat{U}_H$ là một ma trận đơn vị bất kỳ không tự nghịch đảo):** Ta thêm **1 qubit phụ điều khiển** $|\cdot\rangle_c$ và dựng toán tử điều khiển $\hat{U}_{\text{ctrl}} = |0\rangle\langle 0|_c \otimes \hat{U}_H + |1\rangle\langle 1|_c \otimes \hat{U}_H^\dagger$, rồi ghép với phép hoán đổi/phản xạ để biến nó thành phép phản xạ trên không gian mở rộng.
+
+### Bước 4: Khớp hệ số — Ma trận hóa trên mặt phẳng $\mathcal{H}_\lambda$
+Xét trường hợp $\hat{U}_H^2 = \hat{I}$. Từ $\hat{U}_H |0\rangle_a|\lambda\rangle_s = \frac{\lambda}{\alpha}|0\rangle_a|\lambda\rangle_s + \sqrt{1 - (\lambda/\alpha)^2}\,|\perp_\lambda\rangle_{as}$, nhân thêm $\hat{U}_H$ vào hai vế và dùng $\hat{U}_H^2 = \hat{I}$:
+
+$$|0\rangle_a|\lambda\rangle_s = \frac{\lambda}{\alpha}\hat{U}_H|0\rangle_a|\lambda\rangle_s + \sqrt{1 - \left(\frac{\lambda}{\alpha}\right)^2}\,\hat{U}_H|\perp_\lambda\rangle_{as}$$
+
+Giải ra $\hat{U}_H|\perp_\lambda\rangle_{as}$, ta thấy ngay $\hat{U}_H$ đóng kín hoàn toàn trên mặt phẳng 2 chiều $\mathcal{H}_\lambda = \text{span}\{|0\rangle_a|\lambda\rangle_s, |\perp_\lambda\rangle_{as}\}$:
+
+$$\hat{U}_H |\perp_\lambda\rangle_{as} = \sqrt{1 - \left(\frac{\lambda}{\alpha}\right)^2}\,|0\rangle_a|\lambda\rangle_s - \frac{\lambda}{\alpha}|\perp_\lambda\rangle_{as}$$
+
+Bây giờ cho phép phản xạ $\hat{R}_0 = 2|0\rangle\langle 0|_a - \hat{I}_a$ tác động từ bên trái (lưu ý $\hat{R}_0|0\rangle_a|\lambda\rangle_s = +|0\rangle_a|\lambda\rangle_s$ và $\hat{R}_0|\perp_\lambda\rangle_{as} = -|\perp_\lambda\rangle_{as}$). Trong cơ sở trực chuẩn $\{|0\rangle_a|\lambda\rangle_s, |\perp_\lambda\rangle_{as}\}$, toán tử $\hat{W} = \hat{R}_0 \hat{U}_H$ có dạng ma trận $2 \times 2$ chính xác tuyệt đối:
+
+$$\hat{W}\big|_{\mathcal{H}_\lambda} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} \lambda/\alpha & \sqrt{1 - (\lambda/\alpha)^2} \\ \sqrt{1 - (\lambda/\alpha)^2} & -\lambda/\alpha \end{pmatrix} = \begin{pmatrix} \lambda/\alpha & \sqrt{1 - (\lambda/\alpha)^2} \\ -\sqrt{1 - (\lambda/\alpha)^2} & \lambda/\alpha \end{pmatrix} = e^{i\theta_\lambda \hat{Y}_\lambda}$$
+
+trong đó góc quay đơn qubit trên từng không gian con riêng $\mathcal{H}_\lambda$ là:
+
+$$\theta_\lambda = \arccos\left(\frac{\lambda}{\alpha}\right)$$
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho Qubitization
+
+### Giai đoạn 1: Mô hình hóa vật lý và Tối ưu hệ số chuẩn hóa $\alpha$
+* **Xây dựng Block-Encoding tối ưu:** Vì độ phức tạp truy vấn tỷ lệ tuyến tính với $\alpha t$, trọng tâm mô hình hóa của các bài báo FTQC (như mô phỏng FeMoco của Google/PsiQuantum) là nén $\alpha$:
+  * Dùng **Double Factorization (DF)** hoặc **Tensor Hypercontraction (THC)** cho Hamiltonian hóa học lượng tử để giảm $\alpha$ từ $O(N^4)$ xuống $O(N^{1.5} - N^2)$.
+  * Dùng phân rã Pauli gom nhóm đối xứng cho các mô hình mạng spin và Fermi-Hubbard.
+
+### Giai đoạn 2: Thiết kế mạch phản xạ $\hat{R}_0$ và Kết hợp QSP
+* **Mạch phản xạ đa điều khiển $\hat{R}_0 = 2|0\rangle^{\otimes a}\langle 0|^{\otimes a} - \hat{I}_a$:** Cài đặt bằng một cổng đa điều khiển $C^{a-1}Z$ kẹp giữa các cổng $X^{\otimes a}$, tốn đúng $a - 2$ cổng Toffoli (với 1 ancilla mượn).
+* **Tạo hàm tiến hóa $e^{-i\hat{H}t}$ từ $\hat{W}$:** Vì $\hat{W}^k|_{\mathcal{H}_\lambda} = \cos(k\theta_\lambda)\hat{I} + i\sin(k\theta_\lambda)\hat{Y}_\lambda = T_k(\lambda/\alpha)\hat{I} + \dots$ (với $T_k$ là đa thức Chebyshev loại 1), ta áp dụng khai triển **Jacobi–Anger**:
+  $$e^{-i(\alpha t)(\lambda/\alpha)} = J_0(\alpha t) + 2\sum_{k=1}^{K} (-i)^k J_k(\alpha t)\,T_k\left(\frac{\lambda}{\alpha}\right)$$
+  bằng cách dùng LCU hoặc Quantum Signal Processing (QSP) trên chính toán tử $\hat{W}$!
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên FTQC
+* **Tính chất tách biến (Additive Complexity):** Do hàm Bessel $J_k(\alpha t)$ suy giảm siêu hàm mũ ngay khi bậc $k > \frac{e}{2}\alpha t$, bậc đa thức cần thiết chỉ là:
+  $$K = \left\lceil \frac{e}{2}\alpha t + \frac{\ln(1/\epsilon)}{\ln\left(e + \frac{\ln(1/\epsilon)}{\alpha t}\right)} \right\rceil = \Theta\left(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$$
+  Lưu ý sự khác biệt mang tính cách mạng so với chuỗi Taylor: $\alpha t$ và $\log(1/\epsilon)$ được **cộng** với nhau thay vì nhân với nhau!
+* **Đếm cổng Toffoli / T-count chuẩn công nghiệp:** Tổng số cổng T cho toàn bộ thuật toán bằng $K \times (C_T[\hat{U}_H] + C_T[\hat{R}_0])$.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Kiểm tra cấu trúc khối $2 \times 2$:** Dựng ma trận $\hat{W}$ trên hệ nhỏ, chuyển sang cơ sở riêng của $\hat{H}$ và kiểm tra rằng mọi phần tử ma trận nối giữa hai vector riêng khác nhau $|\lambda_i\rangle \neq |\lambda_j\rangle$ đều bằng $0$ đến độ chính xác máy ($< 10^{-15}$).
+* **Xác minh cận cắt cụt Jacobi–Anger:** Vẽ đồ thị sai số $\max_{x \in [-1,1]} |e^{-i\tau x} - \sum_{k=0}^K c_k T_k(x)|$ theo $K$ cho $\tau = \alpha t = 10, 50, 100$ để thấy hiện tượng "vách đá hội tụ" ngay tại $K \approx \frac{e}{2}\tau$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Tương thích phần cứng
+* **Đánh giá ngân sách sửa lỗi bề mặt (Surface Code Footprint):** Trong nghiên cứu tài nguyên FTQC, kết hợp số qubit logic và số cổng T của Qubitization với mô hình nhà máy chưng cất trạng thái kỳ diệu (Magic State Distillation factories) để tính toán số qubit vật lý thực tế (thường cỡ vài trăm nghìn đến vài triệu qubit vật lý) và thời gian chạy thực (wall-clock runtime).
+
+### Giai đoạn 6: Thực thi và Tái lập nghiên cứu
+* **Chuẩn hóa công bố ước lượng tài nguyên:** Xuất bảng kê khai chi tiết (Resource Table) gồm: hệ số chuẩn hóa $\alpha$, số qubit hệ thống $n_s$, số qubit phụ Block-Encoding $a$, chi phí Toffoli của `PREPARE` và `SELECT`, bậc đa thức $K$, và tổng số cổng Toffoli.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Đạt cận dưới lý thuyết tối ưu tuyệt đối $\Theta(\alpha t + \frac{\log(1/\epsilon)}{\log\log(1/\epsilon)})$; hoạt động chung cho mọi loại Block-Encoding; là chuẩn mực vàng của ngành ước lượng tài nguyên lượng tử. |
+| **Giới hạn & Rủi ro** | Hoàn toàn thuộc miền FTQC (đòi hỏi mạch `PREPARE`/`SELECT` sâu và cổng phản xạ đa điều khiển); không tận dụng trực tiếp tính giao hoán địa phương của các số hạng trong $\hat{H}$ như công thức tích Trotter. |
+| **Điều kiện thất bại** | Bài toán có chuẩn $\alpha$ tăng quá nhanh theo kích thước hệ mà không khai thác được cấu trúc địa phương (ví dụ hệ spin 1D dài $N$ không tương tác tầm xa: Qubitization tốn $O(N^2 t)$ cổng T trong khi Trotter tốn $O(N t)$). |

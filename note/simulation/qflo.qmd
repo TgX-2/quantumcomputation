@@ -1,0 +1,107 @@
+---
+title: "Quantum Floquet Simulation (qFLO)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Mô phỏng Floquet lượng tử (Quantum Floquet Simulation — qFLO)** là khung phương pháp luận chuyên biệt để mô phỏng các hệ lượng tử chịu kích thích tuần hoàn theo thời gian $\hat{H}(t + T) = \hat{H}(t)$ (với tần số điều biến $\Omega = 2\pi / T$), chẳng hạn như vật liệu topo cảm ứng bởi ánh sáng (Floquet topological insulators), tinh thể thời gian rời rạc (discrete time crystals), và các cổng lượng tử điều biến vi sóng/laser.
+
+Thay vì phải chia nhỏ từng chu kỳ dao động cực nhanh $T$ thành hàng nghìn lát cắt thời gian rời rạc (như thuật toán Dyson hay Trotter phụ thuộc thời gian thông thường), qFLO khai thác **định lý Floquet** để ánh xạ bài toán phụ thuộc thời gian về một **Hamiltonian hiệu dụng tĩnh $\hat{H}_F$** hoặc một **bài toán trị riêng tĩnh trong không gian mở rộng Sambe**.
+
+| Thuộc tính | Đặc trưng của qFLO |
+| :--- | :--- |
+| **Chế độ phần cứng** | Cả **NISQ** (dùng khai triển Floquet–Magnus cắt cụt) và **FTQC** (mô phỏng trong không gian Sambe) |
+| **Đối tượng vật lý** | Hệ lượng tử điều biến tuần hoàn $\hat{H}(t + T) = \hat{H}(t)$, tần số $\Omega = 2\pi/T$ |
+| **Hai công cụ cốt lõi** | **Khai triển Floquet–Magnus** (bậc cao theo $1/\Omega$) & **Không gian Sambe** $\mathcal{H} \otimes \mathcal{L}_T$ |
+| **Lợi thế đột phá** | Cho phép nhảy qua trọn vẹn nhiều chu kỳ điều biến $T$ bằng một Hamiltonian tĩnh duy nhất |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+qFLO được xây dựng bằng cách chuyển dịch một định lý kinh điển của vật lý chất rắn không gian sang miền thời gian:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Với Hamiltonian phụ thuộc thời gian $\hat{H}(t)$, toán tử tiến hóa không còn là $e^{-i\hat{H}t}$ mà là tích sắp xếp theo thời gian Dyson:
+
+$$\hat{U}(t, 0) = \mathcal{T} \exp\left(-i\int_0^t \hat{H}(s)\,ds\right)$$
+
+Khi tần số kích thích $\Omega$ rất lớn (ví dụ laser quang học tần số THz tác động lên chất rắn), bước thời gian mô phỏng $\Delta t$ phải nhỏ hơn nhiều so với chu kỳ $T = 2\pi/\Omega$. Nếu muốn quan sát động lực học ở thang thời gian vĩ mô $t \gg T$, số bước mô phỏng trở nên khổng lồ dù trạng thái trung bình thay đổi rất chậm.
+
+### Bước 2: Ẩn dụ vật lý — Định lý Bloch trong miền thời gian
+Trong tinh thể không gian tuần hoàn $V(\mathbf{x} + \mathbf{a}) = V(\mathbf{x})$, định lý Bloch phát biểu rằng hàm sóng chỉ là tích của một sóng phẳng với một hàm tuần hoàn theo mạng tinh thể. Tương tự, khi Hamiltonian tuần hoàn theo thời gian $\hat{H}(t + T) = \hat{H}(t)$, hệ bảo toàn **đối xứng tịnh tiến thời gian rời rạc** $t \to t + T$.
+
+Theo **định lý Floquet**, nghiệm của phương trình Schrödinger luôn có dạng:
+
+$$|\psi_\alpha(t)\rangle = e^{-i\varepsilon_\alpha t} |u_\alpha(t)\rangle, \quad \text{with } |u_\alpha(t + T)\rangle = |u_\alpha(t)\rangle$$
+
+trong đó $\varepsilon_\alpha \in [-\Omega/2, \Omega/2)$ là **năng lượng giả Floquet (quasi-energy)** và $|u_\alpha(t)\rangle$ là mode vi chuyển động tuần hoàn (micromotion). Nói cách khác, toán tử tiến hóa tách thành hai phần độc lập:
+
+$$\hat{U}(t, 0) = \hat{P}(t) \, e^{-i\hat{H}_F t}, \quad \hat{P}(t + T) = \hat{P}(t), \; \hat{P}(0) = \hat{I}$$
+
+Tại các thời điểm đồng bộ chu kỳ (stroboscopic times) $t_n = nT$, toán tử vi chuyển động $\hat{P}(nT) = \hat{I}$ biến mất hoàn toàn, và hệ tiến hóa **y hệt một hệ tĩnh** dưới tác dụng của $\hat{H}_F$!
+
+### Bước 3: Thiết kế hai dạng thử sơ khởi (Ansatz)
+Để tìm $\hat{H}_F$ hoặc giải phương trình tiến hóa trên máy tính lượng tử, qFLO sử dụng hai Ansatz bổ trợ nhau:
+
+1. **Ansatz chuỗi tiệm cận tần số cao (Floquet–Magnus):** Giả sử $\hat{H}_F$ khai triển được thành chuỗi lũy thừa nghịch đảo của tần số $\Omega$ (tức lũy thừa của chu kỳ $T$):
+   $$\hat{H}_F = \sum_{n=0}^{\infty} \hat{H}_F^{(n)}, \quad \hat{H}_F^{(n)} = O\left(\frac{1}{\Omega^n}\right) = O(T^n)$$
+2. **Ansatz không gian mở rộng Sambe ($\mathcal{H}_{\text{phys}} \otimes \mathcal{L}_T$):** Khai triển Fourier mode tuần hoàn $|u(t)\rangle = \sum_{m=-\infty}^{\infty} e^{-im\Omega t} |u_m\rangle$ và gắn thêm một thanh ghi lượng tử phụ lưu chỉ số điều hòa Fourier $|m\rangle_f \in \{-M_f, \dots, M_f\}$.
+
+### Bước 4: Khớp hệ số và Rút trích công thức cốt lõi
+* **Nhánh 1 — Khớp hệ số Floquet–Magnus:** Đối chiếu khai triển chuỗi Dyson của $\hat{U}(T, 0) = \mathcal{T}\exp\left(-i\int_0^T \hat{H}(t)\,dt\right)$ với khai triển Taylor của $e^{-i\hat{H}_F T}$ theo từng bậc của $T$:
+  $$\hat{H}_F^{(0)} = \frac{1}{T}\int_0^T \hat{H}(t)\,dt$$
+  $$\hat{H}_F^{(1)} = \frac{1}{2iT}\int_0^T dt_1 \int_0^{t_1} dt_2 \, [\hat{H}(t_1), \hat{H}(t_2)]$$
+  $$\hat{H}_F^{(2)} = -\frac{1}{6T}\int_0^T dt_1 \int_0^{t_1} dt_2 \int_0^{t_2} dt_3 \Big([\hat{H}(t_1), [\hat{H}(t_2), \hat{H}(t_3)]] + [\hat{H}(t_3), [\hat{H}(t_2), \hat{H}(t_1)]]\Big)$$
+  Các giao hoán tử bậc cao này tự động sinh ra các tương tác nhiều hạt nhân tạo (như tương tác chiral ba spin $\hat{\sigma}_i \cdot (\hat{\sigma}_j \times \hat{\sigma}_k)$) vốn không có mặt trong $\hat{H}(t)$ ban đầu!
+
+* **Nhánh 2 — Rút trích Hamiltonian tĩnh trong không gian Sambe:** Thay khai triển Fourier $\hat{H}(t) = \sum_{k} \hat{H}_k e^{-ik\Omega t}$ vào phương trình trị riêng Floquet $(\hat{H}(t) - i\partial_t)|u(t)\rangle = \varepsilon |u(t)\rangle$ và cân bằng hệ số từng hài $e^{-im\Omega t}$, ta thu được bài toán trị riêng hoàn toàn không phụ thuộc thời gian:
+  $$\sum_{n=-M_f}^{M_f} \left(\hat{H}_{m-n} - m\Omega\,\delta_{mn}\hat{I}\right) |u_n\rangle = \varepsilon |u_m\rangle$$
+  Toán tử quasi-energy $\hat{\mathcal{K}} = \sum_{m,n} |m\rangle\langle n|_f \otimes \hat{H}_{m-n} - \Omega \hat{N}_f \otimes \hat{I}$ là một **Hamiltonian tĩnh thông thường** trên không gian mở rộng, cho phép áp dụng trực tiếp Qubitization, QSP hoặc Trotter!
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho qFLO
+
+### Giai đoạn 1: Mô hình hóa vật lý và Phân tích hài Fourier
+* **Khai triển Fourier tín hiệu điều khiển:** Phân tích hàm điều biến $\hat{H}(t)$ thành các thành phần điều hòa $\hat{H}_k = \frac{1}{T}\int_0^T \hat{H}(t)e^{ik\Omega t}\,dt$. Trong hầu hết các bài toán vật lý (điều biến đơn sắc $\cos(\Omega t)$), chỉ có $k \in \{0, \pm 1\}$ khác không, tạo ra cấu trúc ma trận tam đường chéo khối (block-tridiagonal) cực kỳ thưa trong không gian Sambe.
+* **Mã hóa thanh ghi Fourier $|m\rangle_f$:** Dùng $n_f = \lceil \log_2(2M_f + 1) \rceil$ qubit phụ để mã hóa số lượng tử photon hấp thụ/phát xạ $m \in [-M_f, M_f]$.
+
+### Giai đoạn 2: Thiết kế mạch mô phỏng (Stroboscopic Magnus vs. Sambe Block-Encoding)
+* **Trên phần cứng NISQ (Stroboscopic qFLO):** Tính giải tích các số hạng $\hat{H}_F^{(0)} + \hat{H}_F^{(1)} + \hat{H}_F^{(2)}$ trên CPU, ánh xạ các giao hoán tử mới sinh thành chuỗi Pauli, và tiến hóa trạng thái qua $N_{\text{cycles}}$ chu kỳ bằng mạch Trotter tĩnh $e^{-i\hat{H}_F (nT)}$.
+* **Trên phần cứng FTQC (Sambe-space qFLO):** Xây dựng mạch LCU / Block-Encoding cho Hamiltonian tĩnh $\hat{\mathcal{K}}$:
+  * Khối $\hat{H}_{m-n}$ được thực thi bằng toán tử cộng/trừ số nguyên trên thanh ghi Fourier $|m\rangle_f \mapsto |m+k\rangle_f$ điều khiển các cổng Pauli của $\hat{H}_k$.
+  * Khối năng lượng trường $-\Omega \hat{N}_f$ chỉ là một chuỗi cổng quay pha đơn qubit $e^{i\Omega t \, 2^q \hat{Z}_q / 2}$ trên thanh ghi Fourier!
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ngưỡng đốt nóng Floquet
+* **Bán kính hội tụ và Tiền nhiệt hóa Floquet (Floquet Prethermalization):** Chuỗi Floquet–Magnus chỉ hội tụ tiệm cận khi tần số điều biến lớn hơn thang năng lượng địa phương ($\Omega \gg J_{\text{local}}$). Ở tần số trung gian, cắt cụt tại bậc tối ưu $n^* = O(\Omega / J_{\text{local}})$ cho sai số nhỏ theo hàm mũ $e^{-O(\Omega / J_{\text{local}})}$ trong thời gian tiền nhiệt hóa dài theo hàm mũ!
+* **Chặn trên sai số cắt cụt không gian Sambe ($M_f$):** Nhờ hiện tượng định xứ Wannier–Stark trong không gian tần số, biên độ của hài bậc $m$ suy giảm siêu hàm mũ khi $|m| > \|\hat{H}_1\|/\Omega$, do đó chỉ cần $M_f = O\left(\frac{\|\hat{H}_1\|}{\Omega} + \log(1/\epsilon)\right)$ hài (tức chỉ tốn $O(\log M_f)$ qubit phụ!).
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Chân lý nền qua tích Dyson bước nhỏ:** Dùng `scipy.integrate.solve_ivp` tích phân phương trình Schrödinger $i\partial_t|\psi(t)\rangle = \hat{H}(t)|\psi(t)\rangle$ với bước chia siêu mịn ($\delta t = T / 1000$) tại các mốc stroboscopic $t = nT$.
+* **Đối chiếu ngưỡng phá vỡ Magnus:** Khảo sát sai số giữa khai triển Magnus bậc 0, 1, 2 và nghiệm chính xác khi giảm dần tần số $\Omega$ đi qua vùng cộng hưởng đa photon ($\Omega \sim J_{\text{local}}$), xác định chính xác vùng mà không gian Sambe vượt trội so với khai triển Magnus.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Khôi phục vi chuyển động (Micromotion)
+* **Khôi phục trạng thái tại thời điểm bất kỳ $t \neq nT$:** Để lấy trạng thái vật lý ở giữa chu kỳ, áp dụng thêm toán tử vi chuyển động $\hat{P}(t) = e^{-i\hat{K}_F(t)}$ (với toán tử kick $\hat{K}_F(t)$ tính từ chuỗi Magnus tuần hoàn) lên trạng thái stroboscopic.
+* **Kháng nhiễu tự nhiên:** Việc gộp cả một chu kỳ dao động nhanh $T$ vào một bước cổng tĩnh $\hat{H}_F$ giúp giảm hàng trăm lần độ sâu mạch so với việc rời rạc hóa từng đỉnh xung laser, bảo vệ trạng thái khỏi mất kết hợp $T_1, T_2$.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Phép chiếu không gian Sambe khi đo:** Trong mô phỏng không gian Sambe, trạng thái vật lý tại thời điểm $t$ được thu hồi bằng cách biến đổi Fourier ngược trên thanh ghi phụ $|m\rangle_f$ (áp dụng cổng QFT ngược) hoặc chiếu theo pha $e^{-im\Omega t}$.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Biến động lực học phụ thuộc thời gian tuần hoàn thành Hamiltonian tĩnh; tiết kiệm hàng bậc độ lớn độ sâu mạch ở chế độ tần số cao và trung bình; số qubit phụ không gian Sambe chỉ tăng theo $O(\log M_f)$. |
+| **Giới hạn & Rủi ro** | Chuỗi Floquet–Magnus phân kỳ trong vùng cộng hưởng tần số thấp ($\Omega \lesssim J_{\text{local}}$), bắt buộc phải chuyển sang mô phỏng trong không gian Sambe lớn hơn. |
+| **Điều kiện thất bại** | Hệ chịu kích thích không tuần hoàn (ngẫu nhiên hoặc xung đơn lẻ không lặp lại), khi đó đối xứng tịnh tiến thời gian rời rạc của định lý Floquet không còn tồn tại. |

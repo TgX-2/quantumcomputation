@@ -1,0 +1,13 @@
+---
+title: "Stimulated Raman Scattering"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+**Tán xạ Raman kích thích (Stimulated Raman Scattering – SRS)** là một hiệu ứng quang học phi tuyến bậc ba, trong đó hai chùm laser chiếu đồng thời vào môi trường vật chất sẽ kích thích các phân tử chuyển mức dao động (hoặc quay) một cách đồng pha, làm khuếch đại cường độ của chùm ánh sáng tần số thấp hơn (chùm Stokes) và làm suy giảm chùm tần số cao hơn (chùm bơm).

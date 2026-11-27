@@ -1,0 +1,111 @@
+---
+title: "Multi-Product Formulas (MPF)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Công thức đa tích (Multi-Product Formulas — MPF)** là một kỹ thuật ngoại suy đại số bậc cao trong mô phỏng hệ lượng tử, cho phép đạt được độ chính xác tương đương các công thức Lie–Trotter–Suzuki bậc cao mà **không phải chịu chi phí độ sâu mạch tăng theo hàm mũ** hay **các bước tiến hóa lùi thời gian âm**.
+
+Trong các công thức tích Suzuki bậc $2k$ kinh điển, số lượng toán tử mũ con tăng theo hệ số $5^{k-1}$, đồng thời xuất hiện các hệ số bước thời gian âm $p_j < 0$. Các bước lùi thời gian âm này không chỉ làm tăng hằng số sai số giao hoán tử mà còn gây bất khả thi vật lý khi mô phỏng các hệ mở (Lindbladian) có tính bất thuận nghịch. MPF giải quyết triệt để nút thắt này bằng cách kết hợp tuyến tính nhiều mạch Trotter bậc thấp (thường là bậc 2) với các số bước chia thời gian khác nhau.
+
+| Thuộc tính | Đặc trưng của MPF |
+| :--- | :--- |
+| **Chế độ phần cứng** | Tương thích tốt cả **NISQ** (không cần ancilla nếu hậu xử lý cổ điển) và **FTQC** (kết hợp LCU) |
+| **Độ sâu mạch mỗi lần chạy** | Tuyến tính theo số bước chia $r_m$, tránh bùng nổ $5^{k-1}$ của Suzuki |
+| **Độ phức tạp truy vấn** | $O\left(t^{1 + \frac{1}{2M}} / \epsilon^{\frac{1}{2M}}\right)$ với $M$ thành phần ngoại suy |
+| **Yêu cầu cốt lõi** | Công thức cơ sở đối xứng phản xạ thời gian $S_2(-\tau)S_2(\tau) = \hat{I}$ |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+Để hiểu tại sao MPF có dạng tổ hợp tuyến tính của các lũy thừa mạch Trotter, ta lần theo 4 bước tư duy của Childs và Wiebe (2012):
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Khi dùng công thức Suzuki bậc 2 đối xứng:
+
+$$S_2(\tau) = e^{-i\hat{H}_1 \tau/2} \cdots e^{-i\hat{H}_L \tau} \cdots e^{-i\hat{H}_1 \tau/2}$$
+
+nếu muốn nâng độ chính xác từ $O(t^3/r^2)$ lên $O(t^{2M+1}/r^{2M})$ bằng phương pháp đệ quy Suzuki truyền thống, ta buộc phải ghép nối tiếp $5^{M-1}$ khối $S_2$ trong **cùng một mạch duy nhất**, làm độ sâu mạch vượt quá giới hạn kết hợp $T_2$ của phần cứng.
+
+### Bước 2: Ẩn dụ toán học — Ngoại suy Richardson trong không gian toán tử
+Trong giải tích số cổ điển (tích phân Romberg và phương pháp giải phương trình vi phân), **ngoại suy Richardson (Richardson Extrapolation)** không cố gắng làm cho một lưới tính toán duy nhất trở nên cực kỳ phức tạp. Thay vào đó, người ta chạy **cùng một thuật toán đơn giản** trên nhiều kích thước bước lưới thô khác nhau $h_1, h_2, \dots, h_M$, sau đó lấy tổ hợp tuyến tính các kết quả để triệt tiêu các số hạng sai số bậc thấp trong chuỗi khai triển Taylor.
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Xét toán tử tiến hóa trong toàn khoảng thời gian $t$ được chia thành $r$ bước nhỏ của công thức đối xứng bậc 2. Vì $S_2(-\tau)S_2(\tau) = \hat{I}$, khai triển BCH của $S_2(t/r)$ chỉ chứa các lũy thừa lẻ của $t/r$:
+
+$$S_2\left(\frac{t}{r}\right) = \exp\left(-i\hat{H}\frac{t}{r} + \sum_{j=1}^{\infty} \hat{E}_{2j+1}\left(\frac{t}{r}\right)^{2j+1}\right)$$
+
+Khi lặp lại $r$ lần để đi hết thời gian $t$, sai số tích lũy thành chuỗi lũy thừa chẵn theo $1/r$:
+
+$$\left[S_2\left(\frac{t}{r}\right)\right]^r = e^{-i\hat{H}t} + \sum_{j=1}^{\infty} \tilde{E}_{2j}(t)\, r^{-2j}$$
+
+Từ cấu trúc chuỗi lũy thừa chẵn này, ta đặt Ansatz cho toán tử xấp xỉ MPF dưới dạng tổng có trọng số của $M$ mạch với các số bước chia phân biệt $r_1 < r_2 < \dots < r_M$:
+
+$$\hat{U}_{\text{MPF}}(t) = \sum_{m=1}^{M} c_m \left[S_2\left(\frac{t}{r_m}\right)\right]^{r_m}$$
+
+### Bước 4: Khớp hệ số và Rút trích công thức cốt lõi
+Thay khai triển của từng thành phần $[S_2(t/r_m)]^{r_m}$ vào Ansatz:
+
+$$\hat{U}_{\text{MPF}}(t) = \left(\sum_{m=1}^{M} c_m\right) e^{-i\hat{H}t} + \sum_{j=1}^{M-1} \left(\sum_{m=1}^{M} c_m r_m^{-2j}\right) \tilde{E}_{2j}(t) + O\left(\frac{t^{2M+1}}{r_1^{2M}}\right)$$
+
+Để giữ nguyên toán tử tiến hóa đúng $e^{-i\hat{H}t}$ và triệt tiêu toàn bộ $M-1$ số hạng sai số dẫn đầu ($j = 1, \dots, M-1$), bộ hệ số thực $\{c_m\}_{m=1}^M$ phải thỏa mãn hệ phương trình tuyến tính Vandermonde:
+
+$$\begin{pmatrix} 1 & 1 & \cdots & 1 \\ r_1^{-2} & r_2^{-2} & \cdots & r_M^{-2} \\ \vdots & \vdots & \ddots & \vdots \\ r_1^{-2(M-1)} & r_2^{-2(M-1)} & \cdots & r_M^{-2(M-1)} \end{pmatrix} \begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_M \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}$$
+
+Nghiệm giải tích đóng của hệ Vandermonde này cho ra công thức trọng số MPF chuẩn xác:
+
+$$c_m = \prod_{q \neq m} \frac{r_m^2}{r_m^2 - r_q^2}$$
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho MPF
+
+### Giai đoạn 1: Mô hình hóa vật lý và Phân rã Hamiltonian
+* **Chọn cấu trúc phân rã giao hoán tối ưu:** Chia $\hat{H} = \sum_{\gamma=1}^{\Gamma} \hat{H}_\gamma$ thành ít nhóm giao hoán nội bộ nhất có thể (ví dụ: phân tách chẵn–lẻ `even-odd` trên mạng 1D/2D để $\Gamma = 2$, hoặc phân tách động năng–thế năng $\hat{T} + \hat{V}$).
+* **Tối ưu bậc cơ sở:** Kiểm tra xem nên dùng cơ sở bậc 2 ($S_2$) hay bậc 4 ($S_4$) làm hạt nhân ngoại suy; thông thường $S_2$ tối ưu nhất về độ sâu mạch trên phần cứng nhiễu.
+
+### Giai đoạn 2: Thiết kế kiến trúc thực thi (Hai nhánh NISQ và FTQC)
+Tùy thuộc vào mục tiêu nghiên cứu, MPF có hai cách triển khai mạch hoàn toàn khác nhau:
+1. **Nhánh không dùng Ancilla (Classical Post-Processing MPF — NISQ):** Không cần tạo tổng kết hợp trên phần cứng. Ta chạy độc lập $M$ mạch lượng tử $[S_2(t/r_m)]^{r_m}$ trên trạng thái đầu $|\psi_0\rangle$, đo giá trị kỳ vọng của đài quan sát $\hat{O}$ trên từng mạch, rồi cộng tuyến tính trên máy tính cổ điển:
+   $$\langle \hat{O}(t) \rangle_{\text{MPF}} = \sum_{m=1}^{M} c_m \langle \psi_0 | \left[S_2^\dagger\left(\frac{t}{r_m}\right)\right]^{r_m} \hat{O} \left[S_2\left(\frac{t}{r_m}\right)\right]^{r_m} | \psi_0 \rangle$$
+2. **Nhánh kết hợp kết hợp (LCU-MPF — FTQC):** Dùng thanh ghi phụ $\lceil \log_2 M \rceil$ qubit để mã hóa bộ trọng số $|c_m|$ qua cổng $\text{PREPARE}$, điều khiển thực thi $[S_2(t/r_m)]^{r_m}$ qua cổng $\text{SELECT}$, và dùng Khuếch đại biên độ quên lãng (OAA) để thu được trạng thái thuần $|\psi(t)\rangle$.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Kiểm soát chuẩn $\ell_1$ của trọng số ($\|c\|_1 = \sum_{m=1}^M |c_m|$):** Nếu chọn dãy bước chia $r_m = m$ ($1, 2, \dots, M$), chuẩn $\|c\|_1$ tăng theo hàm mũ $e^{O(M)}$, làm khuếch đại nhiễu đo lường. Nghiên cứu hiện đại chứng minh rằng chọn dãy bước chia có khoảng cách tốt (well-conditioned sequences) như $r_m \approx \lceil m^2 \rceil$ hoặc nghiệm đa thức Chebyshev giữ cho $\|c\|_1 = O(\log M)$ bị chặn đa thức!
+* **Chặn trên sai số:** Khi $\|c\|_1 = O(\log M)$, sai số chuẩn phổ của MPF đạt:
+  $$\left\| e^{-i\hat{H}t} - \hat{U}_{\text{MPF}}(t) \right\| = O\left(\frac{(\alpha_{\text{comm}} t)^{2M+1}}{r_1^{2M}} \log M\right)$$
+  trong đó $\alpha_{\text{comm}}$ là chuẩn giao hoán tử lồng nhau bậc $2M+1$.
+* **Ước lượng tài nguyên:** Tổng số cổng hai qubit trên mỗi lần chạy tối đa là $r_M \times C_{\text{base}}$, thấp hơn hàng chục lần so với công thức Suzuki bậc $2M$ cùng độ chính xác.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Đường chuẩn chính xác (ED):** Tính $|\psi_{\text{exact}}(t)\rangle = e^{-i\hat{H}t}|\psi_0\rangle$ bằng `scipy.sparse.linalg.expm_multiply` trên hệ spin Heisenberg hoặc Fermi-Hubbard $N = 10 - 16$ qubit.
+* **Khảo sát đồ thị hội tụ Log–Log:** Vẽ sai số $\epsilon(r_1)$ theo bước cơ sở $r_1$ trên thang log–log cho các bậc ngoại suy $M = 1, 2, 3, 4$. Độ dốc đường thẳng lý thuyết phải khớp chính xác với $-2M$ (tức $-2, -4, -6, -8$).
+* **Kiểm tra phương sai mẫu (Shot Variance):** Vì phương sai của ước lượng cổ điển tỷ lệ với $\|c\|_1^2 / N_{\text{shots}}$, cần đối chiếu giữa sai số hệ thống (bias) giảm theo $r_1^{-2M}$ và sai số thống kê (variance) tăng theo $\|c\|_1^2$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Giảm thiểu lỗi
+* **Tương tác giữa nhiễu phần cứng và ngoại suy:** Khi $r_m$ quá lớn, nhiễu khử cực (depolarizing noise) làm suy giảm biên độ tín hiệu theo $e^{-\gamma r_m}$, phá vỡ sự triệt tiêu đại số giữa các mạch $r_m$ khác nhau.
+* **Tối ưu điểm dừng (Optimal Truncation):** Mô hình hóa kênh nhiễu hiệu dụng $\tilde{S}_2(t/r_m)$ để tìm bậc $M^*$ và bước tối đa $r_M^*$ cân bằng giữa sai số Trotter và nhiễu phần cứng, kết hợp với Zero-Noise Extrapolation (ZNE).
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Phân bổ ngân sách đo tối ưu (Importance Shot Allocation):** Phân bổ số lần đo $N_m$ cho mạch thứ $m$ tỷ lệ thuận với độ lớn trọng số $|c_m|$:
+  $$N_m = N_{\text{total}} \frac{|c_m|}{\sum_{k=1}^M |c_k|}$$
+  để tối thiểu hóa phương sai tổng cộng với cùng tổng số shots trên QPU.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Đạt độ chính xác bậc cao $O(r^{-2M})$ với mạch nông bậc 2; không có bước thời gian âm nên dùng được cho hệ mở Lindblad; triển khai được trên NISQ mà không cần ancilla. |
+| **Giới hạn & Rủi ro** | Nếu chạy theo nhánh hậu xử lý cổ điển, MPF **chỉ tính được giá trị kỳ vọng** $\langle \hat{O}(t) \rangle$, không tạo ra trực tiếp trạng thái lượng tử $|\psi(t)\rangle$ để đưa vào thuật toán khác (như QPE). |
+| **Điều kiện thất bại** | Chọn sai bộ số bước $r_m$ (quá sát nhau) khiến ma trận Vandermonde suy biến, làm $\|c\|_1$ bùng nổ và khuếch đại nhiễu thống kê. |

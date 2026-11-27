@@ -1,0 +1,111 @@
+---
+title: "Truncated Taylor Series Hamiltonian Simulation (Taylor)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Mô phỏng Hamiltonian bằng chuỗi Taylor cắt cụt (Truncated Taylor Series Simulation)** do Berry, Childs, Cleve, Kothari và Somma đề xuất (PRL 2015) là bước ngoặt lịch sử phá vỡ rào cản độ phức tạp theo sai số $\epsilon$ trong mô phỏng lượng tử.
+
+Trong suốt hai thập kỷ trước đó, mọi thuật toán dựa trên công thức tích Lie–Trotter–Suzuki đều có chi phí tăng theo đa thức nghịch đảo sai số $O(1/\epsilon^{1/2k})$. Thuật toán chuỗi Taylor đã cải thiện độ phức tạp theo sai số xuống **tăng theo hàm logarit** $O\left(\frac{\log(1/\epsilon)}{\log\log(1/\epsilon)}\right)$ — một bước nhảy vọt theo hàm mũ về độ chính xác — bằng cách khai triển trực tiếp $e^{-i\hat{H}\tau}$ thành chuỗi lũy thừa và đưa toàn bộ chuỗi này vào bộ máy giao thoa LCU.
+
+| Thuộc tính | Đặc trưng của Taylor Series Simulation |
+| :--- | :--- |
+| **Chế độ phần cứng** | **FTQC** (cần thanh ghi đồng hồ đếm bậc $K$ và $K$ thanh ghi chọn số hạng) |
+| **Độ phức tạp truy vấn** | $O\left(\lambda t \frac{\log(\lambda t / \epsilon)}{\log\log(\lambda t / \epsilon)}\right)$ với $\lambda = \sum_{l=1}^L \alpha_l$ |
+| **Số qubit phụ** | $O\left(K \log L\right)$ với bậc cắt cụt $K = O\left(\frac{\log(\lambda t / \epsilon)}{\log\log(\lambda t / \epsilon)}\right)$ |
+| **Điểm đột phá** | Cố định bước thời gian $\tau = (\ln 2)/\lambda$ để OAA thành công sau **đúng 1 bước lặp** |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+Cách Berry et al. thiết kế ra thuật toán này là một kiệt tác kết hợp giữa giải tích cổ điển và điều khiển xác suất lượng tử:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Công thức tích Trotter bắt buộc phải tách rời các toán tử không giao hoán $e^{-i(\hat{H}_1 + \hat{H}_2)\tau} \approx e^{-i\hat{H}_1\tau} e^{-i\hat{H}_2\tau}$, tạo ra vô số giao hoán tử rác. Ngược lại, **chuỗi Taylor** của hàm mũ ma trận:
+
+$$e^{-i\hat{H}\tau} = \sum_{k=0}^{\infty} \frac{(-i\hat{H}\tau)^k}{k!}$$
+
+là **đúng tuyệt đối bất kể các số hạng trong $\hat{H}$ có giao hoán với nhau hay không**! Vấn đề duy nhất là làm sao cài đặt tổng vô hạn này lên mạch lượng tử đơn vị.
+
+### Bước 2: Ẩn dụ toán học — Khai triển đa thức thành tổng các từ đơn vị
+Giả sử $\hat{H} = \sum_{l=1}^L \alpha_l \hat{H}_l$, trong đó $\alpha_l > 0$ và mỗi $\hat{H}_l$ là một toán tử đơn vị (chẳng hạn chuỗi Pauli). Khi nâng $\hat{H}$ lên lũy thừa bậc $k$, ta không cần tính tích ma trận trên máy tính cổ điển; chỉ cần khai triển theo quy luật phân phối:
+
+$$\hat{H}^k = \left(\sum_{l=1}^{L} \alpha_l \hat{H}_l\right)^k = \sum_{l_1, l_2, \dots, l_k = 1}^{L} \alpha_{l_1}\alpha_{l_2}\cdots\alpha_{l_k} \left(\hat{H}_{l_1}\hat{H}_{l_2}\cdots\hat{H}_{l_k}\right)$$
+
+Vì tích của các toán tử đơn vị vẫn là một toán tử đơn vị, mỗi số hạng $(-i)^k \hat{H}_{l_1}\cdots\hat{H}_{l_k}$ chính là một cổng lượng tử đơn vị!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Chia tổng thời gian $t$ thành $r$ phân đoạn nhỏ $\tau = t/r$. Trên mỗi phân đoạn $\tau$, cắt cụt chuỗi Taylor tại bậc $K$:
+
+$$e^{-i\hat{H}\tau} \approx \hat{U}_{\text{Taylor}}(\tau) = \sum_{k=0}^{K} \sum_{l_1,\dots,l_k=1}^{L} \underbrace{\frac{\tau^k}{k!}\alpha_{l_1}\cdots\alpha_{l_k}}_{\beta_{k,\mathbf{l}} > 0} \underbrace{\left((-i)^k \hat{H}_{l_1}\cdots\hat{H}_{l_k}\right)}_{\hat{U}_{k,\mathbf{l}} \text{ (unitary)}}$$
+
+Cấu trúc này khớp hoàn hảo với khuôn mẫu LCU $\sum \beta_{k,\mathbf{l}} \hat{U}_{k,\mathbf{l}}$ với tổng trọng số:
+
+$$s = \sum_{k=0}^{K} \sum_{l_1,\dots,l_k=1}^{L} \frac{\tau^k}{k!}\alpha_{l_1}\cdots\alpha_{l_k} = \sum_{k=0}^{K} \frac{(\lambda \tau)^k}{k!} \approx e^{\lambda \tau}$$
+
+### Bước 4: Khớp hệ số — Bí quyết chọn $\lambda\tau = \ln 2$
+Nếu áp dụng LCU trực tiếp cho $\hat{U}_{\text{Taylor}}(\tau)$, xác suất thành công khi đo thanh ghi phụ bằng $0$ là $P(0) \approx 1/s^2 \approx e^{-2\lambda\tau}$. Tác giả đặt câu hỏi thông minh: *Ta có quyền tự do chọn kích thước phân đoạn $\tau$; vậy chọn $\tau$ bằng bao nhiêu để Khuếch đại biên độ quên lãng (OAA) hoạt động đẹp nhất?*
+
+Trong thuật toán OAA, trạng thái sau LCU có dạng:
+
+$$\hat{W}|0\rangle_a|\psi\rangle_s = \sin\theta\,|0\rangle_a \hat{U}|\psi\rangle_s + \cos\theta\,|\Phi^\perp\rangle_{as}, \quad \sin\theta = \frac{1}{s}$$
+
+Sau $m$ bước lặp OAA, biên độ thành công biến thành $\sin((2m+1)\theta)$. Để đạt xác suất thành công $100\%$ ngay tại **bước lặp đầu tiên ($m = 1$)**, ta cần:
+
+$$\sin(3\theta) = 1 \implies 3\theta = \frac{\pi}{2} \implies \theta = \frac{\pi}{6} \implies \sin\theta = \frac{1}{2}$$
+
+Do đó, ta chỉ cần ép tổng trọng số $s = 2$! Vì $s \approx e^{\lambda\tau}$, điều này dẫn ngay đến lựa chọn vàng:
+
+$$e^{\lambda\tau} = 2 \iff \tau = \frac{\ln 2}{\lambda}$$
+
+Với $\tau = (\ln 2)/\lambda$, toàn bộ thời gian $t$ được chia thành $r = \lceil \lambda t / \ln 2 \rceil$ phân đoạn, và mỗi phân đoạn chỉ cần **đúng 1 lần lặp OAA**!
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho Taylor Series
+
+### Giai đoạn 1: Mô hình hóa vật lý và Tối thiểu hóa chuẩn $\lambda$
+* **Biểu diễn tổ hợp đơn vị:** Viết $\hat{H} = \sum_{l=1}^L \alpha_l \hat{H}_l$ với $\alpha_l > 0$ và $\hat{H}_l$ tự nghịch đảo hoặc đơn vị. Vì số phân đoạn $r \propto \lambda t$, mọi nỗ lực mô hình hóa đều tập trung vào việc giảm chuẩn $\lambda = \sum_l \alpha_l$ (ví dụ: dịch chuyển mức năng lượng nền $\hat{H} \to \hat{H} - c_0\hat{I}$ để loại bỏ hằng số lớn nhất).
+
+### Giai đoạn 2: Thiết kế mạch LCU phân tầng (Unary Counter + Controlled-$\hat{H}_l$)
+* **Cấu trúc thanh ghi phụ:** Gồm hai phần:
+  1. Thanh ghi bậc $k$ dùng mã hóa nhất phân (unary encoding) gồm $K$ qubit: $|1^k 0^{K-k}\rangle$, giúp điều khiển số lượng phép nhân dễ dàng.
+  2. $K$ thanh ghi chọn chỉ số $|l_1\rangle |l_2\rangle \cdots |l_K\rangle$, mỗi thanh ghi rộng $\lceil \log_2 L \rceil$ qubit.
+* **Thực thi `SELECT` tuần tự:** Thay vì tạo bảng tra cho $L^K$ tổ hợp, ta mắc nối tiếp $K$ khối điều khiển giống hệt nhau: khối thứ $j$ kiểm tra bit thứ $j$ của thanh ghi bậc $k$; nếu bit đó bằng $1$, nó thực thi cổng $\text{SELECT}_H$ dựa trên thanh ghi $|l_j\rangle$ để nhân thêm $(-i)\hat{H}_{l_j}$ vào thanh ghi chính.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Chặn trên sai số cắt cụt:** Với $\lambda\tau = \ln 2$, phần dư Taylor trên mỗi phân đoạn bị chặn bởi:
+  $$\left\| e^{-i\hat{H}\tau} - \hat{U}_{\text{Taylor}}(\tau) \right\| \le \sum_{k=K+1}^{\infty} \frac{(\ln 2)^k}{k!} \le \frac{2(\ln 2)^{K+1}}{(K+1)!}$$
+* **Xác định bậc cắt cụt $K$:** Để tổng sai số trên $r = O(\lambda t)$ phân đoạn nhỏ hơn $\epsilon$, ta cần sai số mỗi đoạn $\le \epsilon / r$. Áp dụng công thức Stirling $(K+1)! \approx (K/e)^K$, suy ra:
+  $$K = O\left(\frac{\log(\lambda t / \epsilon)}{\log\log(\lambda t / \epsilon)}\right)$$
+* **Độ phức tạp cổng:** Mỗi phân đoạn gọi $K$ lần oracle $\text{SELECT}_H$ (chi phí $O(L)$ cổng T mỗi lần) và 3 lần lặp trong OAA, cho tổng số cổng T là $O\left(\lambda t L \frac{\log(\lambda t / \epsilon)}{\log\log(\lambda t / \epsilon)}\right)$.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Kiểm tra độ hội tụ siêu hàm mũ theo $K$:** Cố định $\lambda\tau = \ln 2$ và tính chuẩn phổ $\|e^{-i\hat{H}\tau} - \hat{U}_{\text{Taylor}}(\tau)\|$ khi tăng $K = 1, 2, \dots, 10$. Sai số phải giảm nhanh hơn hàm mũ (tỷ lệ với $(\ln 2)^K / K!$).
+* **Kiểm chứng mạch OAA một bước:** Mô phỏng đầy đủ mạch `PREPARE`–`SELECT`–`OAA` cho hệ nhỏ ($n_{\text{sys}} = 2 - 4$ qubit, $K = 3$) để xác nhận xác suất đo được thanh ghi phụ bằng $0$ đạt $> 99.9\%$.
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Tương thích phần cứng
+* **Điểm yếu trên NISQ:** Do cần tới $K \lceil \log_2 L \rceil + K$ qubit phụ và các cổng Toffoli điều khiển đa tầng, thuật toán Taylor không khả thi trên thiết bị chưa sửa lỗi.
+* **Tối ưu hóa cho FTQC:** Tái sử dụng thanh ghi phụ (ancilla recycling) giữa các phân đoạn $\tau$ bằng cách đo và đặt lại (reset) thanh ghi phụ về $|0\rangle$ sau mỗi bước OAA, giữ cho tổng số qubit không tăng theo thời gian $t$.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Quy trình chạy theo phân đoạn:** Lặp $r$ chu kỳ: (1) Chuẩn bị trạng thái phụ cho $K$ bậc, (2) Chạy LCU + 1 bước OAA, (3) Đo kiểm tra thanh ghi phụ (flag check) để phát hiện lỗi nếu có, (4) Reset thanh ghi phụ sang chu kỳ tiếp theo.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Đạt độ phức tạp tối ưu $O(\log(1/\epsilon)/\log\log(1/\epsilon))$ theo sai số mà không cần thiết kế đa thức góc pha phức tạp như QSP. |
+| **Giới hạn & Rủi ro** | Phụ thuộc vào chuẩn $\lambda = \sum_l \alpha_l$ thay vì chuẩn giao hoán tử (không tận dụng được tính địa phương của tương tác như Trotter); tốn nhiều qubit phụ $O(K \log L)$. |
+| **Điều kiện thất bại** | Khi mô phỏng các mạng spin địa phương lớn ($N \gg 1$), $\lambda$ tăng tuyến tính theo $N$ khiến chi phí Taylor tăng như $O(N^2 t)$ trong khi Trotter chỉ tăng như $O(N t)$. |

@@ -1,0 +1,110 @@
+---
+title: "Variational Quantum Simulation (VQS)"
+chapter: "Future"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+## 1. Tổng quan & Bối cảnh vật lý
+
+**Mô phỏng lượng tử biến phân (Variational Quantum Simulation — VQS)** do Li và Benjamin đề xuất (PRX 2017) là phương pháp chủ lực để mô phỏng động lực học lượng tử thời gian thực và thời gian ảo trên các bộ xử lý lượng tử cận biên nhiễu vừa (NISQ).
+
+Thay vì phân rã toán tử tiến hóa $e^{-i\hat{H}t}$ thành một chuỗi cổng sâu hun hút tỷ lệ thuận với thời gian $t$, VQS cố định một mạch lượng tử tham số hóa (ansatz) có **độ sâu nông và không đổi**, sau đó dùng nguyên lý biến phân để dịch chuyển các tham số cổ điển $\boldsymbol{\theta}(t)$ sao cho trạng thái lượng tử trượt sát nhất với quỹ đạo Schrödinger thực tế.
+
+| Thuộc tính | Đặc trưng của VQS |
+| :--- | :--- |
+| **Chế độ phần cứng** | **NISQ** (thuật toán lai lượng tử–cổ điển Hybrid Quantum-Classical) |
+| **Độ sâu mạch** | Cố định, độc lập với tổng thời gian mô phỏng $t$ |
+| **Nguyên lý điều khiển** | Nguyên lý biến phân McLachlan $\delta \| (\partial_t + i\hat{H})|\phi(\boldsymbol{\theta})\rangle \|^2 = 0$ |
+| **Chi phí đo mỗi bước** | $O(P^2)$ mạch Hadamard test với $P$ là số tham số biến phân |
+
+---
+
+## 2. Tư duy kiến tạo công thức từ nguyên lý gốc
+
+VQS được xây dựng bằng cách đưa bài toán phương trình vi phân đạo hàm riêng trong không gian Hilbert $2^n$ chiều về một hệ phương trình vi phân thường trên đa tạp tham số $P$ chiều:
+
+### Bước 1: Nhận diện nút thắt cổ chai
+Trên phần cứng NISQ, thời gian mất kết hợp $T_2$ chỉ cho phép thực thi vài chục lớp cổng hai qubit. Mọi thuật toán Trotter hay LCU đều có độ sâu tăng tuyến tính theo $t$, khiến trạng thái lượng tử bị nhiễu hòa tan thành trạng thái hỗn hợp tối đa trước khi quan sát được hiện tượng vật lý.
+
+### Bước 2: Ẩn dụ hình học — Chiếu vận tốc tiếp tuyến lên đa tạp cong
+Hãy hình dung không gian Hilbert $2^n$ chiều là một không gian Euclid khổng lồ, trong đó trạng thái thực $|\psi(t)\rangle$ chuyển động theo vector vận tốc đúng $\mathbf{v}_{\text{exact}} = -i\hat{H}|\psi\rangle$. Một mạch lượng tử tham số hóa $|\phi(\boldsymbol{\theta})\rangle = \hat{U}(\boldsymbol{\theta})|0\rangle$ với $P \ll 2^n$ tham số thực chất chỉ quét ra một **mặt cong (đa tạp) chiều thấp $\mathcal{M}$** nhúng trong không gian Hilbert đó.
+
+Vì vector vận tốc đúng $-i\hat{H}|\phi(\boldsymbol{\theta})\rangle$ thường chĩa ra ngoài mặt cong $\mathcal{M}$, ta không thể đi theo nó chính xác. Giải pháp tự nhiên nhất trong hình học vi phân là **chiếu vuông góc** vector vận tốc đúng lên không gian tiếp tuyến của $\mathcal{M}$ tại điểm $\boldsymbol{\theta}(t)$!
+
+### Bước 3: Thiết kế dạng thử sơ khởi (Ansatz)
+Chọn một mạch tham số hóa gồm $P$ cổng quay đơn/hai qubit:
+
+$$|\phi(\boldsymbol{\theta}(t))\rangle = \hat{U}_P(\theta_P(t)) \cdots \hat{U}_2(\theta_2(t)) \hat{U}_1(\theta_1(t)) |0\rangle^{\otimes n}$$
+
+Lưu ý một tinh tế vật lý quan trọng: phương trình Schrödinger phụ thuộc vào **pha toàn cục (global phase)**, trong khi mạch $\hat{U}(\boldsymbol{\theta})$ có thể không tạo ra pha toàn cục tự do. Do đó, ta bổ sung một biến pha toàn cục $\theta_0(t)$ vào trạng thái thử:
+
+$$|\tilde{\phi}(t)\rangle = e^{i\theta_0(t)} |\phi(\boldsymbol{\theta}(t))\rangle$$
+
+### Bước 4: Khớp hệ số — Dẫn xuất phương trình McLachlan
+Áp dụng **nguyên lý biến phân McLachlan**: tìm tốc độ biến thiên $\dot{\theta}_0, \dot{\theta}_1, \dots, \dot{\theta}_P$ sao cho khoảng cách Euclid giữa đạo hàm thời gian của trạng thái thử và vế phải phương trình Schrödinger đạt cực tiểu:
+
+$$\delta \left\| \left(\frac{d}{dt} + i\hat{H}\right) e^{i\theta_0(t)} |\phi(\boldsymbol{\theta}(t))\rangle \right\|^2 = 0$$
+
+Khai triển đạo hàm theo quy tắc dây chuyền $\frac{d}{dt}|\tilde{\phi}\rangle = e^{i\theta_0}\left(i\dot{\theta}_0|\phi\rangle + \sum_{j=1}^P \dot{\theta}_j \frac{\partial |\phi\rangle}{\partial \theta_j}\right)$, bình phương chuẩn cần cực tiểu hóa là:
+
+$$F(\dot{\theta}_0, \dot{\boldsymbol{\theta}}) = \left\| i\dot{\theta}_0|\phi\rangle + \sum_{j=1}^P \dot{\theta}_j \frac{\partial |\phi\rangle}{\partial \theta_j} + i\hat{H}|\phi\rangle \right\|^2$$
+
+Lấy đạo hàm riêng của $F$ theo $\dot{\theta}_0$ bằng $0$ để khử pha toàn cục trước:
+
+$$\frac{\partial F}{\partial \dot{\theta}_0} = 0 \implies \dot{\theta}_0 = -\langle\phi|\hat{H}|\phi\rangle + i \sum_{j=1}^P \dot{\theta}_j \langle\phi|\frac{\partial \phi}{\partial \theta_j}\rangle$$
+
+Thay biểu thức $\dot{\theta}_0$ này trở lại vào $F$ và lấy đạo hàm riêng theo từng thành phần $\dot{\theta}_k$ ($k = 1, \dots, P$) bằng $0$, ta thu được hệ phương trình tuyến tính Euler–Lagrange nổi tiếng của VQS:
+
+$$\sum_{j=1}^{P} M_{kj} \dot{\theta}_j = V_k$$
+
+trong đó ma trận metric lượng tử $M_{kj}$ và vector lực $V_k$ hoàn toàn là số thực:
+
+$$M_{kj} = \text{Re}\left(\frac{\partial \langle\phi|}{\partial \theta_k}\frac{\partial |\phi\rangle}{\partial \theta_j} + \frac{\partial \langle\phi|}{\partial \theta_k}|\phi\rangle \frac{\partial \langle\phi|}{\partial \theta_j}|\phi\rangle\right)$$
+
+$$V_k = \text{Im}\left(\frac{\partial \langle\phi|}{\partial \theta_k}\hat{H}|\phi\rangle + \frac{\partial \langle\phi|}{\partial \theta_k}|\phi\rangle \langle\phi|\hat{H}|\phi\rangle\right)$$
+
+---
+
+## 3. Quy trình nghiên cứu 6 giai đoạn cho VQS
+
+### Giai đoạn 1: Mô hình hóa vật lý và Thiết kế Ansatz
+* **Lựa chọn Ansatz có cấu trúc vật lý:** Sử dụng **Hamiltonian Variational Ansatz (HVA)** (xây dựng bằng cách lặp lại các lớp sinh từ chính các số hạng của $\hat{H}$) hoặc **UCCSD** cho hóa học lượng tử, đảm bảo đa tạp tham số $\mathcal{M}$ bao phủ được quỹ đạo tiến hóa thực của hệ.
+* **Phân rã Pauli của $\hat{H}$:** Viết $\hat{H} = \sum_{l=1}^L c_l \hat{P}_l$ để tính từng số hạng $\text{Im}\left(\frac{\partial\langle\phi|}{\partial\theta_k}\hat{P}_l|\phi\rangle\right)$ trong vector lực $V_k$.
+
+### Giai đoạn 2: Thiết kế mạch đo $M_{kj}$ và $V_k$ (Hadamard Test)
+* **Tính đạo hàm mạch lượng tử:** Với mỗi cổng tham số có dạng $e^{-i\theta_j \hat{G}_j / 2}$ (với $\hat{G}_j^2 = \hat{I}$), đạo hàm theo $\theta_j$ tạo ra một tổ hợp mạch chỉ chèn thêm một cổng Pauli $\hat{G}_j$ vào vị trí cổng thứ $j$:
+  $$\frac{\partial |\phi(\boldsymbol{\theta})\rangle}{\partial \theta_j} = -\frac{i}{2} \hat{U}_{P:j+1} \hat{G}_j \hat{U}_{j:1} |0\rangle$$
+* **Mạch Hadamard Test mở rộng:** Dùng **1 qubit phụ** đặt ở trạng thái $|+\rangle$ điều khiển việc chèn $\hat{G}_k$ (khi ancilla là $|0\rangle$) hoặc chèn $\hat{G}_j$ (khi ancilla là $|1\rangle$). Đo $\langle \hat{X}_a \rangle$ hoặc $\langle \hat{Y}_a \rangle$ trên qubit phụ cho trực tiếp phần thực hoặc phần ảo của tích vô hướng $\frac{\partial\langle\phi|}{\partial\theta_k}\frac{\partial|\phi\rangle}{\partial\theta_j}$.
+
+### Giai đoạn 3: Phân tích lý thuyết về Sai số và Ước lượng tài nguyên
+* **Chẩn đoán sai số chiếu (Projection Error):** Định nghĩa khoảng cách McLachlan tức thời:
+  $$L^2(t) = \min_{\dot{\boldsymbol{\theta}}} \left\| \left(\frac{d}{dt} + i\hat{H}\right)|\tilde{\phi}(t)\rangle \right\|^2 = \langle\phi|\hat{H}^2|\phi\rangle - \langle\phi|\hat{H}|\phi\rangle^2 - \sum_{k,j=1}^P V_k (M^{-1})_{kj} V_j$$
+  Tích phân $\int_0^t L(\tau)\,d\tau$ cho cận trên chặt chẽ của sai số trạng thái $\|\,|\psi_{\text{exact}}(t)\rangle - |\tilde{\phi}(t)\rangle\,\|_2$!
+* **Chi phí đo lường:** Mỗi bước thời gian $\Delta t$ cần đo $P(P+1)/2$ phần tử đối xứng của ma trận $M$ và $P \times L$ số hạng của vector $V$.
+
+### Giai đoạn 4: Kiểm chứng bằng mô phỏng cổ điển chuẩn
+* **Theo dõi khoảng cách McLachlan $L(t)$:** So sánh quỹ đạo VQS với Exact Diagonalization (`expm_multiply`). Khi $L(t) \approx 0$, độ trung thực $F(t) = |\langle\psi_{\text{exact}}(t)|\phi(\boldsymbol{\theta}(t))\rangle|^2$ duy trì $> 0.999$; khi $L(t)$ tăng vọt, đó là dấu hiệu ansatz quá nông không đủ sức biểu diễn độ vướng víu đang tăng của hệ.
+* **Kiểm tra điều kiện khả nghịch của $M$:** Vì $M$ (tương đương Quantum Fisher Information Matrix) thường có các giá trị riêng gần $0$ do dư thừa tham số, cần dùng **Tikhonov regularization** $(M + \lambda_{\text{reg}} I)\dot{\boldsymbol{\theta}} = V$ hoặc phân rã giá trị suy biến cắt cụt (SVD cutoff).
+
+### Giai đoạn 5: Mô hình hóa nhiễu và Giảm thiểu lỗi
+* **Khuếch đại nhiễu qua nghịch đảo ma trận $M^{-1}$:** Sai số thống kê (shot noise) khi đo $M$ và $V$ bị khuếch đại mạnh khi nhân với $M^{-1}$ nếu số điều kiện $\kappa(M)$ lớn.
+* **Tích hợp giảm thiểu lỗi:** Áp dụng **Zero-Noise Extrapolation (ZNE)** lên từng phần tử $M_{kj}$ và $V_k$, kết hợp với phương pháp tích phân Runge–Kutta bậc 4 (RK4) có điều chỉnh bước thời gian thích nghi để chống trôi tham số.
+
+### Giai đoạn 6: Thực thi trên QPU và Tái lập nghiên cứu
+* **Vòng lặp tích phân thời gian:** Tại bước $t_n$: (1) Gửi lô mạch Hadamard test lên QPU để đo $M(t_n)$ và $V(t_n)$, (2) Giải hệ tuyến tính chính quy hóa trên CPU để lấy $\dot{\boldsymbol{\theta}}(t_n)$, (3) Cập nhật $\boldsymbol{\theta}(t_{n+1}) = \boldsymbol{\theta}(t_n) + \Delta t\,\dot{\boldsymbol{\theta}}(t_n)$, (4) Đo các đài quan sát vật lý trên $|\phi(\boldsymbol{\theta}(t_{n+1}))\rangle$.
+
+---
+
+## 4. Tổng kết đặc tính & Giới hạn áp dụng
+
+| Tiêu chí | Đánh giá chi tiết |
+| :--- | :--- |
+| **Điểm mạnh vượt trội** | Giữ độ sâu mạch hoàn toàn không đổi theo thời gian $t$; áp dụng được cho cả tiến hóa thời gian thực ($-i\hat{H}$) và thời gian ảo ($-\hat{H}$, dùng để tìm trạng thái cơ bản). |
+| **Giới hạn & Rủi ro** | Đo ma trận $M_{kj}$ tốn $O(P^2)$ mạch có ancilla điều khiển toàn cục (Hadamard test); phép nghịch đảo $M^{-1}$ rất nhạy với nhiễu đo khi ansatz có tham số dư thừa. |
+| **Điều kiện thất bại** | Hệ trải qua quá trình nhiệt hóa nhanh (quench dynamics) tạo ra độ vướng víu quy luật thể tích vượt quá khả năng biểu diễn của mạch ansatz nông. |

@@ -1,0 +1,61 @@
+---
+title: "Simulation"
+chapter: "Simulation"
+author: "TgX.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Mục lục bài viết"
+    toc-location: right
+---
+
+================================================================================
+ NHÁNH 1: CHIA NHỎ THỜI GIAN & LẤY MẪU NGẪU NHIÊN (Tối ưu cho NISQ / Mạch trực tiếp)
+================================================================================
+
+  [Trotter bậc 1] ──(+ Đối xứng gương S(-τ)S(τ)=I & bước lùi âm)──▶ [Trotter-Suzuki bậc cao]
+         │
+         ├──(+ Ngoại suy Richardson trên nhiều lưới bước r_m)───────▶ [MPF] (Bỏ bước âm, mạch nông)
+         │                                                             ▲
+         └──(+ Đổi hệ số thành xác suất p_j = |h_j|/λ + Monte Carlo)─▶ [qDRIFT] (Độc lập số hạng L)
+                                                                       │
+                                            [qDRIFT] + [MPF] ──────────┴─▶ [Randomized MPF]
+
+================================================================================
+ NHÁNH 2: BIẾN PHÂN & TÁI CẤU TRÚC HAMILTONIAN (Nén mạch / Nén không gian)
+================================================================================
+
+  [PT Schrödinger] ──(+ Chiếu vận tốc lên mạch nông McLachlan)────▶ [VQS]
+         │
+         └──(+ Chiếu bước nhảy p-VQD + mọc cổng thích nghi AVQDS)───▶ [TDVQA] (Bỏ nghịch đảo M⁻¹)
+
+  [H trộn mức năng lượng] ──(+ Dòng chảy đơn vị Wegner / DUCC)─────▶ [qFlow] (Tách dải, giảm qubit)
+  [H(t) tuần hoàn] ─────────(+ Định lý Bloch thời gian: Sambe)────▶ [qFLO]  (Biến H(t) thành tĩnh)
+
+================================================================================
+ NHÁNH 3: MÃ HÓA KHỐI & TỔNG HỢP ĐA THỨC (Tối ưu tiệm cận cho FTQC)
+================================================================================
+
+  [Tổng ∑ α_l U_l] ──(+ Giao thoa kế PREPARE/SELECT + OAA)─────────▶ [LCU Block-Encoding U_H]
+         │                                                                 │
+         ├──(+ Chuỗi Taylor e^(-iHτ) + chọn bước vàng λτ = ln 2)──────────┼─▶ [Taylor Simulation]
+         │                                                                 │
+         │   [Ma trận thưa H] ──(+ Bước đi Szegedy + 2 phép phản xạ)───────┼─▶ [Quantum Walk]
+         │                                                                 ▼
+         │                         (+ Định lý 2 phép chiếu Jordan)──▶ [Qubitization] (Tách mặt SU(2))
+         │                                                                 │
+         │                         (+ Chuỗi pha Φ_k + Đa thức Chebyshev)───┼─▶ [QSP] (Chỉ cần 1 ancilla)
+         │                                                                 ▼
+         │                         (+ Khai triển SVD với 2 bộ chiếu)──────┴─▶ [QSVT] (Mọi ma trận bất kỳ)
+         │
+         └──[Bước Trotter ngắn e^(-iHτ)] + [QSP] ──────────────────────────▶ [QETU] (Bỏ qua luôn LCU)
+
+
+Trotter → MPF → qDRIFT → qFLO: hiểu product formula, commutator, randomized simulation và extrapolation.
+
+Taylor → LCU: hiểu linear combination of unitaries và amplitude amplification.
+
+Block-encoding → Qubitization → QSP → QSVT: hiểu spectral theory, polynomial approximation và singular value transformation.
+
+VQS → TDVQA: hiểu variational principle, parameterized quantum circuits và phương trình vi phân
