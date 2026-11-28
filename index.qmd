@@ -1,4 +1,4 @@
-::: {.home-hero}
+<!-- ::: {.home-hero}
 
 :::: {.hero-layout}
 ::::: {.hero-copy}
@@ -12,9 +12,6 @@ QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版
 量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。
 ::::::
 
-<!-- :::::: {.hero-quote}
-> 量子計算は死にゆく分野であり、量子情報はまだ生まれていない分野である。これらは、生まれる前に死んでしまった学際領域を形作っている。
-:::::: -->
 
 :::::: {.hero-attribution}
 マイケル・A・ニールセン、アイザック・L・チャン著
@@ -55,6 +52,149 @@ QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版
 ::: {.home-card}
 ### [まえがきを読む →](note/intro/preface.qmd)
 本文に入る前に、翻訳ノートの背景を読む。
+:::
+
+:::
+</section>
+
+::: {.home-note}
+#### この文章について
+
+これは特定の誰かに向けた文章でも、学術論文でもありません。内容は中立的な立場から記述しており、TgX.2の見解や立場を反映するものではありません。
+::: -->
+
+
+::: {.home-hero}
+
+:::: {.hero-layout}
+::::: {.hero-copy}
+:::::: {.hero-eyebrow}
+QUANTUM COMPUTATION & QUANTUM INFORMATION · 10周年記念版
+::::::
+
+# 量子計算と量子情報
+
+:::::: {.hero-description}
+量子の世界から、計算と情報を考える。ニールセン＆チャンの名著を、少しずつ読み解くための翻訳ノートです。
+::::::
+
+<!-- :::::: {.hero-quote}
+> 量子計算は死にゆく分野であり、量子情報はまだ生まれていない分野である。これらは、生まれる前に死んでしまった学際領域を形作っている。
+:::::: -->
+
+:::::: {.hero-attribution}
+マイケル・A・ニールセン、アイザック・L・チャン著
+::::::
+
+:::::: {.hero-actions}
+[原文を読む ↗](file/quantum-computation-and-quantum-information-nielsen-chuang.pdf){.hero-button .primary}
+[ウェブ版を見る ↗](https://tgx-2.github.io/quantumcomputation){.hero-button}
+::::::
+:::::
+
+::::: {.hero-portrait}
+![ただの一匹の猫。生きていると同時に、死んでいる。。](img/avt.png){.hero-avatar}
+:::::
+::::
+:::
+
+<section class="home-overview">
+
+## 読みたいところから
+ 
+::: {.home-intro}
+Chương 6 : Tìm kiếm lượng tử
+:::
+
+Đọc cho vui thôi, chứ việc tìm kiếm lượng tử trên một tập cổ điển là một điều ngu ngốc.
+
+::: {.home-grid}
+
+::: {.home-card}
+### [The quantum search algorithm →](note/quantumsearchalgorithms/1.qmd)
+Chia thành 2 tổ hợp đáp án đúng và sai - $\vert a \rangle$ và $\vert b \rangle$, dùng oracle để phase kickback nghiệm cần tìm thành -1, rồi sau đó lấy phép đảo biên độ quanh giá trị trung bình để đẩy đáp án đúng lên gần tập đúng. Dễ bị quay lố, phải quay gần với $k_{opt} \approx \frac {\pi} 4 \sqrt{\frac N M} - \frac 1 2$.
+:::
+
+::: {.home-card}
+### [Quantum search as a quantum simulation →](note/quantumsearchalgorithms/2.qmd) 
+Thay vì lặp các cổng rời rạc, có thể thực hiện tìm kiếm Grover bằng tiến hóa thời gian liên tục dưới một Hamiltonian tĩnh $\hat{H} = E(\vert{}x_0\rangle\langle x_0\vert{} + \vert{}\psi\rangle\langle\psi\vert{})$ (với $\vert x_0 \rangle$ là trạng thái chứa đáp án, $\vert \psi \rangle$ trạng thái chồng chập ban đầu, $E$ thang năng lượng) (Farhi & Gutmann 1998).
+:::
+
+::: {.home-card}
+### [Quantum counting →](note/quantumsearchalgorithms/3.qmd) 
+Việc phải biết số lần quay và quay như thế nào liên quan đến số lượng nghiệm M, việc mà phải dùng QFT để đếm. Ta biết rằng $\sin^2 \theta = \frac M N$, các eigenvalue của Grover operator có dạng $\lambda_{\pm} = e^{i\pm2i\theta}$, vì vậy nếu xác định được $2\theta$ bằng QPE thì ta có thể suy ra $M = N\sin^2\theta$
+:::
+
+::: {.home-card}
+### [Speeding up the solution of NP-complete problems →](note/quantumsearchalgorithms/4.qmd) 
+Không cần qRAM nạp dữ liệu, dùng trực tiếp mạch logic kiểm tra nghiệm (ví dụ kiểm tra thỏa mãn 3-SAT) làm oracle để giảm độ phức tạp vét cạn từ $O(2^n)$ xuống $O(2^{n/2})$. Tuy nhiên, đây vẫn chỉ là tăng tốc bậc hai (đa thức) chứ không giải được NP-complete trong thời gian đa thức, và trên thực tế vẫn thua xa các bộ giải SAT cổ điển thông minh (CDCL) do chi phí trễ cổng sửa lỗi quá lớn.
+:::
+
+::: {.home-card}
+### [Quantum search of an unstructured database →](note/quantumsearchalgorithms/5.qmd) 
+Giới thiệu qRAM. Nhưng vẫn quá phế, việc nạp dữ liệu cổ điển vào một hệ lượng tử là quá tốn thời gian và tốn quá nhiều tài nguyên để có thể chịu lỗi, so với việc chỉ tăng tốc căn bậc hai của Grover.
+:::
+
+::: {.home-card}
+### [Optimality of the search algorithm →](note/quantumsearchalgorithms/6.qmd) 
+Định lý BBBV (Bennett–Bernstein–Brassard–Vazirani 1997) chứng minh bằng phương pháp lai rằng bất kỳ thuật toán lượng tử nào tìm kiếm trên không gian không cấu trúc qua oracle đều bắt buộc tốn ít nhất $\Omega(\sqrt{N})$ truy vấn. Điều này khẳng định Grover đã chạm tới giới hạn vật lý tuyệt đối — không thể tồn tại thuật toán tìm kiếm mù nhanh hơn $O(\sqrt{N})$.
+:::
+
+::: {.home-card}
+### [Black box algorithm limits →](note/quantumsearchalgorithms/7.qmd) 
+Tổng quát hóa từ tính tối ưu của Grover (thông qua phương pháp đa thức của Beals et al.): khi bài toán không có cấu trúc đại số đặc biệt (như tính tuần hoàn của nhóm giao hoán trong Shor) mà chỉ truy cập qua hộp đen, máy tính lượng tử chỉ có thể đạt tăng tốc tối đa theo bậc đa thức (bậc hai, bậc ba...), tuyệt đối không có tăng tốc hàm mũ. Đây chính là bằng chứng toán học khép lại chương: muốn có lợi thế hàm mũ, buộc phải khai thác cấu trúc vật lý của hệ (mô phỏng Hamiltonian).
+:::
+:::
+
+
+::: {.home-intro}
+Chương 7 : Hiện thực hóa vật lý của Quantum Computer
+:::
+
+::: {.home-grid}
+
+::: {.home-card}
+### [Guiding principles →](note/quantumcomputers/1.qmd)
+Các yếu tố để đánh giá một Quantum Computer.
+:::
+
+::: {.home-card}
+### [Conditions for quantum computation →](note/quantumcomputers/2.qmd)
+4 yêu cầu về khả năng của Quantum Computer.
+:::
+
+::: {.home-card}
+### [Harmonic oscillator quantum computer →](note/quantumcomputers/3.qmd)
+Đọc cho vui. Kiến trúc mã hóa trực tiếp toàn bộ thanh ghi qubit vào mức năng lượng của một oscillator đơn là không thực tế, tuy nhiên, oscillator vẫn là nền tảng cho bosonic quantum computing. Phương pháp luận cho các cấu trúc máy tính ở sau và giếng thế năng được đề cập trong này.
+:::
+
+::: {.home-card}
+### [Optical photon quantum computer →](note/quantumcomputers/4.qmd)
+Đã có nhiều cải tiến mới. Quang học phi tuyến không còn là lựa chọn nghiên cứu hàng đầu, thay vào đó chuyển sang giao thức KLM. Cấu trúc tiếp tục tiến hóa thành MBQC và FBQC.
+:::
+
+::: {.home-card}
+### [Optical cavity quantum electrodynamics →](note/quantumcomputers/5.qmd)
+Nên đọc để tìm hiểu, việc dùng atom để lưu trữ thông tin và photon để giao tiếp, sử dụng khá nhiều kiến thức QED để có thể hiểu, ngoài ra còn có kiểu mã hóa khác, là ghi trực tiếp thông tin vào trạng thái photon, sau đó dùng atom và cavity để tạo tương tác giữa các photon. Giao thức Duan-Kimble. Cavity QED đã có hậu bối là circuit QED. Hamiltonian Jaynes-Cummings được đề cập trong này.
+:::
+
+::: {.home-card}
+### [Ion traps →](note/quantumcomputers/6.qmd)
+Nên đọc. Sử dụng ion để lưu trữ thông tin, phonon để giao tiếp. Nhưng vì cổng Cirac-Zoller cũ phải chịu quá nhiều nhiễu nhiệt và phải làm lạnh, reset phonon về tuyệt đối 0, trước mỗi lần tính toán, vì vậy đã phát triển thêm cổng Molmer-Sorensen để có thêm một góc nhìn khác. Cải tiến thêm cấu trúc mở rộng QCCD.
+:::
+
+::: {.home-card}
+### [Nuclear magnetic resonance →](note/quantumcomputers/7.qmd)
+Đọc cho vui, đã quá lỗi thời. Xác nhận rằng không có vướng víu. Hậu bối là NV-Center và 28Si.
+:::
+
+::: {.home-card}
+### [Other implementation schemes →](note/quantumcomputers/8.qmd)
+Superconducting, Quantum Dots, Neutral atoms, đều đẵ được nhắc đến trong đây, nhưng vì đã từ năm 2000 rồi, nên tác giả không đoán trước được sức mạnh của 3 ông lớn này ở thời điểm hiện tại.
+:::
+
+:::
+
 :::
 
 :::
